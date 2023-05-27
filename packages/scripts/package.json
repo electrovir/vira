@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-scripts",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "private": true,
     "scripts": {
         "compile": "virmator compile",

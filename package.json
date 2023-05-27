@@ -7,6 +7,7 @@
         "./packages/*"
     ],
     "scripts": {
+        "build": "cd packages/vira && npm run build",
         "compile": "mono-vir for-each npm run compile",
         "docs:update": "virmator code-in-markdown",
         "format": "virmator format",

@@ -10,7 +10,7 @@
         "update:exports": "ts-node src/update-all-exports.ts"
     },
     "devDependencies": {
-        "@types/node": "^18.16.3",
+        "@types/node": "^20.2.5",
         "typescript": "^5.0.4"
     }
 }

@@ -1,8 +1,9 @@
-import {css, defineElement} from 'element-vir';
+import {css} from 'element-vir';
 import {viraIconColorCssVars} from '../../icons/icon-color-css-vars';
 import {ViraIconSvg} from '../../icons/icon-svg';
+import {defineViraElement} from '../define-vira-element';
 
-export const ViraIcon = defineElement<{
+export const ViraIcon = defineViraElement<{
     icon: ViraIconSvg | undefined;
     /** Ignores the given icon's embedded size and causes the <svg> element to fill its parent. */
     fitContainer?: boolean | undefined;
@@ -12,7 +13,7 @@ export const ViraIcon = defineElement<{
         /** Ignores the given icon's embedded size and causes the <svg> element to fill its parent. */
         'vira-icon-fit-container': ({inputs}) => !!inputs.fitContainer,
     },
-    styles: ({hostClassSelectors}) => css`
+    styles: ({hostClasses}) => css`
         :host {
             display: inline-block;
             color: ${viraIconColorCssVars['vira-icon-color'].value};
@@ -28,7 +29,7 @@ export const ViraIcon = defineElement<{
             display: block;
         }
 
-        ${hostClassSelectors['vira-icon-fit-container']} svg {
+        ${hostClasses['vira-icon-fit-container'].selector} svg {
             height: 100%;
             width: 100%;
         }

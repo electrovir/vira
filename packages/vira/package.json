@@ -29,7 +29,7 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^12.5.4",
+        "element-vir": "^13.0.0",
         "lit-css-vars": "^2.0.2"
     },
     "devDependencies": {

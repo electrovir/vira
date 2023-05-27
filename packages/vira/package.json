@@ -1,0 +1,41 @@
+{
+    "name": "vira",
+    "version": "0.0.0",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/electrovir/vira",
+    "bugs": {
+        "url": "https://github.com/electrovir/vira/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/electrovir/vira"
+    },
+    "license": "(MIT or CC0 1.0)",
+    "author": {
+        "name": "electrovir",
+        "url": "https://github.com/electrovir"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "virmator frontend build",
+        "compile": "rm -rf dist && virmator compile",
+        "preview": "virmator frontend preview",
+        "start": "virmator frontend",
+        "test": "virmator test-web",
+        "test:all": "npm test",
+        "test:coverage": "npm run test coverage",
+        "test:docs": "virmator code-in-markdown check"
+    },
+    "devDependencies": {
+        "@open-wc/testing": "^3.1.8",
+        "@types/mocha": "^10.0.1",
+        "@web/dev-server-esbuild": "^0.4.1",
+        "@web/test-runner": "^0.16.1",
+        "@web/test-runner-commands": "^0.7.0",
+        "@web/test-runner-playwright": "^0.10.0",
+        "@web/test-runner-visual-regression": "^0.8.0",
+        "istanbul-smart-text-reporter": "^1.1.1"
+    }
+}

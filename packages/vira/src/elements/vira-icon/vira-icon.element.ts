@@ -14,7 +14,7 @@ export const ViraIcon = defineElement<{
     },
     styles: ({hostClassSelectors}) => css`
         :host {
-            display: block;
+            display: inline-block;
             color: ${viraIconColorCssVars['vira-icon-color'].value};
             fill: ${viraIconColorCssVars['vira-icon-fill-color'].value};
             stroke: ${viraIconColorCssVars['vira-icon-stroke-color'].value};

@@ -33,6 +33,7 @@
         "lit-css-vars": "^2.0.2"
     },
     "devDependencies": {
+        "@augment-vir/browser-testing": "^14.2.0",
         "@augment-vir/node-js": "^14.2.0",
         "@open-wc/testing": "^3.1.8",
         "@types/mocha": "^10.0.1",

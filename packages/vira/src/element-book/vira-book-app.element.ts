@@ -1,4 +1,4 @@
-import {ElementBookApp} from 'element-book';
+import {ElementBookApp, ElementBookSlotName} from 'element-book';
 import {assign, css, defineElementNoInputs, html} from 'element-vir';
 import {allElementBookEntries} from './all-element-book-entries';
 
@@ -15,6 +15,13 @@ export const ViraBookApp = defineElementNoInputs({
             height: 100%;
             width: 100%;
         }
+
+        h1 {
+            margin: 0;
+            margin-bottom: 16px;
+            padding: 0;
+            margin-left: 16px;
+        }
     `,
     renderCallback() {
         return html`
@@ -25,8 +32,11 @@ export const ViraBookApp = defineElementNoInputs({
                         useInternalRouter: true,
                     },
                     entries: allElementBookEntries,
+                    themeColor: '#33ccff',
                 })}
-            ></${ElementBookApp}>
+            >
+                <h1 slot=${ElementBookSlotName.NavHeader}>Vira</h1>
+            </${ElementBookApp}>
         `;
     },
 });

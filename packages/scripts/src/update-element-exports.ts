@@ -28,7 +28,7 @@ export const updateElementExports: UpdateExportsConfig = {
 };
 
 if (require.main === module) {
-    updateExportsMain(elementsIndexPath, updateElementExports).catch((error) => {
+    updateExportsMain(updateElementExports).catch((error) => {
         console.error(error);
         process.exit(1);
     });

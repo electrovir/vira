@@ -95,7 +95,7 @@ export const updateIconExports: UpdateExportsConfig = {
 };
 
 if (require.main === module) {
-    updateExportsMain(iconIndexPath, updateIconExports).catch((error) => {
+    updateExportsMain(updateIconExports).catch((error) => {
         console.error(error);
         process.exit(1);
     });

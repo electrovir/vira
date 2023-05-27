@@ -48,40 +48,35 @@ export async function writeOrCheckGeneratedFile(
 
     const formattedCode = formatCode(codeWithComment, fileToWriteTo);
     const relativeWriteToFile = relative(monoRepoRootDir, fileToWriteTo);
-    const currentOutputContents = (await readFile(fileToWriteTo)).toString();
+    const currentOutputContents: string = existsSync(fileToWriteTo)
+        ? (await readFile(fileToWriteTo)).toString()
+        : '';
     const qualifier = args.checkOnly ? '' : ' already';
     if (formattedCode === currentOutputContents) {
         console.info(
-            `${cliColors.green}Up to date${qualifier}: "${relativeWriteToFile}".${cliColors.reset}`,
+            `${cliColors.green}Up to date${qualifier}: '${relativeWriteToFile}'.${cliColors.reset}`,
         );
         return;
     }
 
     if (args.dryRun) {
         console.info(
-            `Would've written the following to "${relativeWriteToFile}":\n"${formattedCode}"`,
+            `Would've written the following to '${relativeWriteToFile}':\n'${formattedCode}'`,
         );
     } else if (args.checkOnly) {
         throw new NotUpToDateError(
-            `${cliColors.red}${cliColors.bold}"${relativeWriteToFile}" needs to be updated: run '${
+            `${cliColors.red}${cliColors.bold}'${relativeWriteToFile}' needs to be updated: run '${
                 cliColors.reset
             }${cliColors.blue}npx ts-node ${relative(monoRepoRootDir, scriptName)}${cliColors.red}${
                 cliColors.bold
             }'${cliColors.reset}`,
         );
     } else {
-        console.info(`${cliColors.blue}Writing to "${relativeWriteToFile}".${cliColors.reset}`);
         await writeFile(fileToWriteTo, formattedCode);
+        console.info(`${cliColors.blue}Wrote to '${relativeWriteToFile}'.${cliColors.reset}`);
     }
 }
 
-export async function updateExportsMain(
-    fileCheckPath: string,
-    updateExportsConfig: UpdateExportsConfig,
-): Promise<void> {
-    if (!existsSync(fileCheckPath)) {
-        throw new Error(`"${fileCheckPath}" file does not exist.`);
-    }
-
+export async function updateExportsMain(updateExportsConfig: UpdateExportsConfig): Promise<void> {
     await updateExportsConfig.executor(parseUpdateExportsArgs());
 }

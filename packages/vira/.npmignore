@@ -16,3 +16,6 @@ bash-scripts/
 index.html
 test-files/
 tsconfig*.json
+
+*.book.*
+src/element-book

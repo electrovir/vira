@@ -1,13 +1,12 @@
 import {assign, css, html} from 'element-vir';
 import {ViraIconSvg} from '../../icons';
 import {noUserSelect} from '../../styles';
+import {viraDisabledStyles} from '../../styles/disabled';
 import {viraAnimationDurations} from '../../styles/durations';
-import {createFocusStyles} from '../../styles/focus';
+import {createFocusStyles, viraFocusCssVars} from '../../styles/focus';
 import {removeNativeFormStyles} from '../../styles/native-styles';
 import {defineViraElement} from '../define-vira-element';
 import {ViraIcon} from '../vira-icon/vira-icon.element';
-
-export const buttonBorderRadius = css`8px`;
 
 export enum ViraButtonStyleEnum {
     Default = 'vira-button-default',
@@ -18,21 +17,22 @@ export const ViraButton = defineViraElement<{
     text?: string;
     icon?: undefined | ViraIconSvg;
     disabled?: boolean | undefined;
-    style?: ViraButtonStyleEnum | undefined;
+    buttonStyle?: ViraButtonStyleEnum | undefined;
 }>()({
     tagName: 'vira-button',
     hostClasses: {
-        'vira-button-outline-style': ({inputs}) => inputs.style === ViraButtonStyleEnum.Outline,
+        'vira-button-outline-style': ({inputs}) =>
+            inputs.buttonStyle === ViraButtonStyleEnum.Outline,
         'vira-button-disabled': ({inputs}) => !!inputs.disabled,
     },
     cssVars: {
         /** On the default button style this is the background color. */
-        'vira-button-primary-color': '',
-        'vira-button-primary-hover-color': '',
-        'vira-button-primary-active-color': '',
+        'vira-button-primary-color': '#0A89FF',
+        'vira-button-primary-hover-color': '#59B1FF',
+        'vira-button-primary-active-color': '#007FF6',
 
         /** On the default button style this is the text color. */
-        'vira-button-secondary-color': '',
+        'vira-button-secondary-color': 'white',
 
         'vira-button-internal-foreground-color': '',
         'vira-button-internal-background-color': '',
@@ -52,18 +52,33 @@ export const ViraButton = defineViraElement<{
             ${cssVars['vira-button-internal-foreground-color'].name}: ${cssVars[
                 'vira-button-secondary-color'
             ].value};
+            ${viraFocusCssVars['vira-focus-outline-color'].name}: ${cssVars[
+                'vira-button-primary-hover-color'
+            ].value}
         }
 
-        :host(:hover) button {
+        :host(:hover) button,
+        button:hover {
             ${cssVars['vira-button-internal-background-color'].name}: ${cssVars[
                 'vira-button-primary-hover-color'
             ].value};
         }
 
-        :host(:active) button {
+        :host(:active) button,
+        button:active {
             ${cssVars['vira-button-internal-background-color'].name}: ${cssVars[
                 'vira-button-primary-active-color'
             ].value};
+        }
+
+        ${hostClasses['vira-button-disabled'].selector} {
+            ${viraDisabledStyles};
+        }
+
+        ${hostClasses['vira-button-outline-style'].selector} button {
+            color: ${cssVars['vira-button-internal-background-color'].value};
+            background-color: transparent;
+            border-color: currentColor;
         }
 
         button {
@@ -77,10 +92,10 @@ export const ViraButton = defineViraElement<{
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            border-radius: ${buttonBorderRadius};
+            border-radius: 8px;
             background-color: ${cssVars['vira-button-internal-background-color'].value};
             color: ${cssVars['vira-button-internal-foreground-color'].value};
-            padding: 10px;
+            padding: 5px 10px;
             transition: color ${viraAnimationDurations['vira-interaction-animation-duration'].value},
                 background-color
                     ${viraAnimationDurations['vira-interaction-animation-duration'].value},

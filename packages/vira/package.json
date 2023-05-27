@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "",
     "keywords": [],
     "homepage": "https://github.com/electrovir/vira",
@@ -25,7 +25,7 @@
         "start": "virmator frontend",
         "test": "virmator test-web",
         "test:all": "npm test",
-        "test:coverage": "npm run test coverage",
+        "test:coverage": "npm run test",
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
@@ -43,6 +43,7 @@
         "@web/test-runner-playwright": "^0.10.0",
         "@web/test-runner-visual-regression": "^0.8.0",
         "istanbul-smart-text-reporter": "^1.1.1",
+        "typescript": "^5.0.4",
         "vite": "^4.3.9",
         "vite-tsconfig-paths": "^4.2.0"
     }

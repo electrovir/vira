@@ -103,7 +103,7 @@ export const ViraButton = defineViraElement<{
         }
 
         ${createFocusStyles({
-            mainSelector: 'button:focus:focus-visible:not(:active)',
+            mainSelector: 'button:focus:focus-visible:not(:active):not([disabled])',
             elementBorderSize: 2,
         })}
 
@@ -128,7 +128,7 @@ export const ViraButton = defineViraElement<{
             : '';
 
         return html`
-            <button>${iconTemplate} ${textTemplate}</button>
+            <button ?disabled=${inputs.disabled}>${iconTemplate} ${textTemplate}</button>
         `;
     },
 });

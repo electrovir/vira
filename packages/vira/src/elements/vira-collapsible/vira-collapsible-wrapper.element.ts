@@ -18,8 +18,8 @@ export const ViraCollapsibleWrapper = defineViraElement<{expanded: boolean}>()({
         }
 
         .header-wrapper {
-            cursor: pointer;
             ${removeNativeFormStyles};
+            cursor: pointer;
         }
 
         .content-wrapper,

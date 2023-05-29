@@ -4,7 +4,7 @@ import {ViraIconSvg} from '../../icons/icon-svg';
 import {defineViraElement} from '../define-vira-element';
 
 export const ViraIcon = defineViraElement<{
-    icon: ViraIconSvg | undefined;
+    icon: Pick<ViraIconSvg, 'svgTemplate'> | undefined;
     /** Ignores the given icon's embedded size and causes the <svg> element to fill its parent. */
     fitContainer?: boolean | undefined;
 }>()({

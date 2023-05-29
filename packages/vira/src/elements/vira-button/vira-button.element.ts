@@ -5,6 +5,7 @@ import {viraDisabledStyles} from '../../styles/disabled';
 import {viraAnimationDurations} from '../../styles/durations';
 import {createFocusStyles, viraFocusCssVars} from '../../styles/focus';
 import {removeNativeFormStyles} from '../../styles/native-styles';
+import {viraCssVars} from '../../styles/vira-css-vars';
 import {defineViraElement} from '../define-vira-element';
 import {ViraIcon} from '../vira-icon/vira-icon.element';
 
@@ -15,7 +16,7 @@ export enum ViraButtonStyleEnum {
 
 export const ViraButton = defineViraElement<{
     text?: string;
-    icon?: undefined | ViraIconSvg;
+    icon?: undefined | Pick<ViraIconSvg, 'svgTemplate'>;
     disabled?: boolean | undefined;
     buttonStyle?: ViraButtonStyleEnum | undefined;
 }>()({
@@ -36,6 +37,7 @@ export const ViraButton = defineViraElement<{
 
         'vira-button-internal-foreground-color': '',
         'vira-button-internal-background-color': '',
+        'vira-button-padding': '5px 10px',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
@@ -82,6 +84,7 @@ export const ViraButton = defineViraElement<{
         }
 
         button {
+            cursor: pointer;
             ${removeNativeFormStyles};
             position: relative;
             width: 100%;
@@ -92,10 +95,10 @@ export const ViraButton = defineViraElement<{
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            border-radius: 8px;
+            border-radius: ${viraCssVars['vira-form-input-border-radius'].value};
             background-color: ${cssVars['vira-button-internal-background-color'].value};
             color: ${cssVars['vira-button-internal-foreground-color'].value};
-            padding: 5px 10px;
+            padding: ${cssVars['vira-button-padding'].value};
             transition: color ${viraAnimationDurations['vira-interaction-animation-duration'].value},
                 background-color
                     ${viraAnimationDurations['vira-interaction-animation-duration'].value},

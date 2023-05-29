@@ -2,9 +2,11 @@ import {css} from 'element-vir';
 import {unsafeCSS} from 'lit';
 import {defineCssVars} from 'lit-css-vars';
 import {toPixel} from '../util/number';
+import {viraCssVars} from './vira-css-vars';
 
 export const viraFocusCssVars = defineCssVars({
     'vira-focus-outline-color': 'blue',
+    'vira-focus-outline-border-radius': css`calc(${viraCssVars['vira-form-input-border-radius'].value} + 4px)`,
 });
 
 /**
@@ -28,6 +30,7 @@ export function createFocusStyles({
     elementBorderSize: number;
     outlineGap?: number;
     outlineWidth?: number;
+    borderRadius?: number;
 }) {
     const outlineSpacing = unsafeCSS(toPixel(outlineWidth + outlineGap + elementBorderSize));
 
@@ -42,7 +45,7 @@ export function createFocusStyles({
             box-sizing: border-box;
             pointer-events: none;
             border: ${outlineWidth}px solid ${viraFocusCssVars['vira-focus-outline-color'].value};
-            border-radius: 12px;
+            border-radius: ${viraFocusCssVars['vira-focus-outline-border-radius'].value};
             z-index: 100;
         }
     `;

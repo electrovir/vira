@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "description": "",
     "keywords": [],
     "homepage": "https://github.com/electrovir/vira",
@@ -29,12 +29,12 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^13.0.4",
+        "element-vir": "^14.0.0",
         "lit-css-vars": "^2.0.3"
     },
     "devDependencies": {
-        "@augment-vir/browser-testing": "^14.3.0",
-        "@augment-vir/node-js": "^14.3.0",
+        "@augment-vir/browser-testing": "^15.1.0",
+        "@augment-vir/node-js": "^15.1.0",
         "@open-wc/testing": "^3.2.0",
         "@types/chai": "^4.3.5",
         "@types/mocha": "^10.0.1",

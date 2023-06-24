@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-root",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "workspaces": [
@@ -36,7 +36,7 @@
         "prettier-plugin-packagejson": "^2.4.3",
         "prettier-plugin-sort-json": "^1.0.0",
         "prettier-plugin-toml": "^0.3.1",
-        "virmator": "^6.6.4"
+        "virmator": "^6.6.5"
     },
     "overrides": {
         "make-dir": "npm:make-dir@v4.0.0"

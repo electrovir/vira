@@ -1,3 +1,3 @@
-import {defineElementBookChapter} from 'element-book';
+import {defineBookPage} from 'element-book';
 
-export const elementsBookChapter = defineElementBookChapter({title: 'Elements', parent: undefined});
+export const elementsBookChapter = defineBookPage({title: 'Elements', parent: undefined});

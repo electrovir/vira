@@ -1,36 +1,32 @@
-import {
-    defineElementBookChapter,
-    defineElementBookPage,
-    ElementBookPageControlTypeEnum,
-} from 'element-book';
+import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
 import {assign, css, html, unsafeCSS} from 'element-vir';
 import {ViraIcon} from '../elements/vira-icon/vira-icon.element';
 import {viraIconColorCssVars} from './icon-color-css-vars';
 import {allIconsByName} from './index';
 
-const iconsBookChapter = defineElementBookChapter({
+const iconsBookChapter = defineBookPage({
     parent: undefined,
     title: 'Icons',
 });
 
-const allIconsBookPage = defineElementBookPage({
+const allIconsBookPage = defineBookPage({
     title: 'All Icons',
     parent: iconsBookChapter,
     controls: {
         'Icon Color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
         'Stroke Color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
         'Fill Color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
     },
-    defineExamplesCallback({defineExample}) {
+    elementExamplesCallback({defineExample}) {
         Object.values(allIconsByName).forEach((icon) => {
             defineExample({
                 title: icon.name,

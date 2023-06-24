@@ -1,18 +1,14 @@
-import {
-    defineElementBookChapter,
-    defineElementBookPage,
-    ElementBookPageControlTypeEnum,
-} from 'element-book';
-import {assign, css, CSSResult, html, unsafeCSS} from 'element-vir';
+import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
+import {CSSResult, assign, css, html, unsafeCSS} from 'element-vir';
 import {elementsBookChapter} from '../elements.book';
 import {ViraButton, ViraButtonStyleEnum} from './vira-button.element';
 
-const viraButtonBookChapter = defineElementBookChapter({
+const viraButtonBookChapter = defineBookPage({
     parent: elementsBookChapter,
     title: 'Button',
 });
 
-const viraButtonBookPage = defineElementBookPage({
+const viraButtonBookPage = defineBookPage({
     parent: viraButtonBookChapter,
     title: ViraButton.tagName,
     descriptionParagraphs: [
@@ -20,23 +16,23 @@ const viraButtonBookPage = defineElementBookPage({
     ],
     controls: {
         'Primary color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
         'Secondary color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
         'Hover color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
         'Active color': {
-            controlType: ElementBookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         },
     },
-    defineExamplesCallback({defineExample}) {
+    elementExamplesCallback({defineExample}) {
         function defineViraButtonExample({
             title,
             styles: inputStyles,
@@ -112,13 +108,13 @@ const viraButtonBookPage = defineElementBookPage({
     },
 });
 
-const viraButtonCustomColorsBookPage = defineElementBookPage({
+const viraButtonCustomColorsBookPage = defineBookPage({
     parent: viraButtonBookChapter,
     title: 'with custom colors',
     descriptionParagraphs: [
         'These are not necessarily GOOD color combinations, but they are custom!',
     ],
-    defineExamplesCallback({defineExample}) {
+    elementExamplesCallback({defineExample}) {
         defineExample({
             title: 'custom colors',
             styles: css`

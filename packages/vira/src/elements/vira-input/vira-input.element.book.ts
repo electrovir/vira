@@ -1,14 +1,10 @@
-import {
-    defineElementBookChapter,
-    defineElementBookPage,
-    ElementBookPageControlTypeEnum,
-} from 'element-book';
-import {assign, css, CSSResult, html, listen, unsafeCSS} from 'element-vir';
+import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
+import {CSSResult, assign, css, html, listen, unsafeCSS} from 'element-vir';
 import {Element24Icon} from '../../icons';
 import {elementsBookChapter} from '../elements.book';
 import {ViraInput} from './vira-input.element';
 
-const viraInputBookChapter = defineElementBookChapter({
+const viraInputBookChapter = defineBookPage({
     title: 'Input',
     parent: elementsBookChapter,
 });
@@ -16,38 +12,36 @@ const viraInputBookChapter = defineElementBookChapter({
 function defineViraInputPage(
     title: string,
     showControls: boolean,
-    descriptions?: ReadonlyArray<string>,
+    descriptions: string[] = [],
     overrideInputs?: Pick<(typeof ViraInput)['inputsType'], 'fitText'>,
 ) {
-    return defineElementBookPage({
+    return defineBookPage({
         title,
         parent: viraInputBookChapter,
         descriptionParagraphs: descriptions,
         controls: (() => {
             const controls = {
                 'Text color': {
-                    controlType: ElementBookPageControlTypeEnum.Text,
+                    controlType: BookPageControlTypeEnum.Text,
                     initValue: '',
                 },
                 'Placeholder color': {
-                    controlType: ElementBookPageControlTypeEnum.Text,
+                    controlType: BookPageControlTypeEnum.Text,
                     initValue: '',
                 },
                 'Border color': {
-                    controlType: ElementBookPageControlTypeEnum.Text,
+                    controlType: BookPageControlTypeEnum.Text,
                     initValue: '',
                 },
                 'Focus color': {
-                    controlType: ElementBookPageControlTypeEnum.Text,
+                    controlType: BookPageControlTypeEnum.Text,
                     initValue: '',
                 },
                 'Selection color': {
-                    controlType: ElementBookPageControlTypeEnum.Text,
+                    controlType: BookPageControlTypeEnum.Text,
                     initValue: '',
                 },
-            } as const satisfies NonNullable<
-                Parameters<typeof defineElementBookPage>[0]['controls']
-            >;
+            } as const satisfies NonNullable<Parameters<typeof defineBookPage>[0]['controls']>;
 
             if (showControls) {
                 return controls;
@@ -55,7 +49,7 @@ function defineViraInputPage(
                 return {} as typeof controls;
             }
         })(),
-        defineExamplesCallback({defineExample}) {
+        elementExamplesCallback({defineExample}) {
             function defineInputExample({
                 styles,
                 title,

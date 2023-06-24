@@ -1,0 +1,1 @@
+export declare const viraCollapsibleBookEntries: (import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}> | import("element-book").BookPage<import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}>, {}>)[];

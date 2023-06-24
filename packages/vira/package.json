@@ -1,8 +1,17 @@
 {
     "name": "vira",
     "version": "0.5.0",
-    "description": "",
-    "keywords": [],
+    "description": "A simple and highly versatile design system using element-vir.",
+    "keywords": [
+        "design",
+        "system",
+        "vir",
+        "elements",
+        "custom",
+        "components",
+        "web",
+        "element-vir"
+    ],
     "homepage": "https://github.com/electrovir/vira",
     "bugs": {
         "url": "https://github.com/electrovir/vira/issues"
@@ -19,7 +28,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "virmator frontend build",
+        "build": "npm run compile && virmator frontend build",
         "compile": "rm -rf dist && virmator compile",
         "preview": "virmator frontend preview",
         "start": "virmator frontend",

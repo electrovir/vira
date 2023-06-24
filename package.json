@@ -7,13 +7,13 @@
         "./packages/*"
     ],
     "scripts": {
-        "build": "cd packages/vira && npm run build",
+        "build": "npm run --workspace vira build",
         "compile": "mono-vir for-each npm run compile",
         "docs:update": "virmator code-in-markdown",
         "format": "virmator format",
         "publish": "virmator publish \"npm run compile && npm run test:all\"",
         "regenerate-deps": "rm -rf node_modules && rm -rf packages/*/node_modules && rm -f package-lock.json && npm i",
-        "start": "npm install && cd packages/vira && virmator frontend",
+        "start": "npm install && npm run --workspace vira start",
         "test": "mono-vir for-each-async npm run test:all",
         "test:all": "concurrently --colors --kill-others-on-fail -c auto --names types,tests,spelling,format,docs \"npm run test:types\" \"npm run test\" \"npm run test:spelling\" \"npm run test:format\" \"npm run test:docs\"",
         "test:docs": "virmator code-in-markdown check",

@@ -39,7 +39,9 @@
     },
     "dependencies": {
         "element-vir": "^14.0.3",
-        "lit-css-vars": "^2.0.3"
+        "lit-css-vars": "^2.0.3",
+        "spa-router-vir": "^2.1.1",
+        "type-fest": "^3.12.0"
     },
     "devDependencies": {
         "@augment-vir/browser-testing": "^15.3.0",

@@ -1,19 +1,14 @@
 import {defineBookPage} from 'element-book';
 import {assign, css, html, listen, renderIf} from 'element-vir';
-import {elementsBookChapter} from '../elements.book';
+import {elementsBookPage} from '../elements.book';
 import {
     ViraCollapsibleSlotNameEnum,
     ViraCollapsibleWrapper,
 } from './vira-collapsible-wrapper.element';
 
-const viraCollapsibleBookChapter = defineBookPage({
-    title: 'Collapsible',
-    parent: elementsBookChapter,
-});
-
-const viraCollapsibleBookPage = defineBookPage({
+export const viraCollapsibleBookPage = defineBookPage({
     title: ViraCollapsibleWrapper.tagName,
-    parent: viraCollapsibleBookChapter,
+    parent: elementsBookPage,
     descriptionParagraphs: [
         'A very basic collapsible wrapper element that expands to fit its content with smooth animations. The animations even adapt to dynamic child sizes!',
         'This element does not make any assumptions on styling, all styles are applied by consumers.',
@@ -147,8 +142,3 @@ const viraCollapsibleBookPage = defineBookPage({
         });
     },
 });
-
-export const viraCollapsibleBookEntries = [
-    viraCollapsibleBookChapter,
-    viraCollapsibleBookPage,
-];

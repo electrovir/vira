@@ -1,15 +1,10 @@
 import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
 import {CSSResult, assign, css, html, unsafeCSS} from 'element-vir';
-import {elementsBookChapter} from '../elements.book';
+import {elementsBookPage} from '../elements.book';
 import {ViraButton, ViraButtonStyleEnum} from './vira-button.element';
 
-const viraButtonBookChapter = defineBookPage({
-    parent: elementsBookChapter,
-    title: 'Button',
-});
-
-const viraButtonBookPage = defineBookPage({
-    parent: viraButtonBookChapter,
+export const viraButtonBookPage = defineBookPage({
+    parent: elementsBookPage,
     title: ViraButton.tagName,
     descriptionParagraphs: [
         'Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!',
@@ -105,18 +100,9 @@ const viraButtonBookPage = defineBookPage({
                 }
             `,
         });
-    },
-});
 
-const viraButtonCustomColorsBookPage = defineBookPage({
-    parent: viraButtonBookChapter,
-    title: 'with custom colors',
-    descriptionParagraphs: [
-        'These are not necessarily GOOD color combinations, but they are custom!',
-    ],
-    elementExamplesCallback({defineExample}) {
         defineExample({
-            title: 'custom colors',
+            title: 'customized colors',
             styles: css`
                 :host {
                     ${ViraButton.cssVars['vira-button-primary-color'].name}: pink;
@@ -137,9 +123,3 @@ const viraButtonCustomColorsBookPage = defineBookPage({
         });
     },
 });
-
-export const viraButtonBookEntries = [
-    viraButtonBookChapter,
-    viraButtonBookPage,
-    viraButtonCustomColorsBookPage,
-];

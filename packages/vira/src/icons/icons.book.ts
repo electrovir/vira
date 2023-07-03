@@ -4,14 +4,9 @@ import {ViraIcon} from '../elements/vira-icon/vira-icon.element';
 import {viraIconColorCssVars} from './icon-color-css-vars';
 import {allIconsByName} from './index';
 
-const iconsBookChapter = defineBookPage({
-    parent: undefined,
+export const iconsBookPage = defineBookPage({
     title: 'Icons',
-});
-
-const allIconsBookPage = defineBookPage({
-    title: 'All Icons',
-    parent: iconsBookChapter,
+    parent: undefined,
     controls: {
         'Icon Color': {
             controlType: BookPageControlTypeEnum.Text,
@@ -51,8 +46,3 @@ const allIconsBookPage = defineBookPage({
         });
     },
 });
-
-export const iconBookEntries = [
-    iconsBookChapter,
-    allIconsBookPage,
-];

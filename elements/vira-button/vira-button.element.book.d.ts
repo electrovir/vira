@@ -1,1 +1,0 @@
-export declare const viraButtonBookEntries: (import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}> | import("element-book").BookPage<import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}>, {}>)[];

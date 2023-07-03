@@ -1,1 +1,0 @@
-export declare const allElementBookEntries: (import("element-book").BookPage<undefined, {}> | import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}> | import("element-book").BookPage<import("element-book").BookPage<import("element-book").BookPage<undefined, {}>, {}>, {}>)[];

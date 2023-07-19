@@ -1,21 +1,26 @@
 import {css, defineElementEvent, html, listen} from 'element-vir';
 import {FullRoute, SpaRouter, shouldMouseEventTriggerRoutes} from 'spa-router-vir';
-import {RequireExactlyOne} from 'type-fest';
 import {defineViraElement} from '../define-vira-element';
 
-export const ViraLink = defineViraElement<
-    RequireExactlyOne<{
-        link: {
-            url: string;
-            newTab: boolean;
-        };
-        route: {
-            route: FullRoute;
-            router: Pick<SpaRouter, 'createRoutesUrl'>;
-            scrollToTop?: boolean;
-        };
-    }>
->()({
+export const ViraLink = defineViraElement<{
+    /**
+     * A full raw URL link that will navigate the current window away or open a new tab. If this
+     * property is provided for the inputs, don't provide a route property.
+     */
+    link?: {
+        url: string;
+        newTab: boolean;
+    };
+    /**
+     * A route that'll change that current page without navigating the window. If this property is
+     * provided for the inputs, don't provide a link property.
+     */
+    route?: {
+        route: FullRoute;
+        router: Pick<SpaRouter, 'createRoutesUrl'>;
+        scrollToTop?: boolean;
+    };
+}>()({
     tagName: 'vira-link',
     cssVars: {
         'vira-link-hover-color': 'currentColor',

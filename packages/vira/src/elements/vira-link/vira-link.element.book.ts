@@ -1,5 +1,5 @@
 import {BookPageControlTypeEnum, defineBookPage, definePageControl} from 'element-book';
-import {assign, css, html, listen, unsafeCSS} from 'element-vir';
+import {css, html, listen, unsafeCSS} from 'element-vir';
 import {elementsBookPage} from '../elements.book';
 import {ViraLink} from './vira-link.element';
 
@@ -38,11 +38,8 @@ export const viraLinkBookPage = defineBookPage({
                     `;
 
                     return html`
-                        <${ViraLink}
+                        <${ViraLink.assign(inputs)}
                             style=${styles}
-                            ${assign(ViraLink, {
-                                ...inputs,
-                            })}
                             ${listen(ViraLink.events.routeChange, (event) => {
                                 console.info(event);
                             })}

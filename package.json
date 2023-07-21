@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-root",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "workspaces": [
@@ -23,8 +23,8 @@
     },
     "devDependencies": {
         "cspell": "^6.31.2",
-        "element-book": "^8.0.0",
-        "esbuild": "^0.18.14",
+        "element-book": "^9.0.0",
+        "esbuild": "^0.18.15",
         "markdown-code-example-inserter": "^0.3.1",
         "mono-vir": "^0.1.4",
         "npm-check-updates": "^16.10.16",

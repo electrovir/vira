@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -38,7 +38,7 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^15.0.0",
+        "element-vir": "^15.0.1",
         "lit-css-vars": "^2.0.3",
         "spa-router-vir": "^2.1.1",
         "type-fest": "^4.0.0"

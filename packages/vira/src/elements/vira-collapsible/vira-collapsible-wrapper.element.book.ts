@@ -1,5 +1,5 @@
 import {defineBookPage} from 'element-book';
-import {assign, css, html, listen, renderIf} from 'element-vir';
+import {css, html, listen, renderIf} from 'element-vir';
 import {elementsBookPage} from '../elements.book';
 import {
     ViraCollapsibleSlotNameEnum,
@@ -32,10 +32,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                     .fill(0)
                     .map((value, index) => {
                         return html`
-                            <${ViraCollapsibleWrapper}
-                                ${assign(ViraCollapsibleWrapper, {
-                                    expanded: !!state.expandedStates[index],
-                                })}
+                            <${ViraCollapsibleWrapper.assign({
+                                expanded: !!state.expandedStates[index],
+                            })}
                                 ${listen(ViraCollapsibleWrapper.events.expandChange, (event) => {
                                     const newExpandedStates = [...state.expandedStates];
                                     newExpandedStates[index] = event.detail;
@@ -89,10 +88,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                     .fill(0)
                     .map((value, index) => {
                         return html`
-                            <${ViraCollapsibleWrapper}
-                                ${assign(ViraCollapsibleWrapper, {
-                                    expanded: !!state.expandedStates[index],
-                                })}
+                            <${ViraCollapsibleWrapper.assign({
+                                expanded: !!state.expandedStates[index],
+                            })}
                                 ${listen(ViraCollapsibleWrapper.events.expandChange, (event) => {
                                     const newExpandedStates = [...state.expandedStates];
                                     newExpandedStates[index] = event.detail;

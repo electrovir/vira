@@ -1,5 +1,5 @@
 import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
-import {CSSResult, assign, css, html, listen, unsafeCSS} from 'element-vir';
+import {CSSResult, css, html, listen, unsafeCSS} from 'element-vir';
 import {Element24Icon} from '../../icons';
 import {elementsBookPage} from '../elements.book';
 import {ViraInput} from './vira-input.element';
@@ -71,12 +71,11 @@ export const viraInputBookPage = defineBookPage({
                     `;
 
                     return html`
-                        <${ViraInput}
+                        <${ViraInput.assign({
+                            ...inputs,
+                            value: state.value,
+                        })}
                             style=${styles}
-                            ${assign(ViraInput, {
-                                ...inputs,
-                                value: state.value,
-                            })}
                             ${listen(ViraInput.events.valueChange, (event) => {
                                 updateState({
                                     value: event.detail,

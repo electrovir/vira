@@ -1,5 +1,5 @@
 import {defineBookPage} from 'element-book';
-import {assign, html} from 'element-vir';
+import {html} from 'element-vir';
 import {Element24Icon} from '../../icons';
 import {elementsBookPage} from '../elements.book';
 import {ViraIcon} from './vira-icon.element';
@@ -15,7 +15,7 @@ export const viraIconBookPage = defineBookPage({
             title: 'basic',
             renderCallback() {
                 return html`
-                    <${ViraIcon} ${assign(ViraIcon, {icon: Element24Icon})}></${ViraIcon}>
+                    <${ViraIcon.assign({icon: Element24Icon})}></${ViraIcon}>
                 `;
             },
         });

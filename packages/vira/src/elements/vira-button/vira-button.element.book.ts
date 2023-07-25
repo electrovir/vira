@@ -1,5 +1,5 @@
 import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
-import {CSSResult, assign, css, html, unsafeCSS} from 'element-vir';
+import {CSSResult, css, html, unsafeCSS} from 'element-vir';
 import {elementsBookPage} from '../elements.book';
 import {ViraButton, ViraButtonStyleEnum} from './vira-button.element';
 
@@ -59,12 +59,11 @@ export const viraButtonBookPage = defineBookPage({
                     `;
 
                     return html`
-                        <${ViraButton}
+                        <${ViraButton.assign({
+                            text: 'hello',
+                            ...inputs,
+                        })}
                             style=${styles}
-                            ${assign(ViraButton, {
-                                text: 'hello',
-                                ...inputs,
-                            })}
                         ></${ViraButton}>
                     `;
                 },
@@ -113,11 +112,9 @@ export const viraButtonBookPage = defineBookPage({
             `,
             renderCallback() {
                 return html`
-                    <${ViraButton}
-                        ${assign(ViraButton, {
-                            text: 'hello',
-                        })}
-                    ></${ViraButton}>
+                    <${ViraButton.assign({
+                        text: 'hello',
+                    })}></${ViraButton}>
                 `;
             },
         });

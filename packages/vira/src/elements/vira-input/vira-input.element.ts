@@ -1,13 +1,4 @@
-import {
-    assign,
-    classMap,
-    css,
-    defineElementEvent,
-    html,
-    listen,
-    onResize,
-    renderIf,
-} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, onResize, renderIf} from 'element-vir';
 import {TemplateResult} from 'lit';
 import {ViraIconSvg} from '../../icons';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../../styles';
@@ -302,7 +293,7 @@ export const ViraInput = defineViraElement<{
 
         const iconTemplate: TemplateResult | string = inputs.icon
             ? html`
-                  <${ViraIcon} ${assign(ViraIcon, {icon: inputs.icon})}></${ViraIcon}>
+                  <${ViraIcon.assign({icon: inputs.icon})}></${ViraIcon}>
               `
             : '';
 

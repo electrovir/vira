@@ -1,4 +1,4 @@
-import {assign, css, html} from 'element-vir';
+import {css, html} from 'element-vir';
 import {ViraIconSvg} from '../../icons';
 import {noUserSelect} from '../../styles';
 import {viraDisabledStyles} from '../../styles/disabled';
@@ -117,11 +117,9 @@ export const ViraButton = defineViraElement<{
     renderCallback: ({inputs}) => {
         const iconTemplate = inputs.icon
             ? html`
-                  <${ViraIcon}
-                      ${assign(ViraIcon, {
-                          icon: inputs.icon,
-                      })}
-                  ></${ViraIcon}>
+                  <${ViraIcon.assign({
+                      icon: inputs.icon,
+                  })}></${ViraIcon}>
               `
             : '';
         const textTemplate = inputs.text

@@ -1,6 +1,6 @@
 import {typedAssertInstanceOf} from '@augment-vir/browser-testing';
 import {assert, fixture as renderFixture} from '@open-wc/testing';
-import {assign, html} from 'element-vir';
+import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {Element24Icon} from '../../icons';
 import {viraIconColorCssVars} from '../../icons/icon-color-css-vars';
@@ -10,7 +10,7 @@ describe(ViraIcon.tagName, () => {
     async function setupFixture() {
         const fixture = await renderFixture(
             html`
-                <div><${ViraIcon} ${assign(ViraIcon, {icon: Element24Icon})}></${ViraIcon}></div>
+                <div><${ViraIcon.assign({icon: Element24Icon})}></${ViraIcon}></div>
             `,
         );
 

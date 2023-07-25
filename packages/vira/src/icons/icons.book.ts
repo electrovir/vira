@@ -1,5 +1,5 @@
-import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
-import {assign, css, html, unsafeCSS} from 'element-vir';
+import {BookPageControlTypeEnum, defineBookPage, definePageControl} from 'element-book';
+import {css, html, unsafeCSS} from 'element-vir';
 import {ViraIcon} from '../elements/vira-icon/vira-icon.element';
 import {viraIconColorCssVars} from './icon-color-css-vars';
 import {allIconsByName} from './index';
@@ -8,18 +8,18 @@ export const iconsBookPage = defineBookPage({
     title: 'Icons',
     parent: undefined,
     controls: {
-        'Icon Color': {
+        'Icon Color': definePageControl({
             controlType: BookPageControlTypeEnum.Text,
             initValue: '',
-        },
-        'Stroke Color': {
+        }),
+        'Stroke Color': definePageControl({
             controlType: BookPageControlTypeEnum.Text,
             initValue: '',
-        },
-        'Fill Color': {
+        }),
+        'Fill Color': definePageControl({
             controlType: BookPageControlTypeEnum.Text,
             initValue: '',
-        },
+        }),
     },
     elementExamplesCallback({defineExample}) {
         Object.values(allIconsByName).forEach((icon) => {
@@ -39,7 +39,7 @@ export const iconsBookPage = defineBookPage({
                     `;
 
                     return html`
-                        <${ViraIcon} style=${styles} ${assign(ViraIcon, {icon})}></${ViraIcon}>
+                        <${ViraIcon.assign({icon})} style=${styles}></${ViraIcon}>
                     `;
                 },
             });

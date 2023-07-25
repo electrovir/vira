@@ -1,5 +1,5 @@
 import {ElementBookApp, ElementBookSlotName} from 'element-book';
-import {assign, css, defineElementNoInputs, html} from 'element-vir';
+import {css, defineElementNoInputs, html} from 'element-vir';
 import {allElementBookEntries} from './all-element-book-entries';
 
 export const ViraBookApp = defineElementNoInputs({
@@ -25,16 +25,14 @@ export const ViraBookApp = defineElementNoInputs({
     `,
     renderCallback() {
         return html`
-            <${ElementBookApp}
-                ${assign(ElementBookApp, {
-                    internalRouterConfig: {
-                        basePath: 'vira',
-                        useInternalRouter: true,
-                    },
-                    entries: allElementBookEntries,
-                    themeColor: '#33ccff',
-                })}
-            >
+            <${ElementBookApp.assign({
+                internalRouterConfig: {
+                    basePath: 'vira',
+                    useInternalRouter: true,
+                },
+                entries: allElementBookEntries,
+                themeColor: '#33ccff',
+            })}>
                 <h1 slot=${ElementBookSlotName.NavHeader}>Vira</h1>
             </${ElementBookApp}>
         `;

@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "0.6.3",
+    "version": "0.6.4",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -38,14 +38,14 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^15.0.1",
+        "element-vir": "^16.0.0",
         "lit-css-vars": "^2.0.3",
         "spa-router-vir": "^2.1.1",
         "type-fest": "^4.0.0"
     },
     "devDependencies": {
-        "@augment-vir/browser-testing": "^15.4.1",
-        "@augment-vir/node-js": "^15.4.1",
+        "@augment-vir/browser-testing": "^15.5.0",
+        "@augment-vir/node-js": "^15.5.0",
         "@open-wc/testing": "^3.2.0",
         "@types/chai": "^4.3.5",
         "@types/mocha": "^10.0.1",
@@ -54,11 +54,11 @@
         "@web/test-runner-commands": "^0.8.0",
         "@web/test-runner-playwright": "^0.10.1",
         "@web/test-runner-visual-regression": "^0.8.2",
-        "esbuild": "^0.18.15",
+        "esbuild": "^0.18.16",
         "istanbul-smart-text-reporter": "^1.1.2",
         "npm-check-updates": "^16.10.16",
         "typescript": "^5.1.6",
-        "vite": "^4.4.6",
+        "vite": "^4.4.7",
         "vite-tsconfig-paths": "^4.2.0"
     }
 }

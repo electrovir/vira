@@ -23,8 +23,8 @@
     },
     "devDependencies": {
         "cspell": "^6.31.2",
-        "element-book": "^10.0.0",
-        "esbuild": "^0.18.16",
+        "element-book": "^10.0.1",
+        "esbuild": "^0.18.17",
         "markdown-code-example-inserter": "^0.3.1",
         "mono-vir": "^0.1.4",
         "npm-check-updates": "^16.10.17",

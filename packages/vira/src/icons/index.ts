@@ -6,6 +6,7 @@ import {Options24Icon} from './icon-svgs/options-24.icon';
 import {StatusFailure24Icon} from './icon-svgs/status-failure-24.icon';
 import {StatusInProgress24Icon} from './icon-svgs/status-in-progress-24.icon';
 import {StatusSuccess24Icon} from './icon-svgs/status-success-24.icon';
+export * from './icon-color-css-vars';
 export * from './icon-svg';
 export * from './icon-svgs/element-16.icon';
 export * from './icon-svgs/element-24.icon';

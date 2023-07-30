@@ -38,14 +38,14 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^16.0.3",
+        "element-vir": "^16.3.0",
         "lit-css-vars": "^3.0.0",
         "spa-router-vir": "^2.1.1",
         "type-fest": "^4.0.0"
     },
     "devDependencies": {
-        "@augment-vir/browser-testing": "^16.0.1",
-        "@augment-vir/node-js": "^16.0.1",
+        "@augment-vir/browser-testing": "^16.2.0",
+        "@augment-vir/node-js": "^16.2.0",
         "@open-wc/testing": "^3.2.0",
         "@types/chai": "^4.3.5",
         "@types/mocha": "^10.0.1",

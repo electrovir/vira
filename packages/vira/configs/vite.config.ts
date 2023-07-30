@@ -6,5 +6,8 @@ export default defineConfig({forGitHubPages: true}, (baseConfig) => {
         optimizeDeps: {
             disabled: true,
         },
+        build: {
+            outDir: '../book-dist',
+        },
     };
 });

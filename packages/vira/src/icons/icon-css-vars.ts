@@ -15,6 +15,10 @@ const specificIconCssVars = defineCssVars({
     'vira-icon-stroke-color': genericIconColorCssVar['vira-icon-color'].value,
     /** To be used for coloring an icon's fill. */
     'vira-icon-fill-color': genericIconColorCssVar['vira-icon-color'].value,
+    'vira-icon-stroke-width': '1px',
 });
 
-export const viraIconColorCssVars = {...genericIconColorCssVar, ...specificIconCssVars};
+export const viraIconCssVars = {
+    ...genericIconColorCssVar,
+    ...specificIconCssVars,
+};

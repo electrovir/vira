@@ -1,6 +1,8 @@
 import {defineCssVars} from 'lit-css-vars';
 
 export const viraAnimationDurations = defineCssVars({
+    /** A longer duration show a full animation. */
+    'vira-extended-animation-duration': '1s',
     /** A longer duration to emphasize the animation. */
     'vira-pretty-animation-duration': '300ms',
     /**

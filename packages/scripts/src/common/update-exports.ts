@@ -1,8 +1,8 @@
+import {log, logColors} from '@augment-vir/node-js';
 import {existsSync} from 'fs';
 import {readFile, writeFile} from 'fs/promises';
 import {basename, relative} from 'path';
 import {generateAutomaticallyUpdatedByComment} from './automatically-updated';
-import {cliColors} from './cli-colors';
 import {monoRepoRootDir} from './file-paths';
 import {formatCode} from './format';
 
@@ -54,7 +54,7 @@ export async function writeOrCheckGeneratedFile(
     const qualifier = args.checkOnly ? '' : ' already';
     if (formattedCode === currentOutputContents) {
         console.info(
-            `${cliColors.green}Up to date${qualifier}: '${relativeWriteToFile}'.${cliColors.reset}`,
+            `${logColors.success}Up to date${qualifier}: '${relativeWriteToFile}'.${logColors.reset}`,
         );
         return;
     }
@@ -65,15 +65,17 @@ export async function writeOrCheckGeneratedFile(
         );
     } else if (args.checkOnly) {
         throw new NotUpToDateError(
-            `${cliColors.red}${cliColors.bold}'${relativeWriteToFile}' needs to be updated: run '${
-                cliColors.reset
-            }${cliColors.blue}npx ts-node ${relative(monoRepoRootDir, scriptName)}${cliColors.red}${
-                cliColors.bold
-            }'${cliColors.reset}`,
+            `${logColors.error}${
+                logColors.bold
+            }'${relativeWriteToFile}' needs to be updated: run '${logColors.reset}${
+                logColors.info
+            }npx ts-node ${relative(monoRepoRootDir, scriptName)}${logColors.error}${
+                logColors.bold
+            }'${logColors.reset}`,
         );
     } else {
         await writeFile(fileToWriteTo, formattedCode);
-        console.info(`${cliColors.blue}Wrote to '${relativeWriteToFile}'.${cliColors.reset}`);
+        log.mutate(`Wrote to '${relativeWriteToFile}'.`);
     }
 }
 

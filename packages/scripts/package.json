@@ -12,7 +12,10 @@
         "update:exports": "ts-node src/update-all-exports.ts"
     },
     "devDependencies": {
-        "@types/node": "^20.4.5",
+        "@types/node": "^20.5.0",
         "typescript": "^5.1.6"
+    },
+    "dependencies": {
+        "@augment-vir/node-js": "^16.4.0"
     }
 }

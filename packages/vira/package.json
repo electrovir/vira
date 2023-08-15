@@ -40,14 +40,14 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "element-vir": "^16.3.0",
+        "element-vir": "^16.3.1",
         "lit-css-vars": "^3.0.0",
         "spa-router-vir": "^2.1.1",
-        "type-fest": "^4.1.0"
+        "type-fest": "^4.2.0"
     },
     "devDependencies": {
-        "@augment-vir/browser-testing": "^16.2.0",
-        "@augment-vir/node-js": "^16.2.0",
+        "@augment-vir/browser-testing": "^16.4.0",
+        "@augment-vir/node-js": "^16.4.0",
         "@open-wc/testing": "^3.2.0",
         "@types/chai": "^4.3.5",
         "@types/mocha": "^10.0.1",
@@ -56,11 +56,11 @@
         "@web/test-runner-commands": "^0.8.0",
         "@web/test-runner-playwright": "^0.10.1",
         "@web/test-runner-visual-regression": "^0.8.2",
-        "esbuild": "^0.18.17",
+        "esbuild": "^0.19.2",
         "istanbul-smart-text-reporter": "^1.1.2",
-        "npm-check-updates": "^16.10.17",
+        "npm-check-updates": "^16.11.1",
         "typescript": "^5.1.6",
-        "vite": "^4.4.7",
+        "vite": "^4.4.9",
         "vite-tsconfig-paths": "^4.2.0"
     }
 }

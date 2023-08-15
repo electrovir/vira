@@ -4,7 +4,7 @@ import {noUserSelect} from '../../styles';
 import {viraDisabledStyles} from '../../styles/disabled';
 import {viraAnimationDurations} from '../../styles/durations';
 import {createFocusStyles, viraFocusCssVars} from '../../styles/focus';
-import {removeNativeFormStyles} from '../../styles/native-styles';
+import {noNativeFormStyles} from '../../styles/native-styles';
 import {viraCssVars} from '../../styles/vira-css-vars';
 import {defineViraElement} from '../define-vira-element';
 import {ViraIcon} from '../vira-icon/vira-icon.element';
@@ -85,7 +85,7 @@ export const ViraButton = defineViraElement<{
 
         button {
             cursor: pointer;
-            ${removeNativeFormStyles};
+            ${noNativeFormStyles};
             position: relative;
             width: 100%;
             height: 100%;

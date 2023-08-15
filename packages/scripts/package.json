@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-scripts",
-    "version": "0.7.2",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "compile": "virmator compile",
@@ -11,11 +11,11 @@
         "test:exports": "ts-node src/update-all-exports.ts --check",
         "update:exports": "ts-node src/update-all-exports.ts"
     },
+    "dependencies": {
+        "@augment-vir/node-js": "^16.4.0"
+    },
     "devDependencies": {
         "@types/node": "^20.5.0",
         "typescript": "^5.1.6"
-    },
-    "dependencies": {
-        "@augment-vir/node-js": "^16.4.0"
     }
 }

@@ -1,5 +1,5 @@
 import {css} from 'element-vir';
-import {viraIconColorCssVars} from '../../icons/icon-color-css-vars';
+import {viraIconCssVars} from '../../icons/icon-css-vars';
 import {ViraIconSvg} from '../../icons/icon-svg';
 import {defineViraElement} from '../define-vira-element';
 
@@ -16,9 +16,9 @@ export const ViraIcon = defineViraElement<{
     styles: ({hostClasses}) => css`
         :host {
             display: inline-block;
-            color: ${viraIconColorCssVars['vira-icon-color'].value};
-            fill: ${viraIconColorCssVars['vira-icon-fill-color'].value};
-            stroke: ${viraIconColorCssVars['vira-icon-stroke-color'].value};
+            color: ${viraIconCssVars['vira-icon-color'].value};
+            fill: ${viraIconCssVars['vira-icon-fill-color'].value};
+            stroke: ${viraIconCssVars['vira-icon-stroke-color'].value};
         }
 
         svg {

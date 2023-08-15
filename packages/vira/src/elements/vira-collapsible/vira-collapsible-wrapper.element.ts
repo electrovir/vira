@@ -1,5 +1,5 @@
 import {css, defineElementEvent, html, listen, onResize} from 'element-vir';
-import {removeNativeFormStyles, viraAnimationDurations} from '../../styles';
+import {noNativeFormStyles, viraAnimationDurations} from '../../styles';
 import {defineViraElement} from '../define-vira-element';
 
 export enum ViraCollapsibleSlotNameEnum {
@@ -18,7 +18,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{expanded: boolean}>()({
         }
 
         .header-wrapper {
-            ${removeNativeFormStyles};
+            ${noNativeFormStyles};
             cursor: pointer;
         }
 

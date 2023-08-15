@@ -1,7 +1,7 @@
+import {addPx} from '@augment-vir/common';
 import {css} from 'element-vir';
 import {unsafeCSS} from 'lit';
 import {defineCssVars} from 'lit-css-vars';
-import {toPixel} from '../util/number';
 import {viraCssVars} from './vira-css-vars';
 
 export const viraFocusCssVars = defineCssVars({
@@ -32,7 +32,7 @@ export function createFocusStyles({
     outlineWidth?: number;
     borderRadius?: number;
 }) {
-    const outlineSpacing = unsafeCSS(toPixel(outlineWidth + outlineGap + elementBorderSize));
+    const outlineSpacing = unsafeCSS(addPx(outlineWidth + outlineGap + elementBorderSize));
 
     return css`
         ${unsafeCSS(mainSelector)}::after {

@@ -3,7 +3,7 @@ import {assert, fixture as renderFixture} from '@open-wc/testing';
 import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {Element24Icon} from '../../icons';
-import {viraIconColorCssVars} from '../../icons/icon-color-css-vars';
+import {viraIconCssVars} from '../../icons/icon-css-vars';
 import {ViraIcon} from './vira-icon.element';
 
 describe(ViraIcon.tagName, () => {
@@ -57,7 +57,7 @@ describe(ViraIcon.tagName, () => {
             const {viraIconInstance, wrapperDiv} = await setupFixture();
 
             setCssVarValue({
-                forCssVar: viraIconColorCssVars['vira-icon-color'],
+                forCssVar: viraIconCssVars['vira-icon-color'],
                 onElement: wrapperDiv,
                 toValue: 'green',
             });
@@ -71,7 +71,7 @@ describe(ViraIcon.tagName, () => {
             const {viraIconInstance, wrapperDiv} = await setupFixture();
 
             setCssVarValue({
-                forCssVar: viraIconColorCssVars['vira-icon-stroke-color'],
+                forCssVar: viraIconCssVars['vira-icon-stroke-color'],
                 onElement: wrapperDiv,
                 toValue: 'blue',
             });
@@ -85,7 +85,7 @@ describe(ViraIcon.tagName, () => {
             const {viraIconInstance, wrapperDiv} = await setupFixture();
 
             setCssVarValue({
-                forCssVar: viraIconColorCssVars['vira-icon-fill-color'],
+                forCssVar: viraIconCssVars['vira-icon-fill-color'],
                 onElement: wrapperDiv,
                 toValue: 'white',
             });

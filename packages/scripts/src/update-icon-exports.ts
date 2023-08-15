@@ -72,7 +72,7 @@ function generateIconImportsAndExports(iconPaths: ReadonlyArray<string>): string
 
     return `${imports.join('\n')}
         ${exports.join('\n')}
-        export * from './icon-color-css-vars';
+        export * from './icon-css-vars';
         export * from './icon-svg';
     
         export const allIconsByName = {

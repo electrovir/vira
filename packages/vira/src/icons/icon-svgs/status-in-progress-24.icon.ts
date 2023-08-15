@@ -1,5 +1,5 @@
 import {html} from 'element-vir';
-import {viraIconColorCssVars} from '../icon-color-css-vars';
+import {viraIconCssVars} from '../icon-css-vars';
 import {defineIcon} from '../icon-svg';
 
 export const StatusInProgress24Icon = defineIcon({
@@ -10,28 +10,28 @@ export const StatusInProgress24Icon = defineIcon({
                 cx="12"
                 cy="12"
                 r="9"
-                stroke=${viraIconColorCssVars['vira-icon-stroke-color'].value}
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 fill="none"
             />
             <circle
                 cx="7"
                 cy="12"
                 r="1"
-                fill=${viraIconColorCssVars['vira-icon-stroke-color'].value}
+                fill=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke="none"
             />
             <circle
                 cx="12"
                 cy="12"
                 r="1"
-                fill=${viraIconColorCssVars['vira-icon-stroke-color'].value}
+                fill=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke="none"
             />
             <circle
                 cx="17"
                 cy="12"
                 r="1"
-                fill=${viraIconColorCssVars['vira-icon-stroke-color'].value}
+                fill=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke="none"
             />
         </svg>

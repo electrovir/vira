@@ -2,20 +2,19 @@ import {html} from 'element-vir';
 import {viraIconCssVars} from '../icon-css-vars';
 import {defineIcon} from '../icon-svg';
 
-export const Element16Icon = defineIcon({
-    name: 'Element16Icon',
+export const Loader24Icon = defineIcon({
+    name: 'Loader24Icon',
     svgTemplate: html`
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
         >
             <path
+                d="M12 8V2M16 12h6M12 16v6M8 12H2M9.17 9.17 4.93 4.93M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-                vector-effect="non-scaling-stroke"
-                d="M4 5 1 8l3 3m8-6 3 3-3 3m-5 0 2-6"
             />
         </svg>
     `,

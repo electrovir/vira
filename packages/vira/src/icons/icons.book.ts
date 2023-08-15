@@ -1,7 +1,8 @@
 import {BookPageControlTypeEnum, defineBookPage, definePageControl} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
 import {ViraIcon} from '../elements/vira-icon/vira-icon.element';
-import {viraIconColorCssVars} from './icon-color-css-vars';
+import {viraCssVars} from '../styles/vira-css-vars';
+import {viraIconCssVars} from './icon-css-vars';
 import {allIconsByName} from './index';
 
 export const iconsBookPage = defineBookPage({
@@ -20,21 +21,38 @@ export const iconsBookPage = defineBookPage({
             controlType: BookPageControlTypeEnum.Text,
             initValue: '',
         }),
+        'Stroke Width': definePageControl({
+            controlType: BookPageControlTypeEnum.Number,
+            initValue: 1,
+        }),
     },
     elementExamplesCallback({defineExample}) {
         Object.values(allIconsByName).forEach((icon) => {
             defineExample({
                 title: icon.name,
+                styles: css`
+                    :host(:hover) ${ViraIcon} {
+                        background-color: #f2f2f2;
+                    }
+
+                    ${ViraIcon} {
+                        padding: 8px;
+                        border-radius: ${viraCssVars['vira-form-input-border-radius'].value};
+                    }
+                `,
                 renderCallback({controls}) {
                     const styles = css`
-                        ${viraIconColorCssVars['vira-icon-color'].name}: ${unsafeCSS(
+                        ${viraIconCssVars['vira-icon-color'].name}: ${unsafeCSS(
                             controls['Icon Color'] || 'inherit',
                         )};
-                        ${viraIconColorCssVars['vira-icon-fill-color'].name}: ${unsafeCSS(
+                        ${viraIconCssVars['vira-icon-fill-color'].name}: ${unsafeCSS(
                             controls['Fill Color'] || 'inherit',
                         )};
-                        ${viraIconColorCssVars['vira-icon-stroke-color'].name}: ${unsafeCSS(
+                        ${viraIconCssVars['vira-icon-stroke-color'].name}: ${unsafeCSS(
                             controls['Stroke Color'] || 'inherit',
+                        )};
+                        ${viraIconCssVars['vira-icon-stroke-width'].name}: ${unsafeCSS(
+                            controls['Stroke Width'] || 'inherit',
                         )};
                     `;
 

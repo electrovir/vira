@@ -29,8 +29,8 @@ export const ViraInput = defineViraElement<
         'vira-input-placeholder-color': '#ccc',
         'vira-input-text-color': 'black',
         'vira-input-border-color': '#ccc',
-        'vira-input-focus-border-color': '#59B1FF',
-        'vira-input-text-selection-color': '#CFE9FF',
+        'vira-input-focus-border-color': '#59b1ff',
+        'vira-input-text-selection-color': '#cfe9ff',
 
         'vira-input-padding-horizontal': '10px',
         'vira-input-padding-vertical': '6px',

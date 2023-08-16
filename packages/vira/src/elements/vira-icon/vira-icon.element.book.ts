@@ -8,7 +8,7 @@ export const viraIconBookPage = defineBookPage({
     title: ViraIcon.tagName,
     parent: elementsBookPage,
     descriptionParagraphs: [
-        "See the 'All Icons' section for a list of all included icons.",
+        "See the 'Icons' page for a list of all included icons.",
     ],
     elementExamplesCallback({defineExample}) {
         defineExample({

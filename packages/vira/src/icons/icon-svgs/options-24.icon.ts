@@ -12,9 +12,10 @@ export const Options24Icon = defineIcon({
                 <circle cx="8.5" cy="18.5" r="2.5" />
             </g>
             <path
-                stroke="none"
-                fill="${viraIconCssVars['vira-icon-stroke-color'].value}"
-                d="M6 18a3 3 0 0 0 0 1H3v-1h3Zm5 1a3 3 0 0 0 0-1h10v1H11Zm3-7a3 3 0 0 0 0 1H3v-1h11Zm5 1a3 3 0 0 0 0-1h2v1h-2ZM7 5a3 3 0 0 0 0 1H3V5h4Zm5 1a3 3 0 0 0 0-1h9v1h-9Z"
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
+                stroke="${viraIconCssVars['vira-icon-stroke-color'].value}"
+                fill="none"
+                d="M3 5.5h3.5m5 0h8.5M3 12.5h11m5 0h2M3 18.5h3m5 0h10"
             />
         </svg>
     `,

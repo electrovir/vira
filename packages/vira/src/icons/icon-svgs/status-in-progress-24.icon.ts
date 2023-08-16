@@ -10,6 +10,7 @@ export const StatusInProgress24Icon = defineIcon({
                 cx="12"
                 cy="12"
                 r="9"
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 fill="none"
             />
@@ -18,21 +19,24 @@ export const StatusInProgress24Icon = defineIcon({
                 cy="12"
                 r="1"
                 fill=${viraIconCssVars['vira-icon-stroke-color'].value}
-                stroke="none"
+                stroke-width="calc(${viraIconCssVars['vira-icon-stroke-width'].value} - 1px)"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
             />
             <circle
                 cx="12"
                 cy="12"
                 r="1"
                 fill=${viraIconCssVars['vira-icon-stroke-color'].value}
-                stroke="none"
+                stroke-width="calc(${viraIconCssVars['vira-icon-stroke-width'].value} - 1px)"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
             />
             <circle
                 cx="17"
                 cy="12"
                 r="1"
                 fill=${viraIconCssVars['vira-icon-stroke-color'].value}
-                stroke="none"
+                stroke-width="calc(${viraIconCssVars['vira-icon-stroke-width'].value} - 1px)"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
             />
         </svg>
     `,

@@ -1,3 +1,4 @@
+import {addPx} from '@augment-vir/common';
 import {BookPageControlTypeEnum, defineBookPage, definePageControl} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
 import {ViraIcon} from '../elements/vira-icon/vira-icon.element';
@@ -52,7 +53,7 @@ export const iconsBookPage = defineBookPage({
                             controls['Stroke Color'] || 'inherit',
                         )};
                         ${viraIconCssVars['vira-icon-stroke-width'].name}: ${unsafeCSS(
-                            controls['Stroke Width'] || 'inherit',
+                            addPx(controls['Stroke Width']) || 'inherit',
                         )};
                     `;
 

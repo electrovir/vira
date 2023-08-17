@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "compile": "virmator compile",
+        "execute": "npm run update:exports",
         "publish:post": "ts-node src/publish-script post-publish",
         "publish:pre": "ts-node src/publish-script pre-publish",
         "test": "npm run test:exports",

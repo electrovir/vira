@@ -7,6 +7,7 @@ export const noNativeSpacing = css`
 
 export const noNativeFormStyles = css`
     ${noNativeSpacing};
+    cursor: unset;
     background: none;
     border: none;
     font: inherit;

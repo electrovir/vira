@@ -13,6 +13,8 @@ export const Element24Icon = defineIcon({
             width="24"
         >
             <path
+                fill="none"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
                 d="m7 7-5 5 5 5M17 7l5 5-5 5m-6 0 2-10"
             />

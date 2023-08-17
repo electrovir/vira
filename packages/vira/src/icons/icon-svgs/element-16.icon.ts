@@ -13,9 +13,10 @@ export const Element16Icon = defineIcon({
             viewBox="0 0 16 16"
         >
             <path
-                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-                vector-effect="non-scaling-stroke"
                 d="M4 5 1 8l3 3m8-6 3 3-3 3m-5 0 2-6"
+                fill="none"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
             />
         </svg>
     `,

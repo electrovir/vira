@@ -9,10 +9,10 @@ export const StatusSuccess24Icon = defineIcon({
             <circle
                 cx="12"
                 cy="12"
-                r="9"
-                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
+                r="10"
+                fill=${viraIconCssVars['vira-icon-fill-color'].value}
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
-                fill="none"
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
             />
             <path
                 d="m17 8.5-7 8-3-3"

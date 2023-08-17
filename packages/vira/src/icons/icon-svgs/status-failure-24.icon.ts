@@ -15,15 +15,15 @@ export const StatusFailure24Icon = defineIcon({
             <circle
                 cx="12"
                 cy="12"
-                r="9"
-                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
+                r="10"
+                fill=${viraIconCssVars['vira-icon-fill-color'].value}
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
-                fill="none"
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
             />
             <path
+                fill="none"
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-                fill="none"
                 d="M8 16.5 L16 7.5 M8 7.5 L16 16.5"
             />
         </svg>

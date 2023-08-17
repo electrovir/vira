@@ -216,13 +216,7 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                 </div>
             </div>
         `}}),w=Me({"vira-icon-stroke-color":"currentColor","vira-icon-fill-color":"none","vira-icon-stroke-width":"1px"});function de({name:e,svgTemplate:t}){return{name:e,svgTemplate:t}}const ds=de({name:"CloseX24Icon",svgTemplate:p`
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xml:space="preserve"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <circle
                 cx="12"
                 cy="12"
@@ -232,13 +226,13 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                 stroke-width=${w["vira-icon-stroke-width"].value}
             />
             <path
+                d="M9 8.5l6 7m0 -7l-6 7"
                 fill="none"
                 stroke=${w["vira-icon-stroke-color"].value}
                 stroke-width=${w["vira-icon-stroke-width"].value}
-                d="M9 8.5l6 7m0 -7l-6 7"
             />
         </svg>
-    `});function Hr({input:e,matcher:t}){return!e||!t?!0:e.length>1?!!e.split("").every(r=>Hr({input:r,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function fs({value:e,allowed:t,blocked:r}){const n=t?Hr({input:e,matcher:t}):!0,o=r?Hr({input:e,matcher:r}):!1;return n&&!o}function hs(e){if(!e.value)return{filtered:e.value,blocked:""};const{filtered:t,blocked:r}=e.value.split("").reduce((n,o)=>(fs({...e,value:o})?n.filtered.push(o):n.blocked.push(o),n),{filtered:[],blocked:[]});return{filtered:t.join(""),blocked:r.join("")}}function ou({inputs:e,filteredValue:t,event:r,inputBlockedCallback:n,newValueCallback:o}){if(!(r instanceof InputEvent))throw new Error("Text input event was not an InputEvent.");const a=Re(r,HTMLInputElement),s=r.data,i=t;let l=a.value??"";if(s)if(s.length===1)fs({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs})||(l=i,n(s));else{const{filtered:c,blocked:u}=hs({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});l=c,n(u)}a.value!==l&&(a.value=l),i!==l&&o(l)}const B=pt()({tagName:"vira-input",hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText},cssVars:{"vira-input-placeholder-color":"#cccccc","vira-input-text-color":"#000000","vira-input-border-color":"#cccccc","vira-input-focus-border-color":"#59b1ff","vira-input-text-selection-color":"#cfe9ff","vira-input-padding-horizontal":"10px","vira-input-padding-vertical":"6px"},events:{valueChange:Ve(),inputBlocked:Ve()},styles:({hostClasses:e,cssVars:t})=>y`
+    `});function Hr({input:e,matcher:t}){return!e||!t?!0:e.length>1?!!e.split("").every(r=>Hr({input:r,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function fs({value:e,allowed:t,blocked:r}){const n=t?Hr({input:e,matcher:t}):!0,o=r?Hr({input:e,matcher:r}):!1;return n&&!o}function hs(e){if(!e.value)return{filtered:e.value,blocked:""};const{filtered:t,blocked:r}=e.value.split("").reduce((n,o)=>(fs({...e,value:o})?n.filtered.push(o):n.blocked.push(o),n),{filtered:[],blocked:[]});return{filtered:t.join(""),blocked:r.join("")}}function ou({inputs:e,filteredValue:t,event:r,inputBlockedCallback:n,newValueCallback:o}){if(!(r instanceof InputEvent))throw new Error("Text input event was not an InputEvent.");const a=Re(r,HTMLInputElement),s=r.data,i=t;let l=a.value??"";if(s)if(s.length===1)fs({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs})||(l=i,n(s));else{const{filtered:c,blocked:u}=hs({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});l=c,n(u)}a.value!==l&&(a.value=l),i!==l&&o(l)}const B=pt()({tagName:"vira-input",hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton},cssVars:{"vira-input-placeholder-color":"#cccccc","vira-input-text-color":"#000000","vira-input-border-color":"#cccccc","vira-input-focus-border-color":"#59b1ff","vira-input-text-selection-color":"#cfe9ff","vira-input-clear-button-color":"#aaaaaa","vira-input-clear-button-hover-color":"#ff0000","vira-input-clear-button-active-color":"#b30000","vira-input-padding-horizontal":"10px","vira-input-padding-vertical":"6px"},events:{valueChange:Ve(),inputBlocked:Ve()},styles:({hostClasses:e,cssVars:t})=>y`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -284,6 +278,10 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                 ${Dr};
                 vertical-align: middle;
                 max-height: 100%;
+            }
+
+            ${e["vira-input-clear-button-shown"].selector} label {
+                padding-right: 4px;
             }
 
             pre {
@@ -382,15 +380,19 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
             }
 
             .close-x-button {
-                color: ${t["vira-input-text-color"].value};
                 ${$e};
+                color: ${t["vira-input-clear-button-color"].value};
                 cursor: pointer;
                 display: flex;
                 transition: ${Se["vira-interaction-animation-duration"].value};
             }
 
             .close-x-button:hover {
-                color: red;
+                color: ${t["vira-input-clear-button-hover-color"].value};
+            }
+
+            .close-x-button:active {
+                color: ${t["vira-input-clear-button-active-color"].value};
             }
         `,stateInitStatic:{forcedInputWidth:0},renderCallback:({inputs:e,dispatch:t,state:r,updateState:n,events:o})=>{const{filtered:a}=hs({value:e.value??"",allowed:e.allowedInputs,blocked:e.blockedInputs}),s=e.icon?p`
                   <${P.assign({icon:e.icon})} class="left-side-icon"></${P}>
@@ -468,13 +470,7 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                     <slot></slot>
                 </a>
             `}}}),ps=de({name:"Element16Icon",svgTemplate:p`
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path
                 d="M4 5 1 8l3 3m8-6 3 3-3 3m-5 0 2-6"
                 fill="none"
@@ -483,27 +479,20 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
             />
         </svg>
     `}),Ne=de({name:"Element24Icon",svgTemplate:p`
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path
+                d="m7 7-5 5 5 5M17 7l5 5-5 5m-6 0 2-10"
                 fill="none"
                 stroke=${w["vira-icon-stroke-color"].value}
                 stroke-width=${w["vira-icon-stroke-width"].value}
-                d="m7 7-5 5 5 5M17 7l5 5-5 5m-6 0 2-10"
             />
         </svg>
     `}),ms=de({name:"Loader24Icon",svgTemplate:p`
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
+            width="24"
             height="24"
             viewBox="0 0 24 24"
-            width="24"
             class="loader-animated-24-icon"
         >
             <path
@@ -533,7 +522,7 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
         </style>
         ${ms.svgTemplate}
     `}),gs=de({name:"Options24Icon",svgTemplate:p`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g
                 fill=${w["vira-icon-fill-color"].value}
                 stroke=${w["vira-icon-stroke-color"].value}
@@ -544,20 +533,14 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                 <circle cx="8.5" cy="18.5" r="2.5" />
             </g>
             <path
+                d="M3 5.5h3.5m5 0h8.5M3 12.5h11m5 0h2M3 18.5h3m5 0h10"
                 fill="none"
                 stroke="${w["vira-icon-stroke-color"].value}"
                 stroke-width=${w["vira-icon-stroke-width"].value}
-                d="M3 5.5h3.5m5 0h8.5M3 12.5h11m5 0h2M3 18.5h3m5 0h10"
             />
         </svg>
     `}),iu=de({name:"StatusFailure24Icon",svgTemplate:p`
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xml:space="preserve"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <circle
                 cx="12"
                 cy="12"
@@ -567,10 +550,10 @@ var xs=Object.defineProperty;var Ss=(e,t,r)=>t in e?xs(e,t,{enumerable:!0,config
                 stroke-width=${w["vira-icon-stroke-width"].value}
             />
             <path
+                d="M8 16.5 L16 7.5 M8 7.5 L16 16.5"
                 fill="none"
                 stroke=${w["vira-icon-stroke-color"].value}
                 stroke-width=${w["vira-icon-stroke-width"].value}
-                d="M8 16.5 L16 7.5 M8 7.5 L16 16.5"
             />
         </svg>
     `}),lu=de({name:"StatusInProgress24Icon",svgTemplate:p`

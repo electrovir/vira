@@ -26,6 +26,7 @@ export const ViraInput = defineViraElement<
     hostClasses: {
         'vira-input-disabled': ({inputs}) => !!inputs.disabled,
         'vira-input-fit-text': ({inputs}) => !!inputs.fitText,
+        'vira-input-clear-button-shown': ({inputs}) => !!inputs.showClearButton,
     },
     cssVars: {
         'vira-input-placeholder-color': '#cccccc',
@@ -33,6 +34,9 @@ export const ViraInput = defineViraElement<
         'vira-input-border-color': '#cccccc',
         'vira-input-focus-border-color': '#59b1ff',
         'vira-input-text-selection-color': '#cfe9ff',
+        'vira-input-clear-button-color': '#aaaaaa',
+        'vira-input-clear-button-hover-color': '#ff0000',
+        'vira-input-clear-button-active-color': '#b30000',
 
         'vira-input-padding-horizontal': '10px',
         'vira-input-padding-vertical': '6px',
@@ -99,6 +103,10 @@ export const ViraInput = defineViraElement<
                 ${noUserSelect};
                 vertical-align: middle;
                 max-height: 100%;
+            }
+
+            ${hostClasses['vira-input-clear-button-shown'].selector} label {
+                padding-right: 4px;
             }
 
             pre {
@@ -203,15 +211,19 @@ export const ViraInput = defineViraElement<
             }
 
             .close-x-button {
-                color: ${cssVars['vira-input-text-color'].value};
                 ${noNativeFormStyles};
+                color: ${cssVars['vira-input-clear-button-color'].value};
                 cursor: pointer;
                 display: flex;
                 transition: ${viraAnimationDurations['vira-interaction-animation-duration'].value};
             }
 
             .close-x-button:hover {
-                color: red;
+                color: ${cssVars['vira-input-clear-button-hover-color'].value};
+            }
+
+            .close-x-button:active {
+                color: ${cssVars['vira-input-clear-button-active-color'].value};
             }
         `;
     },

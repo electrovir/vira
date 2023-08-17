@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-root",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "workspaces": [

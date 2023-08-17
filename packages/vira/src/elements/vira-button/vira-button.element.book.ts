@@ -11,20 +11,20 @@ export const viraButtonBookPage = defineBookPage({
     ],
     controls: {
         'Primary color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraButton.cssVars['vira-button-primary-color'].default,
         },
         'Secondary color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraButton.cssVars['vira-button-secondary-color'].default,
         },
         'Hover color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraButton.cssVars['vira-button-primary-hover-color'].default,
         },
         'Active color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraButton.cssVars['vira-button-primary-active-color'].default,
         },
     },
     elementExamplesCallback({defineExample}) {

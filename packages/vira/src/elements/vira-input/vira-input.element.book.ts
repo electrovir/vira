@@ -1,5 +1,6 @@
+import {mapObjectValues} from '@augment-vir/common';
 import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
-import {CSSResult, css, html, listen, unsafeCSS} from 'element-vir';
+import {CSSResult, css, html, listen} from 'element-vir';
 import {Element24Icon} from '../../icons';
 import {elementsBookPage} from '../elements.book';
 import {ViraInput} from './vira-input.element';
@@ -13,24 +14,24 @@ export const viraInputBookPage = defineBookPage({
     ],
     controls: {
         'Text color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraInput.cssVars['vira-input-text-color'].default,
         },
         'Placeholder color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraInput.cssVars['vira-input-placeholder-color'].default,
         },
         'Border color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraInput.cssVars['vira-input-border-color'].default,
         },
         'Focus color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraInput.cssVars['vira-input-focus-border-color'].default,
         },
         'Selection color': {
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
+            controlType: BookPageControlTypeEnum.Color,
+            initValue: ViraInput.cssVars['vira-input-text-selection-color'].default,
         },
     } as const satisfies NonNullable<Parameters<typeof defineBookPage>[0]['controls']>,
     elementExamplesCallback({defineExample}) {
@@ -52,23 +53,41 @@ export const viraInputBookPage = defineBookPage({
                     value: inputs.value,
                 },
                 renderCallback({state, updateState, controls}) {
-                    const styles = css`
-                        ${ViraInput.cssVars['vira-input-text-color'].name}: ${unsafeCSS(
-                            controls['Text color'] || 'inherit',
-                        )};
-                        ${ViraInput.cssVars['vira-input-border-color'].name}: ${unsafeCSS(
-                            controls['Border color'] || 'inherit',
-                        )};
-                        ${ViraInput.cssVars['vira-input-focus-border-color'].name}: ${unsafeCSS(
-                            controls['Focus color'] || 'inherit',
-                        )};
-                        ${ViraInput.cssVars['vira-input-placeholder-color'].name}: ${unsafeCSS(
-                            controls['Placeholder color'] || 'inherit',
-                        )};
-                        ${ViraInput.cssVars['vira-input-text-selection-color'].name}: ${unsafeCSS(
-                            controls['Selection color'] || 'inherit',
-                        )};
-                    `;
+                    const cssVarControlValues = {
+                        [String(ViraInput.cssVars['vira-input-text-color'].name)]:
+                            controls['Text color'],
+                        [String(ViraInput.cssVars['vira-input-placeholder-color'].name)]:
+                            controls['Placeholder color'],
+                        [String(ViraInput.cssVars['vira-input-border-color'].name)]:
+                            controls['Border color'],
+                        [String(ViraInput.cssVars['vira-input-focus-border-color'].name)]:
+                            controls['Focus color'],
+                        [String(ViraInput.cssVars['vira-input-text-selection-color'].name)]:
+                            controls['Selection color'],
+                    };
+
+                    const cssVarValues = mapObjectValues(
+                        cssVarControlValues,
+                        (varName, controlValue) => {
+                            return controlValue || 'inherit';
+                        },
+                    );
+
+                    const styles = Object.entries(cssVarValues)
+                        .map(
+                            ([
+                                varName,
+                                varValue,
+                            ]) => {
+                                return (
+                                    [
+                                        varName,
+                                        varValue,
+                                    ].join(': ') + ';'
+                                );
+                            },
+                        )
+                        .join('\n');
 
                     return html`
                         <${ViraInput.assign({
@@ -115,6 +134,14 @@ export const viraInputBookPage = defineBookPage({
             },
         });
         defineInputExample({
+            title: 'with clear button',
+            inputs: {
+                value: 'value',
+                placeholder: 'with clear',
+                showClearButton: true,
+            },
+        });
+        defineInputExample({
             title: 'disabled',
             inputs: {
                 value: 'disabled',
@@ -149,7 +176,7 @@ export const viraInputBookPage = defineBookPage({
             },
         });
         defineInputExample({
-            title: 'custom height',
+            title: 'taller height',
             styles: css`
                 ${ViraInput} {
                     height: 48px;
@@ -157,7 +184,21 @@ export const viraInputBookPage = defineBookPage({
             `,
             inputs: {
                 value: '',
-                placeholder: 'height',
+                placeholder: 'taller',
+                icon: Element24Icon,
+            },
+        });
+        defineInputExample({
+            title: 'shorter height',
+            styles: css`
+                ${ViraInput} {
+                    height: 26px;
+                }
+            `,
+            inputs: {
+                value: '',
+                placeholder: 'shorter',
+                showClearButton: true,
                 icon: Element24Icon,
             },
         });

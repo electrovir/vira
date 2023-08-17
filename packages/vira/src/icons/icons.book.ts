@@ -10,16 +10,12 @@ export const iconsBookPage = defineBookPage({
     title: 'Icons',
     parent: undefined,
     controls: {
-        'Icon Color': definePageControl({
-            controlType: BookPageControlTypeEnum.Text,
-            initValue: '',
-        }),
         'Stroke Color': definePageControl({
-            controlType: BookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Color,
             initValue: '',
         }),
         'Fill Color': definePageControl({
-            controlType: BookPageControlTypeEnum.Text,
+            controlType: BookPageControlTypeEnum.Color,
             initValue: '',
         }),
         'Stroke Width': definePageControl({
@@ -43,9 +39,6 @@ export const iconsBookPage = defineBookPage({
                 `,
                 renderCallback({controls}) {
                     const styles = css`
-                        ${viraIconCssVars['vira-icon-color'].name}: ${unsafeCSS(
-                            controls['Icon Color'] || 'inherit',
-                        )};
                         ${viraIconCssVars['vira-icon-fill-color'].name}: ${unsafeCSS(
                             controls['Fill Color'] || 'inherit',
                         )};

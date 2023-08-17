@@ -1,6 +1,7 @@
 import {css, defineElementEvent, html, listen, onResize, renderIf} from 'element-vir';
 import {TemplateResult} from 'lit';
 import {ViraIconSvg} from '../../icons';
+import {CloseX24Icon} from '../../icons/icon-svgs/close-x-24.icon';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../../styles';
 import {createFocusStyles, viraFocusCssVars} from '../../styles/focus';
 import {noNativeFormStyles} from '../../styles/native-styles';
@@ -17,7 +18,8 @@ export const ViraInput = defineViraElement<
     {
         icon?: undefined | Pick<ViraIconSvg, 'svgTemplate'>;
         /** A suffix that, if provided, is shown following the user input field. */
-        suffix?: string;
+        suffix?: string | undefined;
+        showClearButton?: boolean | undefined;
     } & SharedTextInputElementInputs
 >()({
     tagName: 'vira-input',
@@ -26,9 +28,9 @@ export const ViraInput = defineViraElement<
         'vira-input-fit-text': ({inputs}) => !!inputs.fitText,
     },
     cssVars: {
-        'vira-input-placeholder-color': '#ccc',
-        'vira-input-text-color': 'black',
-        'vira-input-border-color': '#ccc',
+        'vira-input-placeholder-color': '#cccccc',
+        'vira-input-text-color': '#000000',
+        'vira-input-border-color': '#cccccc',
         'vira-input-focus-border-color': '#59b1ff',
         'vira-input-text-selection-color': '#cfe9ff',
 
@@ -134,7 +136,6 @@ export const ViraInput = defineViraElement<
                 ${noNativeFormStyles};
                 max-width: 100%;
                 flex-grow: 1;
-                cursor: text;
                 display: inline-flex;
                 box-sizing: border-box;
                 align-items: center;
@@ -148,6 +149,7 @@ export const ViraInput = defineViraElement<
                 */
                 border: 1px solid transparent;
                 gap: 4px;
+                cursor: text;
             }
 
             ${createFocusStyles({
@@ -156,7 +158,7 @@ export const ViraInput = defineViraElement<
                 elementBorderSize: 0,
             })}
 
-            ${ViraIcon} {
+            .left-side-icon {
                 margin-right: calc(${cssVars['vira-input-padding-horizontal'].value} - 4px);
             }
 
@@ -199,6 +201,18 @@ export const ViraInput = defineViraElement<
                 font-weight: bold;
                 ${noUserSelect};
             }
+
+            .close-x-button {
+                color: ${cssVars['vira-input-text-color'].value};
+                ${noNativeFormStyles};
+                cursor: pointer;
+                display: flex;
+                transition: ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+            }
+
+            .close-x-button:hover {
+                color: red;
+            }
         `;
     },
     stateInitStatic: {
@@ -213,7 +227,7 @@ export const ViraInput = defineViraElement<
 
         const iconTemplate: TemplateResult | string = inputs.icon
             ? html`
-                  <${ViraIcon.assign({icon: inputs.icon})}></${ViraIcon}>
+                  <${ViraIcon.assign({icon: inputs.icon})} class="left-side-icon"></${ViraIcon}>
               `
             : '';
 
@@ -262,6 +276,24 @@ export const ViraInput = defineViraElement<
                     })}
                     placeholder=${inputs.placeholder}
                 />
+                ${renderIf(
+                    !!(inputs.showClearButton && inputs.value),
+                    html`
+                        <button
+                            class="close-x-button"
+                            title="clear input"
+                            ${listen('click', (event) => {
+                                /** Prevent focus of the input. */
+                                event.stopImmediatePropagation();
+                                event.preventDefault();
+
+                                dispatch(new events.valueChange(''));
+                            })}
+                        >
+                            <${ViraIcon.assign({icon: CloseX24Icon})}></${ViraIcon}>
+                        </button>
+                    `,
+                )}
                 ${renderIf(
                     !!inputs.suffix,
                     html`

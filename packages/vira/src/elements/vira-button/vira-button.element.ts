@@ -28,16 +28,17 @@ export const ViraButton = defineViraElement<{
     },
     cssVars: {
         /** On the default button style this is the background color. */
-        'vira-button-primary-color': '#0A89FF',
-        'vira-button-primary-hover-color': '#59B1FF',
-        'vira-button-primary-active-color': '#007FF6',
+        'vira-button-primary-color': '#0a89ff',
+        'vira-button-primary-hover-color': '#59b1ff',
+        'vira-button-primary-active-color': '#007ff6',
 
         /** On the default button style this is the text color. */
-        'vira-button-secondary-color': 'white',
+        'vira-button-secondary-color': '#ffffff',
+
+        'vira-button-padding': '5px 10px',
 
         'vira-button-internal-foreground-color': '',
         'vira-button-internal-background-color': '',
-        'vira-button-padding': '5px 10px',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {

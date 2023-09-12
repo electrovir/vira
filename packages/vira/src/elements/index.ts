@@ -1,4 +1,4 @@
-/** This file is automatically updated by update-element-exports.ts */
+/** This file is automatically updated by update-index-exports.ts */
 
 export * from './define-vira-element';
 export * from './vira-button/vira-button.element';

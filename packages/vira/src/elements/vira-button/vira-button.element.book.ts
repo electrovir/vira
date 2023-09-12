@@ -1,5 +1,6 @@
 import {BookPageControlTypeEnum, defineBookPage} from 'element-book';
 import {CSSResult, css, html, unsafeCSS} from 'element-vir';
+import {Options24Icon} from '../../icons';
 import {elementsBookPage} from '../elements.book';
 import {ViraButton, ViraButtonStyleEnum} from './vira-button.element';
 
@@ -71,6 +72,7 @@ export const viraButtonBookPage = defineBookPage({
         }
 
         defineViraButtonExample({title: 'basic'});
+        defineViraButtonExample({title: 'with icon', inputs: {icon: Options24Icon}});
         defineViraButtonExample({
             title: 'outline',
             inputs: {

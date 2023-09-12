@@ -10,10 +10,13 @@ export const viraPackageJsonPath = join(viraPackageDir, 'package.json');
 export const viraSrcDir = join(viraPackageDir, 'src');
 export const viraElementsDir = join(viraSrcDir, 'elements');
 
-export function generateExportsFromFilePaths(
-    filePaths: ReadonlyArray<string>,
-    relativeDir: string,
-): string {
+export function generateExportsFromFilePaths({
+    filePaths,
+    relativeDir,
+}: {
+    filePaths: ReadonlyArray<string>;
+    relativeDir: string;
+}): string {
     const exportLines = filePaths.map((filePath) => {
         const relativePath = relative(relativeDir, filePath).replace(/\.ts?$/, '');
         const posixPath = toPosixPath(relativePath);
@@ -25,26 +28,36 @@ export function generateExportsFromFilePaths(
     return exportLines.join('\n');
 }
 
-export async function getElementFilePaths(): Promise<string[]> {
-    const allFilePathsInElements = (await readDirRecursive(viraElementsDir)).map((relativePath) =>
-        join(viraElementsDir, relativePath),
+const ignoredFileNameEndings = [
+    '.test.ts',
+    '.book.ts',
+    '.test-helper.ts',
+];
+
+export async function getExportableTsFilePaths(dirPath: string): Promise<string[]> {
+    const allFilePaths = (await readDirRecursive(dirPath)).map((relativePath) =>
+        join(dirPath, relativePath),
     );
 
-    const allElementFilePaths = allFilePathsInElements.filter((fileName) => {
-        return fileName.endsWith('.element.ts');
+    const allNonIndexFilePaths = allFilePaths.filter((filePath) => {
+        const isTsFile = filePath.endsWith('.ts');
+        const hasEndingToIgnore = ignoredFileNameEndings.some((ignoredEnding) =>
+            filePath.endsWith(ignoredEnding),
+        );
+        return isTsFile && !hasEndingToIgnore;
     });
-    await verifyElementFilePaths(allElementFilePaths);
-    return allElementFilePaths;
+    await verifyTsFilePaths(allNonIndexFilePaths);
+    return allNonIndexFilePaths;
 }
 
-async function verifyElementFilePaths(filePaths: ReadonlyArray<string>): Promise<void> {
+async function verifyTsFilePaths(filePaths: ReadonlyArray<string>): Promise<void> {
     await Promise.all(
         filePaths.map(async (filePath) => {
             if (!existsSync(filePath)) {
-                throw new Error(`Element file "${filePath}" does not exist.`);
+                throw new Error(`TS file '${filePath}' does not exist.`);
             }
             if (!(await stat(filePath)).isFile()) {
-                throw new Error(`Element file "${filePath}" is not a file.`);
+                throw new Error(`TS file '${filePath}' is not a file.`);
             }
         }),
     );

@@ -3,6 +3,7 @@ import {assert, fixture as renderFixture} from '@open-wc/testing';
 import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {StatusSuccess24Icon} from '../../icons';
+import {ColorTypeEnum, extractIconColor} from '../../icons/icon-color.test-helper';
 import {viraIconCssVars} from '../../icons/icon-css-vars';
 import {ViraIcon} from './vira-icon.element';
 
@@ -25,16 +26,10 @@ describe(ViraIcon.tagName, () => {
         return {
             wrapperDiv: fixture,
             viraIconInstance,
-            getColor(colorType: GetColorType): string {
-                return window.getComputedStyle(internalSvg).getPropertyValue(colorType);
+            getColor(colorType: ColorTypeEnum) {
+                return extractIconColor(internalSvg, colorType);
             },
         };
-    }
-
-    enum GetColorType {
-        Color = 'color',
-        Fill = 'fill',
-        Stroke = 'stroke',
     }
 
     describe('icon with stroke', () => {
@@ -42,9 +37,9 @@ describe(ViraIcon.tagName, () => {
             const {getColor} = await setupFixture();
 
             /** Default color (black) */
-            assert.strictEqual(getColor(GetColorType.Color), 'rgb(0, 0, 0)');
-            assert.strictEqual(getColor(GetColorType.Fill), 'none');
-            assert.strictEqual(getColor(GetColorType.Stroke), 'rgb(0, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Color), 'rgb(0, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Fill), 'none');
+            assert.strictEqual(getColor(ColorTypeEnum.Stroke), 'rgb(0, 0, 0)');
         });
 
         it("tracks its parent's color value", async () => {
@@ -52,9 +47,9 @@ describe(ViraIcon.tagName, () => {
 
             wrapperDiv.style.color = 'red';
 
-            assert.strictEqual(getColor(GetColorType.Color), 'rgb(255, 0, 0)');
-            assert.strictEqual(getColor(GetColorType.Fill), 'none');
-            assert.strictEqual(getColor(GetColorType.Stroke), 'rgb(255, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Color), 'rgb(255, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Fill), 'none');
+            assert.strictEqual(getColor(ColorTypeEnum.Stroke), 'rgb(255, 0, 0)');
         });
 
         it('follows stroke color CSS var', async () => {
@@ -66,9 +61,9 @@ describe(ViraIcon.tagName, () => {
                 toValue: 'blue',
             });
 
-            assert.strictEqual(getColor(GetColorType.Color), 'rgb(0, 0, 0)');
-            assert.strictEqual(getColor(GetColorType.Fill), 'none');
-            assert.strictEqual(getColor(GetColorType.Stroke), 'rgb(0, 0, 255)');
+            assert.strictEqual(getColor(ColorTypeEnum.Color), 'rgb(0, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Fill), 'none');
+            assert.strictEqual(getColor(ColorTypeEnum.Stroke), 'rgb(0, 0, 255)');
         });
 
         it('follows fill color CSS var', async () => {
@@ -80,9 +75,9 @@ describe(ViraIcon.tagName, () => {
                 toValue: 'white',
             });
 
-            assert.strictEqual(getColor(GetColorType.Color), 'rgb(0, 0, 0)');
-            assert.strictEqual(getColor(GetColorType.Fill), 'rgb(255, 255, 255)');
-            assert.strictEqual(getColor(GetColorType.Stroke), 'rgb(0, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Color), 'rgb(0, 0, 0)');
+            assert.strictEqual(getColor(ColorTypeEnum.Fill), 'rgb(255, 255, 255)');
+            assert.strictEqual(getColor(ColorTypeEnum.Stroke), 'rgb(0, 0, 0)');
         });
     });
 });

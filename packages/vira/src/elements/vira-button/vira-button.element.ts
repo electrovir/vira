@@ -85,8 +85,8 @@ export const ViraButton = defineViraElement<{
         }
 
         button {
-            cursor: pointer;
             ${noNativeFormStyles};
+            cursor: pointer;
             position: relative;
             width: 100%;
             height: 100%;

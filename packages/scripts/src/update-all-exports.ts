@@ -4,12 +4,14 @@ import {
     parseUpdateExportsArgs,
     UpdateExportsConfig,
 } from './common/update-exports';
-import {updateElementExports} from './update-element-exports';
 import {updateIconExports} from './update-icon-exports';
+import {updateIndexExports} from './update-index-exports';
+import {updateRootIndexExports} from './update-root-index-exports';
 
 const updateExportsConfigs: UpdateExportsConfig[] = [
     updateIconExports,
-    updateElementExports,
+    updateIndexExports,
+    updateRootIndexExports,
 ];
 
 async function main() {

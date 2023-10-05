@@ -1,7 +1,8 @@
-import {assertThrows, typedAssertInstanceOf} from '@augment-vir/browser-testing';
+import {assertThrows} from '@augment-vir/browser-testing';
 import {assert, fixture as renderFixture} from '@open-wc/testing';
 import Color from 'colorjs.io';
 import {html} from 'element-vir';
+import {assertInstanceOf} from 'run-time-assertions';
 import {rgbCssColorFormat} from '../styles/color';
 import {ColorTypeEnum, extractIconColor} from './icon-color.test-helper';
 import {createColoredIcon} from './icon-svg';
@@ -25,7 +26,7 @@ describe(createColoredIcon.name, () => {
             `,
         );
         const pathElement = rendered.querySelector('path');
-        typedAssertInstanceOf(pathElement, SVGPathElement);
+        assertInstanceOf(pathElement, SVGPathElement);
 
         const appliedColor = extractIconColor(pathElement, ColorTypeEnum.Stroke);
 

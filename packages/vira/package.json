@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -40,28 +40,29 @@
         "test:docs": "virmator code-in-markdown check"
     },
     "dependencies": {
-        "@augment-vir/common": "^18.1.0",
+        "@augment-vir/common": "^19.4.2",
         "colorjs.io": "^0.4.5",
-        "element-vir": "^16.3.2",
+        "element-vir": "^16.4.2",
         "lit-css-vars": "^3.0.1",
         "spa-router-vir": "^3.0.2",
-        "type-fest": "^4.3.1"
+        "type-fest": "^4.3.3"
     },
     "devDependencies": {
-        "@augment-vir/browser-testing": "^18.1.0",
-        "@augment-vir/node-js": "^18.1.0",
+        "@augment-vir/browser-testing": "^19.4.2",
+        "@augment-vir/node-js": "^19.4.2",
         "@open-wc/testing": "^3.2.0",
         "@types/chai": "^4.3.6",
-        "@types/mocha": "^10.0.1",
+        "@types/mocha": "^10.0.2",
         "@web/dev-server-esbuild": "^0.4.1",
         "@web/test-runner": "^0.17.1",
         "@web/test-runner-commands": "^0.8.0",
         "@web/test-runner-playwright": "^0.10.1",
         "@web/test-runner-visual-regression": "^0.8.2",
-        "esbuild": "^0.19.2",
+        "esbuild": "^0.19.4",
         "istanbul-smart-text-reporter": "^1.1.2",
+        "run-time-assertions": "^0.0.2",
         "typescript": "^5.2.2",
-        "vite": "^4.4.9",
+        "vite": "^4.4.11",
         "vite-tsconfig-paths": "^4.2.1"
     }
 }

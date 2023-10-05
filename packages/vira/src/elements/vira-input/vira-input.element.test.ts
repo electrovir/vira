@@ -1,7 +1,8 @@
 import {randomString} from '@augment-vir/browser';
-import {clickElement, typedAssertInstanceOf, typeString} from '@augment-vir/browser-testing';
+import {clickElement, typeString} from '@augment-vir/browser-testing';
 import {assert, fixture as renderFixture} from '@open-wc/testing';
 import {html, listen} from 'element-vir';
+import {assertInstanceOf} from 'run-time-assertions';
 import {ReadonlyDeep} from 'type-fest';
 import {ViraInput} from './vira-input.element';
 
@@ -21,7 +22,7 @@ describe(ViraInput.tagName, () => {
             `,
         );
 
-        typedAssertInstanceOf(fixture, ViraInput);
+        assertInstanceOf(fixture, ViraInput);
 
         return {
             instance: fixture,

@@ -1,7 +1,7 @@
-import {typedAssertInstanceOf} from '@augment-vir/browser-testing';
 import {assert, fixture as renderFixture} from '@open-wc/testing';
 import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
+import {assertInstanceOf} from 'run-time-assertions';
 import {StatusSuccess24Icon} from '../../icons';
 import {ColorTypeEnum, extractIconColor} from '../../icons/icon-color.test-helper';
 import {viraIconCssVars} from '../../icons/icon-css-vars';
@@ -15,13 +15,13 @@ describe(ViraIcon.tagName, () => {
             `,
         );
 
-        typedAssertInstanceOf(fixture, HTMLDivElement);
+        assertInstanceOf(fixture, HTMLDivElement);
 
         const viraIconInstance = fixture.querySelector(ViraIcon.tagName);
 
-        typedAssertInstanceOf(viraIconInstance, ViraIcon);
+        assertInstanceOf(viraIconInstance, ViraIcon);
         const internalSvg = viraIconInstance.shadowRoot.querySelector('circle');
-        typedAssertInstanceOf(internalSvg, SVGCircleElement);
+        assertInstanceOf(internalSvg, SVGCircleElement);
 
         return {
             wrapperDiv: fixture,

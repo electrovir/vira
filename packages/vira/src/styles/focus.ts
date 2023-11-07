@@ -1,6 +1,5 @@
 import {addPx} from '@augment-vir/common';
-import {css} from 'element-vir';
-import {unsafeCSS} from 'lit';
+import {css, unsafeCSS} from 'element-vir';
 import {defineCssVars} from 'lit-css-vars';
 import {viraCssVars} from './vira-css-vars';
 

@@ -100,7 +100,8 @@ export const ViraButton = defineViraElement<{
             background-color: ${cssVars['vira-button-internal-background-color'].value};
             color: ${cssVars['vira-button-internal-foreground-color'].value};
             padding: ${cssVars['vira-button-padding'].value};
-            transition: color ${viraAnimationDurations['vira-interaction-animation-duration'].value},
+            transition:
+                color ${viraAnimationDurations['vira-interaction-animation-duration'].value},
                 background-color
                     ${viraAnimationDurations['vira-interaction-animation-duration'].value},
                 border-color ${viraAnimationDurations['vira-interaction-animation-duration'].value};

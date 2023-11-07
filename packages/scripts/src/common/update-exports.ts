@@ -46,7 +46,7 @@ export async function writeOrCheckGeneratedFile(
     const codeWithComment =
         generateAutomaticallyUpdatedByComment(basename(scriptName)) + '\n\n' + codeToWrite;
 
-    const formattedCode = formatCode(codeWithComment, fileToWriteTo);
+    const formattedCode = await formatCode(codeWithComment, fileToWriteTo);
     const relativeWriteToFile = relative(monoRepoRootDir, fileToWriteTo);
     const currentOutputContents: string = existsSync(fileToWriteTo)
         ? (await readFile(fileToWriteTo)).toString()

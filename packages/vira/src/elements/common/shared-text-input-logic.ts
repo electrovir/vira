@@ -37,7 +37,7 @@ function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}):
     }
 }
 
-type IsAllowedInputs = {
+export type IsAllowedInputs = {
     value: string;
     allowed: string | RegExp | undefined;
     blocked: string | RegExp | undefined;

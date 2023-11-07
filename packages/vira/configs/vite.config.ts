@@ -1,8 +1,7 @@
-import {join} from 'path';
-import {defineConfig, outDir} from 'virmator/dist/compiled-base-configs/base-vite';
+import {defineConfig} from 'virmator/dist/compiled-base-configs/base-vite';
 
-export default defineConfig({forGitHubPages: true}, (baseConfig) => {
-    const viraPackageDir = outDir.replace(/dist$/, '');
+export default defineConfig({forGitHubPages: true}, (baseConfig, basePaths) => {
+    const distBookPath = basePaths.outDir.replace(/dist$/, 'dist-book');
 
     return {
         ...baseConfig,
@@ -10,7 +9,7 @@ export default defineConfig({forGitHubPages: true}, (baseConfig) => {
             disabled: true,
         },
         build: {
-            outDir: join(viraPackageDir, 'book-dist'),
+            outDir: distBookPath,
         },
     };
 });

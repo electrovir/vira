@@ -16,7 +16,8 @@
         "scripts": "npm run execute --workspace @electrovir/vira-scripts",
         "start": "npm i && npm run scripts && npm run start --workspace vira",
         "test": "mono-vir for-each-async npm run test:all",
-        "test:all": "concurrently --colors --kill-others-on-fail -c auto --names types,tests,spelling,format \"npm run test:types\" \"npm run test\" \"npm run test:spelling\" \"npm run test:format\"",
+        "test:all": "concurrently --colors --kill-others-on-fail -c auto --names types,tests,spelling,format,deps,docs \"npm run test:types\" \"npm run test\" \"npm run test:spelling\" \"npm run test:format\" \"npm run test:deps\"",
+        "test:deps": "virmator deps check",
         "test:format": "virmator format check",
         "test:spelling": "virmator spellcheck",
         "test:types": "mono-vir for-each tsc --noEmit"
@@ -25,23 +26,25 @@
         "colorjs.io": "^0.4.5"
     },
     "devDependencies": {
-        "cspell": "^7.3.7",
-        "element-book": "^10.1.2",
-        "esbuild": "^0.19.4",
+        "cspell": "^7.3.9",
+        "dependency-cruiser": "^15.2.0",
+        "esbuild": "^0.19.5",
         "markdown-code-example-inserter": "^0.3.2",
-        "mono-vir": "^0.1.5",
+        "mono-vir": "^0.1.6",
         "npm-check-updates": "~16.12.3",
-        "prettier": "^2.8.8",
-        "prettier-plugin-interpolated-html-tags": "^0.0.4",
-        "prettier-plugin-jsdoc": "^0.4.2",
-        "prettier-plugin-multiline-arrays": "^2.0.0",
+        "prettier": "^3.0.3",
+        "prettier-plugin-interpolated-html-tags": "^1.0.2",
+        "prettier-plugin-jsdoc": "^1.1.1",
+        "prettier-plugin-multiline-arrays": "^3.0.0",
         "prettier-plugin-organize-imports": "^3.2.3",
         "prettier-plugin-packagejson": "^2.4.6",
-        "prettier-plugin-sort-json": "^2.0.0",
-        "prettier-plugin-toml": "^0.3.1",
-        "virmator": "^8.0.5"
+        "prettier-plugin-sort-json": "^3.1.0",
+        "prettier-plugin-toml": "^1.0.0",
+        "virmator": "^11.1.0"
     },
     "overrides": {
-        "make-dir": "npm:make-dir@v4.0.0"
+        "@open-wc/scoped-elements": "2.2.3",
+        "@open-wc/testing-helpers": "2.3.1",
+        "semver": "^7.5.2"
     }
 }

@@ -1,5 +1,12 @@
-import {css, defineElementEvent, html, listen, onResize, renderIf} from 'element-vir';
-import {TemplateResult} from 'lit';
+import {
+    TemplateResult,
+    css,
+    defineElementEvent,
+    html,
+    listen,
+    onResize,
+    renderIf,
+} from 'element-vir';
 import {ViraIconSvg} from '../../icons';
 import {CloseX24Icon} from '../../icons/icon-svgs/close-x-24.icon';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../../styles';
@@ -13,6 +20,8 @@ import {
 } from '../common/shared-text-input-logic';
 import {defineViraElement} from '../define-vira-element';
 import {ViraIcon} from '../vira-icon/vira-icon.element';
+
+export * from '../common/shared-text-input-logic';
 
 export const ViraInput = defineViraElement<
     {

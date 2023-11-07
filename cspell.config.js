@@ -4,7 +4,7 @@ module.exports = {
     ...baseConfig,
     ignorePaths: [
         ...baseConfig.ignorePaths,
-        '**/book-dist/',
+        '**/dist-book/',
     ],
     words: [
         ...baseConfig.words,

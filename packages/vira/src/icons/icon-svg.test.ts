@@ -1,8 +1,7 @@
-import {assertThrows} from '@augment-vir/browser-testing';
 import {assert, fixture as renderFixture} from '@open-wc/testing';
 import Color from 'colorjs.io';
 import {html} from 'element-vir';
-import {assertInstanceOf} from 'run-time-assertions';
+import {assertInstanceOf, assertThrows} from 'run-time-assertions';
 import {rgbCssColorFormat} from '../styles/color';
 import {ColorTypeEnum, extractIconColor} from './icon-color.test-helper';
 import {createColoredIcon} from './icon-svg';
@@ -20,11 +19,9 @@ describe(createColoredIcon.name, () => {
         const coloredIcon = createColoredIcon(Element24Icon, {
             'vira-icon-stroke-color': testColor.toString({format: rgbCssColorFormat}),
         });
-        const rendered = await renderFixture(
-            html`
-                ${coloredIcon.svgTemplate}
-            `,
-        );
+        const rendered = await renderFixture(html`
+            ${coloredIcon.svgTemplate}
+        `);
         const pathElement = rendered.querySelector('path');
         assertInstanceOf(pathElement, SVGPathElement);
 

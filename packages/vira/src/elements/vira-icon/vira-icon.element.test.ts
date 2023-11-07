@@ -9,11 +9,9 @@ import {ViraIcon} from './vira-icon.element';
 
 describe(ViraIcon.tagName, () => {
     async function setupFixture() {
-        const fixture = await renderFixture(
-            html`
-                <div><${ViraIcon.assign({icon: StatusSuccess24Icon})}></${ViraIcon}></div>
-            `,
-        );
+        const fixture = await renderFixture(html`
+            <div><${ViraIcon.assign({icon: StatusSuccess24Icon})}></${ViraIcon}></div>
+        `);
 
         assertInstanceOf(fixture, HTMLDivElement);
 

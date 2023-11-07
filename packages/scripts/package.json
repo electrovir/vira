@@ -13,11 +13,12 @@
         "update:exports": "ts-node src/update-all-exports.ts"
     },
     "dependencies": {
-        "@augment-vir/common": "^19.4.2",
-        "@augment-vir/node-js": "^19.4.2"
+        "@augment-vir/common": "^21.5.1",
+        "@augment-vir/node-js": "^21.5.1",
+        "prettier": "^3.0.3"
     },
     "devDependencies": {
-        "@types/node": "^20.8.2",
+        "@types/node": "^20.8.10",
         "typescript": "^5.2.2"
     }
 }

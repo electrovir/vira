@@ -1,6 +1,6 @@
 import {wait} from '@augment-vir/common';
 import {Duration, DurationUnit} from 'date-vir';
-import {classMap, css, html, listen, renderIf} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
 import {LoaderAnimated24Icon, StatusFailure24Icon} from '../../icons';
 import {Dimensions} from '../../util/dimensions';
 import {defineViraElement} from '../define-vira-element';
@@ -35,6 +35,10 @@ export const ViraImage = defineViraElement<{
     tagName: 'vira-image',
     hostClasses: {
         'vira-image-height-constrained': ({inputs}) => inputs.dominantDimension === 'height',
+    },
+    events: {
+        imageLoad: defineElementEvent<void>(),
+        imageError: defineElementEvent<unknown>(),
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -95,7 +99,7 @@ export const ViraImage = defineViraElement<{
          */
         erroredUrls: {} as Readonly<{[url: string]: true}>,
     },
-    renderCallback({inputs, state, updateState}) {
+    renderCallback({inputs, state, updateState, dispatch, events}) {
         /**
          * Saved off for use in the image listeners. This is used to eliminate race conditions
          * between image events and the input URL changing.
@@ -133,8 +137,10 @@ export const ViraImage = defineViraElement<{
                             [imageUrl]: true,
                         },
                     });
+
+                    dispatch(new events.imageLoad());
                 })}
-                ${listen('error', async () => {
+                ${listen('error', async (event) => {
                     if (inputs._debugLoadDelay) {
                         await wait(inputs._debugLoadDelay.milliseconds);
                     }
@@ -144,6 +150,8 @@ export const ViraImage = defineViraElement<{
                             [imageUrl]: true,
                         },
                     });
+
+                    dispatch(new events.imageError(event.error));
                 })}
                 src=${imageUrl}
             />

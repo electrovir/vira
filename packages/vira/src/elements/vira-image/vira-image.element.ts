@@ -113,12 +113,12 @@ export const ViraImage = defineViraElement<{
                   </slot>
               `
             : !state.loadedUrls[imageUrl]
-            ? html`
-                  <slot class="status-wrapper" name=${ViraImageSlotNameEnum.Loading}>
-                      <${ViraIcon.assign({icon: LoaderAnimated24Icon})}></${ViraIcon}>
-                  </slot>
-              `
-            : undefined;
+              ? html`
+                    <slot class="status-wrapper" name=${ViraImageSlotNameEnum.Loading}>
+                        <${ViraIcon.assign({icon: LoaderAnimated24Icon})}></${ViraIcon}>
+                    </slot>
+                `
+              : undefined;
 
         return html`
             ${renderIf(!!statusTemplate, statusTemplate)}

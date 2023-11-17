@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "2.5.1",
+    "version": "2.5.2",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -44,7 +44,7 @@
         "@augment-vir/common": "^21.6.0",
         "colorjs.io": "^0.4.5",
         "date-vir": "^4.1.0",
-        "element-vir": "^16.5.2",
+        "element-vir": "^17.0.0",
         "lit-css-vars": "^3.0.2",
         "spa-router-vir": "^3.0.2",
         "type-fest": "^4.7.1"

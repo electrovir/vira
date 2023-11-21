@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-scripts",
-    "version": "2.5.3",
+    "version": "2.5.4",
     "private": true,
     "scripts": {
         "compile": "virmator compile",
@@ -18,7 +18,7 @@
         "prettier": "^3.1.0"
     },
     "devDependencies": {
-        "@types/node": "^20.9.2",
+        "@types/node": "^20.9.3",
         "typescript": "~5.2.2"
     }
 }

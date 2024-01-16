@@ -1,7 +1,3 @@
 # vira
 
-The Vira design system.
-
-https://electrovir.github.io/vira/book/
-
-WIP.
+This has been combined into the element-vir mono-repo: https://github.com/electrovir/element-vir/tree/dev/packages/vira

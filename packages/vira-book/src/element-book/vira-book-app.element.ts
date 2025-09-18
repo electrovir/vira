@@ -26,7 +26,6 @@ export const ViraBookApp = defineElement()({
     `,
     render() {
         return html`
-
             <${ElementBookApp.assign({
                 internalRouterConfig: {
                     basePath: joinUrlPaths('vira'),
@@ -35,11 +34,8 @@ export const ViraBookApp = defineElement()({
                 pages: viraBookPages,
                 themeColor: '#33ccff',
             })}>
-
                 <h1 slot=${ElementBookSlotName.NavHeader}>Vira</h1>
-
             </${ElementBookApp}>
-
         `;
     },
 });

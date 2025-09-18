@@ -1,22 +1,28 @@
-import {wrapInTry} from '@augment-vir/common';
-import {Format} from 'colorjs.io/types/src/space';
-import {Color, ColorTypes} from '../re-exports/colorjs-io';
+import {stringify} from '@augment-vir/common';
+import {type Format} from 'colorjs.io/types/src/space';
+import {Color, type ColorTypes} from '../re-exports/colorjs-io.js';
 
+/**
+ * Asserts that the given color type is valid.
+ *
+ * @category Internal
+ */
 export function getAssertedValidColor(input: ColorTypes | undefined) {
     try {
         if (!input) {
             throw new Error('invalid empty color');
         }
         return new Color(input);
-    } catch (caught) {
-        const stringInput = String(input);
-        const inputForMessage: string = stringInput.toLowerCase().match(/\[\s*object\s+object\s*\]/)
-            ? wrapInTry({callback: () => JSON.stringify(input), fallbackValue: stringInput})
-            : stringInput;
-        throw new Error(`Invalid color: ${inputForMessage}`);
+    } catch {
+        throw new Error(`Invalid color: ${stringify(input)}`);
     }
 }
 
+/**
+ * The colorjs format for CSS RGB colors.
+ *
+ * @category Internal
+ */
 export const rgbCssColorFormat: Format = {
     name: 'rgb',
     coords: [

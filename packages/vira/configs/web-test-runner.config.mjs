@@ -1,9 +1,9 @@
+import {defineConfig} from '@virmator/test/configs/web-test-runner.config.base.mjs';
 import {dirname} from 'path';
 import {fileURLToPath, pathToFileURL} from 'url';
-import {getWebTestRunnerConfigWithCoveragePercent} from 'virmator/base-configs/base-web-test-runner.mjs';
 
-const baseConfig = getWebTestRunnerConfigWithCoveragePercent({
-    coveragePercent: 100,
+const baseConfig = defineConfig({
+    coveragePercent: 0,
     packageRootDirPath: dirname(dirname(fileURLToPath(import.meta.url))),
     extraScreenshotOptions: {},
 });
@@ -11,11 +11,13 @@ const baseConfig = getWebTestRunnerConfigWithCoveragePercent({
 /** @type {import('@web/test-runner').TestRunnerConfig} */
 const webTestRunnerConfig = {
     ...baseConfig,
+    port: 8103,
+    concurrency: 1,
 };
 
 export default webTestRunnerConfig;
 
-// check if the current file is being run directly as a script
+/** Log the full config if this file file is run directly as a script, for debugging. */
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     console.info(JSON.stringify(webTestRunnerConfig, null, 4));
 }

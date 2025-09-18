@@ -1,7 +1,14 @@
 import {html} from 'element-vir';
-import {viraIconCssVars} from '../icon-css-vars';
-import {defineIcon} from '../icon-svg';
+import {viraIconCssVars} from '../icon-css-vars.js';
+import {defineIcon} from '../icon-svg.js';
 
+/**
+ * A status icon that indicates that something is still in progress.
+ *
+ * @category Icon
+ * @category SVG
+ * @see https://electrovir.github.io/vira/book/icons/statusinprogress24icon
+ */
 export const StatusInProgress24Icon = defineIcon({
     name: 'StatusInProgress24Icon',
     svgTemplate: html`
@@ -14,6 +21,7 @@ export const StatusInProgress24Icon = defineIcon({
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
             />
+
             <circle
                 cx="7"
                 cy="12"
@@ -22,6 +30,7 @@ export const StatusInProgress24Icon = defineIcon({
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width="calc(${viraIconCssVars['vira-icon-stroke-width'].value} - 1px)"
             />
+
             <circle
                 cx="12"
                 cy="12"
@@ -30,6 +39,7 @@ export const StatusInProgress24Icon = defineIcon({
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width="calc(${viraIconCssVars['vira-icon-stroke-width'].value} - 1px)"
             />
+
             <circle
                 cx="17"
                 cy="12"

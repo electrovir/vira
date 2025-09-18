@@ -1,7 +1,14 @@
 import {html} from 'element-vir';
-import {viraIconCssVars} from '../icon-css-vars';
-import {defineIcon} from '../icon-svg';
+import {viraIconCssVars} from '../icon-css-vars.js';
+import {defineIcon} from '../icon-svg.js';
 
+/**
+ * An icon symbol that represents an HTML element.
+ *
+ * @category Icon
+ * @category SVG
+ * @see https://electrovir.github.io/vira/book/icons/element24icon
+ */
 export const Element24Icon = defineIcon({
     name: 'Element24Icon',
     svgTemplate: html`

@@ -92,11 +92,11 @@ export const ViraLink = defineViraElement<
                 event,
             );
 
-            if (inputs.route.scrollToTop) {
+            if (routed && inputs.route.scrollToTop) {
                 window.scrollTo({
                     left: 0,
                     top: 0,
-                    behavior: routed ? 'instant' : 'smooth',
+                    behavior: 'instant',
                 });
             }
         }

@@ -22,7 +22,7 @@ const buildPackageInfos: ReadonlyArray<Readonly<BuildPackageInfo>> = [
     {
         packagePath: 'vira',
         copyFrom: 'dist-docs',
-        copyTo: join('vira', 'docs'),
+        copyTo: 'docs',
     },
     {
         packagePath: 'theme-vir',
@@ -56,13 +56,10 @@ async function buildPackagePage(buildInfo: Readonly<BuildPackageInfo>): Promise<
 
 function buildTopLevelIndexFile() {
     return /* HTML */ `
-
         <!doctype html>
 
         <html>
-
             <head>
-
                 <title>Element-Vir Packages</title>
 
                 <style>
@@ -70,29 +67,20 @@ function buildTopLevelIndexFile() {
                         font-family: sans-serif;
                     }
                 </style>
-
             </head>
 
             <body>
-
                 <ul>
-
                     ${buildPackageInfos
                         .map((buildInfo) => {
                             return /* HTML */ `
-
                                 <li><a href="./${buildInfo.copyTo}">${buildInfo.copyTo}</a></li>
-
                             `;
                         })
                         .join('')}
-
                 </ul>
-
             </body>
-
         </html>
-
     `;
 }
 

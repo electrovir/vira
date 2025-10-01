@@ -9,7 +9,7 @@ export default defineConfig(
     (baseConfig, basePaths) => {
         return {
             ...baseConfig,
-            base: '/vira',
+            base: '/vira/book',
             build: {
                 ...baseConfig.build,
                 outDir: join(basePaths.cwd, 'dist-book'),

@@ -8,6 +8,7 @@ import {
     ifDefined,
     listen,
     listenToActivate,
+    nothing,
     type AttributeValues,
     type CSSResult,
 } from 'element-vir';
@@ -24,7 +25,11 @@ import {ViraIcon} from './vira-icon.element.js';
  *
  * @category Internals
  */
-export type ViraCheckboxInnerElements = 'label' | 'custom-checkbox' | typeof ViraIcon.tagName;
+export type ViraCheckboxInnerElements =
+    | 'label'
+    | 'custom-checkbox'
+    | 'text'
+    | typeof ViraIcon.tagName;
 
 /**
  * Inputs for {@link ViraCheckbox}.
@@ -35,6 +40,7 @@ export type ViraCheckboxInputs = PartialWithUndefined<{
     stylePassthrough: Record<ViraCheckboxInnerElements, CSSResult>;
     attributePassthrough: Record<ViraCheckboxInnerElements, AttributeValues>;
     disabled: boolean;
+    label: string;
 }> & {
     value: boolean;
 };
@@ -50,21 +56,31 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     tagName: 'vira-checkbox',
     styles: css`
         :host {
-            height: 24px;
-            aspect-ratio: 1;
             display: inline-flex;
         }
 
-        label,
-        ${ViraIcon}, .custom-checkbox {
-            height: 100%;
+        .custom-checkbox {
+            height: 24px;
+            aspect-ratio: 1;
+            box-sizing: border-box;
+        }
+
+        ${ViraIcon} {
             width: 100%;
+            height: 100%;
             box-sizing: border-box;
         }
 
         label {
+            display: inline-flex;
+            gap: 8px;
+
             &.disabled {
                 cursor: not-allowed;
+            }
+
+            & .text::first-line {
+                line-height: 24px;
             }
         }
 
@@ -75,6 +91,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
 
         /* The visible custom box */
         .custom-checkbox {
+            flex-shrink: 0;
             border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
             border-radius: ${viraBorders['vira-form-input-radius'].value};
@@ -115,6 +132,18 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
         }
 
+        const textLabel = inputs.label
+            ? html`
+                  <span
+                      class="text"
+                      ${attributes(inputs.attributePassthrough?.['text'])}
+                      style=${ifDefined(inputs.stylePassthrough?.['text'])}
+                  >
+                      ${inputs.label}
+                  </span>
+              `
+            : nothing;
+
         return html`
             <label
                 class=${classMap({
@@ -145,6 +174,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                         style=${ifDefined(inputs.stylePassthrough?.[ViraIcon.tagName])}
                     ></${ViraIcon}>
                 </span>
+                ${textLabel}
             </label>
         `;
     },

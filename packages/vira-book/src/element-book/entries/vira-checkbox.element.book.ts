@@ -105,13 +105,7 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'big',
-            styles: css`
-                ${ViraCheckbox} {
-                    height: 200px;
-                    width: 200px;
-                }
-            `,
+            title: 'with label',
             state() {
                 return {
                     checked: true,
@@ -121,6 +115,34 @@ export const viraCheckboxBookPage = defineBookPage({
                 return html`
                     <${ViraCheckbox.assign({
                         value: state.checked,
+                        label: 'label goes here',
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'long label',
+            state() {
+                return {
+                    checked: true,
+                };
+            },
+            styles: css`
+                ${ViraCheckbox} {
+                    max-width: 400px;
+                }
+            `,
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        label: 'label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here ',
                     })}
                         ${listen(ViraCheckbox.events.valueChange, (event) => {
                             updateState({

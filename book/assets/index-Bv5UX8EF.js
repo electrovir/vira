@@ -1338,8 +1338,11 @@ ${hf(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
                 cursor: not-allowed;
             }
 
-            & .text::first-line {
-                line-height: 24px;
+            & .text {
+                cursor: pointer;
+                &::first-line {
+                    line-height: 24px;
+                }
             }
         }
 

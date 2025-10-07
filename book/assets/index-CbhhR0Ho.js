@@ -1391,6 +1391,7 @@ ${hf(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
                 class=${Fn({disabled:!!e.disabled})}
                 ${Di(e.attributePassthrough?.label)}
                 style=${Vt(e.stylePassthrough?.label)}
+                ${ee("click",r)}
             >
                 <span
                     class="custom-checkbox ${Fn({checked:e.value,disabled:!!e.disabled})}"
@@ -1401,7 +1402,6 @@ ${hf(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
                     ${Di(e.attributePassthrough?.["custom-checkbox"])}
                     style=${Vt(e.stylePassthrough?.["custom-checkbox"])}
                     ${T8(r)}
-                    ${ee("click",r)}
                 >
                     <${V.assign({icon:Rd,fitContainer:!0})}
                         ${Di(e.attributePassthrough?.[V.tagName])}

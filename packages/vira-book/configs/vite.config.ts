@@ -1,3 +1,4 @@
+import {mergeDeep} from '@augment-vir/common';
 import {defineConfig} from '@virmator/frontend/configs/vite.config.base.ts';
 import {join, resolve} from 'node:path';
 
@@ -7,19 +8,17 @@ export default defineConfig(
         packageDirPath: resolve(import.meta.dirname, '..'),
     },
     (baseConfig, basePaths) => {
-        return {
-            ...baseConfig,
+        return mergeDeep(baseConfig, {
             base: '/vira/book',
             build: {
-                ...baseConfig.build,
                 outDir: join(basePaths.cwd, 'dist-book'),
             },
-            resolve: {
-                ...baseConfig.resolve,
-                alias: {
-                    vira: resolve('../vira/src/index.ts'),
-                },
+            optimizeDeps: {
+                exclude: [
+                    ...(baseConfig.optimizeDeps?.exclude || []),
+                    'vira',
+                ],
             },
-        };
+        });
     },
 );

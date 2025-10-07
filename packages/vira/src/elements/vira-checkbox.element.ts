@@ -79,8 +79,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 cursor: not-allowed;
             }
 
-            & .text::first-line {
-                line-height: 24px;
+            & .text {
+                cursor: pointer;
+                &::first-line {
+                    line-height: 24px;
+                }
             }
         }
 

@@ -151,6 +151,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 })}
                 ${attributes(inputs.attributePassthrough?.label)}
                 style=${ifDefined(inputs.stylePassthrough?.label)}
+                ${listen('click', updateValue)}
             >
                 <span
                     class="custom-checkbox ${classMap({
@@ -164,7 +165,6 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     ${attributes(inputs.attributePassthrough?.['custom-checkbox'])}
                     style=${ifDefined(inputs.stylePassthrough?.['custom-checkbox'])}
                     ${listenToActivate(updateValue)}
-                    ${listen('click', updateValue)}
                 >
                     <${ViraIcon.assign({
                         icon: Check24Icon,

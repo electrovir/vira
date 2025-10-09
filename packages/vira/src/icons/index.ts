@@ -1,5 +1,6 @@
 /** This file is automatically updated by update-icon-exports.ts */
 
+import {Bell24Icon} from './icon-svgs/bell-24.icon.js';
 import {Chat24Icon} from './icon-svgs/chat-24.icon.js';
 import {Check24Icon} from './icon-svgs/check-24.icon.js';
 import {ChevronUp24Icon} from './icon-svgs/chevron-up-24.icon.js';
@@ -31,6 +32,7 @@ import {Upload24Icon} from './icon-svgs/upload-24.icon.js';
 
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
+export * from './icon-svgs/bell-24.icon.js';
 export * from './icon-svgs/chat-24.icon.js';
 export * from './icon-svgs/check-24.icon.js';
 export * from './icon-svgs/chevron-up-24.icon.js';
@@ -66,6 +68,7 @@ export * from './icon-svgs/upload-24.icon.js';
  * @category Icon
  */
 export const allIconsByName = {
+    Bell24Icon,
     Chat24Icon,
     Check24Icon,
     ChevronUp24Icon,

@@ -19,7 +19,7 @@ export const iconsBookPage = defineBookPage({
         }),
         'Stroke Width': definePageControl({
             controlType: BookPageControlType.Number,
-            initValue: 1,
+            initValue: 1.5,
         }),
     },
     defineExamples({defineExample}) {

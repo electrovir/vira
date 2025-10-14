@@ -1,4 +1,5 @@
 import {assertWrap} from '@augment-vir/assert';
+import {extractEventTarget} from '@augment-vir/web';
 import {
     attributes,
     css,
@@ -199,7 +200,7 @@ export const ViraInput = defineViraElement<
                 overflow: hidden;
                 outline: none;
 
-                &:focus:focus-visible:not(:active):not([disabled]) ~ .focus-border {
+                &:focus:focus-visible:not([disabled]) ~ .focus-border {
                     ${createFocusStyles({
                         elementBorderSize: 0,
                         noNesting: true,
@@ -318,10 +319,19 @@ export const ViraInput = defineViraElement<
         return html`
             <span
                 class="input-wrapper"
-                ${listen('mouseup', () => {
-                    assertWrap
-                        .instanceOf(host.shadowRoot.querySelector('input'), HTMLInputElement)
-                        .focus();
+                ${listen('mousedown', (event) => {
+                    const eventTarget = extractEventTarget(event, HTMLElement, {
+                        useOriginalTarget: true,
+                    });
+                    const inputElement = assertWrap.instanceOf(
+                        host.shadowRoot.querySelector('input'),
+                        HTMLInputElement,
+                    );
+
+                    if (eventTarget !== inputElement) {
+                        event.preventDefault();
+                        inputElement.focus();
+                    }
                 })}
             >
                 ${iconTemplate}
@@ -371,11 +381,11 @@ export const ViraInput = defineViraElement<
                         <button
                             class="clear-x-button"
                             title="clear"
-                            ${listen('click', (event) => {
-                                /** Prevent focus of the input. */
+                            ${listen('mousedown', (event) => {
                                 event.stopImmediatePropagation();
                                 event.preventDefault();
-
+                            })}
+                            ${listen('click', () => {
                                 dispatch(new events.valueChange(''));
                             })}
                         >
@@ -389,11 +399,12 @@ export const ViraInput = defineViraElement<
                         <button
                             class="show-password-button"
                             title="show password"
-                            ${listen('click', (event) => {
+                            ${listen('mousedown', (event) => {
                                 /** Prevent focus of the input. */
                                 event.stopImmediatePropagation();
                                 event.preventDefault();
-
+                            })}
+                            ${listen('click', () => {
                                 updateState({showPassword: !state.showPassword});
                             })}
                         >

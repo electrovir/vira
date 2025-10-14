@@ -1,21 +1,21 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {type NavController} from 'device-navigation';
 import {classMap, css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
-import {type PopUpManager, type ShowPopUpResult} from '../../util/pop-up-manager.js';
+import {type PopoverManager, type ShowPopoverResult} from '../../util/pop-over-manager.js';
 import {defineViraElement} from '../define-vira-element.js';
-import {updateSelectedItems} from './pop-up-helpers.js';
-import {type MenuItem} from './pop-up-menu-item.js';
+import {updateSelectedItems} from './popover-helpers.js';
+import {type MenuItem} from './popover-menu-item.js';
 import {ViraMenu} from './vira-menu.element.js';
 import {
-    PopUpMenuDirection,
-    ViraPopUpMenu,
-    type PopUpMenuCornerStyle,
-} from './vira-pop-up-menu.element.js';
+    PopoverMenuDirection,
+    ViraPopoverMenu,
+    type PopoverMenuCornerStyle,
+} from './vira-popover-menu.element.js';
 import {
     HorizontalAnchor,
-    ViraPopUpTrigger,
-    type PopUpOffset,
-} from './vira-pop-up-trigger.element.js';
+    ViraPopoverTrigger,
+    type PopoverOffset,
+} from './vira-popover-trigger.element.js';
 
 /**
  * Test ids for {@link ViraMenuTrigger}.
@@ -27,9 +27,9 @@ export const viraMenuTriggerTestIds = {
 };
 
 /**
- * A more specific wrapper of `ViraPopUpTrigger` that always opens a menu.
+ * A more specific wrapper of `ViraPopoverTrigger` that always opens a menu.
  *
- * @category PopUp
+ * @category Popover
  * @category Elements
  */
 export const ViraMenuTrigger = defineViraElement<
@@ -41,20 +41,20 @@ export const ViraMenuTrigger = defineViraElement<
         isDisabled: boolean;
         isMultiSelect: boolean;
         z_debug_forceOpenState: boolean;
-        popUpOffset: PopUpOffset;
+        popoverOffset: PopoverOffset;
         /** Hide menu item check mark icons. */
         hideCheckIcons: boolean;
-        menuCornerStyle: PopUpMenuCornerStyle;
+        menuCornerStyle: PopoverMenuCornerStyle;
         /**
-         * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the
-         *   pop-up can grow to the right.
-         * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the
-         *   pop-up can grow to the left.
-         * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
+         * - `HorizontalAnchor.Left`: popover is anchored to the left side of the trigger and the
+         *   popover can grow to the right.
+         * - `HorizontalAnchor.Right`: popover is anchored to the right side of the trigger and the
+         *   popover can grow to the left.
+         * - `HorizontalAnchor.Both`: popover is anchored on both sides of the trigger and cannot grow
          *   beyond it.
          *
          * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popUpOffset` for the direction _opposite_ of the chosen anchor.
+         * `popoverOffset` for the direction _opposite_ of the chosen anchor.
          *
          * @default HorizontalAnchor.Left
          */
@@ -70,7 +70,7 @@ export const ViraMenuTrigger = defineViraElement<
             max-width: 100%;
         }
 
-        ${ViraPopUpTrigger} {
+        ${ViraPopoverTrigger} {
             width: 100%;
         }
 
@@ -80,43 +80,43 @@ export const ViraMenuTrigger = defineViraElement<
     `,
     events: {
         itemActivate: defineElementEvent<PropertyKey[]>(),
-        openChange: defineElementEvent<ShowPopUpResult | undefined>(),
+        openChange: defineElementEvent<ShowPopoverResult | undefined>(),
     },
     state() {
         return {
             navController: undefined as undefined | NavController,
-            popUpManager: undefined as undefined | PopUpManager,
-            /** `undefined` means the pop up is not currently showing. */
-            showPopUpResult: undefined as ShowPopUpResult | undefined,
+            popoverManager: undefined as undefined | PopoverManager,
+            /** `undefined` means the popover is not currently showing. */
+            showPopoverResult: undefined as ShowPopoverResult | undefined,
         };
     },
     render({inputs, state, updateState, dispatch, events}) {
         return html`
-            <${ViraPopUpTrigger.assign({
+            <${ViraPopoverTrigger.assign({
                 isDisabled: inputs.isDisabled,
                 keepOpenAfterInteraction: true,
                 z_debug_forceOpenState: inputs.z_debug_forceOpenState,
-                popUpOffset: inputs.popUpOffset,
+                popoverOffset: inputs.popoverOffset,
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Left,
             })}
                 class=${classMap({
-                    open: !!state.showPopUpResult,
+                    open: !!state.showPopoverResult,
                 })}
-                ${listen(ViraPopUpTrigger.events.init, (event) => {
+                ${listen(ViraPopoverTrigger.events.init, (event) => {
                     updateState({
                         navController: event.detail.navController,
-                        popUpManager: event.detail.popUpManager,
+                        popoverManager: event.detail.popoverManager,
                     });
                 })}
-                ${listen(ViraPopUpTrigger.events.openChange, (event) => {
-                    if (!!state.showPopUpResult !== !!event.detail) {
+                ${listen(ViraPopoverTrigger.events.openChange, (event) => {
+                    if (!!state.showPopoverResult !== !!event.detail) {
                         dispatch(new events.openChange(event.detail));
                     }
                     updateState({
-                        showPopUpResult: event.detail,
+                        showPopoverResult: event.detail,
                     });
                 })}
-                ${listen(ViraPopUpTrigger.events.navSelect, (event) => {
+                ${listen(ViraPopoverTrigger.events.navSelect, (event) => {
                     const itemIndex = event.detail.x;
                     const item = inputs.items[itemIndex];
                     if (!item) {
@@ -130,23 +130,23 @@ export const ViraMenuTrigger = defineViraElement<
                     );
                     if (!inputs.isMultiSelect) {
                         /**
-                         * Defer pop up removal to prevent race conditions with element-internal
+                         * Defer popover removal to prevent race conditions with element-internal
                          * click handlers.
                          */
-                        globalThis.setTimeout(() => state.popUpManager?.removePopUp());
+                        globalThis.setTimeout(() => state.popoverManager?.removePopover());
                     }
                 })}
             >
-                <slot slot=${ViraPopUpTrigger.slotNames.trigger}></slot>
-                ${state.navController && state.showPopUpResult
+                <slot slot=${ViraPopoverTrigger.slotNames.trigger}></slot>
+                ${state.navController && state.showPopoverResult
                     ? html`
-                          <${ViraPopUpMenu.assign({
-                              direction: state.showPopUpResult.popDown
-                                  ? PopUpMenuDirection.Downwards
-                                  : PopUpMenuDirection.Upwards,
+                          <${ViraPopoverMenu.assign({
+                              direction: state.showPopoverResult.popDown
+                                  ? PopoverMenuDirection.Downwards
+                                  : PopoverMenuDirection.Upwards,
                               cornerStyle: inputs.menuCornerStyle,
                           })}
-                              slot=${ViraPopUpTrigger.slotNames.popUp}
+                              slot=${ViraPopoverTrigger.slotNames.popover}
                               class=${classMap({
                                   'full-width-menu':
                                       inputs.horizontalAnchor === HorizontalAnchor.Both,
@@ -161,10 +161,10 @@ export const ViraMenuTrigger = defineViraElement<
                               })}
                                   ${testId(viraMenuTriggerTestIds.menu)}
                               ></${ViraMenu}>
-                          </${ViraPopUpMenu}>
+                          </${ViraPopoverMenu}>
                       `
                     : nothing}
-            </${ViraPopUpTrigger}>
+            </${ViraPopoverTrigger}>
         `;
     },
 });

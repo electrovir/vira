@@ -4,12 +4,12 @@ import {Check24Icon} from '../../icons/icon-svgs/check-24.icon.js';
 import {noUserSelect} from '../../styles/index.js';
 import {defineViraElement} from '../define-vira-element.js';
 import {ViraIcon} from '../vira-icon.element.js';
-import {type MenuItem} from './pop-up-menu-item.js';
+import {type MenuItem} from './popover-menu-item.js';
 
 /**
  * An element for an individual menu item.
  *
- * @category PopUp
+ * @category Popover
  * @category Elements
  */
 export const ViraMenuItem = defineViraElement<

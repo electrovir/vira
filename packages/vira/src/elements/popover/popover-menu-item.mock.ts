@@ -1,4 +1,4 @@
-import {type MenuItem} from './pop-up-menu-item.js';
+import {type MenuItem} from './popover-menu-item.js';
 
 export const mockMenuItems = [
     {

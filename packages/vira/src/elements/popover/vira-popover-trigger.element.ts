@@ -5,95 +5,95 @@ import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element
 import {createFocusStyles} from '../../styles/focus.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles} from '../../styles/index.js';
 import {
-    HidePopUpEvent,
+    HidePopoverEvent,
     NavSelectEvent,
-    PopUpManager,
-    type ShowPopUpResult,
-} from '../../util/pop-up-manager.js';
+    PopoverManager,
+    type ShowPopoverResult,
+} from '../../util/pop-over-manager.js';
 import {defineViraElement} from '../define-vira-element.js';
-import {triggerPopUpState} from './pop-up-helpers.js';
+import {triggerPopoverState} from './popover-helpers.js';
 
 /**
- * Offsets applied to any menu opened by {@link ViraPopUpTrigger}.
+ * Offsets applied to any menu opened by {@link ViraPopoverTrigger}.
  *
  * @category Internal
  */
-export type PopUpOffset = PartialWithUndefined<{
+export type PopoverOffset = PartialWithUndefined<{
     vertical: number;
     right: number;
     left: number;
 }>;
 
 /**
- * Anchor options for pop-ups.
+ * Anchor options for popovers.
  *
  * @category Internal
  */
 export enum HorizontalAnchor {
     /**
-     * The left side of the pop-up will be anchored to the left side of the trigger, allowing the
-     * pop-up to grow on the right side of the trigger.
+     * The left side of the popover will be anchored to the left side of the trigger, allowing the
+     * popover to grow on the right side of the trigger.
      */
     Left = 'left',
     /**
-     * The Right side of the pop-up will be anchored to the right side of the trigger, allowing the
-     * pop-up to grow on the left side of the trigger.
+     * The Right side of the popover will be anchored to the right side of the trigger, allowing the
+     * popover to grow on the left side of the trigger.
      */
     Right = 'right',
     /**
-     * Restrict the pop-up on both sides.
+     * Restrict the popover on both sides.
      *
-     * This is the default anchor for {@link ViraPopUpTrigger}.
+     * This is the default anchor for {@link ViraPopoverTrigger}.
      */
     Both = 'both',
 }
 
 /**
- * An element with slots for a pop-up trigger and pop-up contents.
+ * An element with slots for a popover trigger and popover contents.
  *
- * @category PopUp
+ * @category Popover
  * @category Elements
- * @see https://electrovir.github.io/vira/book/elements/vira-pop-up-trigger
+ * @see https://electrovir.github.io/vira/book/elements/vira-popover-trigger
  */
-export const ViraPopUpTrigger = defineViraElement<
+export const ViraPopoverTrigger = defineViraElement<
     PartialWithUndefined<{
         isDisabled: boolean;
         /** For debugging purposes only. Very bad for actual production code use. */
         z_debug_forceOpenState: boolean;
-        /** Set to `true` to keep the pop-up open if it is interacted with. */
+        /** Set to `true` to keep the popover open if it is interacted with. */
         keepOpenAfterInteraction: boolean;
         /** All values in px. */
-        popUpOffset?: PopUpOffset;
+        popoverOffset?: PopoverOffset;
         /**
-         * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the
-         *   pop-up can grow to the right.
-         * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the
-         *   pop-up can grow to the left.
-         * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
+         * - `HorizontalAnchor.Left`: popover is anchored to the left side of the trigger and the
+         *   popover can grow to the right.
+         * - `HorizontalAnchor.Right`: popover is anchored to the right side of the trigger and the
+         *   popover can grow to the left.
+         * - `HorizontalAnchor.Both`: popover is anchored on both sides of the trigger and cannot grow
          *   beyond it. (This is the default experience.)
          *
          * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popUpOffset` for the direction _opposite_ of the chosen anchor.
+         * `popoverOffset` for the direction _opposite_ of the chosen anchor.
          *
          * @default HorizontalAnchor.Both
          */
         horizontalAnchor?: HorizontalAnchor;
     }>
 >()({
-    tagName: 'vira-pop-up-trigger',
+    tagName: 'vira-popover-trigger',
     state({host}) {
         return {
-            /** `undefined` means the pop up is not currently showing. */
-            showPopUpResult: undefined as ShowPopUpResult | undefined,
-            popUpManager: new PopUpManager(new NavController(host, {activateOnMouseUp: true})),
+            /** `undefined` means the popover is not currently showing. */
+            showPopoverResult: undefined as ShowPopoverResult | undefined,
+            popoverManager: new PopoverManager(new NavController(host, {activateOnMouseUp: true})),
         };
     },
     slotNames: [
         'trigger',
-        'popUp',
+        'popover',
     ],
     hostClasses: {
-        'vira-pop-up-trigger-disabled': ({inputs}) => !!inputs.isDisabled,
+        'vira-popover-trigger-disabled': ({inputs}) => !!inputs.isDisabled,
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -122,16 +122,16 @@ export const ViraPopUpTrigger = defineViraElement<
             ${noUserSelect};
         }
 
-        ${hostClasses['vira-pop-up-trigger-disabled'].selector} {
+        ${hostClasses['vira-popover-trigger-disabled'].selector} {
             ${viraDisabledStyles}
             pointer-events: auto;
         }
 
-        ${hostClasses['vira-pop-up-trigger-disabled'].selector} .dropdown-wrapper {
+        ${hostClasses['vira-popover-trigger-disabled'].selector} .dropdown-wrapper {
             pointer-events: none;
         }
 
-        .pop-up-positioner {
+        .popover-positioner {
             position: absolute;
             pointer-events: none;
             display: flex;
@@ -152,30 +152,30 @@ export const ViraPopUpTrigger = defineViraElement<
             }
         }
 
-        .open-upwards .pop-up-positioner {
+        .open-upwards .popover-positioner {
             flex-direction: column-reverse;
         }
     `,
     events: {
         navSelect: defineElementEvent<Coords>(),
         /**
-         * - `undefined` indicates that the pop-up just closed.
-         * - {@link ShowPopUpResult} indicates that the pop-up just opened.
+         * - `undefined` indicates that the popover just closed.
+         * - {@link ShowPopoverResult} indicates that the popover just opened.
          */
-        openChange: defineElementEvent<ShowPopUpResult | undefined>(),
+        openChange: defineElementEvent<ShowPopoverResult | undefined>(),
         init: defineElementEvent<{
             navController: NavController;
-            popUpManager: PopUpManager;
+            popoverManager: PopoverManager;
         }>(),
     },
     cleanup({state, updateState}) {
-        updateState({showPopUpResult: undefined});
-        state.popUpManager.destroy();
+        updateState({showPopoverResult: undefined});
+        state.popoverManager.destroy();
     },
     init({state, updateState, host, inputs, dispatch, events}) {
-        /** Refocus the trigger and set the result to `undefined` when the pop up closes. */
-        state.popUpManager.listen(HidePopUpEvent, () => {
-            updateState({showPopUpResult: undefined});
+        /** Refocus the trigger and set the result to `undefined` when the popover closes. */
+        state.popoverManager.listen(HidePopoverEvent, () => {
+            updateState({showPopoverResult: undefined});
             dispatch(new events.openChange(undefined));
             if (!inputs.isDisabled) {
                 const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-wrapper');
@@ -189,17 +189,17 @@ export const ViraPopUpTrigger = defineViraElement<
                 dropdownWrapper.focus();
             }
         });
-        state.popUpManager.listen(NavSelectEvent, (event) => {
+        state.popoverManager.listen(NavSelectEvent, (event) => {
             if (!inputs.keepOpenAfterInteraction) {
-                triggerPopUpState({
+                triggerPopoverState({
                     open: false,
-                    callback(showPopUpResult) {
+                    callback(showPopoverResult) {
                         updateState({
-                            showPopUpResult,
+                            showPopoverResult,
                         });
                     },
                     host,
-                    popUpManager: state.popUpManager,
+                    popoverManager: state.popoverManager,
                 });
             }
             dispatch(new events.navSelect(event.detail));
@@ -207,65 +207,65 @@ export const ViraPopUpTrigger = defineViraElement<
 
         dispatch(
             new events.init({
-                navController: state.popUpManager.navController,
-                popUpManager: state.popUpManager,
+                navController: state.popoverManager.navController,
+                popoverManager: state.popoverManager,
             }),
         );
     },
     render({dispatch, events, state, inputs, updateState, host, slotNames}) {
-        function triggerPopUp(
+        function triggerPopover(
             {emitEvent, open}: {emitEvent: boolean; open: boolean},
             event: Event | undefined,
         ) {
-            if (state.showPopUpResult && inputs.keepOpenAfterInteraction && event) {
+            if (state.showPopoverResult && inputs.keepOpenAfterInteraction && event) {
                 const dropdownTrigger = host.shadowRoot.querySelector('.dropdown-trigger');
                 if (dropdownTrigger && !event.composedPath().includes(dropdownTrigger)) {
                     /**
-                     * Prevent closing the pop-up when `keepOpenAfterInteraction` is turned on and
-                     * the pop-up was interacted with.
+                     * Prevent closing the popover when `keepOpenAfterInteraction` is turned on and
+                     * the popover was interacted with.
                      */
                     return;
                 }
             }
-            triggerPopUpState({
+            triggerPopoverState({
                 open,
-                callback(showPopUpResult) {
-                    updateState({showPopUpResult});
+                callback(showPopoverResult) {
+                    updateState({showPopoverResult});
                     if (emitEvent) {
-                        dispatch(new events.openChange(showPopUpResult));
+                        dispatch(new events.openChange(showPopoverResult));
                     }
                 },
                 host,
-                popUpManager: state.popUpManager,
+                popoverManager: state.popoverManager,
             });
         }
 
         if (inputs.isDisabled) {
-            triggerPopUp({open: false, emitEvent: false}, undefined);
+            triggerPopover({open: false, emitEvent: false}, undefined);
         } else if (inputs.z_debug_forceOpenState != undefined) {
-            if (!inputs.z_debug_forceOpenState && state.showPopUpResult) {
-                triggerPopUp({emitEvent: false, open: false}, undefined);
-            } else if (inputs.z_debug_forceOpenState && !state.showPopUpResult) {
-                triggerPopUp({emitEvent: false, open: true}, undefined);
+            if (!inputs.z_debug_forceOpenState && state.showPopoverResult) {
+                triggerPopover({emitEvent: false, open: false}, undefined);
+            } else if (inputs.z_debug_forceOpenState && !state.showPopoverResult) {
+                triggerPopover({emitEvent: false, open: true}, undefined);
             }
         }
 
         const leftCss =
-            inputs.horizontalAnchor === HorizontalAnchor.Right && state.showPopUpResult
+            inputs.horizontalAnchor === HorizontalAnchor.Right && state.showPopoverResult
                 ? css`
-                      left: -${state.showPopUpResult.positions.diff.left}px;
+                      left: -${state.showPopoverResult.positions.diff.left}px;
                   `
                 : css`
-                      left: ${inputs.popUpOffset?.left || 0}px;
+                      left: ${inputs.popoverOffset?.left || 0}px;
                   `;
 
         const rightCss =
-            state.showPopUpResult && inputs.horizontalAnchor === HorizontalAnchor.Left
+            state.showPopoverResult && inputs.horizontalAnchor === HorizontalAnchor.Left
                 ? css`
-                      right: -${state.showPopUpResult.positions.diff.right}px;
+                      right: -${state.showPopoverResult.positions.diff.right}px;
                   `
                 : css`
-                      right: ${inputs.popUpOffset?.right || 0}px;
+                      right: ${inputs.popoverOffset?.right || 0}px;
                   `;
 
         const horizontalPositionStyle = css`
@@ -276,41 +276,41 @@ export const ViraPopUpTrigger = defineViraElement<
         /**
          * These styles do _not_ account for window resizing while the menu is open. I decided this
          * was not a major enough problem to tackle. If it becomes major enough in the future,
-         * you'll need to hook into a window _or_ container resize listener inside `PopUpManager`
-         * and emit a new `ShowPopUpResult` instance when it changes.
+         * you'll need to hook into a window _or_ container resize listener inside `PopoverManager`
+         * and emit a new `ShowPopoverResult` instance when it changes.
          */
-        const positionerStyles = state.showPopUpResult
-            ? state.showPopUpResult.popDown
+        const positionerStyles = state.showPopoverResult
+            ? state.showPopoverResult.popDown
                 ? /** Dropdown going down position. */
                   css`
-                      bottom: -${state.showPopUpResult.positions.diff.bottom}px;
-                      top: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                      bottom: -${state.showPopoverResult.positions.diff.bottom}px;
+                      top: calc(100% + ${inputs.popoverOffset?.vertical || 0}px);
                       ${horizontalPositionStyle}
                   `
                 : /** Dropdown going up position. */
                   css`
-                      top: -${state.showPopUpResult.positions.diff.top}px;
-                      bottom: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                      top: -${state.showPopoverResult.positions.diff.top}px;
+                      bottom: calc(100% + ${inputs.popoverOffset?.vertical || 0}px);
                       ${horizontalPositionStyle}
                   `
             : undefined;
 
         function respondToClick(event: Event) {
-            triggerPopUp({emitEvent: true, open: !state.showPopUpResult}, event);
+            triggerPopover({emitEvent: true, open: !state.showPopoverResult}, event);
         }
 
         return html`
             <button
                 ?disabled=${!!inputs.isDisabled}
                 class="dropdown-wrapper ${classMap({
-                    open: !!state.showPopUpResult,
-                    'open-upwards': !state.showPopUpResult?.popDown,
+                    open: !!state.showPopoverResult,
+                    'open-upwards': !state.showPopoverResult?.popDown,
                 })}"
                 role="listbox"
-                aria-expanded=${!!state.showPopUpResult}
+                aria-expanded=${!!state.showPopoverResult}
                 ${listen('keydown', (event) => {
-                    if (!state.showPopUpResult && event.code.startsWith('Arrow')) {
-                        triggerPopUp({emitEvent: true, open: true}, event);
+                    if (!state.showPopoverResult && event.code.startsWith('Arrow')) {
+                        triggerPopover({emitEvent: true, open: true}, event);
                     }
                 })}
                 ${listen('click', (event) => {
@@ -331,15 +331,15 @@ export const ViraPopUpTrigger = defineViraElement<
                 </div>
 
                 <div
-                    class="pop-up-positioner ${classMap({
+                    class="popover-positioner ${classMap({
                         'right-aligned': inputs.horizontalAnchor === HorizontalAnchor.Right,
                     })}"
                     style=${positionerStyles}
                 >
                     ${renderIf(
-                        !!state.showPopUpResult,
+                        !!state.showPopoverResult,
                         html`
-                            <slot name=${slotNames.popUp}></slot>
+                            <slot name=${slotNames.popover}></slot>
                         `,
                     )}
                 </div>

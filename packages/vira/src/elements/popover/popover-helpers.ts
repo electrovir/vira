@@ -1,6 +1,6 @@
 import {joinWithFinalConjunction} from '@augment-vir/common';
-import {type PopUpManager, type ShowPopUpResult} from '../../util/pop-up-manager.js';
-import {type MenuItem} from './pop-up-menu-item.js';
+import {type PopoverManager, type ShowPopoverResult} from '../../util/pop-over-manager.js';
+import {type MenuItem} from './popover-menu-item.js';
 
 /**
  * Verifies that all items have unique ids.
@@ -51,26 +51,26 @@ export function updateSelectedItems(
 }
 
 /**
- * Handles toggling pop up state for `ViraDropdown`.
+ * Handles toggling popover state for `ViraDropdown`.
  *
  * @category Internal
  */
-export function triggerPopUpState({
+export function triggerPopoverState({
     open,
     callback,
-    popUpManager,
+    popoverManager,
     host,
 }: {
     open: boolean;
-    popUpManager: PopUpManager;
+    popoverManager: PopoverManager;
     host: HTMLElement;
-    callback?: ((showPopUpResult: ShowPopUpResult | undefined) => void) | undefined;
+    callback?: ((showPopoverResult: ShowPopoverResult | undefined) => void) | undefined;
 }) {
     if (open) {
-        const showPopUpResult = popUpManager.showPopUp(host);
-        callback?.(showPopUpResult);
+        const showPopoverResult = popoverManager.showPopover(host);
+        callback?.(showPopoverResult);
     } else {
-        popUpManager.removePopUp();
+        popoverManager.removePopover();
         callback?.(undefined);
     }
 }

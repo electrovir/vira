@@ -1,2 +1,2 @@
 export * from './define-table.js';
-export * from './pop-up-manager.js';
+export * from './pop-over-manager.js';

@@ -4,7 +4,7 @@ import {SpaRouter} from 'spa-router-vir';
 import {
     HorizontalAnchor,
     type MenuItem,
-    PopUpMenuCornerStyle,
+    PopoverMenuCornerStyle,
     ViraMenuItem,
     ViraMenuTrigger,
 } from 'vira';
@@ -66,7 +66,7 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsTy
     {
         title: 'rounded',
         inputs: {
-            menuCornerStyle: PopUpMenuCornerStyle.AllRounded,
+            menuCornerStyle: PopoverMenuCornerStyle.AllRounded,
         },
     },
     {
@@ -151,7 +151,7 @@ export const viraMenuTriggerBookPage = defineBookPage({
                     return html`
                         <${ViraMenuTrigger.assign({
                             items: mockMenuItems,
-                            popUpOffset: {
+                            popoverOffset: {
                                 vertical: -1,
                             },
                             ...example.inputs,

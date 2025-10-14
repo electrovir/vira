@@ -4,9 +4,9 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {Element24Icon} from '../icons/index.js';
-import {mockMenuItems} from './pop-up/pop-up-menu-item.mock.js';
-import {viraMenuTriggerTestIds} from './pop-up/vira-menu-trigger.element.js';
-import {viraMenuTestIds} from './pop-up/vira-menu.element.js';
+import {mockMenuItems} from './popover/popover-menu-item.mock.js';
+import {viraMenuTriggerTestIds} from './popover/vira-menu-trigger.element.js';
+import {viraMenuTestIds} from './popover/vira-menu.element.js';
 import {ViraDropdown, viraDropdownTestIds} from './vira-dropdown.element.js';
 
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {

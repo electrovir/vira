@@ -39,15 +39,15 @@ export const emptyPositionRect: PositionRect = {
 };
 
 /**
- * Options for {@link PopUpManager}.
+ * Options for {@link PopoverManager}.
  *
- * @category PopUp
+ * @category Popover
  */
-export type PopUpManagerOptions = {
+export type PopoverManagerOptions = {
     /**
-     * The minimum number of pixels for allowing the pop-up to go downwards. If the downward
+     * The minimum number of pixels for allowing the popover to go downwards. If the downward
      * available space is less than this, and if the upwards available space is
-     * `verticalDiffThreshold` more than the downwards space, the pop-up will be directed upwards.
+     * `verticalDiffThreshold` more than the downwards space, the popover will be directed upwards.
      *
      * Equation:
      *
@@ -60,7 +60,7 @@ export type PopUpManagerOptions = {
     minDownSpace: number;
     /**
      * The number of pixels required for the upwards available space to be bigger than the downwards
-     * available space before directing the pop-up upwards.
+     * available space before directing the popover upwards.
      *
      * Equation:
      *
@@ -72,7 +72,7 @@ export type PopUpManagerOptions = {
      */
     verticalDiffThreshold: number;
     /**
-     * Supports navigation of the pop up via the `device-navigation` package.
+     * Supports navigation of the popover via the `device-navigation` package.
      *
      * @default true
      */
@@ -80,13 +80,13 @@ export type PopUpManagerOptions = {
 };
 
 /**
- * Output type from `PopUpManager.showPopUp`
+ * Output type from `PopoverManager.showPopover`
  *
- * @category PopUp
+ * @category Popover
  */
-export type ShowPopUpResult = {
+export type ShowPopoverResult = {
     /**
-     * Indicates if the "pop up" should pop in the downwards direction or not. If not, it should pop
+     * Indicates if the popover should pop in the downwards direction or not. If not, it should pop
      * in the upwards direction. This is determined by how much space is available on either side of
      * the root element.
      */
@@ -95,34 +95,34 @@ export type ShowPopUpResult = {
 };
 
 /**
- * An event fired from {@link PopUpManager} when the pop up should be hidden.
+ * An event fired from {@link PopoverManager} when the popover should be hidden.
  *
- * @category PopUp
+ * @category Popover
  */
-export class HidePopUpEvent extends defineTypedEvent('hide-pop-up') {}
+export class HidePopoverEvent extends defineTypedEvent('hide-popover') {}
 /**
- * An event fired from {@link PopUpManager} when an individual item in the pop up has been selected
- * by the user.
+ * An event fired from {@link PopoverManager} when an individual item in the popover has been
+ * selected by the user.
  *
- * @category PopUp
+ * @category Popover
  */
 export class NavSelectEvent extends defineTypedCustomEvent<Coords>()('nav-select') {}
 
 /**
- * All events that can be emitted by {@link PopUpManager}.
+ * All events that can be emitted by {@link PopoverManager}.
  *
  * @category Internal
  */
-export type PopUpManagerEvents = HidePopUpEvent | NavSelectEvent;
+export type PopoverManagerEvents = HidePopoverEvent | NavSelectEvent;
 
 /**
- * A "pop up" manager for items that pop up from the HTML page, like dropdowns or menus.
+ * A "popover" manager for items that popover from the HTML page, like dropdowns or menus.
  *
- * @category PopUp
+ * @category Popover
  */
-export class PopUpManager {
-    private listenTarget = new ListenTarget<PopUpManagerEvents>();
-    public options: PopUpManagerOptions = {
+export class PopoverManager {
+    private listenTarget = new ListenTarget<PopoverManagerEvents>();
+    public options: PopoverManagerOptions = {
         minDownSpace: 200,
         verticalDiffThreshold: 20,
         supportNavigation: true,
@@ -132,7 +132,7 @@ export class PopUpManager {
 
     constructor(
         public readonly navController: NavController,
-        options?: Partial<PopUpManagerOptions> | undefined,
+        options?: Partial<PopoverManagerOptions> | undefined,
     ) {
         this.options = {...this.options, ...options};
     }
@@ -141,7 +141,7 @@ export class PopUpManager {
         let firstFired = false;
         const resizeObserver = new ResizeObserver(() => {
             if (firstFired) {
-                this.removePopUp();
+                this.removePopover();
             } else {
                 firstFired = true;
             }
@@ -154,7 +154,7 @@ export class PopUpManager {
             },
             listenToPageActivation(false, (isPageActive) => {
                 if (!isPageActive) {
-                    this.removePopUp();
+                    this.removePopover();
                 }
             }),
             this.navController.listen(NavActivateEvent, (event) => {
@@ -172,10 +172,10 @@ export class PopUpManager {
                         this.lastRootElement &&
                         event.composedPath().includes(this.lastRootElement)
                     ) {
-                        /** Ignore clicks that came from the pop up host itself. */
+                        /** Ignore clicks that came from the popover host itself. */
                         return;
                     }
-                    this.removePopUp();
+                    this.removePopover();
                 },
                 {passive: true},
             ),
@@ -183,7 +183,7 @@ export class PopUpManager {
                 const keyCode = event.code;
 
                 if (keyCode === 'Escape') {
-                    this.removePopUp();
+                    this.removePopover();
                 } else if (this.options.supportNavigation) {
                     if (keyCode === 'ArrowDown') {
                         event.stopImmediatePropagation();
@@ -229,32 +229,32 @@ export class PopUpManager {
         ];
     }
 
-    /** Listen to events emitted from a {@link PopUpManager} instance. */
+    /** Listen to events emitted from a {@link PopoverManager} instance. */
     public listen<
         const EventDefinition extends Readonly<{
-            type: ExtractEventTypes<PopUpManagerEvents>;
+            type: ExtractEventTypes<PopoverManagerEvents>;
         }>,
     >(
         event: EventDefinition,
         listener: (
-            event: ExtractEventByType<PopUpManagerEvents, EventDefinition['type']>,
+            event: ExtractEventByType<PopoverManagerEvents, EventDefinition['type']>,
         ) => MaybePromise<void>,
         options?: ListenOptions | undefined,
     ): RemoveListenerCallback {
         return this.listenTarget.listen(event, listener, options);
     }
 
-    /** Trigger removal or hiding of the pop up. */
-    public removePopUp() {
+    /** Trigger removal or hiding of the popover. */
+    public removePopover() {
         this.cleanupCallbacks.forEach((callback) => callback());
-        this.listenTarget.dispatch(new HidePopUpEvent());
+        this.listenTarget.dispatch(new HidePopoverEvent());
     }
 
-    /** Trigger showing the pop up. */
-    public showPopUp(
+    /** Trigger showing the popover. */
+    public showPopover(
         rootElement: HTMLElement,
-        options?: Partial<PopUpManagerOptions> | undefined,
-    ): ShowPopUpResult {
+        options?: Partial<PopoverManagerOptions> | undefined,
+    ): ShowPopoverResult {
         this.lastRootElement = rootElement;
         const currentOptions = {...this.options, ...options};
         const container = findOverflowAncestor(rootElement);
@@ -308,13 +308,13 @@ export class PopUpManager {
     }
 
     /**
-     * Cleanup and destroy the {@link PopUpManager} instance. This:
+     * Cleanup and destroy the {@link PopoverManager} instance. This:
      *
-     * - Removes the existing pop up
+     * - Removes the existing popover
      * - Cleans up all internal and external listeners
      */
     public destroy() {
-        this.removePopUp();
+        this.removePopover();
         this.listenTarget.destroy();
     }
 }

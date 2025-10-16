@@ -1,7 +1,7 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {type NavController} from 'device-navigation';
 import {classMap, css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
-import {type PopoverManager, type ShowPopoverResult} from '../../util/pop-over-manager.js';
+import {type PopoverManager, type ShowPopoverResult} from '../../util/popover-manager.js';
 import {defineViraElement} from '../define-vira-element.js';
 import {updateSelectedItems} from './popover-helpers.js';
 import {type MenuItem} from './popover-menu-item.js';

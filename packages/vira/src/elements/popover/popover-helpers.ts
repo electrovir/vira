@@ -1,5 +1,5 @@
 import {joinWithFinalConjunction} from '@augment-vir/common';
-import {type PopoverManager, type ShowPopoverResult} from '../../util/pop-over-manager.js';
+import {type PopoverManager, type ShowPopoverResult} from '../../util/popover-manager.js';
 import {type MenuItem} from './popover-menu-item.js';
 
 /**

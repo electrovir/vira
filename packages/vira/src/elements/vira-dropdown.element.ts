@@ -16,7 +16,7 @@ import {ChevronUp24Icon} from '../icons/index.js';
 import {viraBorders} from '../styles/border.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
-import {type ShowPopoverResult} from '../util/pop-over-manager.js';
+import {type ShowPopoverResult} from '../util/popover-manager.js';
 import {defineViraElement} from './define-vira-element.js';
 import {type MenuItem} from './popover/popover-menu-item.js';
 import {ViraMenuTrigger} from './popover/vira-menu-trigger.element.js';

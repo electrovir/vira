@@ -11,7 +11,7 @@ import {
     NavSelectEvent,
     PopoverManager,
     type ShowPopoverResult,
-} from '../../util/pop-over-manager.js';
+} from '../../util/popover-manager.js';
 import {defineViraElement} from '../define-vira-element.js';
 import {triggerPopoverState} from './popover-helpers.js';
 

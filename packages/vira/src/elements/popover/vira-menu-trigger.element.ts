@@ -11,11 +11,7 @@ import {
     ViraPopoverMenu,
     type PopoverMenuCornerStyle,
 } from './vira-popover-menu.element.js';
-import {
-    HorizontalAnchor,
-    ViraPopoverTrigger,
-    type PopoverOffset,
-} from './vira-popover-trigger.element.js';
+import {ViraPopoverTrigger, type PopoverOffset} from './vira-popover-trigger.element.js';
 
 /**
  * Test ids for {@link ViraMenuTrigger}.
@@ -45,20 +41,6 @@ export const ViraMenuTrigger = defineViraElement<
         /** Hide menu item check mark icons. */
         hideCheckIcons: boolean;
         menuCornerStyle: PopoverMenuCornerStyle;
-        /**
-         * - `HorizontalAnchor.Left`: popover is anchored to the left side of the trigger and the
-         *   popover can grow to the right.
-         * - `HorizontalAnchor.Right`: popover is anchored to the right side of the trigger and the
-         *   popover can grow to the left.
-         * - `HorizontalAnchor.Both`: popover is anchored on both sides of the trigger and cannot grow
-         *   beyond it.
-         *
-         * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popoverOffset` for the direction _opposite_ of the chosen anchor.
-         *
-         * @default HorizontalAnchor.Left
-         */
-        horizontalAnchor: HorizontalAnchor;
     }>
 >()({
     tagName: 'vira-menu-trigger',
@@ -97,7 +79,6 @@ export const ViraMenuTrigger = defineViraElement<
                 keepOpenAfterInteraction: true,
                 z_debug_forceOpenState: inputs.z_debug_forceOpenState,
                 popoverOffset: inputs.popoverOffset,
-                horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Left,
             })}
                 class=${classMap({
                     open: !!state.showPopoverResult,
@@ -147,10 +128,6 @@ export const ViraMenuTrigger = defineViraElement<
                               cornerStyle: inputs.menuCornerStyle,
                           })}
                               slot=${ViraPopoverTrigger.slotNames.popover}
-                              class=${classMap({
-                                  'full-width-menu':
-                                      inputs.horizontalAnchor === HorizontalAnchor.Both,
-                              })}
                           >
                               <${ViraMenu.assign({
                                   items: inputs.items,

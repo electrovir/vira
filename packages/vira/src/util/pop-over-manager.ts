@@ -1,6 +1,4 @@
-import {assert} from '@augment-vir/assert';
 import {type MaybePromise, mapObjectValues} from '@augment-vir/common';
-import {findOverflowAncestor} from '@augment-vir/web';
 import {type Coords, NavActivateEvent, type NavController, NavDirection} from 'device-navigation';
 import {listenToPageActivation} from 'page-active';
 import {
@@ -24,6 +22,18 @@ export type PositionRect = {
     left: number;
     right: number;
     bottom: number;
+};
+
+/**
+ * Used to represent the diff between the root element and the viewport.
+ *
+ * @category Internal
+ */
+export type DiffRect = PositionRect & {
+    rootLeftToContainerRight: number;
+    rootRightToContainerLeft: number;
+    rootTopToContainerBottom: number;
+    rootBottomToContainerTop: number;
 };
 
 /**
@@ -57,7 +67,7 @@ export type PopoverManagerOptions = {
      *
      * @default 200
      */
-    minDownSpace: number;
+    minDownwardsSpace: number;
     /**
      * The number of pixels required for the upwards available space to be bigger than the downwards
      * available space before directing the popover upwards.
@@ -87,11 +97,21 @@ export type PopoverManagerOptions = {
 export type ShowPopoverResult = {
     /**
      * Indicates if the popover should pop in the downwards direction or not. If not, it should pop
-     * in the upwards direction. This is determined by how much space is available on either side of
-     * the root element.
+     * in the upwards direction. This is determined by how much space is available on either
+     * vertical side of the root element.
      */
     popDown: boolean;
-    positions: Record<'root' | 'container' | 'diff', PositionRect>;
+    /**
+     * Indicates if the popover should pop in the rightwards direction or not. If not, it should pop
+     * in the leftwards position. This is determined by how much space is available on either
+     * horizontal side of the root element.
+     */
+    popRight: boolean;
+    positions: {
+        root: PositionRect;
+        container: PositionRect;
+        diff: DiffRect;
+    };
 };
 
 /**
@@ -123,7 +143,7 @@ export type PopoverManagerEvents = HidePopoverEvent | NavSelectEvent;
 export class PopoverManager {
     private listenTarget = new ListenTarget<PopoverManagerEvents>();
     public options: PopoverManagerOptions = {
-        minDownSpace: 200,
+        minDownwardsSpace: 200,
         verticalDiffThreshold: 20,
         supportNavigation: true,
     };
@@ -257,48 +277,46 @@ export class PopoverManager {
     ): ShowPopoverResult {
         this.lastRootElement = rootElement;
         const currentOptions = {...this.options, ...options};
-        const container = findOverflowAncestor(rootElement);
-        assert.instanceOf(container, HTMLElement);
+        const container = window.document.body;
 
         const rootRect = rootElement.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
 
-        const containerScrollbarWidth = container.offsetWidth - container.clientWidth;
-        const containerScrollbarHeight = container.offsetHeight - container.clientHeight;
-
-        const containerPosition: PositionRect =
-            container === document.body
-                ? {
-                      top: 0,
-                      left: 0,
-                      right: containerRect.width,
-                      bottom: containerRect.height,
-                  }
-                : {
-                      top: containerRect.top,
-                      left: containerRect.left,
-                      right: containerRect.right - containerScrollbarWidth,
-                      bottom: containerRect.bottom - containerScrollbarHeight,
-                  };
+        const containerPosition: PositionRect = {
+            top: 0,
+            left: 0,
+            right: containerRect.width,
+            bottom: containerRect.height,
+        };
 
         const rootPosition: PositionRect = mapObjectValues(emptyPositionRect, (key) => {
             return rootRect[key];
         });
-        const diff: PositionRect = mapObjectValues(emptyPositionRect, (key) => {
+        const diffPositions: PositionRect = mapObjectValues(emptyPositionRect, (key) => {
             const containerDimension = containerPosition[key];
             const hostDimension = rootPosition[key];
 
             return Math.abs(containerDimension - hostDimension);
         });
+        const diff: DiffRect = {
+            ...diffPositions,
+            rootLeftToContainerRight: containerPosition.right - diffPositions.left,
+            rootRightToContainerLeft: containerPosition.right - diffPositions.right,
+            rootTopToContainerBottom: containerPosition.bottom - diffPositions.top,
+            rootBottomToContainerTop: containerPosition.bottom - diffPositions.bottom,
+        };
 
         const useUp =
             diff.top > diff.bottom + currentOptions.verticalDiffThreshold &&
-            diff.bottom < currentOptions.minDownSpace;
+            diff.bottom < currentOptions.minDownwardsSpace;
 
         this.attachGlobalListeners(container);
 
+        const useLeft = diff.rootLeftToContainerRight + 100 < diff.rootRightToContainerLeft;
+
         return {
             popDown: !useUp,
+            popRight: !useLeft,
             positions: {
                 container: containerPosition,
                 root: rootPosition,

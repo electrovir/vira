@@ -1,9 +1,11 @@
 import {assert} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {NavController, type Coords} from 'device-navigation';
-import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
+import {css, defineElementEvent, html, listen, onDomRendered, renderIf} from 'element-vir';
+import {viraDisabledStyles} from '../../styles/disabled.js';
 import {createFocusStyles} from '../../styles/focus.js';
-import {noNativeFormStyles, noUserSelect, viraDisabledStyles} from '../../styles/index.js';
+import {noNativeFormStyles} from '../../styles/native-styles.js';
+import {noUserSelect} from '../../styles/user-select.js';
 import {
     HidePopoverEvent,
     NavSelectEvent,
@@ -64,20 +66,6 @@ export const ViraPopoverTrigger = defineViraElement<
         keepOpenAfterInteraction: boolean;
         /** All values in px. */
         popoverOffset?: PopoverOffset;
-        /**
-         * - `HorizontalAnchor.Left`: popover is anchored to the left side of the trigger and the
-         *   popover can grow to the right.
-         * - `HorizontalAnchor.Right`: popover is anchored to the right side of the trigger and the
-         *   popover can grow to the left.
-         * - `HorizontalAnchor.Both`: popover is anchored on both sides of the trigger and cannot grow
-         *   beyond it. (This is the default experience.)
-         *
-         * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popoverOffset` for the direction _opposite_ of the chosen anchor.
-         *
-         * @default HorizontalAnchor.Both
-         */
-        horizontalAnchor?: HorizontalAnchor;
     }>
 >()({
     tagName: 'vira-popover-trigger',
@@ -99,61 +87,60 @@ export const ViraPopoverTrigger = defineViraElement<
         :host {
             display: inline-flex;
             box-sizing: border-box;
-            vertical-align: middle;
-            position: relative;
             max-width: 100%;
         }
 
-        .dropdown-wrapper {
+        .wrapper {
+            max-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            /* Do not use display:flex. Doing so will break positioning for Firefox and Safari. */
+            display: block;
+        }
+
+        .dropdown-trigger {
             ${noNativeFormStyles};
+            ${noUserSelect};
             cursor: pointer;
             max-width: 100%;
             position: relative;
             flex-grow: 1;
             box-sizing: border-box;
+            anchor-name: --popover-trigger;
 
             ${createFocusStyles({
                 elementBorderSize: 1,
             })}
         }
 
-        .dropdown-trigger {
-            box-sizing: border-box;
-            ${noUserSelect};
-        }
-
         ${hostClasses['vira-popover-trigger-disabled'].selector} {
             ${viraDisabledStyles}
             pointer-events: auto;
+
+            & .dropdown-wrapper {
+                pointer-events: none;
+            }
         }
 
-        ${hostClasses['vira-popover-trigger-disabled'].selector} .dropdown-wrapper {
-            pointer-events: none;
-        }
+        [popover] {
+            /* More styles are set internally via JS. */
 
-        .popover-positioner {
             position: absolute;
-            pointer-events: none;
-            display: flex;
             box-sizing: border-box;
-            flex-direction: column;
-            align-items: flex-start;
+            inset: auto;
+            display: flex;
+            /* Allow menu shadows to overflow. Without this they are hidden. */
+            overflow: visible;
+            pointer-events: none;
 
-            /* highest possible z-index */
-            z-index: 2147483647;
-
-            & > * {
+            > * {
                 pointer-events: auto;
                 max-width: 100%;
             }
-
-            &.right-aligned {
-                align-items: flex-end;
-            }
         }
 
-        .open-upwards .popover-positioner {
-            flex-direction: column-reverse;
+        :popover-open {
+            ${noNativeFormStyles}
         }
     `,
     events: {
@@ -169,16 +156,20 @@ export const ViraPopoverTrigger = defineViraElement<
         }>(),
     },
     cleanup({state, updateState}) {
-        updateState({showPopoverResult: undefined});
+        updateState({
+            showPopoverResult: undefined,
+        });
         state.popoverManager.destroy();
     },
     init({state, updateState, host, inputs, dispatch, events}) {
         /** Refocus the trigger and set the result to `undefined` when the popover closes. */
         state.popoverManager.listen(HidePopoverEvent, () => {
-            updateState({showPopoverResult: undefined});
+            updateState({
+                showPopoverResult: undefined,
+            });
             dispatch(new events.openChange(undefined));
             if (!inputs.isDisabled) {
-                const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-wrapper');
+                const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-trigger');
 
                 assert.instanceOf(
                     dropdownWrapper,
@@ -214,7 +205,13 @@ export const ViraPopoverTrigger = defineViraElement<
     },
     render({dispatch, events, state, inputs, updateState, host, slotNames}) {
         function triggerPopover(
-            {emitEvent, open}: {emitEvent: boolean; open: boolean},
+            {
+                emitEvent,
+                open,
+            }: {
+                emitEvent: boolean;
+                open: boolean;
+            },
             event: Event | undefined,
         ) {
             if (state.showPopoverResult && inputs.keepOpenAfterInteraction && event) {
@@ -249,92 +246,105 @@ export const ViraPopoverTrigger = defineViraElement<
                 triggerPopover({emitEvent: false, open: true}, undefined);
             }
         }
-
-        const leftCss =
-            inputs.horizontalAnchor === HorizontalAnchor.Right && state.showPopoverResult
+        const horizontalPositionStyle = state.showPopoverResult
+            ? state.showPopoverResult.popRight
                 ? css`
-                      left: -${state.showPopoverResult.positions.diff.left}px;
+                      width: ${state.showPopoverResult.positions.diff.rootLeftToContainerRight}px;
+                      left: anchor(--popover-trigger left);
+                      align-items: flex-start;
                   `
                 : css`
-                      left: ${inputs.popoverOffset?.left || 0}px;
-                  `;
+                      width: ${state.showPopoverResult.positions.diff.rootRightToContainerLeft}px;
+                      right: anchor(--popover-trigger right);
+                      /* Fallback for Firefox and Safari that don't yet support anchor() */
+                      right: ${state.showPopoverResult.positions.diff.right}px;
+                      align-items: flex-end;
+                  `
+            : css`
+                  display: none;
+              `;
 
-        const rightCss =
-            state.showPopoverResult && inputs.horizontalAnchor === HorizontalAnchor.Left
+        const verticalPositionStyle = state.showPopoverResult
+            ? state.showPopoverResult.popDown
                 ? css`
-                      right: -${state.showPopoverResult.positions.diff.right}px;
+                      top: anchor(--popover-trigger bottom);
+                      height: ${state.showPopoverResult.positions.diff.bottom}px;
+                      flex-direction: column;
                   `
                 : css`
-                      right: ${inputs.popoverOffset?.right || 0}px;
-                  `;
-
-        const horizontalPositionStyle = css`
-            ${leftCss}
-            ${rightCss}
-        `;
+                      bottom: anchor(--popover-trigger top);
+                      height: ${state.showPopoverResult.positions.diff.top}px;
+                      flex-direction: column-reverse;
+                  `
+            : css`
+                  display: none;
+              `;
 
         /**
          * These styles do _not_ account for window resizing while the menu is open. I decided this
          * was not a major enough problem to tackle. If it becomes major enough in the future,
          * you'll need to hook into a window _or_ container resize listener inside `PopoverManager`
          * and emit a new `ShowPopoverResult` instance when it changes.
+         *
+         * Currently, the popover will simply close when the window is resized.
          */
-        const positionerStyles = state.showPopoverResult
-            ? state.showPopoverResult.popDown
-                ? /** Dropdown going down position. */
-                  css`
-                      bottom: -${state.showPopoverResult.positions.diff.bottom}px;
-                      top: calc(100% + ${inputs.popoverOffset?.vertical || 0}px);
-                      ${horizontalPositionStyle}
-                  `
-                : /** Dropdown going up position. */
-                  css`
-                      top: -${state.showPopoverResult.positions.diff.top}px;
-                      bottom: calc(100% + ${inputs.popoverOffset?.vertical || 0}px);
-                      ${horizontalPositionStyle}
-                  `
-            : undefined;
+        const positionerStyles = css`
+            ${verticalPositionStyle}
+            ${horizontalPositionStyle}
+        `;
 
         function respondToClick(event: Event) {
-            triggerPopover({emitEvent: true, open: !state.showPopoverResult}, event);
+            triggerPopover(
+                {
+                    emitEvent: true,
+                    open: !state.showPopoverResult,
+                },
+                event,
+            );
         }
 
         return html`
-            <button
-                ?disabled=${!!inputs.isDisabled}
-                class="dropdown-wrapper ${classMap({
-                    open: !!state.showPopoverResult,
-                    'open-upwards': !state.showPopoverResult?.popDown,
-                })}"
-                role="listbox"
-                aria-expanded=${!!state.showPopoverResult}
-                ${listen('keydown', (event) => {
-                    if (!state.showPopoverResult && event.code.startsWith('Arrow')) {
-                        triggerPopover({emitEvent: true, open: true}, event);
-                    }
-                })}
-                ${listen('click', (event) => {
-                    /** Detail is 0 if it was a keyboard key (like Enter) that triggered this click. */
-                    if (event.detail === 0) {
-                        respondToClick(event);
-                    }
-                })}
-                ${listen('mousedown', (event) => {
-                    /** Ignore any clicks that aren't the main button. */
-                    if (event.button === 0) {
-                        respondToClick(event);
-                    }
-                })}
-            >
-                <div class="dropdown-trigger">
+            <div class="wrapper">
+                <button
+                    ?disabled=${!!inputs.isDisabled}
+                    class="dropdown-trigger"
+                    role="listbox"
+                    aria-expanded=${!!state.showPopoverResult}
+                    ${listen('keydown', (event) => {
+                        if (!state.showPopoverResult && event.code.startsWith('Arrow')) {
+                            triggerPopover({emitEvent: true, open: true}, event);
+                        }
+                    })}
+                    ${listen('click', (event) => {
+                        /**
+                         * Detail is 0 if it was a keyboard key (like Enter) that triggered this
+                         * click.
+                         */
+                        if (event.detail === 0) {
+                            respondToClick(event);
+                        }
+                    })}
+                    ${listen('mousedown', (event) => {
+                        /** Ignore any clicks that aren't the main button. */
+                        if (event.button === 0) {
+                            respondToClick(event);
+                        }
+                    })}
+                >
                     <slot name=${slotNames.trigger}></slot>
-                </div>
-
+                </button>
                 <div
-                    class="popover-positioner ${classMap({
-                        'right-aligned': inputs.horizontalAnchor === HorizontalAnchor.Right,
-                    })}"
+                    popover="manual"
                     style=${positionerStyles}
+                    ${onDomRendered((popoverElement) => {
+                        assert.instanceOf(popoverElement, HTMLElement);
+
+                        if (state.showPopoverResult) {
+                            popoverElement.showPopover();
+                        } else {
+                            popoverElement.hidePopover();
+                        }
+                    })}
                 >
                     ${renderIf(
                         !!state.showPopoverResult,
@@ -343,7 +353,7 @@ export const ViraPopoverTrigger = defineViraElement<
                         `,
                     )}
                 </div>
-            </button>
+            </div>
         `;
     },
 });

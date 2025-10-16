@@ -1,13 +1,7 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {SpaRouter} from 'spa-router-vir';
-import {
-    HorizontalAnchor,
-    type MenuItem,
-    PopoverMenuCornerStyle,
-    ViraMenuItem,
-    ViraMenuTrigger,
-} from 'vira';
+import {type MenuItem, PopoverMenuCornerStyle, ViraMenuItem, ViraMenuTrigger} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const mockMenuItems: MenuItem[] = [
@@ -78,33 +72,6 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsTy
     {
         title: 'long item',
         inputs: {
-            items: [
-                ...mockMenuItems,
-                {
-                    id: 'long',
-                    label: html`
-                        <${ViraMenuItem.assign({
-                            selected: false,
-                        })}>
-                            <div
-                                style=${css`
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                `}
-                            >
-                                This menu item is much longer than the others
-                            </div>
-                        </${ViraMenuItem}>
-                    `,
-                },
-            ],
-        },
-    },
-    {
-        title: 'restricted long item',
-        inputs: {
-            horizontalAnchor: HorizontalAnchor.Both,
             items: [
                 ...mockMenuItems,
                 {

@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {HorizontalAnchor, viraFocusCssVars, ViraPopoverTrigger} from 'vira';
+import {viraFocusCssVars, ViraPopoverTrigger} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 export const viraPopoverTriggerBookPage = defineBookPage({
@@ -41,7 +41,7 @@ export const viraPopoverTriggerBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'long clipped content',
+            title: 'long content',
             styles: css`
                 .trigger {
                     cursor: pointer;
@@ -65,82 +65,6 @@ export const viraPopoverTriggerBookPage = defineBookPage({
                 return html`
                     <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
-                    })}>
-                        <div slot=${ViraPopoverTrigger.slotNames.trigger}>
-                            Trigger Long Clipped Popover
-                        </div>
-                        <div class="popover" slot=${ViraPopoverTrigger.slotNames.popover}>
-                            really long content in here really long content in here really long
-                            content in here really long content in here really long content in here
-                        </div>
-                    </${ViraPopoverTrigger}>
-                `;
-            },
-        });
-        defineExample({
-            title: 'long right anchored content',
-            styles: css`
-                .trigger {
-                    cursor: pointer;
-                    border: 4px solid #ccc;
-                    padding: 8px 16px;
-                }
-
-                .popover {
-                    box-sizing: border-box;
-                    max-width: 100%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    border: 4px solid #eee;
-                    border-top: none;
-                    padding: 8px 16px;
-                    white-space: nowrap;
-                    background-color: white;
-                }
-            `,
-            render() {
-                return html`
-                    <${ViraPopoverTrigger.assign({
-                        keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Right,
-                    })}>
-                        <div slot=${ViraPopoverTrigger.slotNames.trigger}>
-                            Trigger Long Right Anchored Popover
-                        </div>
-                        <div class="popover" slot=${ViraPopoverTrigger.slotNames.popover}>
-                            really long content in here really long content in here really long
-                            content in here really long content in here really long content in here
-                        </div>
-                    </${ViraPopoverTrigger}>
-                `;
-            },
-        });
-        defineExample({
-            title: 'long left anchored content',
-            styles: css`
-                .trigger {
-                    cursor: pointer;
-                    border: 4px solid #ccc;
-                    padding: 8px 16px;
-                }
-
-                .popover {
-                    box-sizing: border-box;
-                    max-width: 100%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    border: 4px solid #eee;
-                    border-top: none;
-                    padding: 8px 16px;
-                    white-space: nowrap;
-                    background-color: white;
-                }
-            `,
-            render() {
-                return html`
-                    <${ViraPopoverTrigger.assign({
-                        keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Left,
                     })}>
                         <div slot=${ViraPopoverTrigger.slotNames.trigger}>
                             Trigger Long Left Anchored Popover
@@ -154,7 +78,7 @@ export const viraPopoverTriggerBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'short right anchored content',
+            title: 'short content',
             styles: css`
                 .trigger {
                     cursor: pointer;
@@ -178,7 +102,6 @@ export const viraPopoverTriggerBookPage = defineBookPage({
                 return html`
                     <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Right,
                     })}>
                         <div slot=${ViraPopoverTrigger.slotNames.trigger}>
                             Trigger Long Left Anchored Popover

@@ -6,11 +6,11 @@ import {viraShadows} from '../../styles/shadows.js';
 import {defineViraElement} from '../define-vira-element.js';
 
 /**
- * Possible corner styles for {@link ViraPopoverMenu}.
+ * Possible corner styles for {@link ViraPopUpMenu}.
  *
  * @category Internal
  */
-export enum PopoverMenuCornerStyle {
+export enum PopUpMenuCornerStyle {
     /** Rounding of corners depends on the open direction of the menu. */
     Directional = 'directional',
     /** All of the menus corners should be rounded. */
@@ -20,37 +20,37 @@ export enum PopoverMenuCornerStyle {
 }
 
 /**
- * Menu popover directions available for {@link ViraPopoverMenu}.
+ * Menu pop-up directions available for {@link ViraPopUpMenu}.
  *
  * @category Internal
  */
-export enum PopoverMenuDirection {
+export enum PopUpMenuDirection {
     Downwards = 'downwards',
     Upwards = 'upwards',
 }
 
 /**
- * A simple default style wrapper for popover menus.
+ * A simple default style wrapper for pop-up menus.
  *
- * @category Popover
+ * @category PopUp
  * @category Elements
  */
-export const ViraPopoverMenu = defineViraElement<
+export const ViraPopUpMenu = defineViraElement<
     PartialWithUndefined<{
-        /** @default PopoverMenuDirection.Downwards */
-        direction: PopoverMenuDirection;
-        /** @default PopoverMenuCornerStyle.Directional */
-        cornerStyle: PopoverMenuCornerStyle;
+        /** @default PopUpMenuDirection.Downwards */
+        direction: PopUpMenuDirection;
+        /** @default PopUpMenuCornerStyle.Directional */
+        cornerStyle: PopUpMenuCornerStyle;
     }>
 >()({
-    tagName: 'vira-popover-menu',
+    tagName: 'vira-pop-up-menu',
     hostClasses: {
-        'vira-popover-menu-open-upwards': ({inputs}) =>
-            inputs.direction === PopoverMenuDirection.Upwards,
-        'vira-popover-menu-rounded': ({inputs}) =>
-            inputs.cornerStyle === PopoverMenuCornerStyle.AllRounded,
-        'vira-popover-menu-square': ({inputs}) =>
-            inputs.cornerStyle === PopoverMenuCornerStyle.AllSquare,
+        'vira-pop-up-menu-open-upwards': ({inputs}) =>
+            inputs.direction === PopUpMenuDirection.Upwards,
+        'vira-pop-up-menu-rounded': ({inputs}) =>
+            inputs.cornerStyle === PopUpMenuCornerStyle.AllRounded,
+        'vira-pop-up-menu-square': ({inputs}) =>
+            inputs.cornerStyle === PopUpMenuCornerStyle.AllSquare,
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -69,18 +69,18 @@ export const ViraPopoverMenu = defineViraElement<
             ${viraShadows.menuShadow}
         }
 
-        ${hostClasses['vira-popover-menu-open-upwards'].selector} {
+        ${hostClasses['vira-pop-up-menu-open-upwards'].selector} {
             ${viraShadows.menuShadowReversed}
             border-radius: ${viraBorders['vira-form-input-radius'].value};
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
 
-        ${hostClasses['vira-popover-menu-square'].selector} {
+        ${hostClasses['vira-pop-up-menu-square'].selector} {
             border-radius: 0;
         }
 
-        ${hostClasses['vira-popover-menu-rounded'].selector} {
+        ${hostClasses['vira-pop-up-menu-rounded'].selector} {
             border-radius: ${viraBorders['vira-form-input-radius'].value};
         }
     `,

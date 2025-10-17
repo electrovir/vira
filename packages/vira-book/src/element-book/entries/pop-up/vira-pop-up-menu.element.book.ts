@@ -1,13 +1,13 @@
 import {getEnumValues} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {PopoverMenuCornerStyle, PopoverMenuDirection, ViraPopoverMenu} from 'vira';
+import {PopUpMenuCornerStyle, PopUpMenuDirection, ViraPopUpMenu} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
-const examples: {title: string; inputs: typeof ViraPopoverMenu.InputsType}[] = [];
+const examples: {title: string; inputs: typeof ViraPopUpMenu.InputsType}[] = [];
 
-getEnumValues(PopoverMenuDirection).forEach((direction) => {
-    getEnumValues(PopoverMenuCornerStyle).forEach((cornerStyle) => {
+getEnumValues(PopUpMenuDirection).forEach((direction) => {
+    getEnumValues(PopUpMenuCornerStyle).forEach((cornerStyle) => {
         examples.push({
             title: [
                 direction,
@@ -21,9 +21,9 @@ getEnumValues(PopoverMenuDirection).forEach((direction) => {
     });
 });
 
-export const viraPopoverMenuBookPage = defineBookPage({
+export const viraPopUpMenuBookPage = defineBookPage({
     parent: elementsBookPage,
-    title: ViraPopoverMenu.tagName,
+    title: ViraPopUpMenu.tagName,
     defineExamples({defineExample}) {
         examples.forEach((example) => {
             defineExample({
@@ -35,9 +35,9 @@ export const viraPopoverMenuBookPage = defineBookPage({
                 `,
                 render() {
                     return html`
-                        <${ViraPopoverMenu.assign(example.inputs)}>
+                        <${ViraPopUpMenu.assign(example.inputs)}>
                             <div class="content">Contents</div>
-                        </${ViraPopoverMenu}>
+                        </${ViraPopUpMenu}>
                     `;
                 },
             });

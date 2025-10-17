@@ -1,8 +1,8 @@
-import {viraMenuItemBookPage} from './entries/popover/vira-menu-item.element.book.js';
-import {viraMenuTriggerBookPage} from './entries/popover/vira-menu-trigger.element.book.js';
-import {viraMenuOptionsBookPage} from './entries/popover/vira-menu.element.book.js';
-import {viraPopoverMenuBookPage} from './entries/popover/vira-popover-menu.element.book.js';
-import {viraPopoverTriggerBookPage} from './entries/popover/vira-popover-trigger.element.book.js';
+import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
+import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
+import {viraMenuOptionsBookPage} from './entries/pop-up/vira-menu.element.book.js';
+import {viraPopUpMenuBookPage} from './entries/pop-up/vira-pop-up-menu.element.book.js';
+import {viraPopUpTriggerBookPage} from './entries/pop-up/vira-pop-up-trigger.element.book.js';
 import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
 import {viraButtonBookPage} from './entries/vira-button.element.book.js';
 import {viraCheckboxBookPage} from './entries/vira-checkbox.element.book.js';
@@ -33,8 +33,8 @@ const subPages = [
     viraMenuItemBookPage,
     viraMenuOptionsBookPage,
     viraMenuTriggerBookPage,
-    viraPopoverMenuBookPage,
-    viraPopoverTriggerBookPage,
+    viraPopUpMenuBookPage,
+    viraPopUpTriggerBookPage,
     viraProgressBookPage,
 ].sort((a, b) => a.title.localeCompare(b.title));
 

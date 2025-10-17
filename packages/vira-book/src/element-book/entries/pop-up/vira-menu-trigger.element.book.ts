@@ -1,7 +1,13 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {SpaRouter} from 'spa-router-vir';
-import {type MenuItem, PopoverMenuCornerStyle, ViraMenuItem, ViraMenuTrigger} from 'vira';
+import {
+    HorizontalAnchor,
+    type MenuItem,
+    PopUpMenuCornerStyle,
+    ViraMenuItem,
+    ViraMenuTrigger,
+} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const mockMenuItems: MenuItem[] = [
@@ -60,7 +66,7 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsTy
     {
         title: 'rounded',
         inputs: {
-            menuCornerStyle: PopoverMenuCornerStyle.AllRounded,
+            menuCornerStyle: PopUpMenuCornerStyle.AllRounded,
         },
     },
     {
@@ -72,6 +78,33 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsTy
     {
         title: 'long item',
         inputs: {
+            items: [
+                ...mockMenuItems,
+                {
+                    id: 'long',
+                    label: html`
+                        <${ViraMenuItem.assign({
+                            selected: false,
+                        })}>
+                            <div
+                                style=${css`
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                `}
+                            >
+                                This menu item is much longer than the others
+                            </div>
+                        </${ViraMenuItem}>
+                    `,
+                },
+            ],
+        },
+    },
+    {
+        title: 'restricted long item',
+        inputs: {
+            horizontalAnchor: HorizontalAnchor.Both,
             items: [
                 ...mockMenuItems,
                 {
@@ -118,7 +151,7 @@ export const viraMenuTriggerBookPage = defineBookPage({
                     return html`
                         <${ViraMenuTrigger.assign({
                             items: mockMenuItems,
-                            popoverOffset: {
+                            popUpOffset: {
                                 vertical: -1,
                             },
                             ...example.inputs,

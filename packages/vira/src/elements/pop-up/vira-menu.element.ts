@@ -6,8 +6,8 @@ import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noNativeFormStyles, viraDisabledStyles} from '../../styles/index.js';
 import {defineViraElement} from '../define-vira-element.js';
 import {ViraLink} from '../vira-link.element.js';
-import {assertUniqueIdProps} from './popover-helpers.js';
-import {type MenuItem} from './popover-menu-item.js';
+import {assertUniqueIdProps} from './pop-up-helpers.js';
+import {type MenuItem} from './pop-up-menu-item.js';
 import {ViraMenuItem} from './vira-menu-item.element.js';
 
 /**
@@ -24,7 +24,7 @@ export const viraMenuTestIds = {
  * when items are selected or unselected, pass in a `NavController` instance and hook into its
  * events.
  *
- * @category Popover
+ * @category PopUp
  * @category Elements
  */
 export const ViraMenu = defineViraElement<

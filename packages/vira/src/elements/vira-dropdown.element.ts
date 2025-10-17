@@ -16,10 +16,11 @@ import {ChevronUp24Icon} from '../icons/index.js';
 import {viraBorders} from '../styles/border.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
-import {type ShowPopoverResult} from '../util/popover-manager.js';
+import {type ShowPopUpResult} from '../util/pop-up-manager.js';
 import {defineViraElement} from './define-vira-element.js';
-import {type MenuItem} from './popover/popover-menu-item.js';
-import {ViraMenuTrigger} from './popover/vira-menu-trigger.element.js';
+import {type MenuItem} from './pop-up/pop-up-menu-item.js';
+import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
+import {HorizontalAnchor} from './pop-up/vira-pop-up-trigger.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 /**
@@ -34,7 +35,7 @@ export const viraDropdownTestIds = {
 };
 
 /**
- * A dropdown element that uses popover menus.
+ * A dropdown element that uses pop-up menus.
  *
  * @category Dropdown
  * @category Elements
@@ -58,6 +59,17 @@ export const ViraDropdown = defineViraElement<
         isDisabled: boolean;
         /** For debugging purposes only. Very bad for actual production code use. */
         z_debug_forceOpenState: boolean;
+        /**
+         * - `HorizontalAnchor.Left`: dropdown is anchored to the left side of the trigger and the
+         *   dropdown can grow to the right.
+         * - `HorizontalAnchor.Right`: dropdown is anchored to the right side of the trigger and the
+         *   dropdown can grow to the left.
+         * - `HorizontalAnchor.Both`: dropdown is anchored on both sides of the trigger and cannot
+         *   grow beyond it. (This is the default experience.)
+         *
+         * @default HorizontalAnchor.Both
+         */
+        horizontalAnchor: HorizontalAnchor;
     }>
 >()({
     tagName: 'vira-dropdown',
@@ -131,12 +143,12 @@ export const ViraDropdown = defineViraElement<
     `,
     events: {
         selectedChange: defineElementEvent<PropertyKey[]>(),
-        openChange: defineElementEvent<ShowPopoverResult | undefined>(),
+        openChange: defineElementEvent<ShowPopUpResult | undefined>(),
     },
     state() {
         return {
-            /** `undefined` means the popover is not currently showing. */
-            showPopoverResult: undefined as ShowPopoverResult | undefined,
+            /** `undefined` means the pop up is not currently showing. */
+            showPopUpResult: undefined as ShowPopUpResult | undefined,
         };
     },
     render({state, inputs, dispatch, events, updateState}) {
@@ -180,13 +192,14 @@ export const ViraDropdown = defineViraElement<
                 isDisabled: inputs.isDisabled,
                 isMultiSelect: inputs.isMultiSelect,
                 z_debug_forceOpenState: inputs.z_debug_forceOpenState,
-                popoverOffset: {
+                popUpOffset: {
                     vertical: -1,
                     right: 24,
                 },
+                horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Both,
             })}
                 ${listen(ViraMenuTrigger.events.openChange, (event) => {
-                    updateState({showPopoverResult: event.detail});
+                    updateState({showPopUpResult: event.detail});
                     dispatch(new events.openChange(event.detail));
                 })}
                 ${listen(ViraMenuTrigger.events.itemActivate, (event) => {
@@ -195,8 +208,8 @@ export const ViraDropdown = defineViraElement<
             >
                 <div
                     class="dropdown-trigger ${classMap({
-                        open: !!state.showPopoverResult,
-                        'open-upwards': !state.showPopoverResult?.popDown,
+                        open: !!state.showPopUpResult,
+                        'open-upwards': !state.showPopUpResult?.popDown,
                     })}"
                     ${testId(viraDropdownTestIds.trigger)}
                 >

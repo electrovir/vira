@@ -27,6 +27,7 @@ import {Star24Icon} from './icon-svgs/star-24.icon.js';
 import {StatusFailure24Icon} from './icon-svgs/status-failure-24.icon.js';
 import {StatusInProgress24Icon} from './icon-svgs/status-in-progress-24.icon.js';
 import {StatusSuccess24Icon} from './icon-svgs/status-success-24.icon.js';
+import {StatusUnknown24Icon} from './icon-svgs/status-unknown-24.icon.js';
 import {StatusWarning24Icon} from './icon-svgs/status-warning-24.icon.js';
 import {Upload24Icon} from './icon-svgs/upload-24.icon.js';
 
@@ -59,6 +60,7 @@ export * from './icon-svgs/star-24.icon.js';
 export * from './icon-svgs/status-failure-24.icon.js';
 export * from './icon-svgs/status-in-progress-24.icon.js';
 export * from './icon-svgs/status-success-24.icon.js';
+export * from './icon-svgs/status-unknown-24.icon.js';
 export * from './icon-svgs/status-warning-24.icon.js';
 export * from './icon-svgs/upload-24.icon.js';
 
@@ -95,6 +97,7 @@ export const allIconsByName = {
     StatusFailure24Icon,
     StatusInProgress24Icon,
     StatusSuccess24Icon,
+    StatusUnknown24Icon,
     StatusWarning24Icon,
     Upload24Icon,
 } as const;

@@ -30,6 +30,7 @@ import {StatusSuccess24Icon} from './icon-svgs/status-success-24.icon.js';
 import {StatusUnknown24Icon} from './icon-svgs/status-unknown-24.icon.js';
 import {StatusWarning24Icon} from './icon-svgs/status-warning-24.icon.js';
 import {Upload24Icon} from './icon-svgs/upload-24.icon.js';
+import {X24Icon} from './icon-svgs/x-24.icon.js';
 
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
@@ -63,6 +64,7 @@ export * from './icon-svgs/status-success-24.icon.js';
 export * from './icon-svgs/status-unknown-24.icon.js';
 export * from './icon-svgs/status-warning-24.icon.js';
 export * from './icon-svgs/upload-24.icon.js';
+export * from './icon-svgs/x-24.icon.js';
 
 /**
  * All icons within vira by name.
@@ -100,4 +102,5 @@ export const allIconsByName = {
     StatusUnknown24Icon,
     StatusWarning24Icon,
     Upload24Icon,
+    X24Icon,
 } as const;

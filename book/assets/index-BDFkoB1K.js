@@ -349,7 +349,7 @@ ${bf(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
     text-transform: inherit;
     text-decoration: inherit;
     -webkit-tap-highlight-color: transparent;
-`,ic=kr({"menu-shadow-color":"#e2e2e2","modal-shadow-color":"#bfbfbf"}),mo={menuShadow:x`
+`,ic=kr({"menu-shadow-color":"#e2e2e2","modal-shadow-color":"#4f4f4f"}),mo={menuShadow:x`
         filter: drop-shadow(0px 5px 5px ${ic["menu-shadow-color"].value});
         /*
            This helps force the drop shadow to re-render when the element moves or the page changes.
@@ -362,7 +362,7 @@ ${bf(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
        */
         will-change: filter;
     `,modal:x`
-        box-shadow: 0 20px 60px ${ic["modal-shadow-color"].value};
+        box-shadow: 0 5px 15px ${ic["modal-shadow-color"].value};
     `},To=x`
     /* iOS Safari */
     -webkit-touch-callout: none;

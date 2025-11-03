@@ -8,7 +8,7 @@ import {defineCssVars} from 'lit-css-vars';
  */
 export const shadowCssVars = defineCssVars({
     'menu-shadow-color': '#e2e2e2',
-    'modal-shadow-color': '#bfbfbf',
+    'modal-shadow-color': '#4f4f4f',
 });
 
 /**
@@ -32,6 +32,6 @@ export const viraShadows = {
         will-change: filter;
     `,
     modal: css`
-        box-shadow: 0 20px 60px ${shadowCssVars['modal-shadow-color'].value};
+        box-shadow: 0 5px 15px ${shadowCssVars['modal-shadow-color'].value};
     `,
 } as const satisfies Record<string, CSSResult>;

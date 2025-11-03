@@ -1,6 +1,14 @@
 import {html} from 'element-vir';
-import {defineIcon, viraIconCssVars} from 'vira';
+import {viraIconCssVars} from '../icon-css-vars.js';
+import {defineIcon} from '../icon-svg.js';
 
+/**
+ * A plain X icon.
+ *
+ * @category Icon
+ * @category SVG
+ * @see https://electrovir.github.io/vira/book/icons/x24icon
+ */
 export const X24Icon = defineIcon({
     name: 'X24Icon',
     svgTemplate: html`

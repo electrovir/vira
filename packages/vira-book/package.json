@@ -16,8 +16,8 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.45.0",
-        "@augment-vir/common": "^31.45.0",
+        "@augment-vir/assert": "^31.47.0",
+        "@augment-vir/common": "^31.47.0",
         "element-book": "^26.11.1",
         "element-vir": "^26.11.1",
         "spa-router-vir": "^6.3.1",

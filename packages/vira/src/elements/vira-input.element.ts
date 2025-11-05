@@ -88,6 +88,8 @@ export const ViraInput = defineViraElement<
 
         'vira-input-padding-horizontal': '10px',
         'vira-input-padding-vertical': '6px',
+
+        'vira-input-label-font-weight': 'bold',
     },
     styles: ({hostClasses, cssVars}) => {
         return css`
@@ -106,6 +108,13 @@ export const ViraInput = defineViraElement<
                 gap: 2px;
                 width: 100%;
                 max-width: 100%;
+
+                & .input-label {
+                    font-weight: ${cssVars['vira-input-label-font-weight'].value};
+                    text-align: left;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                }
             }
 
             ${hostClasses['vira-input-disabled'].selector} {

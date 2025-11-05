@@ -1,4 +1,5 @@
 import {css, html} from 'element-vir';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 
 /**
@@ -10,12 +11,11 @@ import {defineViraElement} from './define-vira-element.js';
 export const ViraError = defineViraElement()({
     tagName: 'vira-error',
     cssVars: {
-        'vira-error-color': 'red',
         'vira-error-font-weight': 'bold',
     },
     styles: ({cssVars}) => css`
         :host {
-            color: ${cssVars['vira-error-color'].value};
+            color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
             font-weight: ${cssVars['vira-error-font-weight'].value};
         }
     `,

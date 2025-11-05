@@ -1,4 +1,5 @@
 import {assertWrap} from '@augment-vir/assert';
+import {type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
     attributes,
@@ -14,6 +15,7 @@ import {
 import {CloseX24Icon} from '../icons/icon-svgs/close-x-24.icon.js';
 import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     noUserSelect,
     viraAnimationDurations,
@@ -51,13 +53,20 @@ export enum ViraInputType {
  * @see https://electrovir.github.io/vira/book/elements/vira-input
  */
 export const ViraInput = defineViraElement<
-    {
-        icon?: undefined | Pick<ViraIconSvg, 'svgTemplate'>;
-        /** A suffix that, if provided, is shown following the user input field. */
-        suffix?: string | undefined;
-        showClearButton?: boolean | undefined;
-        type?: ViraInputType;
-    } & SharedTextInputElementInputs
+    Readonly<
+        PartialWithUndefined<{
+            icon: Pick<ViraIconSvg, 'svgTemplate'>;
+            /** A suffix that, if provided, is shown following the input field. */
+            suffix: string;
+            /** A label that is shown above the input, if provided. */
+            label: string;
+            /** If true, applies error styling. */
+            hasError: boolean;
+            showClearButton: boolean;
+            type: ViraInputType;
+        }> &
+            SharedTextInputElementInputs
+    >
 >()({
     tagName: 'vira-input',
     cssVars: {
@@ -88,6 +97,15 @@ export const ViraInput = defineViraElement<
                 width: 224px;
                 box-sizing: border-box;
                 color: ${cssVars['vira-input-text-color'].value};
+            }
+
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 2px;
+                width: 100%;
+                max-width: 100%;
             }
 
             ${hostClasses['vira-input-disabled'].selector} {
@@ -259,6 +277,12 @@ export const ViraInput = defineViraElement<
             .show-password-button:active {
                 color: ${cssVars['vira-input-show-password-button-active-color'].value};
             }
+
+            ${hostClasses['vira-input-error'].selector} {
+                & .wrapper-border {
+                    border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
+                }
+            }
         `;
     },
     events: {
@@ -278,12 +302,18 @@ export const ViraInput = defineViraElement<
         return {
             forcedInputWidth: 0,
             showPassword: false,
+            /**
+             * Used to couple the label and input together. This is not applied if no label is
+             * provided.
+             */
+            randomId: randomString(32),
         };
     },
     hostClasses: {
         'vira-input-disabled': ({inputs}) => !!inputs.disabled,
         'vira-input-fit-text': ({inputs}) => !!inputs.fitText,
         'vira-input-clear-button-shown': ({inputs}) => !!inputs.showClearButton,
+        'vira-input-error': ({inputs}) => !!inputs.hasError,
     },
     render: ({inputs, dispatch, state, updateState, events, host}) => {
         const {filtered: filteredValue} = filterTextInputValue({
@@ -312,11 +342,7 @@ export const ViraInput = defineViraElement<
              */
             inputs.type === ViraInputType.Password;
 
-        /**
-         * Don't use a wrapping `<label>` element here because it will mess with browser and
-         * password manager autocomplete for passwords and usernames.
-         */
-        return html`
+        const inputTemplate = html`
             <span
                 class="input-wrapper"
                 ${listen('mousedown', (event) => {
@@ -350,6 +376,8 @@ export const ViraInput = defineViraElement<
                 )}
 
                 <input
+                    id=${ifDefined(inputs.label ? state.randomId : undefined)}
+                    aria-label=${ifDefined(inputs.label || undefined)}
                     type=${calculateEffectiveInputType(inputs.type, state.showPassword)}
                     style=${forcedInputWidthStyles}
                     autocomplete=${ifDefined(shouldBlockBrowserHelps ? 'off' : undefined)}
@@ -431,6 +459,17 @@ export const ViraInput = defineViraElement<
                 <div class="border-style wrapper-border"></div>
             </span>
         `;
+
+        if (inputs.label) {
+            return html`
+                <label for=${state.randomId}>
+                    <span class="input-label">${inputs.label}</span>
+                    ${inputTemplate}
+                </label>
+            `;
+        } else {
+            return inputTemplate;
+        }
     },
 });
 

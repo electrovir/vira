@@ -257,6 +257,21 @@ export const viraInputBookPage = defineBookPage({
                     },
                 },
             },
+            {
+                title: 'with error',
+                inputs: {
+                    value: 'has error',
+                    hasError: true,
+                },
+            },
+            {
+                title: 'with label',
+                inputs: {
+                    label: 'Label here',
+                    placeholder: 'has label',
+                    value: '',
+                },
+            },
         ];
 
         examples.forEach(defineInputExample);

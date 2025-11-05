@@ -1,4 +1,5 @@
 import {css, html} from 'element-vir';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 
 /**
@@ -28,8 +29,6 @@ export const ViraCard = defineViraElement<{
     cssVars: {
         'vira-card-border': '1px solid #d3d3d3',
         'vira-card-border-radius': '16px',
-        'vira-card-error-color': 'red',
-        'vira-card-success-color': 'green',
         'vira-card-padding': '16px',
     },
     styles: ({hostClasses, cssVars}) => css`
@@ -41,10 +40,10 @@ export const ViraCard = defineViraElement<{
         }
 
         ${hostClasses['vira-card-error'].selector} {
-            border-color: ${cssVars['vira-card-error-color'].value};
+            border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
         }
         ${hostClasses['vira-card-success'].selector} {
-            border-color: ${cssVars['vira-card-success-color'].value};
+            border-color: ${viraFormCssVars['vira-form-success-foreground-color'].value};
         }
     `,
     render() {

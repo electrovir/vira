@@ -6,6 +6,7 @@ import {viraPopUpTriggerBookPage} from './entries/pop-up/vira-pop-up-trigger.ele
 import {shadowBookPage} from './entries/shadow.book.js';
 import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
 import {viraButtonBookPage} from './entries/vira-button.element.book.js';
+import {viraCardBookPage} from './entries/vira-card.element.book.js';
 import {viraCheckboxBookPage} from './entries/vira-checkbox.element.book.js';
 import {viraCollapsibleBookPage} from './entries/vira-collapsible-wrapper.element.book.js';
 import {viraDropdownPage} from './entries/vira-dropdown.element.book.js';
@@ -26,6 +27,7 @@ const topLevelPages = [
 const subPages = [
     viraBoldTextPage,
     viraButtonBookPage,
+    viraCardBookPage,
     viraCheckboxBookPage,
     viraCollapsibleBookPage,
     viraDropdownPage,

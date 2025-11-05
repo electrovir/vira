@@ -1745,7 +1745,7 @@ ${Df(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
                 ${q("error",async a=>{e._debugLoadDelay&&await Fs(e._debugLoadDelay),n({erroredUrls:{...t.erroredUrls,[s]:!0}}),r(new i.imageError(a.error))})}
                 src=${s}
             />
-        `}});function sf({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split("").every(n=>sf({input:n,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function $I({value:e,allowed:t,blocked:n}){const r=t?sf({input:e,matcher:t}):!0,i=n?sf({input:e,matcher:n}):!1;return r&&!i}function uf(e){if(!e.value)return{filtered:e.value,blocked:""};const{filtered:t,blocked:n}=e.value.split("").reduce((r,i)=>($I({...e,value:i})?r.filtered.push(i):r.blocked.push(i),r),{filtered:[],blocked:[]});return{filtered:t.join(""),blocked:n.join("")}}function vI({inputs:e,previousValue:t,event:n,inputBlockedCallback:r,newValueCallback:i}){const o=no(n,HTMLInputElement),s=S.hasKey(n,"data")&&gv.isString(n.data)||"";if(s){const{blocked:a}=uf({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});a.length&&r(a)}const u=uf({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==u&&(o.value=u),t!==u&&i(u)}var af=(e=>(e.Default="text",e.Password="password",e.Email="email",e))(af||{});const Le=mt()({tagName:"vira-input",cssVars:{"vira-input-background-color":"white","vira-input-placeholder-color":"#cccccc","vira-input-text-color":"#000000","vira-input-border-color":"#cccccc","vira-input-text-selection-color":"#cfe9ff","vira-input-action-button-color":"#aaaaaa","vira-input-clear-button-hover-color":"#ff0000","vira-input-clear-button-active-color":"#b30000","vira-input-show-password-button-hover-color":"#0a89ff","vira-input-show-password-button-active-color":"#0261ba","vira-input-padding-horizontal":"10px","vira-input-padding-vertical":"6px"},styles:({hostClasses:e,cssVars:t})=>x`
+        `}});function sf({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split("").every(n=>sf({input:n,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function $I({value:e,allowed:t,blocked:n}){const r=t?sf({input:e,matcher:t}):!0,i=n?sf({input:e,matcher:n}):!1;return r&&!i}function uf(e){if(!e.value)return{filtered:e.value,blocked:""};const{filtered:t,blocked:n}=e.value.split("").reduce((r,i)=>($I({...e,value:i})?r.filtered.push(i):r.blocked.push(i),r),{filtered:[],blocked:[]});return{filtered:t.join(""),blocked:n.join("")}}function vI({inputs:e,previousValue:t,event:n,inputBlockedCallback:r,newValueCallback:i}){const o=no(n,HTMLInputElement),s=S.hasKey(n,"data")&&gv.isString(n.data)||"";if(s){const{blocked:a}=uf({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});a.length&&r(a)}const u=uf({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==u&&(o.value=u),t!==u&&i(u)}var af=(e=>(e.Default="text",e.Password="password",e.Email="email",e))(af||{});const Le=mt()({tagName:"vira-input",cssVars:{"vira-input-background-color":"white","vira-input-placeholder-color":"#cccccc","vira-input-text-color":"#000000","vira-input-border-color":"#cccccc","vira-input-text-selection-color":"#cfe9ff","vira-input-action-button-color":"#aaaaaa","vira-input-clear-button-hover-color":"#ff0000","vira-input-clear-button-active-color":"#b30000","vira-input-show-password-button-hover-color":"#0a89ff","vira-input-show-password-button-active-color":"#0261ba","vira-input-padding-horizontal":"10px","vira-input-padding-vertical":"6px","vira-input-label-font-weight":"bold"},styles:({hostClasses:e,cssVars:t})=>x`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -1761,6 +1761,13 @@ ${Df(i,1)}`);super(o),this.value=t,this.errors=n,this.failureMessage=r}}function
                 gap: 2px;
                 width: 100%;
                 max-width: 100%;
+
+                & .input-label {
+                    font-weight: ${t["vira-input-label-font-weight"].value};
+                    text-align: left;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                }
             }
 
             ${e["vira-input-disabled"].selector} {

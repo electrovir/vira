@@ -19,3 +19,4 @@ export * from './vira-input.element.js';
 export * from './vira-link.element.js';
 export * from './vira-modal.element.js';
 export * from './vira-progress.element.js';
+export * from './vira-select.element.js';

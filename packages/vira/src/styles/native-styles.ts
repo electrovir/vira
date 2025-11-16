@@ -22,6 +22,7 @@ export const noNativeFormStyles = css`
     background: none;
     border: none;
     font: inherit;
+    line-height: inherit;
     color: inherit;
     text-transform: inherit;
     text-decoration: inherit;

@@ -8,10 +8,12 @@ import {defineCssVars} from 'lit-css-vars';
  */
 export const viraFormCssVars = defineCssVars({
     'vira-form-border-color': '#cccccc',
+    'vira-form-placeholder-color': '#cccccc',
 
     'vira-form-background-color': 'white',
     'vira-form-foreground-color': 'black',
 
+    'vira-form-text-selection-color': '#cfe9ff',
     'vira-form-selection-hover-background-color': '#d2eaff',
     'vira-form-selection-hover-foreground-color': 'black',
     'vira-form-selection-active-background-color': '#d2eaff',
@@ -19,4 +21,6 @@ export const viraFormCssVars = defineCssVars({
 
     'vira-form-error-foreground-color': 'red',
     'vira-form-success-foreground-color': 'green',
+
+    'vira-form-label-font-weight': 'bold',
 });

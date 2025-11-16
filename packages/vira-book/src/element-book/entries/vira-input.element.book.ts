@@ -1,7 +1,7 @@
 import {mapObjectValues} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, viraFocusCssVars, ViraInput, ViraInputType} from 'vira';
+import {Element24Icon, viraFocusCssVars, viraFormCssVars, ViraInput, ViraInputType} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraInputBookPage = defineBookPage({
@@ -14,15 +14,15 @@ export const viraInputBookPage = defineBookPage({
     controls: {
         'Text color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraInput.cssVars['vira-input-text-color'].default,
+            initValue: viraFormCssVars['vira-form-foreground-color'].default,
         },
         'Placeholder color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraInput.cssVars['vira-input-placeholder-color'].default,
+            initValue: viraFormCssVars['vira-form-placeholder-color'].default,
         },
         'Border color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraInput.cssVars['vira-input-border-color'].default,
+            initValue: viraFormCssVars['vira-form-border-color'].default,
         },
         'Focus color': {
             controlType: BookPageControlType.Color,
@@ -30,7 +30,7 @@ export const viraInputBookPage = defineBookPage({
         },
         'Selection color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraInput.cssVars['vira-input-text-selection-color'].default,
+            initValue: viraFormCssVars['vira-form-text-selection-color'].default,
         },
     } as const satisfies NonNullable<Parameters<typeof defineBookPage>[0]['controls']>,
     defineExamples({defineExample}) {
@@ -53,15 +53,15 @@ export const viraInputBookPage = defineBookPage({
                 },
                 render({state, updateState, controls}) {
                     const cssVarControlValues = {
-                        [String(ViraInput.cssVars['vira-input-text-color'].name)]:
+                        [String(viraFormCssVars['vira-form-foreground-color'].name)]:
                             controls['Text color'],
-                        [String(ViraInput.cssVars['vira-input-placeholder-color'].name)]:
+                        [String(viraFormCssVars['vira-form-placeholder-color'].name)]:
                             controls['Placeholder color'],
-                        [String(ViraInput.cssVars['vira-input-border-color'].name)]:
+                        [String(viraFormCssVars['vira-form-border-color'].name)]:
                             controls['Border color'],
                         [String(viraFocusCssVars['vira-focus-outline-color'].name)]:
                             controls['Focus color'],
-                        [String(ViraInput.cssVars['vira-input-text-selection-color'].name)]:
+                        [String(viraFormCssVars['vira-form-text-selection-color'].name)]:
                             controls['Selection color'],
                     };
 
@@ -271,6 +271,27 @@ export const viraInputBookPage = defineBookPage({
                     placeholder: 'has label',
                     value: '',
                 },
+            },
+            {
+                title: 'with long label',
+                inputs: {
+                    label: 'Enter a really really really really long value',
+                    placeholder: 'has label',
+                    value: '',
+                },
+            },
+            {
+                title: 'with unbound long label',
+                inputs: {
+                    label: 'Enter a really really really really long value',
+                    placeholder: 'has label',
+                    value: '',
+                },
+                styles: css`
+                    ${ViraInput} {
+                        width: unset;
+                    }
+                `,
             },
         ];
 

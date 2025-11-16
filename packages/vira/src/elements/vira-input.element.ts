@@ -70,12 +70,6 @@ export const ViraInput = defineViraElement<
 >()({
     tagName: 'vira-input',
     cssVars: {
-        'vira-input-background-color': 'white',
-        'vira-input-placeholder-color': '#cccccc',
-        'vira-input-text-color': '#000000',
-        'vira-input-border-color': '#cccccc',
-        'vira-input-text-selection-color': '#cfe9ff',
-
         'vira-input-action-button-color': '#aaaaaa',
 
         'vira-input-clear-button-hover-color': '#ff0000',
@@ -88,8 +82,6 @@ export const ViraInput = defineViraElement<
 
         'vira-input-padding-horizontal': '10px',
         'vira-input-padding-vertical': '6px',
-
-        'vira-input-label-font-weight': 'bold',
     },
     styles: ({hostClasses, cssVars}) => {
         return css`
@@ -98,7 +90,7 @@ export const ViraInput = defineViraElement<
                 display: inline-flex;
                 width: 224px;
                 box-sizing: border-box;
-                color: ${cssVars['vira-input-text-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
             }
 
             label {
@@ -110,15 +102,11 @@ export const ViraInput = defineViraElement<
                 max-width: 100%;
 
                 & .input-label {
-                    font-weight: ${cssVars['vira-input-label-font-weight'].value};
+                    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
                     text-align: left;
                     flex-shrink: 0;
                     flex-wrap: wrap;
                 }
-            }
-
-            ${hostClasses['vira-input-disabled'].selector} {
-                ${viraDisabledStyles};
             }
 
             ${hostClasses['vira-input-fit-text'].selector} {
@@ -185,9 +173,7 @@ export const ViraInput = defineViraElement<
             .wrapper-border {
                 top: -1px;
                 left: -1px;
-                border: 1px solid ${cssVars['vira-input-border-color'].value};
-                transition: border
-                    ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             }
 
             .input-wrapper {
@@ -200,7 +186,7 @@ export const ViraInput = defineViraElement<
                 position: relative;
                 padding: 0 ${cssVars['vira-input-padding-horizontal'].value};
                 border-radius: ${viraBorders['vira-form-input-radius'].value};
-                background-color: ${cssVars['vira-input-background-color'].value};
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
                 /*
                     Border colors are actually applied via the .wrapper-border class. However, we must
                     apply a border here still so that it takes up space.
@@ -236,11 +222,11 @@ export const ViraInput = defineViraElement<
             }
 
             ::selection {
-                background: ${cssVars['vira-input-text-selection-color']
+                background: ${viraFormCssVars['vira-form-text-selection-color']
                     .value}; /* WebKit/Blink Browsers */
             }
             ::-moz-selection {
-                background: ${cssVars['vira-input-text-selection-color']
+                background: ${viraFormCssVars['vira-form-text-selection-color']
                     .value}; /* Gecko Browsers */
             }
 
@@ -250,7 +236,7 @@ export const ViraInput = defineViraElement<
             }
 
             input::placeholder {
-                color: ${cssVars['vira-input-placeholder-color'].value};
+                color: ${viraFormCssVars['vira-form-placeholder-color'].value};
             }
 
             .suffix {
@@ -290,6 +276,25 @@ export const ViraInput = defineViraElement<
             ${hostClasses['vira-input-error'].selector} {
                 & .wrapper-border {
                     border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
+                }
+            }
+
+            ${hostClasses['vira-input-disabled'].selector} {
+                cursor: not-allowed;
+
+                & label,
+                & .input-wrapper {
+                    cursor: not-allowed;
+                }
+
+                & input,
+                & .wrapper-border,
+                & input::placeholder {
+                    ${viraDisabledStyles};
+                }
+
+                & .focus-border {
+                    display: none;
                 }
             }
         `;
@@ -343,6 +348,21 @@ export const ViraInput = defineViraElement<
               `
             : nothing;
 
+        const mousedownListener = listen('mousedown', (event) => {
+            const eventTarget = extractEventTarget(event, HTMLElement, {
+                useOriginalTarget: true,
+            });
+            const inputElement = assertWrap.instanceOf(
+                host.shadowRoot.querySelector('input'),
+                HTMLInputElement,
+            );
+
+            if (eventTarget !== inputElement) {
+                event.preventDefault();
+                inputElement.focus();
+            }
+        });
+
         const shouldBlockBrowserHelps =
             inputs.disableBrowserHelps ||
             /**
@@ -352,23 +372,7 @@ export const ViraInput = defineViraElement<
             inputs.type === ViraInputType.Password;
 
         const inputTemplate = html`
-            <span
-                class="input-wrapper"
-                ${listen('mousedown', (event) => {
-                    const eventTarget = extractEventTarget(event, HTMLElement, {
-                        useOriginalTarget: true,
-                    });
-                    const inputElement = assertWrap.instanceOf(
-                        host.shadowRoot.querySelector('input'),
-                        HTMLInputElement,
-                    );
-
-                    if (eventTarget !== inputElement) {
-                        event.preventDefault();
-                        inputElement.focus();
-                    }
-                })}
-            >
+            <span class="input-wrapper" ${inputs.label ? nothing : mousedownListener}>
                 ${iconTemplate}
                 ${renderIf(
                     !!inputs.fitText,
@@ -471,7 +475,7 @@ export const ViraInput = defineViraElement<
 
         if (inputs.label) {
             return html`
-                <label for=${state.randomId}>
+                <label for=${state.randomId} ${mousedownListener}>
                     <span class="input-label">${inputs.label}</span>
                     ${inputTemplate}
                 </label>

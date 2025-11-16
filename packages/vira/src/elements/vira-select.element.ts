@@ -216,19 +216,23 @@ export const ViraSelect = defineViraElement<
         }
     `,
     render({inputs, state, dispatch, events}) {
-        const placeholderOptionTemplate = inputs.placeholder
-            ? html`
-                  <option value="" disabled ?selected=${inputs.value == undefined}>
-                      ${inputs.placeholder}
-                  </option>
-              `
-            : nothing;
+        const value = inputs.value || undefined;
+
+        const placeholderOptionTemplate =
+            inputs.placeholder || value == undefined
+                ? html`
+                      <option value="" disabled ?selected=${value == undefined}>
+                          ${inputs.placeholder}
+                      </option>
+                  `
+                : nothing;
 
         const selectTemplate = html`
             <span class="select-wrapper">
                 <select
+                    .value=${ifDefined(value)}
                     class=${classMap({
-                        placeholder: !inputs.value && !!inputs.placeholder,
+                        placeholder: !value && !!inputs.placeholder,
                         'with-icon': !!inputs.icon,
                     })}
                     tabindex=${inputs.disabled ? -1 : 0}
@@ -236,9 +240,16 @@ export const ViraSelect = defineViraElement<
                     aria-label=${ifDefined(inputs.label || undefined)}
                     aria-disabled=${ifDefined(inputs.disabled ? 'true' : undefined)}
                     ${listen('input', (event) => {
-                        const element = extractEventTarget(event, HTMLSelectElement);
+                        const selectElement = extractEventTarget(event, HTMLSelectElement);
+                        const newValue = selectElement.value;
 
-                        dispatch(new events.valueChange(element.value));
+                        if (selectElement.value !== value) {
+                            selectElement.selectedIndex = inputs.options.findIndex(
+                                (option) => option.value === value,
+                            );
+                        }
+
+                        dispatch(new events.valueChange(newValue));
                     })}
                     ${attributes(inputs.attributePassthrough?.select)}
                 >
@@ -246,9 +257,10 @@ export const ViraSelect = defineViraElement<
                     ${inputs.options.map((option) => {
                         return html`
                             <option
-                                ?selected=${option.value === inputs.value}
+                                ?selected=${option.value === value}
                                 aria-label=${option.label}
                                 ?disabled=${option.disabled}
+                                value=${option.value}
                             >
                                 ${option.label}
                             </option>

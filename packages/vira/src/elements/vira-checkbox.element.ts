@@ -41,6 +41,7 @@ export type ViraCheckboxInputs = PartialWithUndefined<{
     attributePassthrough: Record<ViraCheckboxInnerElements, AttributeValues>;
     disabled: boolean;
     label: string;
+    hasError: boolean;
 }> & {
     value: boolean;
 };
@@ -73,22 +74,22 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
 
         label {
             display: inline-flex;
-            gap: 8px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
 
             &.disabled {
                 cursor: not-allowed;
             }
 
-            & .text {
+            & .label-text {
                 cursor: pointer;
-                &::first-line {
-                    line-height: 24px;
-                }
+                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
             }
         }
 
         ${ViraIcon} {
-            ${viraIconCssVars['vira-icon-stroke-width'].name}: 3px;
+            ${viraIconCssVars['vira-icon-stroke-width'].name}: 2px;
             opacity: 0;
         }
 
@@ -108,6 +109,10 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 & ${ViraIcon} {
                     opacity: 1;
                 }
+            }
+
+            &.error {
+                border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
             }
 
             &:hover {
@@ -138,7 +143,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         const textLabel = inputs.label
             ? html`
                   <span
-                      class="text"
+                      class="label-text"
                       ${attributes(inputs.attributePassthrough?.['text'])}
                       style=${ifDefined(inputs.stylePassthrough?.['text'])}
                   >
@@ -154,12 +159,14 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 })}
                 ${attributes(inputs.attributePassthrough?.label)}
                 style=${ifDefined(inputs.stylePassthrough?.label)}
-                ${listen('click', updateValue)}
+                ${listen('mousedown', updateValue)}
             >
+                ${textLabel}
                 <span
                     class="custom-checkbox ${classMap({
                         checked: inputs.value,
                         disabled: !!inputs.disabled,
+                        error: !!inputs.hasError,
                     })}"
                     role="checkbox"
                     aria-checked=${inputs.value ? 'true' : 'false'}
@@ -177,7 +184,6 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                         style=${ifDefined(inputs.stylePassthrough?.[ViraIcon.tagName])}
                     ></${ViraIcon}>
                 </span>
-                ${textLabel}
             </label>
         `;
     },

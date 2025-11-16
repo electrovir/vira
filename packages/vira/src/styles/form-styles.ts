@@ -14,9 +14,9 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-foreground-color': 'black',
 
     'vira-form-text-selection-color': '#cfe9ff',
-    'vira-form-selection-hover-background-color': '#d2eaff',
+    'vira-form-selection-hover-background-color': '#e6f9fe',
     'vira-form-selection-hover-foreground-color': 'black',
-    'vira-form-selection-active-background-color': '#d2eaff',
+    'vira-form-selection-active-background-color': '#e6f9fe',
     'vira-form-selection-active-foreground-color': 'black',
 
     'vira-form-error-foreground-color': 'red',

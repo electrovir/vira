@@ -60,6 +60,28 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'error',
+            state() {
+                return {
+                    checked: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        hasError: true,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'disabled unchecked',
             render() {
                 return html`

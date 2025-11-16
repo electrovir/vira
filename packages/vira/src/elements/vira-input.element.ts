@@ -100,6 +100,7 @@ export const ViraInput = defineViraElement<
                 gap: 2px;
                 width: 100%;
                 max-width: 100%;
+                cursor: text;
 
                 & .input-label {
                     font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
@@ -391,6 +392,7 @@ export const ViraInput = defineViraElement<
                 <input
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
                     aria-label=${ifDefined(inputs.label || undefined)}
+                    autofocus=${false}
                     type=${calculateEffectiveInputType(inputs.type, state.showPassword)}
                     style=${forcedInputWidthStyles}
                     autocomplete=${ifDefined(shouldBlockBrowserHelps ? 'off' : undefined)}

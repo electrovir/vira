@@ -9,6 +9,9 @@ export default defineConfig(
     },
     (baseConfig, basePaths) => {
         return mergeDeep(baseConfig, {
+            server: {
+                host: true,
+            },
             base: '/vira/book',
             build: {
                 outDir: join(basePaths.cwd, 'dist-book'),

@@ -1,10 +1,11 @@
+import {assertWrap} from '@augment-vir/assert';
 import {defineBookPage} from 'element-book';
 import {css, type CSSResult, html, listen} from 'element-vir';
 import {type SetOptional} from 'type-fest';
-import {Element24Icon, ViraSelect, type ViraSelectOption} from 'vira';
+import {defineViraElement, Element24Icon, ViraSelect, type ViraSelectOption} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
-const mockExamples: ReadonlyArray<Readonly<ViraSelectOption>> = [
+const mockOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
     {
         value: '1',
         label: 'one',
@@ -35,14 +36,14 @@ const examples: {
     {
         title: 'basic',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
         },
     },
     {
         title: 'with really long option',
         inputs: {
             options: [
-                ...mockExamples,
+                ...mockOptions,
                 {
                     label: 'really really really really really really really really long option',
                     value: 'something',
@@ -53,35 +54,35 @@ const examples: {
     {
         title: 'with placeholder',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             placeholder: 'pick an option...',
         },
     },
     {
         title: 'disabled',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             disabled: true,
         },
     },
     {
         title: 'error',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             hasError: true,
         },
     },
     {
         title: 'with icon',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             icon: Element24Icon,
         },
     },
     {
         title: 'custom width',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
         },
         styles: css`
             ${ViraSelect} {
@@ -92,7 +93,7 @@ const examples: {
     {
         title: 'custom short height',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             icon: Element24Icon,
         },
         styles: css`
@@ -104,7 +105,7 @@ const examples: {
     {
         title: 'custom tall height',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             icon: Element24Icon,
         },
         styles: css`
@@ -116,21 +117,21 @@ const examples: {
     {
         title: 'with label',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             label: 'Pick an option',
         },
     },
     {
         title: 'with long label',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             label: 'Pick a really really really really long option',
         },
     },
     {
         title: 'with unbound long label',
         inputs: {
-            options: mockExamples,
+            options: mockOptions,
             label: 'Pick a really really really really long option',
         },
         styles: css`
@@ -172,5 +173,66 @@ export const viraSelectBookPage = defineBookPage({
                 },
             });
         });
+        defineExample({
+            title: 'no listener',
+            descriptionParagraphs: [
+                'All user input should be blocked if there is nothing updating the state.',
+            ],
+            render() {
+                return html`
+                    <${ViraSelect.assign({
+                        options: mockOptions,
+                        value: mockOptions[0]?.value,
+                    })}></${ViraSelect}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'force update',
+            render() {
+                return html`
+                    <${ViraSelectForceUpdateExample}></${ViraSelectForceUpdateExample}>
+                `;
+            },
+        });
+    },
+});
+
+const ViraSelectForceUpdateExample = defineViraElement()({
+    tagName: 'vira-select-force-update-example',
+    state() {
+        return {
+            intervalId: undefined as undefined | ReturnType<typeof globalThis.setInterval>,
+            value: undefined as string | undefined,
+        };
+    },
+    init({updateState, state}) {
+        updateState({
+            intervalId: globalThis.setInterval(() => {
+                const currentValueIndex = mockOptions.findIndex(
+                    (option) => option.value === state.value,
+                );
+                const nextValue = assertWrap.isDefined(
+                    mockOptions[(currentValueIndex + 1) % mockOptions.length],
+                ).value;
+
+                updateState({
+                    value: nextValue,
+                });
+                console.info(`Forcing select to ${nextValue}`);
+            }, 500),
+        });
+    },
+    cleanup({state}) {
+        globalThis.clearInterval(state.intervalId);
+    },
+    render({state}) {
+        return html`
+            <${ViraSelect.assign({
+                options: mockOptions,
+                value: state.value,
+            })}></${ViraSelect}>
+        `;
     },
 });

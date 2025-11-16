@@ -1,4 +1,5 @@
 import {check, checkWrap} from '@augment-vir/assert';
+import {type PartialWithUndefined} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {type AttributeValues} from 'element-vir';
 
@@ -9,10 +10,11 @@ import {type AttributeValues} from 'element-vir';
  */
 export type SharedTextInputElementInputs = {
     value: string;
+} & PartialWithUndefined<{
     /** Shown when no other text is present. Input restrictions do not apply to this property. */
-    placeholder?: string;
+    placeholder: string;
     /** Set to true to trigger disabled styles and to block all user input. */
-    disabled?: boolean;
+    disabled: boolean;
     /**
      * Only letters in the given string or matches to the given RegExp will be allowed.
      * blockedInputs takes precedence over this input.
@@ -20,16 +22,16 @@ export type SharedTextInputElementInputs = {
      * For example: if allowedInputs is set to "abcd" and blockedInputs is set to "d", only "a",
      * "b", or "c" letters will be allowed.
      */
-    allowedInputs?: string | RegExp;
+    allowedInputs: string | RegExp;
     /** Any letters in the given string or matches to the given RegExp will be blocked. */
-    blockedInputs?: string | RegExp;
+    blockedInputs: string | RegExp;
     /** Disable all browser helps like spellchecking, autocomplete, etc. */
-    disableBrowserHelps?: boolean;
+    disableBrowserHelps: boolean;
     /** Set this to true to make the whole element size to only fit the input text. */
-    fitText?: boolean;
+    fitText: boolean;
     /** A set of attributes that will be applied to the inner native text element. */
-    attributePassthrough?: AttributeValues | undefined;
-};
+    attributePassthrough: AttributeValues;
+}>;
 
 function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}): boolean {
     if (!input || !matcher) {

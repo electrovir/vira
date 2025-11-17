@@ -1,10 +1,9 @@
-import {baseTypedocConfig} from '@virmator/docs/configs/typedoc.config.base';
-import {dirname, join} from 'node:path/posix';
-import {fileURLToPath} from 'node:url';
+import {baseTypedocConfig} from '@virmator/docs/configs/typedoc.config.base.js';
+import {resolve} from 'node:path';
 import {type TypeDocOptions} from 'typedoc';
 
-const indexTsFile = join(dirname(dirname(fileURLToPath(import.meta.url))), 'src', 'index.ts');
-const outDirPath = join(dirname(dirname(fileURLToPath(import.meta.url))), 'dist-docs');
+const indexTsFile = resolve(import.meta.dirname, '..', 'src', 'index.ts');
+const outDirPath = resolve(import.meta.dirname, '..', 'dist-docs');
 
 export const typeDocConfig: Partial<TypeDocOptions> = {
     ...baseTypedocConfig,

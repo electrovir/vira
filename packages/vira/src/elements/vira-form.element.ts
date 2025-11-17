@@ -1,5 +1,5 @@
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
-import {css, defineElementEvent, html, listen} from 'element-vir';
+import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {defineViraElement} from './define-vira-element.js';
 import {ViraCheckbox} from './vira-checkbox.element.js';
@@ -41,6 +41,7 @@ export type ViraFormField =
           icon?: ViraIconSvg | undefined;
           hasError?: boolean | undefined;
           isUsername?: boolean | undefined;
+          testId?: string | undefined;
       }
     | {
           type: ViraFormFieldType.Select;
@@ -51,6 +52,7 @@ export type ViraFormField =
           disabled?: boolean | undefined;
           icon?: ViraIconSvg | undefined;
           hasError?: boolean | undefined;
+          testId?: string | undefined;
       }
     | {
           type: ViraFormFieldType.Checkbox;
@@ -58,6 +60,7 @@ export type ViraFormField =
           value: boolean;
           disabled?: boolean | undefined;
           hasError?: boolean | undefined;
+          testId?: string | undefined;
       };
 
 /**
@@ -111,6 +114,7 @@ export const ViraForm = defineViraElement<
                             hasError: field.hasError,
                             label: field.label,
                         })}
+                            ${field.testId ? testId(field.testId) : nothing}
                             ${listen(ViraCheckbox.events.valueChange, (event) => {
                                 dispatch(
                                     new events.valueChange({
@@ -133,6 +137,7 @@ export const ViraForm = defineViraElement<
                             hasError: field.hasError,
                             icon: field.icon,
                         })}
+                            ${field.testId ? testId(field.testId) : nothing}
                             ${listen(ViraSelect.events.valueChange, (event) => {
                                 dispatch(
                                     new events.valueChange({
@@ -180,6 +185,7 @@ export const ViraForm = defineViraElement<
                                   ? ViraInputType.Email
                                   : ViraInputType.Default,
                         })}
+                            ${field.testId ? testId(field.testId) : nothing}
                             ${listen(ViraInput.events.valueChange, (event) => {
                                 dispatch(
                                     new events.valueChange({

@@ -83,7 +83,6 @@ export const ViraForm = defineViraElement<
     >
 >()({
     tagName: 'vira-form',
-    slotNames: ['actionButtons'],
     events: {
         valueChange: defineElementEvent<
             {
@@ -98,7 +97,7 @@ export const ViraForm = defineViraElement<
             gap: 10px;
         }
     `,
-    render({inputs, slotNames, dispatch, events}) {
+    render({inputs, dispatch, events}) {
         const formFields = getObjectTypedEntries(inputs.fields).map(
             ([
                 key,
@@ -199,7 +198,7 @@ export const ViraForm = defineViraElement<
         return html`
             <form ${listen('submit', (event) => event.preventDefault())}>
                 ${formFields}
-                <slot name=${slotNames.actionButtons}></slot>
+                <slot></slot>
             </form>
         `;
     },

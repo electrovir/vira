@@ -6,6 +6,7 @@ import {
     ViraForm,
     type ViraFormFields,
     ViraFormFieldType,
+    ViraInput,
     type ViraSelectOption,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
@@ -98,7 +99,65 @@ export const viraFormBookPage = defineBookPage({
                             });
                         })}
                     >
-                        <div class="buttons" slot=${ViraForm.slotNames.actionButtons}>
+                        <div class="buttons">
+                            <${ViraButton.assign({
+                                text: 'Cancel',
+                                buttonStyle: ViraButtonStyle.Outline,
+                            })}></${ViraButton}>
+                            <${ViraButton.assign({
+                                text: 'Submit',
+                            })}></${ViraButton}>
+                        </div>
+                    </${ViraForm}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'with extra slot elements',
+            state() {
+                return {
+                    firstName: '',
+                    lastName: '',
+                };
+            },
+            styles: css`
+                .buttons {
+                    display: flex;
+                    gap: 8px;
+                    justify-content: flex-end;
+                }
+            `,
+            render({state, updateState}) {
+                const formFields = {
+                    firstName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'First Name',
+                        value: state.firstName,
+                    },
+                    lastName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'Last Name',
+                        value: state.lastName,
+                    },
+                } satisfies ViraFormFields;
+
+                return html`
+                    <${ViraForm.assign({
+                        fields: formFields,
+                    })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            updateState({
+                                ...state,
+                                [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    >
+                        <${ViraInput.assign({
+                            value: '',
+                            label: 'More stuff',
+                        })}></${ViraInput}>
+                        <div class="buttons">
                             <${ViraButton.assign({
                                 text: 'Cancel',
                                 buttonStyle: ViraButtonStyle.Outline,

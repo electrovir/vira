@@ -3,9 +3,20 @@ import {BookPageControlType, defineBookPage, definePageControl} from 'element-bo
 import {css, html, unsafeCSS} from 'element-vir';
 import {ViraIcon, allIconsByName, viraBorders, viraIconCssVars} from 'vira';
 
-export const elementsBookPage = defineBookPage({title: 'Elements', parent: undefined});
+export const elementsBookPage = defineBookPage({
+    title: 'Elements',
+    parent: undefined,
+});
 
-export const stylesBookPage = defineBookPage({title: 'Styles', parent: undefined});
+export const stylesBookPage = defineBookPage({
+    title: 'Styles',
+    parent: undefined,
+});
+
+export const utilBookPage = defineBookPage({
+    title: 'Util',
+    parent: undefined,
+});
 
 export const iconsBookPage = defineBookPage({
     title: 'Icons',

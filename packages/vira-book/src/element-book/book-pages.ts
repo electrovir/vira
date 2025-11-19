@@ -1,3 +1,4 @@
+import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
 import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
 import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
 import {viraMenuOptionsBookPage} from './entries/pop-up/vira-menu.element.book.js';
@@ -19,12 +20,13 @@ import {viraLinkBookPage} from './entries/vira-link.element.book.js';
 import {viraModalBookPage} from './entries/vira-modal.element.book.js';
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
-import {elementsBookPage, iconsBookPage, stylesBookPage} from './top-level-pages.js';
+import {elementsBookPage, iconsBookPage, stylesBookPage, utilBookPage} from './top-level-pages.js';
 
 const topLevelPages = [
     elementsBookPage,
     iconsBookPage,
     stylesBookPage,
+    utilBookPage,
 ];
 
 const allPages = [
@@ -48,6 +50,8 @@ const allPages = [
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
     viraSelectBookPage,
+
+    dynamicElementsBookPage,
 
     shadowBookPage,
 ].sort((a, b) => a.title.localeCompare(b.title));

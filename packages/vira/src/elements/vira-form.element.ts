@@ -94,10 +94,20 @@ export const ViraForm = defineViraElement<
         >(),
     },
     styles: css`
+        :host {
+            display: flex;
+        }
+
         form {
             display: flex;
+            flex-grow: 1;
             flex-direction: column;
+            align-items: stretch;
             gap: 10px;
+
+            > * {
+                width: unset;
+            }
         }
     `,
     render({inputs, dispatch, events}) {

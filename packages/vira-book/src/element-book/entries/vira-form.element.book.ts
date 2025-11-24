@@ -170,5 +170,87 @@ export const viraFormBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'custom width',
+            state() {
+                return {
+                    firstName: '',
+                    lastName: '',
+                    subscribe: true,
+                    email: '',
+                    password: '',
+                    userRole: undefined as string | undefined,
+                };
+            },
+            styles: css`
+                .buttons {
+                    display: flex;
+                    gap: 8px;
+                    justify-content: flex-end;
+                }
+
+                ${ViraForm} {
+                    width: 400px;
+                }
+            `,
+            render({state, updateState}) {
+                const formFields = {
+                    firstName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'First Name',
+                        value: state.firstName,
+                    },
+                    lastName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'Last Name',
+                        value: state.lastName,
+                    },
+                    subscribe: {
+                        type: ViraFormFieldType.Checkbox,
+                        label: 'Subscribe to updates',
+                        value: state.subscribe,
+                    },
+                    email: {
+                        type: ViraFormFieldType.Email,
+                        label: 'Email Address',
+                        value: state.email,
+                    },
+                    password: {
+                        type: ViraFormFieldType.NewPassword,
+                        label: 'Password',
+                        value: state.password,
+                    },
+                    userRole: {
+                        type: ViraFormFieldType.Select,
+                        label: 'Role',
+                        options: mockRoleOptions,
+                        value: state.userRole,
+                    },
+                } satisfies ViraFormFields;
+
+                return html`
+                    <${ViraForm.assign({
+                        fields: formFields,
+                    })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            updateState({
+                                ...state,
+                                [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    >
+                        <div class="buttons">
+                            <${ViraButton.assign({
+                                text: 'Cancel',
+                                buttonStyle: ViraButtonStyle.Outline,
+                            })}></${ViraButton}>
+                            <${ViraButton.assign({
+                                text: 'Submit',
+                            })}></${ViraButton}>
+                        </div>
+                    </${ViraForm}>
+                `;
+            },
+        });
     },
 });

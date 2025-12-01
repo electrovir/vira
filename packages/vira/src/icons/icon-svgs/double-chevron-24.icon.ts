@@ -15,7 +15,7 @@ export const DoubleChevron24Icon = defineIcon({
         <svg
             xmlns="http://www.w3.org/2000/svg"
             xml:space="preserve"
-            style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+            style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:miter;stroke-miterlimit:2"
             viewBox="0 0 24 24"
             width="24"
             height="24"

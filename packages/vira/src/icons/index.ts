@@ -3,6 +3,7 @@
 import {Bell24Icon} from './icon-svgs/bell-24.icon.js';
 import {Chat24Icon} from './icon-svgs/chat-24.icon.js';
 import {Check24Icon} from './icon-svgs/check-24.icon.js';
+import {ChevronDown24Icon} from './icon-svgs/chevron-down-24.icon.js';
 import {ChevronUp24Icon} from './icon-svgs/chevron-up-24.icon.js';
 import {CloseX24Icon} from './icon-svgs/close-x-24.icon.js';
 import {Commit24Icon} from './icon-svgs/commit-24.icon.js';
@@ -39,6 +40,7 @@ export * from './icon-svg.js';
 export * from './icon-svgs/bell-24.icon.js';
 export * from './icon-svgs/chat-24.icon.js';
 export * from './icon-svgs/check-24.icon.js';
+export * from './icon-svgs/chevron-down-24.icon.js';
 export * from './icon-svgs/chevron-up-24.icon.js';
 export * from './icon-svgs/close-x-24.icon.js';
 export * from './icon-svgs/commit-24.icon.js';
@@ -79,6 +81,7 @@ export const allIconsByName = {
     Bell24Icon,
     Chat24Icon,
     Check24Icon,
+    ChevronDown24Icon,
     ChevronUp24Icon,
     CloseX24Icon,
     Commit24Icon,

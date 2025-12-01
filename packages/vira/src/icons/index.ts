@@ -13,6 +13,7 @@ import {Element24Icon} from './icon-svgs/element-24.icon.js';
 import {ExternalLink24Icon} from './icon-svgs/external-link-24.icon.js';
 import {EyeClosed24Icon} from './icon-svgs/eye-closed-24.icon.js';
 import {EyeOpen24Icon} from './icon-svgs/eye-open-24.icon.js';
+import {Filter24Icon} from './icon-svgs/filter-24.icon.js';
 import {Link24Icon} from './icon-svgs/link-24.icon.js';
 import {Loader24Icon} from './icon-svgs/loader-24.icon.js';
 import {LoaderAnimated24Icon} from './icon-svgs/loader-animated-24.icon.js';
@@ -48,6 +49,7 @@ export * from './icon-svgs/element-24.icon.js';
 export * from './icon-svgs/external-link-24.icon.js';
 export * from './icon-svgs/eye-closed-24.icon.js';
 export * from './icon-svgs/eye-open-24.icon.js';
+export * from './icon-svgs/filter-24.icon.js';
 export * from './icon-svgs/link-24.icon.js';
 export * from './icon-svgs/loader-24.icon.js';
 export * from './icon-svgs/loader-animated-24.icon.js';
@@ -87,6 +89,7 @@ export const allIconsByName = {
     ExternalLink24Icon,
     EyeClosed24Icon,
     EyeOpen24Icon,
+    Filter24Icon,
     Link24Icon,
     Loader24Icon,
     LoaderAnimated24Icon,

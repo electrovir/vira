@@ -1,6 +1,6 @@
 import {html} from 'element-vir';
-import {defineIcon} from 'vira';
 import {viraIconCssVars} from '../icon-css-vars.js';
+import {defineIcon} from '../icon-svg.js';
 
 /**
  * An icon symbol that represents filtering.

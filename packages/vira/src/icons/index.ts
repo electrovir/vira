@@ -23,6 +23,8 @@ import {Lock24Icon} from './icon-svgs/lock-24.icon.js';
 import {Options24Icon} from './icon-svgs/options-24.icon.js';
 import {Pencil24Icon} from './icon-svgs/pencil-24.icon.js';
 import {Shield24Icon} from './icon-svgs/shield-24.icon.js';
+import {SortAscending24Icon} from './icon-svgs/sort-ascending-24.icon.js';
+import {SortDescending24Icon} from './icon-svgs/sort-descending-24.icon.js';
 import {SpeakerLoud24Icon} from './icon-svgs/speaker-loud-24.icon.js';
 import {SpeakerMedium24Icon} from './icon-svgs/speaker-medium-24.icon.js';
 import {SpeakerMuted24Icon} from './icon-svgs/speaker-muted-24.icon.js';
@@ -38,6 +40,7 @@ import {X24Icon} from './icon-svgs/x-24.icon.js';
 
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
+
 export * from './icon-svgs/bell-24.icon.js';
 export * from './icon-svgs/chat-24.icon.js';
 export * from './icon-svgs/check-24.icon.js';
@@ -61,6 +64,8 @@ export * from './icon-svgs/lock-24.icon.js';
 export * from './icon-svgs/options-24.icon.js';
 export * from './icon-svgs/pencil-24.icon.js';
 export * from './icon-svgs/shield-24.icon.js';
+export * from './icon-svgs/sort-ascending-24.icon.js';
+export * from './icon-svgs/sort-descending-24.icon.js';
 export * from './icon-svgs/speaker-loud-24.icon.js';
 export * from './icon-svgs/speaker-medium-24.icon.js';
 export * from './icon-svgs/speaker-muted-24.icon.js';
@@ -103,6 +108,8 @@ export const allIconsByName = {
     Options24Icon,
     Pencil24Icon,
     Shield24Icon,
+    SortAscending24Icon,
+    SortDescending24Icon,
     SpeakerLoud24Icon,
     SpeakerMedium24Icon,
     SpeakerMuted24Icon,

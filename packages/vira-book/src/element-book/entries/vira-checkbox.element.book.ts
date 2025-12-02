@@ -149,6 +149,29 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'horizontal',
+            state() {
+                return {
+                    checked: true,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        label: 'label goes here',
+                        horizontal: true,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'long label',
             state() {
                 return {

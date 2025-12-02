@@ -42,6 +42,7 @@ export type ViraCheckboxInputs = PartialWithUndefined<{
     disabled: boolean;
     label: string;
     hasError: boolean;
+    horizontal: boolean;
 }> & {
     value: boolean;
 };
@@ -55,7 +56,10 @@ export type ViraCheckboxInputs = PartialWithUndefined<{
  */
 export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     tagName: 'vira-checkbox',
-    styles: css`
+    hostClasses: {
+        'vira-checkbox-horizontal': ({inputs}) => !!inputs.horizontal,
+    },
+    styles: ({hostClasses}) => css`
         :host {
             display: inline-flex;
         }
@@ -86,6 +90,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 cursor: pointer;
                 font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
             }
+
+            &:hover .custom-checkbox {
+                background-color: ${viraFormCssVars['vira-form-selection-hover-background-color']
+                    .value};
+            }
         }
 
         ${ViraIcon} {
@@ -115,11 +124,6 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
             }
 
-            &:hover {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-background-color']
-                    .value};
-            }
-
             &:active {
                 background-color: ${viraFormCssVars['vira-form-selection-active-background-color']
                     .value};
@@ -128,6 +132,12 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             &.disabled {
                 ${viraDisabledStyles};
             }
+        }
+
+        ${hostClasses['vira-checkbox-horizontal'].selector} label {
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 8px;
         }
     `,
     events: {

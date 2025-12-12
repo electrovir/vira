@@ -1,74 +1,16 @@
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
-import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {defineViraElement} from './define-vira-element.js';
-import {ViraCheckbox} from './vira-checkbox.element.js';
-import {ViraInput, ViraInputType} from './vira-input.element.js';
-import {ViraSelect, type ViraSelectOption} from './vira-select.element.js';
-
-/**
- * Form field types for {@link ViraFormField}.
- *
- * @category Internal
- */
-export enum ViraFormFieldType {
-    Text = 'text',
-    /** Allows auto complete for _existing_ passwords used on this website (for login). */
-    ExistingPassword = 'existing-password',
-    /** Allows auto complete for _new_ passwords used on this website (for login). */
-    NewPassword = 'new-password',
-    Email = 'email',
-    Select = 'select',
-    Checkbox = 'checkbox',
-}
-
-/**
- * An individual form field for {@link ViraFormFields}.
- *
- * @category Internal
- */
-export type ViraFormField =
-    | {
-          type:
-              | ViraFormFieldType.Text
-              | ViraFormFieldType.ExistingPassword
-              | ViraFormFieldType.NewPassword
-              | ViraFormFieldType.Email;
-          label: string;
-          value: string;
-          placeholder?: string | undefined;
-          disabled?: boolean | undefined;
-          icon?: ViraIconSvg | undefined;
-          hasError?: boolean | undefined;
-          isUsername?: boolean | undefined;
-          testId?: string | undefined;
-      }
-    | {
-          type: ViraFormFieldType.Select;
-          label: string;
-          value: string | undefined;
-          options: ReadonlyArray<Readonly<ViraSelectOption>>;
-          placeholder?: string | undefined;
-          disabled?: boolean | undefined;
-          icon?: ViraIconSvg | undefined;
-          hasError?: boolean | undefined;
-          testId?: string | undefined;
-      }
-    | {
-          type: ViraFormFieldType.Checkbox;
-          label: string;
-          value: boolean;
-          disabled?: boolean | undefined;
-          hasError?: boolean | undefined;
-          testId?: string | undefined;
-      };
-
-/**
- * A collection of form fields for {@link ViraForm}.
- *
- * @category Internal
- */
-export type ViraFormFields = Record<string, ViraFormField>;
+import {defineViraElement} from '../define-vira-element.js';
+import {ViraCheckbox} from '../vira-checkbox.element.js';
+import {ViraInput, ViraInputType} from '../vira-input.element.js';
+import {ViraSelect} from '../vira-select.element.js';
+import {
+    applyRequiredLabel,
+    areFieldsValid,
+    type ViraFormField,
+    type ViraFormFields,
+    ViraFormFieldType,
+} from './vira-form-fields.js';
 
 /**
  * A form element.
@@ -82,6 +24,19 @@ export const ViraForm = defineViraElement<
             fields: Readonly<ViraFormFields>;
         } & PartialWithUndefined<{
             showClearButtons: boolean;
+            /**
+             * When `true`, all fields in this form are disabled. Note that this will not (and can
+             * not) disable any child elements you've inserted via <slot>.
+             *
+             * @default false
+             */
+            isDisabled: boolean;
+            /**
+             * If true, no `'*'` is appended to required form field labels.
+             *
+             * @default false
+             */
+            hideRequiredMarkers: boolean;
         }>
     >
 >()({
@@ -92,6 +47,9 @@ export const ViraForm = defineViraElement<
                 key: string;
             } & ViraFormField
         >(),
+        validChange: defineElementEvent<{
+            allFieldsAreValid: boolean;
+        }>(),
     },
     styles: css`
         :host {
@@ -110,19 +68,37 @@ export const ViraForm = defineViraElement<
             }
         }
     `,
-    render({inputs, dispatch, events}) {
-        const formFields = getObjectTypedEntries(inputs.fields).map(
+    state() {
+        return {
+            lastIsValid: false,
+        };
+    },
+    render({inputs, dispatch, events, state, updateState}) {
+        const currentIsValid = areFieldsValid(inputs.fields);
+        if (currentIsValid !== state.lastIsValid) {
+            updateState({
+                lastIsValid: currentIsValid,
+            });
+            dispatch(new events.validChange({allFieldsAreValid: currentIsValid}));
+        }
+
+        const formFieldTemplates = getObjectTypedEntries(inputs.fields).map(
             ([
                 key,
                 field,
             ]) => {
-                if (field.type === ViraFormFieldType.Checkbox) {
+                if (field.isHidden) {
+                    return nothing;
+                } else if (field.type === ViraFormFieldType.Checkbox) {
                     return html`
                         <${ViraCheckbox.assign({
-                            value: field.value,
-                            disabled: field.disabled,
+                            value: field.value || false,
+                            disabled: inputs.isDisabled || field.isDisabled,
                             hasError: field.hasError,
-                            label: field.label,
+                            label: applyRequiredLabel(
+                                field.label,
+                                !!field.isRequired && !inputs.hideRequiredMarkers,
+                            ),
                         })}
                             ${field.testId ? testId(field.testId) : nothing}
                             ${listen(ViraCheckbox.events.valueChange, (event) => {
@@ -142,8 +118,11 @@ export const ViraForm = defineViraElement<
                             options: field.options,
                             value: field.value,
                             placeholder: field.placeholder,
-                            disabled: field.disabled,
-                            label: field.label,
+                            disabled: inputs.isDisabled || field.isDisabled,
+                            label: applyRequiredLabel(
+                                field.label,
+                                !!field.isRequired && !inputs.hideRequiredMarkers,
+                            ),
                             hasError: field.hasError,
                             icon: field.icon,
                         })}
@@ -162,11 +141,14 @@ export const ViraForm = defineViraElement<
                 } else {
                     return html`
                         <${ViraInput.assign({
-                            value: field.value,
-                            disabled: field.disabled,
+                            value: field.value || '',
+                            disabled: inputs.isDisabled || field.isDisabled,
                             hasError: field.hasError,
                             icon: field.icon,
-                            label: field.label,
+                            label: applyRequiredLabel(
+                                field.label,
+                                !!field.isRequired && !inputs.hideRequiredMarkers,
+                            ),
                             placeholder: field.placeholder,
                             showClearButton: inputs.showClearButtons,
                             attributePassthrough: field.isUsername
@@ -189,6 +171,7 @@ export const ViraForm = defineViraElement<
                             type: [
                                 ViraFormFieldType.NewPassword,
                                 ViraFormFieldType.ExistingPassword,
+                                ViraFormFieldType.PlainPassword,
                             ].includes(field.type)
                                 ? ViraInputType.Password
                                 : field.type === ViraFormFieldType.Email
@@ -213,7 +196,7 @@ export const ViraForm = defineViraElement<
 
         return html`
             <form ${listen('submit', (event) => event.preventDefault())}>
-                ${formFields}
+                ${formFieldTemplates}
                 <slot></slot>
             </form>
         `;

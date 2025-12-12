@@ -199,13 +199,15 @@ export const ViraSelect = defineViraElement<
         ${hostClasses['vira-select-disabled'].selector} {
             cursor: not-allowed;
 
-            & label {
-                cursor: not-allowed;
-            }
-
             & select,
             & .wrapper-border {
                 ${viraDisabledStyles}
+            }
+            ${ViraIcon} {
+                ${viraDisabledStyles}
+            }
+            & * {
+                cursor: not-allowed;
             }
         }
 

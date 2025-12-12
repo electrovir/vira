@@ -1,4 +1,6 @@
 export * from './define-vira-element.js';
+export * from './form/vira-form-fields.js';
+export * from './form/vira-form.element.js';
 export * from './pop-up/pop-up-helpers.js';
 export * from './pop-up/pop-up-menu-item.js';
 export * from './pop-up/vira-menu-item.element.js';
@@ -13,7 +15,6 @@ export * from './vira-checkbox.element.js';
 export * from './vira-collapsible-wrapper.element.js';
 export * from './vira-dropdown.element.js';
 export * from './vira-error.element.js';
-export * from './vira-form.element.js';
 export * from './vira-icon.element.js';
 export * from './vira-image.element.js';
 export * from './vira-input.element.js';

@@ -59,11 +59,14 @@ export const viraFormBookPage = defineBookPage({
                         type: ViraFormFieldType.Text,
                         label: 'First Name',
                         value: state.firstName,
+                        isRequired: true,
+                        placeholder: 'placeholder',
                     },
                     lastName: {
                         type: ViraFormFieldType.Text,
                         label: 'Last Name',
                         value: state.lastName,
+                        isRequired: true,
                     },
                     subscribe: {
                         type: ViraFormFieldType.Checkbox,
@@ -85,6 +88,19 @@ export const viraFormBookPage = defineBookPage({
                         label: 'Role',
                         options: mockRoleOptions,
                         value: state.userRole,
+                        placeholder: 'placeholder',
+                    },
+                    disabledField: {
+                        type: ViraFormFieldType.Text,
+                        label: 'Disabled Field',
+                        value: 'should be disabled',
+                        isDisabled: true,
+                    },
+                    hidden: {
+                        type: ViraFormFieldType.Text,
+                        label: 'Should be hidden',
+                        value: 'Should be hidden',
+                        isHidden: true,
                     },
                 } satisfies ViraFormFields;
 
@@ -231,6 +247,85 @@ export const viraFormBookPage = defineBookPage({
                 return html`
                     <${ViraForm.assign({
                         fields: formFields,
+                    })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            updateState({
+                                ...state,
+                                [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    >
+                        <div class="buttons">
+                            <${ViraButton.assign({
+                                text: 'Cancel',
+                                buttonStyle: ViraButtonStyle.Outline,
+                            })}></${ViraButton}>
+                            <${ViraButton.assign({
+                                text: 'Submit',
+                            })}></${ViraButton}>
+                        </div>
+                    </${ViraForm}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled',
+            state() {
+                return {
+                    firstName: '',
+                    lastName: '',
+                    subscribe: true,
+                    email: '',
+                    password: '',
+                    userRole: undefined as string | undefined,
+                };
+            },
+            styles: css`
+                .buttons {
+                    display: flex;
+                    gap: 8px;
+                    justify-content: flex-end;
+                }
+            `,
+            render({state, updateState}) {
+                const formFields = {
+                    firstName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'First Name',
+                        value: state.firstName,
+                    },
+                    lastName: {
+                        type: ViraFormFieldType.Text,
+                        label: 'Last Name',
+                        value: state.lastName,
+                    },
+                    subscribe: {
+                        type: ViraFormFieldType.Checkbox,
+                        label: 'Subscribe to updates',
+                        value: state.subscribe,
+                    },
+                    email: {
+                        type: ViraFormFieldType.Email,
+                        label: 'Email Address',
+                        value: state.email,
+                    },
+                    password: {
+                        type: ViraFormFieldType.NewPassword,
+                        label: 'Password',
+                        value: state.password,
+                    },
+                    userRole: {
+                        type: ViraFormFieldType.Select,
+                        label: 'Role',
+                        options: mockRoleOptions,
+                        value: state.userRole,
+                    },
+                } satisfies ViraFormFields;
+
+                return html`
+                    <${ViraForm.assign({
+                        fields: formFields,
+                        isDisabled: true,
                     })}
                         ${listen(ViraForm.events.valueChange, (event) => {
                             updateState({

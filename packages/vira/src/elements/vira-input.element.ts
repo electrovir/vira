@@ -283,15 +283,16 @@ export const ViraInput = defineViraElement<
             ${hostClasses['vira-input-disabled'].selector} {
                 cursor: not-allowed;
 
-                & label,
-                & .input-wrapper {
+                & * {
                     cursor: not-allowed;
                 }
 
-                & input,
-                & .wrapper-border,
-                & input::placeholder {
+                & > * {
                     ${viraDisabledStyles};
+                }
+
+                & .show-password-button {
+                    pointer-events: none;
                 }
 
                 & .focus-border {
@@ -429,6 +430,9 @@ export const ViraInput = defineViraElement<
                                 event.preventDefault();
                             })}
                             ${listen('click', () => {
+                                if (inputs.disabled) {
+                                    return;
+                                }
                                 dispatch(new events.valueChange(''));
                             })}
                         >

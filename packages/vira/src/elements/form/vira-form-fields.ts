@@ -127,7 +127,7 @@ export function applyRequiredLabel(
  *
  * @category Internal
  */
-export function areFieldsValid(formFields: Readonly<ViraFormFields>) {
+export function areFormFieldsValid(formFields: Readonly<ViraFormFields>) {
     return getObjectTypedValues(formFields).every((formField) => {
         if (formField.isHidden || !formField.isRequired) {
             return true;

@@ -1,7 +1,7 @@
 import {describe, itCases} from '@augment-vir/test';
-import {areFieldsValid, type ViraFormField, ViraFormFieldType} from './vira-form-fields.js';
+import {areFormFieldsValid, type ViraFormField, ViraFormFieldType} from './vira-form-fields.js';
 
-describe(areFieldsValid.name, () => {
+describe(areFormFieldsValid.name, () => {
     const requiredEmptyFormField: ViraFormField = {
         type: ViraFormFieldType.Text,
         value: '',
@@ -27,7 +27,7 @@ describe(areFieldsValid.name, () => {
         label: '',
     };
 
-    itCases(areFieldsValid, [
+    itCases(areFormFieldsValid, [
         {
             it: 'ignores hidden fields',
             input: {

@@ -6,7 +6,7 @@ import {ViraInput, ViraInputType} from '../vira-input.element.js';
 import {ViraSelect} from '../vira-select.element.js';
 import {
     applyRequiredLabel,
-    areFieldsValid,
+    areFormFieldsValid,
     type ViraFormField,
     type ViraFormFields,
     ViraFormFieldType,
@@ -74,7 +74,7 @@ export const ViraForm = defineViraElement<
         };
     },
     render({inputs, dispatch, events, state, updateState}) {
-        const currentIsValid = areFieldsValid(inputs.fields);
+        const currentIsValid = areFormFieldsValid(inputs.fields);
         if (currentIsValid !== state.lastIsValid) {
             updateState({
                 lastIsValid: currentIsValid,

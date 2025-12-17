@@ -37,8 +37,8 @@ export type ViraCheckboxInnerElements =
  * @category Internal
  */
 export type ViraCheckboxInputs = PartialWithUndefined<{
-    stylePassthrough: Record<ViraCheckboxInnerElements, CSSResult>;
-    attributePassthrough: Record<ViraCheckboxInnerElements, AttributeValues>;
+    stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
+    attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
     disabled: boolean;
     label: string;
     hasError: boolean;
@@ -179,6 +179,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                         error: !!inputs.hasError,
                     })}"
                     role="checkbox"
+                    aria-label=${ifDefined(inputs.label || undefined)}
                     aria-checked=${inputs.value ? 'true' : 'false'}
                     aria-disabled=${inputs.disabled ? 'true' : 'false'}
                     tabindex=${inputs.disabled ? '-1' : '0'}

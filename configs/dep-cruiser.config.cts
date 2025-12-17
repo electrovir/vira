@@ -6,13 +6,12 @@ const baseConfig = defineConfig({
         // enter file exceptions by rule name here
         'no-orphans': {
             from: [
-                'src/index.ts',
+                'src/index\\.ts',
             ],
         },
-        'not-to-unresolvable': {
-            to: [
-                // this _is_ resolvable
-                'page-active',
+        'no-non-package-json': {
+            from: [
+                'prettier\\.config\\.mjs',
             ],
         },
     },

@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-book",
-    "version": "28.12.1",
+    "version": "28.12.2",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "author": {
@@ -16,21 +16,21 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.54.3",
-        "@augment-vir/common": "^31.54.3",
-        "element-book": "^26.11.3",
-        "element-vir": "^26.11.3",
-        "spa-router-vir": "^6.3.1",
-        "url-vir": "^2.1.6",
-        "vira": "^28.12.1"
+        "@augment-vir/assert": "^31.54.4",
+        "@augment-vir/common": "^31.54.4",
+        "element-book": "^26.12.2",
+        "element-vir": "^26.12.2",
+        "spa-router-vir": "^6.4.1",
+        "url-vir": "^2.1.7",
+        "vira": "^28.12.2"
     },
     "devDependencies": {
         "esbuild": "^0.27.0",
         "markdown-code-example-inserter": "^3.0.3",
-        "type-fest": "^5.2.0",
+        "type-fest": "^5.3.1",
         "typedoc": "^0.28.15",
         "typescript": "^5.9.3",
-        "vite": "^7.2.4",
+        "vite": "^7.3.0",
         "vite-tsconfig-paths": "^5.1.4"
     },
     "engines": {

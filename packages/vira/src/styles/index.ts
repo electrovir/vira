@@ -11,3 +11,4 @@ export * from './scrollbar.js';
 export * from './shadows.js';
 export * from './user-select.js';
 export * from './vira-color-palette.js';
+export * from './vira-color-theme.js';

@@ -1,4 +1,5 @@
-import {type PartialWithUndefined} from '@augment-vir/common';
+import {check} from '@augment-vir/assert';
+import {groupArrayBy, type PartialWithUndefined} from '@augment-vir/common';
 import {
     BookPageControlType,
     defineBookPage,
@@ -9,7 +10,7 @@ import {
 import {css, html, listen, nothing} from 'element-vir';
 import {type EmptyObject} from 'type-fest';
 import {type ColorThemeOverride} from './color-theme-override.js';
-import {type ColorTheme} from './color-theme.js';
+import {generateThemeCode, type ColorTheme} from './color-theme.js';
 import {ThemeVirColorExample} from './elements/theme-vir-color-example.element.js';
 
 /**
@@ -23,6 +24,8 @@ export function createColorThemeBookPages({
     theme,
     hideInverseColors,
     overrides,
+    useVerticalLayout,
+    prefixGroupByCount = 0,
 }: {
     title: string;
     theme: Readonly<ColorTheme>;
@@ -30,89 +33,127 @@ export function createColorThemeBookPages({
     parent: Readonly<BookPage>;
     hideInverseColors: boolean;
     overrides: ReadonlyArray<Readonly<ColorThemeOverride>>;
+    useVerticalLayout: boolean;
+    /**
+     * The number of CSS variable name prefixes to group colors by.
+     *
+     * @default 0
+     */
+    prefixGroupByCount: number;
 }>) {
+    const themeControls = {
+        'Show Var Names': definePageControl({
+            controlType: BookPageControlType.Checkbox,
+            initValue: false,
+        }),
+        'Show Contrast Tips': definePageControl({
+            controlType: BookPageControlType.Checkbox,
+            initValue: true,
+        }),
+    };
+
     const themeParentPage = defineBookPage({
         parent,
         title,
-        controls: {
-            'Show Var Names': definePageControl({
-                controlType: BookPageControlType.Checkbox,
-                initValue: false,
-            }),
-            'Show Contrast Tips': definePageControl({
-                controlType: BookPageControlType.Checkbox,
-                initValue: true,
-            }),
-        },
+        controls: themeControls,
     });
 
-    function createThemePage(
+    function buildThemeColorTemplate({
+        controls,
+        theme,
+        themeColorName,
+    }: {
+        controls: Record<keyof typeof themeControls, boolean>;
+        theme: Readonly<ColorTheme>;
+        themeColorName: string;
+    }) {
+        const themeColor = check.isKeyOf(themeColorName, theme.colors)
+            ? theme.colors[themeColorName]
+            : undefined;
+        const inverseThemeColor = check.isKeyOf(themeColorName, theme.inverse)
+            ? theme.inverse[themeColorName]
+            : undefined;
+        if (!themeColor || !inverseThemeColor) {
+            throw new Error(`No theme color found by name '${themeColorName}'`);
+        }
+
+        const normalTemplate = html`
+            <${ThemeVirColorExample.assign({
+                color: themeColor,
+                showVarValues: true,
+                showVarNames: controls['Show Var Names'],
+                showContrast: controls['Show Contrast Tips'],
+                fontWeight: 400,
+            })}></${ThemeVirColorExample}>
+        `;
+
+        const inverseColor = hideInverseColors ? undefined : inverseThemeColor;
+
+        const inverseTemplate = inverseColor
+            ? html`
+                  <${ThemeVirColorExample.assign({
+                      color: inverseColor,
+                      showVarValues: false,
+                      showVarNames: controls['Show Var Names'],
+                      showContrast: controls['Show Contrast Tips'],
+                      fontWeight: 400,
+                  })}></${ThemeVirColorExample}>
+              `
+            : nothing;
+
+        return html`
+            <div class="with-inverse">${normalTemplate}${inverseTemplate}</div>
+        `;
+    }
+
+    function createThemePageExamples(
         defineExample: DefineExampleCallback<EmptyObject, typeof themeParentPage.controls>,
         theme: Readonly<ColorTheme>,
     ) {
-        Object.values(theme.colors).forEach((themeColor) => {
-            defineExample({
-                title: themeColor.name,
-                styles: css`
-                    :host {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 4px;
-                    }
-                `,
-                state() {
-                    return {
-                        forceShowEverything: false,
-                    };
-                },
-                render({controls, state, updateState}) {
-                    const normalTemplate = html`
-                        <${ThemeVirColorExample.assign({
-                            color: themeColor,
-                            showVarValues: true,
-                            showVarNames: controls['Show Var Names'] || state.forceShowEverything,
-                            showContrast:
-                                controls['Show Contrast Tips'] || state.forceShowEverything,
-                            fontWeight: 400,
-                        })}
-                            ${listen(ThemeVirColorExample.events.toggleShowVars, () => {
-                                updateState({
-                                    forceShowEverything: !state.forceShowEverything,
-                                });
-                            })}
-                        ></${ThemeVirColorExample}>
-                    `;
-
-                    const inverseColor = hideInverseColors
-                        ? undefined
-                        : theme.inverse[themeColor.name];
-
-                    const inverseTemplate = inverseColor
-                        ? html`
-                              <${ThemeVirColorExample.assign({
-                                  color: inverseColor,
-                                  showVarValues: false,
-                                  showVarNames:
-                                      controls['Show Var Names'] || state.forceShowEverything,
-                                  showContrast:
-                                      controls['Show Contrast Tips'] || state.forceShowEverything,
-                                  fontWeight: 400,
-                              })}
-                                  ${listen(ThemeVirColorExample.events.toggleShowVars, () => {
-                                      updateState({
-                                          forceShowEverything: !state.forceShowEverything,
-                                      });
-                                  })}
-                              ></${ThemeVirColorExample}>
-                          `
-                        : nothing;
-
-                    return html`
-                        ${normalTemplate}${inverseTemplate}
-                    `;
-                },
-            });
+        const groups = groupArrayBy(Object.keys(theme.colors), (value) => {
+            if (prefixGroupByCount) {
+                return value.split('-').slice(0, prefixGroupByCount).join('-');
+            } else {
+                return value;
+            }
         });
+
+        Object.entries(groups).forEach(
+            ([
+                groupName,
+                group,
+            ]) => {
+                if (!group) {
+                    return;
+                }
+
+                defineExample({
+                    title: groupName,
+                    styles: css`
+                        :host {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
+                        }
+
+                        .with-inverse {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
+                        }
+                    `,
+                    render({controls}) {
+                        return group.map((entry) =>
+                            buildThemeColorTemplate({
+                                controls,
+                                theme,
+                                themeColorName: entry,
+                            }),
+                        );
+                    },
+                });
+            },
+        );
     }
 
     const descriptionParagraphs = [
@@ -123,8 +164,24 @@ export function createColorThemeBookPages({
         parent: themeParentPage,
         title: 'Default Theme',
         descriptionParagraphs,
+        useVerticalExamples: useVerticalLayout,
+        controls: {
+            copy: definePageControl({
+                controlType: BookPageControlType.Custom,
+                content: html`
+                    <button
+                        ${listen('click', async () => {
+                            const code = generateThemeCode(theme, 'viraColorPalette');
+                            await navigator.clipboard.writeText(code);
+                        })}
+                    >
+                        Copy Code
+                    </button>
+                `,
+            }),
+        },
         defineExamples({defineExample}) {
-            createThemePage(defineExample, theme);
+            createThemePageExamples(defineExample, theme);
         },
     });
 
@@ -132,9 +189,10 @@ export function createColorThemeBookPages({
         return defineBookPage({
             parent: themeParentPage,
             title: override.name,
+            useVerticalExamples: useVerticalLayout,
             descriptionParagraphs,
             defineExamples({defineExample}) {
-                createThemePage(defineExample, override.asTheme);
+                createThemePageExamples(defineExample, override.asTheme);
             },
         });
     });

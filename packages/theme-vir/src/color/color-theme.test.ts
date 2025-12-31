@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {mapObjectValues} from '@augment-vir/common';
 import {describe, it} from '@augment-vir/test';
-import {defineColorTheme, themeDefaultKey} from './color-theme.js';
+import {defineColorTheme, generateThemeCode, themeDefaultKey} from './color-theme.js';
 import {mockColorTheme} from './color-theme.mock.js';
 
 describe(defineColorTheme.name, () => {
@@ -169,6 +169,40 @@ describe(defineColorTheme.name, () => {
             {
                 matchMessage: 'Cannot define theme color by name',
             },
+        );
+    });
+});
+
+describe(generateThemeCode.name, () => {
+    it('works', () => {
+        assert.strictEquals(
+            generateThemeCode(mockColorTheme),
+            `defineColorTheme(
+    {
+        foreground: 'black',
+        background: 'white',
+    },
+    {
+        'action-primary': {
+            foreground: 'dodgerblue',
+        },
+        'action-secondary': {
+            foreground: 'navy',
+        },
+        'action-danger': {
+            foreground: 'red',
+        },
+        'nav-bar': {
+            background: '#ccc',
+        },
+        'button-primary': {
+            foreground: 'white',
+            background: {
+                refForeground: 'action-primary',
+            },
+        },
+    },
+)`,
         );
     });
 });

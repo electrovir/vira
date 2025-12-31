@@ -4,7 +4,7 @@ import {
     ContrastLevelName,
     contrastLevels,
     type CalculatedContrast,
-    type FontSizeWeights,
+    type FontWeight,
 } from '../contrast.js';
 
 /**
@@ -14,7 +14,7 @@ import {
  */
 export const ThemeVirContrastIndicator = defineElement<{
     contrast: Readonly<CalculatedContrast>;
-    fontWeight: FontSizeWeights;
+    fontWeight: FontWeight;
 }>()({
     tagName: 'theme-vir-contrast-indicator',
     styles: css`
@@ -39,7 +39,7 @@ export const ThemeVirContrastIndicator = defineElement<{
         .${unsafeCSS(ContrastLevelName.Decoration)} {
             color: #ff6600;
         }
-        .${unsafeCSS(ContrastLevelName.SpotText)} {
+        .${unsafeCSS(ContrastLevelName.Placeholder)} {
             color: #a5a520;
         }
 

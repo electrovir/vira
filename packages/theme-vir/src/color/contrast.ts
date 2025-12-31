@@ -1,5 +1,12 @@
-import {assertWrap} from '@augment-vir/assert';
-import {type ArrayElement, arrayToObject, round} from '@augment-vir/common';
+import {assertWrap, check} from '@augment-vir/assert';
+import {
+    type ArrayElement,
+    arrayToObject,
+    type ExtractKeysWithMatchingValues,
+    mapObjectValues,
+    round,
+    type Values,
+} from '@augment-vir/common';
 
 // @ts-expect-error: `fontLookupAPCA` is not in the types
 import {calcAPCA, fontLookupAPCA} from 'apca-w3';
@@ -10,14 +17,70 @@ import {calcAPCA, fontLookupAPCA} from 'apca-w3';
  *
  * @category Internal
  */
-export type FontSizeWeights = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
+/**
+ * All considered font weights in {@link FontWeight} mapped by their weight name.
+ *
+ * @category Internal
+ */
+export const fontWeightByName = {
+    Thin: 100,
+    ExtraLight: 200,
+    Light: 300,
+    Normal: 400,
+    Medium: 500,
+    SemiBold: 600,
+    Bold: 700,
+    ExtraBold: 800,
+    Heavy: 900,
+} as const satisfies Record<string, FontWeight>;
+
+/**
+ * All font weight names from {@link fontWeightByName}.
+ *
+ * @category Internal
+ */
+export type FontWeightName = keyof typeof fontWeightByName;
+/**
+ * All font weight names from {@link fontWeightByName}.
+ *
+ * @category Internal
+ */
+export const FontWeightName = mapObjectValues(fontWeightByName, (key) => key) satisfies Record<
+    FontWeightName,
+    FontWeightName
+> as Record<FontWeightName, FontWeightName> as {[Key in FontWeightName]: Key};
+
+/**
+ * All considered font weights in {@link FontWeight} mapped to their weight name from
+ * {@link fontWeightByName}.
+ *
+ * @category Internal
+ */
+export const fontWeightToName = Object.fromEntries(
+    Object.entries(fontWeightByName).map(
+        ([
+            key,
+            value,
+        ]) => [
+            value,
+            key,
+        ],
+    ),
+) as {
+    [Weight in Values<typeof fontWeightByName>]: ExtractKeysWithMatchingValues<
+        typeof fontWeightByName,
+        Weight
+    >;
+};
 
 /**
  * A mapping of font weights to font sizes. Used in {@link calculateFontSizes}.
  *
  * @category Internal
  */
-export type FontSizes = Record<FontSizeWeights, number>;
+export type FontSizes = Record<FontWeight, number>;
 
 /**
  * Contrast calculations produced by {@link calculateContrast}.
@@ -62,6 +125,93 @@ export function calculateContrast({
     };
 }
 
+/** @category Internal */
+export function findClosestColor(baseColor: string, possibleColors: ReadonlyArray<string>): string {
+    return possibleColors.reduce(
+        (best, color) => {
+            const contrast = Math.abs(
+                calculateContrast({
+                    foreground: color,
+                    background: baseColor,
+                }).contrast,
+            );
+
+            if (contrast > best.contrast) {
+                return best;
+            } else {
+                return {
+                    contrast,
+                    color,
+                };
+            }
+        },
+        {
+            contrast: Infinity,
+            color: '',
+        },
+    ).color;
+}
+
+/**
+ * Find a color from an array that matches the desired contrast level.
+ *
+ * @category Internal
+ * @returns `undefined` if no color match is found.
+ */
+export function findColorAtContrastLevel(
+    colors: Readonly<
+        {foreground: string; background: string[]} | {foreground: string[]; background: string}
+    >,
+    desiredContrastLevel: ContrastLevelName,
+): string | undefined {
+    const otherColors: string[] | Error = check.isArray(colors.foreground)
+        ? colors.foreground
+        : check.isArray(colors.background)
+          ? colors.background
+          : new Error('No color array provided.');
+
+    if (otherColors instanceof Error) {
+        throw otherColors;
+    }
+
+    const desiredIndex = orderedContrastLevelNames.indexOf(desiredContrastLevel);
+
+    const bestMatch = otherColors.reduce(
+        (best, otherColor) => {
+            const contrast = calculateContrast({
+                foreground: check.isString(colors.foreground) ? colors.foreground : otherColor,
+                background: check.isString(colors.background) ? colors.background : otherColor,
+            });
+            const contrastIndex = orderedContrastLevelNames.indexOf(contrast.contrastLevel.name);
+            const distance = contrastIndex - desiredIndex;
+            console.log({
+                distance,
+                desiredContrastLevel,
+                desiredIndex,
+                contrast: contrast.contrastLevel.name,
+                contrastIndex,
+            });
+
+            if (distance > 0 || best.distance > distance) {
+                return best;
+            } else {
+                return {
+                    color: otherColor,
+                    distance,
+                };
+            }
+        },
+        {
+            distance: 0,
+            color: undefined as string | undefined,
+        },
+    );
+
+    console.log('best', bestMatch);
+
+    return bestMatch.color;
+}
+
 /**
  * Calculated needed font sizes for each font weight for the given color contrast.
  *
@@ -97,11 +247,11 @@ export function determineContrastLevel(contrast: number): ContrastLevel {
  * @category Internal
  */
 export enum ContrastLevelName {
-    SmallBodyText = 'small-body-text',
-    BodyText = 'body-text',
-    NonBodyText = 'non-body-text',
-    LargeText = 'large-text',
-    SpotText = 'spot-text',
+    SmallBodyText = 'small-body',
+    BodyText = 'body',
+    NonBodyText = 'non-body',
+    Header = 'header',
+    Placeholder = 'placeholder',
     Decoration = 'decoration',
     Invisible = 'invisible',
 }
@@ -115,10 +265,10 @@ export const contrastLevelLabel: Record<ContrastLevelName, string> = {
     [ContrastLevelName.SmallBodyText]: 'Small Text',
     [ContrastLevelName.BodyText]: 'Body Text',
     [ContrastLevelName.NonBodyText]: 'Non-body Text',
-    [ContrastLevelName.LargeText]: 'Headers',
-    [ContrastLevelName.SpotText]: 'Placeholders',
-    [ContrastLevelName.Decoration]: 'Decorations',
-    [ContrastLevelName.Invisible]: 'Invisible ',
+    [ContrastLevelName.Header]: 'Header',
+    [ContrastLevelName.Placeholder]: 'Placeholder',
+    [ContrastLevelName.Decoration]: 'Decoration',
+    [ContrastLevelName.Invisible]: 'Invisible',
 };
 
 /**
@@ -130,8 +280,8 @@ export const orderedContrastLevelNames = [
     ContrastLevelName.SmallBodyText,
     ContrastLevelName.BodyText,
     ContrastLevelName.NonBodyText,
-    ContrastLevelName.LargeText,
-    ContrastLevelName.SpotText,
+    ContrastLevelName.Header,
+    ContrastLevelName.Placeholder,
     ContrastLevelName.Decoration,
     ContrastLevelName.Invisible,
 ] as const;
@@ -187,7 +337,7 @@ export const contrastLevels = [
     },
     {
         min: 45,
-        name: ContrastLevelName.LargeText,
+        name: ContrastLevelName.Header,
         description: 'Okay for large or headline text.',
         apcaName: 'large & sub-fluent text',
         apcaDescription:
@@ -195,7 +345,7 @@ export const contrastLevels = [
     },
     {
         min: 30,
-        name: ContrastLevelName.SpotText,
+        name: ContrastLevelName.Placeholder,
         description:
             'Okay for disabled or placeholder text, copyright lines, icons, or non-text elements.',
         apcaName: 'spot & non text only',

@@ -7,4 +7,6 @@ export const viraColorPalettePages = createColorPaletteBookPages({
     parent: stylesBookPage,
     title: 'Vira Color',
     includeContrast: true,
+    includeTheme: true,
+    // useVerticalTheme: true,
 });

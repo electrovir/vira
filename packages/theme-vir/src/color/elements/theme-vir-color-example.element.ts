@@ -1,17 +1,8 @@
 import {assertWrap, check} from '@augment-vir/assert';
-import {
-    css,
-    defineElement,
-    defineElementEvent,
-    html,
-    listen,
-    nothing,
-    onDomCreated,
-    unsafeCSS,
-} from 'element-vir';
+import {css, defineElement, html, listen, nothing, onDomCreated, unsafeCSS} from 'element-vir';
 import {noNativeFormStyles, noNativeSpacing} from 'vira';
 import {type ColorThemeColor} from '../color-theme.js';
-import {calculateContrast, type FontSizeWeights} from '../contrast.js';
+import {calculateContrast, type FontWeight} from '../contrast.js';
 import {ThemeVirContrastIndicator} from './theme-vir-contrast-indicator.element.js';
 
 /**
@@ -24,19 +15,18 @@ export const ThemeVirColorExample = defineElement<{
     showVarValues: boolean;
     showVarNames: boolean;
     showContrast: boolean;
-    fontWeight: FontSizeWeights;
+    fontWeight: FontWeight;
 }>()({
     tagName: 'theme-vir-color-example',
     state() {
         return {
             previewElement: undefined as undefined | HTMLElement,
+            forceShowEverything: false,
         };
     },
-    events: {
-        toggleShowVars: defineElementEvent<void>(),
-    },
     hostClasses: {
-        'theme-vir-color-example-no-contrast-tips': ({inputs}) => !inputs.showContrast,
+        'theme-vir-color-example-no-contrast-tips': ({inputs, state}) =>
+            !inputs.showContrast && !state.forceShowEverything,
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -126,7 +116,7 @@ export const ThemeVirColorExample = defineElement<{
             margin-top: 1px;
         }
     `,
-    render({state, updateState, inputs, dispatch, events}) {
+    render({state, updateState, inputs}) {
         const colorRows = (
             [
                 'foreground',
@@ -135,15 +125,16 @@ export const ThemeVirColorExample = defineElement<{
         ).map((layerKey) => {
             const keyString = [
                 inputs.color[layerKey].name,
-                inputs.showVarValues ? ':' : '',
+                inputs.showVarValues || state.forceShowEverything ? ':' : '',
             ]
                 .filter(check.isTruthy)
                 .join('');
-            const valueTemplate = inputs.showVarValues
-                ? html`
-                      <span>${inputs.color[layerKey].default}</span>
-                  `
-                : nothing;
+            const valueTemplate =
+                inputs.showVarValues || state.forceShowEverything
+                    ? html`
+                          <span>${inputs.color[layerKey].default}</span>
+                      `
+                    : nothing;
 
             return html`
                 <p>
@@ -153,11 +144,12 @@ export const ThemeVirColorExample = defineElement<{
             `;
         });
 
-        const cssVarNamesTemplate = inputs.showVarNames
-            ? html`
-                  <div class="css-var-names">${colorRows}</div>
-              `
-            : nothing;
+        const cssVarNamesTemplate =
+            inputs.showVarNames || state.forceShowEverything
+                ? html`
+                      <div class="css-var-names">${colorRows}</div>
+                  `
+                : nothing;
 
         const contrast = state.previewElement
             ? calculateContrast({
@@ -171,7 +163,7 @@ export const ThemeVirColorExample = defineElement<{
             : undefined;
 
         const contrastTemplate =
-            contrast && inputs.showContrast
+            contrast && (inputs.showContrast || state.forceShowEverything)
                 ? html`
                       <${ThemeVirContrastIndicator.assign({
                           contrast,
@@ -183,7 +175,9 @@ export const ThemeVirColorExample = defineElement<{
         return html`
             <button
                 ${listen('click', () => {
-                    dispatch(new events.toggleShowVars());
+                    updateState({
+                        forceShowEverything: !state.forceShowEverything,
+                    });
                 })}
                 ${onDomCreated((element) => {
                     updateState({

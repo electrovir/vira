@@ -1,4 +1,4 @@
-import {viraColorPalettePages} from './entries/colors.js';
+import {viraColorPalettePages} from './entries/colors.book.js';
 import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
 import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
 import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
@@ -31,7 +31,7 @@ const topLevelPages = [
     utilBookPage,
 ];
 
-const allPages = [
+const elementPages = [
     viraBoldTextPage,
     viraButtonBookPage,
     viraCardBookPage,
@@ -52,13 +52,15 @@ const allPages = [
     viraPopUpMenuBookPage,
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
-    viraSelectBookPage,
+    viraSelectBookPage,].sort((a, b) => a.title.localeCompare(b.title))
 
+const allPages = [
+...elementPages,
     dynamicElementsBookPage,
 
     shadowBookPage,
     ...viraColorPalettePages,
-].sort((a, b) => a.title.localeCompare(b.title));
+];
 
 export const viraBookPages = [
     ...topLevelPages,

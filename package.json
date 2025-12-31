@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "28.14.0",
+    "version": "28.15.0",
     "private": true,
     "repository": {
         "type": "git",
@@ -35,7 +35,10 @@
     },
     "overrides": {
         "@web/dev-server-rollup": "0.6.1",
-        "playwright": "1.56.1"
+        "playwright": "1.56.1",
+        "theme-vir": {
+            "vira": "$vira"
+        }
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.3",

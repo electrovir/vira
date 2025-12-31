@@ -1,6 +1,11 @@
-import {defineColorTheme} from 'theme-vir';
+import {defineColorTheme} from 'theme-vir/dist/color/color-theme.js';
 import {viraColorPalette} from './vira-color-palette.js';
 
+/**
+ * A theme for Vira.
+ *
+ * @category Color
+ */
 export const viraColorTheme = defineColorTheme(
     {
         foreground: 'black',

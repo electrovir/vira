@@ -52,10 +52,11 @@ const elementPages = [
     viraPopUpMenuBookPage,
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
-    viraSelectBookPage,].sort((a, b) => a.title.localeCompare(b.title))
+    viraSelectBookPage,
+].sort((a, b) => a.title.localeCompare(b.title));
 
 const allPages = [
-...elementPages,
+    ...elementPages,
     dynamicElementsBookPage,
 
     shadowBookPage,

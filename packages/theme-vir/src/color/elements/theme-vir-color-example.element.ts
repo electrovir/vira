@@ -11,7 +11,7 @@ import {
 } from 'element-vir';
 import {noNativeFormStyles, noNativeSpacing} from 'vira';
 import {type ColorThemeColor} from '../color-theme.js';
-import {calculateContrast} from '../contrast.js';
+import {calculateContrast, type FontSizeWeights} from '../contrast.js';
 import {ThemeVirContrastIndicator} from './theme-vir-contrast-indicator.element.js';
 
 /**
@@ -24,6 +24,7 @@ export const ThemeVirColorExample = defineElement<{
     showVarValues: boolean;
     showVarNames: boolean;
     showContrast: boolean;
+    fontWeight: FontSizeWeights;
 }>()({
     tagName: 'theme-vir-color-example',
     state() {
@@ -174,6 +175,7 @@ export const ThemeVirColorExample = defineElement<{
                 ? html`
                       <${ThemeVirContrastIndicator.assign({
                           contrast,
+                          fontWeight: inputs.fontWeight,
                       })}></${ThemeVirContrastIndicator}>
                   `
                 : nothing;
@@ -205,6 +207,7 @@ export const ThemeVirColorExample = defineElement<{
                                         ? 'hidden'
                                         : 'visible',
                                 )};
+                                font-weight: ${inputs.fontWeight};
                                 font-size: ${contrast ? contrast.fontSizes[400] : 14}px;
                             `}
                         >

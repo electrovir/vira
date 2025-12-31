@@ -4,6 +4,7 @@ import {
     ContrastLevelName,
     contrastLevels,
     type CalculatedContrast,
+    type FontSizeWeights,
 } from '../contrast.js';
 
 /**
@@ -13,6 +14,7 @@ import {
  */
 export const ThemeVirContrastIndicator = defineElement<{
     contrast: Readonly<CalculatedContrast>;
+    fontWeight: FontSizeWeights;
 }>()({
     tagName: 'theme-vir-contrast-indicator',
     styles: css`
@@ -87,7 +89,9 @@ export const ThemeVirContrastIndicator = defineElement<{
         ].join('\n');
 
         const fontSize =
-            inputs.contrast.fontSizes[400] > 150 ? '-' : `${inputs.contrast.fontSizes[400]}px`;
+            inputs.contrast.fontSizes[inputs.fontWeight] > 150
+                ? '-'
+                : `${inputs.contrast.fontSizes[inputs.fontWeight]}px`;
 
         return html`
             <div title=${title} class="wrapper ${inputs.contrast.contrastLevel.name}">

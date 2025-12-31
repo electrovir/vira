@@ -73,6 +73,7 @@ export function createColorThemeBookPages({
                             showVarNames: controls['Show Var Names'] || state.forceShowEverything,
                             showContrast:
                                 controls['Show Contrast Tips'] || state.forceShowEverything,
+                            fontWeight: 400,
                         })}
                             ${listen(ThemeVirColorExample.events.toggleShowVars, () => {
                                 updateState({
@@ -95,6 +96,7 @@ export function createColorThemeBookPages({
                                       controls['Show Var Names'] || state.forceShowEverything,
                                   showContrast:
                                       controls['Show Contrast Tips'] || state.forceShowEverything,
+                                  fontWeight: 400,
                               })}
                                   ${listen(ThemeVirColorExample.events.toggleShowVars, () => {
                                       updateState({

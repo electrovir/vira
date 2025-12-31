@@ -5,6 +5,6 @@ import {stylesBookPage} from '../top-level-pages.js';
 export const viraColorPalettePages = createColorPaletteBookPages({
     colors: viraColorPalette,
     parent: stylesBookPage,
-    title: 'Vira Color Palette',
+    title: 'Vira Color',
     includeContrast: true,
 });

@@ -4,7 +4,7 @@ import {defineBookPage, type BookPage} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
 import {type CssVarDefinitions, type CssVarsSetup, type SingleCssVarDefinition} from 'lit-css-vars';
 import {type RequireExactlyOne} from 'type-fest';
-import {viraColorPalette} from 'vira';
+import {noNativeSpacing, viraColorPalette} from 'vira';
 import {type FontSizeWeights} from './contrast.js';
 import {ThemeVirColorExample} from './elements/theme-vir-color-example.element.js';
 
@@ -119,9 +119,14 @@ export function createColorPaletteBookPages({
         },
     );
 
-    const colorsPage = defineBookPage({
+    const topColorsPage = defineBookPage({
         parent,
         title,
+    });
+
+    const colorPalettePage = defineBookPage({
+        parent: topColorsPage,
+        title: `${title} Palette`,
         defineExamples({defineExample}) {
             Object.entries(colorGroups).forEach(
                 ([
@@ -146,9 +151,14 @@ export function createColorPaletteBookPages({
                                     height: 50px;
                                 }
 
-                                & .var-name {
+                                & .color-details {
+                                    font-family: monospace;
                                     font-size: 12px;
                                     color: ${viraColorPalette['vira-grey-50'].value};
+                                }
+
+                                & .color-value {
+                                    margin-left: 1ch;
                                 }
                             }
                         `,
@@ -162,7 +172,11 @@ export function createColorPaletteBookPages({
                                                 background-color: ${unsafeCSS(color.value)};
                                             `}
                                         ></div>
-                                        <div class="var-name">${color.varName}</div>
+                                        <p class="color-details">
+                                            <span>${color.varName}</span>
+                                            <br />
+                                            <span class="color-value">${color.value}</span>
+                                        </p>
                                     </div>
                                 `;
                             });
@@ -174,8 +188,8 @@ export function createColorPaletteBookPages({
     });
 
     const blackWhiteContrastPage = defineBookPage({
-        parent: colorsPage,
-        title: `${title} Black White Contrast`,
+        parent: topColorsPage,
+        title: `${title} Contrast Black White`,
         defineExamples({defineExample}) {
             Object.entries(colorGroups).forEach(
                 ([
@@ -191,9 +205,18 @@ export function createColorPaletteBookPages({
                                 gap: 24px;
                             }
 
+                            p {
+                                ${noNativeSpacing}
+                            }
+
+                            .darkness-level {
+                                text-align: center;
+                                font-size: 12px;
+                                color: ${viraColorPalette['vira-grey-50'].value};
+                            }
+
                             td {
-                                padding: 8px 0;
-                                min-width: 170px;
+                                padding: 4px 0;
                             }
                         `,
                         render() {
@@ -201,6 +224,7 @@ export function createColorPaletteBookPages({
                                 const cellTemplates = blackWhiteCells.map((cell) => {
                                     return html`
                                         <td>
+                                            <p class="darkness-level">${color.suffix}</p>
                                             <${ThemeVirColorExample.assign({
                                                 color: {
                                                     background: cell.background || color.definition,
@@ -249,8 +273,8 @@ export function createColorPaletteBookPages({
 
     function createSelfContrastPage(fontWeight: FontSizeWeights) {
         return defineBookPage({
-            parent: colorsPage,
-            title: `${title} Self Contrast ${fontWeight}`,
+            parent: topColorsPage,
+            title: `${title} Contrast Self ${fontWeight}`,
             defineExamples({defineExample}) {
                 Object.entries(colorGroups).forEach(
                     ([
@@ -274,9 +298,18 @@ export function createColorPaletteBookPages({
                                     gap: 24px;
                                 }
 
+                                p {
+                                    ${noNativeSpacing}
+                                }
+
+                                .darkness-level {
+                                    text-align: center;
+                                    font-size: 12px;
+                                    color: ${viraColorPalette['vira-grey-50'].value};
+                                }
+
                                 td {
-                                    padding: 8px 0;
-                                    min-width: 170px;
+                                    padding: 4px 0;
                                 }
                             `,
                             render() {
@@ -284,6 +317,7 @@ export function createColorPaletteBookPages({
                                     const cellTemplates = selfContrastCells.map((cell) => {
                                         return html`
                                             <td>
+                                                <p class="darkness-level">${color.suffix}</p>
                                                 <${ThemeVirColorExample.assign({
                                                     color: {
                                                         background:
@@ -334,7 +368,8 @@ export function createColorPaletteBookPages({
     }
 
     return [
-        colorsPage,
+        topColorsPage,
+        colorPalettePage,
         includeContrast ? blackWhiteContrastPage : undefined,
         includeContrast ? createSelfContrastPage(400) : undefined,
         includeContrast ? createSelfContrastPage(700) : undefined,

@@ -16,8 +16,8 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.54.4",
-        "@augment-vir/common": "^31.54.4",
+        "@augment-vir/assert": "^31.57.3",
+        "@augment-vir/common": "^31.57.3",
         "element-book": "^26.12.2",
         "element-vir": "^26.12.2",
         "lit-css-vars": "^3.0.11",

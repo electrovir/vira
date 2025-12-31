@@ -18,11 +18,11 @@
     "dependencies": {
         "@augment-vir/assert": "^31.57.3",
         "@augment-vir/common": "^31.57.3",
-        "element-book": "^26.14.0",
+        "element-book": "^26.14.1",
         "element-vir": "^26.14.0",
         "lit-css-vars": "^3.0.11",
         "spa-router-vir": "^6.4.1",
-        "theme-vir": "^28.15.0",
+        "theme-vir": "^28.15.3",
         "url-vir": "^2.1.7",
         "vira": "^28.15.0"
     },

@@ -1,11 +1,21 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import Color from 'colorjs.io';
+import {type Format} from 'colorjs.io/types/src/space';
 import {html} from 'element-vir';
-import {rgbCssColorFormat} from '../styles/color.js';
 import {ColorType, extractIconColor} from './icon-color.test-helper.js';
 import {createColoredIcon} from './icon-svg.js';
 import {Element24Icon} from './icon-svgs/element-24.icon.js';
+
+const rgbCssColorFormat: Format = {
+    name: 'rgb',
+    coords: [
+        '<number>[0, 255]',
+        '<number>[0, 255]',
+        '<number>[0, 255]',
+    ],
+    commas: true,
+};
 
 describe(createColoredIcon.name, () => {
     it('fails if a given color is invalid', () => {

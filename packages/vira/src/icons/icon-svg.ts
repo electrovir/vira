@@ -1,6 +1,6 @@
-import {getObjectTypedKeys} from '@augment-vir/common';
+import {getObjectTypedKeys, stringify} from '@augment-vir/common';
+import Color, {type ColorTypes} from 'colorjs.io';
 import {type TemplateResult, html} from 'element-vir';
-import {getAssertedValidColor} from '../styles/color.js';
 import {viraIconCssVars} from './icon-css-vars.js';
 
 /**
@@ -31,6 +31,17 @@ export function defineIcon({
     };
 
     return iconSvg;
+}
+
+function getAssertedValidColor(input: ColorTypes | undefined) {
+    try {
+        if (!input) {
+            throw new Error('invalid empty color');
+        }
+        return new Color(input);
+    } catch {
+        throw new Error(`Invalid color: ${stringify(input)}`);
+    }
 }
 
 /**

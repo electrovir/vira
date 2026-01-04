@@ -4,6 +4,7 @@ export * from './border.js';
 export * from './disabled.js';
 export * from './durations.js';
 export * from './focus.js';
+export * from './font.js';
 export * from './form-styles.js';
 export * from './native-styles.js';
 export * from './scrollbar.js';

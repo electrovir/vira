@@ -1,6 +1,6 @@
 import ColorImport from 'colorjs.io';
 
-export type {ColorTypes} from 'colorjs.io/types/src/color';
+export type {ColorTypes} from 'colorjs.io';
 export type {Format} from 'colorjs.io/types/src/space';
 
 /**

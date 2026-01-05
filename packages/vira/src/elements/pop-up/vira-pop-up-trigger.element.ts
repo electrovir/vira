@@ -66,7 +66,7 @@ export const ViraPopUpTrigger = defineViraElement<
         /** Set to `true` to keep the pop-up open if it is interacted with. */
         keepOpenAfterInteraction: boolean;
         /** All values in px. */
-        popUpOffset?: PopUpOffset;
+        popUpOffset: PopUpOffset;
         /**
          * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the
          *   pop-up can grow to the right.
@@ -82,7 +82,15 @@ export const ViraPopUpTrigger = defineViraElement<
          *
          * @default HorizontalAnchor.Auto
          */
-        horizontalAnchor?: HorizontalAnchor;
+        horizontalAnchor: HorizontalAnchor;
+        /**
+         * When `true`, the pop-up will not have its maximum height/width constrained to fit within
+         * the overflow container. The positioning logic (up/down, left/right) will still be
+         * applied.
+         *
+         * @default false
+         */
+        ignoreMaxDimensions: boolean;
     }>
 >()({
     tagName: 'vira-pop-up-trigger',
@@ -269,18 +277,26 @@ export const ViraPopUpTrigger = defineViraElement<
 
         const leftCss =
             effectiveHorizontalAnchor === HorizontalAnchor.Right && state.showPopUpResult
-                ? css`
-                      left: -${state.showPopUpResult.positions.diff.left}px;
-                  `
+                ? inputs.ignoreMaxDimensions
+                    ? css`
+                          left: unset;
+                      `
+                    : css`
+                          left: -${state.showPopUpResult.positions.diff.left}px;
+                      `
                 : css`
                       left: ${inputs.popUpOffset?.left || 0}px;
                   `;
 
         const rightCss =
             state.showPopUpResult && effectiveHorizontalAnchor === HorizontalAnchor.Left
-                ? css`
-                      right: -${state.showPopUpResult.positions.diff.right}px;
-                  `
+                ? inputs.ignoreMaxDimensions
+                    ? css`
+                          right: unset;
+                      `
+                    : css`
+                          right: -${state.showPopUpResult.positions.diff.right}px;
+                      `
                 : css`
                       right: ${inputs.popUpOffset?.right || 0}px;
                   `;
@@ -299,17 +315,29 @@ export const ViraPopUpTrigger = defineViraElement<
         const positionerStyles = state.showPopUpResult
             ? state.showPopUpResult.popDown
                 ? /** Dropdown going down position. */
-                  css`
-                      bottom: -${state.showPopUpResult.positions.diff.bottom}px;
-                      top: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
-                      ${horizontalPositionStyle}
-                  `
+                  inputs.ignoreMaxDimensions
+                    ? css`
+                          bottom: unset;
+                          top: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                          ${horizontalPositionStyle}
+                      `
+                    : css`
+                          bottom: -${state.showPopUpResult.positions.diff.bottom}px;
+                          top: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                          ${horizontalPositionStyle}
+                      `
                 : /** Dropdown going up position. */
-                  css`
-                      top: -${state.showPopUpResult.positions.diff.top}px;
-                      bottom: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
-                      ${horizontalPositionStyle}
-                  `
+                  inputs.ignoreMaxDimensions
+                  ? css`
+                        top: unset;
+                        bottom: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                        ${horizontalPositionStyle}
+                    `
+                  : css`
+                        top: -${state.showPopUpResult.positions.diff.top}px;
+                        bottom: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
+                        ${horizontalPositionStyle}
+                    `
             : undefined;
 
         function respondToClick(event: Event) {

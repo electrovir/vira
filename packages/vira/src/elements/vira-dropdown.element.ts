@@ -70,6 +70,14 @@ export const ViraDropdown = defineViraElement<
          * @default HorizontalAnchor.Both
          */
         horizontalAnchor: HorizontalAnchor;
+        /**
+         * When `true`, the dropdown will not have its maximum height/width constrained to fit
+         * within the overflow container. The positioning logic (up/down, left/right) will still be
+         * applied.
+         *
+         * @default false
+         */
+        ignoreMaxDimensions: boolean;
     }>
 >()({
     tagName: 'vira-dropdown',
@@ -197,6 +205,7 @@ export const ViraDropdown = defineViraElement<
                     right: 24,
                 },
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Both,
+                ignoreMaxDimensions: inputs.ignoreMaxDimensions,
             })}
                 ${listen(ViraMenuTrigger.events.openChange, (event) => {
                     updateState({showPopUpResult: event.detail});

@@ -186,5 +186,64 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'ignoreMaxDimensions wide content',
+            styles: css`
+                .container {
+                    width: 300px;
+                    overflow: auto;
+                    border: 2px solid #999;
+                    padding: 16px;
+                }
+
+                .trigger {
+                    cursor: pointer;
+                    border: 4px solid #ccc;
+                    padding: 8px 16px;
+                }
+
+                .pop-up {
+                    box-sizing: border-box;
+                    border: 4px solid #eee;
+                    border-top: none;
+                    padding: 8px 16px;
+                    background-color: #eef9ff;
+                    white-space: nowrap;
+                }
+            `,
+            render() {
+                return html`
+                    <p>
+                        The container has a fixed width of 300px. With
+                        <code>ignoreMaxDimensions: true</code>
+                        , the pop-up can exceed the container width.
+                    </p>
+                    <div class="container">
+                        <${ViraPopUpTrigger.assign({
+                            keepOpenAfterInteraction: true,
+                            z_debug_forceOpenState: true,
+                            ignoreMaxDimensions: true,
+                        })}>
+                            <div class="trigger" slot=${ViraPopUpTrigger.slotNames.trigger}>
+                                Trigger
+                            </div>
+                            <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>
+                                This content is much wider than the container and should overflow
+                                <div>Item 1</div>
+                                <div>Item 2</div>
+                                <div>Item 3</div>
+                                <div>Item 4</div>
+                                <div>Item 5</div>
+                                <div>Item 6</div>
+                                <div>Item 7</div>
+                                <div>Item 8</div>
+                                <div>Item 9</div>
+                                <div>Item 10</div>
+                            </div>
+                        </${ViraPopUpTrigger}>
+                    </div>
+                `;
+            },
+        });
     },
 });

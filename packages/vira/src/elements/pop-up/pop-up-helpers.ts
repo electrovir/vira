@@ -1,5 +1,9 @@
-import {joinWithFinalConjunction} from '@augment-vir/common';
-import {type PopUpManager, type ShowPopUpResult} from '../../util/pop-up-manager.js';
+import {joinWithFinalConjunction, type PartialWithUndefined} from '@augment-vir/common';
+import {
+    type PopUpManager,
+    type PopUpManagerOptions,
+    type ShowPopUpResult,
+} from '../../util/pop-up-manager.js';
 import {type MenuItem} from './pop-up-menu-item.js';
 
 /**
@@ -60,14 +64,19 @@ export function triggerPopUpState({
     callback,
     popUpManager,
     host,
-}: {
-    open: boolean;
-    popUpManager: PopUpManager;
-    host: HTMLElement;
-    callback?: ((showPopUpResult: ShowPopUpResult | undefined) => void) | undefined;
-}) {
+    options,
+}: Readonly<
+    {
+        open: boolean;
+        popUpManager: PopUpManager;
+        host: HTMLElement;
+    } & PartialWithUndefined<{
+        callback?: ((showPopUpResult: ShowPopUpResult | undefined) => void) | undefined;
+        options?: Partial<PopUpManagerOptions> | undefined;
+    }>
+>) {
     if (open) {
-        const showPopUpResult = popUpManager.showPopUp(host);
+        const showPopUpResult = popUpManager.showPopUp(host, options);
         callback?.(showPopUpResult);
     } else {
         popUpManager.removePopUp();

@@ -59,6 +59,14 @@ export const ViraMenuTrigger = defineViraElement<
          * @default HorizontalAnchor.Left
          */
         horizontalAnchor: HorizontalAnchor;
+        /**
+         * When `true`, the pop-up will not have its maximum height/width constrained to fit within
+         * the overflow container. The positioning logic (up/down, left/right) will still be
+         * applied.
+         *
+         * @default false
+         */
+        ignoreMaxDimensions: boolean;
     }>
 >()({
     tagName: 'vira-menu-trigger',
@@ -98,6 +106,7 @@ export const ViraMenuTrigger = defineViraElement<
                 z_debug_forceOpenState: inputs.z_debug_forceOpenState,
                 popUpOffset: inputs.popUpOffset,
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Left,
+                ignoreMaxDimensions: inputs.ignoreMaxDimensions,
             })}
                 class=${classMap({
                     open: !!state.showPopUpResult,

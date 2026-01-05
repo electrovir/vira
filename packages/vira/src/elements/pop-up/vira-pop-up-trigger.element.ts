@@ -40,12 +40,15 @@ export enum HorizontalAnchor {
      * pop-up to grow on the left side of the trigger.
      */
     Right = 'right',
+    /** Restrict the pop-up on both sides. */
+    Both = 'both',
     /**
-     * Restrict the pop-up on both sides.
+     * Automatically choose left or right based on available space, defaulting to anchoring on the
+     * left side.
      *
      * This is the default anchor for {@link ViraPopUpTrigger}.
      */
-    Both = 'both',
+    Auto = 'auto',
 }
 
 /**
@@ -70,12 +73,14 @@ export const ViraPopUpTrigger = defineViraElement<
          * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the
          *   pop-up can grow to the left.
          * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
-         *   beyond it. (This is the default experience.)
+         *   beyond it.
+         * - `HorizontalAnchor.Auto`: automatically choose left or right anchor based on available
+         *   space, defaulting to left anchor. (This is the default experience.)
          *
          * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
          * `popUpOffset` for the direction _opposite_ of the chosen anchor.
          *
-         * @default HorizontalAnchor.Both
+         * @default HorizontalAnchor.Auto
          */
         horizontalAnchor?: HorizontalAnchor;
     }>
@@ -250,8 +255,20 @@ export const ViraPopUpTrigger = defineViraElement<
             }
         }
 
+        /**
+         * Resolve the effective horizontal anchor. For Auto, use the popRight calculation from
+         * showPopUpResult to determine whether to anchor left or right.
+         */
+        const effectiveHorizontalAnchor: HorizontalAnchor =
+            inputs.horizontalAnchor === HorizontalAnchor.Auto ||
+            inputs.horizontalAnchor === undefined
+                ? state.showPopUpResult?.popRight
+                    ? HorizontalAnchor.Left
+                    : HorizontalAnchor.Right
+                : inputs.horizontalAnchor;
+
         const leftCss =
-            inputs.horizontalAnchor === HorizontalAnchor.Right && state.showPopUpResult
+            effectiveHorizontalAnchor === HorizontalAnchor.Right && state.showPopUpResult
                 ? css`
                       left: -${state.showPopUpResult.positions.diff.left}px;
                   `
@@ -260,7 +277,7 @@ export const ViraPopUpTrigger = defineViraElement<
                   `;
 
         const rightCss =
-            state.showPopUpResult && inputs.horizontalAnchor === HorizontalAnchor.Left
+            state.showPopUpResult && effectiveHorizontalAnchor === HorizontalAnchor.Left
                 ? css`
                       right: -${state.showPopUpResult.positions.diff.right}px;
                   `
@@ -332,7 +349,7 @@ export const ViraPopUpTrigger = defineViraElement<
 
                 <div
                     class="pop-up-positioner ${classMap({
-                        'right-aligned': inputs.horizontalAnchor === HorizontalAnchor.Right,
+                        'right-aligned': effectiveHorizontalAnchor === HorizontalAnchor.Right,
                     })}"
                     style=${positionerStyles}
                 >

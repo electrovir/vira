@@ -59,6 +59,21 @@ export type PopUpManagerOptions = {
      */
     minDownSpace: number;
     /**
+     * The minimum number of pixels for allowing the pop-up to go rightwards. If the rightward
+     * available space is less than this, and if the leftwards available space is
+     * `horizontalDiffThreshold` more than the rightwards space, the pop-up will be directed
+     * leftwards.
+     *
+     * Equation:
+     *
+     *     const directLeftwards =
+     *         rightwardsSpace < minRightSpace &&
+     *         leftwardsSpace > rightwardsSpace + horizontalDiffThreshold;
+     *
+     * @default 400
+     */
+    minRightSpace: number;
+    /**
      * The number of pixels required for the upwards available space to be bigger than the downwards
      * available space before directing the pop-up upwards.
      *
@@ -71,6 +86,19 @@ export type PopUpManagerOptions = {
      * @default 20
      */
     verticalDiffThreshold: number;
+    /**
+     * The number of pixels required for the leftwards available space to be bigger than the
+     * rightwards available space before directing the pop-up leftwards.
+     *
+     * Equation:
+     *
+     *     const directLeftwards =
+     *         rightwardsSpace < minRightSpace &&
+     *         leftwardsSpace > rightwardsSpace + horizontalDiffThreshold;
+     *
+     * @default 100
+     */
+    horizontalDiffThreshold: number;
     /**
      * Supports navigation of the pop up via the `device-navigation` package.
      *
@@ -91,6 +119,12 @@ export type ShowPopUpResult = {
      * the root element.
      */
     popDown: boolean;
+    /**
+     * Indicates if the "pop up" should pop in the rightwards direction or not. If not, it should
+     * pop in the leftwards direction. This is determined by how much space is available on either
+     * side of the root element.
+     */
+    popRight: boolean;
     positions: Record<'root' | 'container' | 'diff', PositionRect>;
 };
 
@@ -124,7 +158,9 @@ export class PopUpManager {
     private listenTarget = new ListenTarget<PopUpManagerEvents>();
     public options: PopUpManagerOptions = {
         minDownSpace: 200,
+        minRightSpace: 400,
         verticalDiffThreshold: 20,
+        horizontalDiffThreshold: 100,
         supportNavigation: true,
     };
     private cleanupCallbacks: (() => void)[] = [];
@@ -295,10 +331,15 @@ export class PopUpManager {
             diff.top > diff.bottom + currentOptions.verticalDiffThreshold &&
             diff.bottom < currentOptions.minDownSpace;
 
+        const useLeft =
+            diff.left > diff.right + currentOptions.horizontalDiffThreshold &&
+            diff.right < currentOptions.minRightSpace;
+
         this.attachGlobalListeners(container);
 
         return {
             popDown: !useUp,
+            popRight: !useLeft,
             positions: {
                 container: containerPosition,
                 root: rootPosition,

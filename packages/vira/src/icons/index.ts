@@ -7,6 +7,7 @@ import {ChevronDown24Icon} from './icon-svgs/chevron-down-24.icon.js';
 import {ChevronUp24Icon} from './icon-svgs/chevron-up-24.icon.js';
 import {CloseX24Icon} from './icon-svgs/close-x-24.icon.js';
 import {Commit24Icon} from './icon-svgs/commit-24.icon.js';
+import {Copy24Icon} from './icon-svgs/copy-24.icon.js';
 import {Document24Icon} from './icon-svgs/document-24.icon.js';
 import {DocumentSearch24Icon} from './icon-svgs/document-search-24.icon.js';
 import {DoubleChevron24Icon} from './icon-svgs/double-chevron-24.icon.js';
@@ -48,6 +49,7 @@ export * from './icon-svgs/chevron-down-24.icon.js';
 export * from './icon-svgs/chevron-up-24.icon.js';
 export * from './icon-svgs/close-x-24.icon.js';
 export * from './icon-svgs/commit-24.icon.js';
+export * from './icon-svgs/copy-24.icon.js';
 export * from './icon-svgs/document-24.icon.js';
 export * from './icon-svgs/document-search-24.icon.js';
 export * from './icon-svgs/double-chevron-24.icon.js';
@@ -92,6 +94,7 @@ export const allIconsByName = {
     ChevronUp24Icon,
     CloseX24Icon,
     Commit24Icon,
+    Copy24Icon,
     Document24Icon,
     DocumentSearch24Icon,
     DoubleChevron24Icon,

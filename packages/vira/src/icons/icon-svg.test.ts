@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import Color from 'colorjs.io';
-import {type Format} from 'colorjs.io/types/src/space';
+import {type Format} from 'colorjs.io/src/ColorSpace.js';
 import {html} from 'element-vir';
 import {ColorType, extractIconColor} from './icon-color.test-helper.js';
 import {createColoredIcon} from './icon-svg.js';

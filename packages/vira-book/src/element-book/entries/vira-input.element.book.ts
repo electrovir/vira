@@ -258,6 +258,17 @@ export const viraInputBookPage = defineBookPage({
                 },
             },
             {
+                title: 'centered',
+                styles: css`
+                    ${ViraInput} {
+                        text-align: center;
+                    }
+                `,
+                inputs: {
+                    value: 'Abc',
+                },
+            },
+            {
                 title: 'with error',
                 inputs: {
                     value: 'has error',

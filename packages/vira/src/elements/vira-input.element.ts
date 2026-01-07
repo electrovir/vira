@@ -207,6 +207,7 @@ export const ViraInput = defineViraElement<
                 margin: ${cssVars['vira-input-padding-vertical'].value} 0;
                 flex-grow: 1;
                 max-width: 100%;
+                text-align: inherit;
                 /* fix input element not shrinking by default */
                 width: 0;
                 text-overflow: ellipsis;

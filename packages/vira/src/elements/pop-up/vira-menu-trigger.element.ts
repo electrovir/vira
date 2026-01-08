@@ -15,6 +15,7 @@ import {
     HorizontalAnchor,
     ViraPopUpTrigger,
     type PopUpOffset,
+    type PopUpTriggerPosition,
 } from './vira-pop-up-trigger.element.js';
 
 /**
@@ -35,39 +36,19 @@ export const viraMenuTriggerTestIds = {
 export const ViraMenuTrigger = defineViraElement<
     {
         items: ReadonlyArray<Readonly<MenuItem>>;
-    } & PartialWithUndefined<{
-        /** The selected item ids from the given `items` object. */
-        selected: ReadonlyArray<PropertyKey>;
-        isDisabled: boolean;
-        isMultiSelect: boolean;
-        z_debug_forceOpenState: boolean;
-        popUpOffset: PopUpOffset;
-        /** Hide menu item check mark icons. */
-        hideCheckIcons: boolean;
-        menuCornerStyle: PopUpMenuCornerStyle;
-        /**
-         * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the
-         *   pop-up can grow to the right.
-         * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the
-         *   pop-up can grow to the left.
-         * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
-         *   beyond it.
-         *
-         * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popUpOffset` for the direction _opposite_ of the chosen anchor.
-         *
-         * @default HorizontalAnchor.Left
-         */
-        horizontalAnchor: HorizontalAnchor;
-        /**
-         * When `true`, the pop-up will not have its maximum height/width constrained to fit within
-         * the overflow container. The positioning logic (up/down, left/right) will still be
-         * applied.
-         *
-         * @default false
-         */
-        ignoreMaxDimensions: boolean;
-    }>
+    } & PartialWithUndefined<
+        {
+            /** The selected item ids from the given `items` object. */
+            selected: ReadonlyArray<PropertyKey>;
+            isDisabled: boolean;
+            isMultiSelect: boolean;
+            z_debug_forceOpenState: boolean;
+            popUpOffset: PopUpOffset;
+            /** Hide menu item check mark icons. */
+            hideCheckIcons: boolean;
+            menuCornerStyle: PopUpMenuCornerStyle;
+        } & PopUpTriggerPosition
+    >
 >()({
     tagName: 'vira-menu-trigger',
     styles: css`
@@ -101,12 +82,10 @@ export const ViraMenuTrigger = defineViraElement<
     render({inputs, state, updateState, dispatch, events}) {
         return html`
             <${ViraPopUpTrigger.assign({
-                isDisabled: inputs.isDisabled,
+                ...inputs,
                 keepOpenAfterInteraction: true,
-                z_debug_forceOpenState: inputs.z_debug_forceOpenState,
                 popUpOffset: inputs.popUpOffset,
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Left,
-                ignoreMaxDimensions: inputs.ignoreMaxDimensions,
             })}
                 class=${classMap({
                     open: !!state.showPopUpResult,

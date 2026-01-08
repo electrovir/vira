@@ -20,7 +20,7 @@ import {type ShowPopUpResult} from '../util/pop-up-manager.js';
 import {defineViraElement} from './define-vira-element.js';
 import {type MenuItem} from './pop-up/pop-up-menu-item.js';
 import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
-import {HorizontalAnchor} from './pop-up/vira-pop-up-trigger.element.js';
+import {HorizontalAnchor, type PopUpTriggerPosition} from './pop-up/vira-pop-up-trigger.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 /**
@@ -46,39 +46,22 @@ export const ViraDropdown = defineViraElement<
         options: ReadonlyArray<Readonly<MenuItem>>;
         /** The selected id from the given options. */
         selected: ReadonlyArray<PropertyKey>;
-    } & PartialWithUndefined<{
-        /** Text to show if nothing is selected. */
-        placeholder: string;
-        /**
-         * If false, this will behave like a single select dropdown, otherwise you can select
-         * multiple.
-         */
-        isMultiSelect: boolean;
-        icon: ViraIconSvg;
-        selectionPrefix: string;
-        isDisabled: boolean;
-        /** For debugging purposes only. Very bad for actual production code use. */
-        z_debug_forceOpenState: boolean;
-        /**
-         * - `HorizontalAnchor.Left`: dropdown is anchored to the left side of the trigger and the
-         *   dropdown can grow to the right.
-         * - `HorizontalAnchor.Right`: dropdown is anchored to the right side of the trigger and the
-         *   dropdown can grow to the left.
-         * - `HorizontalAnchor.Both`: dropdown is anchored on both sides of the trigger and cannot
-         *   grow beyond it. (This is the default experience.)
-         *
-         * @default HorizontalAnchor.Both
-         */
-        horizontalAnchor: HorizontalAnchor;
-        /**
-         * When `true`, the dropdown will not have its maximum height/width constrained to fit
-         * within the overflow container. The positioning logic (up/down, left/right) will still be
-         * applied.
-         *
-         * @default false
-         */
-        ignoreMaxDimensions: boolean;
-    }>
+    } & PartialWithUndefined<
+        {
+            /** Text to show if nothing is selected. */
+            placeholder: string;
+            /**
+             * If false, this will behave like a single select dropdown, otherwise you can select
+             * multiple.
+             */
+            isMultiSelect: boolean;
+            icon: ViraIconSvg;
+            selectionPrefix: string;
+            isDisabled: boolean;
+            /** For debugging purposes only. Very bad for actual production code use. */
+            z_debug_forceOpenState: boolean;
+        } & PopUpTriggerPosition
+    >
 >()({
     tagName: 'vira-dropdown',
     styles: css`
@@ -195,17 +178,13 @@ export const ViraDropdown = defineViraElement<
 
         return html`
             <${ViraMenuTrigger.assign({
+                ...inputs,
                 items: inputs.options,
-                selected: inputs.selected,
-                isDisabled: inputs.isDisabled,
-                isMultiSelect: inputs.isMultiSelect,
-                z_debug_forceOpenState: inputs.z_debug_forceOpenState,
                 popUpOffset: {
                     vertical: -1,
                     right: 24,
                 },
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Both,
-                ignoreMaxDimensions: inputs.ignoreMaxDimensions,
             })}
                 ${listen(ViraMenuTrigger.events.openChange, (event) => {
                     updateState({showPopUpResult: event.detail});

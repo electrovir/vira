@@ -52,6 +52,42 @@ export enum HorizontalAnchor {
 }
 
 /**
+ * Configs for {@link ViraPopUpTrigger} pop-up positioning and sizing.
+ *
+ * @category Internal
+ */
+export type PopUpTriggerPosition = {
+    /**
+     * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the pop-up
+     *   can grow to the right.
+     * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the pop-up
+     *   can grow to the left.
+     * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
+     *   beyond it.
+     * - `HorizontalAnchor.Auto`: automatically choose left or right anchor based on available space,
+     *   defaulting to left anchor. (This is the default experience.)
+     *
+     * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
+     * `popUpOffset` for the direction _opposite_ of the chosen anchor.
+     */
+    horizontalAnchor: HorizontalAnchor;
+    /**
+     * When `true`, the pop-up will not have its maximum width constrained to fit within the
+     * overflow container. The positioning logic (left/right) will still be applied.
+     *
+     * @default false
+     */
+    ignoreMaxWidth: boolean;
+    /**
+     * When `true`, the pop-up will not have its maximum height constrained to fit within the
+     * overflow container. The positioning logic (up/down) will still be applied.
+     *
+     * @default false
+     */
+    ignoreMaxHeight: boolean;
+};
+
+/**
  * An element with slots for a pop-up trigger and pop-up contents.
  *
  * @category PopUp
@@ -59,39 +95,17 @@ export enum HorizontalAnchor {
  * @see https://electrovir.github.io/vira/book/elements/vira-pop-up-trigger
  */
 export const ViraPopUpTrigger = defineViraElement<
-    PartialWithUndefined<{
-        isDisabled: boolean;
-        /** For debugging purposes only. Very bad for actual production code use. */
-        z_debug_forceOpenState: boolean;
-        /** Set to `true` to keep the pop-up open if it is interacted with. */
-        keepOpenAfterInteraction: boolean;
-        /** All values in px. */
-        popUpOffset: PopUpOffset;
-        /**
-         * - `HorizontalAnchor.Left`: pop-up is anchored to the left side of the trigger and the
-         *   pop-up can grow to the right.
-         * - `HorizontalAnchor.Right`: pop-up is anchored to the right side of the trigger and the
-         *   pop-up can grow to the left.
-         * - `HorizontalAnchor.Both`: pop-up is anchored on both sides of the trigger and cannot grow
-         *   beyond it.
-         * - `HorizontalAnchor.Auto`: automatically choose left or right anchor based on available
-         *   space, defaulting to left anchor. (This is the default experience.)
-         *
-         * Note that when `HorizontalAnchor.Both` is _not_ used, this anchor will cancel out any
-         * `popUpOffset` for the direction _opposite_ of the chosen anchor.
-         *
-         * @default HorizontalAnchor.Auto
-         */
-        horizontalAnchor: HorizontalAnchor;
-        /**
-         * When `true`, the pop-up will not have its maximum height/width constrained to fit within
-         * the overflow container. The positioning logic (up/down, left/right) will still be
-         * applied.
-         *
-         * @default false
-         */
-        ignoreMaxDimensions: boolean;
-    }>
+    PartialWithUndefined<
+        PopUpTriggerPosition & {
+            isDisabled: boolean;
+            /** For debugging purposes only. Very bad for actual production code use. */
+            z_debug_forceOpenState: boolean;
+            /** Set to `true` to keep the pop-up open if it is interacted with. */
+            keepOpenAfterInteraction: boolean;
+            /** All values in px. */
+            popUpOffset: PopUpOffset;
+        }
+    >
 >()({
     tagName: 'vira-pop-up-trigger',
     state({host}) {
@@ -277,7 +291,7 @@ export const ViraPopUpTrigger = defineViraElement<
 
         const leftCss =
             effectiveHorizontalAnchor === HorizontalAnchor.Right && state.showPopUpResult
-                ? inputs.ignoreMaxDimensions
+                ? inputs.ignoreMaxWidth
                     ? css`
                           left: unset;
                       `
@@ -290,7 +304,7 @@ export const ViraPopUpTrigger = defineViraElement<
 
         const rightCss =
             state.showPopUpResult && effectiveHorizontalAnchor === HorizontalAnchor.Left
-                ? inputs.ignoreMaxDimensions
+                ? inputs.ignoreMaxWidth
                     ? css`
                           right: unset;
                       `
@@ -315,7 +329,7 @@ export const ViraPopUpTrigger = defineViraElement<
         const positionerStyles = state.showPopUpResult
             ? state.showPopUpResult.popDown
                 ? /** Dropdown going down position. */
-                  inputs.ignoreMaxDimensions
+                  inputs.ignoreMaxHeight
                     ? css`
                           bottom: unset;
                           top: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);
@@ -327,7 +341,7 @@ export const ViraPopUpTrigger = defineViraElement<
                           ${horizontalPositionStyle}
                       `
                 : /** Dropdown going up position. */
-                  inputs.ignoreMaxDimensions
+                  inputs.ignoreMaxHeight
                   ? css`
                         top: unset;
                         bottom: calc(100% + ${inputs.popUpOffset?.vertical || 0}px);

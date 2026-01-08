@@ -187,7 +187,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'ignoreMaxDimensions wide content',
+            title: 'ignoreMaxWidth wide content',
             styles: css`
                 .container {
                     width: 300px;
@@ -213,16 +213,11 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <p>
-                        The container has a fixed width of 300px. With
-                        <code>ignoreMaxDimensions: true</code>
-                        , the pop-up can exceed the container width.
-                    </p>
                     <div class="container">
                         <${ViraPopUpTrigger.assign({
                             keepOpenAfterInteraction: true,
-                            z_debug_forceOpenState: true,
-                            ignoreMaxDimensions: true,
+                            // z_debug_forceOpenState: true,
+                            // ignoreMaxWidth: true,
                         })}>
                             <div class="trigger" slot=${ViraPopUpTrigger.slotNames.trigger}>
                                 Trigger

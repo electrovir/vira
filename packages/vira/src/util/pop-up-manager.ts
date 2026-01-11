@@ -221,6 +221,23 @@ export class PopUpManager {
                 if (keyCode === 'Escape') {
                     this.removePopUp();
                 } else if (this.options.supportNavigation) {
+                    /**
+                     * Check if the event target is a text input element. If so, allow horizontal
+                     * arrow keys to pass through for cursor navigation within the input.
+                     */
+                    const target = event.target;
+                    const isTextInput =
+                        (target instanceof HTMLInputElement &&
+                            (target.type === 'text' ||
+                                target.type === 'search' ||
+                                target.type === 'email' ||
+                                target.type === 'url' ||
+                                target.type === 'tel' ||
+                                target.type === 'password' ||
+                                target.type === 'number')) ||
+                        target instanceof HTMLTextAreaElement ||
+                        (target instanceof HTMLElement && target.isContentEditable);
+
                     if (keyCode === 'ArrowDown') {
                         event.stopImmediatePropagation();
                         event.preventDefault();
@@ -238,21 +255,27 @@ export class PopUpManager {
                             allowWrapping: false,
                         });
                     } else if (keyCode === 'ArrowLeft') {
-                        event.stopImmediatePropagation();
-                        event.preventDefault();
+                        /** Allow left arrow in text inputs for cursor navigation. */
+                        if (!isTextInput) {
+                            event.stopImmediatePropagation();
+                            event.preventDefault();
 
-                        this.navController.navigate({
-                            direction: NavDirection.Left,
-                            allowWrapping: false,
-                        });
+                            this.navController.navigate({
+                                direction: NavDirection.Left,
+                                allowWrapping: false,
+                            });
+                        }
                     } else if (keyCode === 'ArrowRight') {
-                        event.stopImmediatePropagation();
-                        event.preventDefault();
+                        /** Allow right arrow in text inputs for cursor navigation. */
+                        if (!isTextInput) {
+                            event.stopImmediatePropagation();
+                            event.preventDefault();
 
-                        this.navController.navigate({
-                            direction: NavDirection.Right,
-                            allowWrapping: false,
-                        });
+                            this.navController.navigate({
+                                direction: NavDirection.Right,
+                                allowWrapping: false,
+                            });
+                        }
                     } else if (
                         (keyCode === 'Enter' || keyCode === 'Return' || keyCode === 'Space') &&
                         this.navController.enterInto({fallbackToActivate: true}).success

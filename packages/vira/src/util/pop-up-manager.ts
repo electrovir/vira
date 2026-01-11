@@ -221,11 +221,7 @@ export class PopUpManager {
                 if (keyCode === 'Escape') {
                     this.removePopUp();
                 } else if (this.options.supportNavigation) {
-                    /**
-                     * Check if the event target is a text input element. If so, allow horizontal
-                     * arrow keys to pass through for cursor navigation within the input.
-                     */
-                    const target = event.target;
+                    const target = event.composedPath()[0];
                     const isTextInput =
                         (target instanceof HTMLInputElement &&
                             (target.type === 'text' ||
@@ -237,6 +233,10 @@ export class PopUpManager {
                                 target.type === 'number')) ||
                         target instanceof HTMLTextAreaElement ||
                         (target instanceof HTMLElement && target.isContentEditable);
+
+                    if (isTextInput) {
+                        return;
+                    }
 
                     if (keyCode === 'ArrowDown') {
                         event.stopImmediatePropagation();
@@ -255,27 +255,21 @@ export class PopUpManager {
                             allowWrapping: false,
                         });
                     } else if (keyCode === 'ArrowLeft') {
-                        /** Allow left arrow in text inputs for cursor navigation. */
-                        if (!isTextInput) {
-                            event.stopImmediatePropagation();
-                            event.preventDefault();
+                        event.stopImmediatePropagation();
+                        event.preventDefault();
 
-                            this.navController.navigate({
-                                direction: NavDirection.Left,
-                                allowWrapping: false,
-                            });
-                        }
+                        this.navController.navigate({
+                            direction: NavDirection.Left,
+                            allowWrapping: false,
+                        });
                     } else if (keyCode === 'ArrowRight') {
-                        /** Allow right arrow in text inputs for cursor navigation. */
-                        if (!isTextInput) {
-                            event.stopImmediatePropagation();
-                            event.preventDefault();
+                        event.stopImmediatePropagation();
+                        event.preventDefault();
 
-                            this.navController.navigate({
-                                direction: NavDirection.Right,
-                                allowWrapping: false,
-                            });
-                        }
+                        this.navController.navigate({
+                            direction: NavDirection.Right,
+                            allowWrapping: false,
+                        });
                     } else if (
                         (keyCode === 'Enter' || keyCode === 'Return' || keyCode === 'Space') &&
                         this.navController.enterInto({fallbackToActivate: true}).success

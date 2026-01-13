@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "28.19.2",
+    "version": "28.19.3",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -61,11 +61,11 @@
         "esbuild": "^0.27.2",
         "istanbul-smart-text-reporter": "^1.1.5",
         "markdown-code-example-inserter": "^3.0.3",
-        "theme-vir": "^28.15.4",
+        "theme-vir": "^28.17.0",
         "typedoc": "^0.28.15",
         "typescript": "5.9.3",
-        "vite": "^7.3.0",
-        "vite-tsconfig-paths": "^6.0.3"
+        "vite": "^7.3.1",
+        "vite-tsconfig-paths": "^6.0.4"
     },
     "peerDependencies": {
         "element-vir": "^26.9.1",

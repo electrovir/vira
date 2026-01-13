@@ -1,4 +1,4 @@
-import {viraColorPalettePages} from './entries/colors.book.js';
+import {viraColorPalettePages, viraThemePages} from './entries/colors.book.js';
 import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
 import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
 import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
@@ -61,6 +61,7 @@ const allPages = [
 
     shadowBookPage,
     ...viraColorPalettePages,
+    ...viraThemePages,
 ];
 
 export const viraBookPages = [

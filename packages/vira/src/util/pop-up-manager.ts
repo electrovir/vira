@@ -15,6 +15,26 @@ import {
 } from 'typed-event-target';
 
 /**
+ * Used to prevent pop-ups from closing when a text input is active.
+ *
+ * @category Internal
+ */
+export function isInputLikeElement(element: Element): boolean {
+    return (
+        (element instanceof HTMLInputElement &&
+            (element.type === 'text' ||
+                element.type === 'search' ||
+                element.type === 'email' ||
+                element.type === 'url' ||
+                element.type === 'tel' ||
+                element.type === 'password' ||
+                element.type === 'number')) ||
+        element instanceof HTMLTextAreaElement ||
+        (element instanceof HTMLElement && element.isContentEditable)
+    );
+}
+
+/**
  * A type used for representing a rectangle's position.
  *
  * @category Internal
@@ -181,6 +201,12 @@ export class PopUpManager {
                 }
             }),
             this.navController.listen(NavActivateEvent, (event) => {
+                const target = event.composedPath()[0];
+
+                if (target instanceof Element && isInputLikeElement(target)) {
+                    return;
+                }
+
                 if (event.detail.success) {
                     this.listenTarget.dispatch(new NavSelectEvent({detail: event.detail.coords}));
                     this.navController.currentNavEntry?.entry.focus(true);
@@ -209,19 +235,8 @@ export class PopUpManager {
                     this.removePopUp();
                 } else if (this.options.supportNavigation) {
                     const target = event.composedPath()[0];
-                    const isTextInput =
-                        (target instanceof HTMLInputElement &&
-                            (target.type === 'text' ||
-                                target.type === 'search' ||
-                                target.type === 'email' ||
-                                target.type === 'url' ||
-                                target.type === 'tel' ||
-                                target.type === 'password' ||
-                                target.type === 'number')) ||
-                        target instanceof HTMLTextAreaElement ||
-                        (target instanceof HTMLElement && target.isContentEditable);
 
-                    if (isTextInput) {
+                    if (target instanceof Element && isInputLikeElement(target)) {
                         return;
                     }
 

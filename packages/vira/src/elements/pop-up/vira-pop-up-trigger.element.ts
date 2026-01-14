@@ -1,11 +1,13 @@
 import {assert} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
+import {walkActiveElement} from '@augment-vir/web';
 import {NavController, type Coords} from 'device-navigation';
 import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
 import {createFocusStyles} from '../../styles/focus.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles} from '../../styles/index.js';
 import {
     HidePopUpEvent,
+    isInputLikeElement,
     NavSelectEvent,
     PopUpManager,
     type ShowPopUpResult,
@@ -375,6 +377,20 @@ export const ViraPopUpTrigger = defineViraElement<
                 ${listen('click', (event) => {
                     /** Detail is 0 if it was a keyboard key (like Enter) that triggered this click. */
                     if (event.detail === 0) {
+                        let isTextActiveElement = false as boolean;
+
+                        walkActiveElement(({element}) => {
+                            if (isInputLikeElement(element)) {
+                                isTextActiveElement = true;
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        });
+                        if (isTextActiveElement) {
+                            return;
+                        }
+
                         respondToClick(event);
                     }
                 })}

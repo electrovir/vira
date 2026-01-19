@@ -11,6 +11,7 @@ export const viraTheme = defineColorTheme(
     {
         foreground: 'black',
         background: 'white',
+        prefix: 'vira',
     },
     {
         'vira-red-foreground-body': {

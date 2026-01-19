@@ -179,6 +179,11 @@ export const viraOverflowSwitchBookPage = defineBookPage({
         defineExample({
             title: 'dynamic size',
             styles: css`
+                :host {
+                    width: 200px;
+                    height: 100px;
+                }
+
                 ${commonStyles}
 
                 .wrapper {
@@ -198,6 +203,11 @@ export const viraOverflowSwitchBookPage = defineBookPage({
         defineExample({
             title: 'dynamic slot',
             styles: css`
+                :host {
+                    width: 200px;
+                    height: 100px;
+                }
+
                 ${commonStyles}
             `,
             render() {

@@ -59,8 +59,8 @@ export const ViraButton = defineViraElement<
 
         'vira-button-padding': '5px 10px',
 
-        'vira-button-internal-foreground-color': '',
-        'vira-button-internal-background-color': '',
+        'vira-button-internal-foreground-color': 'transparent',
+        'vira-button-internal-background-color': 'transparent',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {

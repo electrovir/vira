@@ -8,4 +8,5 @@ export const viraThemePages = createColorThemeBookPages({
     title: 'Vira Theme',
     hideInverseColors: true,
     overrides: [viraThemeDarkOverride],
+    hideCopyCode: true,
 });

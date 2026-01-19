@@ -11,7 +11,10 @@ import {viraBorders} from './border.js';
  */
 export const viraFocusCssVars = defineCssVars({
     'vira-focus-outline-color': '#59b1ff',
-    'vira-focus-outline-border-radius': css`calc(${viraBorders['vira-form-input-radius'].value} + 2px)`,
+    'vira-focus-outline-border-radius': {
+        initialValue: '10px',
+        default: css`calc(${viraBorders['vira-form-input-radius'].value} + 2px)`,
+    },
 });
 
 /**

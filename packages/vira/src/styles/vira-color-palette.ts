@@ -1,7 +1,10 @@
 import {defineCssVars} from 'lit-css-vars';
 
-/** Generously contributed by Trent Hazy, modified to more uniform contrast levels. */
-
+/**
+ * The base Vira color theme palette.
+ *
+ * @category Color
+ */
 export const viraColorPalette = defineCssVars({
     'vira-red-5': '#ffe9e6',
     'vira-red-10': '#ffd9d5',

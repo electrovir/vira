@@ -10,6 +10,7 @@ import {
 } from 'element-vir';
 import {type SpaRoute, type SpaRouter} from 'spa-router-vir';
 import {type RequireExactlyOne} from 'type-fest';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 
 /**
@@ -55,10 +56,7 @@ export const ViraLink = defineViraElement<
         }>
 >()({
     tagName: 'vira-link',
-    cssVars: {
-        'vira-link-hover-color': 'currentColor',
-    },
-    styles: ({cssVars}) => css`
+    styles: css`
         :host {
             display: inline;
             text-decoration: underline;
@@ -75,10 +73,13 @@ export const ViraLink = defineViraElement<
         }
 
         :host(:hover) a,
-        a:hover,
+        a:hover {
+            color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+        }
+
         :host(:active) a,
         a:active {
-            color: ${cssVars['vira-link-hover-color'].value};
+            color: ${viraFormCssVars['vira-form-accent-primary-active-color'].value};
         }
     `,
     render({inputs}) {

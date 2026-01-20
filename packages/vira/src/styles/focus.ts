@@ -1,21 +1,6 @@
 import {addPx, type PartialWithUndefined} from '@augment-vir/common';
 import {css, unsafeCSS} from 'element-vir';
-import {defineCssVars} from 'lit-css-vars';
-import {viraBorders} from './border.js';
-
-/**
- * CSS vars for Vira focus colors.
- *
- * @category CSS Vars
- * @category Styles
- */
-export const viraFocusCssVars = defineCssVars({
-    'vira-focus-outline-color': '#59b1ff',
-    'vira-focus-outline-border-radius': {
-        initialValue: '10px',
-        default: css`calc(${viraBorders['vira-form-input-radius'].value} + 2px)`,
-    },
-});
+import {viraFormCssVars} from './form-styles.js';
 
 /**
  * Create styles that look like an outline for the given selector.
@@ -53,8 +38,8 @@ export function createFocusStyles({
         height: calc(100% + calc(${outlineSpacing} * 2));
         box-sizing: border-box;
         pointer-events: none;
-        border: ${outlineWidth}px solid ${viraFocusCssVars['vira-focus-outline-color'].value};
-        border-radius: ${viraFocusCssVars['vira-focus-outline-border-radius'].value};
+        border: ${outlineWidth}px solid ${viraFormCssVars['vira-form-focus-outline-color'].value};
+        border-radius: ${viraFormCssVars['vira-form-focus-outline-border-radius'].value};
         z-index: 100;
     `;
 

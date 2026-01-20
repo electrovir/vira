@@ -15,7 +15,7 @@ import {ChevronUp24Icon, type ViraIconSvg} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {viraAnimationDurations, viraBorders} from '../styles/index.js';
+import {viraAnimationDurations} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
@@ -104,7 +104,8 @@ export const ViraSelect = defineViraElement<
             box-sizing: border-box;
             align-items: center;
             position: relative;
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
+            color: ${viraFormCssVars['vira-form-foreground-color'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
             /*
                 Border colors are actually applied via the .wrapper-border class. However, we must
@@ -166,7 +167,7 @@ export const ViraSelect = defineViraElement<
                 left: 0;
                 width: 100%;
                 height: 100%;
-                border-radius: ${viraBorders['vira-form-input-radius'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 z-index: 0;
                 pointer-events: none;
             }
@@ -213,7 +214,7 @@ export const ViraSelect = defineViraElement<
 
         ${hostClasses['vira-select-error'].selector} {
             & .wrapper-border {
-                border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
             }
         }
     `,

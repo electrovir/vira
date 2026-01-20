@@ -14,6 +14,9 @@ export const viraTheme = defineColorTheme(
         prefix: 'vira',
     },
     {
+        'vira-red-foreground-small-body': {
+            foreground: viraColorPalette['vira-red-90'],
+        },
         'vira-red-foreground-body': {
             foreground: viraColorPalette['vira-red-80'],
         },
@@ -28,6 +31,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-red-foreground-decoration': {
             foreground: viraColorPalette['vira-red-20'],
+        },
+        'vira-red-foreground-invisible': {
+            foreground: viraColorPalette['vira-red-10'],
+        },
+        'vira-red-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-background-body': {
             foreground: {
@@ -59,6 +71,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-red-20'],
         },
+        'vira-red-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-red-5'],
+        },
         'vira-red-on-self-body': {
             foreground: viraColorPalette['vira-red-90'],
             background: '#ffe9e6',
@@ -79,6 +97,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-red-30'],
             background: '#ffe9e6',
         },
+        'vira-red-on-self-invisible': {
+            foreground: viraColorPalette['vira-red-20'],
+            background: '#ffe9e6',
+        },
+        'vira-orange-foreground-small-body': {
+            foreground: viraColorPalette['vira-orange-90'],
+        },
         'vira-orange-foreground-body': {
             foreground: viraColorPalette['vira-orange-80'],
         },
@@ -93,6 +118,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-orange-foreground-decoration': {
             foreground: viraColorPalette['vira-orange-20'],
+        },
+        'vira-orange-foreground-invisible': {
+            foreground: viraColorPalette['vira-orange-10'],
+        },
+        'vira-orange-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-background-body': {
             foreground: {
@@ -124,6 +158,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-orange-20'],
         },
+        'vira-orange-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-orange-5'],
+        },
         'vira-orange-on-self-body': {
             foreground: viraColorPalette['vira-orange-90'],
             background: '#ffebd1',
@@ -144,6 +184,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-orange-30'],
             background: '#ffebd1',
         },
+        'vira-orange-on-self-invisible': {
+            foreground: viraColorPalette['vira-orange-20'],
+            background: '#ffebd1',
+        },
+        'vira-yellow-foreground-small-body': {
+            foreground: viraColorPalette['vira-yellow-90'],
+        },
         'vira-yellow-foreground-body': {
             foreground: viraColorPalette['vira-yellow-80'],
         },
@@ -158,6 +205,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-yellow-foreground-decoration': {
             foreground: viraColorPalette['vira-yellow-20'],
+        },
+        'vira-yellow-foreground-invisible': {
+            foreground: viraColorPalette['vira-yellow-5'],
+        },
+        'vira-yellow-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-background-body': {
             foreground: {
@@ -189,6 +245,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-yellow-20'],
         },
+        'vira-yellow-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-yellow-5'],
+        },
         'vira-yellow-on-self-body': {
             foreground: viraColorPalette['vira-yellow-90'],
             background: '#f7eeca',
@@ -209,6 +271,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-yellow-30'],
             background: '#f7eeca',
         },
+        'vira-yellow-on-self-invisible': {
+            foreground: viraColorPalette['vira-yellow-20'],
+            background: '#f7eeca',
+        },
+        'vira-green-foreground-small-body': {
+            foreground: viraColorPalette['vira-green-90'],
+        },
         'vira-green-foreground-body': {
             foreground: viraColorPalette['vira-green-80'],
         },
@@ -223,6 +292,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-green-foreground-decoration': {
             foreground: viraColorPalette['vira-green-20'],
+        },
+        'vira-green-foreground-invisible': {
+            foreground: viraColorPalette['vira-green-5'],
+        },
+        'vira-green-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-background-body': {
             foreground: {
@@ -254,6 +332,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-green-20'],
         },
+        'vira-green-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-green-5'],
+        },
         'vira-green-on-self-body': {
             foreground: viraColorPalette['vira-green-90'],
             background: '#d3f8cf',
@@ -274,6 +358,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-green-30'],
             background: '#d3f8cf',
         },
+        'vira-green-on-self-invisible': {
+            foreground: viraColorPalette['vira-green-20'],
+            background: '#d3f8cf',
+        },
+        'vira-teal-foreground-small-body': {
+            foreground: viraColorPalette['vira-teal-90'],
+        },
         'vira-teal-foreground-body': {
             foreground: viraColorPalette['vira-teal-80'],
         },
@@ -288,6 +379,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-teal-foreground-decoration': {
             foreground: viraColorPalette['vira-teal-20'],
+        },
+        'vira-teal-foreground-invisible': {
+            foreground: viraColorPalette['vira-teal-5'],
+        },
+        'vira-teal-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-background-body': {
             foreground: {
@@ -319,6 +419,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-teal-20'],
         },
+        'vira-teal-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-teal-5'],
+        },
         'vira-teal-on-self-body': {
             foreground: viraColorPalette['vira-teal-90'],
             background: '#d4f5f3',
@@ -339,6 +445,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-teal-30'],
             background: '#d4f5f3',
         },
+        'vira-teal-on-self-invisible': {
+            foreground: viraColorPalette['vira-teal-10'],
+            background: '#d4f5f3',
+        },
+        'vira-blue-foreground-small-body': {
+            foreground: viraColorPalette['vira-blue-90'],
+        },
         'vira-blue-foreground-body': {
             foreground: viraColorPalette['vira-blue-80'],
         },
@@ -353,6 +466,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-blue-foreground-decoration': {
             foreground: viraColorPalette['vira-blue-20'],
+        },
+        'vira-blue-foreground-invisible': {
+            foreground: viraColorPalette['vira-blue-10'],
+        },
+        'vira-blue-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-background-body': {
             foreground: {
@@ -384,6 +506,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-blue-20'],
         },
+        'vira-blue-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-blue-5'],
+        },
         'vira-blue-on-self-body': {
             foreground: viraColorPalette['vira-blue-90'],
             background: '#daf2ff',
@@ -404,6 +532,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-blue-30'],
             background: '#daf2ff',
         },
+        'vira-blue-on-self-invisible': {
+            foreground: viraColorPalette['vira-blue-10'],
+            background: '#daf2ff',
+        },
+        'vira-purple-foreground-small-body': {
+            foreground: viraColorPalette['vira-purple-90'],
+        },
         'vira-purple-foreground-body': {
             foreground: viraColorPalette['vira-purple-80'],
         },
@@ -418,6 +553,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-purple-foreground-decoration': {
             foreground: viraColorPalette['vira-purple-20'],
+        },
+        'vira-purple-foreground-invisible': {
+            foreground: viraColorPalette['vira-purple-5'],
+        },
+        'vira-purple-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-background-body': {
             foreground: {
@@ -449,6 +593,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-purple-20'],
         },
+        'vira-purple-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-purple-5'],
+        },
         'vira-purple-on-self-body': {
             foreground: viraColorPalette['vira-purple-90'],
             background: '#f6eaff',
@@ -469,6 +619,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-purple-30'],
             background: '#f6eaff',
         },
+        'vira-purple-on-self-invisible': {
+            foreground: viraColorPalette['vira-purple-10'],
+            background: '#f6eaff',
+        },
+        'vira-pink-foreground-small-body': {
+            foreground: viraColorPalette['vira-pink-90'],
+        },
         'vira-pink-foreground-body': {
             foreground: viraColorPalette['vira-pink-80'],
         },
@@ -483,6 +640,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-pink-foreground-decoration': {
             foreground: viraColorPalette['vira-pink-20'],
+        },
+        'vira-pink-foreground-invisible': {
+            foreground: viraColorPalette['vira-pink-10'],
+        },
+        'vira-pink-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-background-body': {
             foreground: {
@@ -514,6 +680,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-pink-20'],
         },
+        'vira-pink-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-pink-5'],
+        },
         'vira-pink-on-self-body': {
             foreground: viraColorPalette['vira-pink-90'],
             background: '#ffe7fb',
@@ -534,6 +706,13 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-pink-30'],
             background: '#ffe7fb',
         },
+        'vira-pink-on-self-invisible': {
+            foreground: viraColorPalette['vira-pink-20'],
+            background: '#ffe7fb',
+        },
+        'vira-grey-foreground-small-body': {
+            foreground: viraColorPalette['vira-grey-90'],
+        },
         'vira-grey-foreground-body': {
             foreground: viraColorPalette['vira-grey-80'],
         },
@@ -548,6 +727,15 @@ export const viraTheme = defineColorTheme(
         },
         'vira-grey-foreground-decoration': {
             foreground: viraColorPalette['vira-grey-20'],
+        },
+        'vira-grey-foreground-invisible': {
+            foreground: viraColorPalette['vira-grey-5'],
+        },
+        'vira-grey-background-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-background-body': {
             foreground: {
@@ -579,6 +767,12 @@ export const viraTheme = defineColorTheme(
             },
             background: viraColorPalette['vira-grey-20'],
         },
+        'vira-grey-background-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-grey-5'],
+        },
         'vira-grey-on-self-body': {
             foreground: viraColorPalette['vira-grey-90'],
             background: '#eceff0',
@@ -599,15 +793,28 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-grey-30'],
             background: '#eceff0',
         },
+        'vira-grey-on-self-invisible': {
+            foreground: viraColorPalette['vira-grey-10'],
+            background: '#eceff0',
+        },
     },
 );
 
+/**
+ * Dark mode override for {@link viraTheme}.
+ *
+ * @category Color
+ */
 export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark', {
     defaultOverride: {
         foreground: 'white',
         background: 'black',
     },
     colorOverrides: {
+        'vira-red-foreground-small-body': {
+            foreground: viraColorPalette['vira-red-5'],
+            background: 'black',
+        },
         'vira-red-foreground-body': {
             foreground: viraColorPalette['vira-red-20'],
             background: 'black',
@@ -626,6 +833,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-red-foreground-decoration': {
             foreground: viraColorPalette['vira-red-80'],
             background: 'black',
+        },
+        'vira-red-foreground-invisible': {
+            foreground: viraColorPalette['vira-red-90'],
+            background: 'black',
+        },
+        'vira-red-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-background-body': {
             foreground: 'black',
@@ -647,6 +862,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-red-80'],
         },
+        'vira-red-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-red-90'],
+        },
         'vira-red-on-self-body': {
             foreground: viraColorPalette['vira-red-10'],
             background: '#760003',
@@ -666,6 +885,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-red-70'],
             background: '#760003',
         },
+        'vira-red-on-self-invisible': {
+            foreground: viraColorPalette['vira-red-80'],
+            background: '#760003',
+        },
+        'vira-orange-foreground-small-body': {
+            foreground: viraColorPalette['vira-orange-5'],
+            background: 'black',
+        },
         'vira-orange-foreground-body': {
             foreground: viraColorPalette['vira-orange-20'],
             background: 'black',
@@ -684,6 +911,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-orange-foreground-decoration': {
             foreground: viraColorPalette['vira-orange-80'],
             background: 'black',
+        },
+        'vira-orange-foreground-invisible': {
+            foreground: viraColorPalette['vira-orange-90'],
+            background: 'black',
+        },
+        'vira-orange-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-background-body': {
             foreground: 'black',
@@ -705,6 +940,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-orange-80'],
         },
+        'vira-orange-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-orange-90'],
+        },
         'vira-orange-on-self-body': {
             foreground: viraColorPalette['vira-orange-10'],
             background: '#6a2500',
@@ -724,6 +963,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-orange-70'],
             background: '#6a2500',
         },
+        'vira-orange-on-self-invisible': {
+            foreground: viraColorPalette['vira-orange-80'],
+            background: '#6a2500',
+        },
+        'vira-yellow-foreground-small-body': {
+            foreground: viraColorPalette['vira-yellow-5'],
+            background: 'black',
+        },
         'vira-yellow-foreground-body': {
             foreground: viraColorPalette['vira-yellow-20'],
             background: 'black',
@@ -742,6 +989,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-yellow-foreground-decoration': {
             foreground: viraColorPalette['vira-yellow-80'],
             background: 'black',
+        },
+        'vira-yellow-foreground-invisible': {
+            foreground: viraColorPalette['vira-yellow-90'],
+            background: 'black',
+        },
+        'vira-yellow-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-background-body': {
             foreground: 'black',
@@ -763,6 +1018,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-yellow-80'],
         },
+        'vira-yellow-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-yellow-90'],
+        },
         'vira-yellow-on-self-body': {
             foreground: viraColorPalette['vira-yellow-10'],
             background: '#4c3b00',
@@ -782,6 +1041,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-yellow-70'],
             background: '#4c3b00',
         },
+        'vira-yellow-on-self-invisible': {
+            foreground: viraColorPalette['vira-yellow-80'],
+            background: '#4c3b00',
+        },
+        'vira-green-foreground-small-body': {
+            foreground: viraColorPalette['vira-green-5'],
+            background: 'black',
+        },
         'vira-green-foreground-body': {
             foreground: viraColorPalette['vira-green-20'],
             background: 'black',
@@ -800,6 +1067,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-green-foreground-decoration': {
             foreground: viraColorPalette['vira-green-80'],
             background: 'black',
+        },
+        'vira-green-foreground-invisible': {
+            foreground: viraColorPalette['vira-green-90'],
+            background: 'black',
+        },
+        'vira-green-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-background-body': {
             foreground: 'black',
@@ -821,6 +1096,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-green-80'],
         },
+        'vira-green-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-green-90'],
+        },
         'vira-green-on-self-body': {
             foreground: viraColorPalette['vira-green-10'],
             background: '#004700',
@@ -841,6 +1120,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-green-70'],
             background: '#004700',
         },
+        'vira-green-on-self-invisible': {
+            foreground: viraColorPalette['vira-green-80'],
+            background: '#004700',
+        },
+        'vira-teal-foreground-small-body': {
+            foreground: viraColorPalette['vira-teal-5'],
+            background: 'black',
+        },
         'vira-teal-foreground-body': {
             foreground: viraColorPalette['vira-teal-20'],
             background: 'black',
@@ -859,6 +1146,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-teal-foreground-decoration': {
             foreground: viraColorPalette['vira-teal-80'],
             background: 'black',
+        },
+        'vira-teal-foreground-invisible': {
+            foreground: viraColorPalette['vira-teal-90'],
+            background: 'black',
+        },
+        'vira-teal-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-background-body': {
             foreground: 'black',
@@ -880,6 +1175,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-teal-80'],
         },
+        'vira-teal-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-teal-90'],
+        },
         'vira-teal-on-self-body': {
             foreground: viraColorPalette['vira-teal-10'],
             background: '#004442',
@@ -900,6 +1199,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-teal-70'],
             background: '#004442',
         },
+        'vira-teal-on-self-invisible': {
+            foreground: viraColorPalette['vira-teal-80'],
+            background: '#004442',
+        },
+        'vira-blue-foreground-small-body': {
+            foreground: viraColorPalette['vira-blue-5'],
+            background: 'black',
+        },
         'vira-blue-foreground-body': {
             foreground: viraColorPalette['vira-blue-20'],
             background: 'black',
@@ -918,6 +1225,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-blue-foreground-decoration': {
             foreground: viraColorPalette['vira-blue-80'],
             background: 'black',
+        },
+        'vira-blue-foreground-invisible': {
+            foreground: viraColorPalette['vira-blue-90'],
+            background: 'black',
+        },
+        'vira-blue-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-background-body': {
             foreground: 'black',
@@ -939,6 +1254,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-blue-80'],
         },
+        'vira-blue-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-blue-90'],
+        },
         'vira-blue-on-self-body': {
             foreground: viraColorPalette['vira-blue-10'],
             background: '#00358a',
@@ -958,6 +1277,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-blue-70'],
             background: '#00358a',
         },
+        'vira-blue-on-self-invisible': {
+            foreground: viraColorPalette['vira-blue-80'],
+            background: '#00358a',
+        },
+        'vira-purple-foreground-small-body': {
+            foreground: viraColorPalette['vira-purple-5'],
+            background: 'black',
+        },
         'vira-purple-foreground-body': {
             foreground: viraColorPalette['vira-purple-20'],
             background: 'black',
@@ -976,6 +1303,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-purple-foreground-decoration': {
             foreground: viraColorPalette['vira-purple-80'],
             background: 'black',
+        },
+        'vira-purple-foreground-invisible': {
+            foreground: viraColorPalette['vira-purple-90'],
+            background: 'black',
+        },
+        'vira-purple-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-background-body': {
             foreground: 'black',
@@ -997,6 +1332,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-purple-80'],
         },
+        'vira-purple-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-purple-90'],
+        },
         'vira-purple-on-self-body': {
             foreground: viraColorPalette['vira-purple-10'],
             background: '#500095',
@@ -1017,6 +1356,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-purple-70'],
             background: '#500095',
         },
+        'vira-purple-on-self-invisible': {
+            foreground: viraColorPalette['vira-purple-80'],
+            background: '#500095',
+        },
+        'vira-pink-foreground-small-body': {
+            foreground: viraColorPalette['vira-pink-5'],
+            background: 'black',
+        },
         'vira-pink-foreground-body': {
             foreground: viraColorPalette['vira-pink-20'],
             background: 'black',
@@ -1035,6 +1382,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-pink-foreground-decoration': {
             foreground: viraColorPalette['vira-pink-80'],
             background: 'black',
+        },
+        'vira-pink-foreground-invisible': {
+            foreground: viraColorPalette['vira-pink-90'],
+            background: 'black',
+        },
+        'vira-pink-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-background-body': {
             foreground: 'black',
@@ -1056,6 +1411,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-pink-80'],
         },
+        'vira-pink-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-pink-90'],
+        },
         'vira-pink-on-self-body': {
             foreground: viraColorPalette['vira-pink-10'],
             background: '#6e004f',
@@ -1075,6 +1434,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-pink-70'],
             background: '#6e004f',
         },
+        'vira-pink-on-self-invisible': {
+            foreground: viraColorPalette['vira-pink-80'],
+            background: '#6e004f',
+        },
+        'vira-grey-foreground-small-body': {
+            foreground: viraColorPalette['vira-grey-5'],
+            background: 'black',
+        },
         'vira-grey-foreground-body': {
             foreground: viraColorPalette['vira-grey-20'],
             background: 'black',
@@ -1093,6 +1460,14 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-grey-foreground-decoration': {
             foreground: viraColorPalette['vira-grey-80'],
             background: 'black',
+        },
+        'vira-grey-foreground-invisible': {
+            foreground: viraColorPalette['vira-grey-90'],
+            background: 'black',
+        },
+        'vira-grey-background-small-body': {
+            foreground: 'black',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-background-body': {
             foreground: 'black',
@@ -1114,6 +1489,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: 'black',
             background: viraColorPalette['vira-grey-80'],
         },
+        'vira-grey-background-invisible': {
+            foreground: 'black',
+            background: viraColorPalette['vira-grey-90'],
+        },
         'vira-grey-on-self-body': {
             foreground: viraColorPalette['vira-grey-10'],
             background: '#363f43',
@@ -1132,6 +1511,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         },
         'vira-grey-on-self-decoration': {
             foreground: viraColorPalette['vira-grey-70'],
+            background: '#363f43',
+        },
+        'vira-grey-on-self-invisible': {
+            foreground: viraColorPalette['vira-grey-80'],
             background: '#363f43',
         },
     },

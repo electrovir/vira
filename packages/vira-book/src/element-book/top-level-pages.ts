@@ -1,7 +1,7 @@
 import {addPx} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
-import {ViraIcon, allIconsByName, viraBorders, viraIconCssVars} from 'vira';
+import {ViraIcon, allIconsByName, viraFormCssVars, viraIconCssVars} from 'vira';
 
 export const elementsBookPage = defineBookPage({
     title: 'Elements',
@@ -46,7 +46,7 @@ export const iconsBookPage = defineBookPage({
 
                     ${ViraIcon} {
                         padding: 8px;
-                        border-radius: ${viraBorders['vira-form-input-radius'].value};
+                        border-radius: ${viraFormCssVars['vira-form-radius'].value};
                     }
                 `,
                 render({controls}) {

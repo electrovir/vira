@@ -1,6 +1,6 @@
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
-import {ViraLink} from 'vira';
+import {viraFormCssVars, ViraLink} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraLinkBookPage = defineBookPage({
@@ -16,7 +16,11 @@ export const viraLinkBookPage = defineBookPage({
         }),
         'Hover color': definePageControl({
             controlType: BookPageControlType.Color,
-            initValue: '',
+            initValue: viraFormCssVars['vira-form-accent-primary-color'].default,
+        }),
+        'Active color': definePageControl({
+            controlType: BookPageControlType.Color,
+            initValue: viraFormCssVars['vira-form-accent-primary-active-color'].default,
         }),
     },
     defineExamples({defineExample}) {
@@ -31,9 +35,11 @@ export const viraLinkBookPage = defineBookPage({
                 title,
                 render({controls}) {
                     const styles = css`
-                        ${ViraLink.cssVars['vira-link-hover-color'].name}: ${unsafeCSS(
+                        ${viraFormCssVars['vira-form-accent-primary-color'].name}: ${unsafeCSS(
                             controls['Hover color'] || 'inherit',
                         )};
+                        ${viraFormCssVars['vira-form-accent-primary-active-color']
+                            .name}: ${unsafeCSS(controls['Active color'] || 'inherit')};
                         color: ${unsafeCSS(controls['CSS Color'] || 'inherit')};
                     `;
 

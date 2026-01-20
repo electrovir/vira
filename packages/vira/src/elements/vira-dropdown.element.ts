@@ -13,7 +13,6 @@ import {
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {ChevronUp24Icon} from '../icons/index.js';
-import {viraBorders} from '../styles/border.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {type ShowPopUpResult} from '../util/pop-up-manager.js';
@@ -123,7 +122,7 @@ export const ViraDropdown = defineViraElement<
             align-items: center;
             padding: 3px;
             padding-left: 10px;
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
         }

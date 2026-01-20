@@ -13,7 +13,6 @@ import {
     type CSSResult,
 } from 'element-vir';
 import {Check24Icon, viraIconCssVars} from '../icons/index.js';
-import {viraBorders} from '../styles/border.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -36,16 +35,20 @@ export type ViraCheckboxInnerElements =
  *
  * @category Internal
  */
-export type ViraCheckboxInputs = PartialWithUndefined<{
+export type ViraCheckboxInputs = {
+    value: boolean;
+} & PartialWithUndefined<{
     stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
     attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
     disabled: boolean;
     label: string;
     hasError: boolean;
     horizontal: boolean;
-}> & {
-    value: boolean;
-};
+    /** The checkbox will be filled with a form selection color when it is checked. */
+    fillWhenChecked: boolean;
+    /** The checkbox will be filled with a form error color when it is unchecked. */
+    fillWhenUnchecked: boolean;
+}>;
 
 /**
  * A custom checkbox.
@@ -58,6 +61,8 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     tagName: 'vira-checkbox',
     hostClasses: {
         'vira-checkbox-horizontal': ({inputs}) => !!inputs.horizontal,
+        'vira-checkbox-filled-checked': ({inputs}) => !!inputs.fillWhenChecked,
+        'vira-checkbox-filled-unchecked': ({inputs}) => !!inputs.fillWhenUnchecked,
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -74,6 +79,43 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             width: 100%;
             height: 100%;
             box-sizing: border-box;
+            ${viraIconCssVars['vira-icon-stroke-width'].name}: 3px;
+            opacity: 0;
+        }
+
+        ${hostClasses['vira-checkbox-filled-checked'].selector} {
+            & .custom-checkbox.checked {
+                color: ${viraFormCssVars['vira-form-background-color'].value};
+                background-color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+            }
+
+            label {
+                &:hover .custom-checkbox.checked {
+                    background-color: ${viraFormCssVars['vira-form-accent-primary-hover-color']
+                        .value};
+                }
+
+                &:active .custom-checkbox.checked {
+                    background-color: ${viraFormCssVars['vira-form-accent-primary-active-color']
+                        .value};
+                }
+            }
+        }
+        ${hostClasses['vira-checkbox-filled-unchecked'].selector} {
+            & .custom-checkbox:not(.checked) {
+                color: ${viraFormCssVars['vira-form-background-color'].value};
+                background-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+
+            label {
+                &:hover .custom-checkbox:not(.checked) {
+                    background-color: ${viraFormCssVars['vira-form-error-hover-color'].value};
+                }
+
+                &:active .custom-checkbox:not(.checked) {
+                    background-color: ${viraFormCssVars['vira-form-error-active-color'].value};
+                }
+            }
         }
 
         label {
@@ -92,14 +134,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             &:hover .custom-checkbox {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-background-color']
-                    .value};
+                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
             }
-        }
-
-        ${ViraIcon} {
-            ${viraIconCssVars['vira-icon-stroke-width'].name}: 2px;
-            opacity: 0;
+            &:active .custom-checkbox {
+                background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
+            }
         }
 
         /* The visible custom box */
@@ -107,7 +146,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             flex-shrink: 0;
             border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
             display: inline-block;
             position: relative;
             cursor: pointer;
@@ -121,12 +160,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             &.error {
-                border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
-            }
-
-            &:active {
-                background-color: ${viraFormCssVars['vira-form-selection-active-background-color']
-                    .value};
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
             }
 
             &.disabled {

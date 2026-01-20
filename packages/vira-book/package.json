@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-book",
-    "version": "28.19.7",
+    "version": "29.0.0",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "author": {
@@ -21,11 +21,11 @@
         "@electrovir/color": "^1.7.6",
         "element-book": "^26.15.3",
         "element-vir": "^26.14.3",
-        "lit-css-vars": "^3.2.2",
+        "lit-css-vars": "^3.3.0",
         "spa-router-vir": "^6.4.1",
-        "theme-vir": "^28.18.4",
+        "theme-vir": "^28.18.5",
         "url-vir": "^2.1.7",
-        "vira": "^28.19.7"
+        "vira": "^29.0.0"
     },
     "devDependencies": {
         "esbuild": "^0.27.2",

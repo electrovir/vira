@@ -88,8 +88,7 @@ export const ViraMenu = defineViraElement<
             baseSelector: '.menu-item:not(.disabled):not(.selected)',
             navValue: NavValue.Active,
         })}, .menu-item:not(.disabled):not(.selected):hover {
-            background-color: ${viraFormCssVars['vira-form-selection-hover-background-color']
-                .value};
+            background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
             outline: none;
         }
 
@@ -104,8 +103,7 @@ export const ViraMenu = defineViraElement<
                     navValue: NavValue.Active,
                 })},
                 .menu-item:not(.disabled):hover {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-background-color']
-                    .value};
+                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
                 outline: none;
             }
         }

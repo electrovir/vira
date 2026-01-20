@@ -198,5 +198,72 @@ export const viraCheckboxBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'fill when checked',
+            state() {
+                return {
+                    checked: true,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        fillWhenChecked: true,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'fill when unchecked',
+            state() {
+                return {
+                    checked: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        fillWhenUnchecked: true,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'both fills',
+            state() {
+                return {
+                    checked: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        fillWhenUnchecked: true,
+                        fillWhenChecked: true,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
     },
 });

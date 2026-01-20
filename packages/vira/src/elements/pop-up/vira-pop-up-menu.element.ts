@@ -1,6 +1,5 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, html} from 'element-vir';
-import {viraBorders} from '../../styles/border.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {viraShadows} from '../../styles/shadows.js';
 import {defineViraElement} from '../define-vira-element.js';
@@ -60,7 +59,7 @@ export const ViraPopUpMenu = defineViraElement<
             overflow-y: auto;
             z-index: 99;
             box-sizing: border-box;
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
@@ -71,7 +70,7 @@ export const ViraPopUpMenu = defineViraElement<
 
         ${hostClasses['vira-pop-up-menu-open-upwards'].selector} {
             ${viraShadows.menuShadowReversed}
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
@@ -81,7 +80,7 @@ export const ViraPopUpMenu = defineViraElement<
         }
 
         ${hostClasses['vira-pop-up-menu-rounded'].selector} {
-            border-radius: ${viraBorders['vira-form-input-radius'].value};
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
         }
     `,
     render() {

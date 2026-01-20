@@ -1,6 +1,7 @@
 import {clamp, type PartialWithUndefined} from '@augment-vir/common';
 import {applyAttributes} from 'device-navigation';
 import {css, html} from 'element-vir';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 
 /**
@@ -31,8 +32,6 @@ export const ViraProgress = defineViraElement<
          * dimension which creates a perfect pill border radius.
          */
         'vira-progress-border-radius': '99999999px',
-        'vira-progress-background-color': '#eee',
-        'vira-progress-foreground-color': 'dodgerblue',
     },
     styles: ({cssVars}) => css`
         :host {
@@ -43,7 +42,7 @@ export const ViraProgress = defineViraElement<
             display: inline-flex;
             align-items: center;
             border-radius: ${cssVars['vira-progress-border-radius'].value};
-            color: ${cssVars['vira-progress-foreground-color'].value};
+            color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
             overflow: hidden;
         }
 
@@ -53,7 +52,7 @@ export const ViraProgress = defineViraElement<
         }
 
         .background-bar {
-            background-color: ${cssVars['vira-progress-background-color'].value};
+            background-color: ${viraFormCssVars['vira-form-filled-background-color'].value};
             height: 100%;
             flex-grow: 1;
         }

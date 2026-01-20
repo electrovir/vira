@@ -15,7 +15,7 @@ export const ViraError = defineViraElement()({
     },
     styles: ({cssVars}) => css`
         :host {
-            color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
+            color: ${viraFormCssVars['vira-form-error-color'].value};
             font-weight: ${cssVars['vira-error-font-weight'].value};
         }
     `,

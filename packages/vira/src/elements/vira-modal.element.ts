@@ -3,6 +3,7 @@ import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
 import {listenToGlobal} from 'typed-event-target';
 import {X24Icon} from '../icons/icon-svgs/x-24.icon.js';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
 import {defineViraElement} from './define-vira-element.js';
@@ -69,11 +70,7 @@ export const ViraModal = defineViraElement<
     },
     slotNames: ['modalTitle'],
     cssVars: {
-        'vira-modal-backdrop-color': 'rgba(0, 0, 0, 0.35)',
         'vira-modal-backdrop-filter': 'blur(3px)',
-        'vira-modal-subtitle-color': '#7E7E7E',
-        'vira-modal-close-button-hover-radius': '8px',
-        'vira-modal-close-button-hover-background-color': '#E4E4E4',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
@@ -102,7 +99,7 @@ export const ViraModal = defineViraElement<
                 display: flex;
             }
             &::backdrop {
-                background: ${cssVars['vira-modal-backdrop-color'].value};
+                background: ${viraFormCssVars['vira-form-modal-backdrop-color'].value};
                 backdrop-filter: ${cssVars['vira-modal-backdrop-filter'].value};
             }
 
@@ -130,7 +127,7 @@ export const ViraModal = defineViraElement<
 
                         & sub {
                             font-size: 16px;
-                            color: ${cssVars['vira-modal-subtitle-color'].value};
+                            color: ${viraFormCssVars['vira-form-secondary-body-foreground'].value};
                         }
                     }
 
@@ -138,12 +135,11 @@ export const ViraModal = defineViraElement<
                         ${noNativeFormStyles};
                         cursor: pointer;
                         padding: 4px;
-                        border-radius: ${cssVars['vira-modal-close-button-hover-radius'].value};
+                        border-radius: ${viraFormCssVars['vira-form-radius'].value};
 
                         &:hover {
-                            background-color: ${cssVars[
-                                'vira-modal-close-button-hover-background-color'
-                            ].value};
+                            background-color: ${viraFormCssVars['vira-form-selection-hover-color']
+                                .value};
                         }
 
                         & ${ViraIcon} {
@@ -208,7 +204,7 @@ export const ViraModal = defineViraElement<
                 ${listen('close', () => {
                     close();
                 })}
-                ${listen('click', (event) => {
+                ${listen('mousedown', (event) => {
                     if (
                         state.contentElement &&
                         !event.composedPath().includes(state.contentElement) &&

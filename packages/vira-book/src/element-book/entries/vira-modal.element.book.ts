@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
-import {ViraModal} from 'vira';
+import {viraFormCssVars, ViraModal} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraModalBookPage = defineBookPage({
@@ -50,7 +50,7 @@ export const viraModalBookPage = defineBookPage({
                 ${ViraModal} {
                     min-width: 500px;
                     border-radius: 4px;
-                    ${ViraModal.cssVars['vira-modal-backdrop-color']
+                    ${viraFormCssVars['vira-form-modal-backdrop-color']
                         .name}: rgba(255, 255, 255, 0.4);
                 }
             `,

@@ -1,6 +1,6 @@
 import {BookPageControlType, defineBookPage} from 'element-book';
 import {type CSSResult, css, html, unsafeCSS} from 'element-vir';
-import {Options24Icon, ViraButton, ViraButtonStyle} from 'vira';
+import {Options24Icon, ViraButton, ViraButtonStyle, viraFormCssVars} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraButtonBookPage = defineBookPage({
@@ -12,19 +12,19 @@ export const viraButtonBookPage = defineBookPage({
     controls: {
         'Primary color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraButton.cssVars['vira-button-primary-color'].default,
+            initValue: '' as string,
         },
         'Secondary color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraButton.cssVars['vira-button-secondary-color'].default,
+            initValue: '' as string,
         },
         'Hover color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraButton.cssVars['vira-button-primary-hover-color'].default,
+            initValue: '' as string,
         },
         'Active color': {
             controlType: BookPageControlType.Color,
-            initValue: ViraButton.cssVars['vira-button-primary-active-color'].default,
+            initValue: '' as string,
         },
     },
     defineExamples({defineExample}) {
@@ -44,18 +44,16 @@ export const viraButtonBookPage = defineBookPage({
                 styles,
                 render({controls}) {
                     const styles = css`
-                        ${ViraButton.cssVars['vira-button-primary-color'].name}: ${unsafeCSS(
+                        ${viraFormCssVars['vira-form-accent-primary-color'].name}: ${unsafeCSS(
                             controls['Primary color'] || 'inherit',
                         )};
-                        ${ViraButton.cssVars['vira-button-secondary-color'].name}: ${unsafeCSS(
+                        ${viraFormCssVars['vira-form-background-color'].name}: ${unsafeCSS(
                             controls['Secondary color'] || 'inherit',
                         )};
-                        ${ViraButton.cssVars['vira-button-primary-hover-color'].name}: ${unsafeCSS(
-                            controls['Hover color'] || 'inherit',
-                        )};
-                        ${ViraButton.cssVars['vira-button-primary-active-color'].name}: ${unsafeCSS(
-                            controls['Active color'] || 'inherit',
-                        )};
+                        ${viraFormCssVars['vira-form-accent-primary-hover-color']
+                            .name}: ${unsafeCSS(controls['Hover color'] || 'inherit')};
+                        ${viraFormCssVars['vira-form-accent-primary-active-color']
+                            .name}: ${unsafeCSS(controls['Active color'] || 'inherit')};
                     `;
 
                     return html`
@@ -83,6 +81,24 @@ export const viraButtonBookPage = defineBookPage({
             title: 'outline',
             inputs: {
                 buttonStyle: ViraButtonStyle.Outline,
+            },
+        });
+        defineViraButtonExample({
+            title: 'ghost',
+            inputs: {
+                buttonStyle: ViraButtonStyle.Ghost,
+            },
+        });
+        defineViraButtonExample({
+            title: 'danger',
+            inputs: {
+                buttonStyle: ViraButtonStyle.Danger,
+            },
+        });
+        defineViraButtonExample({
+            title: 'danger outline',
+            inputs: {
+                buttonStyle: ViraButtonStyle.DangerOutline,
             },
         });
         defineViraButtonExample({
@@ -119,10 +135,10 @@ export const viraButtonBookPage = defineBookPage({
             title: 'customized colors',
             styles: css`
                 :host {
-                    ${ViraButton.cssVars['vira-button-primary-color'].name}: pink;
-                    ${ViraButton.cssVars['vira-button-secondary-color'].name}: purple;
-                    ${ViraButton.cssVars['vira-button-primary-hover-color'].name}: orange;
-                    ${ViraButton.cssVars['vira-button-primary-active-color'].name}: yellow;
+                    ${viraFormCssVars['vira-form-accent-primary-color'].name}: pink;
+                    ${viraFormCssVars['vira-form-background-color'].name}: purple;
+                    ${viraFormCssVars['vira-form-accent-primary-hover-color'].name}: orange;
+                    ${viraFormCssVars['vira-form-accent-primary-active-color'].name}: yellow;
                 }
             `,
             render() {

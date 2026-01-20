@@ -16,12 +16,7 @@ import {CloseX24Icon} from '../icons/icon-svgs/close-x-24.icon.js';
 import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {
-    noUserSelect,
-    viraAnimationDurations,
-    viraBorders,
-    viraDisabledStyles,
-} from '../styles/index.js';
+import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from './define-vira-element.js';
 import {
@@ -70,16 +65,6 @@ export const ViraInput = defineViraElement<
 >()({
     tagName: 'vira-input',
     cssVars: {
-        'vira-input-action-button-color': '#aaaaaa',
-
-        'vira-input-clear-button-hover-color': '#ff0000',
-        'vira-input-clear-button-active-color': '#b30000',
-
-        // eslint-disable-next-line sonarjs/no-hardcoded-passwords
-        'vira-input-show-password-button-hover-color': '#0a89ff',
-        // eslint-disable-next-line sonarjs/no-hardcoded-passwords
-        'vira-input-show-password-button-active-color': '#0261ba',
-
         'vira-input-padding-horizontal': '10px',
         'vira-input-padding-vertical': '6px',
     },
@@ -166,7 +151,7 @@ export const ViraInput = defineViraElement<
                 left: 0;
                 width: 100%;
                 height: 100%;
-                border-radius: ${viraBorders['vira-form-input-radius'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 z-index: 0;
                 pointer-events: none;
             }
@@ -186,7 +171,7 @@ export const ViraInput = defineViraElement<
                 align-items: center;
                 position: relative;
                 padding: 0 ${cssVars['vira-input-padding-horizontal'].value};
-                border-radius: ${viraBorders['vira-form-input-radius'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 background-color: ${viraFormCssVars['vira-form-background-color'].value};
                 /*
                     Border colors are actually applied via the .wrapper-border class. However, we must
@@ -256,28 +241,28 @@ export const ViraInput = defineViraElement<
 
             .clear-x-button,
             .show-password-button {
-                color: ${cssVars['vira-input-action-button-color'].value};
+                color: ${viraFormCssVars['vira-form-placeholder-color'].value};
             }
 
             .clear-x-button:hover {
-                color: ${cssVars['vira-input-clear-button-hover-color'].value};
+                color: ${viraFormCssVars['vira-form-error-color'].value};
             }
 
             .clear-x-button:active {
-                color: ${cssVars['vira-input-clear-button-active-color'].value};
+                color: ${viraFormCssVars['vira-form-error-active-color'].value};
             }
 
             .show-password-button:hover {
-                color: ${cssVars['vira-input-show-password-button-hover-color'].value};
+                color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
             }
 
             .show-password-button:active {
-                color: ${cssVars['vira-input-show-password-button-active-color'].value};
+                color: ${viraFormCssVars['vira-form-accent-primary-active-color'].value};
             }
 
             ${hostClasses['vira-input-error'].selector} {
                 & .wrapper-border {
-                    border-color: ${viraFormCssVars['vira-form-error-foreground-color'].value};
+                    border-color: ${viraFormCssVars['vira-form-error-color'].value};
                 }
             }
 

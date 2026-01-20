@@ -1,7 +1,7 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html, type CSSResult} from 'element-vir';
-import {ViraProgress} from 'vira';
+import {viraFormCssVars, ViraProgress} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const examples: ({
@@ -54,8 +54,8 @@ const examples: ({
         title: 'custom styles tiny progress',
         styles: css`
             :host {
-                ${ViraProgress.cssVars['vira-progress-background-color'].name}: red;
-                ${ViraProgress.cssVars['vira-progress-foreground-color'].name}: black;
+                ${viraFormCssVars['vira-form-filled-background-color'].name}: red;
+                ${viraFormCssVars['vira-form-accent-primary-color'].name}: black;
                 ${ViraProgress.cssVars['vira-progress-border-radius'].name}: 5px;
             }
 
@@ -72,8 +72,8 @@ const examples: ({
         title: 'custom styles half',
         styles: css`
             :host {
-                ${ViraProgress.cssVars['vira-progress-background-color'].name}: red;
-                ${ViraProgress.cssVars['vira-progress-foreground-color'].name}: yellow;
+                ${viraFormCssVars['vira-form-filled-background-color'].name}: red;
+                ${viraFormCssVars['vira-form-accent-primary-color'].name}: yellow;
                 ${ViraProgress.cssVars['vira-progress-border-radius'].name}: 5px;
             }
 
@@ -87,8 +87,8 @@ const examples: ({
         title: 'custom styles full',
         styles: css`
             :host {
-                ${ViraProgress.cssVars['vira-progress-background-color'].name}: red;
-                ${ViraProgress.cssVars['vira-progress-foreground-color'].name}: yellow;
+                ${viraFormCssVars['vira-form-filled-background-color'].name}: red;
+                ${viraFormCssVars['vira-form-accent-primary-color'].name}: yellow;
                 ${ViraProgress.cssVars['vira-progress-border-radius'].name}: 5px;
             }
 

@@ -1,7 +1,7 @@
 import {mapObjectValues} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, viraFocusCssVars, viraFormCssVars, ViraInput, ViraInputType} from 'vira';
+import {Element24Icon, viraFormCssVars, ViraInput, ViraInputType} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraInputBookPage = defineBookPage({
@@ -26,7 +26,7 @@ export const viraInputBookPage = defineBookPage({
         },
         'Focus color': {
             controlType: BookPageControlType.Color,
-            initValue: viraFocusCssVars['vira-focus-outline-color'].default,
+            initValue: viraFormCssVars['vira-form-focus-outline-color'].default,
         },
         'Selection color': {
             controlType: BookPageControlType.Color,
@@ -59,7 +59,7 @@ export const viraInputBookPage = defineBookPage({
                             controls['Placeholder color'],
                         [String(viraFormCssVars['vira-form-border-color'].name)]:
                             controls['Border color'],
-                        [String(viraFocusCssVars['vira-focus-outline-color'].name)]:
+                        [String(viraFormCssVars['vira-form-focus-outline-color'].name)]:
                             controls['Focus color'],
                         [String(viraFormCssVars['vira-form-text-selection-color'].name)]:
                             controls['Selection color'],

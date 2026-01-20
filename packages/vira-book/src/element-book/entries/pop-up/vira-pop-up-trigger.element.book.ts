@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {HorizontalAnchor, viraFocusCssVars, ViraPopUpTrigger} from 'vira';
+import {HorizontalAnchor, viraFormCssVars, ViraPopUpTrigger} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 export const viraPopUpTriggerBookPage = defineBookPage({
@@ -11,7 +11,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             title: 'basic',
             styles: css`
                 ${ViraPopUpTrigger} {
-                    ${viraFocusCssVars['vira-focus-outline-border-radius'].name}: 0;
+                    ${viraFormCssVars['vira-form-focus-outline-border-radius'].name}: 0;
                 }
 
                 .trigger {

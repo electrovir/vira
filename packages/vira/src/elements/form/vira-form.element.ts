@@ -138,6 +138,40 @@ export const ViraForm = defineViraElement<
                             })}
                         ></${ViraSelect}>
                     `;
+                } else if (field.type === ViraFormFieldType.Number) {
+                    return html`
+                        <${ViraInput.assign({
+                            value: field.value.toString(),
+                            disabled: inputs.isDisabled || field.isDisabled,
+                            hasError: field.hasError,
+                            icon: field.icon,
+                            label: applyRequiredLabel(
+                                field.label,
+                                !!field.isRequired && !inputs.hideRequiredMarkers,
+                            ),
+                            placeholder: field.placeholder,
+                            showClearButton: inputs.showClearButtons,
+                            type: ViraInputType.Number,
+                            attributePassthrough: {
+                                ...(field.min === undefined ? {} : {min: String(field.min)}),
+                                ...(field.max === undefined ? {} : {max: String(field.max)}),
+                                ...(field.step === undefined ? {} : {step: String(field.step)}),
+                            },
+                        })}
+                            ${field.testId ? testId(field.testId) : nothing}
+                            ${listen(ViraInput.events.valueChange, (event) => {
+                                const numericValue =
+                                    event.detail === '' ? undefined : Number(event.detail);
+                                dispatch(
+                                    new events.valueChange({
+                                        key,
+                                        ...field,
+                                        value: numericValue,
+                                    }),
+                                );
+                            })}
+                        ></${ViraInput}>
+                    `;
                 } else {
                     return html`
                         <${ViraInput.assign({

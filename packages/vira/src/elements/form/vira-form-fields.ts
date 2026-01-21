@@ -17,6 +17,7 @@ export enum ViraFormFieldType {
     /** Uses a password input without any attributes applied for auto complete hints. */
     PlainPassword = 'plain-password',
     Email = 'email',
+    Number = 'number',
     Select = 'select',
     Checkbox = 'checkbox',
 }
@@ -89,7 +90,18 @@ export type ViraFormField =
     | ({
           type: ViraFormFieldType.Checkbox;
           value: boolean | undefined;
-      } & CommonViraFormFields);
+      } & CommonViraFormFields)
+    | ({
+          type: ViraFormFieldType.Number;
+          value: number | undefined;
+      } & PartialWithUndefined<{
+          placeholder: string;
+          icon: ViraIconSvg;
+          min: number;
+          max: number;
+          step: number;
+      }> &
+          CommonViraFormFields);
 
 /**
  * A collection of form fields for `ViraForm`.

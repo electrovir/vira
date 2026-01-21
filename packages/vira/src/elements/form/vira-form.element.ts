@@ -141,8 +141,9 @@ export const ViraForm = defineViraElement<
                 } else if (field.type === ViraFormFieldType.Number) {
                     return html`
                         <${ViraInput.assign({
-                            value: field.value.toString(),
+                            value: field.value?.toString() || '',
                             disabled: inputs.isDisabled || field.isDisabled,
+                            allowedInputs: /\d/,
                             hasError: field.hasError,
                             icon: field.icon,
                             label: applyRequiredLabel(
@@ -153,9 +154,21 @@ export const ViraForm = defineViraElement<
                             showClearButton: inputs.showClearButtons,
                             type: ViraInputType.Number,
                             attributePassthrough: {
-                                ...(field.min === undefined ? {} : {min: String(field.min)}),
-                                ...(field.max === undefined ? {} : {max: String(field.max)}),
-                                ...(field.step === undefined ? {} : {step: String(field.step)}),
+                                ...(field.min === undefined
+                                    ? {}
+                                    : {
+                                          min: String(field.min),
+                                      }),
+                                ...(field.max === undefined
+                                    ? {}
+                                    : {
+                                          max: String(field.max),
+                                      }),
+                                ...(field.step === undefined
+                                    ? {}
+                                    : {
+                                          step: String(field.step),
+                                      }),
                             },
                         })}
                             ${field.testId ? testId(field.testId) : nothing}

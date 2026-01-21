@@ -44,6 +44,7 @@ export const viraFormBookPage = defineBookPage({
                     email: '',
                     password: '',
                     userRole: undefined as string | undefined,
+                    quantity: 0,
                 };
             },
             styles: css`
@@ -89,6 +90,15 @@ export const viraFormBookPage = defineBookPage({
                         options: mockRoleOptions,
                         value: state.userRole,
                         placeholder: 'placeholder',
+                    },
+                    quantity: {
+                        type: ViraFormFieldType.Number,
+                        label: 'Quantity',
+                        value: state.quantity,
+                        min: 0,
+                        max: 100,
+                        step: 2,
+                        placeholder: 'Enter quantity',
                     },
                     disabledField: {
                         type: ViraFormFieldType.Text,

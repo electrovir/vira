@@ -37,6 +37,7 @@ export enum ViraInputType {
     Default = 'text',
     Password = 'password',
     Email = 'email',
+    Number = 'number',
 }
 
 /**

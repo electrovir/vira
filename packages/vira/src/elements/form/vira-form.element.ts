@@ -141,7 +141,7 @@ export const ViraForm = defineViraElement<
                 } else if (field.type === ViraFormFieldType.Number) {
                     return html`
                         <${ViraInput.assign({
-                            value: field.value.toString(),
+                            value: field.value === undefined ? '' : field.value.toString(),
                             disabled: inputs.isDisabled || field.isDisabled,
                             hasError: field.hasError,
                             icon: field.icon,

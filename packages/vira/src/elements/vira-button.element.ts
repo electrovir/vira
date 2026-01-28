@@ -86,6 +86,10 @@ export const ViraButton = defineViraElement<
             ].value}
         }
 
+        ${hostClasses['vira-button-icon-only'].selector} {
+            ${cssVars['vira-button-padding'].name}: 5px;
+        }
+
         ${hostClasses['vira-button-disabled'].selector} {
             ${viraDisabledStyles};
         }

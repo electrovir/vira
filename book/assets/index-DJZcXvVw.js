@@ -2049,6 +2049,10 @@ ${Mf(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function f9(e){return
             ${M["vira-form-focus-outline-color"].name}: ${M["vira-form-accent-primary-hover-color"].value}
         }
 
+        ${e["vira-button-icon-only"].selector} {
+            ${t["vira-button-padding"].name}: 5px;
+        }
+
         ${e["vira-button-disabled"].selector} {
             ${mi};
         }
@@ -3338,7 +3342,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${w["vira-icon-stroke-width"].name}: ${rt(r["Stroke Width"]?Aa(r["Stroke Width"]):"inherit")};
                     `;return g`
                         <${z.assign({icon:t})} style=${n}></${z}>
-                    `}})})}}),dP=lP({parent:fh,theme:Ke,title:"Vira Theme",hideInverseColors:!0,overrides:[gM],hideCopyCode:!0}),Rw={async element1(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-Cxq6Zd92.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-C67Nz-pk.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Tp=Ci()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Pw(Rw)}},render({state:e,inputs:t}){return Nw(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
+                    `}})})}}),dP=lP({parent:fh,theme:Ke,title:"Vira Theme",hideInverseColors:!0,overrides:[gM],hideCopyCode:!0}),Rw={async element1(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-kYOySAhf.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-Dfa-0uEu.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Tp=Ci()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Pw(Rw)}},render({state:e,inputs:t}){return Nw(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
                     <${ni}>
                         ${hi("Failed to import element",Tt(r))}
                     </${ni}>

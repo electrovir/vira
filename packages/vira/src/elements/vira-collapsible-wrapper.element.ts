@@ -9,7 +9,11 @@ import {defineViraElement} from './define-vira-element.js';
  * @category Elements
  * @see https://electrovir.github.io/vira/book/elements/vira-collapsible-wrapper
  */
-export const ViraCollapsibleWrapper = defineViraElement<{expanded: boolean}>()({
+export const ViraCollapsibleWrapper = defineViraElement<{
+    expanded: boolean;
+    /** When true, forces the content to expand when printing regardless of collapsed state. */
+    expandOnPrint?: boolean;
+}>()({
     tagName: 'vira-collapsible-wrapper',
     state() {
         return {
@@ -18,6 +22,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{expanded: boolean}>()({
     },
     hostClasses: {
         'vira-collapsible-wrapper-expanded': ({inputs}) => inputs.expanded,
+        'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
     },
     slotNames: ['header'],
     styles: ({hostClasses}) => css`
@@ -44,6 +49,15 @@ export const ViraCollapsibleWrapper = defineViraElement<{expanded: boolean}>()({
         }
         ${hostClasses['vira-collapsible-wrapper-expanded'].name} .collapsing-element {
             pointer-events: none;
+        }
+
+        @media print {
+            :host(.${hostClasses['vira-collapsible-wrapper-expand-on-print'].name})
+                .collapsing-element {
+                height: auto !important;
+                overflow: visible !important;
+                transition: none !important;
+            }
         }
     `,
     events: {

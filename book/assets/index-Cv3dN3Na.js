@@ -2171,7 +2171,7 @@ ${Mf(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function f9(e){return
         }
     `,render(){return g`
             <slot></slot>
-        `}}),Bn=qe()({tagName:"vira-collapsible-wrapper",state(){return{contentHeight:0}},hostClasses:{"vira-collapsible-wrapper-expanded":({inputs:e})=>e.expanded},slotNames:["header"],styles:({hostClasses:e})=>A`
+        `}}),Bn=qe()({tagName:"vira-collapsible-wrapper",state(){return{contentHeight:0}},hostClasses:{"vira-collapsible-wrapper-expanded":({inputs:e})=>e.expanded,"vira-collapsible-wrapper-expand-on-print":({inputs:e})=>!!e.expandOnPrint},slotNames:["header"],styles:({hostClasses:e})=>A`
         :host {
             display: flex;
             flex-direction: column;
@@ -2195,6 +2195,15 @@ ${Mf(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function f9(e){return
         }
         ${e["vira-collapsible-wrapper-expanded"].name} .collapsing-element {
             pointer-events: none;
+        }
+
+        @media print {
+            :host(.${e["vira-collapsible-wrapper-expand-on-print"].name})
+                .collapsing-element {
+                height: auto !important;
+                overflow: visible !important;
+                transition: none !important;
+            }
         }
     `,events:{expandChange:bt()},render({state:e,slotNames:t,updateState:r,dispatch:n,events:o,inputs:i}){const s=i.expanded?A`
                   height: ${e.contentHeight}px;
@@ -3342,7 +3351,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${w["vira-icon-stroke-width"].name}: ${rt(r["Stroke Width"]?Aa(r["Stroke Width"]):"inherit")};
                     `;return g`
                         <${z.assign({icon:t})} style=${n}></${z}>
-                    `}})})}}),dP=lP({parent:fh,theme:Ke,title:"Vira Theme",hideInverseColors:!0,overrides:[gM],hideCopyCode:!0}),Rw={async element1(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-kYOySAhf.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-Dfa-0uEu.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Tp=Ci()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Pw(Rw)}},render({state:e,inputs:t}){return Nw(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
+                    `}})})}}),dP=lP({parent:fh,theme:Ke,title:"Vira Theme",hideInverseColors:!0,overrides:[gM],hideCopyCode:!0}),Rw={async element1(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-B-NRu_ql.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await oi({seconds:2}),(await ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CwREoY98.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Tp=Ci()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Pw(Rw)}},render({state:e,inputs:t}){return Nw(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
                     <${ni}>
                         ${hi("Failed to import element",Tt(r))}
                     </${ni}>

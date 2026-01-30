@@ -11,7 +11,7 @@ import {defineViraElement} from './define-vira-element.js';
  */
 export const ViraCollapsibleWrapper = defineViraElement<{
     expanded: boolean;
-    collapseOnPrint?: boolean;
+    expandOnPrint?: boolean;
 }>()({
     tagName: 'vira-collapsible-wrapper',
     state() {
@@ -21,7 +21,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{
     },
     hostClasses: {
         'vira-collapsible-wrapper-expanded': ({inputs}) => inputs.expanded,
-        'vira-collapsible-wrapper-collapse-on-print': ({inputs}) => !!inputs.collapseOnPrint,
+        'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
     },
     slotNames: ['header'],
     styles: ({hostClasses}) => css`
@@ -51,7 +51,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         }
 
         @media print {
-            :host(:not(.${hostClasses['vira-collapsible-wrapper-collapse-on-print'].name}))
+            :host(.${hostClasses['vira-collapsible-wrapper-expand-on-print'].name})
                 .collapsing-element {
                 height: auto !important;
                 overflow: visible !important;

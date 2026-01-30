@@ -11,6 +11,7 @@ import {defineViraElement} from './define-vira-element.js';
  */
 export const ViraCollapsibleWrapper = defineViraElement<{
     expanded: boolean;
+    /** When true, forces the content to expand when printing regardless of collapsed state. */
     expandOnPrint?: boolean;
 }>()({
     tagName: 'vira-collapsible-wrapper',

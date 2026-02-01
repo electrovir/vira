@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-book",
-    "version": "29.2.0",
+    "version": "29.2.1",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "author": {
@@ -18,14 +18,14 @@
     "dependencies": {
         "@augment-vir/assert": "^31.59.0",
         "@augment-vir/common": "^31.59.0",
-        "@electrovir/color": "^1.7.6",
-        "element-book": "^26.15.3",
+        "@electrovir/color": "^1.7.8",
+        "element-book": "^26.16.0",
         "element-vir": "^26.14.3",
-        "lit-css-vars": "^3.3.0",
+        "lit-css-vars": "^3.4.0",
         "spa-router-vir": "^6.4.1",
-        "theme-vir": "^28.18.5",
+        "theme-vir": "^28.18.7",
         "url-vir": "^2.1.7",
-        "vira": "^29.2.0"
+        "vira": "^29.2.1"
     },
     "devDependencies": {
         "esbuild": "^0.27.2",
@@ -34,7 +34,7 @@
         "typedoc": "^0.28.16",
         "typescript": "^5.9.3",
         "vite": "^7.3.1",
-        "vite-tsconfig-paths": "^6.0.4"
+        "vite-tsconfig-paths": "^6.0.5"
     },
     "engines": {
         "node": ">=22"

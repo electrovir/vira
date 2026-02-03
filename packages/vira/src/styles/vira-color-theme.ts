@@ -7,6 +7,7 @@ import {viraColorPalette} from './vira-color-palette.js';
  *
  * @category Color
  */
+
 export const viraTheme = defineColorTheme(
     {
         foreground: 'black',
@@ -35,71 +36,92 @@ export const viraTheme = defineColorTheme(
         'vira-red-foreground-invisible': {
             foreground: viraColorPalette['vira-red-10'],
         },
-        'vira-red-background-small-body': {
+        'vira-red-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-90'],
         },
-        'vira-red-background-body': {
+        'vira-red-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-80'],
         },
-        'vira-red-background-non-body': {
+        'vira-red-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-60'],
         },
-        'vira-red-background-header': {
+        'vira-red-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-40'],
         },
-        'vira-red-background-placeholder': {
+        'vira-red-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-30'],
         },
-        'vira-red-background-decoration': {
+        'vira-red-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-20'],
         },
-        'vira-red-background-invisible': {
+        'vira-red-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-red-5'],
         },
+        'vira-red-behind-fg-small-body': {
+            background: viraColorPalette['vira-red-5'],
+        },
+        'vira-red-behind-fg-body': {
+            background: viraColorPalette['vira-red-20'],
+        },
+        'vira-red-behind-fg-non-body': {
+            background: viraColorPalette['vira-red-30'],
+        },
+        'vira-red-behind-fg-header': {
+            background: viraColorPalette['vira-red-50'],
+        },
+        'vira-red-behind-fg-placeholder': {
+            background: viraColorPalette['vira-red-60'],
+        },
+        'vira-red-behind-fg-decoration': {
+            background: viraColorPalette['vira-red-80'],
+        },
+        'vira-red-behind-fg-invisible': {
+            background: viraColorPalette['vira-red-90'],
+        },
         'vira-red-on-self-body': {
             foreground: viraColorPalette['vira-red-90'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-on-self-non-body': {
             foreground: viraColorPalette['vira-red-80'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-on-self-header': {
             foreground: viraColorPalette['vira-red-60'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-on-self-placeholder': {
             foreground: viraColorPalette['vira-red-50'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-on-self-decoration': {
             foreground: viraColorPalette['vira-red-30'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-red-on-self-invisible': {
             foreground: viraColorPalette['vira-red-20'],
-            background: '#ffe9e6',
+            background: viraColorPalette['vira-red-5'],
         },
         'vira-orange-foreground-small-body': {
             foreground: viraColorPalette['vira-orange-90'],
@@ -122,71 +144,92 @@ export const viraTheme = defineColorTheme(
         'vira-orange-foreground-invisible': {
             foreground: viraColorPalette['vira-orange-10'],
         },
-        'vira-orange-background-small-body': {
+        'vira-orange-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-90'],
         },
-        'vira-orange-background-body': {
+        'vira-orange-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-80'],
         },
-        'vira-orange-background-non-body': {
+        'vira-orange-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-60'],
         },
-        'vira-orange-background-header': {
+        'vira-orange-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-40'],
         },
-        'vira-orange-background-placeholder': {
+        'vira-orange-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-30'],
         },
-        'vira-orange-background-decoration': {
+        'vira-orange-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-20'],
         },
-        'vira-orange-background-invisible': {
+        'vira-orange-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-orange-5'],
         },
+        'vira-orange-behind-fg-small-body': {
+            background: viraColorPalette['vira-orange-5'],
+        },
+        'vira-orange-behind-fg-body': {
+            background: viraColorPalette['vira-orange-20'],
+        },
+        'vira-orange-behind-fg-non-body': {
+            background: viraColorPalette['vira-orange-30'],
+        },
+        'vira-orange-behind-fg-header': {
+            background: viraColorPalette['vira-orange-50'],
+        },
+        'vira-orange-behind-fg-placeholder': {
+            background: viraColorPalette['vira-orange-60'],
+        },
+        'vira-orange-behind-fg-decoration': {
+            background: viraColorPalette['vira-orange-80'],
+        },
+        'vira-orange-behind-fg-invisible': {
+            background: viraColorPalette['vira-orange-90'],
+        },
         'vira-orange-on-self-body': {
             foreground: viraColorPalette['vira-orange-90'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-on-self-non-body': {
             foreground: viraColorPalette['vira-orange-80'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-on-self-header': {
             foreground: viraColorPalette['vira-orange-60'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-on-self-placeholder': {
             foreground: viraColorPalette['vira-orange-50'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-on-self-decoration': {
             foreground: viraColorPalette['vira-orange-30'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-orange-on-self-invisible': {
             foreground: viraColorPalette['vira-orange-20'],
-            background: '#ffebd1',
+            background: viraColorPalette['vira-orange-5'],
         },
         'vira-yellow-foreground-small-body': {
             foreground: viraColorPalette['vira-yellow-90'],
@@ -209,71 +252,92 @@ export const viraTheme = defineColorTheme(
         'vira-yellow-foreground-invisible': {
             foreground: viraColorPalette['vira-yellow-5'],
         },
-        'vira-yellow-background-small-body': {
+        'vira-yellow-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-90'],
         },
-        'vira-yellow-background-body': {
+        'vira-yellow-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-70'],
         },
-        'vira-yellow-background-non-body': {
+        'vira-yellow-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-60'],
         },
-        'vira-yellow-background-header': {
+        'vira-yellow-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-40'],
         },
-        'vira-yellow-background-placeholder': {
+        'vira-yellow-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-30'],
         },
-        'vira-yellow-background-decoration': {
+        'vira-yellow-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-20'],
         },
-        'vira-yellow-background-invisible': {
+        'vira-yellow-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-yellow-5'],
         },
+        'vira-yellow-behind-fg-small-body': {
+            background: viraColorPalette['vira-yellow-5'],
+        },
+        'vira-yellow-behind-fg-body': {
+            background: viraColorPalette['vira-yellow-20'],
+        },
+        'vira-yellow-behind-fg-non-body': {
+            background: viraColorPalette['vira-yellow-30'],
+        },
+        'vira-yellow-behind-fg-header': {
+            background: viraColorPalette['vira-yellow-50'],
+        },
+        'vira-yellow-behind-fg-placeholder': {
+            background: viraColorPalette['vira-yellow-60'],
+        },
+        'vira-yellow-behind-fg-decoration': {
+            background: viraColorPalette['vira-yellow-80'],
+        },
+        'vira-yellow-behind-fg-invisible': {
+            background: viraColorPalette['vira-yellow-90'],
+        },
         'vira-yellow-on-self-body': {
             foreground: viraColorPalette['vira-yellow-90'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-on-self-non-body': {
             foreground: viraColorPalette['vira-yellow-80'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-on-self-header': {
             foreground: viraColorPalette['vira-yellow-60'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-on-self-placeholder': {
             foreground: viraColorPalette['vira-yellow-50'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-on-self-decoration': {
             foreground: viraColorPalette['vira-yellow-30'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-yellow-on-self-invisible': {
             foreground: viraColorPalette['vira-yellow-20'],
-            background: '#f7eeca',
+            background: viraColorPalette['vira-yellow-5'],
         },
         'vira-green-foreground-small-body': {
             foreground: viraColorPalette['vira-green-90'],
@@ -296,71 +360,92 @@ export const viraTheme = defineColorTheme(
         'vira-green-foreground-invisible': {
             foreground: viraColorPalette['vira-green-5'],
         },
-        'vira-green-background-small-body': {
+        'vira-green-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-90'],
         },
-        'vira-green-background-body': {
+        'vira-green-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-70'],
         },
-        'vira-green-background-non-body': {
+        'vira-green-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-60'],
         },
-        'vira-green-background-header': {
+        'vira-green-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-40'],
         },
-        'vira-green-background-placeholder': {
+        'vira-green-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-30'],
         },
-        'vira-green-background-decoration': {
+        'vira-green-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-20'],
         },
-        'vira-green-background-invisible': {
+        'vira-green-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-green-5'],
         },
+        'vira-green-behind-fg-small-body': {
+            background: viraColorPalette['vira-green-5'],
+        },
+        'vira-green-behind-fg-body': {
+            background: viraColorPalette['vira-green-20'],
+        },
+        'vira-green-behind-fg-non-body': {
+            background: viraColorPalette['vira-green-30'],
+        },
+        'vira-green-behind-fg-header': {
+            background: viraColorPalette['vira-green-50'],
+        },
+        'vira-green-behind-fg-placeholder': {
+            background: viraColorPalette['vira-green-60'],
+        },
+        'vira-green-behind-fg-decoration': {
+            background: viraColorPalette['vira-green-80'],
+        },
+        'vira-green-behind-fg-invisible': {
+            background: viraColorPalette['vira-green-90'],
+        },
         'vira-green-on-self-body': {
             foreground: viraColorPalette['vira-green-90'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-on-self-non-body': {
             foreground: viraColorPalette['vira-green-70'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-on-self-header': {
             foreground: viraColorPalette['vira-green-60'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-on-self-placeholder': {
             foreground: viraColorPalette['vira-green-40'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-on-self-decoration': {
             foreground: viraColorPalette['vira-green-30'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-green-on-self-invisible': {
             foreground: viraColorPalette['vira-green-20'],
-            background: '#d3f8cf',
+            background: viraColorPalette['vira-green-5'],
         },
         'vira-teal-foreground-small-body': {
             foreground: viraColorPalette['vira-teal-90'],
@@ -383,71 +468,92 @@ export const viraTheme = defineColorTheme(
         'vira-teal-foreground-invisible': {
             foreground: viraColorPalette['vira-teal-5'],
         },
-        'vira-teal-background-small-body': {
+        'vira-teal-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-90'],
         },
-        'vira-teal-background-body': {
+        'vira-teal-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-80'],
         },
-        'vira-teal-background-non-body': {
+        'vira-teal-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-60'],
         },
-        'vira-teal-background-header': {
+        'vira-teal-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-40'],
         },
-        'vira-teal-background-placeholder': {
+        'vira-teal-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-30'],
         },
-        'vira-teal-background-decoration': {
+        'vira-teal-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-20'],
         },
-        'vira-teal-background-invisible': {
+        'vira-teal-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-teal-5'],
         },
+        'vira-teal-behind-fg-small-body': {
+            background: viraColorPalette['vira-teal-5'],
+        },
+        'vira-teal-behind-fg-body': {
+            background: viraColorPalette['vira-teal-20'],
+        },
+        'vira-teal-behind-fg-non-body': {
+            background: viraColorPalette['vira-teal-30'],
+        },
+        'vira-teal-behind-fg-header': {
+            background: viraColorPalette['vira-teal-50'],
+        },
+        'vira-teal-behind-fg-placeholder': {
+            background: viraColorPalette['vira-teal-60'],
+        },
+        'vira-teal-behind-fg-decoration': {
+            background: viraColorPalette['vira-teal-80'],
+        },
+        'vira-teal-behind-fg-invisible': {
+            background: viraColorPalette['vira-teal-90'],
+        },
         'vira-teal-on-self-body': {
             foreground: viraColorPalette['vira-teal-90'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-on-self-non-body': {
             foreground: viraColorPalette['vira-teal-70'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-on-self-header': {
             foreground: viraColorPalette['vira-teal-60'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-on-self-placeholder': {
             foreground: viraColorPalette['vira-teal-40'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-on-self-decoration': {
             foreground: viraColorPalette['vira-teal-30'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-teal-on-self-invisible': {
             foreground: viraColorPalette['vira-teal-10'],
-            background: '#d4f5f3',
+            background: viraColorPalette['vira-teal-5'],
         },
         'vira-blue-foreground-small-body': {
             foreground: viraColorPalette['vira-blue-90'],
@@ -470,71 +576,92 @@ export const viraTheme = defineColorTheme(
         'vira-blue-foreground-invisible': {
             foreground: viraColorPalette['vira-blue-10'],
         },
-        'vira-blue-background-small-body': {
+        'vira-blue-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-90'],
         },
-        'vira-blue-background-body': {
+        'vira-blue-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-80'],
         },
-        'vira-blue-background-non-body': {
+        'vira-blue-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-60'],
         },
-        'vira-blue-background-header': {
+        'vira-blue-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-40'],
         },
-        'vira-blue-background-placeholder': {
+        'vira-blue-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-30'],
         },
-        'vira-blue-background-decoration': {
+        'vira-blue-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-20'],
         },
-        'vira-blue-background-invisible': {
+        'vira-blue-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-blue-5'],
         },
+        'vira-blue-behind-fg-small-body': {
+            background: viraColorPalette['vira-blue-5'],
+        },
+        'vira-blue-behind-fg-body': {
+            background: viraColorPalette['vira-blue-20'],
+        },
+        'vira-blue-behind-fg-non-body': {
+            background: viraColorPalette['vira-blue-30'],
+        },
+        'vira-blue-behind-fg-header': {
+            background: viraColorPalette['vira-blue-50'],
+        },
+        'vira-blue-behind-fg-placeholder': {
+            background: viraColorPalette['vira-blue-60'],
+        },
+        'vira-blue-behind-fg-decoration': {
+            background: viraColorPalette['vira-blue-80'],
+        },
+        'vira-blue-behind-fg-invisible': {
+            background: viraColorPalette['vira-blue-90'],
+        },
         'vira-blue-on-self-body': {
             foreground: viraColorPalette['vira-blue-90'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-on-self-non-body': {
             foreground: viraColorPalette['vira-blue-80'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-on-self-header': {
             foreground: viraColorPalette['vira-blue-60'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-on-self-placeholder': {
             foreground: viraColorPalette['vira-blue-50'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-on-self-decoration': {
             foreground: viraColorPalette['vira-blue-30'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-blue-on-self-invisible': {
             foreground: viraColorPalette['vira-blue-10'],
-            background: '#daf2ff',
+            background: viraColorPalette['vira-blue-5'],
         },
         'vira-purple-foreground-small-body': {
             foreground: viraColorPalette['vira-purple-90'],
@@ -557,71 +684,92 @@ export const viraTheme = defineColorTheme(
         'vira-purple-foreground-invisible': {
             foreground: viraColorPalette['vira-purple-5'],
         },
-        'vira-purple-background-small-body': {
+        'vira-purple-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-90'],
         },
-        'vira-purple-background-body': {
+        'vira-purple-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-80'],
         },
-        'vira-purple-background-non-body': {
+        'vira-purple-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-60'],
         },
-        'vira-purple-background-header': {
+        'vira-purple-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-40'],
         },
-        'vira-purple-background-placeholder': {
+        'vira-purple-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-30'],
         },
-        'vira-purple-background-decoration': {
+        'vira-purple-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-20'],
         },
-        'vira-purple-background-invisible': {
+        'vira-purple-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-purple-5'],
         },
+        'vira-purple-behind-fg-small-body': {
+            background: viraColorPalette['vira-purple-5'],
+        },
+        'vira-purple-behind-fg-body': {
+            background: viraColorPalette['vira-purple-20'],
+        },
+        'vira-purple-behind-fg-non-body': {
+            background: viraColorPalette['vira-purple-30'],
+        },
+        'vira-purple-behind-fg-header': {
+            background: viraColorPalette['vira-purple-50'],
+        },
+        'vira-purple-behind-fg-placeholder': {
+            background: viraColorPalette['vira-purple-60'],
+        },
+        'vira-purple-behind-fg-decoration': {
+            background: viraColorPalette['vira-purple-80'],
+        },
+        'vira-purple-behind-fg-invisible': {
+            background: viraColorPalette['vira-purple-90'],
+        },
         'vira-purple-on-self-body': {
             foreground: viraColorPalette['vira-purple-90'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-on-self-non-body': {
             foreground: viraColorPalette['vira-purple-70'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-on-self-header': {
             foreground: viraColorPalette['vira-purple-60'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-on-self-placeholder': {
             foreground: viraColorPalette['vira-purple-40'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-on-self-decoration': {
             foreground: viraColorPalette['vira-purple-30'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-purple-on-self-invisible': {
             foreground: viraColorPalette['vira-purple-10'],
-            background: '#f6eaff',
+            background: viraColorPalette['vira-purple-5'],
         },
         'vira-pink-foreground-small-body': {
             foreground: viraColorPalette['vira-pink-90'],
@@ -644,71 +792,92 @@ export const viraTheme = defineColorTheme(
         'vira-pink-foreground-invisible': {
             foreground: viraColorPalette['vira-pink-10'],
         },
-        'vira-pink-background-small-body': {
+        'vira-pink-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-90'],
         },
-        'vira-pink-background-body': {
+        'vira-pink-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-80'],
         },
-        'vira-pink-background-non-body': {
+        'vira-pink-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-60'],
         },
-        'vira-pink-background-header': {
+        'vira-pink-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-40'],
         },
-        'vira-pink-background-placeholder': {
+        'vira-pink-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-30'],
         },
-        'vira-pink-background-decoration': {
+        'vira-pink-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-20'],
         },
-        'vira-pink-background-invisible': {
+        'vira-pink-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-pink-5'],
         },
+        'vira-pink-behind-fg-small-body': {
+            background: viraColorPalette['vira-pink-5'],
+        },
+        'vira-pink-behind-fg-body': {
+            background: viraColorPalette['vira-pink-20'],
+        },
+        'vira-pink-behind-fg-non-body': {
+            background: viraColorPalette['vira-pink-30'],
+        },
+        'vira-pink-behind-fg-header': {
+            background: viraColorPalette['vira-pink-50'],
+        },
+        'vira-pink-behind-fg-placeholder': {
+            background: viraColorPalette['vira-pink-60'],
+        },
+        'vira-pink-behind-fg-decoration': {
+            background: viraColorPalette['vira-pink-80'],
+        },
+        'vira-pink-behind-fg-invisible': {
+            background: viraColorPalette['vira-pink-90'],
+        },
         'vira-pink-on-self-body': {
             foreground: viraColorPalette['vira-pink-90'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-on-self-non-body': {
             foreground: viraColorPalette['vira-pink-80'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-on-self-header': {
             foreground: viraColorPalette['vira-pink-60'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-on-self-placeholder': {
             foreground: viraColorPalette['vira-pink-50'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-on-self-decoration': {
             foreground: viraColorPalette['vira-pink-30'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-pink-on-self-invisible': {
             foreground: viraColorPalette['vira-pink-20'],
-            background: '#ffe7fb',
+            background: viraColorPalette['vira-pink-5'],
         },
         'vira-grey-foreground-small-body': {
             foreground: viraColorPalette['vira-grey-90'],
@@ -731,47 +900,68 @@ export const viraTheme = defineColorTheme(
         'vira-grey-foreground-invisible': {
             foreground: viraColorPalette['vira-grey-5'],
         },
-        'vira-grey-background-small-body': {
+        'vira-grey-behind-bg-small-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-90'],
         },
-        'vira-grey-background-body': {
+        'vira-grey-behind-bg-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-80'],
         },
-        'vira-grey-background-non-body': {
+        'vira-grey-behind-bg-non-body': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-60'],
         },
-        'vira-grey-background-header': {
+        'vira-grey-behind-bg-header': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-40'],
         },
-        'vira-grey-background-placeholder': {
+        'vira-grey-behind-bg-placeholder': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-30'],
         },
-        'vira-grey-background-decoration': {
+        'vira-grey-behind-bg-decoration': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-20'],
         },
-        'vira-grey-background-invisible': {
+        'vira-grey-behind-bg-invisible': {
             foreground: {
                 refDefaultBackground: true,
             },
             background: viraColorPalette['vira-grey-5'],
+        },
+        'vira-grey-behind-fg-small-body': {
+            background: viraColorPalette['vira-grey-5'],
+        },
+        'vira-grey-behind-fg-body': {
+            background: viraColorPalette['vira-grey-20'],
+        },
+        'vira-grey-behind-fg-non-body': {
+            background: viraColorPalette['vira-grey-30'],
+        },
+        'vira-grey-behind-fg-header': {
+            background: viraColorPalette['vira-grey-50'],
+        },
+        'vira-grey-behind-fg-placeholder': {
+            background: viraColorPalette['vira-grey-60'],
+        },
+        'vira-grey-behind-fg-decoration': {
+            background: viraColorPalette['vira-grey-80'],
+        },
+        'vira-grey-behind-fg-invisible': {
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-body': {
             foreground: viraColorPalette['vira-grey-90'],
@@ -838,56 +1028,84 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-red-90'],
             background: 'black',
         },
-        'vira-red-background-small-body': {
+        'vira-red-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-red-5'],
         },
-        'vira-red-background-body': {
+        'vira-red-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-red-20'],
         },
-        'vira-red-background-non-body': {
+        'vira-red-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-red-30'],
         },
-        'vira-red-background-header': {
+        'vira-red-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-red-50'],
         },
-        'vira-red-background-placeholder': {
+        'vira-red-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-red-60'],
         },
-        'vira-red-background-decoration': {
+        'vira-red-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-red-80'],
         },
-        'vira-red-background-invisible': {
+        'vira-red-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-red-90'],
         },
+        'vira-red-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-90'],
+        },
+        'vira-red-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-80'],
+        },
+        'vira-red-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-60'],
+        },
+        'vira-red-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-40'],
+        },
+        'vira-red-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-30'],
+        },
+        'vira-red-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-20'],
+        },
+        'vira-red-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-red-5'],
+        },
         'vira-red-on-self-body': {
             foreground: viraColorPalette['vira-red-10'],
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-on-self-non-body': {
             foreground: viraColorPalette['vira-red-20'],
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-on-self-header': {
             foreground: viraColorPalette['vira-red-40'],
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-on-self-placeholder': {
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-on-self-decoration': {
             foreground: viraColorPalette['vira-red-70'],
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-red-on-self-invisible': {
             foreground: viraColorPalette['vira-red-80'],
-            background: '#760003',
+            background: viraColorPalette['vira-red-90'],
         },
         'vira-orange-foreground-small-body': {
             foreground: viraColorPalette['vira-orange-5'],
@@ -916,56 +1134,84 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-orange-90'],
             background: 'black',
         },
-        'vira-orange-background-small-body': {
+        'vira-orange-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-5'],
         },
-        'vira-orange-background-body': {
+        'vira-orange-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-20'],
         },
-        'vira-orange-background-non-body': {
+        'vira-orange-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-30'],
         },
-        'vira-orange-background-header': {
+        'vira-orange-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-50'],
         },
-        'vira-orange-background-placeholder': {
+        'vira-orange-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-60'],
         },
-        'vira-orange-background-decoration': {
+        'vira-orange-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-80'],
         },
-        'vira-orange-background-invisible': {
+        'vira-orange-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-orange-90'],
         },
+        'vira-orange-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-90'],
+        },
+        'vira-orange-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-80'],
+        },
+        'vira-orange-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-60'],
+        },
+        'vira-orange-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-40'],
+        },
+        'vira-orange-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-30'],
+        },
+        'vira-orange-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-20'],
+        },
+        'vira-orange-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-orange-5'],
+        },
         'vira-orange-on-self-body': {
             foreground: viraColorPalette['vira-orange-10'],
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-on-self-non-body': {
             foreground: viraColorPalette['vira-orange-20'],
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-on-self-header': {
             foreground: viraColorPalette['vira-orange-40'],
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-on-self-placeholder': {
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-on-self-decoration': {
             foreground: viraColorPalette['vira-orange-70'],
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-orange-on-self-invisible': {
             foreground: viraColorPalette['vira-orange-80'],
-            background: '#6a2500',
+            background: viraColorPalette['vira-orange-90'],
         },
         'vira-yellow-foreground-small-body': {
             foreground: viraColorPalette['vira-yellow-5'],
@@ -994,56 +1240,84 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-yellow-90'],
             background: 'black',
         },
-        'vira-yellow-background-small-body': {
+        'vira-yellow-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-5'],
         },
-        'vira-yellow-background-body': {
+        'vira-yellow-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-20'],
         },
-        'vira-yellow-background-non-body': {
+        'vira-yellow-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-30'],
         },
-        'vira-yellow-background-header': {
+        'vira-yellow-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-50'],
         },
-        'vira-yellow-background-placeholder': {
+        'vira-yellow-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-60'],
         },
-        'vira-yellow-background-decoration': {
+        'vira-yellow-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-80'],
         },
-        'vira-yellow-background-invisible': {
+        'vira-yellow-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-yellow-90'],
         },
+        'vira-yellow-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-90'],
+        },
+        'vira-yellow-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-70'],
+        },
+        'vira-yellow-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-60'],
+        },
+        'vira-yellow-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-40'],
+        },
+        'vira-yellow-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-30'],
+        },
+        'vira-yellow-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-20'],
+        },
+        'vira-yellow-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-yellow-5'],
+        },
         'vira-yellow-on-self-body': {
             foreground: viraColorPalette['vira-yellow-10'],
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-on-self-non-body': {
             foreground: viraColorPalette['vira-yellow-20'],
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-on-self-header': {
             foreground: viraColorPalette['vira-yellow-40'],
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-on-self-placeholder': {
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-on-self-decoration': {
             foreground: viraColorPalette['vira-yellow-70'],
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-yellow-on-self-invisible': {
             foreground: viraColorPalette['vira-yellow-80'],
-            background: '#4c3b00',
+            background: viraColorPalette['vira-yellow-90'],
         },
         'vira-green-foreground-small-body': {
             foreground: viraColorPalette['vira-green-5'],
@@ -1072,57 +1346,85 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-green-90'],
             background: 'black',
         },
-        'vira-green-background-small-body': {
+        'vira-green-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-green-5'],
         },
-        'vira-green-background-body': {
+        'vira-green-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-green-20'],
         },
-        'vira-green-background-non-body': {
+        'vira-green-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-green-30'],
         },
-        'vira-green-background-header': {
+        'vira-green-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-green-50'],
         },
-        'vira-green-background-placeholder': {
+        'vira-green-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-green-60'],
         },
-        'vira-green-background-decoration': {
+        'vira-green-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-green-80'],
         },
-        'vira-green-background-invisible': {
+        'vira-green-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-green-90'],
         },
+        'vira-green-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-90'],
+        },
+        'vira-green-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-70'],
+        },
+        'vira-green-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-60'],
+        },
+        'vira-green-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-40'],
+        },
+        'vira-green-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-30'],
+        },
+        'vira-green-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-20'],
+        },
+        'vira-green-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-green-5'],
+        },
         'vira-green-on-self-body': {
             foreground: viraColorPalette['vira-green-10'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-on-self-non-body': {
             foreground: viraColorPalette['vira-green-20'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-on-self-header': {
             foreground: viraColorPalette['vira-green-40'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-on-self-placeholder': {
             foreground: viraColorPalette['vira-green-50'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-on-self-decoration': {
             foreground: viraColorPalette['vira-green-70'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-green-on-self-invisible': {
             foreground: viraColorPalette['vira-green-80'],
-            background: '#004700',
+            background: viraColorPalette['vira-green-90'],
         },
         'vira-teal-foreground-small-body': {
             foreground: viraColorPalette['vira-teal-5'],
@@ -1151,57 +1453,85 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-teal-90'],
             background: 'black',
         },
-        'vira-teal-background-small-body': {
+        'vira-teal-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-5'],
         },
-        'vira-teal-background-body': {
+        'vira-teal-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-20'],
         },
-        'vira-teal-background-non-body': {
+        'vira-teal-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-30'],
         },
-        'vira-teal-background-header': {
+        'vira-teal-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-50'],
         },
-        'vira-teal-background-placeholder': {
+        'vira-teal-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-60'],
         },
-        'vira-teal-background-decoration': {
+        'vira-teal-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-80'],
         },
-        'vira-teal-background-invisible': {
+        'vira-teal-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-teal-90'],
         },
+        'vira-teal-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-90'],
+        },
+        'vira-teal-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-80'],
+        },
+        'vira-teal-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-60'],
+        },
+        'vira-teal-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-40'],
+        },
+        'vira-teal-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-30'],
+        },
+        'vira-teal-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-20'],
+        },
+        'vira-teal-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-teal-5'],
+        },
         'vira-teal-on-self-body': {
             foreground: viraColorPalette['vira-teal-10'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-on-self-non-body': {
             foreground: viraColorPalette['vira-teal-20'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-on-self-header': {
             foreground: viraColorPalette['vira-teal-40'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-on-self-placeholder': {
             foreground: viraColorPalette['vira-teal-50'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-on-self-decoration': {
             foreground: viraColorPalette['vira-teal-70'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-teal-on-self-invisible': {
             foreground: viraColorPalette['vira-teal-80'],
-            background: '#004442',
+            background: viraColorPalette['vira-teal-90'],
         },
         'vira-blue-foreground-small-body': {
             foreground: viraColorPalette['vira-blue-5'],
@@ -1230,56 +1560,84 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-blue-90'],
             background: 'black',
         },
-        'vira-blue-background-small-body': {
+        'vira-blue-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-5'],
         },
-        'vira-blue-background-body': {
+        'vira-blue-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-20'],
         },
-        'vira-blue-background-non-body': {
+        'vira-blue-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-30'],
         },
-        'vira-blue-background-header': {
+        'vira-blue-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-50'],
         },
-        'vira-blue-background-placeholder': {
+        'vira-blue-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-60'],
         },
-        'vira-blue-background-decoration': {
+        'vira-blue-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-80'],
         },
-        'vira-blue-background-invisible': {
+        'vira-blue-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-blue-90'],
         },
+        'vira-blue-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-90'],
+        },
+        'vira-blue-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-80'],
+        },
+        'vira-blue-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-60'],
+        },
+        'vira-blue-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-40'],
+        },
+        'vira-blue-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-30'],
+        },
+        'vira-blue-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-20'],
+        },
+        'vira-blue-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-blue-5'],
+        },
         'vira-blue-on-self-body': {
             foreground: viraColorPalette['vira-blue-10'],
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-on-self-non-body': {
             foreground: viraColorPalette['vira-blue-20'],
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-on-self-header': {
             foreground: viraColorPalette['vira-blue-40'],
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-on-self-placeholder': {
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-on-self-decoration': {
             foreground: viraColorPalette['vira-blue-70'],
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-blue-on-self-invisible': {
             foreground: viraColorPalette['vira-blue-80'],
-            background: '#00358a',
+            background: viraColorPalette['vira-blue-90'],
         },
         'vira-purple-foreground-small-body': {
             foreground: viraColorPalette['vira-purple-5'],
@@ -1308,57 +1666,85 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-purple-90'],
             background: 'black',
         },
-        'vira-purple-background-small-body': {
+        'vira-purple-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-5'],
         },
-        'vira-purple-background-body': {
+        'vira-purple-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-20'],
         },
-        'vira-purple-background-non-body': {
+        'vira-purple-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-30'],
         },
-        'vira-purple-background-header': {
+        'vira-purple-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-50'],
         },
-        'vira-purple-background-placeholder': {
+        'vira-purple-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-60'],
         },
-        'vira-purple-background-decoration': {
+        'vira-purple-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-80'],
         },
-        'vira-purple-background-invisible': {
+        'vira-purple-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-purple-90'],
         },
+        'vira-purple-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-90'],
+        },
+        'vira-purple-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-80'],
+        },
+        'vira-purple-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-60'],
+        },
+        'vira-purple-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-40'],
+        },
+        'vira-purple-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-30'],
+        },
+        'vira-purple-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-20'],
+        },
+        'vira-purple-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-purple-5'],
+        },
         'vira-purple-on-self-body': {
             foreground: viraColorPalette['vira-purple-10'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-on-self-non-body': {
             foreground: viraColorPalette['vira-purple-20'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-on-self-header': {
             foreground: viraColorPalette['vira-purple-40'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-on-self-placeholder': {
             foreground: viraColorPalette['vira-purple-50'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-on-self-decoration': {
             foreground: viraColorPalette['vira-purple-70'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-purple-on-self-invisible': {
             foreground: viraColorPalette['vira-purple-80'],
-            background: '#500095',
+            background: viraColorPalette['vira-purple-90'],
         },
         'vira-pink-foreground-small-body': {
             foreground: viraColorPalette['vira-pink-5'],
@@ -1387,56 +1773,84 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-pink-90'],
             background: 'black',
         },
-        'vira-pink-background-small-body': {
+        'vira-pink-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-5'],
         },
-        'vira-pink-background-body': {
+        'vira-pink-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-20'],
         },
-        'vira-pink-background-non-body': {
+        'vira-pink-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-30'],
         },
-        'vira-pink-background-header': {
+        'vira-pink-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-50'],
         },
-        'vira-pink-background-placeholder': {
+        'vira-pink-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-60'],
         },
-        'vira-pink-background-decoration': {
+        'vira-pink-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-80'],
         },
-        'vira-pink-background-invisible': {
+        'vira-pink-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-pink-90'],
         },
+        'vira-pink-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-90'],
+        },
+        'vira-pink-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-80'],
+        },
+        'vira-pink-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-60'],
+        },
+        'vira-pink-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-40'],
+        },
+        'vira-pink-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-30'],
+        },
+        'vira-pink-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-20'],
+        },
+        'vira-pink-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-pink-5'],
+        },
         'vira-pink-on-self-body': {
             foreground: viraColorPalette['vira-pink-10'],
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-on-self-non-body': {
             foreground: viraColorPalette['vira-pink-20'],
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-on-self-header': {
             foreground: viraColorPalette['vira-pink-40'],
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-on-self-placeholder': {
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-on-self-decoration': {
             foreground: viraColorPalette['vira-pink-70'],
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-pink-on-self-invisible': {
             foreground: viraColorPalette['vira-pink-80'],
-            background: '#6e004f',
+            background: viraColorPalette['vira-pink-90'],
         },
         'vira-grey-foreground-small-body': {
             foreground: viraColorPalette['vira-grey-5'],
@@ -1465,57 +1879,85 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-grey-90'],
             background: 'black',
         },
-        'vira-grey-background-small-body': {
+        'vira-grey-behind-bg-small-body': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-5'],
         },
-        'vira-grey-background-body': {
+        'vira-grey-behind-bg-body': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-20'],
         },
-        'vira-grey-background-non-body': {
+        'vira-grey-behind-bg-non-body': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-30'],
         },
-        'vira-grey-background-header': {
+        'vira-grey-behind-bg-header': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-50'],
         },
-        'vira-grey-background-placeholder': {
+        'vira-grey-behind-bg-placeholder': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-60'],
         },
-        'vira-grey-background-decoration': {
+        'vira-grey-behind-bg-decoration': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-80'],
         },
-        'vira-grey-background-invisible': {
+        'vira-grey-behind-bg-invisible': {
             foreground: 'black',
             background: viraColorPalette['vira-grey-90'],
         },
+        'vira-grey-behind-fg-small-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-90'],
+        },
+        'vira-grey-behind-fg-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-80'],
+        },
+        'vira-grey-behind-fg-non-body': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-60'],
+        },
+        'vira-grey-behind-fg-header': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-40'],
+        },
+        'vira-grey-behind-fg-placeholder': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-30'],
+        },
+        'vira-grey-behind-fg-decoration': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-20'],
+        },
+        'vira-grey-behind-fg-invisible': {
+            foreground: 'white',
+            background: viraColorPalette['vira-grey-5'],
+        },
         'vira-grey-on-self-body': {
             foreground: viraColorPalette['vira-grey-10'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-non-body': {
             foreground: viraColorPalette['vira-grey-20'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-header': {
             foreground: viraColorPalette['vira-grey-40'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-placeholder': {
             foreground: viraColorPalette['vira-grey-50'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-decoration': {
             foreground: viraColorPalette['vira-grey-70'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
         'vira-grey-on-self-invisible': {
             foreground: viraColorPalette['vira-grey-80'],
-            background: '#363f43',
+            background: viraColorPalette['vira-grey-90'],
         },
     },
 });

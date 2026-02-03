@@ -25,17 +25,17 @@ export const viraFormCssVars = defineCssVars({
         viraTheme.colors['vira-grey-foreground-header'].foreground.value,
 
     'vira-form-text-selection-color':
-        viraTheme.colors['vira-blue-background-decoration'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-decoration'].background.value,
     'vira-form-selection-hover-color':
-        viraTheme.colors['vira-blue-background-invisible'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-invisible'].background.value,
     'vira-form-selection-active-color':
-        viraTheme.colors['vira-blue-background-decoration'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-decoration'].background.value,
 
-    'vira-form-error-color': viraTheme.colors['vira-red-background-non-body'].background.value,
-    'vira-form-error-hover-color': viraTheme.colors['vira-red-background-header'].background.value,
-    'vira-form-error-active-color': viraTheme.colors['vira-red-background-body'].background.value,
+    'vira-form-error-color': viraTheme.colors['vira-red-behind-bg-non-body'].background.value,
+    'vira-form-error-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,
+    'vira-form-error-active-color': viraTheme.colors['vira-red-behind-bg-body'].background.value,
 
-    'vira-form-success-color': viraTheme.colors['vira-green-background-non-body'].background.value,
+    'vira-form-success-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
 
     'vira-form-label-font-weight': 'bold',
 
@@ -53,15 +53,15 @@ export const viraFormCssVars = defineCssVars({
         viraTheme.colors['vira-grey-foreground-decoration'].foreground.value,
 
     'vira-form-accent-primary-color':
-        viraTheme.colors['vira-blue-background-non-body'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-non-body'].background.value,
     'vira-form-accent-primary-hover-color':
-        viraTheme.colors['vira-blue-background-header'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-header'].background.value,
     'vira-form-accent-primary-active-color':
-        viraTheme.colors['vira-blue-background-body'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-body'].background.value,
 
-    'vira-form-danger-color': viraTheme.colors['vira-red-background-non-body'].background.value,
-    'vira-form-danger-hover-color': viraTheme.colors['vira-red-background-header'].background.value,
-    'vira-form-danger-active-color': viraTheme.colors['vira-red-background-body'].background.value,
+    'vira-form-danger-color': viraTheme.colors['vira-red-behind-bg-non-body'].background.value,
+    'vira-form-danger-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,
+    'vira-form-danger-active-color': viraTheme.colors['vira-red-behind-bg-body'].background.value,
 
     'vira-form-filled-background-color':
         viraTheme.colors['vira-grey-foreground-invisible'].foreground.value,

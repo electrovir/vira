@@ -775,27 +775,27 @@ export const viraTheme = defineColorTheme(
         },
         'vira-grey-on-self-body': {
             foreground: viraColorPalette['vira-grey-90'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-on-self-non-body': {
             foreground: viraColorPalette['vira-grey-70'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-on-self-header': {
             foreground: viraColorPalette['vira-grey-60'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-on-self-placeholder': {
             foreground: viraColorPalette['vira-grey-40'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-on-self-decoration': {
             foreground: viraColorPalette['vira-grey-30'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
         'vira-grey-on-self-invisible': {
             foreground: viraColorPalette['vira-grey-10'],
-            background: '#eceff0',
+            background: viraColorPalette['vira-grey-5'],
         },
     },
 );

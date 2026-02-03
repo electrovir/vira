@@ -90,6 +90,12 @@ export const viraButtonBookPage = defineBookPage({
             },
         });
         defineViraButtonExample({
+            title: 'plain',
+            inputs: {
+                buttonStyle: ViraButtonStyle.Plain,
+            },
+        });
+        defineViraButtonExample({
             title: 'danger',
             inputs: {
                 buttonStyle: ViraButtonStyle.Danger,

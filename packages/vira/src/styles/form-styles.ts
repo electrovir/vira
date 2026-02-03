@@ -1,6 +1,7 @@
 import {css, unsafeCSS} from 'element-vir';
 import {defineCssVars} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
+import {viraColorPalette} from './vira-color-palette.js';
 import {viraTheme} from './vira-color-theme.js';
 
 const defaultViraFormRadius = '8px';
@@ -44,6 +45,12 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-focus-outline-color':
         viraTheme.colors['vira-blue-foreground-header'].foreground.value,
     'vira-form-focus-outline-border-radius': css`calc(var(--vira-form-radius, ${unsafeCSS(defaultViraFormRadius)}) + 2px)`,
+
+    'vira-form-plain-color': viraColorPalette['vira-grey-0'].value,
+    'vira-form-plain-hover-color':
+        viraTheme.colors['vira-grey-foreground-invisible'].foreground.value,
+    'vira-form-plain-active-color':
+        viraTheme.colors['vira-grey-foreground-decoration'].foreground.value,
 
     'vira-form-accent-primary-color':
         viraTheme.colors['vira-blue-background-non-body'].background.value,

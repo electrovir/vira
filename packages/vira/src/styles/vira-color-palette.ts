@@ -94,6 +94,7 @@ export const viraColorPalette = defineCssVars({
     'vira-pink-80': '#962471',
     'vira-pink-90': '#6e004f',
 
+    'vira-grey-0': '#f3f6f6',
     'vira-grey-5': '#eceff0',
     'vira-grey-10': '#dce2e6',
     'vira-grey-20': '#c7d2d7',

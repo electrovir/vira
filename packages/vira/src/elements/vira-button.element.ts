@@ -21,6 +21,7 @@ export enum ViraButtonStyle {
     Danger = 'vira-button-danger',
     DangerOutline = 'vira-button-danger-outline',
     Ghost = 'vira-button-ghost',
+    Plain = 'vira-button-plain',
 }
 
 /**
@@ -57,14 +58,18 @@ export const ViraButton = defineViraElement<
         'vira-button-disabled': ({inputs}) => !!inputs.disabled,
         'vira-button-expand-to-fit-icon': ({inputs}) => !!inputs.expandToFitIcon,
         'vira-button-icon-only': ({inputs}) => !!inputs.icon && !inputs.text,
+        'vira-button-plain-style': ({inputs}) => inputs.buttonStyle === ViraButtonStyle.Plain,
         'vira-button-default-style': ({inputs}) =>
             !inputs.buttonStyle || inputs.buttonStyle === ViraButtonStyle.Default,
     },
     cssVars: {
         'vira-button-padding': '5px 10px',
 
-        'vira-button-internal-foreground-color': 'transparent',
-        'vira-button-internal-background-color': 'transparent',
+        'vira-button-internal-foreground-color':
+            viraFormCssVars['vira-form-background-color'].value,
+        'vira-button-internal-background-color':
+            viraFormCssVars['vira-form-accent-primary-color'].value,
+        'vira-button-border-color': 'transparent',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
@@ -75,12 +80,6 @@ export const ViraButton = defineViraElement<
             align-items: center;
             box-sizing: border-box;
             ${noUserSelect};
-            ${cssVars['vira-button-internal-background-color'].name}: ${viraFormCssVars[
-                'vira-form-accent-primary-color'
-            ].value};
-            ${cssVars['vira-button-internal-foreground-color'].name}: ${viraFormCssVars[
-                'vira-form-background-color'
-            ].value};
             ${viraFormCssVars['vira-form-focus-outline-color'].name}: ${viraFormCssVars[
                 'vira-form-accent-primary-hover-color'
             ].value}
@@ -151,10 +150,36 @@ export const ViraButton = defineViraElement<
             }
         }
 
+        ${hostClasses['vira-button-plain-style'].selector} {
+            & button {
+                ${cssVars['vira-button-internal-background-color'].name}: ${viraFormCssVars[
+                    'vira-form-plain-color'
+                ].value};
+                color: currentColor;
+                ${cssVars['vira-button-border-color'].name}: ${viraFormCssVars[
+                    'vira-form-plain-active-color'
+                ].value};
+                border-width: 1px;
+            }
+            &:hover button,
+            & button:hover {
+                ${cssVars['vira-button-internal-background-color'].name}: ${viraFormCssVars[
+                    'vira-form-plain-hover-color'
+                ].value};
+            }
+
+            &:active button,
+            & button:active {
+                ${cssVars['vira-button-internal-background-color'].name}: ${viraFormCssVars[
+                    'vira-form-plain-active-color'
+                ].value};
+            }
+        }
+
         ${hostClasses['vira-button-outline-style'].selector} button {
             color: ${cssVars['vira-button-internal-background-color'].value};
             background-color: ${cssVars['vira-button-internal-foreground-color'].value};
-            border-color: currentColor;
+            ${cssVars['vira-button-border-color'].name}: currentColor;
         }
 
         button {
@@ -163,7 +188,7 @@ export const ViraButton = defineViraElement<
             position: relative;
             width: 100%;
             height: 100%;
-            border: 2px solid transparent;
+            border: 2px solid ${cssVars['vira-button-border-color'].value};
             box-sizing: border-box;
             display: inline-flex;
             justify-content: center;

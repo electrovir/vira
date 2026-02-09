@@ -84,11 +84,15 @@ export const ViraMenu = defineViraElement<
         ${navAttribute.css({
             baseSelector: '.menu-item:not(.disabled):not(.selected)',
             navValue: NavValue.Focused,
-        })}, ${navAttribute.css({
-            baseSelector: '.menu-item:not(.disabled):not(.selected)',
-            navValue: NavValue.Active,
         })}, .menu-item:not(.disabled):not(.selected):hover {
             background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+            outline: none;
+        }
+        ${navAttribute.css({
+            baseSelector: '.menu-item:not(.disabled):not(.selected)',
+            navValue: NavValue.Active,
+        })}, .menu-item:not(.disabled):not(.selected):active {
+            background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
             outline: none;
         }
 
@@ -98,12 +102,18 @@ export const ViraMenu = defineViraElement<
                     baseSelector: '.menu-item:not(.disabled)',
                     navValue: NavValue.Focused,
                 })},
+                .menu-item:not(.disabled):hover {
+                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+                outline: none;
+            }
+
+            &
                 ${navAttribute.css({
                     baseSelector: '.menu-item:not(.disabled)',
                     navValue: NavValue.Active,
                 })},
-                .menu-item:not(.disabled):hover {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+                .menu-item:not(.disabled):active {
+                background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
                 outline: none;
             }
         }
@@ -143,6 +153,7 @@ export const ViraMenu = defineViraElement<
                 return html`
                     <${ViraLink.assign({
                         route: item.route,
+                        disableLinkStyles: true,
                     })}
                         class="menu-item ${classMap({
                             disabled: !!item.disabled,

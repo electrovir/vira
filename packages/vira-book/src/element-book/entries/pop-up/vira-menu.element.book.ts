@@ -55,6 +55,15 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenu.InputsType> | u
             ],
         },
     },
+    {
+        title: 'with multi selection',
+        inputs: {
+            isMultiSelect: true,
+            selected: [
+                2,
+            ],
+        },
+    },
 ];
 
 export const viraMenuOptionsBookPage = defineBookPage({

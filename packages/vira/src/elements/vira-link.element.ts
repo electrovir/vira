@@ -53,10 +53,15 @@ export const ViraLink = defineViraElement<
             stylePassthrough: Readonly<PartialWithUndefined<{a: CSSResult}>>;
             /** Attributes that will be applied directly to the inner elements. */
             attributePassthrough: Readonly<PartialWithUndefined<{a: AttributeValues}>>;
+            /** If set to true, internal link styles are not applied. */
+            disableLinkStyles: boolean;
         }>
 >()({
     tagName: 'vira-link',
-    styles: css`
+    hostClasses: {
+        'vira-link-link-styles': ({inputs}) => !inputs.disableLinkStyles,
+    },
+    styles: ({hostClasses}) => css`
         :host {
             display: inline;
             text-decoration: underline;
@@ -72,14 +77,16 @@ export const ViraLink = defineViraElement<
             white-space: inherit;
         }
 
-        :host(:hover) a,
-        a:hover {
-            color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
-        }
+        ${hostClasses['vira-link-link-styles'].selector} {
+            &:hover a,
+            & a:hover {
+                color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+            }
 
-        :host(:active) a,
-        a:active {
-            color: ${viraFormCssVars['vira-form-accent-primary-active-color'].value};
+            &:active a,
+            & a:active {
+                color: ${viraFormCssVars['vira-form-accent-primary-active-color'].value};
+            }
         }
     `,
     render({inputs}) {

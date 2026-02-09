@@ -16,11 +16,11 @@ export const viraLinkBookPage = defineBookPage({
         }),
         'Hover color': definePageControl({
             controlType: BookPageControlType.Color,
-            initValue: viraFormCssVars['vira-form-accent-primary-color'].default,
+            initValue: '',
         }),
         'Active color': definePageControl({
             controlType: BookPageControlType.Color,
-            initValue: viraFormCssVars['vira-form-accent-primary-active-color'].default,
+            initValue: '',
         }),
     },
     defineExamples({defineExample}) {
@@ -73,6 +73,16 @@ export const viraLinkBookPage = defineBookPage({
                             return false;
                         },
                     },
+                },
+            },
+        });
+        defineLinkExample({
+            title: 'disabled link styles',
+            inputs: {
+                disableLinkStyles: true,
+                link: {
+                    newTab: true,
+                    url: 'https://www.wikipedia.org',
                 },
             },
         });

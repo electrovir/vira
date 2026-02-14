@@ -54,12 +54,14 @@ function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}):
  * @category Internal
  */
 export type IsAllowedInputs = {
-    value: string;
+    value: string | number;
     allowed: string | RegExp | undefined;
     blocked: string | RegExp | undefined;
 };
 
-function isAllowed({value, allowed, blocked}: IsAllowedInputs) {
+function isAllowed({value: rawValue, allowed, blocked}: IsAllowedInputs) {
+    const value = String(rawValue);
+
     const isAllowedCharacter = allowed
         ? doesMatch({
               input: value,
@@ -85,10 +87,12 @@ export function filterTextInputValue(inputs: IsAllowedInputs): {
     filtered: string;
     blocked: string;
 } {
+    const value = String(inputs.value);
+
     if (!inputs.value) {
-        return {filtered: inputs.value, blocked: ''};
+        return {filtered: value, blocked: ''};
     }
-    const {filtered, blocked} = inputs.value.split('').reduce(
+    const {filtered, blocked} = value.split('').reduce(
         (accum, letter) => {
             const allowed = isAllowed({...inputs, value: letter});
 

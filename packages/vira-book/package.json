@@ -19,7 +19,7 @@
         "@augment-vir/assert": "^31.59.3",
         "@augment-vir/common": "^31.59.3",
         "@electrovir/color": "^1.7.8",
-        "element-book": "^26.16.0",
+        "element-book": "^26.16.1",
         "element-vir": "^26.14.3",
         "lit-css-vars": "^3.5.0",
         "spa-router-vir": "^6.4.1",

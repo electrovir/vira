@@ -1,5 +1,6 @@
 /** This file is automatically updated by update-icon-exports.ts */
 
+import {AutoTheme24Icon} from './icon-svgs/auto-theme-24.icon.js';
 import {Bell24Icon} from './icon-svgs/bell-24.icon.js';
 import {Chat24Icon} from './icon-svgs/chat-24.icon.js';
 import {Check24Icon} from './icon-svgs/check-24.icon.js';
@@ -21,6 +22,7 @@ import {Link24Icon} from './icon-svgs/link-24.icon.js';
 import {Loader24Icon} from './icon-svgs/loader-24.icon.js';
 import {LoaderAnimated24Icon} from './icon-svgs/loader-animated-24.icon.js';
 import {Lock24Icon} from './icon-svgs/lock-24.icon.js';
+import {Moon24Icon} from './icon-svgs/moon-24.icon.js';
 import {Options24Icon} from './icon-svgs/options-24.icon.js';
 import {Pencil24Icon} from './icon-svgs/pencil-24.icon.js';
 import {Shield24Icon} from './icon-svgs/shield-24.icon.js';
@@ -36,12 +38,14 @@ import {StatusInProgress24Icon} from './icon-svgs/status-in-progress-24.icon.js'
 import {StatusSuccess24Icon} from './icon-svgs/status-success-24.icon.js';
 import {StatusUnknown24Icon} from './icon-svgs/status-unknown-24.icon.js';
 import {StatusWarning24Icon} from './icon-svgs/status-warning-24.icon.js';
+import {Sun24Icon} from './icon-svgs/sun-24.icon.js';
 import {Upload24Icon} from './icon-svgs/upload-24.icon.js';
 import {X24Icon} from './icon-svgs/x-24.icon.js';
 
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
 
+export * from './icon-svgs/auto-theme-24.icon.js';
 export * from './icon-svgs/bell-24.icon.js';
 export * from './icon-svgs/chat-24.icon.js';
 export * from './icon-svgs/check-24.icon.js';
@@ -63,6 +67,7 @@ export * from './icon-svgs/link-24.icon.js';
 export * from './icon-svgs/loader-24.icon.js';
 export * from './icon-svgs/loader-animated-24.icon.js';
 export * from './icon-svgs/lock-24.icon.js';
+export * from './icon-svgs/moon-24.icon.js';
 export * from './icon-svgs/options-24.icon.js';
 export * from './icon-svgs/pencil-24.icon.js';
 export * from './icon-svgs/shield-24.icon.js';
@@ -78,6 +83,7 @@ export * from './icon-svgs/status-in-progress-24.icon.js';
 export * from './icon-svgs/status-success-24.icon.js';
 export * from './icon-svgs/status-unknown-24.icon.js';
 export * from './icon-svgs/status-warning-24.icon.js';
+export * from './icon-svgs/sun-24.icon.js';
 export * from './icon-svgs/upload-24.icon.js';
 export * from './icon-svgs/x-24.icon.js';
 
@@ -87,6 +93,7 @@ export * from './icon-svgs/x-24.icon.js';
  * @category Icon
  */
 export const allIconsByName = {
+    AutoTheme24Icon,
     Bell24Icon,
     Chat24Icon,
     Check24Icon,
@@ -108,6 +115,7 @@ export const allIconsByName = {
     Loader24Icon,
     LoaderAnimated24Icon,
     Lock24Icon,
+    Moon24Icon,
     Options24Icon,
     Pencil24Icon,
     Shield24Icon,
@@ -123,6 +131,7 @@ export const allIconsByName = {
     StatusSuccess24Icon,
     StatusUnknown24Icon,
     StatusWarning24Icon,
+    Sun24Icon,
     Upload24Icon,
     X24Icon,
 } as const;

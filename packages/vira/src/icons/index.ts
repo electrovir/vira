@@ -1,5 +1,6 @@
 /** This file is automatically updated by update-icon-exports.ts */
 
+import {ArrowUp24Icon} from './icon-svgs/arrow-up-24.icon.js';
 import {AutoTheme24Icon} from './icon-svgs/auto-theme-24.icon.js';
 import {Bell24Icon} from './icon-svgs/bell-24.icon.js';
 import {Chat24Icon} from './icon-svgs/chat-24.icon.js';
@@ -18,16 +19,20 @@ import {ExternalLink24Icon} from './icon-svgs/external-link-24.icon.js';
 import {EyeClosed24Icon} from './icon-svgs/eye-closed-24.icon.js';
 import {EyeOpen24Icon} from './icon-svgs/eye-open-24.icon.js';
 import {Filter24Icon} from './icon-svgs/filter-24.icon.js';
+import {Globe24Icon} from './icon-svgs/globe-24.icon.js';
 import {Link24Icon} from './icon-svgs/link-24.icon.js';
 import {Loader24Icon} from './icon-svgs/loader-24.icon.js';
 import {LoaderAnimated24Icon} from './icon-svgs/loader-animated-24.icon.js';
 import {Lock24Icon} from './icon-svgs/lock-24.icon.js';
+import {MagnifyingGlass24Icon} from './icon-svgs/magnifying-glass-24.icon.js';
 import {Moon24Icon} from './icon-svgs/moon-24.icon.js';
 import {Options24Icon} from './icon-svgs/options-24.icon.js';
 import {Pencil24Icon} from './icon-svgs/pencil-24.icon.js';
+import {Printer24Icon} from './icon-svgs/printer-24.icon.js';
 import {Shield24Icon} from './icon-svgs/shield-24.icon.js';
 import {SortAscending24Icon} from './icon-svgs/sort-ascending-24.icon.js';
 import {SortDescending24Icon} from './icon-svgs/sort-descending-24.icon.js';
+import {Sparkle24Icon} from './icon-svgs/sparkle-24.icon.js';
 import {SpeakerLoud24Icon} from './icon-svgs/speaker-loud-24.icon.js';
 import {SpeakerMedium24Icon} from './icon-svgs/speaker-medium-24.icon.js';
 import {SpeakerMuted24Icon} from './icon-svgs/speaker-muted-24.icon.js';
@@ -45,6 +50,7 @@ import {X24Icon} from './icon-svgs/x-24.icon.js';
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
 
+export * from './icon-svgs/arrow-up-24.icon.js';
 export * from './icon-svgs/auto-theme-24.icon.js';
 export * from './icon-svgs/bell-24.icon.js';
 export * from './icon-svgs/chat-24.icon.js';
@@ -63,16 +69,20 @@ export * from './icon-svgs/external-link-24.icon.js';
 export * from './icon-svgs/eye-closed-24.icon.js';
 export * from './icon-svgs/eye-open-24.icon.js';
 export * from './icon-svgs/filter-24.icon.js';
+export * from './icon-svgs/globe-24.icon.js';
 export * from './icon-svgs/link-24.icon.js';
 export * from './icon-svgs/loader-24.icon.js';
 export * from './icon-svgs/loader-animated-24.icon.js';
 export * from './icon-svgs/lock-24.icon.js';
+export * from './icon-svgs/magnifying-glass-24.icon.js';
 export * from './icon-svgs/moon-24.icon.js';
 export * from './icon-svgs/options-24.icon.js';
 export * from './icon-svgs/pencil-24.icon.js';
+export * from './icon-svgs/printer-24.icon.js';
 export * from './icon-svgs/shield-24.icon.js';
 export * from './icon-svgs/sort-ascending-24.icon.js';
 export * from './icon-svgs/sort-descending-24.icon.js';
+export * from './icon-svgs/sparkle-24.icon.js';
 export * from './icon-svgs/speaker-loud-24.icon.js';
 export * from './icon-svgs/speaker-medium-24.icon.js';
 export * from './icon-svgs/speaker-muted-24.icon.js';
@@ -93,6 +103,7 @@ export * from './icon-svgs/x-24.icon.js';
  * @category Icon
  */
 export const allIconsByName = {
+    ArrowUp24Icon,
     AutoTheme24Icon,
     Bell24Icon,
     Chat24Icon,
@@ -111,16 +122,20 @@ export const allIconsByName = {
     EyeClosed24Icon,
     EyeOpen24Icon,
     Filter24Icon,
+    Globe24Icon,
     Link24Icon,
     Loader24Icon,
     LoaderAnimated24Icon,
     Lock24Icon,
+    MagnifyingGlass24Icon,
     Moon24Icon,
     Options24Icon,
     Pencil24Icon,
+    Printer24Icon,
     Shield24Icon,
     SortAscending24Icon,
     SortDescending24Icon,
+    Sparkle24Icon,
     SpeakerLoud24Icon,
     SpeakerMedium24Icon,
     SpeakerMuted24Icon,

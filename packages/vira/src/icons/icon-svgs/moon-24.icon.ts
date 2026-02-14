@@ -2,6 +2,13 @@ import {html} from 'element-vir';
 import {viraIconCssVars} from '../icon-css-vars.js';
 import {defineIcon} from '../icon-svg.js';
 
+/**
+ * A moon icon.
+ *
+ * @category Icon
+ * @category SVG
+ * @see https://electrovir.github.io/vira/book/icons/moon24icon
+ */
 export const Moon24Icon = defineIcon({
     name: 'Moon24Icon',
     svgTemplate: html`

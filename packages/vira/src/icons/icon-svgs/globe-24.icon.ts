@@ -3,35 +3,37 @@ import {viraIconCssVars} from '../icon-css-vars.js';
 import {defineIcon} from '../icon-svg.js';
 
 /**
- * A sun icon.
+ * A globe icon.
  *
  * @category Icon
  * @category SVG
- * @see https://electrovir.github.io/vira/book/icons/sun24icon
+ * @see https://electrovir.github.io/vira/book/icons/globe24icon
  */
-export const Sun24Icon = defineIcon({
-    name: 'Sun24Icon',
+export const Globe24Icon = defineIcon({
+    name: 'Globe24Icon',
     svgTemplate: html`
         <svg
             xmlns="http://www.w3.org/2000/svg"
+            xml:space="preserve"
             width="24"
             height="24"
-            style="fill-rule:nonzero;stroke:#000;stroke-width:1px;stroke-linecap:round;clip-rule:evenodd;"
             viewBox="0 0 24 24"
+            style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:1"
         >
             <circle
                 cx="12"
                 cy="12"
-                r="4"
+                r="9"
+                fill=${viraIconCssVars['vira-icon-fill-color'].value}
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-                fill=${viraIconCssVars['vira-icon-fill-color'].value}
             />
             <path
-                d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"
+                d="M21 12c0 5-4 9-9 9m9-9c0-5-4-9-9-9m9 9H3m9 9c-5 0-9-4-9-9m9 9q3.5-3.9 3.6-9 0-5.1-3.6-9m0 18a14 14 0 0 1-3.6-9q0-5.1 3.6-9m-9 9c0-5 4-9 9-9"
+                style="fill-rule:nonzero;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4"
+                fill="none"
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-                fill="none"
             />
         </svg>
     `,

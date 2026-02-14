@@ -26,12 +26,17 @@ export const Link24Icon = defineIcon({
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
                 fill=${viraIconCssVars['vira-icon-fill-color'].value}
             />
-
             <path
                 d="M12.4 9.6c.5.1 1 .5 1.5.9a4 4 0 0 1 0 5.7l-4.2 4.2A4 4 0 0 1 4 14.7l3-2.9"
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
                 fill=${viraIconCssVars['vira-icon-fill-color'].value}
+            />
+            <path
+                d="M11.6 14.4a4 4 0 0 1-1.5-6.6l4.2-4.2A4 4 0 0 1 20 9.3l-3 2.9"
+                stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
+                stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
+                fill="none"
             />
         </svg>
     `,

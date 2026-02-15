@@ -164,6 +164,8 @@ export const ViraMenu = defineViraElement<
                         class="menu-item ${classMap({
                             disabled: !!item.disabled,
                             selected,
+                            'default-pointer-styles': !item.disableDefaultPointerStyles,
+                            'no-default-pointer-styles': !!item.disableDefaultPointerStyles,
                         })}"
                         ${testId(viraMenuTestIds.item)}
                         title=${ifDefined(item.titleText || undefined)}

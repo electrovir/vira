@@ -20,6 +20,11 @@ export type MenuItem = {
      */
     label: string | HTMLTemplateResult;
 } & PartialWithUndefined<{
+    /**
+     * If set to `true`, the default hover styles aren't applied to the menu item. This is best used
+     * with a template `label` (rather than a plain string).
+     */
+    disableDefaultPointerStyles: boolean;
     route: ViraLinkRoute;
     disabled: boolean;
     /** Text assigned to the `title` HTML attribute that'll show on long hover. */

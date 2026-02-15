@@ -1,5 +1,5 @@
 import {defineBookPage} from 'element-book';
-import {html} from 'element-vir';
+import {css, html} from 'element-vir';
 import {SpaRouter} from 'spa-router-vir';
 import {ViraMenu} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
@@ -61,6 +61,27 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenu.InputsType> | u
             isMultiSelect: true,
             selected: [
                 2,
+            ],
+        },
+    },
+    {
+        title: 'with custom template',
+        inputs: {
+            items: [
+                ...items,
+                {
+                    id: 4,
+                    disableDefaultPointerStyles: true,
+                    label: html`
+                        <span
+                            style=${css`
+                                color: blue;
+                            `}
+                        >
+                            Custom Item
+                        </span>
+                    `,
+                },
             ],
         },
     },

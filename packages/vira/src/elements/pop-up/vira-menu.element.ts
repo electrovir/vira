@@ -78,20 +78,26 @@ export const ViraMenu = defineViraElement<
             will-change: background-color;
             background-color: inherit;
             outline: none;
-            cursor: pointer;
+
+            &.default-pointer-styles {
+                cursor: pointer;
+            }
+            &.no-default-pointer-styles {
+                cursor: auto !important;
+            }
         }
 
         ${navAttribute.css({
-            baseSelector: '.menu-item:not(.disabled):not(.selected)',
+            baseSelector: '.menu-item.default-pointer-styles:not(.disabled):not(.selected)',
             navValue: NavValue.Focused,
-        })}, .menu-item:not(.disabled):not(.selected):hover {
+        })}, .menu-item.default-pointer-styles:not(.disabled):not(.selected):hover {
             background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
             outline: none;
         }
         ${navAttribute.css({
-            baseSelector: '.menu-item:not(.disabled):not(.selected)',
+            baseSelector: '.menu-item.default-pointer-styles:not(.disabled):not(.selected)',
             navValue: NavValue.Active,
-        })}, .menu-item:not(.disabled):not(.selected):active {
+        })}, .menu-item.default-pointer-styles:not(.disabled):not(.selected):active {
             background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
             outline: none;
         }
@@ -173,6 +179,8 @@ export const ViraMenu = defineViraElement<
                         class="menu-item ${classMap({
                             disabled: !!item.disabled,
                             selected,
+                            'default-pointer-styles': !item.disableDefaultPointerStyles,
+                            'no-default-pointer-styles': !!item.disableDefaultPointerStyles,
                         })}"
                         ${testId(viraMenuTestIds.item)}
                         title=${ifDefined(item.titleText || undefined)}

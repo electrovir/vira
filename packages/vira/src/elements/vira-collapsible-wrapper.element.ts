@@ -1,5 +1,5 @@
 import {css, defineElementEvent, html, listen, onResize} from 'element-vir';
-import {noNativeFormStyles, viraAnimationDurations} from '../styles/index.js';
+import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from './define-vira-element.js';
 
 /**
@@ -46,9 +46,12 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         .collapsing-element {
             transition: height ${viraAnimationDurations['vira-pretty-animation-duration'].value};
             overflow: hidden;
+            ${noUserSelect}
         }
-        ${hostClasses['vira-collapsible-wrapper-expanded'].name} .collapsing-element {
+
+        ${hostClasses['vira-collapsible-wrapper-expanded'].selector} .collapsing-element {
             pointer-events: none;
+            user-select: auto;
         }
 
         @media print {

@@ -1,4 +1,4 @@
-import {css, defineElementEvent, html, listen, onResize} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, onResize} from 'element-vir';
 import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from './define-vira-element.js';
 
@@ -21,7 +21,6 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         };
     },
     hostClasses: {
-        'vira-collapsible-wrapper-expanded': ({inputs}) => inputs.expanded,
         'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
     },
     slotNames: ['header'],
@@ -46,12 +45,10 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         .collapsing-element {
             transition: height ${viraAnimationDurations['vira-pretty-animation-duration'].value};
             overflow: hidden;
-            ${noUserSelect}
-        }
 
-        ${hostClasses['vira-collapsible-wrapper-expanded'].selector} .collapsing-element {
-            pointer-events: none;
-            user-select: auto;
+            &.collapsed {
+                ${noUserSelect}
+            }
         }
 
         @media print {
@@ -85,7 +82,13 @@ export const ViraCollapsibleWrapper = defineViraElement<{
                 <slot name=${slotNames.header}>Header</slot>
             </button>
 
-            <div class="collapsing-element" style=${collapsingStyles} disabled="disabled">
+            <div
+                class="collapsing-element ${classMap({
+                    collapsed: !inputs.expanded,
+                })}"
+                style=${collapsingStyles}
+                disabled="disabled"
+            >
                 <div
                     ${onResize(({contentRect}) => {
                         updateState({contentHeight: contentRect.height});

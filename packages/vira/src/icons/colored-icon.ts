@@ -28,6 +28,7 @@ export function createColoredIcon(
     const styles = css`
         ${unsafeCSS(colorStyles)}
         display: inline-flex;
+        vertical-align: middle;
     `;
 
     return defineIcon({

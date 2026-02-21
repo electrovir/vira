@@ -11,7 +11,7 @@ import {
 import {utilBookPage} from '../top-level-pages.js';
 
 export const createColoredIconBookPage = defineBookPage({
-    title: 'createColoredIcon',
+    title: createColoredIcon.name,
     parent: utilBookPage,
     descriptionParagraphs: [
         'Wraps an existing icon with specific colors to create a new icon that can be used anywhere the original icon can be used.',

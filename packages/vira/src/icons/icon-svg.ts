@@ -1,6 +1,6 @@
-import {getObjectTypedKeys, stringify} from '@augment-vir/common';
-import Color, {type ColorTypes} from 'colorjs.io';
-import {type TemplateResult, html} from 'element-vir';
+import {check} from '@augment-vir/assert';
+import {getObjectTypedKeys, type PartialWithUndefined} from '@augment-vir/common';
+import {html, type CSSResult, type TemplateResult} from 'element-vir';
 import {viraIconCssVars} from './icon-css-vars.js';
 
 /**
@@ -33,17 +33,6 @@ export function defineIcon({
     return iconSvg;
 }
 
-function getAssertedValidColor(input: ColorTypes | undefined) {
-    try {
-        if (!input) {
-            throw new Error('invalid empty color');
-        }
-        return new Color(input);
-    } catch {
-        throw new Error(`Invalid color: ${stringify(input)}`);
-    }
-}
-
 /**
  * Wraps an existing icon with a specific color and outputs another icon that can be used anywhere
  * the original icon can be used.
@@ -52,14 +41,17 @@ function getAssertedValidColor(input: ColorTypes | undefined) {
  */
 export function createColoredIcon(
     icon: ViraIconSvg,
-    colors: Partial<Record<keyof typeof viraIconCssVars, string>>,
+    colors: PartialWithUndefined<Record<keyof typeof viraIconCssVars, string | CSSResult>>,
 ): ViraIconSvg {
     const colorStyles = getObjectTypedKeys(colors)
         .map((cssVarName) => {
-            const colorValue = colors[cssVarName];
-            const color = getAssertedValidColor(colorValue);
-            return `${viraIconCssVars[cssVarName].name}: ${color.toString()};`;
+            if (colors[cssVarName]) {
+                return `${viraIconCssVars[cssVarName].name}: ${String(colors[cssVarName])};`;
+            } else {
+                return undefined;
+            }
         })
+        .filter(check.isTruthy)
         .join(' ');
 
     return defineIcon({

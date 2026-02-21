@@ -1094,6 +1094,7 @@ ${Dh(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function gT(e){return
     `});function nn(e,t){const r=je(t).map(o=>{if(t[o])return`${b[o].name}: ${String(t[o])};`}).filter(F.isTruthy).join(" "),n=D`
         ${Ne(r)}
         display: inline-flex;
+        vertical-align: middle;
     `;return re({name:e.name,svgTemplate:g`
             <div style=${n}>${e.svgTemplate}</div>
         `})}const Z0={ArrowUp24Icon:zN,AutoTheme24Icon:VN,Bell24Icon:qN,Chat24Icon:WN,Check24Icon:rg,ChevronDown24Icon:KN,ChevronUp24Icon:ng,CloseX24Icon:G5,Commit24Icon:GN,Copy24Icon:G0,Document24Icon:HN,DocumentSearch24Icon:ZN,DoubleChevron24Icon:JN,Element16Icon:H5,Element24Icon:Ut,ExternalLink24Icon:YN,EyeClosed24Icon:Z5,EyeOpen24Icon:J5,Filter24Icon:XN,Globe24Icon:QN,Link24Icon:eP,Loader24Icon:Y5,LoaderAnimated24Icon:ji,Lock24Icon:rP,MagnifyingGlass24Icon:nP,Moon24Icon:oP,Options24Icon:Za,Pencil24Icon:iP,Printer24Icon:sP,Shield24Icon:aP,SortAscending24Icon:uP,SortDescending24Icon:lP,Sparkle24Icon:cP,SpeakerLoud24Icon:dP,SpeakerMedium24Icon:fP,SpeakerMuted24Icon:hP,SpeakerQuiet24Icon:mP,Star24Icon:H0,StatusFailure24Icon:mc,StatusInProgress24Icon:gP,StatusSuccess24Icon:Ba,StatusUnknown24Icon:pP,StatusWarning24Icon:bP,Sun24Icon:yP,Upload24Icon:vP,X24Icon:X5},_i=D`
@@ -3822,7 +3823,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${I.assign({icon:r})}></${I}>
                     <${I.assign({icon:n})}></${I}>
                     <${I.assign({icon:o})}></${I}>
-                `}})}}),W$={async element1(){return await Ti({seconds:2}),(await Kl(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-B9EpTTPQ.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ti({seconds:2}),(await Kl(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CxjFTrNI.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},ay=Bn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:f$(W$)}},render({state:e,inputs:t}){return h$(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
+                `}})}}),W$={async element1(){return await Ti({seconds:2}),(await Kl(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-DGsHEW4o.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ti({seconds:2}),(await Kl(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-Z6zjmAO0.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},ay=Bn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:f$(W$)}},render({state:e,inputs:t}){return h$(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
                     <${Mi}>
                         ${Vi("Failed to import element",Wt(r))}
                     </${Mi}>

@@ -1,5 +1,7 @@
+import {ViraThemeColorName} from './vira-color-theme-object.js';
+
 /** All available variants for controlling vira form colors. */
-export enum ViraColor {
+export enum ViraColorVariant {
     /**
      * This is the default.
      *
@@ -17,11 +19,42 @@ export enum ViraColor {
     /** @default green colored */
     Positive = 'positive',
     /**
-     * No color variant styles applied at all. All related CSS vars are free to customize to your
-     * wishes.
+     * No color variant styles will be applied at all. All related CSS vars are free to customize to
+     * your wishes.
      */
     None = 'none',
 }
+
+/**
+ * Maps {@link ViraColorVariant} values that support colors to their respective vira theme color
+ * keys.
+ *
+ * @category Internal
+ */
+export const viraColorVariantToColorName: Record<
+    Exclude<ViraColorVariant, ViraColorVariant.None | ViraColorVariant.Plain>,
+    ViraThemeColorName
+> = {
+    [ViraColorVariant.Accent]: ViraThemeColorName.blue,
+    [ViraColorVariant.Neutral]: ViraThemeColorName.grey,
+    [ViraColorVariant.Danger]: ViraThemeColorName.red,
+    [ViraColorVariant.Warning]: ViraThemeColorName.orange,
+    [ViraColorVariant.Positive]: ViraThemeColorName.green,
+};
+
+/**
+ * All defined color variants starting with the default.
+ *
+ * @category Internal
+ */
+export const viraColorVariants = [
+    ViraColorVariant.Accent,
+    ViraColorVariant.Plain,
+    ViraColorVariant.Neutral,
+    ViraColorVariant.Danger,
+    ViraColorVariant.Warning,
+    ViraColorVariant.Positive,
+] as const;
 
 /**
  * All available variants for controlling vira form sizes.
@@ -39,9 +72,24 @@ export enum ViraSize {
     Medium = 'medium',
     /** @default 24px tall */
     Small = 'small',
-    /** No size styles applied at all. All related CSS vars are free to customize to your wishes. */
+    /**
+     * No size styles will be applied at all. All related CSS vars are free to customize to your
+     * wishes.
+     */
     None = 'none',
 }
+
+/**
+ * All defined size variants starting with the default.
+ *
+ * @category Internal
+ */
+export const viraSizeVariants = [
+    ViraSize.Medium,
+    ViraSize.Small,
+    ViraSize.Large,
+] as const;
+
 /**
  * All available variants for controlling vira form emphasis.
  *
@@ -51,6 +99,30 @@ export enum ViraEmphasis {
     /** This is the default. */
     Standard = 'standard',
     Subtle = 'subtle',
-    /** No emphasis styles applied at all. All related CSS vars are free to customize to your wishes. */
+    /**
+     * No emphasis styles will be applied at all. All related CSS vars are free to customize to your
+     * wishes.
+     */
     None = 'none',
 }
+
+/**
+ * All defined emphasis variants starting with the default.
+ *
+ * @category Internal
+ */
+export const viraEmphasisVariants = [
+    ViraEmphasis.Standard,
+    ViraEmphasis.Subtle,
+] as const;
+
+/**
+ * Default heights for {@link ViraSize} values.
+ *
+ * @category Internal
+ */
+export const viraSizeHeights: Record<Exclude<ViraSize, ViraSize.None>, number> = {
+    [ViraSize.Large]: 40,
+    [ViraSize.Medium]: 32,
+    [ViraSize.Small]: 24,
+};

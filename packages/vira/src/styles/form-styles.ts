@@ -38,6 +38,9 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-success-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
 
     'vira-form-label-font-weight': 'bold',
+    'vira-form-small-text-size': '12px',
+    'vira-form-medium-text-size': '16px',
+    'vira-form-large-text-size': '16px',
 
     'vira-form-radius': defaultViraFormRadius,
     'vira-form-wrapper-radius': '16px',

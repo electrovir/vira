@@ -90,33 +90,9 @@ function generateThemeCss(colorVariant: ViraColorVariant): CSSResult | undefined
             }
         }
         :host(
-                .vira-tag-color-${unsafeCSS(colorVariant)}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Standard,
-                    )}.vira-tag-not-checked
-            )
-            button {
-            color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.BodyText]
-                .foreground.value};
-            background-color: transparent;
-            border-color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][
-                ContrastLevelName.BodyText
-            ].background.value};
-
-            &:hover {
-                background-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.Invisible
-                ].background.value};
-            }
-            &:active {
-                background-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.Decoration
-                ].background.value};
-            }
-        }
-        :host(
-                .vira-tag-color-${unsafeCSS(colorVariant)}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Subtle,
-                    )}.vira-tag-not-checked
+                .vira-tag-color-${unsafeCSS(
+                        colorVariant,
+                    )}.vira-tag-not-checked.vira-tag-not-checked.vira-tag-not-checked
             )
             button {
             color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.BodyText]
@@ -317,22 +293,33 @@ export const ViraTag = defineViraElement<
                     )}
             )
             button {
-            ${colorCss(viraTheme.inverse[themeDefaultKey])}
-            border-color: ${viraTheme.inverse[themeDefaultKey].background.value}
+            ${colorCss(viraTheme.inverse[themeDefaultKey])};
+            border-color: ${viraTheme.inverse[themeDefaultKey].background.value};
 
             &:hover {
-                ${colorCss(viraTheme.colors['vira-grey-behind-bg-body'])}
-                border-color: ${viraTheme.inverse['vira-grey-behind-bg-body'].background.value}
+                ${colorCss(viraTheme.colors['vira-grey-behind-bg-non-body'])};
+                border-color: ${viraTheme.colors['vira-grey-behind-bg-non-body'].background.value};
             }
             &:active {
-                ${colorCss(viraTheme.inverse[themeDefaultKey])}
-                border-color: ${viraTheme.inverse[themeDefaultKey].background.value}
+                ${colorCss(viraTheme.inverse[themeDefaultKey])};
+                border-color: ${viraTheme.inverse[themeDefaultKey].background.value};
             }
         }
         :host(
                 .${hostClasses['vira-tag-color-plain'].name}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Standard,
-                    )}.${hostClasses['vira-tag-not-checked'].name}
+                        ViraEmphasis.Subtle,
+                    )}
+            )
+            button {
+            background-color: transparent;
+            color: ${viraTheme.colors[themeDefaultKey].foreground.value};
+            border-color: transparent;
+        }
+        :host(
+                .${hostClasses['vira-tag-color-plain'].name}.${hostClasses['vira-tag-not-checked']
+                        .name}.${hostClasses['vira-tag-not-checked'].name}.${hostClasses[
+                        'vira-tag-not-checked'
+                    ].name}
             )
             button {
             color: ${viraTheme.colors[themeDefaultKey].foreground.value};
@@ -344,20 +331,22 @@ export const ViraTag = defineViraElement<
                         ViraEmphasis.Subtle,
                     )}
             )
+            button,
+        :host(
+                .${hostClasses['vira-tag-color-plain'].name}.${hostClasses['vira-tag-not-checked']
+                        .name}.${hostClasses['vira-tag-not-checked'].name}.${hostClasses[
+                        'vira-tag-not-checked'
+                    ].name}
+            )
             button {
-            background-color: transparent;
-            color: ${viraTheme.colors[themeDefaultKey].foreground.value};
-            border-color: transparent;
-
             &:hover {
                 ${colorCss(viraTheme.colors['vira-grey-behind-fg-small-body'])}
                 border-color: ${viraTheme.colors['vira-grey-behind-fg-small-body'].background
                     .value};
             }
             &:active {
-                background-color: transparent;
-                color: ${viraTheme.colors[themeDefaultKey].foreground.value};
-                border-color: transparent;
+                ${colorCss(viraTheme.colors['vira-grey-behind-fg-body'])}
+                border-color: ${viraTheme.colors['vira-grey-behind-fg-body'].background.value};
             }
         }
     `,

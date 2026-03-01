@@ -143,8 +143,15 @@ const examples: {
     {
         title: 'raw',
         inputs: {
-            options: mockOptions,
+            options: [
+                ...mockOptions,
+                {
+                    label: 'really really really really really really really really long option',
+                    value: 'something',
+                },
+            ],
             rawSelect: true,
+            icon: Element24Icon,
         },
     },
 ];

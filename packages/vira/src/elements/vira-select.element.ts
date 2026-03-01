@@ -122,6 +122,7 @@ export const ViraSelect = defineViraElement<
                 cursor: pointer;
                 /* Prevent the left pixel of text getting cut off. */
                 padding-left: 0.5px;
+                padding-right: 26px;
                 overflow: hidden;
                 text-overflow: ellipsis;
 

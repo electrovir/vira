@@ -53,6 +53,8 @@ export const ViraSelect = defineViraElement<
             icon: Readonly<ViraIconSvg>;
             placeholder: string;
             label: string;
+            /** If set to `true`, only minimal styles are applied. */
+            rawSelect: boolean;
             disabled: boolean;
             attributePassthrough: Readonly<
                 PartialWithUndefined<{
@@ -86,6 +88,7 @@ export const ViraSelect = defineViraElement<
     hostClasses: {
         'vira-select-disabled': ({inputs}) => !!inputs.disabled,
         'vira-select-error': ({inputs}) => !!inputs.hasError,
+        'vira-select-not-raw': ({inputs}) => !inputs.rawSelect,
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
@@ -104,14 +107,6 @@ export const ViraSelect = defineViraElement<
             box-sizing: border-box;
             align-items: center;
             position: relative;
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            /*
-                Border colors are actually applied via the .wrapper-border class. However, we must
-                apply a border here still so that it takes up space.
-            */
-            border: 1px solid transparent;
             cursor: pointer;
 
             & select {
@@ -124,19 +119,11 @@ export const ViraSelect = defineViraElement<
                 border: none;
                 background: none;
                 border-radius: inherit;
-                padding: ${cssVars['vira-select-padding-vertical'].value} 31px
-                    ${cssVars['vira-select-padding-vertical'].value}
-                    ${cssVars['vira-select-padding-horizontal'].value};
                 cursor: pointer;
+                /* Prevent the left pixel of text getting cut off. */
+                padding-left: 0.5px;
                 overflow: hidden;
                 text-overflow: ellipsis;
-
-                &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
-                    ${createFocusStyles({
-                        elementBorderSize: 0,
-                        noNesting: true,
-                    })}
-                }
 
                 &.placeholder {
                     color: ${viraFormCssVars['vira-form-placeholder-color'].value};
@@ -160,24 +147,51 @@ export const ViraSelect = defineViraElement<
                     left: 10px;
                 }
             }
+        }
 
-            & .border-style {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+        ${hostClasses['vira-select-not-raw'].selector} {
+            .select-wrapper {
                 border-radius: ${viraFormCssVars['vira-form-radius'].value};
-                z-index: 0;
-                pointer-events: none;
-            }
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                /*
+                    Border colors are actually applied via the .wrapper-border class. However, we must
+                    apply a border here still so that it takes up space.
+                */
+                border: 1px solid transparent;
+                cursor: pointer;
 
-            & .wrapper-border {
-                top: -1px;
-                left: -1px;
-                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-                transition: border
-                    ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+                & select {
+                    padding: ${cssVars['vira-select-padding-vertical'].value} 31px
+                        ${cssVars['vira-select-padding-vertical'].value}
+                        ${cssVars['vira-select-padding-horizontal'].value};
+
+                    &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
+                        ${createFocusStyles({
+                            elementBorderSize: 0,
+                            noNesting: true,
+                        })}
+                    }
+                }
+
+                & .border-style {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                    z-index: 0;
+                    pointer-events: none;
+                }
+
+                & .wrapper-border {
+                    top: -1px;
+                    left: -1px;
+                    border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                    transition: border
+                        ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+                }
             }
         }
 
@@ -212,10 +226,9 @@ export const ViraSelect = defineViraElement<
             }
         }
 
-        ${hostClasses['vira-select-error'].selector} {
-            & .wrapper-border {
-                border-color: ${viraFormCssVars['vira-form-error-color'].value};
-            }
+        :host(.${hostClasses['vira-select-not-raw'].name}.${hostClasses['vira-select-error'].name})
+            .wrapper-border {
+            border-color: ${viraFormCssVars['vira-form-error-color'].value};
         }
     `,
     render({inputs, state, dispatch, events}) {

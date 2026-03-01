@@ -140,6 +140,13 @@ const examples: {
             }
         `,
     },
+    {
+        title: 'raw',
+        inputs: {
+            options: mockOptions,
+            rawSelect: true,
+        },
+    },
 ];
 
 export const viraSelectBookPage = defineBookPage({

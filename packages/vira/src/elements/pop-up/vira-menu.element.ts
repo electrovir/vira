@@ -28,25 +28,23 @@ export const viraMenuTestIds = {
  * @category Elements
  */
 export const ViraMenu = defineViraElement<
-    Readonly<
-        {
-            /**
-             * The parent nav controller for this menu. If none is provided, an internal nav
-             * controller is created (which means it can't be hooked into by external elements).
-             *
-             * It is recommended to not leave this `undefined`.
-             */
-            navController: NavController | undefined;
-            /** All menu items to show to the user. */
-            items: ReadonlyArray<Readonly<MenuItem>>;
-        } & PartialWithUndefined<{
-            /** The ids of the currently selected menu items. */
-            selected: ReadonlyArray<PropertyKey>;
-            isMultiSelect: boolean;
-            /** Hide menu item check mark icons. */
-            hideCheckIcons: boolean;
-        }>
-    >
+    {
+        /**
+         * The parent nav controller for this menu. If none is provided, an internal nav controller
+         * is created (which means it can't be hooked into by external elements).
+         *
+         * It is recommended to not leave this `undefined`.
+         */
+        navController: NavController | undefined;
+        /** All menu items to show to the user. */
+        items: ReadonlyArray<Readonly<MenuItem>>;
+    } & PartialWithUndefined<{
+        /** The ids of the currently selected menu items. */
+        selected: ReadonlyArray<PropertyKey>;
+        isMultiSelect: boolean;
+        /** Hide menu item check mark icons. */
+        hideCheckIcons: boolean;
+    }>
 >()({
     tagName: 'vira-menu',
     state({inputs, host}) {

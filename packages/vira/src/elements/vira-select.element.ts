@@ -44,28 +44,26 @@ export type ViraSelectOption = {
  * @see https://electrovir.github.io/vira/book/elements/vira-select
  */
 export const ViraSelect = defineViraElement<
-    Readonly<
-        {
-            options: ReadonlyArray<Readonly<ViraSelectOption>>;
-            /** The currently selected option value. */
-            value: undefined | string;
-        } & PartialWithUndefined<{
-            icon: Readonly<ViraIconSvg>;
-            placeholder: string;
-            label: string;
-            /** If set to `true`, only minimal styles are applied. */
-            rawSelect: boolean;
-            disabled: boolean;
-            attributePassthrough: Readonly<
-                PartialWithUndefined<{
-                    label: AttributeValues;
-                    select: AttributeValues;
-                    option: AttributeValues;
-                }>
-            >;
-            hasError: boolean;
-        }>
-    >
+    {
+        options: ReadonlyArray<Readonly<ViraSelectOption>>;
+        /** The currently selected option value. */
+        value: undefined | string;
+    } & PartialWithUndefined<{
+        icon: Readonly<ViraIconSvg>;
+        placeholder: string;
+        label: string;
+        /** If set to `true`, only minimal styles are applied. */
+        rawSelect: boolean;
+        disabled: boolean;
+        attributePassthrough: Readonly<
+            PartialWithUndefined<{
+                label: AttributeValues;
+                select: AttributeValues;
+                option: AttributeValues;
+            }>
+        >;
+        hasError: boolean;
+    }>
 >()({
     tagName: 'vira-select',
     state() {

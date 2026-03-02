@@ -19,26 +19,24 @@ import {
  * @see https://electrovir.github.io/vira/book/elements/vira-form
  */
 export const ViraForm = defineViraElement<
-    Readonly<
-        {
-            fields: Readonly<ViraFormFields>;
-        } & PartialWithUndefined<{
-            showClearButtons: boolean;
-            /**
-             * When `true`, all fields in this form are disabled. Note that this will not (and can
-             * not) disable any child elements you've inserted via <slot>.
-             *
-             * @default false
-             */
-            isDisabled: boolean;
-            /**
-             * If true, no `'*'` is appended to required form field labels.
-             *
-             * @default false
-             */
-            hideRequiredMarkers: boolean;
-        }>
-    >
+    {
+        fields: Readonly<ViraFormFields>;
+    } & PartialWithUndefined<{
+        showClearButtons: boolean;
+        /**
+         * When `true`, all fields in this form are disabled. Note that this will not (and can not)
+         * disable any child elements you've inserted via <slot>.
+         *
+         * @default false
+         */
+        isDisabled: boolean;
+        /**
+         * If true, no `'*'` is appended to required form field labels.
+         *
+         * @default false
+         */
+        hideRequiredMarkers: boolean;
+    }>
 >()({
     tagName: 'vira-form',
     events: {

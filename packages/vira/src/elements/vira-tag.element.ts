@@ -138,30 +138,28 @@ function generateAutomaticViraTagThemeVariants(): CSSResult {
  * @see https://electrovir.github.io/vira/book/elements/vira-tag
  */
 export const ViraTag = defineViraElement<
-    Readonly<
-        {
-            text: Primitive;
-        } & PartialWithUndefined<{
-            isClickable: RequireExactlyOne<{
-                /**
-                 * If set, the tag can be toggled on and off. If toggled on, a checkmark is shown.
-                 *
-                 * - `true`: show a checkmark
-                 * - `false`: hide the checkmark
-                 */
-                selected: boolean;
-                /** If set, the tag shows an x. Clicks indicate removing the tag entirely. */
-                cancellable: true;
-            }>;
-            /** @default ViraSize.Medium */
-            size: ViraSize;
-            /** @default ViraEmphasis.Standard */
-            emphasis: ViraEmphasis;
-            /** @default ViraColor.Accent */
-            color: ViraColorVariant;
-            disabled: boolean;
-        }>
-    >
+    {
+        text: Primitive;
+    } & PartialWithUndefined<{
+        isClickable: RequireExactlyOne<{
+            /**
+             * If set, the tag can be toggled on and off. If toggled on, a checkmark is shown.
+             *
+             * - `true`: show a checkmark
+             * - `false`: hide the checkmark
+             */
+            selected: boolean;
+            /** If set, the tag shows an x. Clicks indicate removing the tag entirely. */
+            cancellable: true;
+        }>;
+        /** @default ViraSize.Medium */
+        size: ViraSize;
+        /** @default ViraEmphasis.Standard */
+        emphasis: ViraEmphasis;
+        /** @default ViraColor.Accent */
+        color: ViraColorVariant;
+        disabled: boolean;
+    }>
 >()({
     tagName: 'vira-tag',
     cssVars: {

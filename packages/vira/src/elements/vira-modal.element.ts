@@ -22,32 +22,30 @@ const globalEventsToCloseModalOn = [
  * @see https://electrovir.github.io/vira/book/elements/vira-modal
  */
 export const ViraModal = defineViraElement<
-    Readonly<
-        {
-            open: boolean;
-        } & PartialWithUndefined<{
-            /** If this isn't set, make sure to use the modal title slot to fill it in. */
-            modalTitle: string;
-            /**
-             * If `true`, the following conditions trigger the modal to close:
-             *
-             * - The user clicks the "x" close button
-             * - The `open` input is set to `false`
-             *
-             * If set to `false` (the default), the following conditions trigger the modal to close:
-             *
-             * - The user clicks outside of the modal
-             * - The user presses the "Escape" key
-             * - The user clicks the "x" close button
-             * - The `open` input is set to `false`
-             *
-             * @default false
-             */
-            blockLightDismissal: boolean;
-            modalSubtitle: string;
-            isMobileSize: boolean;
-        }>
-    >
+    {
+        open: boolean;
+    } & PartialWithUndefined<{
+        /** If this isn't set, make sure to use the modal title slot to fill it in. */
+        modalTitle: string;
+        /**
+         * If `true`, the following conditions trigger the modal to close:
+         *
+         * - The user clicks the "x" close button
+         * - The `open` input is set to `false`
+         *
+         * If set to `false` (the default), the following conditions trigger the modal to close:
+         *
+         * - The user clicks outside of the modal
+         * - The user presses the "Escape" key
+         * - The user clicks the "x" close button
+         * - The `open` input is set to `false`
+         *
+         * @default false
+         */
+        blockLightDismissal: boolean;
+        modalSubtitle: string;
+        isMobileSize: boolean;
+    }>
 >()({
     tagName: 'vira-modal',
     events: {

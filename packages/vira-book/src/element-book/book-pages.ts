@@ -11,6 +11,7 @@ import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
 import {viraButtonBookPage} from './entries/vira-button.element.book.js';
 import {viraCardBookPage} from './entries/vira-card.element.book.js';
 import {viraCheckboxBookPage} from './entries/vira-checkbox.element.book.js';
+import {viraCollapsibleCardBookPage} from './entries/vira-collapsible-card.element.book.js';
 import {viraCollapsibleBookPage} from './entries/vira-collapsible-wrapper.element.book.js';
 import {viraDropdownPage} from './entries/vira-dropdown.element.book.js';
 import {viraErrorBookPage} from './entries/vira-error.element.book.js';
@@ -38,6 +39,7 @@ const elementPages = [
     viraButtonBookPage,
     viraCardBookPage,
     viraCheckboxBookPage,
+    viraCollapsibleCardBookPage,
     viraCollapsibleBookPage,
     viraDropdownPage,
     viraErrorBookPage,

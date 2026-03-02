@@ -13,19 +13,17 @@ import {type MenuItem} from './pop-up-menu-item.js';
  * @category Elements
  */
 export const ViraMenuItem = defineViraElement<
-    Readonly<
-        {
-            selected: boolean;
-        } & PartialWithUndefined<{
-            /**
-             * The text to show in the menu item. If this is not provided, it is expected that you
-             * will instead utilize this element's `<slot>`.
-             */
-            label: MenuItem['label'];
-            /** If `true`, does not render the selected check icon. */
-            hideCheckIcon: boolean;
-        }>
-    >
+    {
+        selected: boolean;
+    } & PartialWithUndefined<{
+        /**
+         * The text to show in the menu item. If this is not provided, it is expected that you will
+         * instead utilize this element's `<slot>`.
+         */
+        label: MenuItem['label'];
+        /** If `true`, does not render the selected check icon. */
+        hideCheckIcon: boolean;
+    }>
 >()({
     tagName: 'vira-menu-item',
     hostClasses: {

@@ -14,16 +14,14 @@ import {defineViraElement} from './define-vira-element.js';
  * @see https://electrovir.github.io/vira/book/elements/vira-progress
  */
 export const ViraProgress = defineViraElement<
-    Readonly<
-        {
-            value: number;
-        } & PartialWithUndefined<{
-            /** @default 0 */
-            min: number;
-            /** @default 100 */
-            max: number;
-        }>
-    >
+    {
+        value: number;
+    } & PartialWithUndefined<{
+        /** @default 0 */
+        min: number;
+        /** @default 100 */
+        max: number;
+    }>
 >()({
     tagName: 'vira-progress',
     cssVars: {

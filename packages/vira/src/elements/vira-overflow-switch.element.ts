@@ -10,12 +10,10 @@ import {defineViraElement} from './define-vira-element.js';
  * @see https://electrovir.github.io/vira/book/elements/vira-overflow-switch
  */
 export const ViraOverflowSwitch = defineViraElement<
-    Readonly<
-        RequireExactlyOne<{
-            automaticallySwitch: boolean;
-            useSmall: boolean;
-        }>
-    >
+    RequireExactlyOne<{
+        automaticallySwitch: boolean;
+        useSmall: boolean;
+    }>
 >()({
     tagName: 'vira-overflow-switch',
     slotNames: [

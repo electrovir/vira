@@ -49,20 +49,18 @@ export enum ViraInputType {
  * @see https://electrovir.github.io/vira/book/elements/vira-input
  */
 export const ViraInput = defineViraElement<
-    Readonly<
-        PartialWithUndefined<{
-            icon: Pick<ViraIconSvg, 'svgTemplate'>;
-            /** A suffix that, if provided, is shown following the input field. */
-            suffix: string;
-            /** A label that is shown above the input, if provided. */
-            label: string;
-            /** If true, applies error styling. */
-            hasError: boolean;
-            showClearButton: boolean;
-            type: ViraInputType;
-        }> &
-            SharedTextInputElementInputs
-    >
+    PartialWithUndefined<{
+        icon: Pick<ViraIconSvg, 'svgTemplate'>;
+        /** A suffix that, if provided, is shown following the input field. */
+        suffix: string;
+        /** A label that is shown above the input, if provided. */
+        label: string;
+        /** If true, applies error styling. */
+        hasError: boolean;
+        showClearButton: boolean;
+        type: ViraInputType;
+    }> &
+        SharedTextInputElementInputs
 >()({
     tagName: 'vira-input',
     cssVars: {

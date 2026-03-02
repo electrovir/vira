@@ -207,6 +207,7 @@ export const ViraTag = defineViraElement<
 
         button {
             ${noNativeFormStyles}
+            flex-shrink: 0;
             cursor: pointer;
             display: flex;
             align-items: center;

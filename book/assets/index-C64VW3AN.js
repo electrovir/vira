@@ -3315,6 +3315,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
         button {
             ${Sr}
+            flex-shrink: 0;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -4050,7 +4051,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${I.assign({icon:r})}></${I}>
                     <${I.assign({icon:n})}></${I}>
                     <${I.assign({icon:o})}></${I}>
-                `}})}}),ok={async element1(){return await ji({seconds:2}),(await Qu(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CMzN2S0d.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ji({seconds:2}),(await Qu(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-DFd_E-TL.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},vy=Un()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:tk(ok)}},render({state:e,inputs:t}){return rk(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
+                `}})}}),ok={async element1(){return await ji({seconds:2}),(await Qu(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-k8Q1Rzms.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ji({seconds:2}),(await Qu(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-Bw3mdp3p.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},vy=Un()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:tk(ok)}},render({state:e,inputs:t}){return rk(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return g`
                     <${Ri}>
                         ${Ji("Failed to import element",Wt(r))}
                     </${Ri}>

@@ -85,8 +85,8 @@ export enum ViraSize {
  * @category Internal
  */
 export const viraSizeVariants = [
-    ViraSize.Medium,
     ViraSize.Small,
+    ViraSize.Medium,
     ViraSize.Large,
 ] as const;
 

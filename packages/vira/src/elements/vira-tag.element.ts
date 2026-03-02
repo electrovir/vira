@@ -202,7 +202,7 @@ export const ViraTag = defineViraElement<
     },
     styles: ({cssVars, hostClasses}) => css`
         :host {
-            display: flex;
+            display: inline-flex;
         }
 
         button {

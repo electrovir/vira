@@ -1,5 +1,8 @@
 /** This file is automatically updated by update-icon-exports.ts */
 
+import {ArrowDown24Icon} from './icon-svgs/arrow-down-24.icon.js';
+import {ArrowLeft24Icon} from './icon-svgs/arrow-left-24.icon.js';
+import {ArrowRight24Icon} from './icon-svgs/arrow-right-24.icon.js';
 import {ArrowUp24Icon} from './icon-svgs/arrow-up-24.icon.js';
 import {AutoTheme24Icon} from './icon-svgs/auto-theme-24.icon.js';
 import {Bell24Icon} from './icon-svgs/bell-24.icon.js';
@@ -53,6 +56,9 @@ export * from './colored-icon.js';
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
 
+export * from './icon-svgs/arrow-down-24.icon.js';
+export * from './icon-svgs/arrow-left-24.icon.js';
+export * from './icon-svgs/arrow-right-24.icon.js';
 export * from './icon-svgs/arrow-up-24.icon.js';
 export * from './icon-svgs/auto-theme-24.icon.js';
 export * from './icon-svgs/bell-24.icon.js';
@@ -108,6 +114,9 @@ export * from './icon-svgs/x-24.icon.js';
  * @category Icon
  */
 export const allIconsByName = {
+    ArrowDown24Icon,
+    ArrowLeft24Icon,
+    ArrowRight24Icon,
     ArrowUp24Icon,
     AutoTheme24Icon,
     Bell24Icon,

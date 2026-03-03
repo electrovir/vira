@@ -4,7 +4,6 @@ import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
 import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
 import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
 import {viraMenuOptionsBookPage} from './entries/pop-up/vira-menu.element.book.js';
-import {viraPopUpMenuBookPage} from './entries/pop-up/vira-pop-up-menu.element.book.js';
 import {viraPopUpTriggerBookPage} from './entries/pop-up/vira-pop-up-trigger.element.book.js';
 import {shadowBookPage} from './entries/shadow.book.js';
 import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
@@ -53,7 +52,6 @@ const elementPages = [
     viraMenuTriggerBookPage,
     viraModalBookPage,
     viraOverflowSwitchBookPage,
-    viraPopUpMenuBookPage,
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
     viraSelectBookPage,

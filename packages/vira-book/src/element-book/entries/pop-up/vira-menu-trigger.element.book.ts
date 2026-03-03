@@ -1,72 +1,49 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {SpaRouter} from 'spa-router-vir';
 import {
+    createMenuItemTemplates,
     HorizontalAnchor,
-    type MenuItem,
-    PopUpMenuCornerStyle,
-    ViraMenuItem,
+    ViraMenuCornerStyle,
     ViraMenuTrigger,
+    type ViraMenuItemEntry,
 } from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
-const mockMenuItems: MenuItem[] = [
-    {
-        id: 1,
-        label: 'one',
-    },
-    {
-        id: 2,
-        label: 'two',
-    },
-    {
-        id: 3,
-        label: 'three',
-    },
-    {
-        id: 4,
-        label: 'four',
-    },
-    {
-        id: 5,
-        label: 'five',
-    },
-    {
-        id: 6,
-        label: 'six',
-    },
-    {
-        id: 7,
-        label: 'link here',
-        route: {
-            route: {
-                paths: [
-                    'test',
-                ],
-            },
-            router: new SpaRouter({
-                sanitizeRoute(rawRoute) {
-                    return rawRoute;
-                },
-            }),
-        },
-    },
+const mockMenuItems: ReadonlyArray<ViraMenuItemEntry> = [
+    {content: 'one'},
+    {content: 'two'},
+    {content: 'three'},
+    {content: 'four'},
+    {content: 'five'},
+    {content: 'six'},
 ];
 
-const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsType>}[] = [
+const longMenuItem: ViraMenuItemEntry = {
+    content: html`
+        <div
+            style=${css`
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            `}
+        >
+            This menu item is much longer than the others
+        </div>
+    `,
+};
+
+const examples: {
+    title: string;
+    inputs?: Partial<typeof ViraMenuTrigger.InputsType>;
+    menuItems?: ReadonlyArray<ViraMenuItemEntry>;
+}[] = [
     {
         title: 'basic',
     },
     {
-        title: 'multi',
-        inputs: {
-            isMultiSelect: true,
-        },
-    },
-    {
         title: 'rounded',
         inputs: {
-            menuCornerStyle: PopUpMenuCornerStyle.AllRounded,
+            menuCornerStyle: ViraMenuCornerStyle.AllRounded,
         },
     },
     {
@@ -77,56 +54,20 @@ const examples: {title: string; inputs?: Partial<typeof ViraMenuTrigger.InputsTy
     },
     {
         title: 'long item',
-        inputs: {
-            items: [
-                ...mockMenuItems,
-                {
-                    id: 'long',
-                    label: html`
-                        <${ViraMenuItem.assign({
-                            selected: false,
-                        })}>
-                            <div
-                                style=${css`
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                `}
-                            >
-                                This menu item is much longer than the others
-                            </div>
-                        </${ViraMenuItem}>
-                    `,
-                },
-            ],
-        },
+        menuItems: [
+            ...mockMenuItems,
+            longMenuItem,
+        ],
     },
     {
         title: 'restricted long item',
         inputs: {
             horizontalAnchor: HorizontalAnchor.Both,
-            items: [
-                ...mockMenuItems,
-                {
-                    id: 'long',
-                    label: html`
-                        <${ViraMenuItem.assign({
-                            selected: false,
-                        })}>
-                            <div
-                                style=${css`
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                `}
-                            >
-                                This menu item is much longer than the others
-                            </div>
-                        </${ViraMenuItem}>
-                    `,
-                },
-            ],
         },
+        menuItems: [
+            ...mockMenuItems,
+            longMenuItem,
+        ],
     },
 ];
 
@@ -148,15 +89,19 @@ export const viraMenuTriggerBookPage = defineBookPage({
                     }
                 `,
                 render() {
+                    const items = example.menuItems || mockMenuItems;
+
                     return html`
                         <${ViraMenuTrigger.assign({
-                            items: mockMenuItems,
                             popUpOffset: {
                                 vertical: -1,
                             },
                             ...example.inputs,
                         })}>
-                            <div class="trigger">Trigger Menu</div>
+                            <div class="trigger" slot=${ViraMenuTrigger.slotNames.trigger}>
+                                Trigger Menu
+                            </div>
+                            ${createMenuItemTemplates(items)}
                         </${ViraMenuTrigger}>
                     `;
                 },

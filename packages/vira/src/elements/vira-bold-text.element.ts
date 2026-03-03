@@ -1,5 +1,5 @@
 import {css, html} from 'element-vir';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * Use this element to reserve space for bolded text, even if it isn't bold yet.

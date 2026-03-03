@@ -1,6 +1,6 @@
 import {css} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * An element that renders a single {@link ViraIconSvg}.
@@ -21,7 +21,7 @@ export const ViraIcon = defineViraElement<{
     },
     styles: ({hostClasses}) => css`
         :host {
-            display: inline-block;
+            display: inline-flex;
         }
 
         svg {

@@ -1,32 +1,39 @@
-import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
-import {type CSSResult, type HTMLTemplateResult, css, html} from 'element-vir';
-import {ViraMenuItem} from 'vira';
+import {defineBookPage} from 'element-book';
+import {
+    type CSSResult,
+    type HTMLTemplateResult,
+    type HtmlInterpolation,
+    css,
+    html,
+} from 'element-vir';
+import {Options24Icon, ViraMenuItem, createColoredIcon} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
     title: string;
+    content: HtmlInterpolation;
     inputs: typeof ViraMenuItem.InputsType;
     customStyle?: CSSResult;
     customTemplate?: HTMLTemplateResult;
 }> = [
     {
         title: 'unselected',
+        content: 'my label',
         inputs: {
-            label: 'my label',
             selected: false,
         },
     },
     {
         title: 'selected',
+        content: 'my label',
         inputs: {
-            label: 'my label',
             selected: true,
         },
     },
     {
         title: 'with custom child',
+        content: 'custom child',
         inputs: {
-            label: 'custom child',
             selected: true,
         },
         customTemplate: html`
@@ -35,26 +42,52 @@ const examples: ReadonlyArray<{
     },
     {
         title: 'constrained width',
+        content: 'has more text than is possible to fit',
         customStyle: css`
             :host {
                 max-width: 100px;
             }
         `,
         inputs: {
-            label: 'has more text than is possible to fit',
             selected: true,
         },
     },
     {
         title: 'stretched width',
+        content: 'wide',
         customStyle: css`
             ${ViraMenuItem} {
                 width: 400px;
             }
         `,
         inputs: {
-            label: 'wide',
             selected: true,
+        },
+    },
+    {
+        title: 'disabled',
+        content: 'my label',
+        inputs: {
+            selected: true,
+            disabled: true,
+        },
+    },
+    {
+        title: 'no default pointer styles',
+        content: 'my label',
+        inputs: {
+            selected: true,
+            disablePointerStyles: true,
+        },
+    },
+    {
+        title: 'icon override',
+        content: 'my label',
+        inputs: {
+            selected: false,
+            iconOverride: createColoredIcon(Options24Icon, {
+                'vira-icon-stroke-color': 'blue',
+            }),
         },
     },
 ];
@@ -62,50 +95,15 @@ const examples: ReadonlyArray<{
 export const viraMenuItemBookPage = defineBookPage({
     title: ViraMenuItem.tagName,
     parent: elementsBookPage,
-    controls: {
-        Selected: definePageControl({
-            controlType: BookPageControlType.Dropdown,
-            initValue: '',
-            options: [
-                '',
-                'all',
-                'none',
-            ],
-        }),
-        Label: definePageControl({
-            controlType: BookPageControlType.Text,
-            initValue: '',
-        }),
-    },
     defineExamples({defineExample}) {
         examples.forEach((example) => {
             defineExample({
                 title: example.title,
-                state() {
-                    return {
-                        selected: example.inputs.selected || [],
-                    };
-                },
                 styles: example.customStyle,
-                render({controls}) {
-                    const finalInputs: typeof ViraMenuItem.InputsType = {
-                        label: controls.Label || example.inputs.label,
-                        selected: controls.Selected
-                            ? controls.Selected === 'all'
-                            : example.inputs.selected,
-                    };
-
-                    if (example.customTemplate) {
-                        return html`
-                            <${ViraMenuItem.assign(finalInputs)}>
-                                ${example.customTemplate}
-                            </${ViraMenuItem}>
-                        `;
-                    } else {
-                        return html`
-                            <${ViraMenuItem.assign(finalInputs)}></${ViraMenuItem}>
-                        `;
-                    }
+                render() {
+                    return html`
+                        <${ViraMenuItem.assign(example.inputs)}>${example.content}</${ViraMenuItem}>
+                    `;
                 },
             });
         });

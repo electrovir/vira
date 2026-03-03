@@ -15,23 +15,17 @@ import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {ChevronUp24Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
+import {defineViraElement} from '../util/define-vira-element.js';
+import {createMenuItemTemplates} from '../util/pop-up-helpers.js';
 import {type ShowPopUpResult} from '../util/pop-up-manager.js';
-import {defineViraElement} from './define-vira-element.js';
-import {type MenuItem} from './pop-up/pop-up-menu-item.js';
-import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
-import {HorizontalAnchor, type PopUpTriggerPosition} from './pop-up/vira-pop-up-trigger.element.js';
+import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {ViraMenu, ViraMenuPopUpDirection} from './pop-up/vira-menu.element.js';
+import {
+    HorizontalAnchor,
+    type PopUpTriggerPosition,
+    ViraPopUpTrigger,
+} from './pop-up/vira-pop-up-trigger.element.js';
 import {ViraIcon} from './vira-icon.element.js';
-
-/**
- * Test ids for {@link ViraDropdown}.
- *
- * @category Internal
- */
-export const viraDropdownTestIds = {
-    trigger: 'dropdown-trigger',
-    icon: 'dropdown-icon',
-    prefix: 'dropdown-prefix',
-};
 
 /**
  * A dropdown element that uses pop-up menus.
@@ -42,7 +36,7 @@ export const viraDropdownTestIds = {
  */
 export const ViraDropdown = defineViraElement<
     {
-        options: ReadonlyArray<Readonly<MenuItem>>;
+        options: ReadonlyArray<Readonly<ViraSelectOption>>;
         /** The selected id from the given options. */
         selected: ReadonlyArray<PropertyKey>;
     } & PartialWithUndefined<
@@ -63,6 +57,11 @@ export const ViraDropdown = defineViraElement<
     >
 >()({
     tagName: 'vira-dropdown',
+    testIds: [
+        'leadingIcon',
+        'prefixText',
+        'trigger',
+    ],
     styles: css`
         :host {
             display: inline-flex;
@@ -72,7 +71,7 @@ export const ViraDropdown = defineViraElement<
             max-width: 100%;
         }
 
-        ${ViraMenuTrigger} {
+        ${ViraPopUpTrigger} {
             width: 100%;
         }
 
@@ -132,7 +131,7 @@ export const ViraDropdown = defineViraElement<
         }
     `,
     events: {
-        selectedChange: defineElementEvent<PropertyKey[]>(),
+        selectedChange: defineElementEvent<string[]>(),
         openChange: defineElementEvent<ShowPopUpResult | undefined>(),
     },
     state() {
@@ -141,10 +140,10 @@ export const ViraDropdown = defineViraElement<
             showPopUpResult: undefined as ShowPopUpResult | undefined,
         };
     },
-    render({state, inputs, dispatch, events, updateState}) {
+    render({state, inputs, dispatch, events, updateState, testIds}) {
         const selectedOptions = filterMap(
             inputs.selected,
-            (selectedId) => inputs.options.find((option) => option.id === selectedId),
+            (selectedValue) => inputs.options.find((option) => option.value === selectedValue),
             check.isTruthy,
         );
 
@@ -153,7 +152,7 @@ export const ViraDropdown = defineViraElement<
                   <${ViraIcon.assign({
                       icon: inputs.icon,
                   })}
-                      ${testId(viraDropdownTestIds.icon)}
+                      ${testId(testIds.leadingIcon)}
                   ></${ViraIcon}>
               `
             : nothing;
@@ -163,7 +162,7 @@ export const ViraDropdown = defineViraElement<
         const prefixTemplate =
             inputs.selectionPrefix && !shouldUsePlaceholder
                 ? html`
-                      <span class="selected-label-prefix" ${testId(viraDropdownTestIds.prefix)}>
+                      <span class="selected-label-prefix" ${testId(testIds.prefixText)}>
                           ${inputs.selectionPrefix}
                       </span>
                   `
@@ -175,22 +174,43 @@ export const ViraDropdown = defineViraElement<
               ? `${selectedOptions.length} Selected`
               : selectedOptions[0]?.label || '';
 
+        const menuTemplate = html`
+            <${ViraMenu.assign({
+                direction: state.showPopUpResult?.popDown
+                    ? ViraMenuPopUpDirection.Downwards
+                    : ViraMenuPopUpDirection.Upwards,
+            })}
+                slot=${ViraPopUpTrigger.slotNames.popUp}
+            >
+                ${createMenuItemTemplates(
+                    inputs.options.map((option) => {
+                        return {
+                            content: option.label,
+                            activate() {
+                                dispatch(new events.selectedChange([option.value]));
+                            },
+                            disabled: option.disabled,
+                            selected: selectedOptions.includes(option),
+                        };
+                    }),
+                )}
+            </${ViraMenu}>
+        `;
+
         return html`
-            <${ViraMenuTrigger.assign({
+            <${ViraPopUpTrigger.assign({
                 ...inputs,
-                items: inputs.options,
                 popUpOffset: {
                     vertical: -1,
                     right: 24,
                 },
                 horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Both,
             })}
-                ${listen(ViraMenuTrigger.events.openChange, (event) => {
+                ${listen(ViraPopUpTrigger.events.openChange, (event) => {
+                    if (!!state.showPopUpResult !== !!event.detail) {
+                        dispatch(new events.openChange(event.detail));
+                    }
                     updateState({showPopUpResult: event.detail});
-                    dispatch(new events.openChange(event.detail));
-                })}
-                ${listen(ViraMenuTrigger.events.itemActivate, (event) => {
-                    dispatch(new events.selectedChange(event.detail));
                 })}
             >
                 <div
@@ -198,7 +218,8 @@ export const ViraDropdown = defineViraElement<
                         open: !!state.showPopUpResult,
                         'open-upwards': !state.showPopUpResult?.popDown,
                     })}"
-                    ${testId(viraDropdownTestIds.trigger)}
+                    slot=${ViraPopUpTrigger.slotNames.trigger}
+                    ${testId(testIds.trigger)}
                 >
                     ${leadingIconTemplate}
                     <span
@@ -216,7 +237,8 @@ export const ViraDropdown = defineViraElement<
                         ></${ViraIcon}>
                     </span>
                 </div>
-            </${ViraMenuTrigger}>
+                ${state.showPopUpResult ? menuTemplate : nothing}
+            </${ViraPopUpTrigger}>
         `;
     },
 });

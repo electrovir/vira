@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augment-vir/common';
-import {type ViraIconSvg} from '../../icons/icon-svg.js';
-import {type ViraSelectOption} from '../vira-select.element.js';
+import {type ViraIconSvg} from '../icons/icon-svg.js';
+import {type ViraSelectOption} from './vira-select-option.js';
 
 /**
  * Form field types for {@link ViraFormField}.

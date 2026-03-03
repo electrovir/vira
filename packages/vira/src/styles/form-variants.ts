@@ -1,6 +1,10 @@
 import {ViraThemeColorName} from './vira-color-theme-object.js';
 
-/** All available variants for controlling vira form colors. */
+/**
+ * All available variants for controlling vira form colors.
+ *
+ * @category Internal
+ */
 export enum ViraColorVariant {
     /**
      * This is the default.

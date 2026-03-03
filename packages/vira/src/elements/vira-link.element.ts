@@ -11,7 +11,7 @@ import {
 import {type SpaRoute, type SpaRouter} from 'spa-router-vir';
 import {type RequireExactlyOne} from 'type-fest';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * The route properties required for using {@link ViraLink} with a route.

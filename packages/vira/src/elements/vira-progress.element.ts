@@ -2,7 +2,7 @@ import {clamp, type PartialWithUndefined} from '@augment-vir/common';
 import {applyAttributes} from 'device-navigation';
 import {css, html} from 'element-vir';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * A [`<progress>`](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/progress)

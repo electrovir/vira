@@ -17,24 +17,10 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {viraAnimationDurations} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
+import {type ViraSelectOption} from '../util/vira-select-option.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraIcon} from './vira-icon.element.js';
-
-/**
- * Options for {@link ViraSelect}.
- *
- * @category Dropdown
- * @category Elements
- * @see https://electrovir.github.io/vira/book/elements/vira-select
- */
-export type ViraSelectOption = {
-    /** A value or id, used to keep track of which option is selected. */
-    value: string;
-    label: string;
-} & PartialWithUndefined<{
-    disabled: boolean;
-}>;
 
 /**
  * Similar to {@link ViraDropdown} but is, instead, simply a wrapper for `<select>` and nothing more.

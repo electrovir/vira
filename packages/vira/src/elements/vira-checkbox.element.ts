@@ -16,7 +16,7 @@ import {Check24Icon, viraIconCssVars} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 /**

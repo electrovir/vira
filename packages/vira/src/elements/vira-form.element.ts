@@ -1,16 +1,16 @@
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
-import {defineViraElement} from '../define-vira-element.js';
-import {ViraCheckbox} from '../vira-checkbox.element.js';
-import {ViraInput, ViraInputType} from '../vira-input.element.js';
-import {ViraSelect} from '../vira-select.element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {
     applyRequiredLabel,
     areFormFieldsValid,
+    ViraFormFieldType,
     type ViraFormField,
     type ViraFormFields,
-    ViraFormFieldType,
-} from './vira-form-fields.js';
+} from '../util/vira-form-fields.js';
+import {ViraCheckbox} from './vira-checkbox.element.js';
+import {ViraInput, ViraInputType} from './vira-input.element.js';
+import {ViraSelect} from './vira-select.element.js';
 
 /**
  * A form element.

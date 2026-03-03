@@ -1,6 +1,6 @@
 import {css, html} from 'element-vir';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * State options for {@link ViraCard}.

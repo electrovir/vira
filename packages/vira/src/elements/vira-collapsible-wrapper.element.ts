@@ -1,6 +1,6 @@
 import {classMap, css, defineElementEvent, html, listen, onResize} from 'element-vir';
 import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * A wrapper element that can collapse and expand to fit its content dynamically and efficiently.

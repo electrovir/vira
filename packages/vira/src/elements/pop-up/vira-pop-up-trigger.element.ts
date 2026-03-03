@@ -5,6 +5,8 @@ import {NavController, type Coords} from 'device-navigation';
 import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
 import {createFocusStyles} from '../../styles/focus.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles} from '../../styles/index.js';
+import {defineViraElement} from '../../util/define-vira-element.js';
+import {triggerPopUpState} from '../../util/pop-up-helpers.js';
 import {
     HidePopUpEvent,
     isInputLikeElement,
@@ -12,8 +14,6 @@ import {
     PopUpManager,
     type ShowPopUpResult,
 } from '../../util/pop-up-manager.js';
-import {defineViraElement} from '../define-vira-element.js';
-import {triggerPopUpState} from './pop-up-helpers.js';
 
 /**
  * Offsets applied to any menu opened by {@link ViraPopUpTrigger}.

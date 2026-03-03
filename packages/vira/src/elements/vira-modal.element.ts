@@ -6,7 +6,7 @@ import {X24Icon} from '../icons/icon-svgs/x-24.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 const globalEventsToCloseModalOn = [

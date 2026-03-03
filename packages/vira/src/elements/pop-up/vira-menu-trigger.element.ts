@@ -1,16 +1,9 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {type NavController} from 'device-navigation';
-import {classMap, css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, nothing} from 'element-vir';
+import {defineViraElement} from '../../util/define-vira-element.js';
 import {type PopUpManager, type ShowPopUpResult} from '../../util/pop-up-manager.js';
-import {defineViraElement} from '../define-vira-element.js';
-import {updateSelectedItems} from './pop-up-helpers.js';
-import {type MenuItem} from './pop-up-menu-item.js';
-import {ViraMenu} from './vira-menu.element.js';
-import {
-    PopUpMenuDirection,
-    ViraPopUpMenu,
-    type PopUpMenuCornerStyle,
-} from './vira-pop-up-menu.element.js';
+import {ViraMenu, ViraMenuPopUpDirection, type ViraMenuCornerStyle} from './vira-menu.element.js';
 import {
     HorizontalAnchor,
     ViraPopUpTrigger,
@@ -34,23 +27,20 @@ export const viraMenuTriggerTestIds = {
  * @category Elements
  */
 export const ViraMenuTrigger = defineViraElement<
-    {
-        items: ReadonlyArray<Readonly<MenuItem>>;
-    } & PartialWithUndefined<
+    PartialWithUndefined<
         {
-            /** The selected item ids from the given `items` object. */
-            selected: ReadonlyArray<PropertyKey>;
             isDisabled: boolean;
-            isMultiSelect: boolean;
             z_debug_forceOpenState: boolean;
             popUpOffset: PopUpOffset;
-            /** Hide menu item check mark icons. */
-            hideCheckIcons: boolean;
-            menuCornerStyle: PopUpMenuCornerStyle;
+            keepOpenAfterInteraction: boolean;
+            menuCornerStyle: ViraMenuCornerStyle;
         } & PopUpTriggerPosition
     >
 >()({
     tagName: 'vira-menu-trigger',
+    slotNames: [
+        'trigger',
+    ],
     styles: css`
         :host {
             display: inline-flex;
@@ -79,13 +69,10 @@ export const ViraMenuTrigger = defineViraElement<
             showPopUpResult: undefined as ShowPopUpResult | undefined,
         };
     },
-    render({inputs, state, updateState, dispatch, events}) {
+    render({inputs, state, updateState, dispatch, events, slotNames}) {
         return html`
             <${ViraPopUpTrigger.assign({
                 ...inputs,
-                keepOpenAfterInteraction: true,
-                popUpOffset: inputs.popUpOffset,
-                horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Left,
             })}
                 class=${classMap({
                     open: !!state.showPopUpResult,
@@ -104,34 +91,14 @@ export const ViraMenuTrigger = defineViraElement<
                         showPopUpResult: event.detail,
                     });
                 })}
-                ${listen(ViraPopUpTrigger.events.navSelect, (event) => {
-                    const itemIndex = event.detail.x;
-                    const item = inputs.items[itemIndex];
-                    if (!item) {
-                        throw new Error(`Found no dropdown option at index '${itemIndex}'`);
-                    }
-
-                    dispatch(
-                        new events.itemActivate(
-                            updateSelectedItems(item, inputs.selected, inputs.isMultiSelect),
-                        ),
-                    );
-                    if (!inputs.isMultiSelect) {
-                        /**
-                         * Defer pop up removal to prevent race conditions with element-internal
-                         * click handlers.
-                         */
-                        globalThis.setTimeout(() => state.popUpManager?.removePopUp());
-                    }
-                })}
             >
-                <slot slot=${ViraPopUpTrigger.slotNames.trigger}></slot>
+                <slot name=${slotNames.trigger} slot=${ViraPopUpTrigger.slotNames.trigger}></slot>
                 ${state.navController && state.showPopUpResult
                     ? html`
-                          <${ViraPopUpMenu.assign({
+                          <${ViraMenu.assign({
                               direction: state.showPopUpResult.popDown
-                                  ? PopUpMenuDirection.Downwards
-                                  : PopUpMenuDirection.Upwards,
+                                  ? ViraMenuPopUpDirection.Downwards
+                                  : ViraMenuPopUpDirection.Upwards,
                               cornerStyle: inputs.menuCornerStyle,
                           })}
                               slot=${ViraPopUpTrigger.slotNames.popUp}
@@ -140,16 +107,8 @@ export const ViraMenuTrigger = defineViraElement<
                                       inputs.horizontalAnchor === HorizontalAnchor.Both,
                               })}
                           >
-                              <${ViraMenu.assign({
-                                  items: inputs.items,
-                                  selected: inputs.selected,
-                                  navController: state.navController,
-                                  isMultiSelect: !!inputs.isMultiSelect,
-                                  hideCheckIcons: inputs.hideCheckIcons,
-                              })}
-                                  ${testId(viraMenuTriggerTestIds.menu)}
-                              ></${ViraMenu}>
-                          </${ViraPopUpMenu}>
+                              <slot></slot>
+                          </${ViraMenu}>
                       `
                     : nothing}
             </${ViraPopUpTrigger}>

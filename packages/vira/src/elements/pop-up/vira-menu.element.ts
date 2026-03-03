@@ -1,200 +1,91 @@
-import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {nav, navAttribute, NavController, NavValue} from 'device-navigation';
-import {classMap, css, html, ifDefined, testId} from 'element-vir';
+import {css, html} from 'element-vir';
 import {viraFormCssVars} from '../../styles/form-styles.js';
-import {noNativeFormStyles, viraDisabledStyles} from '../../styles/index.js';
-import {defineViraElement} from '../define-vira-element.js';
-import {ViraLink} from '../vira-link.element.js';
-import {assertUniqueIdProps} from './pop-up-helpers.js';
-import {type MenuItem} from './pop-up-menu-item.js';
-import {ViraMenuItem} from './vira-menu-item.element.js';
+import {viraShadows} from '../../styles/shadows.js';
+import {defineViraElement} from '../../util/define-vira-element.js';
 
 /**
- * Test ids for {@link ViraMenu}.
+ * Possible corner styles for {@link ViraMenu}.
  *
  * @category Internal
  */
-export const viraMenuTestIds = {
-    item: 'menu-item',
-};
+export enum ViraMenuCornerStyle {
+    /** Rounding of corners depends on the open direction of the menu. */
+    Directional = 'directional',
+    /** All of the menus corners should be rounded. */
+    AllRounded = 'all-rounded',
+    /** None of the menus corners should be rounded. */
+    AllSquare = 'all-square',
+}
 
 /**
- * A wrapper for menu items. This can be used for dropdown items or menu bar dropdowns. To detect
- * when items are selected or unselected, pass in a `NavController` instance and hook into its
- * events.
+ * Menu pop-up directions available for {@link ViraMenu}.
+ *
+ * @category Internal
+ */
+export enum ViraMenuPopUpDirection {
+    Downwards = 'downwards',
+    Upwards = 'upwards',
+}
+
+/**
+ * A simple default style wrapper for pop-up menus. Consider using `createMenuItemTemplates` to help
+ * rendering many menu items.
  *
  * @category PopUp
  * @category Elements
  */
 export const ViraMenu = defineViraElement<
-    {
-        /**
-         * The parent nav controller for this menu. If none is provided, an internal nav controller
-         * is created (which means it can't be hooked into by external elements).
-         *
-         * It is recommended to not leave this `undefined`.
-         */
-        navController: NavController | undefined;
-        /** All menu items to show to the user. */
-        items: ReadonlyArray<Readonly<MenuItem>>;
-    } & PartialWithUndefined<{
-        /** The ids of the currently selected menu items. */
-        selected: ReadonlyArray<PropertyKey>;
-        isMultiSelect: boolean;
-        /** Hide menu item check mark icons. */
-        hideCheckIcons: boolean;
+    PartialWithUndefined<{
+        /** @default PopUpMenuDirection.Downwards */
+        direction: ViraMenuPopUpDirection;
+        /** @default PopUpMenuCornerStyle.Directional */
+        cornerStyle: ViraMenuCornerStyle;
     }>
 >()({
     tagName: 'vira-menu',
-    state({inputs, host}) {
-        return {
-            internalNavController: inputs.navController || new NavController(host),
-        };
-    },
     hostClasses: {
-        'vira-menu-multiselect': ({inputs}) => !!inputs.isMultiSelect,
+        'vira-menu-open-upwards': ({inputs}) => inputs.direction === ViraMenuPopUpDirection.Upwards,
+        'vira-menu-rounded': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllRounded,
+        'vira-menu-square': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllSquare,
     },
     styles: ({hostClasses}) => css`
         :host {
             display: flex;
             flex-direction: column;
-
-            width: 100%;
             max-width: 100%;
             max-height: 100%;
             overflow-y: auto;
-            overscroll-behavior: contain;
-            z-index: 100;
+            z-index: 99;
             box-sizing: border-box;
+            overscroll-behavior: contain;
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
+            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
+            ${viraShadows.menuShadow}
         }
 
-        .menu-item {
-            ${noNativeFormStyles};
-            will-change: background-color;
-            background-color: inherit;
-            outline: none;
-
-            &.default-pointer-styles {
-                cursor: pointer;
-            }
-            &.no-default-pointer-styles {
-                cursor: auto !important;
-            }
+        ${hostClasses['vira-menu-open-upwards'].selector} {
+            ${viraShadows.menuShadowReversed}
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
 
-        ${navAttribute.css({
-            baseSelector: '.menu-item.default-pointer-styles:not(.disabled):not(.selected)',
-            navValue: NavValue.Focused,
-        })}, .menu-item.default-pointer-styles:not(.disabled):not(.selected):hover {
-            background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
-            outline: none;
-        }
-        ${navAttribute.css({
-            baseSelector: '.menu-item.default-pointer-styles:not(.disabled):not(.selected)',
-            navValue: NavValue.Active,
-        })}, .menu-item.default-pointer-styles:not(.disabled):not(.selected):active {
-            background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
-            outline: none;
+        ${hostClasses['vira-menu-square'].selector} {
+            border-radius: 0;
         }
 
-        ${hostClasses['vira-menu-multiselect'].selector} {
-            &
-                ${navAttribute.css({
-                    baseSelector: '.menu-item:not(.disabled)',
-                    navValue: NavValue.Focused,
-                })},
-                .menu-item:not(.disabled):hover {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
-                outline: none;
-            }
-
-            &
-                ${navAttribute.css({
-                    baseSelector: '.menu-item:not(.disabled)',
-                    navValue: NavValue.Active,
-                })},
-                .menu-item:not(.disabled):active {
-                background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
-                outline: none;
-            }
-        }
-
-        ${ViraMenuItem} {
-            pointer-events: none;
-        }
-
-        .menu-item.disabled {
-            ${viraDisabledStyles};
-            pointer-events: auto;
+        ${hostClasses['vira-menu-rounded'].selector} {
+            border-radius: ${viraFormCssVars['vira-form-radius'].value};
         }
     `,
-    cleanup({inputs, state}) {
-        if (!inputs.navController) {
-            state.internalNavController.destroy();
-        }
-    },
-    render({inputs, state}) {
-        assertUniqueIdProps(inputs.items);
-
-        const itemTemplates = inputs.items.map((item) => {
-            const selected = !!inputs.selected?.includes(item.id);
-            const innerTemplate = check.isString(item.label)
-                ? html`
-                      <${ViraMenuItem.assign({
-                          label: item.label,
-                          selected,
-                          hideCheckIcon: inputs.hideCheckIcons,
-                      })}></${ViraMenuItem}>
-                  `
-                : item.label;
-
-            const disabled = item.disabled || (!inputs.isMultiSelect && selected);
-
-            if (item.route) {
-                return html`
-                    <${ViraLink.assign({
-                        route: item.route,
-                        disableLinkStyles: true,
-                    })}
-                        class="menu-item ${classMap({
-                            disabled: !!item.disabled,
-                            selected,
-                            'default-pointer-styles': !item.disableDefaultPointerStyles,
-                            'no-default-pointer-styles': !!item.disableDefaultPointerStyles,
-                        })}"
-                        ${testId(viraMenuTestIds.item)}
-                        title=${ifDefined(item.titleText || undefined)}
-                        role="option"
-                        ${nav(state.internalNavController, {disabled})}
-                    >
-                        ${innerTemplate}
-                    </${ViraLink}>
-                `;
-            } else {
-                return html`
-                    <button
-                        class="menu-item ${classMap({
-                            disabled: !!item.disabled,
-                            selected,
-                            'default-pointer-styles': !item.disableDefaultPointerStyles,
-                            'no-default-pointer-styles': !!item.disableDefaultPointerStyles,
-                        })}"
-                        ${testId(viraMenuTestIds.item)}
-                        title=${ifDefined(item.titleText || undefined)}
-                        role="option"
-                        ${nav(state.internalNavController, {disabled})}
-                    >
-                        ${innerTemplate}
-                    </button>
-                `;
-            }
-        });
-
+    render() {
         return html`
-            ${itemTemplates}
+            <slot>&nbsp;</slot>
         `;
     },
 });

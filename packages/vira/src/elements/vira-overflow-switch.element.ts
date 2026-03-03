@@ -1,7 +1,7 @@
 import {css, html, onDomCreated} from 'element-vir';
 import {type RequireExactlyOne} from 'type-fest';
 import {listenTo} from 'typed-event-target';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
  * An element switches between two slots based on their overflow.

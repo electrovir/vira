@@ -18,15 +18,15 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {
     type SharedTextInputElementInputs,
     filterTextInputValue,
     textInputListener,
-} from './shared-text-input-logic.js';
+} from '../util/shared-text-input-logic.js';
 import {ViraIcon} from './vira-icon.element.js';
 
-export * from './shared-text-input-logic.js';
+export * from '../util/shared-text-input-logic.js';
 
 /**
  * Input types for {@link ViraInput}.

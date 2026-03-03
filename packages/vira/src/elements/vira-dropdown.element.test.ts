@@ -4,13 +4,19 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {Element24Icon} from '../icons/index.js';
-import {mockMenuItems} from './pop-up/pop-up-menu-item.mock.js';
-import {viraMenuTriggerTestIds} from './pop-up/vira-menu-trigger.element.js';
-import {viraMenuTestIds} from './pop-up/vira-menu.element.js';
-import {ViraDropdown, viraDropdownTestIds} from './vira-dropdown.element.js';
+import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
+import {ViraMenu} from './pop-up/vira-menu.element.js';
+import {ViraDropdown} from './vira-dropdown.element.js';
+
+const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
+    {value: '0', label: 'Option A'},
+    {value: '1', label: 'Option B'},
+    {value: '2', label: 'Option C'},
+];
 
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
-    const events: {openChange: boolean[]; selectedChange: PropertyKey[][]} = {
+    const events: {openChange: boolean[]; selectedChange: string[][]} = {
         openChange: [],
         selectedChange: [],
     };
@@ -41,11 +47,11 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
     );
 
     function findMenu() {
-        return queryThroughShadow(instance, testIdSelector(viraMenuTriggerTestIds.menu));
+        return queryThroughShadow(instance, ViraMenu.tagName);
     }
 
     const triggerElement = instance.shadowRoot.querySelector(
-        testIdSelector(viraDropdownTestIds.trigger),
+        testIdSelector(ViraDropdown.testIds.trigger),
     );
     assert.instanceOf(triggerElement, HTMLElement);
 
@@ -59,7 +65,7 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
         instance,
         triggerElement,
         findMenu,
-        queryByTestId: mapObjectValues(viraDropdownTestIds, (testIdKey, testId) => {
+        queryByTestId: mapObjectValues(ViraDropdown.testIds, (testIdKey, testId) => {
             return () => {
                 return instance.shadowRoot.querySelector(testIdSelector(testId));
             };
@@ -109,7 +115,7 @@ describe(ViraDropdown.tagName, () => {
         const {instance, fixture, toggle, events, findMenu} = await setupDropdownTest();
 
         await toggle();
-        const options = queryThroughShadow(instance, testIdSelector(viraMenuTestIds.item), {
+        const options = queryThroughShadow(instance, ViraMenuItem.tagName, {
             all: true,
         });
 
@@ -125,7 +131,7 @@ describe(ViraDropdown.tagName, () => {
             false,
         ]);
         assert.deepEquals(events.selectedChange, [
-            [1],
+            ['1'],
         ]);
     });
 
@@ -134,18 +140,18 @@ describe(ViraDropdown.tagName, () => {
             selectionPrefix: randomString(),
         });
         await waitForAnimationFrame(5);
-        assert.isNull(queryByTestId.prefix());
+        assert.isNull(queryByTestId.prefixText());
     });
 
     it('renders a prefix', async () => {
         const prefix = randomString();
         const {queryByTestId} = await setupDropdownTest({
             selectionPrefix: prefix,
-            selected: [1],
+            selected: ['1'],
         });
         const prefixElement = await waitUntil.isTruthy(
             () => {
-                return queryByTestId.prefix();
+                return queryByTestId.prefixText();
             },
             {timeout: {seconds: 1}},
             'prefix element never showed up',
@@ -160,7 +166,7 @@ describe(ViraDropdown.tagName, () => {
         });
         await waitUntil.isTruthy(
             () => {
-                return queryByTestId.icon();
+                return queryByTestId.leadingIcon();
             },
             {timeout: {seconds: 1}},
             'icon element never showed up',
@@ -170,7 +176,7 @@ describe(ViraDropdown.tagName, () => {
     it('does not render an icon if not assigned', async () => {
         const {queryByTestId} = await setupDropdownTest();
         await waitForAnimationFrame(5);
-        assert.isNull(queryByTestId.icon());
+        assert.isNull(queryByTestId.leadingIcon());
     });
 
     it('renders a placeholder', async () => {

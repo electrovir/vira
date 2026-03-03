@@ -7,7 +7,7 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 /**

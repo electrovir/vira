@@ -2,7 +2,7 @@ import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
 import {ChevronUp24Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraCollapsibleWrapper} from './vira-collapsible-wrapper.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 

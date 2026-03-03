@@ -18,7 +18,7 @@ import {noNativeFormStyles} from '../styles/native-styles.js';
 import {noUserSelect} from '../styles/user-select.js';
 import {viraThemeByKeys, type ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
-import {defineViraElement} from './define-vira-element.js';
+import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 // need to add hover colors to unchecked tags

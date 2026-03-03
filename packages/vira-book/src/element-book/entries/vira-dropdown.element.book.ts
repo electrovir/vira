@@ -1,43 +1,43 @@
 import {check} from '@augment-vir/assert';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, type MenuItem, ViraDropdown, allIconsByName} from 'vira';
+import {Element24Icon, ViraDropdown, type ViraSelectOption, allIconsByName} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const exampleDropdownOptions = [
     {
         label: 'Option 1',
-        id: 1,
+        value: '1',
     },
     {
         label: 'Option 2',
-        id: 2,
+        value: '2',
     },
     {
         label: 'Option 3',
-        id: 3,
+        value: '3',
     },
     {
         label: 'Really really super duper long option',
-        id: 4,
+        value: '4',
     },
     {
         label: 'Really really super duper long option',
-        id: 5,
+        value: '5',
     },
     {
         label: 'Really really super duper long option',
-        id: 6,
+        value: '6',
     },
     {
         label: 'Really really super duper long option',
-        id: 7,
+        value: '7',
     },
     {
         label: "Really really super duper long it just keeps going because it's so long option",
-        id: 8,
+        value: '8',
     },
-] satisfies ReadonlyArray<Readonly<MenuItem>>;
+] satisfies ReadonlyArray<Readonly<ViraSelectOption>>;
 
 const examples: ReadonlyArray<{
     title: string;
@@ -58,11 +58,11 @@ const examples: ReadonlyArray<{
         inputs: {
             options: [
                 {
-                    id: '1',
+                    value: '1',
                     label: '1',
                 },
                 {
-                    id: '2',
+                    value: '2',
                     label: '2',
                 },
             ],
@@ -81,32 +81,13 @@ const examples: ReadonlyArray<{
         },
     },
     {
-        title: 'with custom template',
-        inputs: {
-            selected: [],
-            options: [
-                ...exampleDropdownOptions,
-                {
-                    id: 42,
-                    label: html`
-                        <select>
-                            <option selected>NESTED SELECT!!!</option>
-                            <option>this is a terrible idea</option>
-                            <option>pls don't do this</option>
-                        </select>
-                    `,
-                },
-            ],
-        },
-    },
-    {
         title: 'with disabled item',
         inputs: {
             selected: [],
             options: [
                 ...exampleDropdownOptions,
                 {
-                    id: 42,
+                    value: '42',
                     label: 'this is disabled',
                     disabled: true,
                 },
@@ -228,7 +209,7 @@ export const viraDropdownPage = defineBookPage({
                             ? [
                                   exampleDropdownOptions.find(
                                       (option) => option.label === controls.Selected,
-                                  )?.id,
+                                  )?.value,
                               ].filter(check.isTruthy)
                             : state.selected,
                         selectionPrefix: controls.Prefix || example.inputs?.selectionPrefix,

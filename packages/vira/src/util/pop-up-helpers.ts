@@ -65,7 +65,7 @@ export function triggerPopUpState({
 }
 
 /**
- * A helper type to be used with {@link createMenuItemTemplates}.
+ * A helper type to be used with {@link renderMenuItemEntries}.
  *
  * @category PopUp
  */
@@ -79,7 +79,7 @@ export type ViraMenuItemEntry = {
     typeof ViraMenuItem.InputsType;
 
 /**
- * A callback for menu items getting activated, to be used with {@link createMenuItemTemplates}.
+ * A callback for menu items getting activated, to be used with {@link renderMenuItemEntries}.
  *
  * @category PopUp
  */
@@ -96,7 +96,7 @@ export type MenuItemActivateCallback = (
  *
  * @category PopUp
  */
-export function createMenuItemTemplates(items: ReadonlyArray<Readonly<ViraMenuItemEntry>>) {
+export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItemEntry>>) {
     return items.map((item, index) => {
         return html`
             <${ViraMenuItem.assign({

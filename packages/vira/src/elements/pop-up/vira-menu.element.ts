@@ -29,7 +29,7 @@ export enum ViraMenuPopUpDirection {
 }
 
 /**
- * A simple default style wrapper for pop-up menus. Consider using `createMenuItemTemplates` to help
+ * A simple default style wrapper for pop-up menus. Consider using `renderMenuItemEntries` to help
  * rendering many menu items.
  *
  * @category PopUp

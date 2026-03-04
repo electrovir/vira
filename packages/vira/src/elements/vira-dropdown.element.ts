@@ -16,7 +16,7 @@ import {ChevronUp24Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {createMenuItemTemplates} from '../util/pop-up-helpers.js';
+import {renderMenuItemEntries} from '../util/pop-up-helpers.js';
 import {type ShowPopUpResult} from '../util/pop-up-manager.js';
 import {type ViraSelectOption} from '../util/vira-select-option.js';
 import {ViraMenu, ViraMenuPopUpDirection} from './pop-up/vira-menu.element.js';
@@ -182,7 +182,7 @@ export const ViraDropdown = defineViraElement<
             })}
                 slot=${ViraPopUpTrigger.slotNames.popUp}
             >
-                ${createMenuItemTemplates(
+                ${renderMenuItemEntries(
                     inputs.options.map((option) => {
                         return {
                             content: option.label,

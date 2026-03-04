@@ -58,7 +58,6 @@ export const ViraMenuTrigger = defineViraElement<
         }
     `,
     events: {
-        itemActivate: defineElementEvent<PropertyKey[]>(),
         openChange: defineElementEvent<ShowPopUpResult | undefined>(),
     },
     state() {

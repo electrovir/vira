@@ -1,8 +1,8 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {
-    createMenuItemTemplates,
     HorizontalAnchor,
+    renderMenuItemEntries,
     ViraMenuCornerStyle,
     ViraMenuTrigger,
     type ViraMenuItemEntry,
@@ -101,7 +101,7 @@ export const viraMenuTriggerBookPage = defineBookPage({
                             <div class="trigger" slot=${ViraMenuTrigger.slotNames.trigger}>
                                 Trigger Menu
                             </div>
-                            ${createMenuItemTemplates(items)}
+                            ${renderMenuItemEntries(items)}
                         </${ViraMenuTrigger}>
                     `;
                 },

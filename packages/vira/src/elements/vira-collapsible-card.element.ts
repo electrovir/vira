@@ -105,7 +105,6 @@ export const ViraCollapsibleCard = defineViraElement<
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            gap: 32px;
             overflow-x: auto;
             overflow-y: hidden;
         }

@@ -68,8 +68,15 @@ export const viraButtonBookPage = defineBookPage({
             });
         }
 
-        defineViraButtonExample({title: 'basic'});
-        defineViraButtonExample({title: 'with icon', inputs: {icon: Options24Icon}});
+        defineViraButtonExample({
+            title: 'basic',
+        });
+        defineViraButtonExample({
+            title: 'with icon',
+            inputs: {
+                icon: Options24Icon,
+            },
+        });
         defineViraButtonExample({
             title: 'with expanding icon',
             inputs: {

@@ -63,7 +63,11 @@ export const iconsBookPage = defineBookPage({
                     `;
 
                     return html`
-                        <${ViraIcon.assign({icon})} style=${styles}></${ViraIcon}>
+                        <${ViraIcon.assign({
+                            icon,
+                        })}
+                            style=${styles}
+                        ></${ViraIcon}>
                     `;
                 },
             });

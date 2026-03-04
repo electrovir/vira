@@ -1,5 +1,7 @@
+import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, html} from 'element-vir';
+import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
 import {Check24Icon} from '../../icons/icon-svgs/check-24.icon.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
@@ -30,6 +32,12 @@ export const ViraMenuItem = defineViraElement<
     }>
 >()({
     tagName: 'vira-menu-item',
+    state() {
+        return {
+            /** Removes event listeners registered during init. */
+            cleanup: undefined as undefined | (() => void),
+        };
+    },
     hostClasses: {
         'vira-menu-item-selected': ({inputs}) => !!inputs.selected || !!inputs.iconOverride,
         'vira-menu-item-disabled': ({inputs}) => !!inputs.disabled,
@@ -96,22 +104,69 @@ export const ViraMenuItem = defineViraElement<
             min-width: 0;
         }
     `,
-    init({host, inputs}) {
+    init({state, updateState, host, inputs}) {
         host.setAttribute('role', 'menuitem');
         host.setAttribute('tabindex', inputs.disabled ? '-1' : '0');
         host.setAttribute('aria-selected', String(!!inputs.selected));
         host.setAttribute('aria-disabled', String(!!inputs.disabled));
+        state.cleanup?.();
+        let propagating = false;
 
-        host.onmouseenter = () => {
-            if (!inputs.disabled) {
-                host.focus();
-            }
-        };
-        host.onmouseleave = () => {
-            if (!inputs.disabled) {
-                host.blur();
-            }
-        };
+        const listenerRemovers = [
+            listenTo(host, 'click', (event) => {
+                if (propagating) {
+                    return;
+                } else if (inputs.disabled) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return;
+                }
+
+                const slotElement = assertWrap.instanceOf(
+                    host.shadowRoot.querySelector('slot'),
+                    HTMLSlotElement,
+                );
+
+                slotElement
+                    .assignedElements({
+                        flatten: true,
+                    })
+                    .forEach((element) => {
+                        if (
+                            element instanceof HTMLElement &&
+                            !event.composedPath().includes(element)
+                        ) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            propagating = true;
+                            element.dispatchEvent(new MouseEvent(event.type, event));
+                            propagating = false;
+                        }
+                    });
+            }),
+            listenTo(host, 'mouseenter', () => {
+                if (!inputs.disabled) {
+                    host.focus();
+                }
+            }),
+            listenTo(host, 'mouseleave', () => {
+                if (!inputs.disabled) {
+                    host.blur();
+                }
+            }),
+        ];
+
+        updateState({
+            cleanup: () => {
+                listenerRemovers.forEach((remover) => remover());
+            },
+        });
+    },
+    cleanup({state, updateState}) {
+        state.cleanup?.();
+        updateState({
+            cleanup: undefined,
+        });
     },
     render({inputs}) {
         return html`

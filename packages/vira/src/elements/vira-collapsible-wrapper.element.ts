@@ -91,7 +91,9 @@ export const ViraCollapsibleWrapper = defineViraElement<{
             >
                 <div
                     ${onResize(({contentRect}) => {
-                        updateState({contentHeight: contentRect.height});
+                        updateState({
+                            contentHeight: contentRect.height,
+                        });
                     })}
                     class="content-wrapper"
                 >

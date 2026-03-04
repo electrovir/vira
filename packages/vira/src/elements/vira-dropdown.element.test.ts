@@ -10,9 +10,18 @@ import {ViraMenu} from './pop-up/vira-menu.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
 
 const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
-    {value: '0', label: 'Option A'},
-    {value: '1', label: 'Option B'},
-    {value: '2', label: 'Option C'},
+    {
+        value: '0',
+        label: 'Option A',
+    },
+    {
+        value: '1',
+        label: 'Option B',
+    },
+    {
+        value: '2',
+        label: 'Option C',
+    },
 ];
 
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
@@ -81,7 +90,11 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
 
                     return menuExisted !== menuExistsNow;
                 },
-                {timeout: {seconds: 1}},
+                {
+                    timeout: {
+                        seconds: 1,
+                    },
+                },
                 'the options never popped up',
             );
         },
@@ -153,7 +166,11 @@ describe(ViraDropdown.tagName, () => {
             () => {
                 return queryByTestId.prefixText();
             },
-            {timeout: {seconds: 1}},
+            {
+                timeout: {
+                    seconds: 1,
+                },
+            },
             'prefix element never showed up',
         );
 
@@ -168,7 +185,11 @@ describe(ViraDropdown.tagName, () => {
             () => {
                 return queryByTestId.leadingIcon();
             },
-            {timeout: {seconds: 1}},
+            {
+                timeout: {
+                    seconds: 1,
+                },
+            },
             'icon element never showed up',
         );
     });

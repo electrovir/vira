@@ -121,7 +121,10 @@ export function applyRequiredLabel(
 ): string | undefined {
     if (label) {
         if (isRequired) {
-            return addSuffix({value: label, suffix: '*'});
+            return addSuffix({
+                value: label,
+                suffix: '*',
+            });
         } else {
             return label;
         }

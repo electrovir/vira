@@ -325,7 +325,11 @@ export const ViraInput = defineViraElement<
 
         const iconTemplate = inputs.icon
             ? html`
-                  <${ViraIcon.assign({icon: inputs.icon})} class="left-side-icon"></${ViraIcon}>
+                  <${ViraIcon.assign({
+                      icon: inputs.icon,
+                  })}
+                      class="left-side-icon"
+                  ></${ViraIcon}>
               `
             : nothing;
 
@@ -367,7 +371,9 @@ export const ViraInput = defineViraElement<
                         <span
                             class="size-span"
                             ${onResize(({contentRect}) => {
-                                updateState({forcedInputWidth: contentRect.width});
+                                updateState({
+                                    forcedInputWidth: contentRect.width,
+                                });
                             })}
                         >
                             <pre>${filteredValue || inputs.placeholder || nothing}</pre>
@@ -421,7 +427,9 @@ export const ViraInput = defineViraElement<
                                 dispatch(new events.valueChange(''));
                             })}
                         >
-                            <${ViraIcon.assign({icon: CloseX24Icon})}></${ViraIcon}>
+                            <${ViraIcon.assign({
+                                icon: CloseX24Icon,
+                            })}></${ViraIcon}>
                         </button>
                     `,
                 )}
@@ -437,7 +445,9 @@ export const ViraInput = defineViraElement<
                                 event.preventDefault();
                             })}
                             ${listen('click', () => {
-                                updateState({showPassword: !state.showPassword});
+                                updateState({
+                                    showPassword: !state.showPassword,
+                                });
                             })}
                         >
                             <${ViraIcon.assign({

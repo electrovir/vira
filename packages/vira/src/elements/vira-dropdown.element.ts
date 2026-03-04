@@ -210,7 +210,9 @@ export const ViraDropdown = defineViraElement<
                     if (!!state.showPopUpResult !== !!event.detail) {
                         dispatch(new events.openChange(event.detail));
                     }
-                    updateState({showPopUpResult: event.detail});
+                    updateState({
+                        showPopUpResult: event.detail,
+                    });
                 })}
             >
                 <div
@@ -232,7 +234,9 @@ export const ViraDropdown = defineViraElement<
                     </span>
 
                     <span class="trigger-icon-wrapper">
-                        <${ViraIcon.assign({icon: ChevronUp24Icon})}
+                        <${ViraIcon.assign({
+                            icon: ChevronUp24Icon,
+                        })}
                             class="trigger-icon"
                         ></${ViraIcon}>
                     </span>

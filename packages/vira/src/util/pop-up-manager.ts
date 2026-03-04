@@ -190,7 +190,10 @@ export class PopUpManager {
         public readonly navController: NavController,
         options?: Partial<PopUpManagerOptions> | undefined,
     ) {
-        this.options = {...this.options, ...options};
+        this.options = {
+            ...this.options,
+            ...options,
+        };
     }
 
     private attachGlobalListeners() {
@@ -208,7 +211,11 @@ export class PopUpManager {
                 }
 
                 if (event.detail.success) {
-                    this.listenTarget.dispatch(new NavSelectEvent({detail: event.detail.coords}));
+                    this.listenTarget.dispatch(
+                        new NavSelectEvent({
+                            detail: event.detail.coords,
+                        }),
+                    );
                     this.navController.currentNavEntry?.entry.focus(true);
                     event.stopImmediatePropagation();
                     event.preventDefault();
@@ -226,7 +233,9 @@ export class PopUpManager {
                     }
                     this.removePopUp();
                 },
-                {passive: true},
+                {
+                    passive: true,
+                },
             ),
             listenToGlobal('keydown', (event) => {
                 const keyCode = event.code;
@@ -274,7 +283,9 @@ export class PopUpManager {
                         });
                     } else if (
                         (keyCode === 'Enter' || keyCode === 'Return' || keyCode === 'Space') &&
-                        this.navController.enterInto({fallbackToActivate: true}).success
+                        this.navController.enterInto({
+                            fallbackToActivate: true,
+                        }).success
                     ) {
                         event.stopImmediatePropagation();
                         event.preventDefault();
@@ -311,7 +322,10 @@ export class PopUpManager {
         options?: Partial<PopUpManagerOptions> | undefined,
     ): ShowPopUpResult {
         this.lastRootElement = rootElement;
-        const currentOptions = {...this.options, ...options};
+        const currentOptions = {
+            ...this.options,
+            ...options,
+        };
         const container = findOverflowAncestor(rootElement);
         assert.instanceOf(container, HTMLElement);
 

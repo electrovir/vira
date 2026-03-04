@@ -202,21 +202,45 @@ describe(defineTable.name, () => {
             expect: {
                 orientation: ViraTableOrientation.Vertical,
                 headerRow: [
-                    {content: 'a', key: 'a', data: undefined},
-                    {content: 'b-content', key: 'b', data: undefined},
+                    {
+                        content: 'a',
+                        key: 'a',
+                        data: undefined,
+                    },
+                    {
+                        content: 'b-content',
+                        key: 'b',
+                        data: undefined,
+                    },
                 ],
                 rows: [
                     {
                         cells: [
-                            {content: 'a1', key: 'a', data: 1},
-                            {content: 'b1', key: 'b', data: 1},
+                            {
+                                content: 'a1',
+                                key: 'a',
+                                data: 1,
+                            },
+                            {
+                                content: 'b1',
+                                key: 'b',
+                                data: 1,
+                            },
                         ],
                         data: 1,
                     },
                     {
                         cells: [
-                            {content: 'a2', key: 'a', data: 2},
-                            {content: 'b2', key: 'b', data: 2},
+                            {
+                                content: 'a2',
+                                key: 'a',
+                                data: 2,
+                            },
+                            {
+                                content: 'b2',
+                                key: 'b',
+                                data: 2,
+                            },
                         ],
                         data: 2,
                     },
@@ -255,15 +279,31 @@ describe(defineTable.name, () => {
                 rows: [
                     {
                         cells: [
-                            {content: 'a1', key: 'a', data: 1},
-                            {content: 'b1', key: 'b', data: 1},
+                            {
+                                content: 'a1',
+                                key: 'a',
+                                data: 1,
+                            },
+                            {
+                                content: 'b1',
+                                key: 'b',
+                                data: 1,
+                            },
                         ],
                         data: 1,
                     },
                     {
                         cells: [
-                            {content: 'a2', key: 'a', data: 2},
-                            {content: 'b2', key: 'b', data: 2},
+                            {
+                                content: 'a2',
+                                key: 'a',
+                                data: 2,
+                            },
+                            {
+                                content: 'b2',
+                                key: 'b',
+                                data: 2,
+                            },
                         ],
                         data: 2,
                     },
@@ -302,17 +342,41 @@ describe(defineTable.name, () => {
                 rows: [
                     {
                         cells: [
-                            {content: 'a', key: 'a', data: undefined},
-                            {content: 'a1', key: 'a', data: 1},
-                            {content: 'a2', key: 'a', data: 2},
+                            {
+                                content: 'a',
+                                key: 'a',
+                                data: undefined,
+                            },
+                            {
+                                content: 'a1',
+                                key: 'a',
+                                data: 1,
+                            },
+                            {
+                                content: 'a2',
+                                key: 'a',
+                                data: 2,
+                            },
                         ],
                         data: undefined,
                     },
                     {
                         cells: [
-                            {content: 'b-content', key: 'b', data: undefined},
-                            {content: 'b1', key: 'b', data: 1},
-                            {content: 'b2', key: 'b', data: 2},
+                            {
+                                content: 'b-content',
+                                key: 'b',
+                                data: undefined,
+                            },
+                            {
+                                content: 'b1',
+                                key: 'b',
+                                data: 1,
+                            },
+                            {
+                                content: 'b2',
+                                key: 'b',
+                                data: 2,
+                            },
                         ],
                         data: undefined,
                     },
@@ -352,15 +416,31 @@ describe(defineTable.name, () => {
                 rows: [
                     {
                         cells: [
-                            {content: 'a1', key: 'a', data: 1},
-                            {content: 'a2', key: 'a', data: 2},
+                            {
+                                content: 'a1',
+                                key: 'a',
+                                data: 1,
+                            },
+                            {
+                                content: 'a2',
+                                key: 'a',
+                                data: 2,
+                            },
                         ],
                         data: undefined,
                     },
                     {
                         cells: [
-                            {content: 'b1', key: 'b', data: 1},
-                            {content: 'b2', key: 'b', data: 2},
+                            {
+                                content: 'b1',
+                                key: 'b',
+                                data: 1,
+                            },
+                            {
+                                content: 'b2',
+                                key: 'b',
+                                data: 2,
+                            },
                         ],
                         data: undefined,
                     },

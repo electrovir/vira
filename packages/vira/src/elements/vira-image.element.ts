@@ -113,14 +113,20 @@ export const ViraImage = defineViraElement<{
         const statusTemplate = state.erroredUrls[imageUrl]
             ? html`
                   <slot class="status-wrapper" name=${slotNames.error}>
-                      <${ViraIcon.assign({icon: StatusFailure24Icon})} class="error"></${ViraIcon}>
+                      <${ViraIcon.assign({
+                          icon: StatusFailure24Icon,
+                      })}
+                          class="error"
+                      ></${ViraIcon}>
                   </slot>
               `
             : state.loadedUrls[imageUrl]
               ? undefined
               : html`
                     <slot class="status-wrapper" name=${slotNames.loading}>
-                        <${ViraIcon.assign({icon: LoaderAnimated24Icon})}></${ViraIcon}>
+                        <${ViraIcon.assign({
+                            icon: LoaderAnimated24Icon,
+                        })}></${ViraIcon}>
                     </slot>
                 `;
 

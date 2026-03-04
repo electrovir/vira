@@ -31,7 +31,9 @@ export const viraModalBookPage = defineBookPage({
                         modalSubtitle: 'Modal subtitle',
                     })}
                         ${listen(ViraModal.events.modalClose, () => {
-                            updateState({modalOpen: false});
+                            updateState({
+                                modalOpen: false,
+                            });
                         })}
                     >
                         Modal Content
@@ -71,7 +73,9 @@ export const viraModalBookPage = defineBookPage({
                         modalSubtitle: 'Modal subtitle',
                     })}
                         ${listen(ViraModal.events.modalClose, () => {
-                            updateState({modalOpen: false});
+                            updateState({
+                                modalOpen: false,
+                            });
                         })}
                     >
                         Modal Content

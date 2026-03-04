@@ -277,8 +277,16 @@ export const ViraSelect = defineViraElement<
 
                 <div class="border-style wrapper-border"></div>
 
-                <${ViraIcon.assign({icon: inputs.icon})} class="input-icon"></${ViraIcon}>
-                <${ViraIcon.assign({icon: ChevronUp24Icon})} class="trigger-icon"></${ViraIcon}>
+                <${ViraIcon.assign({
+                    icon: inputs.icon,
+                })}
+                    class="input-icon"
+                ></${ViraIcon}>
+                <${ViraIcon.assign({
+                    icon: ChevronUp24Icon,
+                })}
+                    class="trigger-icon"
+                ></${ViraIcon}>
             </span>
         `;
 

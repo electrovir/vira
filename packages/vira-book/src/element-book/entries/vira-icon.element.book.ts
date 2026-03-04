@@ -14,7 +14,9 @@ export const viraIconBookPage = defineBookPage({
             title: 'basic',
             render() {
                 return html`
-                    <${ViraIcon.assign({icon: Element24Icon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: Element24Icon,
+                    })}></${ViraIcon}>
                 `;
             },
         });

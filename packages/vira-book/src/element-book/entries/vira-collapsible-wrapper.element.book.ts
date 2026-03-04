@@ -35,7 +35,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                             ${listen(ViraCollapsibleWrapper.events.expandChange, (event) => {
                                 const newExpandedStates = [...state.expandedStates];
                                 newExpandedStates[index] = event.detail;
-                                updateState({expandedStates: newExpandedStates});
+                                updateState({
+                                    expandedStates: newExpandedStates,
+                                });
                             })}
                         >
                             <div
@@ -49,7 +51,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                                 ${listen('click', () => {
                                     const newShowMoreStates = [...state.showMoreStates];
                                     newShowMoreStates[index] = !newShowMoreStates[index];
-                                    updateState({showMoreStates: newShowMoreStates});
+                                    updateState({
+                                        showMoreStates: newShowMoreStates,
+                                    });
                                 })}
                             >
                                 show more
@@ -91,7 +95,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                             ${listen(ViraCollapsibleWrapper.events.expandChange, (event) => {
                                 const newExpandedStates = [...state.expandedStates];
                                 newExpandedStates[index] = event.detail;
-                                updateState({expandedStates: newExpandedStates});
+                                updateState({
+                                    expandedStates: newExpandedStates,
+                                });
                             })}
                         >
                             <div
@@ -108,7 +114,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                                 ${listen('click', () => {
                                     const newShowMoreStates = [...state.showMoreStates];
                                     newShowMoreStates[index] = !newShowMoreStates[index];
-                                    updateState({showMoreStates: newShowMoreStates});
+                                    updateState({
+                                        showMoreStates: newShowMoreStates,
+                                    });
                                 })}
                             >
                                 show more

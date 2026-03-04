@@ -22,20 +22,26 @@ export const viraImageBookPage = defineBookPage({
         }> = [
             {
                 title: 'simple image',
-                inputs: {imageUrl: '/vira/bolt.png'},
+                inputs: {
+                    imageUrl: '/vira/bolt.png',
+                },
             },
             {
                 title: 'infinite loading',
                 inputs: {
                     imageUrl: '/vira/bolt.png',
-                    _debugLoadDelay: {milliseconds: Infinity},
+                    _debugLoadDelay: {
+                        milliseconds: Infinity,
+                    },
                 },
             },
             {
                 title: 'custom loading',
                 inputs: {
                     imageUrl: '/vira/bolt.png',
-                    _debugLoadDelay: {milliseconds: Infinity},
+                    _debugLoadDelay: {
+                        milliseconds: Infinity,
+                    },
                 },
                 styles: css`
                     border-radius: 32px;
@@ -66,11 +72,15 @@ export const viraImageBookPage = defineBookPage({
             },
             {
                 title: 'invalid',
-                inputs: {imageUrl: '/invalid-image.png'},
+                inputs: {
+                    imageUrl: '/invalid-image.png',
+                },
             },
             {
                 title: 'custom invalid',
-                inputs: {imageUrl: '/invalid-image.png'},
+                inputs: {
+                    imageUrl: '/invalid-image.png',
+                },
                 styles: css`
                     border-radius: 32px;
                 `,
@@ -100,7 +110,9 @@ export const viraImageBookPage = defineBookPage({
             },
             {
                 title: 'disproportionate dimensions',
-                inputs: {imageUrl: '/element-vir/vira/bolt.png'},
+                inputs: {
+                    imageUrl: '/element-vir/vira/bolt.png',
+                },
                 styles: css`
                     width: 25px;
                     height: 200px;
@@ -121,7 +133,9 @@ export const viraImageBookPage = defineBookPage({
                 title: 'long loading',
                 inputs: {
                     imageUrl: '/element-vir/vira/bolt.png',
-                    _debugLoadDelay: {milliseconds: 2000},
+                    _debugLoadDelay: {
+                        milliseconds: 2000,
+                    },
                 },
                 styles: css`
                     border-radius: 32px;

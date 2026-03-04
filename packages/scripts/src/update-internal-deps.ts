@@ -29,7 +29,10 @@ async function updateInternalDeps() {
             }
             return accum;
         },
-        {public: {}, private: {}} as MonoRepoPackages,
+        {
+            public: {},
+            private: {},
+        } as MonoRepoPackages,
     );
 
     await Promise.all(

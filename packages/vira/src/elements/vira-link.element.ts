@@ -1,3 +1,4 @@
+import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {
     attributes,
@@ -10,6 +11,7 @@ import {
 } from 'element-vir';
 import {type SpaRoute, type SpaRouter} from 'spa-router-vir';
 import {type RequireExactlyOne} from 'type-fest';
+import {listenTo} from 'typed-event-target';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 
@@ -58,6 +60,12 @@ export const ViraLink = defineViraElement<
         }>
 >()({
     tagName: 'vira-link',
+    state() {
+        return {
+            /** Removes event listeners registered during init. */
+            cleanup: undefined as undefined | (() => void),
+        };
+    },
     hostClasses: {
         'vira-link-link-styles': ({inputs}) => !inputs.disableLinkStyles,
     },
@@ -89,6 +97,46 @@ export const ViraLink = defineViraElement<
             }
         }
     `,
+    init({state, updateState, host}) {
+        state.cleanup?.();
+
+        let propagating = false;
+
+        const listenerRemovers = [
+            listenTo(host, 'click', (event) => {
+                if (propagating) {
+                    return;
+                }
+
+                const anchorElement = assertWrap.instanceOf(
+                    host.shadowRoot.querySelector('a'),
+                    HTMLAnchorElement,
+                );
+
+                if (event.composedPath().includes(anchorElement)) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+                propagating = true;
+                anchorElement.dispatchEvent(new MouseEvent(event.type, event));
+                propagating = false;
+            }),
+        ];
+
+        updateState({
+            cleanup: () => {
+                listenerRemovers.forEach((remover) => remover());
+            },
+        });
+    },
+    cleanup({state, updateState}) {
+        state.cleanup?.();
+        updateState({
+            cleanup: undefined,
+        });
+    },
     render({inputs}) {
         function clickCallback(event: MouseEvent) {
             if (!inputs.route) {

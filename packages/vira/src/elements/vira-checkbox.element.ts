@@ -151,7 +151,9 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             position: relative;
             cursor: pointer;
 
-            ${createFocusStyles({elementBorderSize: 1})}
+            ${createFocusStyles({
+                elementBorderSize: 1,
+            })}
 
             &.checked {
                 & ${ViraIcon} {

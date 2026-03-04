@@ -63,7 +63,9 @@ export const viraLinkBookPage = defineBookPage({
             title: 'with route',
             inputs: {
                 route: {
-                    route: {paths: []},
+                    route: {
+                        paths: [],
+                    },
                     router: {
                         createRouteUrl() {
                             return window.location.href;

@@ -11,12 +11,24 @@ import {
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const mockMenuItems: ReadonlyArray<ViraMenuItemEntry> = [
-    {content: 'one'},
-    {content: 'two'},
-    {content: 'three'},
-    {content: 'four'},
-    {content: 'five'},
-    {content: 'six'},
+    {
+        content: 'one',
+    },
+    {
+        content: 'two',
+    },
+    {
+        content: 'three',
+    },
+    {
+        content: 'four',
+    },
+    {
+        content: 'five',
+    },
+    {
+        content: 'six',
+    },
 ];
 
 const longMenuItem: ViraMenuItemEntry = {
@@ -77,7 +89,10 @@ const examples: {
             {
                 content: html`
                     <${ViraLink.assign({
-                        link: {url: 'https://www.wikipedia.org', newTab: true},
+                        link: {
+                            url: 'https://www.wikipedia.org',
+                            newTab: true,
+                        },
                         disableLinkStyles: true,
                     })}>
                         Wikipedia link
@@ -94,7 +109,9 @@ const examples: {
                 content: html`
                     <${ViraLink.assign({
                         route: {
-                            route: {paths: []},
+                            route: {
+                                paths: [],
+                            },
                             router: {
                                 createRouteUrl() {
                                     return window.location.href;

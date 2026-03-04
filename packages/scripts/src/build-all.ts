@@ -38,10 +38,17 @@ async function buildPackagePage(buildInfo: Readonly<BuildPackageInfo>): Promise<
         const copyFromDir = join(packagePath, buildInfo.copyFrom);
         const copyToDir = join(rootDistDir, buildInfo.copyTo);
 
-        await rm(copyToDir, {recursive: true, force: true});
-        await mkdir(copyToDir, {recursive: true});
+        await rm(copyToDir, {
+            recursive: true,
+            force: true,
+        });
+        await mkdir(copyToDir, {
+            recursive: true,
+        });
 
-        await cp(copyFromDir, copyToDir, {recursive: true});
+        await cp(copyFromDir, copyToDir, {
+            recursive: true,
+        });
         log.success(`Done building ${packagePath}`);
     } catch (error) {
         log.error(`Failed building ${packagePath}`);

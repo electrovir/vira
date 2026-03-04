@@ -77,7 +77,11 @@ export const ViraForm = defineViraElement<
             updateState({
                 lastIsValid: currentIsValid,
             });
-            dispatch(new events.validChange({allFieldsAreValid: currentIsValid}));
+            dispatch(
+                new events.validChange({
+                    allFieldsAreValid: currentIsValid,
+                }),
+            );
         }
 
         const formFieldTemplates = getObjectTypedEntries(inputs.fields).map(

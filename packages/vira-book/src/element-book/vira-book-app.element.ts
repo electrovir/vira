@@ -1,4 +1,4 @@
-import {ElementBookApp, ElementBookSlotName} from 'element-book';
+import {ElementBookApp} from 'element-book';
 import {css, defineElement, html} from 'element-vir';
 import {joinUrlPaths} from 'url-vir';
 import {viraBookPages} from './book-pages.js';
@@ -34,7 +34,7 @@ export const ViraBookApp = defineElement()({
                 pages: viraBookPages,
                 themeColor: '#33ccff',
             })}>
-                <h1 slot=${ElementBookSlotName.NavHeader}>Vira</h1>
+                <h1 slot=${ElementBookApp.slotNames.navHeader}>Vira</h1>
             </${ElementBookApp}>
         `;
     },

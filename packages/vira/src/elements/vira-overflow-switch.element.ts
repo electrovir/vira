@@ -131,5 +131,7 @@ function updateOverflowing({
 }) {
     const isOverflowing = elementToTest.scrollWidth > host.clientWidth;
 
-    updateState({isOverflowing});
+    updateState({
+        isOverflowing,
+    });
 }

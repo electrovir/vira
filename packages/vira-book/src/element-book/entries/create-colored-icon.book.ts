@@ -32,9 +32,13 @@ export const createColoredIconBookPage = defineBookPage({
                 });
 
                 return html`
-                    <${ViraIcon.assign({icon: Element24Icon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: Element24Icon,
+                    })}></${ViraIcon}>
                     <span>→</span>
-                    <${ViraIcon.assign({icon: coloredIcon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: coloredIcon,
+                    })}></${ViraIcon}>
                 `;
             },
         });
@@ -55,9 +59,13 @@ export const createColoredIconBookPage = defineBookPage({
                 });
 
                 return html`
-                    <${ViraIcon.assign({icon: Star24Icon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: Star24Icon,
+                    })}></${ViraIcon}>
                     <span>→</span>
-                    <${ViraIcon.assign({icon: coloredIcon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: coloredIcon,
+                    })}></${ViraIcon}>
                 `;
             },
         });
@@ -78,9 +86,13 @@ export const createColoredIconBookPage = defineBookPage({
                 });
 
                 return html`
-                    <${ViraIcon.assign({icon: StatusSuccess24Icon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: StatusSuccess24Icon,
+                    })}></${ViraIcon}>
                     <span>→</span>
-                    <${ViraIcon.assign({icon: coloredIcon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: coloredIcon,
+                    })}></${ViraIcon}>
                 `;
             },
         });
@@ -103,8 +115,12 @@ export const createColoredIconBookPage = defineBookPage({
                 });
 
                 return html`
-                    <${ViraIcon.assign({icon: errorIcon})}></${ViraIcon}>
-                    <${ViraIcon.assign({icon: successIcon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: errorIcon,
+                    })}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: successIcon,
+                    })}></${ViraIcon}>
                 `;
             },
         });
@@ -133,10 +149,18 @@ export const createColoredIconBookPage = defineBookPage({
                 });
 
                 return html`
-                    <${ViraIcon.assign({icon: redIcon})}></${ViraIcon}>
-                    <${ViraIcon.assign({icon: blueIcon})}></${ViraIcon}>
-                    <${ViraIcon.assign({icon: greenIcon})}></${ViraIcon}>
-                    <${ViraIcon.assign({icon: purpleIcon})}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: redIcon,
+                    })}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: blueIcon,
+                    })}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: greenIcon,
+                    })}></${ViraIcon}>
+                    <${ViraIcon.assign({
+                        icon: purpleIcon,
+                    })}></${ViraIcon}>
                 `;
             },
         });

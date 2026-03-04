@@ -19,33 +19,61 @@ const examples: ReadonlyArray<{
     {
         title: 'basic',
         items: [
-            {content: 'one'},
-            {content: 'two'},
-            {content: 'three'},
+            {
+                content: 'one',
+            },
+            {
+                content: 'two',
+            },
+            {
+                content: 'three',
+            },
         ],
     },
     {
         title: 'with selection',
         items: [
-            {content: 'one'},
-            {content: 'two', selected: true},
-            {content: 'three'},
+            {
+                content: 'one',
+            },
+            {
+                content: 'two',
+                selected: true,
+            },
+            {
+                content: 'three',
+            },
         ],
     },
     {
         title: 'with multi selection',
         items: [
-            {content: 'one'},
-            {content: 'two', selected: true},
-            {content: 'three', selected: true},
+            {
+                content: 'one',
+            },
+            {
+                content: 'two',
+                selected: true,
+            },
+            {
+                content: 'three',
+                selected: true,
+            },
         ],
     },
     {
         title: 'with disabled item',
         items: [
-            {content: 'one'},
-            {content: 'two', disabled: true},
-            {content: 'three'},
+            {
+                content: 'one',
+            },
+            {
+                content: 'two',
+                disabled: true,
+            },
+            {
+                content: 'three',
+            },
         ],
     },
 ];

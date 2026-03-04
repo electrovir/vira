@@ -29,7 +29,9 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <${ViraPopUpTrigger.assign({keepOpenAfterInteraction: true})}>
+                    <${ViraPopUpTrigger.assign({
+                        keepOpenAfterInteraction: true,
+                    })}>
                         <div class="trigger" slot=${ViraPopUpTrigger.slotNames.trigger}>
                             Trigger Pop Up
                         </div>

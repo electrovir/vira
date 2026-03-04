@@ -61,7 +61,10 @@ export const ViraProgress = defineViraElement<
         const totalRange = max - min;
         const value = inputs.value - min;
 
-        const percentFull = clamp(Math.round((value / totalRange) * 100), {min: 0, max: 100});
+        const percentFull = clamp(Math.round((value / totalRange) * 100), {
+            min: 0,
+            max: 100,
+        });
 
         applyAttributes(host, {
             'aria-valuemin': inputs.min,

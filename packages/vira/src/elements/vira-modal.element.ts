@@ -171,7 +171,9 @@ export const ViraModal = defineViraElement<
 
         if (state.previousOpenValue !== inputs.open) {
             state.cleanup?.();
-            updateState({previousOpenValue: inputs.open});
+            updateState({
+                previousOpenValue: inputs.open,
+            });
             if (inputs.open) {
                 const removers = globalEventsToCloseModalOn.map((eventName) =>
                     listenToGlobal(eventName, () => {
@@ -197,7 +199,9 @@ export const ViraModal = defineViraElement<
         return html`
             <dialog
                 ${onDomCreated((element) => {
-                    updateState({dialogElement: assertWrap.instanceOf(element, HTMLDialogElement)});
+                    updateState({
+                        dialogElement: assertWrap.instanceOf(element, HTMLDialogElement),
+                    });
                 })}
                 ${listen('close', () => {
                     close();

@@ -114,7 +114,11 @@ export const ViraPopUpTrigger = defineViraElement<
         return {
             /** `undefined` means the pop up is not currently showing. */
             showPopUpResult: undefined as ShowPopUpResult | undefined,
-            popUpManager: new PopUpManager(new NavController(host, {activateOnMouseUp: true})),
+            popUpManager: new PopUpManager(
+                new NavController(host, {
+                    activateOnMouseUp: true,
+                }),
+            ),
         };
     },
     slotNames: [
@@ -198,13 +202,17 @@ export const ViraPopUpTrigger = defineViraElement<
         }>(),
     },
     cleanup({state, updateState}) {
-        updateState({showPopUpResult: undefined});
+        updateState({
+            showPopUpResult: undefined,
+        });
         state.popUpManager.destroy();
     },
     init({state, updateState, host, inputs, dispatch, events}) {
         /** Refocus the trigger and set the result to `undefined` when the pop up closes. */
         state.popUpManager.listen(HidePopUpEvent, () => {
-            updateState({showPopUpResult: undefined});
+            updateState({
+                showPopUpResult: undefined,
+            });
             dispatch(new events.openChange(undefined));
             if (!inputs.isDisabled) {
                 const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-wrapper');
@@ -259,7 +267,9 @@ export const ViraPopUpTrigger = defineViraElement<
             triggerPopUpState({
                 open,
                 callback(showPopUpResult) {
-                    updateState({showPopUpResult});
+                    updateState({
+                        showPopUpResult,
+                    });
                     if (emitEvent) {
                         dispatch(new events.openChange(showPopUpResult));
                     }
@@ -270,12 +280,30 @@ export const ViraPopUpTrigger = defineViraElement<
         }
 
         if (inputs.isDisabled) {
-            triggerPopUp({open: false, emitEvent: false}, undefined);
+            triggerPopUp(
+                {
+                    open: false,
+                    emitEvent: false,
+                },
+                undefined,
+            );
         } else if (inputs.z_debug_forceOpenState != undefined) {
             if (!inputs.z_debug_forceOpenState && state.showPopUpResult) {
-                triggerPopUp({emitEvent: false, open: false}, undefined);
+                triggerPopUp(
+                    {
+                        emitEvent: false,
+                        open: false,
+                    },
+                    undefined,
+                );
             } else if (inputs.z_debug_forceOpenState && !state.showPopUpResult) {
-                triggerPopUp({emitEvent: false, open: true}, undefined);
+                triggerPopUp(
+                    {
+                        emitEvent: false,
+                        open: true,
+                    },
+                    undefined,
+                );
             }
         }
 
@@ -357,7 +385,13 @@ export const ViraPopUpTrigger = defineViraElement<
             : undefined;
 
         function respondToClick(event: Event) {
-            triggerPopUp({emitEvent: true, open: !state.showPopUpResult}, event);
+            triggerPopUp(
+                {
+                    emitEvent: true,
+                    open: !state.showPopUpResult,
+                },
+                event,
+            );
         }
 
         return html`
@@ -371,7 +405,13 @@ export const ViraPopUpTrigger = defineViraElement<
                 aria-expanded=${!!state.showPopUpResult}
                 ${listen('keydown', (event) => {
                     if (!state.showPopUpResult && event.code.startsWith('Arrow')) {
-                        triggerPopUp({emitEvent: true, open: true}, event);
+                        triggerPopUp(
+                            {
+                                emitEvent: true,
+                                open: true,
+                            },
+                            event,
+                        );
                     }
                 })}
                 ${listen('click', (event) => {
@@ -402,7 +442,13 @@ export const ViraPopUpTrigger = defineViraElement<
                          * open/close toggling for the trigger itself.
                          */
                         if (dropdownTrigger && !event.composedPath().includes(dropdownTrigger)) {
-                            triggerPopUp({emitEvent: true, open: false}, event);
+                            triggerPopUp(
+                                {
+                                    emitEvent: true,
+                                    open: false,
+                                },
+                                event,
+                            );
                         }
                     }
                 })}

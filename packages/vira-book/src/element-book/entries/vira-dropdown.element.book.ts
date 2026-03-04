@@ -230,7 +230,9 @@ export const viraDropdownPage = defineBookPage({
                     return html`
                         <${ViraDropdown.assign(finalInputs)}
                             ${listen(ViraDropdown.events.selectedChange, (event) => {
-                                updateState({selected: event.detail});
+                                updateState({
+                                    selected: event.detail,
+                                });
                             })}
                         ></${ViraDropdown}>
                     `;

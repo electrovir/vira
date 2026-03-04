@@ -38,7 +38,12 @@ function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}):
         return true;
     }
     if (input.length > 1) {
-        return input.split('').every((singleInput) => doesMatch({input: singleInput, matcher}));
+        return input.split('').every((singleInput) =>
+            doesMatch({
+                input: singleInput,
+                matcher,
+            }),
+        );
     }
 
     if (matcher instanceof RegExp) {
@@ -90,11 +95,17 @@ export function filterTextInputValue(inputs: IsAllowedInputs): {
     const value = String(inputs.value);
 
     if (!inputs.value) {
-        return {filtered: value, blocked: ''};
+        return {
+            filtered: value,
+            blocked: '',
+        };
     }
     const {filtered, blocked} = value.split('').reduce(
         (accum, letter) => {
-            const allowed = isAllowed({...inputs, value: letter});
+            const allowed = isAllowed({
+                ...inputs,
+                value: letter,
+            });
 
             if (allowed) {
                 accum.filtered.push(letter);

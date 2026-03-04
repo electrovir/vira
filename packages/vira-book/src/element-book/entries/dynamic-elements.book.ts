@@ -15,11 +15,15 @@ import {utilBookPage} from '../top-level-pages.js';
 
 const loaders = {
     async element1() {
-        await wait({seconds: 2});
+        await wait({
+            seconds: 2,
+        });
         return (await import('../../mocks/vira-element-1.js')).ViraElement1Mock;
     },
     async element2() {
-        await wait({seconds: 2});
+        await wait({
+            seconds: 2,
+        });
         return (await import('../../mocks/vira-element-2.js')).ViraElement2Mock;
     },
     errorElement() {

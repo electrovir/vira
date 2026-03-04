@@ -186,7 +186,7 @@ export const ViraDropdown = defineViraElement<
                     inputs.options.map((option) => {
                         return {
                             content: option.label,
-                            activate() {
+                            onClick() {
                                 dispatch(new events.selectedChange([option.value]));
                             },
                             disabled: option.disabled,

@@ -74,7 +74,7 @@ export type ViraMenuItemEntry = {
 } & PartialWithUndefined<{
     selected: boolean;
     /** Called when any item is activated. */
-    activate: MenuItemActivateCallback;
+    onClick: MenuItemClickCallback;
 }> &
     typeof ViraMenuItem.InputsType;
 
@@ -83,7 +83,7 @@ export type ViraMenuItemEntry = {
  *
  * @category PopUp
  */
-export type MenuItemActivateCallback = (
+export type MenuItemClickCallback = (
     params: Readonly<{
         /** The menu item's index in the array. */
         index: number;
@@ -102,8 +102,8 @@ export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItem
             <${ViraMenuItem.assign({
                 ...item,
             })}
-                ${listen('mousedown', async (event) => {
-                    await item.activate?.({
+                ${listen('click', async (event) => {
+                    await item.onClick?.({
                         event,
                         index,
                     });

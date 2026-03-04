@@ -1,4 +1,4 @@
-import {assert} from '@augment-vir/assert';
+import {assert, assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {walkActiveElement} from '@augment-vir/web';
 import {NavController, type Coords} from 'device-navigation';
@@ -387,16 +387,41 @@ export const ViraPopUpTrigger = defineViraElement<
                                 return false;
                             }
                         });
+
                         if (isTextActiveElement) {
                             return;
                         }
 
                         respondToClick(event);
+                    } else if (event.button === 0 && state.showPopUpResult) {
+                        const dropdownTrigger = host.shadowRoot.querySelector('.dropdown-trigger');
+
+                        /**
+                         * Close the menu when a mouse click originates from the pop-up area (e.g. a
+                         * menu item was clicked). The trigger's mousedown already handles
+                         * open/close toggling for the trigger itself.
+                         */
+                        if (dropdownTrigger && !event.composedPath().includes(dropdownTrigger)) {
+                            triggerPopUp({emitEvent: true, open: false}, event);
+                        }
                     }
                 })}
                 ${listen('mousedown', (event) => {
                     /** Ignore any clicks that aren't the main button. */
-                    if (event.button === 0) {
+                    if (event.button !== 0) {
+                        return;
+                    }
+
+                    const dropdownTrigger = assertWrap.instanceOf(
+                        host.shadowRoot.querySelector('.dropdown-trigger'),
+                        HTMLElement,
+                    );
+
+                    /**
+                     * Only respond if the mousedown originated from the trigger slot, not from
+                     * within the pop-up menu items, to avoid prematurely closing the menu.
+                     */
+                    if (event.composedPath().includes(dropdownTrigger)) {
                         respondToClick(event);
                     }
                 })}

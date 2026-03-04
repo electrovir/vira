@@ -3,6 +3,7 @@ import {css, html} from 'element-vir';
 import {
     HorizontalAnchor,
     renderMenuItemEntries,
+    ViraLink,
     ViraMenuCornerStyle,
     ViraMenuTrigger,
     type ViraMenuItemEntry,
@@ -67,6 +68,49 @@ const examples: {
         menuItems: [
             ...mockMenuItems,
             longMenuItem,
+        ],
+    },
+    {
+        title: 'ViraLink URL item',
+        menuItems: [
+            ...mockMenuItems,
+            {
+                content: html`
+                    <${ViraLink.assign({
+                        link: {url: 'https://www.wikipedia.org', newTab: true},
+                        disableLinkStyles: true,
+                    })}>
+                        Wikipedia link
+                    </${ViraLink}>
+                `,
+            },
+        ],
+    },
+    {
+        title: 'ViraLink route item',
+        menuItems: [
+            ...mockMenuItems,
+            {
+                content: html`
+                    <${ViraLink.assign({
+                        route: {
+                            route: {paths: []},
+                            router: {
+                                createRouteUrl() {
+                                    return window.location.href;
+                                },
+                                setRouteOnDirectNavigation(route, event) {
+                                    console.info(route, event);
+                                    return false;
+                                },
+                            },
+                        },
+                        disableLinkStyles: true,
+                    })}>
+                        Route link
+                    </${ViraLink}>
+                `,
+            },
         ],
     },
 ];

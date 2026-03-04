@@ -6,7 +6,7 @@ import {
     css,
     html,
 } from 'element-vir';
-import {Options24Icon, ViraMenuItem, createColoredIcon} from 'vira';
+import {Options24Icon, ViraLink, ViraMenuItem, createColoredIcon} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
@@ -88,6 +88,28 @@ const examples: ReadonlyArray<{
             iconOverride: createColoredIcon(Options24Icon, {
                 'vira-icon-stroke-color': 'blue',
             }),
+        },
+    },
+    {
+        title: 'with ViraLink content',
+        customStyle: css`
+            ${ViraLink} {
+                text-decoration: none;
+            }
+        `,
+        content: html`
+            <${ViraLink.assign({
+                link: {
+                    url: 'https://example.com',
+                    newTab: true,
+                },
+                disableLinkStyles: true,
+            })}>
+                link label
+            </${ViraLink}>
+        `,
+        inputs: {
+            selected: false,
         },
     },
 ];

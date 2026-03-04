@@ -1949,7 +1949,6 @@ ${Rh(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function IT(e){return
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            gap: 32px;
             overflow-x: auto;
             overflow-y: hidden;
         }
@@ -4161,7 +4160,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${O.assign({icon:r})}></${O}>
                     <${O.assign({icon:n})}></${O}>
                     <${O.assign({icon:o})}></${O}>
-                `}})}}),tk={async element1(){return await zi({seconds:2}),(await nc(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CPd7sjPK.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await zi({seconds:2}),(await nc(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CRxaI8WH.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},yy=Un()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:X$(tk)}},render({state:e,inputs:t}){return Q$(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return p`
+                `}})}}),tk={async element1(){return await zi({seconds:2}),(await nc(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-B3UFpBG7.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await zi({seconds:2}),(await nc(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CgPU_G3l.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},yy=Un()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:X$(tk)}},render({state:e,inputs:t}){return Q$(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return p`
                     <${_i}>
                         ${Xi("Failed to import element",Zt(r))}
                     </${_i}>

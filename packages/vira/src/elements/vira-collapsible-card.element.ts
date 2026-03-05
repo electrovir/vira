@@ -54,7 +54,10 @@ export const ViraCollapsibleCard = defineViraElement<
         'vira-collapsible-card-expansion-blocked': ({inputs}) => !!inputs.blockExpansion,
         'vira-collapsible-card-card-styles': ({inputs}) => !inputs.rawCollapsible,
     },
-    styles: ({hostClasses}) => css`
+    cssVars: {
+        'vira-collapsible-card-content-gap': '16px',
+    },
+    styles: ({hostClasses, cssVars}) => css`
         :host {
             display: inline-flex;
         }
@@ -105,6 +108,7 @@ export const ViraCollapsibleCard = defineViraElement<
             display: flex;
             flex-direction: column;
             align-items: stretch;
+            gap: ${cssVars['vira-collapsible-card-content-gap'].value};
             overflow-x: auto;
             overflow-y: hidden;
         }

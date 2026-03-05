@@ -1,6 +1,6 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, html, nothing} from 'element-vir';
-import {ChevronDown24Icon, type ViraIconSvg} from '../icons/index.js';
+import {type ViraIconSvg, ChevronDown16Icon} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {viraAnimationDurations} from '../styles/durations.js';
 import {createFocusStyles} from '../styles/focus.js';
@@ -80,6 +80,7 @@ export const ViraButton = defineViraElement<
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
+            height: 32px;
             font-weight: bold;
             display: inline-flex;
             position: relative;
@@ -232,12 +233,12 @@ export const ViraButton = defineViraElement<
         }
 
         .caret-icon {
-            padding-left: 4px;
+            margin-left: 8px;
         }
 
         ${hostClasses['vira-button-with-menu-caret'].selector} {
             button {
-                padding-right: 4px;
+                padding-right: 6px;
             }
         }
     `,
@@ -260,7 +261,7 @@ export const ViraButton = defineViraElement<
         const caretIconTemplate = inputs.showMenuCaret
             ? html`
                   <${ViraIcon.assign({
-                      icon: ChevronDown24Icon,
+                      icon: ChevronDown16Icon,
                   })}
                       class="caret-icon"
                   ></${ViraIcon}>

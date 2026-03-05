@@ -13,7 +13,7 @@ import {
     type AttributeValues,
 } from 'element-vir';
 import {listenTo} from 'typed-event-target';
-import {ChevronUp24Icon, type ViraIconSvg} from '../icons/index.js';
+import {ChevronUp16Icon, type ViraIconSvg} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -136,6 +136,11 @@ export const ViraSelect = defineViraElement<
                     left: 10px;
                 }
             }
+        }
+
+        .trigger-icon {
+            width: 24px;
+            aspect-ratio: 1;
         }
 
         ${hostClasses['vira-select-not-raw'].selector} {
@@ -323,7 +328,7 @@ export const ViraSelect = defineViraElement<
                     class="input-icon"
                 ></${ViraIcon}>
                 <${ViraIcon.assign({
-                    icon: ChevronUp24Icon,
+                    icon: ChevronUp16Icon,
                 })}
                     class="trigger-icon"
                 ></${ViraIcon}>

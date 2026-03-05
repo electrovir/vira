@@ -12,7 +12,7 @@ import {
     testId,
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {ChevronUp24Icon} from '../icons/index.js';
+import {ChevronUp16Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
@@ -82,6 +82,8 @@ export const ViraDropdown = defineViraElement<
         }
 
         .trigger-icon {
+            width: 24px;
+            aspect-ratio: 1;
             align-self: flex-start;
             will-change: transform;
             transform: rotate(180deg);
@@ -235,7 +237,7 @@ export const ViraDropdown = defineViraElement<
 
                     <span class="trigger-icon-wrapper">
                         <${ViraIcon.assign({
-                            icon: ChevronUp24Icon,
+                            icon: ChevronUp16Icon,
                         })}
                             class="trigger-icon"
                         ></${ViraIcon}>

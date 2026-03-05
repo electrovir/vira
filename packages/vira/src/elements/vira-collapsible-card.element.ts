@@ -1,6 +1,6 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
-import {ChevronUp24Icon} from '../icons/index.js';
+import {ChevronUp16Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraCollapsibleWrapper} from './vira-collapsible-wrapper.element.js';
@@ -160,7 +160,7 @@ export const ViraCollapsibleCard = defineViraElement<
                           ? nothing
                           : html`
                                 <${ViraIcon.assign({
-                                    icon: ChevronUp24Icon,
+                                    icon: ChevronUp16Icon,
                                     fitContainer: true,
                                 })}
                                     ${testId(testIds.openCaret)}

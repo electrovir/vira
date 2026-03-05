@@ -35,6 +35,18 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-error-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,
     'vira-form-error-active-color': viraTheme.colors['vira-red-behind-bg-body'].background.value,
 
+    'vira-form-warning-color': viraTheme.colors['vira-orange-behind-bg-non-body'].background.value,
+    'vira-form-warning-hover-color':
+        viraTheme.colors['vira-orange-behind-bg-header'].background.value,
+    'vira-form-warning-active-color':
+        viraTheme.colors['vira-orange-behind-bg-body'].background.value,
+
+    'vira-form-positive-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
+    'vira-form-positive-hover-color':
+        viraTheme.colors['vira-green-behind-bg-header'].background.value,
+    'vira-form-positive-active-color':
+        viraTheme.colors['vira-green-behind-bg-body'].background.value,
+
     'vira-form-success-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
 
     'vira-form-label-font-weight': 'bold',

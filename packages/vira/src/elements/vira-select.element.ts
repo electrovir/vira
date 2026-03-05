@@ -238,7 +238,9 @@ export const ViraSelect = defineViraElement<
                 event.stopPropagation();
                 /** `showPicker` is not in Safari. */
                 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-                (selectElement.showPicker || selectElement.showPopover).call(selectElement);
+                if (selectElement.showPicker) {
+                    selectElement.showPicker();
+                }
             }),
         ];
 

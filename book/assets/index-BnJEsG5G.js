@@ -297,6 +297,13 @@ ${Lh(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function RT(e){return
             }
         }
 
+        ${B} {
+            width: 24px;
+            aspect-ratio: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
         ${e["vira-menu-item-default-icon"].selector} {
             ${B} {
                 visibility: hidden;
@@ -776,7 +783,7 @@ ${Lh(n,1)}`);super(o),this.errors=t,this.failureMessage=r}}function RT(e){return
     `}),sI=ne({name:"Dash16Icon",svgTemplate:b`
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path
-                d="M3 8h10"
+                d="M4 8h8"
                 fill="none"
                 stroke=${v["vira-icon-stroke-color"].value}
                 stroke-width=${v["vira-icon-stroke-width"].value}
@@ -4187,7 +4194,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${B.assign({icon:r})}></${B}>
                     <${B.assign({icon:n})}></${B}>
                     <${B.assign({icon:o})}></${B}>
-                `}})}}),nk={async element1(){return await Vi({seconds:2}),(await oc(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-Bx-Lz3UC.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await oc(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-ELkfYfX5.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},vy=zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:ek(nk)}},render({state:e,inputs:t}){return tk(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return b`
+                `}})}}),nk={async element1(){return await Vi({seconds:2}),(await oc(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-msV5a5tq.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await oc(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-BERH3_a9.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},vy=zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:ek(nk)}},render({state:e,inputs:t}){return tk(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return b`
                     <${Ui}>
                         ${Qi("Failed to import element",Jt(r))}
                     </${Ui}>

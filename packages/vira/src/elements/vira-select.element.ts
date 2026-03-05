@@ -1,3 +1,4 @@
+import {assertWrap} from '@augment-vir/assert';
 import {randomString, type PartialWithUndefined} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
@@ -11,6 +12,7 @@ import {
     nothing,
     type AttributeValues,
 } from 'element-vir';
+import {listenTo} from 'typed-event-target';
 import {ChevronUp24Icon, type ViraIconSvg} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
@@ -59,6 +61,8 @@ export const ViraSelect = defineViraElement<
              * provided.
              */
             randomId: randomString(32),
+            /** Removes event listeners registered during init. */
+            cleanup: undefined as undefined | (() => void),
         };
     },
     events: {
@@ -106,7 +110,7 @@ export const ViraSelect = defineViraElement<
                 cursor: pointer;
                 /* Prevent the left pixel of text getting cut off. */
                 padding-left: 0.5px;
-                padding-right: 26px;
+                padding-right: 28px;
                 overflow: hidden;
                 text-overflow: ellipsis;
 
@@ -216,6 +220,40 @@ export const ViraSelect = defineViraElement<
             border-color: ${viraFormCssVars['vira-form-error-color'].value};
         }
     `,
+    init({state, updateState, host}) {
+        state.cleanup?.();
+
+        const listenerRemovers = [
+            listenTo(host, 'mousedown', (event) => {
+                const selectElement = assertWrap.instanceOf(
+                    host.shadowRoot.querySelector('select'),
+                    HTMLSelectElement,
+                );
+
+                if (event.composedPath().includes(selectElement)) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+                /** `showPicker` is not in Safari. */
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                (selectElement.showPicker || selectElement.showPopover).call(selectElement);
+            }),
+        ];
+
+        updateState({
+            cleanup: () => {
+                listenerRemovers.forEach((remover) => remover());
+            },
+        });
+    },
+    cleanup({state, updateState}) {
+        state.cleanup?.();
+        updateState({
+            cleanup: undefined,
+        });
+    },
     render({inputs, state, dispatch, events}) {
         const value = inputs.value || undefined;
 

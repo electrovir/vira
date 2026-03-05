@@ -110,40 +110,40 @@ export const ViraMenuItem = defineViraElement<
         host.setAttribute('aria-selected', String(!!inputs.selected));
         host.setAttribute('aria-disabled', String(!!inputs.disabled));
         state.cleanup?.();
-        let propagating = false;
+        const propagating: Record<string, boolean> = {};
+
+        function propagateMouseEvent(event: Event) {
+            if (propagating[event.type]) {
+                return;
+            } else if (inputs.disabled) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+
+            const slotElement = assertWrap.instanceOf(
+                host.shadowRoot.querySelector('slot'),
+                HTMLSlotElement,
+            );
+
+            slotElement
+                .assignedElements({
+                    flatten: true,
+                })
+                .forEach((element) => {
+                    if (element instanceof HTMLElement && !event.composedPath().includes(element)) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        propagating[event.type] = true;
+                        element.dispatchEvent(new MouseEvent(event.type, event));
+                        delete propagating[event.type];
+                    }
+                });
+        }
 
         const listenerRemovers = [
-            listenTo(host, 'click', (event) => {
-                if (propagating) {
-                    return;
-                } else if (inputs.disabled) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    return;
-                }
-
-                const slotElement = assertWrap.instanceOf(
-                    host.shadowRoot.querySelector('slot'),
-                    HTMLSlotElement,
-                );
-
-                slotElement
-                    .assignedElements({
-                        flatten: true,
-                    })
-                    .forEach((element) => {
-                        if (
-                            element instanceof HTMLElement &&
-                            !event.composedPath().includes(element)
-                        ) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            propagating = true;
-                            element.dispatchEvent(new MouseEvent(event.type, event));
-                            propagating = false;
-                        }
-                    });
-            }),
+            listenTo(host, 'click', propagateMouseEvent),
+            listenTo(host, 'mousedown', propagateMouseEvent),
             listenTo(host, 'mouseenter', () => {
                 if (!inputs.disabled) {
                     host.focus();

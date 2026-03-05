@@ -11,10 +11,10 @@ import {Check16Icon} from './icon-svgs/check-16.icon.js';
 import {Check24Icon} from './icon-svgs/check-24.icon.js';
 import {ChevronDown24Icon} from './icon-svgs/chevron-down-24.icon.js';
 import {ChevronUp24Icon} from './icon-svgs/chevron-up-24.icon.js';
-import {CloseX16Icon} from './icon-svgs/close-x-16.icon.js';
 import {CloseX24Icon} from './icon-svgs/close-x-24.icon.js';
 import {Commit24Icon} from './icon-svgs/commit-24.icon.js';
 import {Copy24Icon} from './icon-svgs/copy-24.icon.js';
+import {Dash16Icon} from './icon-svgs/dash-16.icon.js';
 import {Document24Icon} from './icon-svgs/document-24.icon.js';
 import {DocumentSearch24Icon} from './icon-svgs/document-search-24.icon.js';
 import {DoubleChevron24Icon} from './icon-svgs/double-chevron-24.icon.js';
@@ -50,6 +50,7 @@ import {StatusUnknown24Icon} from './icon-svgs/status-unknown-24.icon.js';
 import {StatusWarning24Icon} from './icon-svgs/status-warning-24.icon.js';
 import {Sun24Icon} from './icon-svgs/sun-24.icon.js';
 import {Upload24Icon} from './icon-svgs/upload-24.icon.js';
+import {X16Icon} from './icon-svgs/x-16.icon.js';
 import {X24Icon} from './icon-svgs/x-24.icon.js';
 
 export * from './colored-icon.js';
@@ -67,10 +68,10 @@ export * from './icon-svgs/check-16.icon.js';
 export * from './icon-svgs/check-24.icon.js';
 export * from './icon-svgs/chevron-down-24.icon.js';
 export * from './icon-svgs/chevron-up-24.icon.js';
-export * from './icon-svgs/close-x-16.icon.js';
 export * from './icon-svgs/close-x-24.icon.js';
 export * from './icon-svgs/commit-24.icon.js';
 export * from './icon-svgs/copy-24.icon.js';
+export * from './icon-svgs/dash-16.icon.js';
 export * from './icon-svgs/document-24.icon.js';
 export * from './icon-svgs/document-search-24.icon.js';
 export * from './icon-svgs/double-chevron-24.icon.js';
@@ -106,6 +107,7 @@ export * from './icon-svgs/status-unknown-24.icon.js';
 export * from './icon-svgs/status-warning-24.icon.js';
 export * from './icon-svgs/sun-24.icon.js';
 export * from './icon-svgs/upload-24.icon.js';
+export * from './icon-svgs/x-16.icon.js';
 export * from './icon-svgs/x-24.icon.js';
 
 /**
@@ -125,10 +127,10 @@ export const allIconsByName = {
     Check24Icon,
     ChevronDown24Icon,
     ChevronUp24Icon,
-    CloseX16Icon,
     CloseX24Icon,
     Commit24Icon,
     Copy24Icon,
+    Dash16Icon,
     Document24Icon,
     DocumentSearch24Icon,
     DoubleChevron24Icon,
@@ -164,5 +166,6 @@ export const allIconsByName = {
     StatusWarning24Icon,
     Sun24Icon,
     Upload24Icon,
+    X16Icon,
     X24Icon,
 } as const;

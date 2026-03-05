@@ -3,14 +3,14 @@ import {viraIconCssVars} from '../icon-css-vars.js';
 import {defineIcon} from '../icon-svg.js';
 
 /**
- * An x icon meant to be used as a "close" button (16px).
+ * An x icon.
  *
  * @category Icon
  * @category SVG
- * @see https://electrovir.github.io/vira/book/icons/closex16icon
+ * @see https://electrovir.github.io/vira/book/icons/x16icon
  */
-export const CloseX16Icon = defineIcon({
-    name: 'CloseX16Icon',
+export const X16Icon = defineIcon({
+    name: 'X16Icon',
     svgTemplate: html`
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path

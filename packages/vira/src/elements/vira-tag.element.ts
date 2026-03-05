@@ -5,7 +5,7 @@ import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from '
 import {themeDefaultKey} from 'theme-vir';
 import {type Primitive, type RequireExactlyOne} from 'type-fest';
 import {Check16Icon} from '../icons/icon-svgs/check-16.icon.js';
-import {CloseX16Icon} from '../icons/icon-svgs/close-x-16.icon.js';
+import {X16Icon} from '../icons/icon-svgs/x-16.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     ViraColorVariant,
@@ -369,7 +369,7 @@ export const ViraTag = defineViraElement<
                 ></${ViraIcon}>
                 <span class="text">${String(inputs.text)}</span>
                 <${ViraIcon.assign({
-                    icon: CloseX16Icon,
+                    icon: X16Icon,
                 })}
                     class="cancel-x"
                 ></${ViraIcon}>

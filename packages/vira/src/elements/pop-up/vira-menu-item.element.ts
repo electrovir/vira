@@ -87,6 +87,13 @@ export const ViraMenuItem = defineViraElement<
             }
         }
 
+        ${ViraIcon} {
+            width: 24px;
+            aspect-ratio: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
         ${hostClasses['vira-menu-item-default-icon'].selector} {
             ${ViraIcon} {
                 visibility: hidden;

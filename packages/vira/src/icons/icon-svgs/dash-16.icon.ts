@@ -14,7 +14,7 @@ export const Dash16Icon = defineIcon({
     svgTemplate: html`
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path
-                d="M3 8h10"
+                d="M4 8h8"
                 fill="none"
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}

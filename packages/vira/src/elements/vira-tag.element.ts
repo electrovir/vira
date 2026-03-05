@@ -21,8 +21,6 @@ import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
-// need to add hover colors to unchecked tags
-
 function generateThemeCss(colorVariant: ViraColorVariant): CSSResult | undefined {
     if (!check.hasKey(viraColorVariantToColorName, colorVariant)) {
         throw new Error(`No ViraTag color for variant '${colorVariant}'`);

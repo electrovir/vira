@@ -16,6 +16,9 @@ export default defineConfig(
             build: {
                 outDir: join(basePaths.cwd, 'dist-book'),
             },
+            esbuild: {
+                keepNames: true,
+            },
             optimizeDeps: {
                 exclude: [
                     ...(baseConfig.optimizeDeps?.exclude || []),

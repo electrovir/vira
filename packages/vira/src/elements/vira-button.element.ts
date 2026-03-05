@@ -1,6 +1,6 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, html, nothing} from 'element-vir';
-import {type ViraIconSvg} from '../icons/index.js';
+import {ChevronDown24Icon, type ViraIconSvg} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {viraAnimationDurations} from '../styles/durations.js';
 import {createFocusStyles} from '../styles/focus.js';
@@ -44,6 +44,12 @@ export const ViraButton = defineViraElement<
          * @default false
          */
         expandToFitIcon: boolean;
+        /**
+         * If `true`, a menu trigger caret (like in ViraDropdown or ViraSelect) is rendered.
+         *
+         * @default false
+         */
+        showMenuCaret: boolean;
     }>
 >()({
     tagName: 'vira-button',
@@ -61,6 +67,7 @@ export const ViraButton = defineViraElement<
         'vira-button-plain-style': ({inputs}) => inputs.buttonStyle === ViraButtonStyle.Plain,
         'vira-button-default-style': ({inputs}) =>
             !inputs.buttonStyle || inputs.buttonStyle === ViraButtonStyle.Default,
+        'vira-button-with-menu-caret': ({inputs}) => !!inputs.showMenuCaret,
     },
     cssVars: {
         'vira-button-padding': '5px 10px',
@@ -223,6 +230,16 @@ export const ViraButton = defineViraElement<
                 align-items: center;
             }
         }
+
+        .caret-icon {
+            padding-left: 4px;
+        }
+
+        ${hostClasses['vira-button-with-menu-caret'].selector} {
+            button {
+                padding-right: 4px;
+            }
+        }
     `,
     render: ({inputs}) => {
         const iconTemplate = inputs.icon
@@ -240,8 +257,20 @@ export const ViraButton = defineViraElement<
                   <span class="empty-text">&nbsp;</span>
               `;
 
+        const caretIconTemplate = inputs.showMenuCaret
+            ? html`
+                  <${ViraIcon.assign({
+                      icon: ChevronDown24Icon,
+                  })}
+                      class="caret-icon"
+                  ></${ViraIcon}>
+              `
+            : nothing;
+
         return html`
-            <button ?disabled=${inputs.disabled}>${iconTemplate} ${textTemplate}</button>
+            <button ?disabled=${inputs.disabled}>
+                ${iconTemplate}${textTemplate}${caretIconTemplate}
+            </button>
         `;
     },
 });

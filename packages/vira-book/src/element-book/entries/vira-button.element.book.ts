@@ -128,6 +128,12 @@ export const viraButtonBookPage = defineBookPage({
             },
         });
         defineViraButtonExample({
+            title: 'menu caret',
+            inputs: {
+                showMenuCaret: true,
+            },
+        });
+        defineViraButtonExample({
             title: 'custom width',
             styles: css`
                 ${ViraButton} {

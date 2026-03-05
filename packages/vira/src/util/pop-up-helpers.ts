@@ -1,4 +1,5 @@
 import {
+    filterMap,
     joinWithFinalConjunction,
     type MaybePromise,
     type PartialWithUndefined,
@@ -75,6 +76,12 @@ export type ViraMenuItemEntry = {
     selected: boolean;
     /** Called when any item is activated. */
     onClick: MenuItemClickCallback;
+    /**
+     * If set to `true`, this menu item won't show up at all.
+     *
+     * @default false
+     */
+    hidden: boolean;
 }> &
     typeof ViraMenuItem.InputsType;
 
@@ -97,20 +104,24 @@ export type MenuItemClickCallback = (
  * @category PopUp
  */
 export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItemEntry>>) {
-    return items.map((item, index) => {
-        return html`
-            <${ViraMenuItem.assign({
-                ...item,
-            })}
-                ${listen('click', async (event) => {
-                    await item.onClick?.({
-                        event,
-                        index,
-                    });
+    return filterMap(
+        items,
+        (item, index) => {
+            return html`
+                <${ViraMenuItem.assign({
+                    ...item,
                 })}
-            >
-                ${item.content}
-            </${ViraMenuItem}>
-        `;
-    });
+                    ${listen('click', async (event) => {
+                        await item.onClick?.({
+                            event,
+                            index,
+                        });
+                    })}
+                >
+                    ${item.content}
+                </${ViraMenuItem}>
+            `;
+        },
+        (template, menuItem) => !menuItem.hidden,
+    );
 }

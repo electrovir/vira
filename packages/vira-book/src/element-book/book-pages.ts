@@ -1,5 +1,6 @@
 import {viraThemePages} from './entries/colors.book.js';
 import {createColoredIconBookPage} from './entries/create-colored-icon.book.js';
+import {createSizedIconBookPage} from './entries/create-sized-icon.book.js';
 import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
 import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
 import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
@@ -62,6 +63,7 @@ const elementPages = [
 const allPages = [
     ...elementPages,
     createColoredIconBookPage,
+    createSizedIconBookPage,
     dynamicElementsBookPage,
     icons16BookPage,
     icons24BookPage,

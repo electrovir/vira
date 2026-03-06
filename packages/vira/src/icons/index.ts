@@ -58,6 +58,7 @@ import {X24Icon} from './icon-svgs/24/x-24.icon.js';
 export * from './colored-icon.js';
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
+export * from './sized-icon.js';
 
 export * from './icon-svgs/16/check-16.icon.js';
 export * from './icon-svgs/16/chevron-down-16.icon.js';

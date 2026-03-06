@@ -7,6 +7,8 @@ import {type TemplateResult} from 'element-vir';
  */
 export type ViraIconSvg = {
     name: string;
+    /** An optionally forced icon size. */
+    size?: number;
     svgTemplate: TemplateResult;
 };
 

@@ -3,7 +3,7 @@ import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, html} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
-import {Check24Icon} from '../../icons/icon-svgs/check-24.icon.js';
+import {Check24Icon} from '../../icons/icon-svgs/24/check-24.icon.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noUserSelect} from '../../styles/index.js';
 import {defineViraElement} from '../../util/define-vira-element.js';

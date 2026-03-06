@@ -4,8 +4,8 @@ import {colorCss, ContrastLevelName} from '@electrovir/color';
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type Primitive, type RequireExactlyOne} from 'type-fest';
-import {Check16Icon} from '../icons/icon-svgs/check-16.icon.js';
-import {X16Icon} from '../icons/icon-svgs/x-16.icon.js';
+import {Check16Icon} from '../icons/icon-svgs/16/check-16.icon.js';
+import {X16Icon} from '../icons/icon-svgs/16/x-16.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     ViraColorVariant,

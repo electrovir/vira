@@ -12,7 +12,7 @@ import {
     onResize,
     renderIf,
 } from 'element-vir';
-import {CloseX24Icon} from '../icons/icon-svgs/close-x-24.icon.js';
+import {CloseX24Icon} from '../icons/icon-svgs/24/close-x-24.icon.js';
 import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';

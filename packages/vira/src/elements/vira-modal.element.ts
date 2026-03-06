@@ -2,7 +2,7 @@ import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
 import {listenToGlobal} from 'typed-event-target';
-import {X24Icon} from '../icons/icon-svgs/x-24.icon.js';
+import {X24Icon} from '../icons/icon-svgs/24/x-24.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';

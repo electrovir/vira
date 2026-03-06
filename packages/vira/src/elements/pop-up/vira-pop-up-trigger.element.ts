@@ -106,6 +106,10 @@ export const ViraPopUpTrigger = defineViraElement<
             keepOpenAfterInteraction: boolean;
             /** All values in px. */
             popUpOffset: PopUpOffset;
+            /** If true, the focus outline is moved inside the element. */
+            useInsideFocus: boolean;
+            /** When `true`, the trigger will focus itself when the pop-up closes. */
+            focusOnClose: boolean;
         }
     >
 >()({
@@ -127,6 +131,8 @@ export const ViraPopUpTrigger = defineViraElement<
     ],
     hostClasses: {
         'vira-pop-up-trigger-disabled': ({inputs}) => !!inputs.isDisabled,
+        'vira-pop-up-trigger-inside-focus': ({inputs}) => !!inputs.useInsideFocus,
+        'vira-pop-up-trigger-outside-focus': ({inputs}) => !inputs.useInsideFocus,
     },
     styles: ({hostClasses}) => css`
         :host {
@@ -144,10 +150,15 @@ export const ViraPopUpTrigger = defineViraElement<
             position: relative;
             flex-grow: 1;
             box-sizing: border-box;
+        }
 
+        ${hostClasses['vira-pop-up-trigger-inside-focus'].selector} .dropdown-wrapper {
             ${createFocusStyles({
-                elementBorderSize: '1px',
+                renderInside: true,
             })}
+        }
+        ${hostClasses['vira-pop-up-trigger-outside-focus'].selector} .dropdown-wrapper {
+            ${createFocusStyles()}
         }
 
         .dropdown-trigger {
@@ -214,7 +225,7 @@ export const ViraPopUpTrigger = defineViraElement<
                 showPopUpResult: undefined,
             });
             dispatch(new events.openChange(undefined));
-            if (!inputs.isDisabled) {
+            if (inputs.focusOnClose && !inputs.isDisabled) {
                 const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-wrapper');
 
                 assert.instanceOf(

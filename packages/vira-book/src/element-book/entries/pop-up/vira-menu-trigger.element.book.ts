@@ -66,6 +66,12 @@ const examples: {
         },
     },
     {
+        title: 'inside focus',
+        inputs: {
+            useInsideFocus: true,
+        },
+    },
+    {
         title: 'long item',
         menuItems: [
             ...mockMenuItems,

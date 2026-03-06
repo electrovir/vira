@@ -34,6 +34,18 @@ export const ViraMenuTrigger = defineViraElement<
             popUpOffset: PopUpOffset;
             keepOpenAfterInteraction: boolean;
             menuCornerStyle: ViraMenuCornerStyle;
+            /**
+             * If true, the focus outline is moved inside the element.
+             *
+             * @default false
+             */
+            useInsideFocus: boolean;
+            /**
+             * When `true`, the trigger will focus itself when the pop-up closes.
+             *
+             * @default false
+             */
+            focusOnClose: boolean;
         } & PopUpTriggerPosition
     >
 >()({

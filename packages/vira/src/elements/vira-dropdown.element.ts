@@ -202,6 +202,7 @@ export const ViraDropdown = defineViraElement<
         return html`
             <${ViraPopUpTrigger.assign({
                 ...inputs,
+                focusOnClose: true,
                 popUpOffset: {
                     vertical: -1,
                     right: 24,

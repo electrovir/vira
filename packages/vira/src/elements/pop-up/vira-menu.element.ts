@@ -69,7 +69,6 @@ export const ViraMenu = defineViraElement<
         }
 
         ${hostClasses['vira-menu-open-upwards'].selector} {
-            ${viraShadows.menuShadowReversed}
             border-radius: ${viraFormCssVars['vira-form-radius'].value};
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;

@@ -24,13 +24,6 @@ export const viraShadows = {
        */
         will-change: filter;
     `,
-    menuShadowReversed: css`
-        filter: drop-shadow(0px -5px 5px ${shadowCssVars['menu-shadow-color'].value});
-        /*
-           This helps force the drop shadow to re-render when the element moves or the page changes.
-       */
-        will-change: filter;
-    `,
     modal: css`
         box-shadow: 0 5px 15px ${shadowCssVars['modal-shadow-color'].value};
     `,

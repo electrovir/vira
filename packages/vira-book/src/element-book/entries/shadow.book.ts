@@ -9,10 +9,6 @@ const shadowExamples: {title: string; styles: CSSResult}[] = [
         styles: viraShadows.menuShadow,
     },
     {
-        title: 'menu shadow reversed',
-        styles: viraShadows.menuShadowReversed,
-    },
-    {
         title: 'modal',
         styles: viraShadows.modal,
     },

@@ -2314,7 +2314,7 @@ ${zh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function CN(e){return
                 outline: none;
 
                 &:focus:focus-visible:not([disabled]) ~ .focus-border {
-                    ${tu({elementBorderSize:"0",noNesting:!0})}
+                    ${tu({elementBorderSize:"1px",noNesting:!0})}
                 }
             }
 
@@ -2549,7 +2549,7 @@ ${zh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function CN(e){return
                         ${r["vira-select-padding-horizontal"].value};
 
                     &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
-                        ${tu({elementBorderSize:"0",noNesting:!0})}
+                        ${tu({elementBorderSize:"1px",noNesting:!0})}
                     }
                 }
 
@@ -4222,7 +4222,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${B.assign({icon:t})}></${B}>
                     <${B.assign({icon:n})}></${B}>
                     <${B.assign({icon:o})}></${B}>
-                `}})}}),qk={async element1(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-DZcx81Gn.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-BIRAxxtK.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Iv=qn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Uk(qk)}},render({state:e,inputs:r}){return zk(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
+                `}})}}),qk={async element1(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-B5_TsY3T.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-D1O268Vp.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Iv=qn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Uk(qk)}},render({state:e,inputs:r}){return zk(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
                     <${Ui}>
                         ${Xi("Failed to import element",Qr(t))}
                     </${Ui}>

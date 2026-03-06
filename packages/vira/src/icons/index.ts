@@ -33,6 +33,7 @@ import {MagnifyingGlass24Icon} from './icon-svgs/magnifying-glass-24.icon.js';
 import {Moon24Icon} from './icon-svgs/moon-24.icon.js';
 import {Options24Icon} from './icon-svgs/options-24.icon.js';
 import {Pencil24Icon} from './icon-svgs/pencil-24.icon.js';
+import {Plus24Icon} from './icon-svgs/plus-24.icon.js';
 import {Printer24Icon} from './icon-svgs/printer-24.icon.js';
 import {Shield24Icon} from './icon-svgs/shield-24.icon.js';
 import {SortAscending24Icon} from './icon-svgs/sort-ascending-24.icon.js';
@@ -93,6 +94,7 @@ export * from './icon-svgs/magnifying-glass-24.icon.js';
 export * from './icon-svgs/moon-24.icon.js';
 export * from './icon-svgs/options-24.icon.js';
 export * from './icon-svgs/pencil-24.icon.js';
+export * from './icon-svgs/plus-24.icon.js';
 export * from './icon-svgs/printer-24.icon.js';
 export * from './icon-svgs/shield-24.icon.js';
 export * from './icon-svgs/sort-ascending-24.icon.js';
@@ -155,6 +157,7 @@ export const allIconsByName = {
     Moon24Icon,
     Options24Icon,
     Pencil24Icon,
+    Plus24Icon,
     Printer24Icon,
     Shield24Icon,
     SortAscending24Icon,
@@ -213,6 +216,7 @@ export const all24IconsByName = {
     Moon24Icon,
     Options24Icon,
     Pencil24Icon,
+    Plus24Icon,
     Printer24Icon,
     Shield24Icon,
     SortAscending24Icon,

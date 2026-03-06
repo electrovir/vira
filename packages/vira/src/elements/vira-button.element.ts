@@ -340,11 +340,11 @@ export const ViraButton = defineViraElement<
         'vira-button-active-border-color': 'transparent',
 
         'vira-button-disabled-text-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].foreground.value,
+            viraTheme.colors['vira-grey-behind-bg-invisible'].foreground.value,
         'vira-button-disabled-background-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+            viraTheme.colors['vira-grey-behind-bg-invisible'].background.value,
         'vira-button-disabled-border-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+            viraTheme.colors['vira-grey-behind-bg-invisible'].background.value,
 
         'vira-button-border-width': '1px',
         'vira-button-border-radius': viraFormCssVars['vira-form-radius'].value,

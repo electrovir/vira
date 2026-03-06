@@ -72,6 +72,17 @@ export const viraColorPalette = defineCssVars({
     'vira-blue-80': '#0054aa',
     'vira-blue-90': '#00358a',
 
+    'vira-accent-5': '#daf2ff',
+    'vira-accent-10': '#bde8ff',
+    'vira-accent-20': '#98d8ff',
+    'vira-accent-30': '#77c6ff',
+    'vira-accent-40': '#4cb2ff',
+    'vira-accent-50': '#299cf9',
+    'vira-accent-60': '#0086e0',
+    'vira-accent-70': '#006ec7',
+    'vira-accent-80': '#0054aa',
+    'vira-accent-90': '#00358a',
+
     'vira-purple-5': '#f6eaff',
     'vira-purple-10': '#eddaff',
     'vira-purple-20': '#e6c3ff',

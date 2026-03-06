@@ -502,8 +502,10 @@ export const ViraButton = defineViraElement<
             }
 
             ${hostClasses['vira-button-icon-only'].selector} {
+                aspect-ratio: 1;
+
                 button {
-                    aspect-ratio: 1;
+                    padding: 0;
                 }
             }
         `;

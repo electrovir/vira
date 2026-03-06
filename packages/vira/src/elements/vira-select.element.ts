@@ -162,7 +162,7 @@ export const ViraSelect = defineViraElement<
 
                     &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
                         ${createFocusStyles({
-                            elementBorderSize: '0',
+                            elementBorderSize: '1px',
                             noNesting: true,
                         })}
                     }

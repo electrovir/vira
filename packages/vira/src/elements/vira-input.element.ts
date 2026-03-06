@@ -201,7 +201,7 @@ export const ViraInput = defineViraElement<
 
                 &:focus:focus-visible:not([disabled]) ~ .focus-border {
                     ${createFocusStyles({
-                        elementBorderSize: '0',
+                        elementBorderSize: '1px',
                         noNesting: true,
                     })}
                 }

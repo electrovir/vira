@@ -1745,8 +1745,10 @@ ${zh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function EN(e){return
             }
 
             ${e["vira-button-icon-only"].selector} {
+                aspect-ratio: 1;
+
                 button {
-                    aspect-ratio: 1;
+                    padding: 0;
                 }
             }
         `},"styles"),render:i(({inputs:e})=>{const r=e.icon?b`
@@ -4231,7 +4233,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${B.assign({icon:t})}></${B}>
                     <${B.assign({icon:n})}></${B}>
                     <${B.assign({icon:o})}></${B}>
-                `}})}}),Wk={async element1(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CHvxfuNE.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CvP9dzQn.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Iv=qn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:zk(Wk)}},render({state:e,inputs:r}){return Vk(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
+                `}})}}),Wk={async element1(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-tRXSXS13.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Vi({seconds:2}),(await ac(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-BwN1TQgK.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Iv=qn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:zk(Wk)}},render({state:e,inputs:r}){return Vk(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
                     <${Ui}>
                         ${Xi("Failed to import element",Qr(t))}
                     </${Ui}>

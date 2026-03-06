@@ -24,6 +24,7 @@ import {viraOverflowSwitchBookPage} from './entries/vira-overflow-switch.element
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
+import {icons16BookPage, icons24BookPage} from './icon-book-pages.js';
 import {elementsBookPage, iconsBookPage, stylesBookPage, utilBookPage} from './top-level-pages.js';
 
 const topLevelPages = [
@@ -62,6 +63,8 @@ const allPages = [
     ...elementPages,
     createColoredIconBookPage,
     dynamicElementsBookPage,
+    icons16BookPage,
+    icons24BookPage,
 
     shadowBookPage,
     ...viraThemePages,

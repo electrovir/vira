@@ -146,7 +146,7 @@ export const ViraPopUpTrigger = defineViraElement<
             box-sizing: border-box;
 
             ${createFocusStyles({
-                elementBorderSize: 1,
+                elementBorderSize: '1px',
             })}
         }
 

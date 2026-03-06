@@ -1,5 +1,3 @@
-/** This file is automatically updated by update-icon-exports.ts */
-
 import {ArrowDown24Icon} from './icon-svgs/arrow-down-24.icon.js';
 import {ArrowLeft24Icon} from './icon-svgs/arrow-left-24.icon.js';
 import {ArrowRight24Icon} from './icon-svgs/arrow-right-24.icon.js';
@@ -177,4 +175,75 @@ export const allIconsByName = {
     Upload24Icon,
     X16Icon,
     X24Icon,
+} as const;
+
+/**
+ * All 24px icons within vira by name.
+ *
+ * @category Icon
+ */
+export const all24IconsByName = {
+    ArrowDown24Icon,
+    ArrowLeft24Icon,
+    ArrowRight24Icon,
+    ArrowUp24Icon,
+    AutoTheme24Icon,
+    Bell24Icon,
+    Chat24Icon,
+    Check24Icon,
+    ChevronDown24Icon,
+    ChevronUp24Icon,
+    CloseX24Icon,
+    Commit24Icon,
+    Copy24Icon,
+    Document24Icon,
+    DocumentSearch24Icon,
+    DoubleChevron24Icon,
+    Element24Icon,
+    ExternalLink24Icon,
+    EyeClosed24Icon,
+    EyeOpen24Icon,
+    Filter24Icon,
+    Globe24Icon,
+    Link24Icon,
+    Loader24Icon,
+    LoaderAnimated24Icon,
+    Lock24Icon,
+    MagnifyingGlass24Icon,
+    Moon24Icon,
+    Options24Icon,
+    Pencil24Icon,
+    Printer24Icon,
+    Shield24Icon,
+    SortAscending24Icon,
+    SortDescending24Icon,
+    Sparkle24Icon,
+    SpeakerLoud24Icon,
+    SpeakerMedium24Icon,
+    SpeakerMuted24Icon,
+    SpeakerQuiet24Icon,
+    Star24Icon,
+    StatusFailure24Icon,
+    StatusInProgress24Icon,
+    StatusSuccess24Icon,
+    StatusUnknown24Icon,
+    StatusWarning24Icon,
+    Sun24Icon,
+    Upload24Icon,
+    X24Icon,
+} as const;
+
+/**
+ * All 16px icons within vira by name.
+ *
+ * @category Icon
+ */
+export const all16IconsByName = {
+    Check16Icon,
+    ChevronDown16Icon,
+    ChevronUp16Icon,
+    Dash16Icon,
+    Element16Icon,
+    Upload16Icon,
+    X16Icon,
 } as const;

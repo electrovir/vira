@@ -2,7 +2,8 @@ import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
 import {
     ViraButton,
-    ViraButtonStyle,
+    ViraColorVariant,
+    ViraEmphasis,
     ViraForm,
     type ViraFormFields,
     ViraFormFieldType,
@@ -128,7 +129,8 @@ export const viraFormBookPage = defineBookPage({
                         <div class="buttons">
                             <${ViraButton.assign({
                                 text: 'Cancel',
-                                buttonStyle: ViraButtonStyle.Outline,
+                                buttonEmphasis: ViraEmphasis.Subtle,
+                                colorVariant: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -186,7 +188,8 @@ export const viraFormBookPage = defineBookPage({
                         <div class="buttons">
                             <${ViraButton.assign({
                                 text: 'Cancel',
-                                buttonStyle: ViraButtonStyle.Outline,
+                                buttonEmphasis: ViraEmphasis.Subtle,
+                                colorVariant: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -268,7 +271,8 @@ export const viraFormBookPage = defineBookPage({
                         <div class="buttons">
                             <${ViraButton.assign({
                                 text: 'Cancel',
-                                buttonStyle: ViraButtonStyle.Outline,
+                                buttonEmphasis: ViraEmphasis.Subtle,
+                                colorVariant: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -347,7 +351,8 @@ export const viraFormBookPage = defineBookPage({
                         <div class="buttons">
                             <${ViraButton.assign({
                                 text: 'Cancel',
-                                buttonStyle: ViraButtonStyle.Outline,
+                                buttonEmphasis: ViraEmphasis.Subtle,
+                                colorVariant: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',

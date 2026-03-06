@@ -333,6 +333,62 @@ describe('viraThemeByKeys', () => {
                     [ContrastLevelName.Invisible]: viraTheme.colors['vira-blue-on-self-invisible'],
                 },
             },
+            accent: {
+                foreground: {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-accent-foreground-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-accent-foreground-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-accent-foreground-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-accent-foreground-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-accent-foreground-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-accent-foreground-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-accent-foreground-invisible'],
+                },
+                'behind-bg': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-accent-behind-bg-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-accent-behind-bg-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-accent-behind-bg-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-accent-behind-bg-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-accent-behind-bg-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-accent-behind-bg-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-accent-behind-bg-invisible'],
+                },
+                'behind-fg': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-accent-behind-fg-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-accent-behind-fg-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-accent-behind-fg-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-accent-behind-fg-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-accent-behind-fg-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-accent-behind-fg-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-accent-behind-fg-invisible'],
+                },
+                'on-self': {
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-accent-on-self-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-accent-on-self-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-accent-on-self-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-accent-on-self-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-accent-on-self-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-accent-on-self-invisible'],
+                },
+            },
             purple: {
                 foreground: {
                     [ContrastLevelName.SmallBodyText]:

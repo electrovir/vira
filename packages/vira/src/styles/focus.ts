@@ -1,6 +1,16 @@
-import {addPx, type PartialWithUndefined} from '@augment-vir/common';
-import {css, unsafeCSS} from 'element-vir';
+import {check} from '@augment-vir/assert';
+import {type PartialWithUndefined} from '@augment-vir/common';
+import {css, type CSSResult, unsafeCSS} from 'element-vir';
+import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {viraFormCssVars} from './form-styles.js';
+
+function cssValueOrRaw(value: string | SingleCssVarDefinition): CSSResult {
+    if (check.isString(value)) {
+        return unsafeCSS(value);
+    } else {
+        return value.value;
+    }
+}
 
 /**
  * Create styles that look like an outline for the given selector.
@@ -12,22 +22,26 @@ import {viraFormCssVars} from './form-styles.js';
  */
 export function createFocusStyles({
     elementBorderSize,
-    outlineGap = 2,
-    outlineWidth = 2,
+    outlineGap = '2px',
+    outlineWidth = '2px',
     noNesting,
+    outlineColor = viraFormCssVars['vira-form-focus-outline-color'],
+    borderRadius = viraFormCssVars['vira-form-focus-outline-border-radius'],
 }: {
     /**
      * ElementBorderSize here is used to fix the outline when the element these styles are attached
      * to has a border. The dev must specify that border size here for the offsets to be calculated
      * correctly.
      */
-    elementBorderSize: number;
+    elementBorderSize: SingleCssVarDefinition | string;
 } & PartialWithUndefined<{
-    outlineGap: number;
-    outlineWidth: number;
+    outlineGap: SingleCssVarDefinition | string;
+    outlineWidth: SingleCssVarDefinition | string;
+    borderRadius: SingleCssVarDefinition | string;
+    outlineColor: SingleCssVarDefinition | string;
     noNesting: boolean;
 }>) {
-    const outlineSpacing = unsafeCSS(addPx(outlineWidth + outlineGap + elementBorderSize));
+    const outlineSpacing = css`calc(${cssValueOrRaw(outlineWidth)} + ${cssValueOrRaw(outlineGap)} + ${cssValueOrRaw(elementBorderSize)})`;
 
     const styles = css`
         content: '';
@@ -38,8 +52,8 @@ export function createFocusStyles({
         height: calc(100% + calc(${outlineSpacing} * 2));
         box-sizing: border-box;
         pointer-events: none;
-        border: ${outlineWidth}px solid ${viraFormCssVars['vira-form-focus-outline-color'].value};
-        border-radius: ${viraFormCssVars['vira-form-focus-outline-border-radius'].value};
+        border: ${cssValueOrRaw(outlineWidth)} solid ${cssValueOrRaw(outlineColor)};
+        border-radius: ${cssValueOrRaw(borderRadius)};
         z-index: 100;
     `;
 

@@ -1,7 +1,82 @@
-import {BookPageControlType, defineBookPage} from 'element-book';
-import {type CSSResult, css, html, unsafeCSS} from 'element-vir';
-import {Options24Icon, ViraButton, ViraButtonStyle, viraFormCssVars} from 'vira';
+import {defineBookPage} from 'element-book';
+import {css, html} from 'element-vir';
+import {
+    Upload16Icon,
+    Upload24Icon,
+    ViraButton,
+    ViraColorVariant,
+    viraColorVariants,
+    viraEmphasisVariants,
+    viraSizeVariants,
+} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
+
+const buttonVariants: {
+    label: string;
+    extraInputs: Omit<
+        typeof ViraButton.InputsType,
+        'buttonSize' | 'buttonEmphasis' | 'colorVariant'
+    >;
+}[] = [
+    {
+        label: 'basic',
+        extraInputs: {},
+    },
+    {
+        label: 'with 24px icon',
+        extraInputs: {
+            icon: Upload24Icon,
+        },
+    },
+    {
+        label: 'with 16px icon',
+        extraInputs: {
+            icon: Upload16Icon,
+        },
+    },
+    {
+        label: 'only 24px icon',
+        extraInputs: {
+            icon: Upload24Icon,
+            text: '',
+        },
+    },
+    {
+        label: 'only 16px icon',
+        extraInputs: {
+            icon: Upload16Icon,
+            text: '',
+        },
+    },
+    {
+        label: 'disabled',
+        extraInputs: {
+            isDisabled: true,
+        },
+    },
+    {
+        label: 'menu caret',
+        extraInputs: {
+            showMenuCaret: true,
+        },
+    },
+];
+
+const tableStyles = css`
+    table {
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        font-weight: normal;
+    }
+`;
 
 export const viraButtonBookPage = defineBookPage({
     parent: elementsBookPage,
@@ -9,161 +84,81 @@ export const viraButtonBookPage = defineBookPage({
     descriptionParagraphs: [
         'Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!',
     ],
-    controls: {
-        'Primary color': {
-            controlType: BookPageControlType.Color,
-            initValue: '' as string,
-        },
-        'Secondary color': {
-            controlType: BookPageControlType.Color,
-            initValue: '' as string,
-        },
-        'Hover color': {
-            controlType: BookPageControlType.Color,
-            initValue: '' as string,
-        },
-        'Active color': {
-            controlType: BookPageControlType.Color,
-            initValue: '' as string,
-        },
-    },
     defineExamples({defineExample}) {
-        function defineViraButtonExample({
-            title,
-            styles: inputStyles,
-            inputs,
-        }: {
-            title: string;
-            styles?: CSSResult;
-            inputs?: (typeof ViraButton)['InputsType'];
-        }) {
-            const styles = inputStyles ?? css``;
-
+        viraSizeVariants.forEach((size) => {
             defineExample({
-                title,
-                styles,
-                render({controls}) {
-                    const styles = css`
-                        ${viraFormCssVars['vira-form-accent-primary-color'].name}: ${unsafeCSS(
-                            controls['Primary color'] || 'inherit',
-                        )};
-                        ${viraFormCssVars['vira-form-background-color'].name}: ${unsafeCSS(
-                            controls['Secondary color'] || 'inherit',
-                        )};
-                        ${viraFormCssVars['vira-form-accent-primary-hover-color']
-                            .name}: ${unsafeCSS(controls['Hover color'] || 'inherit')};
-                        ${viraFormCssVars['vira-form-accent-primary-active-color']
-                            .name}: ${unsafeCSS(controls['Active color'] || 'inherit')};
-                    `;
-
-                    return html`
-                        <${ViraButton.assign({
-                            text: 'hello',
-                            ...inputs,
-                        })}
-                            style=${styles}
-                        ></${ViraButton}>
-                    `;
+                title: size,
+                styles: tableStyles,
+                render() {
+                    return buttonVariants.map(({label, extraInputs}) => {
+                        return html`
+                            <h3>${label}</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        ${viraColorVariants.map(
+                                            (color) => html`
+                                                <th>${color}</th>
+                                            `,
+                                        )}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${viraEmphasisVariants.map(
+                                        (emphasis) => html`
+                                            <tr>
+                                                <th>${emphasis}</th>
+                                                ${viraColorVariants.map((color) => {
+                                                    return html`
+                                                        <td>
+                                                            <${ViraButton.assign({
+                                                                text: 'Button',
+                                                                ...extraInputs,
+                                                                buttonSize: size,
+                                                                buttonEmphasis: emphasis,
+                                                                colorVariant: color,
+                                                            })}></${ViraButton}>
+                                                        </td>
+                                                    `;
+                                                })}
+                                            </tr>
+                                        `,
+                                    )}
+                                </tbody>
+                            </table>
+                        `;
+                    });
                 },
             });
-        }
-
-        defineViraButtonExample({
-            title: 'basic',
-        });
-        defineViraButtonExample({
-            title: 'with icon',
-            inputs: {
-                icon: Options24Icon,
-            },
-        });
-        defineViraButtonExample({
-            title: 'with expanding icon',
-            inputs: {
-                icon: Options24Icon,
-                expandToFitIcon: true,
-            },
-        });
-        defineViraButtonExample({
-            title: 'outline',
-            inputs: {
-                buttonStyle: ViraButtonStyle.Outline,
-            },
-        });
-        defineViraButtonExample({
-            title: 'ghost',
-            inputs: {
-                buttonStyle: ViraButtonStyle.Ghost,
-            },
-        });
-        defineViraButtonExample({
-            title: 'plain',
-            inputs: {
-                buttonStyle: ViraButtonStyle.Plain,
-            },
-        });
-        defineViraButtonExample({
-            title: 'danger',
-            inputs: {
-                buttonStyle: ViraButtonStyle.Danger,
-            },
-        });
-        defineViraButtonExample({
-            title: 'danger outline',
-            inputs: {
-                buttonStyle: ViraButtonStyle.DangerOutline,
-            },
-        });
-        defineViraButtonExample({
-            title: 'only icon',
-            inputs: {
-                icon: Options24Icon,
-                text: '',
-            },
-        });
-        defineViraButtonExample({
-            title: 'disabled',
-            inputs: {
-                disabled: true,
-            },
-        });
-        defineViraButtonExample({
-            title: 'menu caret',
-            inputs: {
-                showMenuCaret: true,
-            },
-        });
-        defineViraButtonExample({
-            title: 'custom width',
-            styles: css`
-                ${ViraButton} {
-                    width: 100px;
-                }
-            `,
-        });
-        defineViraButtonExample({
-            title: 'custom height',
-            styles: css`
-                ${ViraButton} {
-                    height: 75px;
-                }
-            `,
         });
 
         defineExample({
             title: 'customized colors',
             styles: css`
                 :host {
-                    ${viraFormCssVars['vira-form-accent-primary-color'].name}: pink;
-                    ${viraFormCssVars['vira-form-background-color'].name}: purple;
-                    ${viraFormCssVars['vira-form-accent-primary-hover-color'].name}: orange;
-                    ${viraFormCssVars['vira-form-accent-primary-active-color'].name}: yellow;
+                    ${ViraButton.cssVars['vira-button-text-color'].name}: purple;
+                    ${ViraButton.cssVars['vira-button-background-color'].name}: pink;
+                    ${ViraButton.cssVars['vira-button-border-color'].name}: magenta;
+
+                    ${ViraButton.cssVars['vira-button-hover-text-color'].name}: white;
+                    ${ViraButton.cssVars['vira-button-hover-background-color'].name}: orange;
+                    ${ViraButton.cssVars['vira-button-hover-border-color'].name}: red;
+
+                    ${ViraButton.cssVars['vira-button-active-text-color'].name}: black;
+                    ${ViraButton.cssVars['vira-button-active-background-color'].name}: yellow;
+                    ${ViraButton.cssVars['vira-button-active-border-color'].name}: goldenrod;
+
+                    ${ViraButton.cssVars['vira-button-disabled-text-color'].name}: gray;
+                    ${ViraButton.cssVars['vira-button-disabled-background-color'].name}: lightgray;
+                    ${ViraButton.cssVars['vira-button-disabled-border-color'].name}: darkgray;
                 }
             `,
             render() {
                 return html`
                     <${ViraButton.assign({
                         text: 'hello',
+                        colorVariant: ViraColorVariant.None,
                     })}></${ViraButton}>
                 `;
             },

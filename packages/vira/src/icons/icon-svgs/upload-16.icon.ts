@@ -14,7 +14,7 @@ export const Upload16Icon = defineIcon({
     svgTemplate: html`
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path
-                d="M3 10v4h10v-4"
+                d="M3 9v4h10v-4"
                 fill=${viraIconCssVars['vira-icon-fill-color'].value}
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
@@ -22,7 +22,7 @@ export const Upload16Icon = defineIcon({
                 stroke-linejoin="round"
             />
             <path
-                d="M8 10V3m3 3-3-3-3 3"
+                d="M8 9V2m3 3-3-3-3 3"
                 fill="none"
                 stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
                 stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}

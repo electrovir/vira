@@ -62,7 +62,7 @@ export const ViraSelect = defineViraElement<
              */
             randomId: randomString(32),
             /** Removes event listeners registered during init. */
-            cleanup: undefined as undefined | (() => void),
+            cleanupListeners: undefined as undefined | (() => void),
         };
     },
     events: {
@@ -226,7 +226,7 @@ export const ViraSelect = defineViraElement<
         }
     `,
     init({state, updateState, host}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
 
         const listenerRemovers = [
             listenTo(host, 'mousedown', (event) => {
@@ -250,15 +250,15 @@ export const ViraSelect = defineViraElement<
         ];
 
         updateState({
-            cleanup: () => {
+            cleanupListeners: () => {
                 listenerRemovers.forEach((remover) => remover());
             },
         });
     },
     cleanup({state, updateState}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
         updateState({
-            cleanup: undefined,
+            cleanupListeners: undefined,
         });
     },
     render({inputs, state, dispatch, events}) {

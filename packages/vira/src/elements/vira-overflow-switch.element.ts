@@ -27,7 +27,7 @@ export const ViraOverflowSwitch = defineViraElement<
             isOverflowing: false,
             resizeObserver: undefined as undefined | ResizeObserver,
             /** Called on cleanup to clear all listeners. */
-            cleanup: undefined as undefined | (() => void),
+            cleanupListeners: undefined as undefined | (() => void),
         };
     },
     hostClasses: {
@@ -65,9 +65,9 @@ export const ViraOverflowSwitch = defineViraElement<
         }
     `,
     cleanup({state, updateState}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
         updateState({
-            cleanup: undefined,
+            cleanupListeners: undefined,
         });
     },
     render({slotNames, updateState, inputs, host, state}) {
@@ -104,9 +104,9 @@ export const ViraOverflowSwitch = defineViraElement<
                     /** Initial measurement: defer until after first layout. */
                     updateOverflowing(overflowParams);
 
-                    state.cleanup?.();
+                    state.cleanupListeners?.();
                     updateState({
-                        cleanup() {
+                        cleanupListeners() {
                             resizeObserver.disconnect();
                             removeSlotChangeListener();
                         },

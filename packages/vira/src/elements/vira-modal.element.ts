@@ -57,11 +57,11 @@ export const ViraModal = defineViraElement<
             contentElement: undefined as HTMLDivElement | undefined,
             previousOpenValue: undefined as undefined | boolean,
             /** Remove listeners. */
-            cleanup: undefined as undefined | (() => void),
+            cleanupListeners: undefined as undefined | (() => void),
         };
     },
     cleanup({state}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
     },
     hostClasses: {
         'vira-modal-phone-size': ({inputs}) => !!inputs.isMobileSize,
@@ -170,7 +170,7 @@ export const ViraModal = defineViraElement<
         }
 
         if (state.previousOpenValue !== inputs.open) {
-            state.cleanup?.();
+            state.cleanupListeners?.();
             updateState({
                 previousOpenValue: inputs.open,
             });
@@ -182,7 +182,7 @@ export const ViraModal = defineViraElement<
                 );
 
                 updateState({
-                    cleanup: () => {
+                    cleanupListeners: () => {
                         removers.forEach((remover) => remover());
                     },
                 });
@@ -191,7 +191,7 @@ export const ViraModal = defineViraElement<
 
         function close() {
             if (inputs.open) {
-                state.cleanup?.();
+                state.cleanupListeners?.();
                 dispatch(new events.modalClose());
             }
         }

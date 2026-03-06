@@ -63,7 +63,7 @@ export const ViraLink = defineViraElement<
     state() {
         return {
             /** Removes event listeners registered during init. */
-            cleanup: undefined as undefined | (() => void),
+            cleanupListeners: undefined as undefined | (() => void),
         };
     },
     hostClasses: {
@@ -98,7 +98,7 @@ export const ViraLink = defineViraElement<
         }
     `,
     init({state, updateState, host}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
 
         let propagating = false;
 
@@ -126,15 +126,15 @@ export const ViraLink = defineViraElement<
         ];
 
         updateState({
-            cleanup: () => {
+            cleanupListeners: () => {
                 listenerRemovers.forEach((remover) => remover());
             },
         });
     },
     cleanup({state, updateState}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
         updateState({
-            cleanup: undefined,
+            cleanupListeners: undefined,
         });
     },
     render({inputs}) {

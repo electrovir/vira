@@ -35,7 +35,7 @@ export const ViraMenuItem = defineViraElement<
     state() {
         return {
             /** Removes event listeners registered during init. */
-            cleanup: undefined as undefined | (() => void),
+            cleanupListeners: undefined as undefined | (() => void),
         };
     },
     hostClasses: {
@@ -116,7 +116,7 @@ export const ViraMenuItem = defineViraElement<
         host.setAttribute('tabindex', inputs.disabled ? '-1' : '0');
         host.setAttribute('aria-selected', String(!!inputs.selected));
         host.setAttribute('aria-disabled', String(!!inputs.disabled));
-        state.cleanup?.();
+        state.cleanupListeners?.();
         const propagating: Record<string, boolean> = {};
 
         function propagateMouseEvent(event: Event) {
@@ -164,15 +164,15 @@ export const ViraMenuItem = defineViraElement<
         ];
 
         updateState({
-            cleanup: () => {
+            cleanupListeners: () => {
                 listenerRemovers.forEach((remover) => remover());
             },
         });
     },
     cleanup({state, updateState}) {
-        state.cleanup?.();
+        state.cleanupListeners?.();
         updateState({
-            cleanup: undefined,
+            cleanupListeners: undefined,
         });
     },
     render({inputs}) {

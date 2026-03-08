@@ -16,8 +16,8 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.68.0",
-        "@augment-vir/common": "^31.68.0",
+        "@augment-vir/assert": "^31.68.1",
+        "@augment-vir/common": "^31.68.1",
         "@electrovir/color": "^1.7.8",
         "element-book": "^26.17.0",
         "element-vir": "*",

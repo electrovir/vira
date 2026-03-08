@@ -38,9 +38,9 @@
         "test:docs": "virmator docs check"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.68.0",
-        "@augment-vir/common": "^31.68.0",
-        "@augment-vir/web": "^31.68.0",
+        "@augment-vir/assert": "^31.68.1",
+        "@augment-vir/common": "^31.68.1",
+        "@augment-vir/web": "^31.68.1",
         "@electrovir/color": "^1.7.8",
         "date-vir": "^8.2.0",
         "device-navigation": "^4.5.5",
@@ -52,7 +52,7 @@
         "typed-event-target": "^4.3.0"
     },
     "devDependencies": {
-        "@augment-vir/test": "^31.68.0",
+        "@augment-vir/test": "^31.68.1",
         "@types/feather-icons": "^4.29.4",
         "@web/dev-server-esbuild": "^1.0.5",
         "@web/test-runner": "^0.20.2",

@@ -163,5 +163,21 @@ export const viraButtonBookPage = defineBookPage({
                 `;
             },
         });
+
+        defineExample({
+            title: 'text wrapping',
+            styles: css`
+                ${ViraButton} {
+                    max-width: 120px;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraButton.assign({
+                        text: 'This is a long button label that wraps',
+                    })}></${ViraButton}>
+                `;
+            },
+        });
     },
 });

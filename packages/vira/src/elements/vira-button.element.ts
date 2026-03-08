@@ -393,11 +393,11 @@ export const ViraButton = defineViraElement<
             const styles = viraSizeVariants.map((sizeVariant) => {
                 return css`
                     ${hostClasses[`vira-button-size-${sizeVariant}`].selector} {
-                        height: ${viraSizeHeights[sizeVariant]}px;
                         font-size: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
 
                         button {
-                            padding: 0
+                            min-height: ${viraSizeHeights[sizeVariant]}px;
+                            padding: 2px
                                 ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
                         }
                     }

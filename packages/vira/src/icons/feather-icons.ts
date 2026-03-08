@@ -42,7 +42,7 @@ export type FeatherIconKey = keyof typeof featherIconsImported.icons;
  * @category Internal
  */
 export type FeatherIconEntry = ViraIconSvg &
-    ((options: Readonly<FeatherAttributes>) => ViraIconSvg);
+    ((options: Readonly<Partial<FeatherAttributes>>) => ViraIconSvg);
 
 const defaultFeatherOptions: Readonly<Partial<FeatherAttributes>> = {
     fill: String(viraIconCssVars['vira-icon-fill-color'].value),
@@ -53,7 +53,7 @@ const defaultFeatherOptions: Readonly<Partial<FeatherAttributes>> = {
 function createFeatherIconEntry(iconKey: FeatherIconKey): FeatherIconEntry {
     const featherIcon = featherIconsImported.icons[iconKey];
 
-    const configureIconCallback = (options: Readonly<FeatherAttributes>): ViraIconSvg => {
+    const configureIconCallback = (options: Readonly<Partial<FeatherAttributes>>): ViraIconSvg => {
         return {
             name: featherIcon.name,
             svgTemplate: html`

@@ -39,9 +39,12 @@ export const ViraIcon = defineViraElement<{
             vector-effect: non-scaling-stroke;
         }
 
-        ${hostClasses['vira-icon-fit-container'].selector} svg {
-            height: 100%;
-            width: 100%;
+        ${hostClasses['vira-icon-fit-container'].selector} {
+            > *,
+            svg {
+                height: 100%;
+                width: 100%;
+            }
         }
     `,
     render({inputs, host}) {

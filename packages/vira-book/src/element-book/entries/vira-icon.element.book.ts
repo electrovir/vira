@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {Element24Icon, ViraIcon, createColoredIcon} from 'vira';
+import {Element24Icon, ViraIcon, createColoredIcon, createSizedIcon, featherIcons} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraIconBookPage = defineBookPage({
@@ -33,7 +33,58 @@ export const viraIconBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'using createSizedIcon',
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: createSizedIcon(Element24Icon, 32),
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'using feather icon',
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: featherIcons.anchor,
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'using customized feather icon',
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: featherIcons.anchor({
+                            height: 64,
+                            width: 64,
+                        }),
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
             title: 'fit container',
+            styles: css`
+                ${ViraIcon} {
+                    width: 200px;
+                    height: 200px;
+                    border: 1px solid #eee;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: Element24Icon,
+                        fitContainer: true,
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'colored fit container',
             styles: css`
                 ${ViraIcon} {
                     width: 200px;
@@ -46,6 +97,44 @@ export const viraIconBookPage = defineBookPage({
                     <${ViraIcon.assign({
                         icon: createColoredIcon(Element24Icon, {
                             'vira-icon-stroke-color': 'red',
+                        }),
+                        fitContainer: true,
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'feather fit container',
+            styles: css`
+                ${ViraIcon} {
+                    width: 200px;
+                    height: 200px;
+                    border: 1px solid #eee;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: featherIcons.anchor,
+                        fitContainer: true,
+                    })}></${ViraIcon}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'customized feather fit container',
+            styles: css`
+                ${ViraIcon} {
+                    width: 200px;
+                    height: 200px;
+                    border: 1px solid #eee;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraIcon.assign({
+                        icon: featherIcons.anchor({
+                            'stroke-width': 4,
                         }),
                         fitContainer: true,
                     })}></${ViraIcon}>

@@ -6,6 +6,7 @@ import {
     ViraIcon,
     all16IconsByName,
     all24IconsByName,
+    featherIcons,
     noNativeFormStyles,
     viraFormCssVars,
     viraIconCssVars,
@@ -90,5 +91,13 @@ export const icons24BookPage = defineBookPage({
     parent: iconsBookPage,
     defineExamples({defineExample}) {
         defineIconExamples(all24IconsByName, defineExample);
+    },
+});
+
+export const featherIconsBookPage = defineBookPage({
+    title: 'Feather Icons',
+    parent: iconsBookPage,
+    defineExamples({defineExample}) {
+        defineIconExamples(featherIcons, defineExample);
     },
 });

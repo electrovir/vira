@@ -56,6 +56,7 @@ import {Upload24Icon} from './icon-svgs/24/upload-24.icon.js';
 import {X24Icon} from './icon-svgs/24/x-24.icon.js';
 
 export * from './colored-icon.js';
+export * from './feather-icons.js';
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
 export * from './sized-icon.js';

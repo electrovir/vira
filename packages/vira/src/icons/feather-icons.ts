@@ -1,11 +1,48 @@
+import {check} from '@augment-vir/assert';
 import {html, unsafeHTML} from 'element-vir';
-import featherIconsImport, {type FeatherAttributes} from 'feather-icons';
+import type * as featherIconsImportType from 'feather-icons';
+import {type FeatherAttributes} from 'feather-icons';
 import {viraIconCssVars} from './icon-css-vars.js';
 import {type ViraIconSvg} from './icon-svg.js';
 
-export type FeatherIconKey = keyof typeof featherIconsImport.icons;
+/** Feather's export format is all messed up so we have to do this to catch all its possible cases. */
+async function importFeatherIcons(): Promise<typeof featherIconsImportType> {
+    const imported = (await import('feather-icons')) as unknown;
 
-type FeatherIconEntry = ViraIconSvg & ((options: Readonly<FeatherAttributes>) => ViraIconSvg);
+    function recurseImport(imported: unknown): unknown {
+        if (check.isObject(imported)) {
+            if (check.hasKey(imported, 'default')) {
+                return recurseImport(imported.default);
+            } else if (check.hasKey(imported, 'icons')) {
+                return imported;
+            }
+        }
+        return undefined;
+    }
+
+    return (
+        recurseImport(imported) ||
+        /** Unfortunately, Feather will attach itself to the global state sometimes. */
+        (globalThis.feather as any)
+    );
+}
+
+const featherIconsImported = await importFeatherIcons();
+
+/**
+ * All supported feather icon names.
+ *
+ * @category Internal
+ */
+export type FeatherIconKey = keyof typeof featherIconsImported.icons;
+
+/**
+ * An entry in {@link featherIcons}.
+ *
+ * @category Internal
+ */
+export type FeatherIconEntry = ViraIconSvg &
+    ((options: Readonly<FeatherAttributes>) => ViraIconSvg);
 
 const defaultFeatherOptions: Readonly<Partial<FeatherAttributes>> = {
     fill: String(viraIconCssVars['vira-icon-fill-color'].value),
@@ -14,7 +51,7 @@ const defaultFeatherOptions: Readonly<Partial<FeatherAttributes>> = {
 };
 
 function createFeatherIconEntry(iconKey: FeatherIconKey): FeatherIconEntry {
-    const featherIcon = featherIconsImport.icons[iconKey];
+    const featherIcon = featherIconsImported.icons[iconKey];
 
     const configureIconCallback = (options: Readonly<FeatherAttributes>): ViraIconSvg => {
         return {
@@ -45,13 +82,19 @@ function createFeatherIconEntry(iconKey: FeatherIconKey): FeatherIconEntry {
 
 const featherIconCache = new Map<FeatherIconKey, FeatherIconEntry>();
 
+/**
+ * All [Feather icons](https://feathericons.com) in a format compatible with `ViraIcon`. Each icon
+ * entry can be accessed directly or customized by calling it as a function.
+ *
+ * @category Icon
+ */
 export const featherIcons: Readonly<Record<FeatherIconKey, FeatherIconEntry>> = new Proxy(
     {} as Record<FeatherIconKey, FeatherIconEntry>,
     {
         get(_target, property: string) {
             const iconKey = property as FeatherIconKey;
 
-            if (!(iconKey in featherIconsImport.icons)) {
+            if (!(iconKey in featherIconsImported.icons)) {
                 return undefined;
             }
 
@@ -66,13 +109,13 @@ export const featherIcons: Readonly<Record<FeatherIconKey, FeatherIconEntry>> = 
             return entry;
         },
         has(_target, property: string) {
-            return property in featherIconsImport.icons;
+            return property in featherIconsImported.icons;
         },
         ownKeys() {
-            return Object.keys(featherIconsImport.icons);
+            return Object.keys(featherIconsImported.icons);
         },
         getOwnPropertyDescriptor(_target, property: string) {
-            if (property in featherIconsImport.icons) {
+            if (property in featherIconsImported.icons) {
                 return {
                     configurable: true,
                     enumerable: true,

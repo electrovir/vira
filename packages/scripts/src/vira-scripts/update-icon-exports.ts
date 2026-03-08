@@ -48,8 +48,7 @@ function generateIconImportsAndExports(iconPaths: ReadonlyArray<string>): string
         (accum, iconInfo) => {
             if (accum.importsSet.has(iconInfo.importString)) {
                 throw new Error(`Duplicate icon import: '${iconInfo.importString}'`);
-            }
-            if (accum.iconNamesSet.has(iconInfo.iconName)) {
+            } else if (accum.iconNamesSet.has(iconInfo.iconName)) {
                 throw new Error(`Duplicate icon name: '${iconInfo.iconName}'`);
             }
 

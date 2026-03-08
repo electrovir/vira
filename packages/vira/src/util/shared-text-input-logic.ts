@@ -36,17 +36,14 @@ export type SharedTextInputElementInputs = {
 function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}): boolean {
     if (!input || !matcher) {
         return true;
-    }
-    if (input.length > 1) {
+    } else if (input.length > 1) {
         return input.split('').every((singleInput) =>
             doesMatch({
                 input: singleInput,
                 matcher,
             }),
         );
-    }
-
-    if (matcher instanceof RegExp) {
+    } else if (matcher instanceof RegExp) {
         return !!input.match(matcher);
     } else {
         return matcher.includes(input);

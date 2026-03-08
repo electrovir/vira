@@ -16,12 +16,12 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.67.0",
-        "@augment-vir/common": "^31.67.0",
+        "@augment-vir/assert": "^31.68.0",
+        "@augment-vir/common": "^31.68.0",
         "@electrovir/color": "^1.7.8",
         "element-book": "^26.17.0",
         "element-vir": "*",
-        "lit-css-vars": "^3.5.0",
+        "lit-css-vars": "^3.6.2",
         "spa-router-vir": "^6.4.1",
         "theme-vir": "^28.22.0",
         "url-vir": "^2.1.7",

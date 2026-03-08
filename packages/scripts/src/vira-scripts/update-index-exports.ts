@@ -77,9 +77,7 @@ export const updateIndexExports: UpdateExportsConfig = {
                 if (result.status !== 'rejected') {
                     // nothing to do
                     return accum;
-                }
-
-                if (result.reason instanceof NotUpToDateError) {
+                } else if (result.reason instanceof NotUpToDateError) {
                     accum.notUpToDateErrors.push(result.reason);
                     return accum;
                 } else {
@@ -95,9 +93,7 @@ export const updateIndexExports: UpdateExportsConfig = {
 
         if (errors.otherErrors.length) {
             throw combineErrors(errors.otherErrors);
-        }
-
-        if (errors.notUpToDateErrors.length) {
+        } else if (errors.notUpToDateErrors.length) {
             throw combineErrors(errors.notUpToDateErrors);
         }
     },

@@ -48,8 +48,7 @@ async function verifyTsFilePaths(filePaths: ReadonlyArray<string>): Promise<void
         filePaths.map(async (filePath) => {
             if (!existsSync(filePath)) {
                 throw new Error(`TS file '${filePath}' does not exist.`);
-            }
-            if (!(await stat(filePath)).isFile()) {
+            } else if (!(await stat(filePath)).isFile()) {
                 throw new Error(`TS file '${filePath}' is not a file.`);
             }
         }),

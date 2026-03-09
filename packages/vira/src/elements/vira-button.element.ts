@@ -400,6 +400,10 @@ export const ViraButton = defineViraElement<
                             padding: 2px
                                 ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
                         }
+
+                        &${hostClasses['vira-button-icon-only'].selector} {
+                            min-width: ${viraSizeHeights[sizeVariant]}px;
+                        }
                     }
                 `;
             });
@@ -502,8 +506,6 @@ export const ViraButton = defineViraElement<
             }
 
             ${hostClasses['vira-button-icon-only'].selector} {
-                aspect-ratio: 1;
-
                 button {
                     padding: 0;
                 }

@@ -35,11 +35,11 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-error-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,
     'vira-form-error-active-color': viraTheme.colors['vira-red-behind-bg-body'].background.value,
 
-    'vira-form-warning-color': viraTheme.colors['vira-orange-behind-bg-non-body'].background.value,
+    'vira-form-warning-color': viraTheme.colors['vira-yellow-behind-bg-non-body'].background.value,
     'vira-form-warning-hover-color':
-        viraTheme.colors['vira-orange-behind-bg-header'].background.value,
+        viraTheme.colors['vira-yellow-behind-bg-header'].background.value,
     'vira-form-warning-active-color':
-        viraTheme.colors['vira-orange-behind-bg-body'].background.value,
+        viraTheme.colors['vira-yellow-behind-bg-body'].background.value,
 
     'vira-form-positive-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
     'vira-form-positive-hover-color':
@@ -61,7 +61,7 @@ export const viraFormCssVars = defineCssVars({
         viraTheme.colors['vira-accent-foreground-header'].foreground.value,
     'vira-form-focus-outline-border-radius': css`calc(var(--vira-form-radius, ${unsafeCSS(defaultViraFormRadius)}) + 2px)`,
 
-    'vira-form-plain-color': viraColorPalette['vira-grey-0'].value,
+    'vira-form-plain-color': viraColorPalette['vira-grey-100'].value,
     'vira-form-plain-hover-color':
         viraTheme.colors['vira-grey-foreground-invisible'].foreground.value,
     'vira-form-plain-active-color':

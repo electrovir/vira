@@ -49,6 +49,8 @@ describe('viraThemeByKeys', () => {
                     [ContrastLevelName.Invisible]: viraTheme.colors['vira-red-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-red-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-red-on-self-body'],
                     [ContrastLevelName.NonBodyText]: viraTheme.colors['vira-red-on-self-non-body'],
                     [ContrastLevelName.Header]: viraTheme.colors['vira-red-on-self-header'],
@@ -56,62 +58,6 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-red-on-self-placeholder'],
                     [ContrastLevelName.Decoration]: viraTheme.colors['vira-red-on-self-decoration'],
                     [ContrastLevelName.Invisible]: viraTheme.colors['vira-red-on-self-invisible'],
-                },
-            },
-            orange: {
-                foreground: {
-                    [ContrastLevelName.SmallBodyText]:
-                        viraTheme.colors['vira-orange-foreground-small-body'],
-                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-orange-foreground-body'],
-                    [ContrastLevelName.NonBodyText]:
-                        viraTheme.colors['vira-orange-foreground-non-body'],
-                    [ContrastLevelName.Header]: viraTheme.colors['vira-orange-foreground-header'],
-                    [ContrastLevelName.Placeholder]:
-                        viraTheme.colors['vira-orange-foreground-placeholder'],
-                    [ContrastLevelName.Decoration]:
-                        viraTheme.colors['vira-orange-foreground-decoration'],
-                    [ContrastLevelName.Invisible]:
-                        viraTheme.colors['vira-orange-foreground-invisible'],
-                },
-                'behind-bg': {
-                    [ContrastLevelName.SmallBodyText]:
-                        viraTheme.colors['vira-orange-behind-bg-small-body'],
-                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-orange-behind-bg-body'],
-                    [ContrastLevelName.NonBodyText]:
-                        viraTheme.colors['vira-orange-behind-bg-non-body'],
-                    [ContrastLevelName.Header]: viraTheme.colors['vira-orange-behind-bg-header'],
-                    [ContrastLevelName.Placeholder]:
-                        viraTheme.colors['vira-orange-behind-bg-placeholder'],
-                    [ContrastLevelName.Decoration]:
-                        viraTheme.colors['vira-orange-behind-bg-decoration'],
-                    [ContrastLevelName.Invisible]:
-                        viraTheme.colors['vira-orange-behind-bg-invisible'],
-                },
-                'behind-fg': {
-                    [ContrastLevelName.SmallBodyText]:
-                        viraTheme.colors['vira-orange-behind-fg-small-body'],
-                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-orange-behind-fg-body'],
-                    [ContrastLevelName.NonBodyText]:
-                        viraTheme.colors['vira-orange-behind-fg-non-body'],
-                    [ContrastLevelName.Header]: viraTheme.colors['vira-orange-behind-fg-header'],
-                    [ContrastLevelName.Placeholder]:
-                        viraTheme.colors['vira-orange-behind-fg-placeholder'],
-                    [ContrastLevelName.Decoration]:
-                        viraTheme.colors['vira-orange-behind-fg-decoration'],
-                    [ContrastLevelName.Invisible]:
-                        viraTheme.colors['vira-orange-behind-fg-invisible'],
-                },
-                'on-self': {
-                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-orange-on-self-body'],
-                    [ContrastLevelName.NonBodyText]:
-                        viraTheme.colors['vira-orange-on-self-non-body'],
-                    [ContrastLevelName.Header]: viraTheme.colors['vira-orange-on-self-header'],
-                    [ContrastLevelName.Placeholder]:
-                        viraTheme.colors['vira-orange-on-self-placeholder'],
-                    [ContrastLevelName.Decoration]:
-                        viraTheme.colors['vira-orange-on-self-decoration'],
-                    [ContrastLevelName.Invisible]:
-                        viraTheme.colors['vira-orange-on-self-invisible'],
                 },
             },
             yellow: {
@@ -158,6 +104,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-yellow-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-yellow-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-yellow-on-self-body'],
                     [ContrastLevelName.NonBodyText]:
                         viraTheme.colors['vira-yellow-on-self-non-body'],
@@ -214,6 +162,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-green-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-green-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-green-on-self-body'],
                     [ContrastLevelName.NonBodyText]:
                         viraTheme.colors['vira-green-on-self-non-body'],
@@ -269,6 +219,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-teal-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-teal-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-teal-on-self-body'],
                     [ContrastLevelName.NonBodyText]: viraTheme.colors['vira-teal-on-self-non-body'],
                     [ContrastLevelName.Header]: viraTheme.colors['vira-teal-on-self-header'],
@@ -323,6 +275,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-blue-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-blue-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-blue-on-self-body'],
                     [ContrastLevelName.NonBodyText]: viraTheme.colors['vira-blue-on-self-non-body'],
                     [ContrastLevelName.Header]: viraTheme.colors['vira-blue-on-self-header'],
@@ -377,6 +331,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-accent-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-accent-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-accent-on-self-body'],
                     [ContrastLevelName.NonBodyText]:
                         viraTheme.colors['vira-accent-on-self-non-body'],
@@ -433,6 +389,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-purple-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-purple-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-purple-on-self-body'],
                     [ContrastLevelName.NonBodyText]:
                         viraTheme.colors['vira-purple-on-self-non-body'],
@@ -489,6 +447,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-pink-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-pink-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-pink-on-self-body'],
                     [ContrastLevelName.NonBodyText]: viraTheme.colors['vira-pink-on-self-non-body'],
                     [ContrastLevelName.Header]: viraTheme.colors['vira-pink-on-self-header'],
@@ -543,6 +503,8 @@ describe('viraThemeByKeys', () => {
                         viraTheme.colors['vira-grey-behind-fg-invisible'],
                 },
                 'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-grey-on-self-small-body'],
                     [ContrastLevelName.BodyText]: viraTheme.colors['vira-grey-on-self-body'],
                     [ContrastLevelName.NonBodyText]: viraTheme.colors['vira-grey-on-self-non-body'],
                     [ContrastLevelName.Header]: viraTheme.colors['vira-grey-on-self-header'],
@@ -554,12 +516,5 @@ describe('viraThemeByKeys', () => {
                 },
             },
         });
-    });
-
-    it('does not have missing values', () => {
-        viraThemeByKeys.blue['foreground'][ContrastLevelName.SmallBodyText];
-
-        // @ts-expect-error: this contrast level does not exist here.
-        viraThemeByKeys.blue['on-self'][ContrastLevelName.SmallBodyText];
     });
 });

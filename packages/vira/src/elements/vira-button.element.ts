@@ -189,36 +189,36 @@ const colorVariantColors: Record<
     [ViraColorVariant.Warning]: {
         [ViraEmphasis.Standard]: {
             idle: {
-                backgroundColor: viraTheme.colors['vira-orange-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-orange-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-orange-behind-bg-body'].background,
+                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-non-body'].background,
+                textColor: viraTheme.colors['vira-yellow-behind-bg-non-body'].foreground,
+                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
             },
             hover: {
-                backgroundColor: viraTheme.colors['vira-orange-behind-bg-header'].background,
-                textColor: viraTheme.colors['vira-orange-behind-bg-header'].foreground,
-                borderColor: viraTheme.colors['vira-orange-behind-bg-body'].background,
+                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-header'].background,
+                textColor: viraTheme.colors['vira-yellow-behind-bg-header'].foreground,
+                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
             },
             active: {
-                backgroundColor: viraTheme.colors['vira-orange-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-orange-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-orange-behind-bg-body'].background,
+                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
+                textColor: viraTheme.colors['vira-yellow-behind-bg-body'].foreground,
+                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
             },
         },
         [ViraEmphasis.Subtle]: {
             idle: {
                 backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-orange-foreground-non-body'].foreground,
+                textColor: viraTheme.colors['vira-yellow-foreground-non-body'].foreground,
                 borderColor: transparentColor,
             },
             hover: {
-                backgroundColor: viraTheme.colors['vira-orange-on-self-body'].background,
-                textColor: viraTheme.colors['vira-orange-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-orange-on-self-body'].foreground,
+                backgroundColor: viraTheme.colors['vira-yellow-on-self-body'].background,
+                textColor: viraTheme.colors['vira-yellow-on-self-body'].foreground,
+                borderColor: viraTheme.colors['vira-yellow-on-self-body'].foreground,
             },
             active: {
-                backgroundColor: viraTheme.colors['vira-orange-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-orange-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-orange-on-self-non-body'].foreground,
+                backgroundColor: viraTheme.colors['vira-yellow-on-self-non-body'].background,
+                textColor: viraTheme.colors['vira-yellow-on-self-non-body'].foreground,
+                borderColor: viraTheme.colors['vira-yellow-on-self-non-body'].foreground,
             },
         },
     },

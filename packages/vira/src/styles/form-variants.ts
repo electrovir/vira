@@ -42,7 +42,7 @@ export const viraColorVariantToColorName: Record<
     [ViraColorVariant.Accent]: ViraThemeColorName.blue,
     [ViraColorVariant.Neutral]: ViraThemeColorName.grey,
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
-    [ViraColorVariant.Warning]: ViraThemeColorName.orange,
+    [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
     [ViraColorVariant.Positive]: ViraThemeColorName.green,
 };
 

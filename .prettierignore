@@ -10,3 +10,6 @@
 **/package-lock.json
 **/tsconfig.tsbuildinfo
 /Icon?
+
+# to prevent sorting messing up the order
+packages/vira/src/styles/vira-color-palette.json

@@ -1,7 +1,8 @@
 import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {colorCss, ContrastLevelName} from '@electrovir/color';
+import {ContrastLevelName} from '@electrovir/color';
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
+import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type Primitive, type RequireExactlyOne} from 'type-fest';
 import {Check16Icon} from '../icons/icon-svgs/16/check-16.icon.js';
@@ -9,10 +10,13 @@ import {X16Icon} from '../icons/icon-svgs/16/x-16.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     ViraColorVariant,
+    viraColorVariants,
     viraColorVariantToColorName,
     ViraEmphasis,
+    viraEmphasisVariants,
     ViraSize,
     viraSizeHeights,
+    viraSizeVariants,
 } from '../styles/form-variants.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {noUserSelect} from '../styles/user-select.js';
@@ -21,112 +25,183 @@ import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
-function generateThemeCss(colorVariant: ViraColorVariant): CSSResult | undefined {
-    if (!check.hasKey(viraColorVariantToColorName, colorVariant)) {
-        throw new Error(`No ViraTag color for variant '${colorVariant}'`);
+type TagColorValue = Pick<SingleCssVarDefinition, 'value'>;
+
+const transparentColor: TagColorValue = {
+    value: css`transparent`,
+};
+
+type TagColorStateColors = Record<
+    'idle' | 'hover' | 'active',
+    {
+        textColor: TagColorValue;
+        backgroundColor: TagColorValue;
+        borderColor: TagColorValue;
     }
+>;
 
-    const viraThemeColorKey: ViraThemeColorName = viraColorVariantToColorName[colorVariant];
+function buildThemedTagColors(
+    colorName: ViraThemeColorName,
+): Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors> {
+    const behindBg = viraThemeByKeys[colorName]['behind-bg'];
+    const onSelf = viraThemeByKeys[colorName]['on-self'];
 
-    return css`
-        :host(
-                .vira-tag-color-${unsafeCSS(colorVariant)}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Standard,
-                    )}
-            )
-            button {
-            ${colorCss(
-                viraThemeByKeys[viraThemeColorKey]['behind-bg'][ContrastLevelName.NonBodyText],
-            )}
-            border-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                ContrastLevelName.NonBodyText
-            ].background.value};
-
-            &:hover {
-                ${colorCss(
-                    viraThemeByKeys[viraThemeColorKey]['behind-bg'][ContrastLevelName.Header],
-                )}
-                border-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.Header
-                ].background.value};
-            }
-            &:active {
-                ${colorCss(
-                    viraThemeByKeys[viraThemeColorKey]['behind-bg'][ContrastLevelName.NonBodyText],
-                )}
-                border-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.NonBodyText
-                ].background.value};
-            }
-        }
-        :host(
-                .vira-tag-color-${unsafeCSS(colorVariant)}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Subtle,
-                    )}
-            )
-            button {
-            ${colorCss(viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.BodyText])}
-            border-color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][
-                ContrastLevelName.BodyText
-            ].background.value};
-
-            &:hover {
-                ${colorCss(
-                    viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.NonBodyText],
-                )}
-                border-color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][
-                    ContrastLevelName.NonBodyText
-                ].background.value};
-            }
-            &:active {
-                ${colorCss(
-                    viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.BodyText],
-                )}
-                border-color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][
-                    ContrastLevelName.BodyText
-                ].background.value};
-            }
-        }
-        :host(
-                .vira-tag-color-${unsafeCSS(
-                        colorVariant,
-                    )}.vira-tag-not-checked.vira-tag-not-checked.vira-tag-not-checked
-            )
-            button {
-            color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][ContrastLevelName.BodyText]
-                .foreground.value};
-            background-color: transparent;
-            border-color: ${viraThemeByKeys[viraThemeColorKey]['on-self'][
-                ContrastLevelName.BodyText
-            ].background.value};
-
-            &:hover {
-                background-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.Invisible
-                ].background.value};
-            }
-            &:active {
-                background-color: ${viraThemeByKeys[viraThemeColorKey]['behind-bg'][
-                    ContrastLevelName.Decoration
-                ].background.value};
-            }
-        }
-    `;
+    return {
+        [ViraEmphasis.Standard]: {
+            idle: {
+                textColor: behindBg[ContrastLevelName.NonBodyText].foreground,
+                backgroundColor: behindBg[ContrastLevelName.NonBodyText].background,
+                borderColor: behindBg[ContrastLevelName.NonBodyText].background,
+            },
+            hover: {
+                textColor: behindBg[ContrastLevelName.Header].foreground,
+                backgroundColor: behindBg[ContrastLevelName.Header].background,
+                borderColor: behindBg[ContrastLevelName.Header].background,
+            },
+            active: {
+                textColor: behindBg[ContrastLevelName.NonBodyText].foreground,
+                backgroundColor: behindBg[ContrastLevelName.NonBodyText].background,
+                borderColor: behindBg[ContrastLevelName.NonBodyText].background,
+            },
+        },
+        [ViraEmphasis.Subtle]: {
+            idle: {
+                textColor: onSelf[ContrastLevelName.BodyText].foreground,
+                backgroundColor: onSelf[ContrastLevelName.BodyText].background,
+                borderColor: onSelf[ContrastLevelName.BodyText].background,
+            },
+            hover: {
+                textColor: onSelf[ContrastLevelName.NonBodyText].foreground,
+                backgroundColor: onSelf[ContrastLevelName.NonBodyText].background,
+                borderColor: onSelf[ContrastLevelName.NonBodyText].background,
+            },
+            active: {
+                textColor: onSelf[ContrastLevelName.BodyText].foreground,
+                backgroundColor: onSelf[ContrastLevelName.BodyText].background,
+                borderColor: onSelf[ContrastLevelName.BodyText].background,
+            },
+        },
+    };
 }
 
-function generateAutomaticViraTagThemeVariants(): CSSResult {
-    return unsafeCSS(
-        [
-            ViraColorVariant.Accent,
-            ViraColorVariant.Danger,
-            ViraColorVariant.Neutral,
-            ViraColorVariant.Positive,
-            ViraColorVariant.Warning,
-        ]
-            .map((variant) => generateThemeCss(variant))
-            .join(' '),
-    );
+function buildThemedNotCheckedColors(colorName: ViraThemeColorName): TagColorStateColors {
+    const onSelfBodyText = viraThemeByKeys[colorName]['on-self'][ContrastLevelName.BodyText];
+
+    return {
+        idle: {
+            textColor: onSelfBodyText.foreground,
+            backgroundColor: transparentColor,
+            borderColor: onSelfBodyText.background,
+        },
+        hover: {
+            textColor: onSelfBodyText.foreground,
+            backgroundColor:
+                viraThemeByKeys[colorName]['behind-bg'][ContrastLevelName.Invisible].background,
+            borderColor: onSelfBodyText.background,
+        },
+        active: {
+            textColor: onSelfBodyText.foreground,
+            backgroundColor:
+                viraThemeByKeys[colorName]['behind-bg'][ContrastLevelName.Decoration].background,
+            borderColor: onSelfBodyText.background,
+        },
+    };
 }
+
+const tagColorVariantColors: Record<
+    Exclude<ViraColorVariant, ViraColorVariant.None>,
+    Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors>
+> = {
+    [ViraColorVariant.Plain]: {
+        [ViraEmphasis.Standard]: {
+            idle: {
+                backgroundColor: viraTheme.inverse[themeDefaultKey].background,
+                textColor: viraTheme.inverse[themeDefaultKey].foreground,
+                borderColor: viraTheme.inverse[themeDefaultKey].background,
+            },
+            hover: {
+                backgroundColor: viraTheme.colors['vira-grey-behind-bg-non-body'].background,
+                textColor: viraTheme.colors['vira-grey-behind-bg-non-body'].foreground,
+                borderColor: viraTheme.colors['vira-grey-behind-bg-non-body'].background,
+            },
+            active: {
+                backgroundColor: viraTheme.inverse[themeDefaultKey].background,
+                textColor: viraTheme.inverse[themeDefaultKey].foreground,
+                borderColor: viraTheme.inverse[themeDefaultKey].background,
+            },
+        },
+        [ViraEmphasis.Subtle]: {
+            idle: {
+                backgroundColor: transparentColor,
+                textColor: viraTheme.colors[themeDefaultKey].foreground,
+                borderColor: transparentColor,
+            },
+            hover: {
+                backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+                textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+                borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            },
+            active: {
+                backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+                textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
+                borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+            },
+        },
+    },
+    [ViraColorVariant.Accent]: buildThemedTagColors(
+        viraColorVariantToColorName[ViraColorVariant.Accent],
+    ),
+    [ViraColorVariant.Neutral]: buildThemedTagColors(
+        viraColorVariantToColorName[ViraColorVariant.Neutral],
+    ),
+    [ViraColorVariant.Danger]: buildThemedTagColors(
+        viraColorVariantToColorName[ViraColorVariant.Danger],
+    ),
+    [ViraColorVariant.Warning]: buildThemedTagColors(
+        viraColorVariantToColorName[ViraColorVariant.Warning],
+    ),
+    [ViraColorVariant.Positive]: buildThemedTagColors(
+        viraColorVariantToColorName[ViraColorVariant.Positive],
+    ),
+};
+
+const tagNotCheckedColors: Record<
+    Exclude<ViraColorVariant, ViraColorVariant.None>,
+    TagColorStateColors
+> = {
+    [ViraColorVariant.Plain]: {
+        idle: {
+            textColor: viraTheme.colors[themeDefaultKey].foreground,
+            backgroundColor: transparentColor,
+            borderColor: transparentColor,
+        },
+        hover: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+        },
+        active: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+        },
+    },
+    [ViraColorVariant.Accent]: buildThemedNotCheckedColors(
+        viraColorVariantToColorName[ViraColorVariant.Accent],
+    ),
+    [ViraColorVariant.Neutral]: buildThemedNotCheckedColors(
+        viraColorVariantToColorName[ViraColorVariant.Neutral],
+    ),
+    [ViraColorVariant.Danger]: buildThemedNotCheckedColors(
+        viraColorVariantToColorName[ViraColorVariant.Danger],
+    ),
+    [ViraColorVariant.Warning]: buildThemedNotCheckedColors(
+        viraColorVariantToColorName[ViraColorVariant.Warning],
+    ),
+    [ViraColorVariant.Positive]: buildThemedNotCheckedColors(
+        viraColorVariantToColorName[ViraColorVariant.Positive],
+    ),
+};
 
 /**
  * A "tag" or "label" or "pill" element. Supports many variations including non-clickable,
@@ -161,8 +236,25 @@ export const ViraTag = defineViraElement<
 >()({
     tagName: 'vira-tag',
     cssVars: {
-        'vira-tag-text-color': 'white',
-        'vira-tag-background-color': 'black',
+        'vira-tag-text-color': 'transparent',
+        'vira-tag-background-color': 'transparent',
+        'vira-tag-border-color': 'transparent',
+
+        'vira-tag-hover-text-color': 'transparent',
+        'vira-tag-hover-background-color': 'transparent',
+        'vira-tag-hover-border-color': 'transparent',
+
+        'vira-tag-active-text-color': 'transparent',
+        'vira-tag-active-background-color': 'transparent',
+        'vira-tag-active-border-color': 'transparent',
+
+        'vira-tag-disabled-text-color':
+            viraTheme.colors['vira-grey-behind-bg-decoration'].foreground.value,
+        'vira-tag-disabled-background-color':
+            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+        'vira-tag-disabled-border-color':
+            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+
         'vira-tag-border-radius': '1000px',
         'vira-tag-gap': '6px',
         'vira-tag-horizontal-padding': '12px',
@@ -196,157 +288,177 @@ export const ViraTag = defineViraElement<
         'vira-tag-color-warning': ({inputs}) => inputs.color === ViraColorVariant.Warning,
         'vira-tag-color-positive': ({inputs}) => inputs.color === ViraColorVariant.Positive,
     },
-    styles: ({cssVars, hostClasses}) => css`
-        :host {
-            display: inline-flex;
+    styles: ({cssVars, hostClasses}) => {
+        function generateVariantCss(): CSSResult {
+            const allStyles = viraEmphasisVariants.flatMap((emphasis) => {
+                return viraColorVariants.map((colorVariant) => {
+                    const colors = tagColorVariantColors[colorVariant][emphasis];
+                    const variantSelector = hostClasses[`vira-tag-color-${colorVariant}`].selector;
+                    const emphasisSelector = hostClasses[`vira-tag-emphasis-${emphasis}`].selector;
+
+                    return css`
+                        ${variantSelector}${emphasisSelector} {
+                            ${cssVars['vira-tag-background-color'].name}: ${colors.idle
+                                .backgroundColor.value};
+                            ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
+                            ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor
+                                .value};
+
+                            ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
+                                .backgroundColor.value};
+                            ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor
+                                .value};
+                            ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover
+                                .borderColor.value};
+
+                            ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
+                                .backgroundColor.value};
+                            ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor
+                                .value};
+                            ${cssVars['vira-tag-active-border-color'].name}: ${colors.active
+                                .borderColor.value};
+                        }
+                    `;
+                });
+            });
+
+            return unsafeCSS(allStyles.join('\n'));
         }
 
-        button {
-            ${noNativeFormStyles}
-            flex-shrink: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: ${cssVars['vira-tag-gap'].value};
-            border-radius: ${cssVars['vira-tag-border-radius'].value};
-            border-width: ${cssVars['vira-tag-border-width'].value};
-            border-style: solid;
-            border-color: transparent;
-            color: ${cssVars['vira-tag-text-color'].value};
-            background-color: ${cssVars['vira-tag-background-color'].value};
-            box-sizing: border-box;
-            padding: 0 ${cssVars['vira-tag-horizontal-padding'].value};
+        function generateNotCheckedCss(): CSSResult {
+            const allStyles = viraColorVariants.map((colorVariant) => {
+                const colors = tagNotCheckedColors[colorVariant];
+                const variantSelector = hostClasses[`vira-tag-color-${colorVariant}`].selector;
+                const notCheckedSelector = hostClasses['vira-tag-not-checked'].selector;
 
-            &[disabled] {
-                cursor: default;
-                pointer-events: none;
+                return css`
+                    ${variantSelector}${notCheckedSelector}${notCheckedSelector}${notCheckedSelector} {
+                        ${cssVars['vira-tag-background-color'].name}: ${colors.idle.backgroundColor
+                            .value};
+                        ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
+                        ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor.value};
+
+                        ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
+                            .backgroundColor.value};
+                        ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor
+                            .value};
+                        ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover.borderColor
+                            .value};
+
+                        ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
+                            .backgroundColor.value};
+                        ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor
+                            .value};
+                        ${cssVars['vira-tag-active-border-color'].name}: ${colors.active.borderColor
+                            .value};
+                    }
+                `;
+            });
+
+            return unsafeCSS(allStyles.join('\n'));
+        }
+
+        function generateSizeVariantCss(): CSSResult {
+            const styles = viraSizeVariants.map((sizeVariant) => {
+                return css`
+                    ${hostClasses[`vira-tag-size-${sizeVariant}`].selector} button {
+                        height: ${viraSizeHeights[sizeVariant]}px;
+                        font-size: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
+                    }
+                `;
+            });
+
+            return unsafeCSS(styles.join('\n'));
+        }
+
+        return css`
+            :host {
+                display: inline-flex;
             }
-        }
 
-        .cancel-x,
-        .selected-check,
-        .text {
-            height: 0;
-            display: flex;
-            align-items: center;
-        }
+            ${generateSizeVariantCss()}
+            ${generateVariantCss()}
+            ${generateNotCheckedCss()}
 
-        .cancel-x {
-            display: none;
-            margin-right: -2px;
-        }
-
-        .selected-check {
-            margin-left: -2px;
-            display: none;
-            visibility: hidden;
-        }
-
-        ${hostClasses['vira-tag-selectable'].selector} .selected-check {
-            display: flex;
-        }
-        ${hostClasses['vira-tag-checked'].selector} .selected-check {
-            visibility: visible;
-        }
-        ${hostClasses['vira-tag-cancellable'].selector} .cancel-x {
-            display: flex;
-        }
-        ${hostClasses['vira-tag-size-large'].selector} button {
-            height: ${viraSizeHeights[ViraSize.Large]}px;
-            font-size: ${viraFormCssVars['vira-form-large-text-size'].value};
-            padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 16px);
-        }
-        ${hostClasses['vira-tag-size-medium'].selector} button {
-            height: ${viraSizeHeights[ViraSize.Medium]}px;
-            font-size: ${viraFormCssVars['vira-form-medium-text-size'].value};
-        }
-        ${hostClasses['vira-tag-size-small'].selector} button {
-            height: ${viraSizeHeights[ViraSize.Small]}px;
-            font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
-        }
-
-        ${generateAutomaticViraTagThemeVariants()}
-
-        :host(.${hostClasses['vira-tag-disabled'].name}.${hostClasses['vira-tag-disabled']
-            .name}.${hostClasses['vira-tag-disabled'].name}.${hostClasses['vira-tag-disabled']
-            .name}) {
-            cursor: not-allowed;
-            ${noUserSelect}
-
-            & button {
-                ${colorCss(viraTheme.colors['vira-grey-behind-bg-decoration'])}
-                border-color: ${viraTheme.colors['vira-grey-behind-bg-decoration'].background.value}
-            }
-
-            &.${hostClasses['vira-tag-emphasis-subtle'].name} button {
-                ${colorCss(viraTheme.colors['vira-grey-behind-bg-decoration'])}
-                border-color: ${viraTheme.colors['vira-grey-behind-bg-decoration'].background.value}
-            }
-        }
-
-        :host(
-                .${hostClasses['vira-tag-color-plain'].name}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Standard,
-                    )}
-            )
             button {
-            ${colorCss(viraTheme.inverse[themeDefaultKey])};
-            border-color: ${viraTheme.inverse[themeDefaultKey].background.value};
+                ${noNativeFormStyles}
+                flex-shrink: 0;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: ${cssVars['vira-tag-gap'].value};
+                border-radius: ${cssVars['vira-tag-border-radius'].value};
+                border-width: ${cssVars['vira-tag-border-width'].value};
+                border-style: solid;
+                border-color: ${cssVars['vira-tag-border-color'].value};
+                color: ${cssVars['vira-tag-text-color'].value};
+                background-color: ${cssVars['vira-tag-background-color'].value};
+                box-sizing: border-box;
+                padding: 0 ${cssVars['vira-tag-horizontal-padding'].value};
 
-            &:hover {
-                ${colorCss(viraTheme.colors['vira-grey-behind-bg-non-body'])};
-                border-color: ${viraTheme.colors['vira-grey-behind-bg-non-body'].background.value};
+                &[disabled] {
+                    cursor: default;
+                    pointer-events: none;
+                }
             }
-            &:active {
-                ${colorCss(viraTheme.inverse[themeDefaultKey])};
-                border-color: ${viraTheme.inverse[themeDefaultKey].background.value};
+
+            button:hover {
+                background-color: ${cssVars['vira-tag-hover-background-color'].value};
+                color: ${cssVars['vira-tag-hover-text-color'].value};
+                border-color: ${cssVars['vira-tag-hover-border-color'].value};
             }
-        }
-        :host(
-                .${hostClasses['vira-tag-color-plain'].name}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Subtle,
-                    )}
-            )
-            button {
-            background-color: transparent;
-            color: ${viraTheme.colors[themeDefaultKey].foreground.value};
-            border-color: transparent;
-        }
-        :host(
-                .${hostClasses['vira-tag-color-plain'].name}.${hostClasses['vira-tag-not-checked']
-                        .name}.${hostClasses['vira-tag-not-checked'].name}.${hostClasses[
-                        'vira-tag-not-checked'
-                    ].name}
-            )
-            button {
-            color: ${viraTheme.colors[themeDefaultKey].foreground.value};
-            background-color: transparent;
-            border-color: transparent;
-        }
-        :host(
-                .${hostClasses['vira-tag-color-plain'].name}.vira-tag-emphasis-${unsafeCSS(
-                        ViraEmphasis.Subtle,
-                    )}
-            )
-            button,
-        :host(
-                .${hostClasses['vira-tag-color-plain'].name}.${hostClasses['vira-tag-not-checked']
-                        .name}.${hostClasses['vira-tag-not-checked'].name}.${hostClasses[
-                        'vira-tag-not-checked'
-                    ].name}
-            )
-            button {
-            &:hover {
-                ${colorCss(viraTheme.colors['vira-grey-behind-fg-small-body'])}
-                border-color: ${viraTheme.colors['vira-grey-behind-fg-small-body'].background
-                    .value};
+
+            button:active {
+                background-color: ${cssVars['vira-tag-active-background-color'].value};
+                color: ${cssVars['vira-tag-active-text-color'].value};
+                border-color: ${cssVars['vira-tag-active-border-color'].value};
             }
-            &:active {
-                ${colorCss(viraTheme.colors['vira-grey-behind-fg-body'])}
-                border-color: ${viraTheme.colors['vira-grey-behind-fg-body'].background.value};
+
+            .cancel-x,
+            .selected-check,
+            .text {
+                height: 0;
+                display: flex;
+                align-items: center;
             }
-        }
-    `,
+
+            .cancel-x {
+                display: none;
+                margin-right: -2px;
+            }
+
+            .selected-check {
+                margin-left: -2px;
+                display: none;
+                visibility: hidden;
+            }
+
+            ${hostClasses['vira-tag-selectable'].selector} .selected-check {
+                display: flex;
+            }
+            ${hostClasses['vira-tag-checked'].selector} .selected-check {
+                visibility: visible;
+            }
+            ${hostClasses['vira-tag-cancellable'].selector} .cancel-x {
+                display: flex;
+            }
+
+            ${hostClasses['vira-tag-size-large'].selector} button {
+                padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 16px);
+            }
+
+            ${hostClasses['vira-tag-disabled'].selector} {
+                cursor: not-allowed;
+                ${noUserSelect}
+
+                & button {
+                    color: ${cssVars['vira-tag-disabled-text-color'].value};
+                    background-color: ${cssVars['vira-tag-disabled-background-color'].value};
+                    border-color: ${cssVars['vira-tag-disabled-border-color'].value};
+                }
+            }
+        `;
+    },
     render({inputs, dispatch, events}) {
         const disabled: boolean = !inputs.isClickable || !!inputs.disabled;
         return html`

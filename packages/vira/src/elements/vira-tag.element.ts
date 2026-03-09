@@ -1,6 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {ContrastLevelName} from '@electrovir/color';
+import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';

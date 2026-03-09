@@ -1,6 +1,6 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it} from '@augment-vir/test';
-import {ContrastLevelName} from '@electrovir/color';
+import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {viraThemeByKeys} from './vira-color-theme-object.js';
 import {viraTheme} from './vira-color-theme.js';
 

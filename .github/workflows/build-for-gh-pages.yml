@@ -25,6 +25,7 @@ jobs:
             - name: build
               run: |
                   npm ci
+                  npm run compile
                   npm run build
             - uses: JamesIves/github-pages-deploy-action@v4.6.3
               with:

@@ -119,17 +119,17 @@ const colorVariantColors: Record<
             idle: {
                 backgroundColor: viraTheme.colors[themeDefaultKey].background,
                 textColor: viraTheme.colors[themeDefaultKey].foreground,
-                borderColor: viraTheme.colors['vira-grey-foreground-non-body'].foreground,
+                borderColor: viraFormCssVars['vira-form-border-color'],
             },
             hover: {
                 backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
                 textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-foreground-non-body'].foreground,
+                borderColor: viraFormCssVars['vira-form-border-color'],
             },
             active: {
                 backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
                 textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-foreground-non-body'].foreground,
+                borderColor: viraFormCssVars['vira-form-border-color'],
             },
         },
         [ViraEmphasis.Subtle]: {

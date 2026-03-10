@@ -18,12 +18,12 @@
     "dependencies": {
         "@augment-vir/assert": "^31.68.1",
         "@augment-vir/common": "^31.68.1",
-        "@electrovir/color": "^1.7.8",
+        "@electrovir/color": "^1.7.9",
         "element-book": "^26.17.0",
         "element-vir": "*",
         "lit-css-vars": "^3.6.2",
         "spa-router-vir": "^6.4.1",
-        "theme-vir": "^28.22.0",
+        "theme-vir": "^28.23.1",
         "url-vir": "^2.1.7",
         "vira": "^31.5.2"
     },

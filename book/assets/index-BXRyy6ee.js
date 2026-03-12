@@ -235,6 +235,7 @@ ${mh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function eN(e){return
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         svg {
@@ -1930,6 +1931,8 @@ ${mh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function eN(e){return
         :host {
             display: flex;
             flex-direction: column;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .header-wrapper {
@@ -1988,6 +1991,8 @@ ${mh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function eN(e){return
         `}}),Yr=cr()({tagName:"vira-collapsible-card",testIds:["openCaret"],events:{expandToggle:Re()},state({inputs:e}){return{isExpanded:!!e.startExpanded}},hostClasses:{"vira-collapsible-card-expanded":i(({state:e})=>e.isExpanded,"vira-collapsible-card-expanded"),"vira-collapsible-card-expansion-blocked":i(({inputs:e})=>!!e.blockExpansion,"vira-collapsible-card-expansion-blocked"),"vira-collapsible-card-card-styles":i(({inputs:e})=>!e.rawCollapsible,"vira-collapsible-card-card-styles")},cssVars:{"vira-collapsible-card-content-gap":"16px"},styles:i(({hostClasses:e,cssVars:r})=>k`
         :host {
             display: inline-flex;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         ${e["vira-collapsible-card-expanded"].selector} .open-caret {
@@ -3420,6 +3425,7 @@ ${mh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function eN(e){return
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         svg {
@@ -4960,7 +4966,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${B.assign({icon:r.icon})}></${B}>
                         <span>→</span>
                         <${B.assign({icon:t})}></${B}>
-                    `}})})}}),Sx={async element1(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-DTb54Toh.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-K-YoIjg4.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},hy=Zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Z$(Sx)}},render({state:e,inputs:r}){return Y$(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
+                    `}})})}}),Sx={async element1(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CLrk4EVA.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2--h9xRzKX.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},hy=Zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Z$(Sx)}},render({state:e,inputs:r}){return Y$(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
                     <${Gi}>
                         ${sa("Failed to import element",tt(t))}
                     </${Gi}>

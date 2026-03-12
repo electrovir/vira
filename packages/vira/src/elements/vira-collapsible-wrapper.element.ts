@@ -28,6 +28,8 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         :host {
             display: flex;
             flex-direction: column;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .header-wrapper {

@@ -25,6 +25,7 @@ export const ViraIcon = defineViraElement<{
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         svg {

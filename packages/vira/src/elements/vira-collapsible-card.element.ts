@@ -60,6 +60,8 @@ export const ViraCollapsibleCard = defineViraElement<
     styles: ({hostClasses, cssVars}) => css`
         :host {
             display: inline-flex;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         ${hostClasses['vira-collapsible-card-expanded'].selector} .open-caret {

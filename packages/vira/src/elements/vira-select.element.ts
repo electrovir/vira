@@ -101,6 +101,7 @@ export const ViraSelect = defineViraElement<
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
+                color: inherit;
                 font: inherit;
                 outline: none;
                 width: 100%;

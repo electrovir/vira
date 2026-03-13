@@ -165,7 +165,6 @@ export const ViraTabs = defineViraElement<
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 8px 16px;
                 position: relative;
                 color: ${cssVars['vira-tabs-inactive-color'].value};
                 font-size: ${viraFormCssVars['vira-form-medium-text-size'].value};
@@ -278,6 +277,11 @@ export const ViraTabs = defineViraElement<
 
             ${ViraLink} {
                 text-decoration: none;
+            }
+
+            .tabs-container ${ViraLink} {
+                display: flex;
+                padding: 8px 16px;
             }
         `;
     },

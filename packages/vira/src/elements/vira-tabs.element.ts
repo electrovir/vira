@@ -130,17 +130,18 @@ export const ViraTabs = defineViraElement<
     styles: ({hostClasses, cssVars}) => {
         return css`
             :host {
-                display: inline-flex;
+                display: flex;
                 box-sizing: border-box;
                 ${noUserSelect};
-                max-width: 100%;
-                max-height: 100%;
+                width: 100%;
+                height: 100%;
             }
 
             .tabs-container {
                 display: flex;
                 position: relative;
                 list-style: none;
+                overflow: hidden;
                 margin: 0;
                 padding: 0;
             }
@@ -199,6 +200,11 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-bottom'].selector} {
+                & .tabs-container {
+                    border-bottom: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+
                 & li::after {
                     bottom: 0;
                     left: 0;
@@ -210,6 +216,11 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-top'].selector} {
+                & .tabs-container {
+                    border-top: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     left: 0;
@@ -221,6 +232,11 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-left'].selector} {
+                & .tabs-container {
+                    border-left: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     bottom: 0;
@@ -232,6 +248,11 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-right'].selector} {
+                & .tabs-container {
+                    border-right: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     bottom: 0;

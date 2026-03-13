@@ -1,11 +1,14 @@
 import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
+import {colorCss} from '@electrovir/color';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
+import {themeDefaultKey} from 'theme-vir';
 import {listenToGlobal} from 'typed-event-target';
 import {X24Icon} from '../icons/icon-svgs/24/x-24.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
+import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
@@ -82,6 +85,7 @@ export const ViraModal = defineViraElement<
         }
 
         dialog {
+            ${colorCss(viraTheme.colors[themeDefaultKey])}
             border: none;
             flex-direction: column;
             border-radius: inherit;

@@ -71,6 +71,11 @@ export const ViraMenuItem = defineViraElement<
             }
         }
 
+        :host(:focus),
+        :host(:active) {
+            outline: none;
+        }
+
         ${hostClasses['vira-menu-item-enabled'].selector}${hostClasses[
             'vira-menu-item-default-styles'
         ].selector} {
@@ -78,12 +83,10 @@ export const ViraMenuItem = defineViraElement<
 
             &:host(:focus) {
                 background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
-                outline: none;
             }
 
             &:host(:active) {
                 background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
-                outline: none;
             }
         }
 

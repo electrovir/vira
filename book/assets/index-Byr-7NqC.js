@@ -2510,6 +2510,7 @@ ${mh(n,1)}`);super(o),this.errors=r,this.failureMessage=t}}function eN(e){return
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
+                color: inherit;
                 font: inherit;
                 outline: none;
                 width: 100%;
@@ -4151,6 +4152,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
+                color: inherit;
                 font: inherit;
                 outline: none;
                 width: 100%;
@@ -4966,7 +4968,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${B.assign({icon:r.icon})}></${B}>
                         <span>→</span>
                         <${B.assign({icon:t})}></${B}>
-                    `}})})}}),Sx={async element1(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CLrk4EVA.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2--h9xRzKX.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},hy=Zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Z$(Sx)}},render({state:e,inputs:r}){return Y$(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
+                    `}})})}}),Sx={async element1(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-DJdkcfQK.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await Ji({seconds:2}),(await Ml(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-C-v9JDjF.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},hy=Zn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Z$(Sx)}},render({state:e,inputs:r}){return Y$(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return b`
                     <${Gi}>
                         ${sa("Failed to import element",tt(t))}
                     </${Gi}>

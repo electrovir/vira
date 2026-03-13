@@ -14,6 +14,7 @@ import {
     ViraTabs,
     ViraTabsBarDirection,
     ViraTabsIconLayout,
+    viraTheme,
     type ViraTab,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
@@ -145,8 +146,8 @@ const ViraDynamicWidthTabsExample = defineViraElement()({
     styles: ({cssVars}) => css`
         :host {
             display: block;
-            border: 1px solid #ccc;
-            padding: 8px;
+            border: 1px solid
+                ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
             width: ${cssVars['vira-dynamic-width-tabs-example-width'].value};
         }
     `,
@@ -218,6 +219,27 @@ export const viraTabsBookPage = defineBookPage({
             styles: css`
                 :host {
                     max-width: 200px;
+                    border: 1px solid red;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithIcons,
+                        router: mockRouter,
+                        currentRoute: selectedRoute,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'big font',
+            styles: css`
+                :host {
+                    font-size: 32px;
+                    max-width: 200px;
+                    border: 1px solid red;
                 }
             `,
             render() {

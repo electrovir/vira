@@ -200,10 +200,8 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-bottom'].selector} {
-                & .tabs-container {
-                    border-bottom: 1px solid
-                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
-                }
+                border-bottom: 1px solid
+                    ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
                 & li::after {
                     bottom: 0;
@@ -216,10 +214,8 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-top'].selector} {
-                & .tabs-container {
-                    border-top: 1px solid
-                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
-                }
+                border-top: 1px solid
+                    ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
                 & li::after {
                     top: 0;
@@ -232,10 +228,8 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-left'].selector} {
-                & .tabs-container {
-                    border-left: 1px solid
-                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
-                }
+                border-left: 1px solid
+                    ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
                 & li::after {
                     top: 0;
@@ -248,10 +242,8 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-right'].selector} {
-                & .tabs-container {
-                    border-right: 1px solid
-                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
-                }
+                border-right: 1px solid
+                    ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
                 & li::after {
                     top: 0;
@@ -303,6 +295,11 @@ export const ViraTabs = defineViraElement<
             .tabs-container ${ViraLink} {
                 display: flex;
                 padding: 8px 16px;
+            }
+
+            ${ViraMenuTrigger} {
+                margin-top: -1lh;
+                margin-bottom: 2.6px;
             }
         `;
     },

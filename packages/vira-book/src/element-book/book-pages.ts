@@ -21,7 +21,6 @@ import {viraImageBookPage} from './entries/vira-image.element.book.js';
 import {viraInputBookPage} from './entries/vira-input.element.book.js';
 import {viraLinkBookPage} from './entries/vira-link.element.book.js';
 import {viraModalBookPage} from './entries/vira-modal.element.book.js';
-import {viraOverflowSwitchBookPage} from './entries/vira-overflow-switch.element.book.js';
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
@@ -54,7 +53,6 @@ const elementPages = [
     viraMenuOptionsBookPage,
     viraMenuTriggerBookPage,
     viraModalBookPage,
-    viraOverflowSwitchBookPage,
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
     viraSelectBookPage,

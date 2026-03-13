@@ -1,6 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined} from '@augment-vir/common';
-import {classMap, css, html, nothing} from 'element-vir';
+import {classMap, css, html, nothing, onDomCreated} from 'element-vir';
 import {
     routeHasPaths,
     type FullSpaRoute,
@@ -13,6 +13,7 @@ import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraColorVariant} from '../styles/form-variants.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
+import {createOverflowObserver} from '../util/overflow-observer.js';
 import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
 import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
 import {ViraMenuCornerStyle} from './pop-up/vira-menu.element.js';
@@ -20,7 +21,6 @@ import {type HorizontalAnchor, type PopUpOffset} from './pop-up/vira-pop-up-trig
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 import {ViraLink} from './vira-link.element.js';
-import {ViraOverflowSwitch} from './vira-overflow-switch.element.js';
 
 /**
  * Controls which edge of the tab the selection indicator bar appears on.
@@ -102,6 +102,13 @@ export const ViraTabs = defineViraElement<
     }>
 >()({
     tagName: 'vira-tabs',
+    state() {
+        return {
+            isOverflowing: false,
+            /** A callback to remove all internal observers. */
+            cleanupObserver: undefined as undefined | (() => void),
+        };
+    },
     hostClasses: {
         'vira-tabs-bar-top': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Top,
         'vira-tabs-bar-bottom': ({inputs}) =>
@@ -115,6 +122,7 @@ export const ViraTabs = defineViraElement<
             !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical,
         'vira-tabs-icon-layout-horizontal': ({inputs}) =>
             inputs.iconLayout === ViraTabsIconLayout.Horizontal,
+        'vira-tabs-overflowing': ({state}) => state.isOverflowing,
     },
     cssVars: {
         'vira-tabs-active-color': viraFormCssVars['vira-form-accent-primary-color'].value,
@@ -134,7 +142,6 @@ export const ViraTabs = defineViraElement<
                 box-sizing: border-box;
                 ${noUserSelect};
                 width: 100%;
-                height: 100%;
             }
 
             .tabs-container {
@@ -284,8 +291,19 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
-            ${ViraOverflowSwitch} {
-                max-width: 100%;
+            ${hostClasses['vira-tabs-overflowing'].selector} .tabs-container {
+                visibility: hidden;
+                height: 0;
+            }
+
+            .overflow-menu {
+                display: none;
+            }
+
+            ${hostClasses['vira-tabs-overflowing'].selector} .overflow-menu {
+                display: flex;
+                align-items: center;
+                width: fit-content;
             }
 
             ${ViraLink} {
@@ -298,12 +316,14 @@ export const ViraTabs = defineViraElement<
             }
 
             ${ViraMenuTrigger} {
-                margin-top: -1lh;
-                margin-bottom: 2.6px;
+                margin: 3px 0;
             }
         `;
     },
-    render({inputs}) {
+    cleanup({state}) {
+        state.cleanupObserver?.();
+    },
+    render({inputs, state, updateState, host}) {
         const tabs = filterMap(
             inputs.tabs,
             (tab) => {
@@ -397,34 +417,43 @@ export const ViraTabs = defineViraElement<
         );
 
         return html`
-            <${ViraOverflowSwitch.assign({
-                automaticallySwitch: true,
-            })}>
-                <ul
-                    class="tabs-container"
-                    role="tablist"
-                    slot=${ViraOverflowSwitch.slotNames.large}
-                >
-                    ${tabs}
-                </ul>
-                <${ViraMenuTrigger.assign({
-                    horizontalAnchor: inputs.menuHorizontalAnchor,
-                    isDisabled: inputs.menuIsDisabled,
-                    popUpOffset: inputs.menuPopUpOffset,
-                    menuCornerStyle: ViraMenuCornerStyle.AllRounded,
+            <${ViraMenuTrigger.assign({
+                horizontalAnchor: inputs.menuHorizontalAnchor,
+                isDisabled: inputs.menuIsDisabled,
+                popUpOffset: inputs.menuPopUpOffset,
+                menuCornerStyle: ViraMenuCornerStyle.AllRounded,
+            })}
+                class="overflow-menu"
+            >
+                <${ViraButton.assign({
+                    text: selectedTab?.label || '',
+                    showMenuCaret: true,
+                    colorVariant: ViraColorVariant.Neutral,
                 })}
-                    slot=${ViraOverflowSwitch.slotNames.small}
-                >
-                    <${ViraButton.assign({
-                        text: selectedTab?.label || '',
-                        showMenuCaret: true,
-                        colorVariant: ViraColorVariant.Neutral,
-                    })}
-                        slot=${ViraMenuTrigger.slotNames.trigger}
-                    ></${ViraButton}>
-                    ${menuItems}
-                </${ViraMenuTrigger}>
-            </${ViraOverflowSwitch}>
+                    slot=${ViraMenuTrigger.slotNames.trigger}
+                ></${ViraButton}>
+                ${menuItems}
+            </${ViraMenuTrigger}>
+            <ul
+                class="tabs-container"
+                role="tablist"
+                ${onDomCreated((tabsElement) => {
+                    state.cleanupObserver?.();
+                    updateState({
+                        cleanupObserver: createOverflowObserver({
+                            element: tabsElement,
+                            widthElement: host,
+                            onChange(isOverflowing) {
+                                updateState({
+                                    isOverflowing,
+                                });
+                            },
+                        }),
+                    });
+                })}
+            >
+                ${tabs}
+            </ul>
         `;
     },
 });

@@ -1,6 +1,7 @@
 export * from './define-table.js';
 export * from './define-vira-element.js';
 export * from './dynamic-element.js';
+export * from './overflow-observer.js';
 export * from './pop-up-helpers.js';
 export * from './pop-up-manager.js';
 export * from './shared-text-input-logic.js';

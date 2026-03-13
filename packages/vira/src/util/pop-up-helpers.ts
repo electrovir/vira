@@ -112,6 +112,12 @@ export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItem
                     ...item,
                 })}
                     ${listen('click', async (event) => {
+                        if (item.disabled) {
+                            event.stopImmediatePropagation();
+                            event.preventDefault();
+                            return;
+                        }
+
                         await item.onClick?.({
                             event,
                             index,

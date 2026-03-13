@@ -1,9 +1,13 @@
+import {checkWrap} from '@augment-vir/assert';
+import {addPx, removePx} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
+import {readCssVarValue, setCssVarValue} from 'lit-css-vars';
 import {PathTree} from 'spa-router-vir';
 import {
     Bell24Icon,
     Chat24Icon,
+    defineViraElement,
     Element24Icon,
     Star24Icon,
     ViraColorVariant,
@@ -121,6 +125,72 @@ const simpleExamples = [
     },
 ];
 
+const dynamicWidths = {
+    max: 600,
+    min: 150,
+    default: 600,
+};
+
+const ViraDynamicWidthTabsExample = defineViraElement()({
+    tagName: 'vira-dynamic-width-tabs-example',
+    cssVars: {
+        'vira-dynamic-width-tabs-example-width': addPx(dynamicWidths.default),
+    },
+    state() {
+        return {
+            intervalId: undefined as undefined | ReturnType<typeof globalThis.setInterval>,
+            increment: 2,
+        };
+    },
+    styles: ({cssVars}) => css`
+        :host {
+            display: block;
+            border: 1px solid #ccc;
+            padding: 8px;
+            width: ${cssVars['vira-dynamic-width-tabs-example-width'].value};
+        }
+    `,
+    init({state, updateState, host, cssVars}) {
+        globalThis.clearInterval(state.intervalId);
+        updateState({
+            intervalId: globalThis.setInterval(() => {
+                const currentWidth =
+                    checkWrap.isNumber(
+                        removePx(
+                            readCssVarValue({
+                                onElement: host,
+                                forCssVar: cssVars['vira-dynamic-width-tabs-example-width'],
+                            }),
+                        ),
+                    ) || dynamicWidths.default;
+
+                if (currentWidth >= dynamicWidths.max || currentWidth <= dynamicWidths.min) {
+                    updateState({
+                        increment: state.increment * -1,
+                    });
+                }
+
+                setCssVarValue({
+                    onElement: host,
+                    forCssVar: cssVars['vira-dynamic-width-tabs-example-width'],
+                    toValue: addPx(currentWidth + state.increment),
+                });
+            }, 10),
+        });
+    },
+    cleanup({state, updateState}) {
+        globalThis.clearInterval(state.intervalId);
+        updateState({
+            intervalId: undefined,
+        });
+    },
+    render() {
+        return html`
+            <slot></slot>
+        `;
+    },
+});
+
 export const viraTabsBookPage = defineBookPage({
     parent: elementsBookPage,
     title: ViraTabs.tagName,
@@ -157,6 +227,26 @@ export const viraTabsBookPage = defineBookPage({
                         router: mockRouter,
                         currentRoute: selectedRoute,
                     })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'dynamic overflow',
+            styles: css`
+                :host {
+                    width: ${dynamicWidths.max + 20}px;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraDynamicWidthTabsExample}>
+                        <${ViraTabs.assign({
+                            tabs: tabsWithIcons,
+                            router: mockRouter,
+                            currentRoute: selectedRoute,
+                        })}></${ViraTabs}>
+                    </${ViraDynamicWidthTabsExample}>
                 `;
             },
         });

@@ -51,13 +51,15 @@ export const ViraOverflowSwitch = defineViraElement<
 
         /**
          * When the large content overflows, hide it but keep it in layout so we can measure it.
-         * The small content is then shown instead.
+         * The small content is then shown instead. Using height: 0 + overflow: hidden instead of
+         * position: absolute keeps the large element in flow so the host's width still reflects
+         * the available container space, allowing the ResizeObserver to detect when there is
+         * enough room to un-collapse.
          */
         ${hostClasses['vira-overflow-switch-show-small'].selector} .large {
             visibility: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
+            height: 0;
+            overflow: hidden;
         }
 
         ${hostClasses['vira-overflow-switch-show-small'].selector} .small {

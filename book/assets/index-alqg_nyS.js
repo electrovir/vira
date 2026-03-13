@@ -4260,17 +4260,18 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             <div class="background-bar"></div>
         `}});var ai=(e=>(e.Top="top",e.Bottom="bottom",e.Left="left",e.Right="right",e))(ai||{}),i4=(e=>(e.Vertical="vertical",e.Horizontal="horizontal",e))(i4||{});const vo=Je()({tagName:"vira-tabs",hostClasses:{"vira-tabs-bar-top":i(({inputs:e})=>e.barDirection==="top","vira-tabs-bar-top"),"vira-tabs-bar-bottom":i(({inputs:e})=>!e.barDirection||e.barDirection==="bottom","vira-tabs-bar-bottom"),"vira-tabs-bar-left":i(({inputs:e})=>e.barDirection==="left","vira-tabs-bar-left"),"vira-tabs-bar-right":i(({inputs:e})=>e.barDirection==="right","vira-tabs-bar-right"),"vira-tabs-color-accent":i(({inputs:e})=>!e.colorVariant||e.colorVariant===te.Accent,"vira-tabs-color-accent"),"vira-tabs-color-plain":i(({inputs:e})=>e.colorVariant===te.Plain,"vira-tabs-color-plain"),"vira-tabs-icon-layout-vertical":i(({inputs:e})=>!e.iconLayout||e.iconLayout==="vertical","vira-tabs-icon-layout-vertical"),"vira-tabs-icon-layout-horizontal":i(({inputs:e})=>e.iconLayout==="horizontal","vira-tabs-icon-layout-horizontal")},cssVars:{"vira-tabs-active-color":R["vira-form-accent-primary-color"].value,"vira-tabs-active-hover-color":R["vira-form-accent-primary-hover-color"].value,"vira-tabs-inactive-color":S.colors["vira-grey-foreground-header"].foreground.value,"vira-tabs-inactive-hover-color":S.colors["vira-grey-foreground-non-body"].foreground.value,"vira-tabs-bar-thickness":"3px"},styles:i(({hostClasses:e,cssVars:r})=>w`
             :host {
-                display: inline-flex;
+                display: flex;
                 box-sizing: border-box;
                 ${jo};
-                max-width: 100%;
-                max-height: 100%;
+                width: 100%;
+                height: 100%;
             }
 
             .tabs-container {
                 display: flex;
                 position: relative;
                 list-style: none;
+                overflow: hidden;
                 margin: 0;
                 padding: 0;
             }
@@ -4326,6 +4327,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e["vira-tabs-bar-bottom"].selector} {
+                & .tabs-container {
+                    border-bottom: 1px solid
+                        ${S.colors["vira-grey-foreground-decoration"].foreground.value};
+                }
+
                 & li::after {
                     bottom: 0;
                     left: 0;
@@ -4337,6 +4343,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e["vira-tabs-bar-top"].selector} {
+                & .tabs-container {
+                    border-top: 1px solid
+                        ${S.colors["vira-grey-foreground-decoration"].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     left: 0;
@@ -4348,6 +4359,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e["vira-tabs-bar-left"].selector} {
+                & .tabs-container {
+                    border-left: 1px solid
+                        ${S.colors["vira-grey-foreground-decoration"].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     bottom: 0;
@@ -4359,6 +4375,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e["vira-tabs-bar-right"].selector} {
+                & .tabs-container {
+                    border-right: 1px solid
+                        ${S.colors["vira-grey-foreground-decoration"].foreground.value};
+                }
+
                 & li::after {
                     top: 0;
                     bottom: 0;
@@ -5161,7 +5182,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${B.assign({icon:r.icon})}></${B}>
                         <span>→</span>
                         <${B.assign({icon:t})}></${B}>
-                    `}})})}}),u4={async element1(){return await ta({seconds:2}),(await Rl(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-CBsEygpf.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ta({seconds:2}),(await Rl(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-DXmUfckY.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},U1=Jn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:a4(u4)}},render({state:e,inputs:r}){return s4(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return m`
+                    `}})})}}),u4={async element1(){return await ta({seconds:2}),(await Rl(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-C1uy0h0c.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ta({seconds:2}),(await Rl(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CoS8vTo0.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},U1=Jn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:a4(u4)}},render({state:e,inputs:r}){return s4(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return m`
                     <${Qi}>
                         ${ga("Failed to import element",nt(t))}
                     </${Qi}>

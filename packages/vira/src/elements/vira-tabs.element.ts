@@ -1,6 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined} from '@augment-vir/common';
-import {classMap, css, html, nothing, onDomCreated} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
 import {
     routeHasPaths,
     type FullSpaRoute,
@@ -102,6 +102,10 @@ export const ViraTabs = defineViraElement<
     }>
 >()({
     tagName: 'vira-tabs',
+    events: {
+        /** Fires when a tab is clicked with the corresponding tab entry. */
+        tabSelect: defineElementEvent<Readonly<ViraTab>>(),
+    },
     state() {
         return {
             isOverflowing: false,
@@ -323,7 +327,7 @@ export const ViraTabs = defineViraElement<
     cleanup({state}) {
         state.cleanupObserver?.();
     },
-    render({inputs, state, updateState, host}) {
+    render({inputs, state, updateState, host, dispatch, events}) {
         const tabs = filterMap(
             inputs.tabs,
             (tab) => {
@@ -350,6 +354,11 @@ export const ViraTabs = defineViraElement<
                             disabled: !!tab.isDisabled,
                         })}
                         role="presentation"
+                        ${listen('click', () => {
+                            if (!tab.isDisabled) {
+                                dispatch(new events.tabSelect(tab));
+                            }
+                        })}
                     >
                         <${ViraLink.assign({
                             route: {
@@ -410,6 +419,11 @@ export const ViraTabs = defineViraElement<
                         `,
                         selected: isSelected,
                         disabled: tab.isDisabled,
+                        onClick() {
+                            if (!tab.isDisabled) {
+                                dispatch(new events.tabSelect(tab));
+                            }
+                        },
                     };
                 },
                 check.isTruthy,

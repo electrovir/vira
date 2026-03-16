@@ -443,6 +443,11 @@ export const ViraTag = defineViraElement<
                 display: flex;
             }
 
+            ${hostClasses['vira-tag-size-small'].selector} button {
+                padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 8px);
+                gap: 4px;
+            }
+
             ${hostClasses['vira-tag-size-large'].selector} button {
                 padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 16px);
             }

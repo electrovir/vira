@@ -4539,6 +4539,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 display: flex;
             }
 
+            ${r["vira-tag-size-small"].selector} button {
+                padding: 0 var(${e["vira-tag-horizontal-padding"].name}, 8px);
+                gap: 4px;
+            }
+
             ${r["vira-tag-size-large"].selector} button {
                 padding: 0 var(${e["vira-tag-horizontal-padding"].name}, 16px);
             }
@@ -5150,7 +5155,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${B.assign({icon:r.icon})}></${B}>
                         <span>→</span>
                         <${B.assign({icon:t})}></${B}>
-                    `}})})}}),e4={async element1(){return await ea({seconds:2}),(await Ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-B6u_65uG.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ea({seconds:2}),(await Ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-B3UZIQET.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},B1=Xn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Jx(e4)}},render({state:e,inputs:r}){return Xx(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return m`
+                    `}})})}}),e4={async element1(){return await ea({seconds:2}),(await Ol(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-DBf_LFAM.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await ea({seconds:2}),(await Ol(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-Bb0AkroE.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},B1=Xn()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:Jx(e4)}},render({state:e,inputs:r}){return Xx(e.dynamicElements,{key:r.numberValue===1?"element1":r.numberValue===2?"element2":"errorElement",error(t){return m`
                     <${Ji}>
                         ${fa("Failed to import element",nt(t))}
                     </${Ji}>

@@ -1,12 +1,14 @@
 import {defineBookPage} from 'element-book';
-import {css, html} from 'element-vir';
+import {css, html, listen} from 'element-vir';
 import {
     HorizontalAnchor,
     renderMenuItemEntries,
     ViraLink,
     ViraMenuCornerStyle,
     ViraMenuTrigger,
+    ViraSelect,
     type ViraMenuItemEntry,
+    type ViraSelectOption,
 } from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
@@ -28,6 +30,21 @@ const mockMenuItems: ReadonlyArray<ViraMenuItemEntry> = [
     },
     {
         content: 'six',
+    },
+];
+
+const mockSelectOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
+    {
+        value: '1',
+        label: 'Option one',
+    },
+    {
+        value: '2',
+        label: 'Option two',
+    },
+    {
+        value: '3',
+        label: 'Option three',
     },
 ];
 
@@ -155,8 +172,41 @@ export const viraMenuTriggerBookPage = defineBookPage({
                         padding: 8px 16px;
                     }
                 `,
-                render() {
-                    const items = example.menuItems || mockMenuItems;
+                state() {
+                    return {
+                        selectedValue: undefined as string | undefined,
+                    };
+                },
+                render({state, updateState}) {
+                    const rawSelectItem: ViraMenuItemEntry = {
+                        content: html`
+                            <${ViraSelect.assign({
+                                options: mockSelectOptions,
+                                value: state.selectedValue,
+                                rawSelect: true,
+                            })}
+                                style=${css`
+                                    width: 100%;
+                                `}
+                                ${listen('click', (event) => {
+                                    event.stopPropagation();
+                                })}
+                                ${listen('mousedown', (event) => {
+                                    event.stopPropagation();
+                                })}
+                                ${listen(ViraSelect.events.valueChange, (event) => {
+                                    updateState({
+                                        selectedValue: event.detail,
+                                    });
+                                })}
+                            ></${ViraSelect}>
+                        `,
+                    };
+
+                    const items = [
+                        rawSelectItem,
+                        ...(example.menuItems || mockMenuItems),
+                    ];
 
                     return html`
                         <${ViraMenuTrigger.assign({

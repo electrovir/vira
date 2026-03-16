@@ -19,10 +19,17 @@ export default defineConfig(
             esbuild: {
                 keepNames: true,
             },
+            resolve: {
+                dedupe: [
+                    'vira',
+                    'element-vir',
+                ],
+            },
             optimizeDeps: {
                 exclude: [
                     ...(baseConfig.optimizeDeps?.exclude || []),
                     'vira',
+                    'element-book',
                 ],
             },
         });

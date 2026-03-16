@@ -108,6 +108,8 @@ export const ViraMenuItem = defineViraElement<
         }
 
         .slot-wrapper {
+            display: flex;
+            flex-grow: 1;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -145,7 +147,16 @@ export const ViraMenuItem = defineViraElement<
                         event.preventDefault();
                         event.stopPropagation();
                         propagating[event.type] = true;
-                        element.dispatchEvent(new MouseEvent(event.type, event));
+                        if (event.type === 'click') {
+                            /**
+                             * Use `.click()` instead of dispatching a synthetic MouseEvent so that
+                             * the resulting event is trusted and carries user activation. This is
+                             * required for APIs like `showPicker()` on `<select>` elements.
+                             */
+                            element.click();
+                        } else {
+                            element.dispatchEvent(new MouseEvent(event.type, event));
+                        }
                         delete propagating[event.type];
                     }
                 });

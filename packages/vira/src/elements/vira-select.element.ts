@@ -229,12 +229,31 @@ export const ViraSelect = defineViraElement<
     init({state, updateState, host}) {
         state.cleanupListeners?.();
 
+        function getSelectElement() {
+            return assertWrap.instanceOf(
+                host.shadowRoot.querySelector('select'),
+                HTMLSelectElement,
+            );
+        }
+
         const listenerRemovers = [
             listenTo(host, 'mousedown', (event) => {
-                const selectElement = assertWrap.instanceOf(
-                    host.shadowRoot.querySelector('select'),
-                    HTMLSelectElement,
-                );
+                const selectElement = getSelectElement();
+
+                if (event.composedPath().includes(selectElement)) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+                /** `showPicker` is not in Safari. */
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                if (selectElement.showPicker) {
+                    selectElement.showPicker();
+                }
+            }),
+            listenTo(host, 'click', (event) => {
+                const selectElement = getSelectElement();
 
                 if (event.composedPath().includes(selectElement)) {
                     return;

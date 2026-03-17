@@ -215,6 +215,27 @@ export const viraTabsBookPage = defineBookPage({
         });
 
         defineExample({
+            title: 'fill width',
+            styles: css`
+                :host {
+                    width: 600px;
+                    border: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithIcons,
+                        router: mockRouter,
+                        currentRoute: selectedRoute,
+                        shouldFillWidth: true,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
             title: 'overflow into menu',
             styles: css`
                 :host {

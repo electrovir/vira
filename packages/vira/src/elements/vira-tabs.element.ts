@@ -99,6 +99,8 @@ export const ViraTabs = defineViraElement<
         menuIsDisabled: boolean;
         /** Offset for the dropdown pop-up. Only used when tabs overflow into a dropdown. */
         menuPopUpOffset: Readonly<PopUpOffset>;
+        /** When true, tabs and their container expand to fill all available horizontal space. */
+        shouldFillWidth: boolean;
     }>
 >()({
     tagName: 'vira-tabs',
@@ -127,6 +129,7 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-icon-layout-horizontal': ({inputs}) =>
             inputs.iconLayout === ViraTabsIconLayout.Horizontal,
         'vira-tabs-overflowing': ({state}) => state.isOverflowing,
+        'vira-tabs-fill-width': ({inputs}) => !!inputs.shouldFillWidth,
     },
     cssVars: {
         'vira-tabs-active-color': viraFormCssVars['vira-form-accent-primary-color'].value,
@@ -194,6 +197,8 @@ export const ViraTabs = defineViraElement<
 
                 &:hover {
                     color: ${cssVars['vira-tabs-inactive-hover-color'].value};
+                    background-color: ${viraTheme.colors['vira-grey-on-self-small-body'].background
+                        .value};
                 }
 
                 &.selected {
@@ -308,6 +313,21 @@ export const ViraTabs = defineViraElement<
                 display: flex;
                 align-items: center;
                 width: fit-content;
+            }
+
+            ${hostClasses['vira-tabs-fill-width'].selector} {
+                & .tabs-container {
+                    flex-grow: 1;
+                }
+
+                & li {
+                    flex-grow: 1;
+                }
+
+                & .tabs-container ${ViraLink} {
+                    flex-grow: 1;
+                    justify-content: center;
+                }
             }
 
             ${ViraLink} {

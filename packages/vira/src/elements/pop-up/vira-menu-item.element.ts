@@ -48,6 +48,7 @@ export const ViraMenuItem = defineViraElement<
     styles: ({hostClasses}) => css`
         :host {
             display: flex;
+            flex-shrink: 0;
             ${noUserSelect};
             box-sizing: border-box;
             max-width: 100%;

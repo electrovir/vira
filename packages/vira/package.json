@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "31.8.1",
+    "version": "31.9.0",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -53,15 +53,14 @@
     },
     "devDependencies": {
         "@augment-vir/test": "^31.68.1",
-        "@types/feather-icons": "^4.29.4",
         "@web/dev-server-esbuild": "^1.0.5",
         "@web/test-runner": "^0.20.2",
         "@web/test-runner-commands": "^0.9.0",
         "@web/test-runner-playwright": "^0.11.1",
         "@web/test-runner-visual-regression": "^0.10.0",
         "esbuild": "^0.27.3",
-        "feather-icons": "^4.29.2",
         "istanbul-smart-text-reporter": "^1.1.5",
+        "lucide-static": "^0.577.0",
         "markdown-code-example-inserter": "^3.0.3",
         "theme-vir": "^28.23.1",
         "typedoc": "^0.28.17",
@@ -70,9 +69,8 @@
         "vite-tsconfig-paths": "^6.1.1"
     },
     "peerDependencies": {
-        "@types/feather-icons": ">=4",
         "element-vir": ">=26",
-        "feather-icons": ">=4",
+        "lucide-static": ">=0.460",
         "theme-vir": ">=28"
     },
     "engines": {

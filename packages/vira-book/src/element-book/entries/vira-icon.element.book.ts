@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {Element24Icon, ViraIcon, createColoredIcon, createSizedIcon, featherIcons} from 'vira';
+import {Element24Icon, ViraIcon, createColoredIcon, createSizedIcon, lucideIcons} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraIconBookPage = defineBookPage({
@@ -43,21 +43,21 @@ export const viraIconBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'using feather icon',
+            title: 'using lucide icon',
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: featherIcons.anchor,
+                        icon: lucideIcons.Anchor,
                     })}></${ViraIcon}>
                 `;
             },
         });
         defineExample({
-            title: 'using customized feather icon',
+            title: 'using customized lucide icon',
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: featherIcons.anchor({
+                        icon: lucideIcons.Anchor({
                             height: 64,
                             width: 64,
                         }),
@@ -104,7 +104,7 @@ export const viraIconBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'feather fit container',
+            title: 'lucide fit container',
             styles: css`
                 ${ViraIcon} {
                     width: 200px;
@@ -115,14 +115,14 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: featherIcons.anchor,
+                        icon: lucideIcons.Anchor,
                         fitContainer: true,
                     })}></${ViraIcon}>
                 `;
             },
         });
         defineExample({
-            title: 'customized feather fit container',
+            title: 'customized lucide fit container',
             styles: css`
                 ${ViraIcon} {
                     width: 200px;
@@ -133,7 +133,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: featherIcons.anchor({
+                        icon: lucideIcons.Anchor({
                             'stroke-width': 4,
                         }),
                         fitContainer: true,

@@ -25,7 +25,7 @@ import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
-import {featherIconsBookPage, icons16BookPage, icons24BookPage} from './icon-book-pages.js';
+import {icons16BookPage, icons24BookPage, lucideIconsBookPage} from './icon-book-pages.js';
 import {elementsBookPage, iconsBookPage, stylesBookPage, utilBookPage} from './top-level-pages.js';
 
 const topLevelPages = [
@@ -65,7 +65,7 @@ const allPages = [
     createColoredIconBookPage,
     createSizedIconBookPage,
     dynamicElementsBookPage,
-    featherIconsBookPage,
+    lucideIconsBookPage,
     icons16BookPage,
     icons24BookPage,
 

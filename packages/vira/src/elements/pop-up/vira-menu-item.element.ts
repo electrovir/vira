@@ -149,12 +149,26 @@ export const ViraMenuItem = defineViraElement<
                         event.stopPropagation();
                         propagating[event.type] = true;
                         if (event.type === 'click') {
-                            /**
-                             * Use `.click()` instead of dispatching a synthetic MouseEvent so that
-                             * the resulting event is trusted and carries user activation. This is
-                             * required for APIs like `showPicker()` on `<select>` elements.
-                             */
-                            element.click();
+                            const hasModifiers =
+                                event instanceof MouseEvent &&
+                                (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+
+                            if (hasModifiers) {
+                                /**
+                                 * If modifier keys are present, dispatch a synthetic MouseEvent so
+                                 * that the modifier keys are preserved. This is needed so that
+                                 * cmd+click opens links in a new tab.
+                                 */
+                                element.dispatchEvent(new MouseEvent('click', event));
+                            } else {
+                                /**
+                                 * Use `.click()` instead of dispatching a synthetic MouseEvent so
+                                 * that the resulting event is trusted and carries user activation.
+                                 * This is required for APIs like `showPicker()` on `<select>`
+                                 * elements.
+                                 */
+                                element.click();
+                            }
                         } else {
                             element.dispatchEvent(new MouseEvent(event.type, event));
                         }

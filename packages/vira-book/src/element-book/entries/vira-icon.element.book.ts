@@ -53,14 +53,11 @@ export const viraIconBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'using customized lucide icon',
+            title: 'using sized lucide icon',
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: lucideIcons.Anchor({
-                            height: 64,
-                            width: 64,
-                        }),
+                        icon: createSizedIcon(lucideIcons.Anchor, 64),
                     })}></${ViraIcon}>
                 `;
             },
@@ -122,7 +119,7 @@ export const viraIconBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'customized lucide fit container',
+            title: 'colored lucide fit container',
             styles: css`
                 ${ViraIcon} {
                     width: 200px;
@@ -133,8 +130,8 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: lucideIcons.Anchor({
-                            'stroke-width': 4,
+                        icon: createColoredIcon(lucideIcons.Anchor, {
+                            'vira-icon-stroke-color': 'red',
                         }),
                         fitContainer: true,
                     })}></${ViraIcon}>

@@ -10,14 +10,6 @@ import {type ViraIconSvg} from './icon-svg.js';
  */
 export type LucideIconKey = keyof typeof lucideStaticImport;
 
-/**
- * An entry in {@link lucideIcons}.
- *
- * @category Internal
- */
-export type LucideIconEntry = ViraIconSvg &
-    ((options: Readonly<Record<string, string | number>>) => ViraIconSvg);
-
 const defaultLucideAttributes: Readonly<Record<string, string>> = {
     fill: String(viraIconCssVars['vira-icon-fill-color'].value),
     stroke: String(viraIconCssVars['vira-icon-stroke-color'].value),
@@ -35,7 +27,7 @@ function setSvgAttribute(svgString: string, attributeName: string, value: string
 
 function applySvgAttributes(
     svgString: string,
-    attributes: Readonly<Record<string, string | number>>,
+    attributes: Readonly<Record<string, string>>,
 ): string {
     return Object.entries(attributes).reduce(
         (
@@ -44,7 +36,7 @@ function applySvgAttributes(
                 key,
                 value,
             ],
-        ) => setSvgAttribute(result, key, String(value)),
+        ) => setSvgAttribute(result, key, value),
         svgString,
     );
 }
@@ -63,48 +55,25 @@ function getLucideIconSvg(key: LucideIconKey): string {
     return svg;
 }
 
-function createLucideIconEntry(iconKey: LucideIconKey): LucideIconEntry {
-    const svgString = getLucideIconSvg(iconKey);
-
-    const configureIconCallback = (
-        options: Readonly<Record<string, string | number>>,
-    ): ViraIconSvg => {
-        return {
-            name: iconKey,
-            svgTemplate: html`
-                ${unsafeHTML(
-                    applySvgAttributes(svgString, {
-                        ...defaultLucideAttributes,
-                        ...options,
-                    }),
-                )}
-            `,
-        };
-    };
-
-    Object.defineProperty(configureIconCallback, 'name', {
-        value: iconKey,
-        writable: false,
-        configurable: true,
-    });
-
-    return Object.assign(configureIconCallback, {
+function createLucideIconEntry(iconKey: LucideIconKey): ViraIconSvg {
+    return {
+        name: iconKey,
         svgTemplate: html`
-            ${unsafeHTML(applySvgAttributes(svgString, defaultLucideAttributes))}
+            ${unsafeHTML(applySvgAttributes(getLucideIconSvg(iconKey), defaultLucideAttributes))}
         `,
-    }) as LucideIconEntry;
+    };
 }
 
-const lucideIconCache = new Map<LucideIconKey, LucideIconEntry>();
+const lucideIconCache = new Map<LucideIconKey, ViraIconSvg>();
 
 /**
  * All [Lucide icons](https://lucide.dev) in a format compatible with `ViraIcon`. Each icon entry
- * can be accessed directly or customized by calling it as a function.
+ * can be accessed directly as a {@link ViraIconSvg}.
  *
  * @category Icon
  */
-export const lucideIcons: Readonly<Record<LucideIconKey, LucideIconEntry>> = new Proxy(
-    {} as Record<LucideIconKey, LucideIconEntry>,
+export const lucideIcons: Readonly<Record<LucideIconKey, ViraIconSvg>> = new Proxy(
+    {} as Record<LucideIconKey, ViraIconSvg>,
     {
         get(_target, property: string) {
             if (!isLucideIconKey(property)) {

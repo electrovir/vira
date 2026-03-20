@@ -39,7 +39,7 @@ export const viraColorVariantToColorName: Record<
     Exclude<ViraColorVariant, ViraColorVariant.None | ViraColorVariant.Plain>,
     ViraThemeColorName
 > = {
-    [ViraColorVariant.Accent]: ViraThemeColorName.blue,
+    [ViraColorVariant.Accent]: ViraThemeColorName.accent,
     [ViraColorVariant.Neutral]: ViraThemeColorName.grey,
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
     [ViraColorVariant.Warning]: ViraThemeColorName.yellow,

@@ -173,17 +173,17 @@ const tagNotCheckedColors: Record<
         idle: {
             textColor: viraTheme.colors[themeDefaultKey].foreground,
             backgroundColor: transparentColor,
-            borderColor: transparentColor,
+            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
         },
         hover: {
             backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
             textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
-            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
         },
         active: {
             backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
             textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
-            borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
         },
     },
     [ViraColorVariant.Accent]: buildThemedNotCheckedColors(

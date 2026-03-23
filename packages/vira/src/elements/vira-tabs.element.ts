@@ -180,6 +180,7 @@ export const ViraTabs = defineViraElement<
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-align: center;
                 position: relative;
                 color: ${cssVars['vira-tabs-inactive-color'].value};
                 font-size: ${viraFormCssVars['vira-form-medium-text-size'].value};

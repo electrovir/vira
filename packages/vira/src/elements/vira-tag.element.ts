@@ -115,19 +115,19 @@ const tagColorVariantColors: Record<
     [ViraColorVariant.Plain]: {
         [ViraEmphasis.Standard]: {
             idle: {
-                backgroundColor: viraTheme.inverse[themeDefaultKey].background,
-                textColor: viraTheme.inverse[themeDefaultKey].foreground,
-                borderColor: viraTheme.inverse[themeDefaultKey].background,
+                backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
+                textColor: viraTheme.colors[themeDefaultKey].background,
+                borderColor: viraTheme.colors[themeDefaultKey].foreground,
             },
             hover: {
-                backgroundColor: viraTheme.colors['vira-grey-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-grey-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-behind-bg-non-body'].background,
+                backgroundColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
+                textColor: viraTheme.colors['vira-grey-behind-bg-body'].foreground,
+                borderColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
             },
             active: {
-                backgroundColor: viraTheme.inverse[themeDefaultKey].background,
-                textColor: viraTheme.inverse[themeDefaultKey].foreground,
-                borderColor: viraTheme.inverse[themeDefaultKey].background,
+                backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
+                textColor: viraTheme.colors[themeDefaultKey].background,
+                borderColor: viraTheme.colors[themeDefaultKey].foreground,
             },
         },
         [ViraEmphasis.Subtle]: {

@@ -314,6 +314,7 @@ export const ViraTabs = defineViraElement<
                 display: flex;
                 align-items: center;
                 width: fit-content;
+                padding-left: 8px;
             }
 
             ${hostClasses['vira-tabs-fill-width'].selector} {

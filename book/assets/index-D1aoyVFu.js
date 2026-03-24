@@ -34940,6 +34940,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 display: flex;
                 align-items: center;
                 width: fit-content;
+                padding-left: 8px;
             }
 
             ${e["vira-tabs-fill-width"].selector} {
@@ -35728,7 +35729,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${I.assign({icon:t.icon})}></${I}>
                         <span>→</span>
                         <${I.assign({icon:r})}></${I}>
-                    `}})})}}),f9={async element1(){return await es({seconds:2}),(await S2(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-D8_UpS6r.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await es({seconds:2}),(await S2(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2--O7026O2.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Yk=Qo()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:p9(f9)}},render({state:e,inputs:t}){return w9(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return v`
+                    `}})})}}),f9={async element1(){return await es({seconds:2}),(await S2(async()=>{const{ViraElement1Mock:e}=await import("./vira-element-1-h5m4ki-f.js");return{ViraElement1Mock:e}},[])).ViraElement1Mock},async element2(){return await es({seconds:2}),(await S2(async()=>{const{ViraElement2Mock:e}=await import("./vira-element-2-CEsdtrP_.js");return{ViraElement2Mock:e}},[])).ViraElement2Mock},errorElement(){throw new Error("import failure")}},Yk=Qo()({tagName:"example-direct-set-key-dynamic-elements",state(){return{dynamicElements:p9(f9)}},render({state:e,inputs:t}){return w9(e.dynamicElements,{key:t.numberValue===1?"element1":t.numberValue===2?"element2":"errorElement",error(r){return v`
                     <${Xi}>
                         ${hs("Failed to import element",or(r))}
                     </${Xi}>

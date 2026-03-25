@@ -20,9 +20,26 @@ import {viraFormCssVars} from '../styles/form-styles.js';
 import {viraAnimationDurations} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {
+    isViraSelectOptionGroup,
+    type ViraSelectOption,
+    type ViraSelectOptionGroup,
+} from '../util/vira-select-option.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraIcon} from './vira-icon.element.js';
+
+function renderSelectOption(option: Readonly<ViraSelectOption>, value: string | undefined) {
+    return html`
+        <option
+            ?selected=${option.value === value}
+            aria-label=${option.label}
+            ?disabled=${option.disabled}
+            value=${option.value}
+        >
+            ${option.label}
+        </option>
+    `;
+}
 
 /**
  * Similar to {@link ViraDropdown} but is, instead, simply a wrapper for `<select>` and nothing more.
@@ -33,7 +50,7 @@ import {ViraIcon} from './vira-icon.element.js';
  */
 export const ViraSelect = defineViraElement<
     {
-        options: ReadonlyArray<Readonly<ViraSelectOption>>;
+        options: ReadonlyArray<Readonly<ViraSelectOption> | Readonly<ViraSelectOptionGroup>>;
         /** The currently selected option value. */
         value: undefined | string;
     } & PartialWithUndefined<{
@@ -310,9 +327,13 @@ export const ViraSelect = defineViraElement<
                         const newValue = selectElement.value;
 
                         if (selectElement.value !== value) {
-                            selectElement.selectedIndex = inputs.options.findIndex(
-                                (option) => option.value === value,
-                            );
+                            selectElement.selectedIndex = inputs.options
+                                .flatMap((entry) => {
+                                    return isViraSelectOptionGroup(entry)
+                                        ? [...entry.options]
+                                        : [entry];
+                                })
+                                .findIndex((option) => option.value === value);
                         }
 
                         dispatch(new events.valueChange(newValue));
@@ -320,17 +341,17 @@ export const ViraSelect = defineViraElement<
                     ${attributes(inputs.attributePassthrough?.select)}
                 >
                     ${placeholderOptionTemplate}
-                    ${inputs.options.map((option) => {
-                        return html`
-                            <option
-                                ?selected=${option.value === value}
-                                aria-label=${option.label}
-                                ?disabled=${option.disabled}
-                                value=${option.value}
-                            >
-                                ${option.label}
-                            </option>
-                        `;
+                    ${inputs.options.map((entry) => {
+                        if (isViraSelectOptionGroup(entry)) {
+                            return html`
+                                <optgroup label=${entry.groupName}>
+                                    ${entry.options.map((option) => {
+                                        return renderSelectOption(option, value);
+                                    })}
+                                </optgroup>
+                            `;
+                        }
+                        return renderSelectOption(entry, value);
                     })}
                 </select>
                 <!--

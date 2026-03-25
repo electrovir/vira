@@ -14,3 +14,25 @@ export type ViraSelectOption = {
 } & PartialWithUndefined<{
     disabled: boolean;
 }>;
+
+/**
+ * A group of options for `ViraSelect`, rendered as an `<optgroup>`.
+ *
+ * @category Dropdown
+ * @category Elements
+ */
+export type ViraSelectOptionGroup = {
+    groupName: string;
+    options: ReadonlyArray<Readonly<ViraSelectOption>>;
+};
+
+/**
+ * Type guard to determine if a `ViraSelect` options entry is a group.
+ *
+ * @category Internal
+ */
+export function isViraSelectOptionGroup(
+    entry: Readonly<ViraSelectOption> | Readonly<ViraSelectOptionGroup>,
+): entry is Readonly<ViraSelectOptionGroup> {
+    return 'groupName' in entry;
+}

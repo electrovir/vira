@@ -2,8 +2,57 @@ import {assertWrap} from '@augment-vir/assert';
 import {defineBookPage} from 'element-book';
 import {css, type CSSResult, html, listen} from 'element-vir';
 import {type SetOptional} from 'type-fest';
-import {defineViraElement, Element24Icon, ViraSelect, type ViraSelectOption} from 'vira';
+import {
+    defineViraElement,
+    Element24Icon,
+    ViraSelect,
+    type ViraSelectOption,
+    type ViraSelectOptionGroup,
+} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
+
+const mockGroupedOptions: ReadonlyArray<
+    Readonly<ViraSelectOption> | Readonly<ViraSelectOptionGroup>
+> = [
+    {
+        value: 'none',
+        label: 'No group',
+    },
+    {
+        groupName: 'Fruits',
+        options: [
+            {
+                value: 'apple',
+                label: 'Apple',
+            },
+            {
+                value: 'banana',
+                label: 'Banana',
+            },
+            {
+                value: 'cherry',
+                label: 'Cherry',
+            },
+        ],
+    },
+    {
+        groupName: 'Vegetables',
+        options: [
+            {
+                value: 'carrot',
+                label: 'Carrot',
+            },
+            {
+                value: 'broccoli',
+                label: 'Broccoli',
+            },
+            {
+                value: 'spinach',
+                label: 'Spinach',
+            },
+        ],
+    },
+];
 
 const mockOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
     {
@@ -152,6 +201,19 @@ const examples: {
             ],
             rawSelect: true,
             icon: Element24Icon,
+        },
+    },
+    {
+        title: 'with option groups',
+        inputs: {
+            options: mockGroupedOptions,
+        },
+    },
+    {
+        title: 'option groups with placeholder',
+        inputs: {
+            options: mockGroupedOptions,
+            placeholder: 'Select a food...',
         },
     },
 ];

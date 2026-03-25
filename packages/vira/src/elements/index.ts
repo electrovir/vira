@@ -8,6 +8,7 @@ export * from './vira-card.element.js';
 export * from './vira-checkbox.element.js';
 export * from './vira-collapsible-card.element.js';
 export * from './vira-collapsible-wrapper.element.js';
+export * from './vira-drawer.element.js';
 export * from './vira-dropdown.element.js';
 export * from './vira-error.element.js';
 export * from './vira-form.element.js';

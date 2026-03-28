@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "31.10.0",
+    "version": "31.10.1",
     "private": true,
     "repository": {
         "type": "git",
@@ -67,7 +67,7 @@
         "prettier-plugin-sort-json": "^4.2.0",
         "prettier-plugin-toml": "^2.0.6",
         "runstorm": "^1.0.0",
-        "typescript-eslint": "^8.56.1",
+        "typescript-eslint": "^8.57.1",
         "virmator": "^14.10.3"
     },
     "engines": {

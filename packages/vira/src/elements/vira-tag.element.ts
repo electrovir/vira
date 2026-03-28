@@ -433,23 +433,35 @@ export const ViraTag = defineViraElement<
                 visibility: hidden;
             }
 
-            ${hostClasses['vira-tag-selectable'].selector} .selected-check {
-                display: flex;
+            ${hostClasses['vira-tag-selectable'].selector} {
+                & button {
+                    padding: 0 calc(${cssVars['vira-tag-horizontal-padding'].value} + 5px);
+                    margin-left: calc(4px + ${cssVars['vira-tag-gap'].value});
+                }
             }
-            ${hostClasses['vira-tag-checked'].selector} .selected-check {
-                visibility: visible;
+            ${hostClasses['vira-tag-checked'].selector} {
+                & button {
+                    padding: 0 ${cssVars['vira-tag-horizontal-padding'].value};
+                    margin-left: 0;
+                }
+
+                & .selected-check {
+                    display: flex;
+                    visibility: visible;
+                }
             }
+
             ${hostClasses['vira-tag-cancellable'].selector} .cancel-x {
                 display: flex;
             }
 
-            ${hostClasses['vira-tag-size-small'].selector} button {
-                padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 8px);
-                gap: 4px;
+            ${hostClasses['vira-tag-size-small'].selector} {
+                ${cssVars['vira-tag-gap'].name}: 4px;
+                ${cssVars['vira-tag-horizontal-padding'].name}: 8px;
             }
 
-            ${hostClasses['vira-tag-size-large'].selector} button {
-                padding: 0 var(${cssVars['vira-tag-horizontal-padding'].name}, 16px);
+            ${hostClasses['vira-tag-size-large'].selector} {
+                ${cssVars['vira-tag-horizontal-padding'].name}: 16px;
             }
 
             ${hostClasses['vira-tag-disabled'].selector} {

@@ -42,6 +42,42 @@ export const viraModalBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'long title',
+            state() {
+                return {
+                    modalOpen: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <button
+                        ${listen('click', () => {
+                            updateState({
+                                modalOpen: true,
+                            });
+                        })}
+                    >
+                        Show Modal
+                    </button>
+                    <${ViraModal.assign({
+                        open: state.modalOpen,
+                        modalTitle:
+                            'This is a really long modal title that should be truncated instead of pushing the close button around',
+                        modalSubtitle:
+                            'This subtitle is also very long to test how the layout handles overflow in the header text wrapper area',
+                    })}
+                        ${listen(ViraModal.events.modalClose, () => {
+                            updateState({
+                                modalOpen: false,
+                            });
+                        })}
+                    >
+                        Modal Content
+                    </${ViraModal}>
+                `;
+            },
+        });
+        defineExample({
             title: 'customized',
             state() {
                 return {

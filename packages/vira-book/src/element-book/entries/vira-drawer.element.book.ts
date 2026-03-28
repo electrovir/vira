@@ -40,5 +40,39 @@ export const viraDrawerBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'long title',
+            state() {
+                return {
+                    drawerOpen: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <button
+                        ${listen('click', () => {
+                            updateState({
+                                drawerOpen: true,
+                            });
+                        })}
+                    >
+                        Show Drawer
+                    </button>
+                    <${ViraDrawer.assign({
+                        open: state.drawerOpen,
+                        drawerTitle:
+                            'This is a really long drawer title that should be truncated instead of pushing the close button around',
+                    })}
+                        ${listen(ViraDrawer.events.drawerClose, () => {
+                            updateState({
+                                drawerOpen: false,
+                            });
+                        })}
+                    >
+                        Drawer Content
+                    </${ViraDrawer}>
+                `;
+            },
+        });
     },
 });

@@ -140,6 +140,7 @@ export const ViraDrawer = defineViraElement<
                         gap: 4px;
                         align-self: center;
                         flex-grow: 1;
+                        overflow: hidden;
 
                         & h1 {
                             font-size: 20px;
@@ -148,6 +149,7 @@ export const ViraDrawer = defineViraElement<
 
                     & button.close {
                         ${noNativeFormStyles};
+                        flex-shrink: 0;
                         cursor: pointer;
                         padding: 4px;
                         border-radius: ${viraFormCssVars['vira-form-radius'].value};

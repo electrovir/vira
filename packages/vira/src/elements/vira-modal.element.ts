@@ -122,6 +122,7 @@ export const ViraModal = defineViraElement<
                         gap: 4px;
                         align-self: center;
                         margin-right: auto;
+                        overflow: hidden;
 
                         & h1 {
                             font-size: 24px;
@@ -135,6 +136,7 @@ export const ViraModal = defineViraElement<
 
                     & button.close {
                         ${noNativeFormStyles};
+                        flex-shrink: 0;
                         cursor: pointer;
                         padding: 4px;
                         border-radius: ${viraFormCssVars['vira-form-radius'].value};

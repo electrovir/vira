@@ -32120,11 +32120,11 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
             }
 
             label {
-                &:hover .custom-checkbox.checked {
+                &:not(.disabled):hover .custom-checkbox.checked {
                     background-color: ${B[`vira-form-accent-primary-hover-color`].value};
                 }
 
-                &:active .custom-checkbox.checked {
+                &:not(.disabled):active .custom-checkbox.checked {
                     background-color: ${B[`vira-form-accent-primary-active-color`].value};
                 }
             }
@@ -32136,11 +32136,11 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
             }
 
             label {
-                &:hover .custom-checkbox:not(.checked) {
+                &:not(.disabled):hover .custom-checkbox:not(.checked) {
                     background-color: ${B[`vira-form-error-hover-color`].value};
                 }
 
-                &:active .custom-checkbox:not(.checked) {
+                &:not(.disabled):active .custom-checkbox:not(.checked) {
                     background-color: ${B[`vira-form-error-active-color`].value};
                 }
             }
@@ -32161,10 +32161,10 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
                 font-weight: ${B[`vira-form-label-font-weight`].value};
             }
 
-            &:hover .custom-checkbox {
+            &:not(.disabled):hover .custom-checkbox {
                 background-color: ${B[`vira-form-selection-hover-color`].value};
             }
-            &:active .custom-checkbox {
+            &:not(.disabled):active .custom-checkbox {
                 background-color: ${B[`vira-form-selection-active-color`].value};
             }
         }
@@ -32198,8 +32198,12 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
 
         ${e[`vira-checkbox-horizontal`].selector} label {
             flex-direction: row-reverse;
-            align-items: center;
+            align-items: flex-start;
             gap: 8px;
+
+            & .label-text {
+                padding-block: calc((24px - 1em) / 2);
+            }
         }
     `,events:{valueChange:x()},render({inputs:e,dispatch:t,events:n}){function r(){e.disabled||t(new n.valueChange(!e.value))}let i=e.label?T`
                   <span
@@ -36113,6 +36117,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 }
             `,render({state:e,updateState:t}){return T`
                     <${K.assign({value:e.checked,label:`label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here `})}
+                        ${F(K.events.valueChange,e=>{t({checked:e.detail})})}
+                    ></${K}>
+                `}}),e({title:`long horizontal label`,state(){return{checked:!0}},styles:w`
+                ${K} {
+                    max-width: 400px;
+                }
+            `,render({state:e,updateState:t}){return T`
+                    <${K.assign({value:e.checked,label:`label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here `,horizontal:!0})}
                         ${F(K.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${K}>
                 `}}),e({title:`fill when checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return T`

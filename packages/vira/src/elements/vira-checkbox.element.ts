@@ -90,12 +90,12 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             label {
-                &:hover .custom-checkbox.checked {
+                &:not(.disabled):hover .custom-checkbox.checked {
                     background-color: ${viraFormCssVars['vira-form-accent-primary-hover-color']
                         .value};
                 }
 
-                &:active .custom-checkbox.checked {
+                &:not(.disabled):active .custom-checkbox.checked {
                     background-color: ${viraFormCssVars['vira-form-accent-primary-active-color']
                         .value};
                 }
@@ -108,11 +108,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             label {
-                &:hover .custom-checkbox:not(.checked) {
+                &:not(.disabled):hover .custom-checkbox:not(.checked) {
                     background-color: ${viraFormCssVars['vira-form-error-hover-color'].value};
                 }
 
-                &:active .custom-checkbox:not(.checked) {
+                &:not(.disabled):active .custom-checkbox:not(.checked) {
                     background-color: ${viraFormCssVars['vira-form-error-active-color'].value};
                 }
             }
@@ -133,10 +133,10 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
             }
 
-            &:hover .custom-checkbox {
+            &:not(.disabled):hover .custom-checkbox {
                 background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
             }
-            &:active .custom-checkbox {
+            &:not(.disabled):active .custom-checkbox {
                 background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
             }
         }
@@ -172,8 +172,12 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
 
         ${hostClasses['vira-checkbox-horizontal'].selector} label {
             flex-direction: row-reverse;
-            align-items: center;
+            align-items: flex-start;
             gap: 8px;
+
+            & .label-text {
+                padding-block: calc((24px - 1em) / 2);
+            }
         }
     `,
     events: {

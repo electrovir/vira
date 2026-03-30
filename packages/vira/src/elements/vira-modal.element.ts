@@ -48,6 +48,7 @@ export const ViraModal = defineViraElement<
         blockLightDismissal: boolean;
         modalSubtitle: string;
         isMobileSize: boolean;
+        noContentPadding: boolean;
     }>
 >()({
     tagName: 'vira-modal',
@@ -68,6 +69,7 @@ export const ViraModal = defineViraElement<
     },
     hostClasses: {
         'vira-modal-phone-size': ({inputs}) => !!inputs.isMobileSize,
+        'vira-modal-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
     },
     slotNames: ['modalTitle'],
     cssVars: {
@@ -156,6 +158,12 @@ export const ViraModal = defineViraElement<
                     overflow: auto;
                     overscroll-behavior: contain;
                 }
+            }
+        }
+
+        ${hostClasses['vira-modal-no-content-padding'].selector} {
+            & dialog .modal-content-wrapper .body {
+                padding: 0;
             }
         }
 

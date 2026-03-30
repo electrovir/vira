@@ -34,6 +34,7 @@ export const ViraDrawer = defineViraElement<
     } & PartialWithUndefined<{
         /** If this isn't set, make sure to use the drawer title slot to fill it in. */
         drawerTitle: string;
+        noContentPadding: boolean;
     }>
 >()({
     tagName: 'vira-drawer',
@@ -57,6 +58,7 @@ export const ViraDrawer = defineViraElement<
     },
     hostClasses: {
         'vira-drawer-dragging': ({state}) => state.isDragging,
+        'vira-drawer-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
     },
     slotNames: ['drawerTitle'],
     cssVars: {
@@ -170,6 +172,12 @@ export const ViraDrawer = defineViraElement<
                     overflow: auto;
                     overscroll-behavior: contain;
                 }
+            }
+        }
+
+        ${hostClasses['vira-drawer-no-content-padding'].selector} {
+            & dialog .drawer-content-wrapper .body {
+                padding: 0;
             }
         }
     `,

@@ -119,5 +119,39 @@ export const viraModalBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'no content padding',
+            state() {
+                return {
+                    modalOpen: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <button
+                        ${listen('click', () => {
+                            updateState({
+                                modalOpen: true,
+                            });
+                        })}
+                    >
+                        Show Modal
+                    </button>
+                    <${ViraModal.assign({
+                        open: state.modalOpen,
+                        modalTitle: 'Modal title',
+                        noContentPadding: true,
+                    })}
+                        ${listen(ViraModal.events.modalClose, () => {
+                            updateState({
+                                modalOpen: false,
+                            });
+                        })}
+                    >
+                        Modal Content
+                    </${ViraModal}>
+                `;
+            },
+        });
     },
 });

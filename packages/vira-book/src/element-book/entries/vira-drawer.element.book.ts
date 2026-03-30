@@ -74,5 +74,39 @@ export const viraDrawerBookPage = defineBookPage({
                 `;
             },
         });
+        defineExample({
+            title: 'no content padding',
+            state() {
+                return {
+                    drawerOpen: false,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <button
+                        ${listen('click', () => {
+                            updateState({
+                                drawerOpen: true,
+                            });
+                        })}
+                    >
+                        Show Drawer
+                    </button>
+                    <${ViraDrawer.assign({
+                        open: state.drawerOpen,
+                        drawerTitle: 'Drawer title',
+                        noContentPadding: true,
+                    })}
+                        ${listen(ViraDrawer.events.drawerClose, () => {
+                            updateState({
+                                drawerOpen: false,
+                            });
+                        })}
+                    >
+                        Drawer Content
+                    </${ViraDrawer}>
+                `;
+            },
+        });
     },
 });

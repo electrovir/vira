@@ -33645,7 +33645,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                               >
                                   Copy Code
                               </button>
-                          `})},...u},defineExamples({defineExample:e}){p(e,n,i)}}),...(i||[]).map(e=>O({parent:d,title:e.name,useVerticalExamples:a,descriptionParagraphs:m,defineExamples({defineExample:t}){p(t,e.asTheme,void 0)}}))]}var LZ=[`pagehide`,`pageshow`,`popstate`],RZ=30,zZ=vf()({tagName:`vira-drawer`,events:{drawerClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0,isDragging:!1,dragStartY:0,dragCurrentY:0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-drawer-dragging":({state:e})=>e.isDragging},slotNames:[`drawerTitle`],cssVars:{"vira-drawer-backdrop-filter":`blur(3px)`,"vira-drawer-max-height":`80dvh`},styles:({cssVars:e,hostClasses:t})=>w`
+                          `})},...u},defineExamples({defineExample:e}){p(e,n,i)}}),...(i||[]).map(e=>O({parent:d,title:e.name,useVerticalExamples:a,descriptionParagraphs:m,defineExamples({defineExample:t}){p(t,e.asTheme,void 0)}}))]}var LZ=[`pagehide`,`pageshow`,`popstate`],RZ=30,zZ=vf()({tagName:`vira-drawer`,events:{drawerClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0,isDragging:!1,dragStartY:0,dragCurrentY:0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-drawer-dragging":({state:e})=>e.isDragging,"vira-drawer-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`drawerTitle`],cssVars:{"vira-drawer-backdrop-filter":`blur(3px)`,"vira-drawer-max-height":`80dvh`},styles:({cssVars:e,hostClasses:t})=>w`
         :host {
             display: contents;
         }
@@ -33749,6 +33749,12 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     overflow: auto;
                     overscroll-behavior: contain;
                 }
+            }
+        }
+
+        ${t[`vira-drawer-no-content-padding`].selector} {
+            & dialog .drawer-content-wrapper .body {
+                padding: 0;
             }
         }
     `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=LZ.map(e=>qn(e,()=>{i(new r.drawerClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.drawerClose))}if(t.dialogElement)if(t.isDragging){let e=Math.max(0,t.dragCurrentY-t.dragStartY);t.dialogElement.style.transform=`translateY(${String(e)}px)`,t.dialogElement.style.transition=`none`}else t.dialogElement.style.transform=``,t.dialogElement.style.transition=``;return T`
@@ -34537,7 +34543,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 >
                     <slot></slot>
                 </a>
-            `}}),rQ=[`pagehide`,`pageshow`,`popstate`],iQ=vf()({tagName:`vira-modal`,events:{modalClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size":({inputs:e})=>!!e.isMobileSize},slotNames:[`modalTitle`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`},styles:({hostClasses:e,cssVars:t})=>w`
+            `}}),rQ=[`pagehide`,`pageshow`,`popstate`],iQ=vf()({tagName:`vira-modal`,events:{modalClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size":({inputs:e})=>!!e.isMobileSize,"vira-modal-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`modalTitle`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`},styles:({hostClasses:e,cssVars:t})=>w`
         :host {
             display: contents;
             min-width: 280px;
@@ -34619,6 +34625,12 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     overflow: auto;
                     overscroll-behavior: contain;
                 }
+            }
+        }
+
+        ${e[`vira-modal-no-content-padding`].selector} {
+            & dialog .modal-content-wrapper .body {
+                padding: 0;
             }
         }
 
@@ -36267,6 +36279,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     >
                         Drawer Content
                     </${zZ}>
+                `}}),e({title:`no content padding`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return T`
+                    <button
+                        ${F(`click`,()=>{t({drawerOpen:!0})})}
+                    >
+                        Show Drawer
+                    </button>
+                    <${zZ.assign({open:e.drawerOpen,drawerTitle:`Drawer title`,noContentPadding:!0})}
+                        ${F(zZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
+                    >
+                        Drawer Content
+                    </${zZ}>
                 `}})}}),D$=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],O$=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`long selection`,inputs:{selected:[8]}},{title:`with disabled item`,inputs:{selected:[],options:[...D$,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:w`
             :host {
                 max-width: 150px;
@@ -36592,6 +36615,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         Show Modal
                     </button>
                     <${iQ.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
+                        ${F(iQ.events.modalClose,()=>{t({modalOpen:!1})})}
+                    >
+                        Modal Content
+                    </${iQ}>
+                `}}),e({title:`no content padding`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return T`
+                    <button
+                        ${F(`click`,()=>{t({modalOpen:!0})})}
+                    >
+                        Show Modal
+                    </button>
+                    <${iQ.assign({open:e.modalOpen,modalTitle:`Modal title`,noContentPadding:!0})}
                         ${F(iQ.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content

@@ -36,6 +36,12 @@ export const ViraForm = defineViraElement<
          * @default false
          */
         hideRequiredMarkers: boolean;
+        /**
+         * When `true`, all checkboxes in this form render horizontally.
+         *
+         * @default false
+         */
+        horizontalCheckboxes: boolean;
     }>
 >()({
     tagName: 'vira-form',
@@ -97,6 +103,7 @@ export const ViraForm = defineViraElement<
                             value: field.value || false,
                             disabled: inputs.isDisabled || field.isDisabled,
                             hasError: field.hasError,
+                            horizontal: inputs.horizontalCheckboxes,
                             label: applyRequiredLabel(
                                 field.label,
                                 !!field.isRequired && !inputs.hideRequiredMarkers,

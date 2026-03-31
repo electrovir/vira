@@ -34412,7 +34412,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
         }
     `,state(){return{lastIsValid:!1}},render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=UZ(e.fields);a!==r.lastIsValid&&(i({lastIsValid:a}),t(new n.validChange({allFieldsAreValid:a})));let o=ae(e.fields).map(([r,i])=>i.isHidden?C:i.type===$.Checkbox?T`
-                        <${K.assign({value:i.value||!1,disabled:e.isDisabled||i.isDisabled,hasError:i.hasError,label:HZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers)})}
+                        <${K.assign({value:i.value||!1,disabled:e.isDisabled||i.isDisabled,hasError:i.hasError,horizontal:e.horizontalCheckboxes,label:HZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers)})}
                             ${i.testId?ru(i.testId):C}
                             ${F(K.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                         ></${K}>

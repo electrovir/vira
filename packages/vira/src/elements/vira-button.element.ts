@@ -503,6 +503,12 @@ export const ViraButton = defineViraElement<
                     background-color: ${cssVars['vira-button-disabled-background-color'].value};
                     border-color: ${cssVars['vira-button-disabled-border-color'].value};
                 }
+
+                &${hostClasses['vira-button-emphasis-subtle'].selector} button {
+                    color: ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                    background-color: transparent;
+                    border-color: transparent;
+                }
             }
 
             ${hostClasses['vira-button-icon-only'].selector} {

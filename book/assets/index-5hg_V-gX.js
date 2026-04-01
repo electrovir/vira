@@ -32057,6 +32057,12 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
                     background-color: ${t[`vira-button-disabled-background-color`].value};
                     border-color: ${t[`vira-button-disabled-border-color`].value};
                 }
+
+                &${e[`vira-button-emphasis-subtle`].selector} button {
+                    color: ${z.colors[`vira-grey-foreground-decoration`].foreground.value};
+                    background-color: transparent;
+                    border-color: transparent;
+                }
             }
 
             ${e[`vira-button-icon-only`].selector} {

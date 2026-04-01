@@ -17,9 +17,13 @@ import {type ColorThemeColor, type themeDefaultKey} from 'theme-vir';
 import {type UnionToTuple} from 'type-fest';
 import {viraTheme} from './vira-color-theme.js';
 
-const sortedContrastLevelNames = getEnumValues(ContrastLevelName).sort(
-    (a, b) => Number(b.includes('-')) - Number(a.includes('-')),
-);
+const sortedContrastLevelNames = [
+    'highest-contrast' as const,
+    'lowest-contrast' as const,
+    ...getEnumValues(ContrastLevelName).sort(
+        (a, b) => Number(b.includes('-')) - Number(a.includes('-')),
+    ),
+];
 
 /**
  * `ContrastLevelName` values with the values containing internal dashes to the beginning so they
@@ -28,6 +32,8 @@ const sortedContrastLevelNames = getEnumValues(ContrastLevelName).sort(
  * @category Internal
  */
 export type SortedContrastLevelName = [
+    'highest-contrast',
+    'lowest-contrast',
     ...UnionToTuple<Extract<ContrastLevelName, `${string}-${string}`>>,
     ...UnionToTuple<Exclude<ContrastLevelName, `${string}-${string}`>>,
 ];
@@ -143,7 +149,7 @@ export const viraThemeByKeys: ViraThemeByKeys = mapEnumToObject(ViraThemeColorNa
     return arrayToObject(colorPairKeys, (colorPairKey) => {
         return {
             key: colorPairKey,
-            value: arrayToObject(getEnumValues(ContrastLevelName), (contrastLevel) => {
+            value: arrayToObject(sortedContrastLevelNames, (contrastLevel) => {
                 const finalKey = `vira-${colorName}-${colorPairKey}-${contrastLevel}`;
 
                 if (!check.hasKey(viraTheme.colors, finalKey)) {

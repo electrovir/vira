@@ -3,7 +3,184 @@ import {defineColorTheme} from 'theme-vir/dist/color-theme/color-theme.js';
 import {viraColorPalette} from './vira-color-palette.js';
 
 /**
- * A color theme from Vira.
+ * A color theme designed for straightforward accessible foreground and background color choices.
+ * All color pairs can be seen here: https://electrovir.github.io/vira/book/styles/vira-theme.
+ *
+ * ## Color Pairs
+ *
+ * Each color choice is stored in a color pair. Each color pair includes a foreground and a
+ * background color. Foreground and background color pairs are set to specific lightness levels to
+ * ensure a specific level of contrast, which you can choose from (as explained below). Most color
+ * pairs include a color interacting with the page default color pair. These page defaults depend on
+ * which theme you select: light mode or dark mode. The defaults are the following:
+ *
+ * - Light mode:
+ *
+ *   - Foreground: black
+ *   - Background: white
+ * - Dark mode:
+ *
+ *   - Foreground: white
+ *   - Background: black
+ *
+ * ## Choosing a Color
+ *
+ * Each color in the theme is a key following the pattern
+ * `vira-{colorName}-{pairType}-{contrastLevel}`. (Note that there is also `viraThemeByKeys`, which
+ * stores colors in nested objects, accessed with the pattern
+ * `viraThemeByKeys[colorName][pairType][contrastLevel]`.) The following steps explain how to select
+ * a color pair:
+ *
+ * 1. **Choose a color name.** Red, blue, etc. This is the color that you're trying to use.
+ *
+ *    - Examples:
+ *
+ *         - `viraTheme.colors['vira-red-foreground-body']`
+ *         - `viraTheme.colors['vira-blue-foreground-body']`
+ * 2. **Choose a color pair type.** This determines where the color name you chose is placed in the
+ *    color pair.
+ *
+ *    - `foreground`: "Color in the foreground". In this color pair, the chosen color is the foreground
+ *         and the page default background (white in light mode, black in dark mode) is the
+ *         background. The lightness level of the foreground, the chosen color, varies based on the
+ *         selected contrast level (in the next step).
+ *
+ *         - Foreground: the chosen color (red, blue, etc.)
+ *         - Background: the page default background (white in light mode, black in dark mode).
+ *         - Example: `viraTheme.colors['vira-red-foreground-body']`
+ *         - Example: `viraTheme.colors['vira-blue-foreground-body']`
+ *    - `behind-fg`: "Color behind foreground". In this color pair, the chosen color is the background
+ *         and the page default foreground (black in light mode, white in dark mode) is the
+ *         background. The lightness level of the background, the chosen color, varies based on the
+ *         selected contrast level (in the next step).
+ *
+ *         - Foreground: the page default background (black in light mode, white in dark mode).
+ *         - Background: the chosen color (red, blue, etc.)
+ *         - Example: `viraTheme.colors['vira-red-behind-fg-body']`
+ *         - Example: `viraTheme.colors['vira-blue-behind-fg-body']`
+ *    - `behind-bg`: "Color behind background". In this color pair, the chosen color is the background
+ *         and the page default background (white in light mode, black in dark mode) is the
+ *         foreground. The lightness level of the background, the chosen color, varies based on the
+ *         selected contrast level (in the next step).
+ *
+ *         - Foreground: the page default background (white in light mode, black in dark mode)
+ *         - Background: the chosen color (red, blue, etc.)
+ *         - Example: `viraTheme.colors['vira-red-behind-bg-body']`
+ *         - Example: `viraTheme.colors['vira-blue-behind-bg-body']`
+ *    - `on-self`: "Color on self". In this color pair, both the foreground and the background are a
+ *         shade of the chosen color. The lightness level of the background chosen color varies
+ *         based on the selected contrast level (in the next step). The lightness of the foreground
+ *         chosen color is fixed based on the current theme: a dark foreground in light mode, a
+ *         light foreground in dark mode (to remain similar to the page default foreground color).
+ *
+ *         - Foreground: the chosen color (red, blue, etc.)
+ *         - Background: the chosen color (red, blue, etc.)
+ *         - Example: `viraTheme.colors['vira-red-on-self-body']`
+ *         - Example: `viraTheme.colors['vira-blue-on-self-body']`
+ * 3. **Choose a contrast level.** Choose a level of contrast based on what you are applying color to.
+ *    In general, the `header` level of contrast gives a color shade that is not considered "light"
+ *    or "dark". Any contrast level intended for smaller text elements (non-body, body, small-body)
+ *    is a darker variant of that color. Any contrast level allowed on larger text elements
+ *    (placeholder, decoration, invisible) is a lighter variant of that color. Also see
+ *    https://electrovir.github.io/color/docs/variables/contrastLevels.html for more details on each
+ *    contrast level.
+ *
+ *    - `small-body`: Choose this for text or page elements that should be legible but are small in size
+ *         (< 14px font size, similarly sized icons, etc.).
+ *
+ *         - The color pair is chosen to ensure about Lc 90 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-small-body']`: In light mode, this has a very
+ *                   dark red foreground.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-small-body']`: In light mode, a very light blue is
+ *                   used as the background color. (The foreground is a very dark blue.)
+ *    - `body`: Chose this for text or page elements that should be legible and are a normal body text
+ *         size (>= 14px font size).
+ *
+ *         - The color pair is chosen to ensure about Lc 75 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-body']`: In light mode, this has a dark red
+ *                   foreground (not as dark as the `small-body` variant).
+ *         - Example: `viraTheme.colors['vira-blue-on-self-body']`: In light mode, a light blue background is
+ *                   used (but darker than the small-body contrast level). (The foreground is a very
+ *                   dark blue.)
+ *    - `non-body`: Chose this for text or page elements that should be legible but are larger in size
+ *         (>= 24px font size with normal font weight).
+ *
+ *         - The color pair is chosen to ensure about Lc 60 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-non-body']`: In light mode, this has slightly
+ *                   dark red foreground.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-non-body']`: In light mode, a light blue background
+ *                   is used (but darker than the small-body contrast level). (The foreground is a
+ *                   very dark blue.)
+ *    - `header`: Chose this for text or page elements that are heading or heading sized elements (>=24px
+ *         bolded text or >=36px normal weight text).
+ *
+ *         - The color pair is chosen to ensure about Lc 45 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-header']`: In light mode, this has a very vibrant
+ *                   red foreground.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-header']`: In light mode, a plain blue (not very
+ *                   dark or light) background is used.
+ *    - `placeholder`: Chose this for text or page elements that are placeholders or disabled.
+ *
+ *         - The color pair is chosen to ensure about Lc 30 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-placeholder']`: In light mode, this has a light
+ *                   red foreground.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-placeholder']`: In light mode, a dark blue
+ *                   background is used. (The foreground is a very dark blue.)
+ *    - `decoration`: Chose this for decorative page elements such as borders that, if not visible to the
+ *         user (many users may not be able to distinguish this color pair's foreground from the
+ *         background), do not reduce the usability of the page.
+ *
+ *         - The color pair is chosen to ensure about Lc 15 contrast between the foreground and the
+ *                   background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-decoration']`: In light mode, this has a very
+ *                   light red foreground.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-decoration']`: In light mode, a darker blue
+ *                   background is used. (The foreground is a very dark blue.)
+ *    - `invisible`: Choose this for decorative elements that are even harder-to-see (dimmer) than
+ *         `decoration` elements. The foreground and background colors in a color pair in this
+ *         contrast level should be treated as indistinguishable from each other to most of the
+ *         human population.
+ *
+ *         - The color pair is chosen to ensure Lc 0 contrast between the foreground and the background.
+ *         - Example: `viraTheme.colors['vira-red-foreground-invisible']`: In light mode, this has an
+ *                   extremely light red foreground, essentially a pale pink.
+ *         - Example: `viraTheme.colors['vira-blue-on-self-invisible']`: In light mode, an extremely dark blue
+ *                   background is used. (The foreground is a very dark blue.)
+ *
+ *    There are also auxiliary contrast levels available which do not correspond to any specific
+ *    element usage on a page:
+ *
+ *    - `highest-contrast`: Maximum possible contrast between the foreground and background (from the
+ *         color palette). In many color pairs, this will be the same as the `small-body` contrast
+ *         level.
+ *    - `lowest-contrast`: Minimum possible contrast between the foreground and background (from the
+ *         color palette). In many color pairs, this will be the same as the `invisible` contrast
+ *         level.
+ *
+ * ## Examples
+ *
+ * To style an error message (red body text):
+ *
+ * ```ts
+ * viraTheme.colors['vira-red-foreground-body'].foreground.value;
+ * ```
+ *
+ * To style a green banner with white text:
+ *
+ * ```ts
+ * viraTheme.colors['vira-green-behind-bg-body'].background.value;
+ * ```
+ *
+ * `viraThemeByKeys` for structured access:
+ *
+ * ```ts
+ * viraThemeByKeys.red.foreground.body;
+ * ```
  *
  * @category Color
  */

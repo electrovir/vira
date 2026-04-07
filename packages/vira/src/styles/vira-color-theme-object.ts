@@ -118,7 +118,8 @@ export type ViraThemeByKeys = {
 };
 
 /**
- * All {@link viraTheme} color pair grouped by their color name, pair name, and contrast level.
+ * All {@link viraTheme} color pair grouped by their color name, pair name, and contrast level. See
+ * {@link viraTheme} for extensive documentation on what the colors pairs mean.
  *
  * @category Internal
  */

@@ -6,6 +6,10 @@ import {viraColorPalette} from './vira-color-palette.js';
  * A color theme designed for straightforward accessible foreground and background color choices.
  * All color pairs can be seen here: https://electrovir.github.io/vira/book/styles/vira-theme.
  *
+ * Consider using [`colorCss` from
+ * @electrovir/color](https://electrovir.github.io/color/docs/functions/colorCss.html) for applying
+ * a foreground and background color at the same time in CSS.
+ *
  * ## Color Pairs
  *
  * Each color choice is stored in a color pair. Each color pair includes a foreground and a
@@ -166,20 +170,22 @@ import {viraColorPalette} from './vira-color-palette.js';
  *
  * To style an error message (red body text):
  *
- * ```ts
- * viraTheme.colors['vira-red-foreground-body'].foreground.value;
+ * ```css
+ * color: ${viraTheme.colors['vira-red-foreground-body'].foreground.value};
  * ```
  *
  * To style a green banner with white text:
  *
- * ```ts
- * viraTheme.colors['vira-green-behind-bg-body'].background.value;
+ * ```css
+ * .banner {
+ *     ${colorCss(viraTheme.colors['vira-green-behind-bg-body'])};
+ * }
  * ```
  *
  * `viraThemeByKeys` for structured access:
  *
- * ```ts
- * viraThemeByKeys.red.foreground.body;
+ * ```css
+ * color: ${viraThemeByKeys.red.foreground.body.foreground.value};
  * ```
  *
  * @category Color

@@ -22,6 +22,8 @@ export enum ViraColorVariant {
     Warning = 'warning',
     /** @default green colored */
     Positive = 'positive',
+    /** @default brand colored */
+    Brand = 'brand',
     /** @default purple colored */
     Special = 'special',
     /**
@@ -43,6 +45,7 @@ export const viraColorVariantToColorName: Record<ViraColorVariant, ViraThemeColo
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
     [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
     [ViraColorVariant.Positive]: ViraThemeColorName.green,
+    [ViraColorVariant.Brand]: ViraThemeColorName.brand,
     [ViraColorVariant.Special]: ViraThemeColorName.purple,
     [ViraColorVariant.Plain]: ViraThemeColorName.grey,
     [ViraColorVariant.None]: ViraThemeColorName.grey,
@@ -60,6 +63,7 @@ export const viraColorVariants = [
     ViraColorVariant.Danger,
     ViraColorVariant.Warning,
     ViraColorVariant.Positive,
+    ViraColorVariant.Brand,
     ViraColorVariant.Special,
 ] as const;
 

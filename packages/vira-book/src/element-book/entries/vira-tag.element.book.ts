@@ -107,7 +107,7 @@ export const viraTagBookPage = defineBookPage({
                                                             ...inputs,
                                                             size,
                                                             emphasis,
-                                                            color,
+                                                            colorVariant: color,
                                                             isClickable: innerIsClickable,
                                                         })}
                                                             class=${classMap({

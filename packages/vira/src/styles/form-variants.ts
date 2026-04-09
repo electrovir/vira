@@ -11,7 +11,7 @@ export enum ViraColorVariant {
      *
      * @default blue colored
      */
-    Accent = 'accent',
+    Info = 'info',
     /** @default black colored */
     Plain = 'plain',
     /** @default grey colored */
@@ -35,15 +35,14 @@ export enum ViraColorVariant {
  *
  * @category Internal
  */
-export const viraColorVariantToColorName: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.None | ViraColorVariant.Plain>,
-    ViraThemeColorName
-> = {
-    [ViraColorVariant.Accent]: ViraThemeColorName.accent,
+export const viraColorVariantToColorName: Record<ViraColorVariant, ViraThemeColorName> = {
+    [ViraColorVariant.Info]: ViraThemeColorName.blue,
     [ViraColorVariant.Neutral]: ViraThemeColorName.grey,
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
     [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
     [ViraColorVariant.Positive]: ViraThemeColorName.green,
+    [ViraColorVariant.Plain]: ViraThemeColorName.grey,
+    [ViraColorVariant.None]: ViraThemeColorName.grey,
 };
 
 /**
@@ -52,7 +51,7 @@ export const viraColorVariantToColorName: Record<
  * @category Internal
  */
 export const viraColorVariants = [
-    ViraColorVariant.Accent,
+    ViraColorVariant.Info,
     ViraColorVariant.Plain,
     ViraColorVariant.Neutral,
     ViraColorVariant.Danger,

@@ -1,5 +1,5 @@
 import {check} from '@augment-vir/assert';
-import {type PartialWithUndefined} from '@augment-vir/common';
+import {arrayToObject, mapEnumToObject, type PartialWithUndefined} from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
@@ -20,7 +20,7 @@ import {
 } from '../styles/form-variants.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {noUserSelect} from '../styles/user-select.js';
-import {viraThemeByKeys, type ViraThemeColorName} from '../styles/vira-color-theme-object.js';
+import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
@@ -41,8 +41,9 @@ type TagColorStateColors = Record<
 >;
 
 function buildThemedTagColors(
-    colorName: ViraThemeColorName,
+    colorVariant: ViraColorVariant,
 ): Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors> {
+    const colorName = viraColorVariantToColorName[colorVariant];
     const behindBg = viraThemeByKeys[colorName]['behind-bg'];
     const onSelf = viraThemeByKeys[colorName]['on-self'];
 
@@ -84,7 +85,8 @@ function buildThemedTagColors(
     };
 }
 
-function buildThemedNotCheckedColors(colorName: ViraThemeColorName): TagColorStateColors {
+function buildThemedNotCheckedColors(colorVariant: ViraColorVariant): TagColorStateColors {
+    const colorName = viraColorVariantToColorName[colorVariant];
     const onSelfBodyText = viraThemeByKeys[colorName]['on-self'][ContrastLevelName.BodyText];
 
     return {
@@ -112,6 +114,9 @@ const tagColorVariantColors: Record<
     Exclude<ViraColorVariant, ViraColorVariant.None>,
     Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors>
 > = {
+    ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
+        return buildThemedTagColors(colorVariant);
+    }),
     [ViraColorVariant.Plain]: {
         [ViraEmphasis.Standard]: {
             idle: {
@@ -148,27 +153,15 @@ const tagColorVariantColors: Record<
             },
         },
     },
-    [ViraColorVariant.Accent]: buildThemedTagColors(
-        viraColorVariantToColorName[ViraColorVariant.Accent],
-    ),
-    [ViraColorVariant.Neutral]: buildThemedTagColors(
-        viraColorVariantToColorName[ViraColorVariant.Neutral],
-    ),
-    [ViraColorVariant.Danger]: buildThemedTagColors(
-        viraColorVariantToColorName[ViraColorVariant.Danger],
-    ),
-    [ViraColorVariant.Warning]: buildThemedTagColors(
-        viraColorVariantToColorName[ViraColorVariant.Warning],
-    ),
-    [ViraColorVariant.Positive]: buildThemedTagColors(
-        viraColorVariantToColorName[ViraColorVariant.Positive],
-    ),
 };
 
 const tagNotCheckedColors: Record<
     Exclude<ViraColorVariant, ViraColorVariant.None>,
     TagColorStateColors
 > = {
+    ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
+        return buildThemedNotCheckedColors(colorVariant);
+    }),
     [ViraColorVariant.Plain]: {
         idle: {
             textColor: viraTheme.colors[themeDefaultKey].foreground,
@@ -186,21 +179,6 @@ const tagNotCheckedColors: Record<
             borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
         },
     },
-    [ViraColorVariant.Accent]: buildThemedNotCheckedColors(
-        viraColorVariantToColorName[ViraColorVariant.Accent],
-    ),
-    [ViraColorVariant.Neutral]: buildThemedNotCheckedColors(
-        viraColorVariantToColorName[ViraColorVariant.Neutral],
-    ),
-    [ViraColorVariant.Danger]: buildThemedNotCheckedColors(
-        viraColorVariantToColorName[ViraColorVariant.Danger],
-    ),
-    [ViraColorVariant.Warning]: buildThemedNotCheckedColors(
-        viraColorVariantToColorName[ViraColorVariant.Warning],
-    ),
-    [ViraColorVariant.Positive]: buildThemedNotCheckedColors(
-        viraColorVariantToColorName[ViraColorVariant.Positive],
-    ),
 };
 
 /**
@@ -229,8 +207,8 @@ export const ViraTag = defineViraElement<
         size: ViraSize;
         /** @default ViraEmphasis.Standard */
         emphasis: ViraEmphasis;
-        /** @default ViraColor.Accent */
-        color: ViraColorVariant;
+        /** @default ViraColorVariant.Info */
+        colorVariant: ViraColorVariant;
         disabled: boolean;
     }>
 >()({
@@ -280,13 +258,26 @@ export const ViraTag = defineViraElement<
             !inputs.emphasis || inputs.emphasis === ViraEmphasis.Standard,
         'vira-tag-emphasis-subtle': ({inputs}) => inputs.emphasis === ViraEmphasis.Subtle,
 
-        'vira-tag-color-accent': ({inputs}) =>
-            !inputs.color || inputs.color === ViraColorVariant.Accent,
-        'vira-tag-color-plain': ({inputs}) => inputs.color === ViraColorVariant.Plain,
-        'vira-tag-color-neutral': ({inputs}) => inputs.color === ViraColorVariant.Neutral,
-        'vira-tag-color-danger': ({inputs}) => inputs.color === ViraColorVariant.Danger,
-        'vira-tag-color-warning': ({inputs}) => inputs.color === ViraColorVariant.Warning,
-        'vira-tag-color-positive': ({inputs}) => inputs.color === ViraColorVariant.Positive,
+        ...arrayToObject(
+            viraColorVariants,
+            (colorVariant) => {
+                return {
+                    key: `vira-tag-color-${colorVariant}` as const,
+                    value: ({
+                        inputs,
+                    }: {
+                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                    }) => {
+                        return colorVariant === ViraColorVariant.Plain
+                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
+                            : inputs.colorVariant === colorVariant;
+                    },
+                };
+            },
+            {
+                useRequired: true,
+            },
+        ),
     },
     styles: ({cssVars, hostClasses}) => {
         function generateVariantCss(): CSSResult {

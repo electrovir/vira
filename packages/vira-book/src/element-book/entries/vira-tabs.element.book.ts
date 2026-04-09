@@ -107,7 +107,27 @@ const simpleExamples = [
     {
         title: 'plain color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Plain as ViraColorVariant.Accent | ViraColorVariant.Plain,
+        colorVariant: ViraColorVariant.Plain,
+    },
+    {
+        title: 'neutral color variant',
+        tabs: tabsWithIcons,
+        colorVariant: ViraColorVariant.Neutral,
+    },
+    {
+        title: 'danger color variant',
+        tabs: tabsWithIcons,
+        colorVariant: ViraColorVariant.Danger,
+    },
+    {
+        title: 'warning color variant',
+        tabs: tabsWithIcons,
+        colorVariant: ViraColorVariant.Warning,
+    },
+    {
+        title: 'positive color variant',
+        tabs: tabsWithIcons,
+        colorVariant: ViraColorVariant.Positive,
     },
     {
         title: 'bar direction: top',
@@ -317,9 +337,13 @@ export const viraTabsBookPage = defineBookPage({
                 ];
 
                 const colorVariants = [
-                    ViraColorVariant.Accent,
+                    ViraColorVariant.Info,
                     ViraColorVariant.Plain,
-                ] as const;
+                    ViraColorVariant.Neutral,
+                    ViraColorVariant.Danger,
+                    ViraColorVariant.Warning,
+                    ViraColorVariant.Positive,
+                ];
 
                 return html`
                     ${colorVariants.map(

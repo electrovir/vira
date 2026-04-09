@@ -1,6 +1,17 @@
 import {check} from '@augment-vir/assert';
-import {filterMap, type PartialWithUndefined} from '@augment-vir/common';
-import {classMap, css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
+import {arrayToObject, filterMap, type PartialWithUndefined} from '@augment-vir/common';
+import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
+import {
+    classMap,
+    css,
+    defineElementEvent,
+    html,
+    listen,
+    nothing,
+    onDomCreated,
+    unsafeCSS,
+    type CSSResult,
+} from 'element-vir';
 import {
     routeHasPaths,
     type FullSpaRoute,
@@ -10,8 +21,13 @@ import {
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {ViraColorVariant} from '../styles/form-variants.js';
+import {
+    ViraColorVariant,
+    viraColorVariantToColorName,
+    viraColorVariants,
+} from '../styles/form-variants.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
+import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {createOverflowObserver} from '../util/overflow-observer.js';
 import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
@@ -80,9 +96,9 @@ export const ViraTabs = defineViraElement<
         /**
          * Color variant for the tab selection indicator and active tab text.
          *
-         * @default ViraColorVariant.Accent
+         * @default ViraColorVariant.Info
          */
-        colorVariant: ViraColorVariant.Accent | ViraColorVariant.Plain;
+        colorVariant: ViraColorVariant;
         /**
          * Layout direction for icons relative to their label text.
          *
@@ -121,9 +137,26 @@ export const ViraTabs = defineViraElement<
             !inputs.barDirection || inputs.barDirection === ViraTabsBarDirection.Bottom,
         'vira-tabs-bar-left': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Left,
         'vira-tabs-bar-right': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Right,
-        'vira-tabs-color-accent': ({inputs}) =>
-            !inputs.colorVariant || inputs.colorVariant === ViraColorVariant.Accent,
-        'vira-tabs-color-plain': ({inputs}) => inputs.colorVariant === ViraColorVariant.Plain,
+        ...arrayToObject(
+            viraColorVariants,
+            (colorVariant) => {
+                return {
+                    key: `vira-tabs-color-${colorVariant}` as const,
+                    value: ({
+                        inputs,
+                    }: {
+                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                    }) => {
+                        return colorVariant === ViraColorVariant.Plain
+                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
+                            : inputs.colorVariant === colorVariant;
+                    },
+                };
+            },
+            {
+                useRequired: true,
+            },
+        ),
         'vira-tabs-icon-layout-vertical': ({inputs}) =>
             !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical,
         'vira-tabs-icon-layout-horizontal': ({inputs}) =>
@@ -132,9 +165,14 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-fill-width': ({inputs}) => !!inputs.shouldFillWidth,
     },
     cssVars: {
-        'vira-tabs-active-color': viraFormCssVars['vira-form-accent-primary-color'].value,
+        'vira-tabs-active-color':
+            viraThemeByKeys[viraColorVariantToColorName[ViraColorVariant.Info]]['behind-bg'][
+                ContrastLevelName.NonBodyText
+            ].background.value,
         'vira-tabs-active-hover-color':
-            viraFormCssVars['vira-form-accent-primary-hover-color'].value,
+            viraThemeByKeys[viraColorVariantToColorName[ViraColorVariant.Info]]['behind-bg'][
+                ContrastLevelName.Header
+            ].background.value,
         'vira-tabs-inactive-color':
             viraTheme.colors['vira-grey-foreground-header'].foreground.value,
         'vira-tabs-inactive-hover-color':
@@ -143,6 +181,40 @@ export const ViraTabs = defineViraElement<
     },
 
     styles: ({hostClasses, cssVars}) => {
+        function generateVariantCss(): CSSResult {
+            const plainColors = {
+                active: viraTheme.colors['vira-grey-foreground-small-body'].foreground,
+                hover: viraTheme.colors['vira-grey-foreground-body'].foreground,
+            };
+
+            const allStyles = viraColorVariants
+                .map((colorVariant) => {
+                    const variantSelector = hostClasses[`vira-tabs-color-${colorVariant}`].selector;
+
+                    const colors =
+                        colorVariant === ViraColorVariant.Plain
+                            ? plainColors
+                            : {
+                                  active: viraThemeByKeys[
+                                      viraColorVariantToColorName[colorVariant]
+                                  ]['behind-bg'][ContrastLevelName.NonBodyText].background,
+                                  hover: viraThemeByKeys[viraColorVariantToColorName[colorVariant]][
+                                      'behind-bg'
+                                  ][ContrastLevelName.Header].background,
+                              };
+
+                    return css`
+                        ${variantSelector} {
+                            ${cssVars['vira-tabs-active-color'].name}: ${colors.active.value};
+                            ${cssVars['vira-tabs-active-hover-color'].name}: ${colors.hover.value};
+                        }
+                    `;
+                })
+                .join('\n');
+
+            return unsafeCSS(allStyles);
+        }
+
         return css`
             :host {
                 display: flex;
@@ -272,14 +344,7 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
-            ${hostClasses['vira-tabs-color-plain'].selector} {
-                ${cssVars['vira-tabs-active-color'].name}: ${viraTheme.colors[
-                    'vira-grey-foreground-small-body'
-                ].foreground.value};
-                ${cssVars['vira-tabs-active-hover-color'].name}: ${viraTheme.colors[
-                    'vira-grey-foreground-body'
-                ].foreground.value};
-            }
+            ${generateVariantCss()}
 
             .tab-content {
                 display: flex;

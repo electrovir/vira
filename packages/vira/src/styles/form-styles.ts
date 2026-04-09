@@ -25,11 +25,11 @@ export const viraFormCssVars = defineCssVars({
         viraTheme.colors['vira-grey-foreground-header'].foreground.value,
 
     'vira-form-text-selection-color':
-        viraTheme.colors['vira-accent-behind-bg-decoration'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-decoration'].background.value,
     'vira-form-selection-hover-color':
-        viraTheme.colors['vira-accent-behind-bg-invisible'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-invisible'].background.value,
     'vira-form-selection-active-color':
-        viraTheme.colors['vira-accent-behind-bg-decoration'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-decoration'].background.value,
 
     'vira-form-error-color': viraTheme.colors['vira-red-behind-bg-non-body'].background.value,
     'vira-form-error-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,
@@ -58,7 +58,7 @@ export const viraFormCssVars = defineCssVars({
     'vira-form-wrapper-radius': '16px',
 
     'vira-form-focus-outline-color':
-        viraTheme.colors['vira-accent-foreground-header'].foreground.value,
+        viraTheme.colors['vira-blue-foreground-header'].foreground.value,
     'vira-form-focus-outline-border-radius': css`calc(var(--vira-form-radius, ${unsafeCSS(defaultViraFormRadius)}) + 2px)`,
 
     'vira-form-plain-color': viraColorPalette['vira-grey-100'].value,
@@ -68,11 +68,11 @@ export const viraFormCssVars = defineCssVars({
         viraTheme.colors['vira-grey-foreground-decoration'].foreground.value,
 
     'vira-form-accent-primary-color':
-        viraTheme.colors['vira-accent-behind-bg-non-body'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-non-body'].background.value,
     'vira-form-accent-primary-hover-color':
-        viraTheme.colors['vira-accent-behind-bg-header'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-header'].background.value,
     'vira-form-accent-primary-active-color':
-        viraTheme.colors['vira-accent-behind-bg-body'].background.value,
+        viraTheme.colors['vira-blue-behind-bg-body'].background.value,
 
     'vira-form-danger-color': viraTheme.colors['vira-red-behind-bg-non-body'].background.value,
     'vira-form-danger-hover-color': viraTheme.colors['vira-red-behind-bg-header'].background.value,

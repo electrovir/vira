@@ -1,4 +1,5 @@
-import {type PartialWithUndefined} from '@augment-vir/common';
+import {arrayToObject, mapEnumToObject, type PartialWithUndefined} from '@augment-vir/common';
+import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {css, html, nothing, unsafeCSS, type CSSResult} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
@@ -7,6 +8,7 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     viraColorVariants,
+    viraColorVariantToColorName,
     viraEmphasisVariants,
     viraSizeHeights,
     viraSizeVariants,
@@ -19,6 +21,7 @@ import {
     viraTheme,
 } from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
+import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
@@ -27,6 +30,61 @@ type ButtonColorValue = Pick<SingleCssVarDefinition, 'value'>;
 const transparentColor: ButtonColorValue = {
     value: css`transparent`,
 };
+
+type ButtonColorStateColors = Record<
+    'idle' | 'hover' | 'active',
+    {
+        textColor: ButtonColorValue;
+        borderColor: ButtonColorValue;
+        backgroundColor: ButtonColorValue;
+    }
+>;
+
+function buildThemedButtonColors(
+    colorVariant: ViraColorVariant,
+): Record<Exclude<ViraEmphasis, ViraEmphasis.None>, ButtonColorStateColors> {
+    const colorName = viraColorVariantToColorName[colorVariant];
+    const behindBg = viraThemeByKeys[colorName]['behind-bg'];
+    const foreground = viraThemeByKeys[colorName].foreground;
+    const onSelf = viraThemeByKeys[colorName]['on-self'];
+
+    return {
+        [ViraEmphasis.Standard]: {
+            idle: {
+                backgroundColor: behindBg[ContrastLevelName.NonBodyText].background,
+                textColor: behindBg[ContrastLevelName.NonBodyText].foreground,
+                borderColor: behindBg[ContrastLevelName.BodyText].background,
+            },
+            hover: {
+                backgroundColor: behindBg[ContrastLevelName.Header].background,
+                textColor: behindBg[ContrastLevelName.Header].foreground,
+                borderColor: behindBg[ContrastLevelName.BodyText].background,
+            },
+            active: {
+                backgroundColor: behindBg[ContrastLevelName.BodyText].background,
+                textColor: behindBg[ContrastLevelName.BodyText].foreground,
+                borderColor: behindBg[ContrastLevelName.BodyText].background,
+            },
+        },
+        [ViraEmphasis.Subtle]: {
+            idle: {
+                backgroundColor: transparentColor,
+                textColor: foreground[ContrastLevelName.NonBodyText].foreground,
+                borderColor: transparentColor,
+            },
+            hover: {
+                backgroundColor: onSelf[ContrastLevelName.BodyText].background,
+                textColor: onSelf[ContrastLevelName.BodyText].foreground,
+                borderColor: onSelf[ContrastLevelName.BodyText].foreground,
+            },
+            active: {
+                backgroundColor: onSelf[ContrastLevelName.NonBodyText].background,
+                textColor: onSelf[ContrastLevelName.NonBodyText].foreground,
+                borderColor: onSelf[ContrastLevelName.NonBodyText].foreground,
+            },
+        },
+    };
+}
 
 const colorVariantColors: Record<
     Exclude<ViraColorVariant, ViraColorVariant.None>,
@@ -42,6 +100,9 @@ const colorVariantColors: Record<
         >
     >
 > = {
+    ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
+        return buildThemedButtonColors(colorVariant);
+    }),
     [ViraColorVariant.Plain]: {
         [ViraEmphasis.Standard]: {
             idle: {
@@ -78,42 +139,6 @@ const colorVariantColors: Record<
             },
         },
     },
-    [ViraColorVariant.Accent]: {
-        [ViraEmphasis.Standard]: {
-            idle: {
-                backgroundColor: viraTheme.colors['vira-accent-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-accent-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-accent-behind-bg-body'].background,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-accent-behind-bg-header'].background,
-                textColor: viraTheme.colors['vira-accent-behind-bg-header'].foreground,
-                borderColor: viraTheme.colors['vira-accent-behind-bg-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-accent-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-accent-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-accent-behind-bg-body'].background,
-            },
-        },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-accent-foreground-non-body'].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-accent-on-self-body'].background,
-                textColor: viraTheme.colors['vira-accent-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-accent-on-self-body'].foreground,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-accent-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-accent-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-accent-on-self-non-body'].foreground,
-            },
-        },
-    },
     [ViraColorVariant.Neutral]: {
         [ViraEmphasis.Standard]: {
             idle: {
@@ -132,131 +157,9 @@ const colorVariantColors: Record<
                 borderColor: viraFormCssVars['vira-form-border-color'],
             },
         },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-grey-foreground-non-body'].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-grey-on-self-body'].background,
-                textColor: viraTheme.colors['vira-grey-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-on-self-body'].foreground,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-grey-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-grey-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-on-self-non-body'].foreground,
-            },
-        },
-    },
-    [ViraColorVariant.Danger]: {
-        [ViraEmphasis.Standard]: {
-            idle: {
-                backgroundColor: viraTheme.colors['vira-red-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-red-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-red-behind-bg-body'].background,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-red-behind-bg-header'].background,
-                textColor: viraTheme.colors['vira-red-behind-bg-header'].foreground,
-                borderColor: viraTheme.colors['vira-red-behind-bg-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-red-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-red-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-red-behind-bg-body'].background,
-            },
-        },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-red-foreground-non-body'].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-red-on-self-body'].background,
-                textColor: viraTheme.colors['vira-red-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-red-on-self-body'].foreground,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-red-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-red-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-red-on-self-non-body'].foreground,
-            },
-        },
-    },
-    [ViraColorVariant.Warning]: {
-        [ViraEmphasis.Standard]: {
-            idle: {
-                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-yellow-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-header'].background,
-                textColor: viraTheme.colors['vira-yellow-behind-bg-header'].foreground,
-                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-yellow-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-yellow-behind-bg-body'].background,
-            },
-        },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-yellow-foreground-non-body'].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-yellow-on-self-body'].background,
-                textColor: viraTheme.colors['vira-yellow-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-yellow-on-self-body'].foreground,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-yellow-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-yellow-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-yellow-on-self-non-body'].foreground,
-            },
-        },
-    },
-    [ViraColorVariant.Positive]: {
-        [ViraEmphasis.Standard]: {
-            idle: {
-                backgroundColor: viraTheme.colors['vira-green-behind-bg-non-body'].background,
-                textColor: viraTheme.colors['vira-green-behind-bg-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-green-behind-bg-body'].background,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-green-behind-bg-header'].background,
-                textColor: viraTheme.colors['vira-green-behind-bg-header'].foreground,
-                borderColor: viraTheme.colors['vira-green-behind-bg-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-green-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-green-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-green-behind-bg-body'].background,
-            },
-        },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors['vira-green-foreground-non-body'].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-green-on-self-body'].background,
-                textColor: viraTheme.colors['vira-green-on-self-body'].foreground,
-                borderColor: viraTheme.colors['vira-green-on-self-body'].foreground,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-green-on-self-non-body'].background,
-                textColor: viraTheme.colors['vira-green-on-self-non-body'].foreground,
-                borderColor: viraTheme.colors['vira-green-on-self-non-body'].foreground,
-            },
-        },
+        [ViraEmphasis.Subtle]: buildThemedButtonColors(ViraColorVariant.Neutral)[
+            ViraEmphasis.Subtle
+        ],
     },
 };
 
@@ -290,7 +193,7 @@ export const ViraButton = defineViraElement<
          * Set a predefined color variant. Set to `ViraColorVariant.None` for maximum customization.
          * In that case, you will need to use this element's CSS vars to customize the colors.
          *
-         * @default ViraColorVariant.Accent,
+         * @default ViraColorVariant.Info,
          */
         colorVariant: ViraColorVariant;
         /**
@@ -314,14 +217,26 @@ export const ViraButton = defineViraElement<
             !inputs.buttonEmphasis || inputs.buttonEmphasis === ViraEmphasis.Standard,
         'vira-button-emphasis-subtle': ({inputs}) => inputs.buttonEmphasis === ViraEmphasis.Subtle,
 
-        'vira-button-color-accent': ({inputs}) =>
-            !inputs.colorVariant || inputs.colorVariant === ViraColorVariant.Accent,
-        'vira-button-color-plain': ({inputs}) => inputs.colorVariant === ViraColorVariant.Plain,
-        'vira-button-color-neutral': ({inputs}) => inputs.colorVariant === ViraColorVariant.Neutral,
-        'vira-button-color-danger': ({inputs}) => inputs.colorVariant === ViraColorVariant.Danger,
-        'vira-button-color-warning': ({inputs}) => inputs.colorVariant === ViraColorVariant.Warning,
-        'vira-button-color-positive': ({inputs}) =>
-            inputs.colorVariant === ViraColorVariant.Positive,
+        ...arrayToObject(
+            viraColorVariants,
+            (colorVariant) => {
+                return {
+                    key: `vira-button-color-${colorVariant}` as const,
+                    value: ({
+                        inputs,
+                    }: {
+                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                    }) => {
+                        return colorVariant === ViraColorVariant.Plain
+                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
+                            : inputs.colorVariant === colorVariant;
+                    },
+                };
+            },
+            {
+                useRequired: true,
+            },
+        ),
 
         'vira-button-disabled': ({inputs}) => !!inputs.isDisabled,
         'vira-button-icon-only': ({inputs}) => !inputs.text && !!inputs.icon,

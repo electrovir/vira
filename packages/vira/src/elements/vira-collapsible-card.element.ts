@@ -144,14 +144,11 @@ export const ViraCollapsibleCard = defineViraElement<
             });
         }
 
-        const wrapperContentTemplate =
-            state.isExpanded || inputs.expandOnPrint
-                ? html`
-                      <div class="card-content">
-                          <slot></slot>
-                      </div>
-                  `
-                : nothing;
+        const wrapperContentTemplate = html`
+            <div class="card-content">
+                <slot></slot>
+            </div>
+        `;
         const wrapperHeaderTemplate = inputs.hideHeader
             ? nothing
             : html`

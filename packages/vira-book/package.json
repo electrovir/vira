@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-book",
-    "version": "31.13.3",
+    "version": "31.14.0",
     "private": true,
     "license": "(MIT or CC0 1.0)",
     "author": {
@@ -25,7 +25,7 @@
         "spa-router-vir": "^6.4.1",
         "theme-vir": "^28.25.0",
         "url-vir": "^2.1.8",
-        "vira": "^31.13.3"
+        "vira": "^31.14.0"
     },
     "devDependencies": {
         "esbuild": "^0.27.4",

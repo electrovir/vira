@@ -22,6 +22,8 @@ export enum ViraColorVariant {
     Warning = 'warning',
     /** @default green colored */
     Positive = 'positive',
+    /** @default purple colored */
+    Special = 'special',
     /**
      * No color variant styles will be applied at all. All related CSS vars are free to customize to
      * your wishes.
@@ -41,6 +43,7 @@ export const viraColorVariantToColorName: Record<ViraColorVariant, ViraThemeColo
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
     [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
     [ViraColorVariant.Positive]: ViraThemeColorName.green,
+    [ViraColorVariant.Special]: ViraThemeColorName.purple,
     [ViraColorVariant.Plain]: ViraThemeColorName.grey,
     [ViraColorVariant.None]: ViraThemeColorName.grey,
 };
@@ -57,6 +60,7 @@ export const viraColorVariants = [
     ViraColorVariant.Danger,
     ViraColorVariant.Warning,
     ViraColorVariant.Positive,
+    ViraColorVariant.Special,
 ] as const;
 
 /**

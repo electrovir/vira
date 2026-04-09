@@ -913,6 +913,150 @@ export const viraTheme = defineColorTheme(
             foreground: viraColorPalette['vira-blue-850'],
             background: viraColorPalette['vira-blue-1000'],
         },
+        'vira-brand-foreground-highest-contrast': {
+            foreground: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-foreground-small-body': {
+            foreground: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-foreground-body': {
+            foreground: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-foreground-non-body': {
+            foreground: viraColorPalette['vira-brand-650'],
+        },
+        'vira-brand-foreground-header': {
+            foreground: viraColorPalette['vira-brand-500'],
+        },
+        'vira-brand-foreground-placeholder': {
+            foreground: viraColorPalette['vira-brand-450'],
+        },
+        'vira-brand-foreground-decoration': {
+            foreground: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-foreground-invisible': {
+            foreground: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-foreground-lowest-contrast': {
+            foreground: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-behind-bg-highest-contrast': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-bg-small-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-bg-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-behind-bg-non-body': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-600'],
+        },
+        'vira-brand-behind-bg-header': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-450'],
+        },
+        'vira-brand-behind-bg-placeholder': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-behind-bg-decoration': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-behind-bg-invisible': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-behind-bg-lowest-contrast': {
+            foreground: {
+                refDefaultBackground: true,
+            },
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-behind-fg-highest-contrast': {
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-behind-fg-small-body': {
+            background: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-behind-fg-body': {
+            background: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-behind-fg-non-body': {
+            background: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-behind-fg-header': {
+            background: viraColorPalette['vira-brand-500'],
+        },
+        'vira-brand-behind-fg-placeholder': {
+            background: viraColorPalette['vira-brand-650'],
+        },
+        'vira-brand-behind-fg-decoration': {
+            background: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-behind-fg-invisible': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-fg-lowest-contrast': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-on-self-highest-contrast': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-on-self-small-body': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-on-self-body': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-300'],
+        },
+        'vira-brand-on-self-non-body': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-on-self-header': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-450'],
+        },
+        'vira-brand-on-self-placeholder': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-550'],
+        },
+        'vira-brand-on-self-decoration': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-650'],
+        },
+        'vira-brand-on-self-invisible': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-on-self-lowest-contrast': {
+            foreground: viraColorPalette['vira-brand-850'],
+            background: viraColorPalette['vira-brand-1000'],
+        },
         'vira-purple-foreground-highest-contrast': {
             foreground: viraColorPalette['vira-purple-1000'],
         },
@@ -1931,6 +2075,120 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-blue-on-self-lowest-contrast': {
             foreground: viraColorPalette['vira-blue-200'],
             background: viraColorPalette['vira-blue-100'],
+        },
+        'vira-brand-foreground-highest-contrast': {
+            foreground: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-foreground-small-body': {
+            foreground: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-foreground-body': {
+            foreground: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-foreground-non-body': {
+            foreground: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-foreground-placeholder': {
+            foreground: viraColorPalette['vira-brand-600'],
+        },
+        'vira-brand-foreground-decoration': {
+            foreground: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-foreground-invisible': {
+            foreground: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-foreground-lowest-contrast': {
+            foreground: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-bg-highest-contrast': {
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-behind-bg-small-body': {
+            background: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-behind-bg-body': {
+            background: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-behind-bg-non-body': {
+            background: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-behind-bg-header': {
+            background: viraColorPalette['vira-brand-500'],
+        },
+        'vira-brand-behind-bg-placeholder': {
+            background: viraColorPalette['vira-brand-650'],
+        },
+        'vira-brand-behind-bg-decoration': {
+            background: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-behind-bg-invisible': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-bg-lowest-contrast': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-fg-highest-contrast': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-fg-small-body': {
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-behind-fg-body': {
+            background: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-behind-fg-non-body': {
+            background: viraColorPalette['vira-brand-600'],
+        },
+        'vira-brand-behind-fg-header': {
+            background: viraColorPalette['vira-brand-450'],
+        },
+        'vira-brand-behind-fg-placeholder': {
+            background: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-behind-fg-decoration': {
+            background: viraColorPalette['vira-brand-350'],
+        },
+        'vira-brand-behind-fg-invisible': {
+            background: viraColorPalette['vira-brand-250'],
+        },
+        'vira-brand-behind-fg-lowest-contrast': {
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-on-self-highest-contrast': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-1000'],
+        },
+        'vira-brand-on-self-small-body': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-950'],
+        },
+        'vira-brand-on-self-body': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-750'],
+        },
+        'vira-brand-on-self-non-body': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-600'],
+        },
+        'vira-brand-on-self-header': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-500'],
+        },
+        'vira-brand-on-self-placeholder': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-450'],
+        },
+        'vira-brand-on-self-decoration': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-400'],
+        },
+        'vira-brand-on-self-invisible': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-100'],
+        },
+        'vira-brand-on-self-lowest-contrast': {
+            foreground: viraColorPalette['vira-brand-200'],
+            background: viraColorPalette['vira-brand-100'],
         },
         'vira-purple-foreground-highest-contrast': {
             foreground: viraColorPalette['vira-purple-100'],

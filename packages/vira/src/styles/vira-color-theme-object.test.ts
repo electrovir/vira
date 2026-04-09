@@ -327,6 +327,71 @@ describe('viraThemeByKeys', () => {
                     'lowest-contrast': viraTheme.colors['vira-blue-on-self-lowest-contrast'],
                 },
             },
+            brand: {
+                foreground: {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-brand-foreground-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-brand-foreground-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-brand-foreground-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-brand-foreground-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-brand-foreground-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-brand-foreground-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-brand-foreground-invisible'],
+                    'highest-contrast': viraTheme.colors['vira-brand-foreground-highest-contrast'],
+                    'lowest-contrast': viraTheme.colors['vira-brand-foreground-lowest-contrast'],
+                },
+                'behind-bg': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-brand-behind-bg-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-brand-behind-bg-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-brand-behind-bg-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-brand-behind-bg-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-brand-behind-bg-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-brand-behind-bg-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-brand-behind-bg-invisible'],
+                    'highest-contrast': viraTheme.colors['vira-brand-behind-bg-highest-contrast'],
+                    'lowest-contrast': viraTheme.colors['vira-brand-behind-bg-lowest-contrast'],
+                },
+                'behind-fg': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-brand-behind-fg-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-brand-behind-fg-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-brand-behind-fg-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-brand-behind-fg-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-brand-behind-fg-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-brand-behind-fg-decoration'],
+                    [ContrastLevelName.Invisible]:
+                        viraTheme.colors['vira-brand-behind-fg-invisible'],
+                    'highest-contrast': viraTheme.colors['vira-brand-behind-fg-highest-contrast'],
+                    'lowest-contrast': viraTheme.colors['vira-brand-behind-fg-lowest-contrast'],
+                },
+                'on-self': {
+                    [ContrastLevelName.SmallBodyText]:
+                        viraTheme.colors['vira-brand-on-self-small-body'],
+                    [ContrastLevelName.BodyText]: viraTheme.colors['vira-brand-on-self-body'],
+                    [ContrastLevelName.NonBodyText]:
+                        viraTheme.colors['vira-brand-on-self-non-body'],
+                    [ContrastLevelName.Header]: viraTheme.colors['vira-brand-on-self-header'],
+                    [ContrastLevelName.Placeholder]:
+                        viraTheme.colors['vira-brand-on-self-placeholder'],
+                    [ContrastLevelName.Decoration]:
+                        viraTheme.colors['vira-brand-on-self-decoration'],
+                    [ContrastLevelName.Invisible]: viraTheme.colors['vira-brand-on-self-invisible'],
+                    'highest-contrast': viraTheme.colors['vira-brand-on-self-highest-contrast'],
+                    'lowest-contrast': viraTheme.colors['vira-brand-on-self-lowest-contrast'],
+                },
+            },
             purple: {
                 foreground: {
                     [ContrastLevelName.SmallBodyText]:

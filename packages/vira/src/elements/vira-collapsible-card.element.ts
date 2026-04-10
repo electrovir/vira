@@ -62,6 +62,7 @@ export const ViraCollapsibleCard = defineViraElement<
             display: inline-flex;
             max-width: 100%;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         ${hostClasses['vira-collapsible-card-expanded'].selector} .open-caret {
@@ -74,6 +75,8 @@ export const ViraCollapsibleCard = defineViraElement<
         }
 
         ${hostClasses['vira-collapsible-card-card-styles'].selector} {
+            border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
+
             & ${ViraCollapsibleWrapper} {
                 border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
                 border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};

@@ -102,6 +102,30 @@ export const viraCollapsibleCardBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'magenta background',
+            styles: css`
+                ${ViraCollapsibleCard} {
+                    background-color: magenta;
+                    color: white;
+                }
+                p {
+                    ${noNativeFormStyles}
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraCollapsibleCard.assign({
+                        startExpanded: true,
+                    })}>
+                        <span slot=${ViraCollapsibleCard.slotNames.header}>
+                            Magenta Card Header
+                        </span>
+                        <p>Card with a magenta background.</p>
+                    </${ViraCollapsibleCard}>
+                `;
+            },
+        });
+        defineExample({
             title: 'wide',
             styles: css`
                 div {

@@ -32310,6 +32310,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
             display: inline-flex;
             max-width: 100%;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         ${e[`vira-collapsible-card-expanded`].selector} .open-caret {
@@ -32322,6 +32323,8 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,F as s,G as c,H as l,I 
         }
 
         ${e[`vira-collapsible-card-card-styles`].selector} {
+            border-radius: ${z[`vira-form-wrapper-radius`].value};
+
             & ${aK} {
                 border: 1px solid ${z[`vira-form-border-color`].value};
                 border-radius: ${z[`vira-form-wrapper-radius`].value};
@@ -36193,6 +36196,21 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             `,render(){return w`
                     <${oK.assign({hideHeader:!0,startExpanded:!0})}>
                         <p>Content with no header visible.</p>
+                    </${oK}>
+                `}}),e({title:`magenta background`,styles:C`
+                ${oK} {
+                    background-color: magenta;
+                    color: white;
+                }
+                p {
+                    ${mf}
+                }
+            `,render(){return w`
+                    <${oK.assign({startExpanded:!0})}>
+                        <span slot=${oK.slotNames.header}>
+                            Magenta Card Header
+                        </span>
+                        <p>Card with a magenta background.</p>
                     </${oK}>
                 `}}),e({title:`wide`,styles:C`
                 div {

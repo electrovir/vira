@@ -130,7 +130,7 @@ export const viraFormBookPage = defineBookPage({
                             <${ViraButton.assign({
                                 text: 'Cancel',
                                 buttonEmphasis: ViraEmphasis.Subtle,
-                                colorVariant: ViraColorVariant.Neutral,
+                                color: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -189,7 +189,7 @@ export const viraFormBookPage = defineBookPage({
                             <${ViraButton.assign({
                                 text: 'Cancel',
                                 buttonEmphasis: ViraEmphasis.Subtle,
-                                colorVariant: ViraColorVariant.Neutral,
+                                color: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -272,7 +272,7 @@ export const viraFormBookPage = defineBookPage({
                             <${ViraButton.assign({
                                 text: 'Cancel',
                                 buttonEmphasis: ViraEmphasis.Subtle,
-                                colorVariant: ViraColorVariant.Neutral,
+                                color: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',
@@ -352,7 +352,7 @@ export const viraFormBookPage = defineBookPage({
                             <${ViraButton.assign({
                                 text: 'Cancel',
                                 buttonEmphasis: ViraEmphasis.Subtle,
-                                colorVariant: ViraColorVariant.Neutral,
+                                color: ViraColorVariant.Neutral,
                             })}></${ViraButton}>
                             <${ViraButton.assign({
                                 text: 'Submit',

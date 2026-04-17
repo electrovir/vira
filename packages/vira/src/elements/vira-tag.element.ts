@@ -208,7 +208,7 @@ export const ViraTag = defineViraElement<
         /** @default ViraEmphasis.Standard */
         emphasis: ViraEmphasis;
         /** @default ViraColorVariant.Info */
-        colorVariant: ViraColorVariant;
+        color: ViraColorVariant;
         disabled: boolean;
     }>
 >()({
@@ -266,11 +266,11 @@ export const ViraTag = defineViraElement<
                     value: ({
                         inputs,
                     }: {
-                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                        inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant}>>;
                     }) => {
                         return colorVariant === ViraColorVariant.Plain
-                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
-                            : inputs.colorVariant === colorVariant;
+                            ? !inputs.color || inputs.color === colorVariant
+                            : inputs.color === colorVariant;
                     },
                 };
             },

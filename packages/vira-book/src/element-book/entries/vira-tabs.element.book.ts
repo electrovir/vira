@@ -107,27 +107,27 @@ const simpleExamples = [
     {
         title: 'plain color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Plain,
+        color: ViraColorVariant.Plain,
     },
     {
         title: 'neutral color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Neutral,
+        color: ViraColorVariant.Neutral,
     },
     {
         title: 'danger color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Danger,
+        color: ViraColorVariant.Danger,
     },
     {
         title: 'warning color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Warning,
+        color: ViraColorVariant.Warning,
     },
     {
         title: 'positive color variant',
         tabs: tabsWithIcons,
-        colorVariant: ViraColorVariant.Positive,
+        color: ViraColorVariant.Positive,
     },
     {
         title: 'bar direction: top',
@@ -358,7 +358,7 @@ export const viraTabsBookPage = defineBookPage({
                                             router: mockRouter,
                                             currentRoute: selectedRoute,
                                             barDirection,
-                                            colorVariant,
+                                            color: colorVariant,
                                         })}></${ViraTabs}>
                                     `,
                                 )}

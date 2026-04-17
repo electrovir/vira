@@ -196,7 +196,7 @@ export const ViraButton = defineViraElement<
          *
          * @default ViraColorVariant.Info,
          */
-        colorVariant: ViraColorVariant;
+        color: ViraColorVariant;
         /**
          * Set to `true`
          *
@@ -226,11 +226,11 @@ export const ViraButton = defineViraElement<
                     value: ({
                         inputs,
                     }: {
-                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                        inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant}>>;
                     }) => {
                         return colorVariant === ViraColorVariant.Plain
-                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
-                            : inputs.colorVariant === colorVariant;
+                            ? !inputs.color || inputs.color === colorVariant
+                            : inputs.color === colorVariant;
                     },
                 };
             },

@@ -98,7 +98,7 @@ export const ViraTabs = defineViraElement<
          *
          * @default ViraColorVariant.Info
          */
-        colorVariant: ViraColorVariant;
+        color: ViraColorVariant;
         /**
          * Layout direction for icons relative to their label text.
          *
@@ -145,11 +145,11 @@ export const ViraTabs = defineViraElement<
                     value: ({
                         inputs,
                     }: {
-                        inputs: Readonly<PartialWithUndefined<{colorVariant: ViraColorVariant}>>;
+                        inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant}>>;
                     }) => {
                         return colorVariant === ViraColorVariant.Plain
-                            ? !inputs.colorVariant || inputs.colorVariant === colorVariant
-                            : inputs.colorVariant === colorVariant;
+                            ? !inputs.color || inputs.color === colorVariant
+                            : inputs.color === colorVariant;
                     },
                 };
             },
@@ -529,7 +529,7 @@ export const ViraTabs = defineViraElement<
                 <${ViraButton.assign({
                     text: selectedTab?.label || '',
                     showMenuCaret: true,
-                    colorVariant: ViraColorVariant.Neutral,
+                    color: ViraColorVariant.Neutral,
                 })}
                     slot=${ViraMenuTrigger.slotNames.trigger}
                 ></${ViraButton}>

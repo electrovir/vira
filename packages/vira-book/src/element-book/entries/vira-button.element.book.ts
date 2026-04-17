@@ -13,10 +13,7 @@ import {elementsBookPage} from '../top-level-pages.js';
 
 const buttonVariants: {
     label: string;
-    extraInputs: Omit<
-        typeof ViraButton.InputsType,
-        'buttonSize' | 'buttonEmphasis' | 'colorVariant'
-    >;
+    extraInputs: Omit<typeof ViraButton.InputsType, 'buttonSize' | 'buttonEmphasis' | 'color'>;
 }[] = [
     {
         label: 'basic',
@@ -117,7 +114,7 @@ export const viraButtonBookPage = defineBookPage({
                                                                 ...extraInputs,
                                                                 buttonSize: size,
                                                                 buttonEmphasis: emphasis,
-                                                                colorVariant: color,
+                                                                color,
                                                             })}></${ViraButton}>
                                                         </td>
                                                     `;
@@ -158,7 +155,7 @@ export const viraButtonBookPage = defineBookPage({
                 return html`
                     <${ViraButton.assign({
                         text: 'hello',
-                        colorVariant: ViraColorVariant.Custom,
+                        color: ViraColorVariant.Custom,
                     })}></${ViraButton}>
                 `;
             },

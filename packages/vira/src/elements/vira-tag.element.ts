@@ -111,7 +111,7 @@ function buildThemedNotCheckedColors(colorVariant: ViraColorVariant): TagColorSt
 }
 
 const tagColorVariantColors: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.None>,
+    Exclude<ViraColorVariant, ViraColorVariant.Custom>,
     Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors>
 > = {
     ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
@@ -156,7 +156,7 @@ const tagColorVariantColors: Record<
 };
 
 const tagNotCheckedColors: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.None>,
+    Exclude<ViraColorVariant, ViraColorVariant.Custom>,
     TagColorStateColors
 > = {
     ...mapEnumToObject(ViraColorVariant, (colorVariant) => {

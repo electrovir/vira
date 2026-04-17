@@ -158,7 +158,7 @@ export const viraButtonBookPage = defineBookPage({
                 return html`
                     <${ViraButton.assign({
                         text: 'hello',
-                        colorVariant: ViraColorVariant.None,
+                        colorVariant: ViraColorVariant.Custom,
                     })}></${ViraButton}>
                 `;
             },

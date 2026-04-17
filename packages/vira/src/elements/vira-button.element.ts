@@ -87,7 +87,7 @@ function buildThemedButtonColors(
 }
 
 const colorVariantColors: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.None>,
+    Exclude<ViraColorVariant, ViraColorVariant.Custom>,
     Record<
         Exclude<ViraEmphasis, ViraEmphasis.None>,
         Record<
@@ -190,8 +190,9 @@ export const ViraButton = defineViraElement<
          */
         buttonSize: ViraSize;
         /**
-         * Set a predefined color variant. Set to `ViraColorVariant.None` for maximum customization.
-         * In that case, you will need to use this element's CSS vars to customize the colors.
+         * Set a predefined color variant. Set to `ViraColorVariant.Custom` for maximum
+         * customization. In that case, you will need to use this element's CSS vars to customize
+         * the colors.
          *
          * @default ViraColorVariant.Info,
          */

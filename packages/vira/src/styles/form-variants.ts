@@ -27,10 +27,10 @@ export enum ViraColorVariant {
     /** @default purple colored */
     Special = 'special',
     /**
-     * No color variant styles will be applied at all. All related CSS vars are free to customize to
-     * your wishes.
+     * No color variant styles will be applied at all, allowing the element's colors to be fully
+     * customized via its CSS vars.
      */
-    None = 'none',
+    Custom = 'custom',
 }
 
 /**
@@ -48,7 +48,7 @@ export const viraColorVariantToColorName: Record<ViraColorVariant, ViraThemeColo
     [ViraColorVariant.Brand]: ViraThemeColorName.brand,
     [ViraColorVariant.Special]: ViraThemeColorName.purple,
     [ViraColorVariant.Plain]: ViraThemeColorName.grey,
-    [ViraColorVariant.None]: ViraThemeColorName.grey,
+    [ViraColorVariant.Custom]: ViraThemeColorName.grey,
 };
 
 /**

@@ -1,5 +1,5 @@
 import {check} from '@augment-vir/assert';
-import {arrayToObject, mapEnumToObject, type PartialWithUndefined} from '@augment-vir/common';
+import {arrayToObject, getObjectTypedKeys, type PartialWithUndefined} from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
@@ -9,9 +9,8 @@ import {Check16Icon} from '../icons/icon-svgs/16/check-16.icon.js';
 import {X16Icon} from '../icons/icon-svgs/16/x-16.icon.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
+    standaloneThemeColorNames,
     ViraColorVariant,
-    viraColorVariants,
-    viraColorVariantToColorName,
     viraColorVariantToHostClassKey,
     ViraEmphasis,
     viraEmphasisVariants,
@@ -21,7 +20,7 @@ import {
 } from '../styles/form-variants.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {noUserSelect} from '../styles/user-select.js';
-import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
+import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
@@ -42,9 +41,8 @@ type TagColorStateColors = Record<
 >;
 
 function buildThemedTagColors(
-    colorVariant: ViraColorVariant,
+    colorName: ViraThemeColorName,
 ): Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors> {
-    const colorName = viraColorVariantToColorName[colorVariant];
     const behindBg = viraThemeByKeys[colorName]['behind-bg'];
     const onSelf = viraThemeByKeys[colorName]['on-self'];
 
@@ -86,8 +84,7 @@ function buildThemedTagColors(
     };
 }
 
-function buildThemedNotCheckedColors(colorVariant: ViraColorVariant): TagColorStateColors {
-    const colorName = viraColorVariantToColorName[colorVariant];
+function buildThemedNotCheckedColors(colorName: ViraThemeColorName): TagColorStateColors {
     const onSelfBodyText = viraThemeByKeys[colorName]['on-self'][ContrastLevelName.BodyText];
 
     return {
@@ -111,74 +108,58 @@ function buildThemedNotCheckedColors(colorVariant: ViraColorVariant): TagColorSt
     };
 }
 
-const tagColorVariantColors: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.Custom>,
-    Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors>
-> = {
-    ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
-        return buildThemedTagColors(colorVariant);
-    }),
-    [ViraColorVariant.Plain]: {
-        [ViraEmphasis.Standard]: {
-            idle: {
-                backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
-                textColor: viraTheme.colors[themeDefaultKey].background,
-                borderColor: viraTheme.colors[themeDefaultKey].foreground,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
-                textColor: viraTheme.colors['vira-grey-behind-bg-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
-                textColor: viraTheme.colors[themeDefaultKey].background,
-                borderColor: viraTheme.colors[themeDefaultKey].foreground,
-            },
+const plainTagColors: Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors> = {
+    [ViraEmphasis.Standard]: {
+        idle: {
+            backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
+            textColor: viraTheme.colors[themeDefaultKey].background,
+            borderColor: viraTheme.colors[themeDefaultKey].foreground,
         },
-        [ViraEmphasis.Subtle]: {
-            idle: {
-                backgroundColor: transparentColor,
-                textColor: viraTheme.colors[themeDefaultKey].foreground,
-                borderColor: transparentColor,
-            },
-            hover: {
-                backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
-                textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
-            },
-            active: {
-                backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
-                textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
-                borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
-            },
+        hover: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-bg-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-bg-body'].background,
+        },
+        active: {
+            backgroundColor: viraTheme.colors[themeDefaultKey].foreground,
+            textColor: viraTheme.colors[themeDefaultKey].background,
+            borderColor: viraTheme.colors[themeDefaultKey].foreground,
         },
     },
-};
-
-const tagNotCheckedColors: Record<
-    Exclude<ViraColorVariant, ViraColorVariant.Custom>,
-    TagColorStateColors
-> = {
-    ...mapEnumToObject(ViraColorVariant, (colorVariant) => {
-        return buildThemedNotCheckedColors(colorVariant);
-    }),
-    [ViraColorVariant.Plain]: {
+    [ViraEmphasis.Subtle]: {
         idle: {
-            textColor: viraTheme.colors[themeDefaultKey].foreground,
             backgroundColor: transparentColor,
-            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
+            textColor: viraTheme.colors[themeDefaultKey].foreground,
+            borderColor: transparentColor,
         },
         hover: {
             backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
             textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
-            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
         },
         active: {
             backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
             textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
-            borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
         },
+    },
+};
+
+const plainNotCheckedColors: TagColorStateColors = {
+    idle: {
+        textColor: viraTheme.colors[themeDefaultKey].foreground,
+        backgroundColor: transparentColor,
+        borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
+    },
+    hover: {
+        backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+        textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+        borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
+    },
+    active: {
+        backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+        textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
+        borderColor: viraTheme.colors['vira-grey-on-self-body'].background,
     },
 };
 
@@ -208,8 +189,13 @@ export const ViraTag = defineViraElement<
         size: ViraSize;
         /** @default ViraEmphasis.Standard */
         emphasis: ViraEmphasis;
-        /** @default ViraColorVariant.Info */
-        color: ViraColorVariant;
+        /**
+         * Color scheme. Accepts any {@link ViraColorVariant} or a {@link ViraThemeColorName} (e.g.,
+         * `ViraThemeColorName.blue`).
+         *
+         * @default ViraColorVariant.Plain
+         */
+        color: ViraColorVariant | ViraThemeColorName;
         disabled: boolean;
     }>
 >()({
@@ -260,18 +246,49 @@ export const ViraTag = defineViraElement<
         'vira-tag-emphasis-subtle': ({inputs}) => inputs.emphasis === ViraEmphasis.Subtle,
 
         ...arrayToObject(
-            viraColorVariants,
+            getObjectTypedKeys(viraColorVariantToHostClassKey),
             (colorVariant) => {
+                const colorKey = viraColorVariantToHostClassKey[colorVariant];
                 return {
-                    key: `vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}` as const,
+                    key: `vira-tag-color-${colorKey}` as const,
                     value: ({
                         inputs,
                     }: {
-                        inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant}>>;
+                        inputs: Readonly<
+                            PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
+                        >;
                     }) => {
-                        return colorVariant === ViraColorVariant.Plain
-                            ? !inputs.color || inputs.color === colorVariant
-                            : inputs.color === colorVariant;
+                        return inputs.color === colorVariant || inputs.color === colorKey;
+                    },
+                };
+            },
+            {
+                useRequired: true,
+            },
+        ),
+        'vira-tag-color-plain': ({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) => !inputs.color || inputs.color === ViraColorVariant.Plain,
+        'vira-tag-color-neutral': ({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) => inputs.color === ViraColorVariant.Neutral,
+        ...arrayToObject(
+            standaloneThemeColorNames,
+            (colorName) => {
+                return {
+                    key: `vira-tag-color-${colorName}` as const,
+                    value: ({
+                        inputs,
+                    }: {
+                        inputs: Readonly<
+                            PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
+                        >;
+                    }) => {
+                        return inputs.color === colorName;
                     },
                 };
             },
@@ -281,78 +298,128 @@ export const ViraTag = defineViraElement<
         ),
     },
     styles: ({cssVars, hostClasses}) => {
+        function buildVariantCssRule(
+            variantSelector: CSSResult,
+            emphasisSelector: CSSResult,
+            colors: TagColorStateColors,
+        ): CSSResult {
+            return css`
+                ${variantSelector}${emphasisSelector} {
+                    ${cssVars['vira-tag-background-color'].name}: ${colors.idle.backgroundColor
+                        .value};
+                    ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
+                    ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor.value};
+
+                    ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
+                        .backgroundColor.value};
+                    ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor.value};
+                    ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover.borderColor
+                        .value};
+
+                    ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
+                        .backgroundColor.value};
+                    ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor.value};
+                    ${cssVars['vira-tag-active-border-color'].name}: ${colors.active.borderColor
+                        .value};
+                }
+            `;
+        }
+
         function generateVariantCss(): CSSResult {
             const allStyles = viraEmphasisVariants.flatMap((emphasis) => {
-                return viraColorVariants.map((colorVariant) => {
-                    const colors = tagColorVariantColors[colorVariant][emphasis];
-                    const variantSelector =
-                        hostClasses[
-                            `vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}`
-                        ].selector;
-                    const emphasisSelector = hostClasses[`vira-tag-emphasis-${emphasis}`].selector;
-
-                    return css`
-                        ${variantSelector}${emphasisSelector} {
-                            ${cssVars['vira-tag-background-color'].name}: ${colors.idle
-                                .backgroundColor.value};
-                            ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
-                            ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor
-                                .value};
-
-                            ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
-                                .backgroundColor.value};
-                            ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor
-                                .value};
-                            ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover
-                                .borderColor.value};
-
-                            ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
-                                .backgroundColor.value};
-                            ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor
-                                .value};
-                            ${cssVars['vira-tag-active-border-color'].name}: ${colors.active
-                                .borderColor.value};
-                        }
-                    `;
+                const emphasisSelector = hostClasses[`vira-tag-emphasis-${emphasis}`].selector;
+                const themedStyles = getObjectTypedKeys(viraColorVariantToHostClassKey).map(
+                    (colorVariant) => {
+                        const colorKey = viraColorVariantToHostClassKey[colorVariant];
+                        const colors = buildThemedTagColors(colorKey)[emphasis];
+                        const variantSelector = hostClasses[`vira-tag-color-${colorKey}`].selector;
+                        return buildVariantCssRule(variantSelector, emphasisSelector, colors);
+                    },
+                );
+                const plainStyle = buildVariantCssRule(
+                    hostClasses['vira-tag-color-plain'].selector,
+                    emphasisSelector,
+                    plainTagColors[emphasis],
+                );
+                const neutralStyle = buildVariantCssRule(
+                    hostClasses['vira-tag-color-neutral'].selector,
+                    emphasisSelector,
+                    buildThemedTagColors(ViraThemeColorName.grey)[emphasis],
+                );
+                const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
+                    const colors = buildThemedTagColors(colorName)[emphasis];
+                    const variantSelector = hostClasses[`vira-tag-color-${colorName}`].selector;
+                    return buildVariantCssRule(variantSelector, emphasisSelector, colors);
                 });
+                return [
+                    ...themedStyles,
+                    plainStyle,
+                    neutralStyle,
+                    ...standaloneStyles,
+                ];
             });
 
             return unsafeCSS(allStyles.join('\n'));
         }
 
+        function buildNotCheckedCssRule(
+            variantSelector: CSSResult,
+            colors: TagColorStateColors,
+        ): CSSResult {
+            const notCheckedSelector = hostClasses['vira-tag-not-checked'].selector;
+            return css`
+                ${variantSelector}${notCheckedSelector}${notCheckedSelector}${notCheckedSelector} {
+                    ${cssVars['vira-tag-background-color'].name}: ${colors.idle.backgroundColor
+                        .value};
+                    ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
+                    ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor.value};
+
+                    ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
+                        .backgroundColor.value};
+                    ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor.value};
+                    ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover.borderColor
+                        .value};
+
+                    ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
+                        .backgroundColor.value};
+                    ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor.value};
+                    ${cssVars['vira-tag-active-border-color'].name}: ${colors.active.borderColor
+                        .value};
+                }
+            `;
+        }
+
         function generateNotCheckedCss(): CSSResult {
-            const allStyles = viraColorVariants.map((colorVariant) => {
-                const colors = tagNotCheckedColors[colorVariant];
-                const variantSelector =
-                    hostClasses[`vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}`]
-                        .selector;
-                const notCheckedSelector = hostClasses['vira-tag-not-checked'].selector;
-
-                return css`
-                    ${variantSelector}${notCheckedSelector}${notCheckedSelector}${notCheckedSelector} {
-                        ${cssVars['vira-tag-background-color'].name}: ${colors.idle.backgroundColor
-                            .value};
-                        ${cssVars['vira-tag-text-color'].name}: ${colors.idle.textColor.value};
-                        ${cssVars['vira-tag-border-color'].name}: ${colors.idle.borderColor.value};
-
-                        ${cssVars['vira-tag-hover-background-color'].name}: ${colors.hover
-                            .backgroundColor.value};
-                        ${cssVars['vira-tag-hover-text-color'].name}: ${colors.hover.textColor
-                            .value};
-                        ${cssVars['vira-tag-hover-border-color'].name}: ${colors.hover.borderColor
-                            .value};
-
-                        ${cssVars['vira-tag-active-background-color'].name}: ${colors.active
-                            .backgroundColor.value};
-                        ${cssVars['vira-tag-active-text-color'].name}: ${colors.active.textColor
-                            .value};
-                        ${cssVars['vira-tag-active-border-color'].name}: ${colors.active.borderColor
-                            .value};
-                    }
-                `;
+            const themedStyles = getObjectTypedKeys(viraColorVariantToHostClassKey).map(
+                (colorVariant) => {
+                    const colorKey = viraColorVariantToHostClassKey[colorVariant];
+                    const colors = buildThemedNotCheckedColors(colorKey);
+                    const variantSelector = hostClasses[`vira-tag-color-${colorKey}`].selector;
+                    return buildNotCheckedCssRule(variantSelector, colors);
+                },
+            );
+            const plainStyle = buildNotCheckedCssRule(
+                hostClasses['vira-tag-color-plain'].selector,
+                plainNotCheckedColors,
+            );
+            const neutralStyle = buildNotCheckedCssRule(
+                hostClasses['vira-tag-color-neutral'].selector,
+                buildThemedNotCheckedColors(ViraThemeColorName.grey),
+            );
+            const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
+                const colors = buildThemedNotCheckedColors(colorName);
+                const variantSelector = hostClasses[`vira-tag-color-${colorName}`].selector;
+                return buildNotCheckedCssRule(variantSelector, colors);
             });
 
-            return unsafeCSS(allStyles.join('\n'));
+            return unsafeCSS(
+                [
+                    ...themedStyles,
+                    plainStyle,
+                    neutralStyle,
+                    ...standaloneStyles,
+                ].join('\n'),
+            );
         }
 
         function generateSizeVariantCss(): CSSResult {

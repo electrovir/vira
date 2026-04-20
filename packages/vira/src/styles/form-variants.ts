@@ -1,4 +1,5 @@
-import {type ArrayElement} from '@augment-vir/common';
+import {check} from '@augment-vir/assert';
+import {type ArrayElement, getObjectTypedValues} from '@augment-vir/common';
 import {ViraThemeColorName} from './vira-color-theme-object.js';
 
 /**
@@ -7,13 +8,13 @@ import {ViraThemeColorName} from './vira-color-theme-object.js';
  * @category Internal
  */
 export enum ViraColorVariant {
-    /**
-     * This is the default.
-     *
-     * @default blue colored
-     */
+    /** @default blue colored */
     Info = 'info',
-    /** @default black colored */
+    /**
+     * Applied when no `color` input is set on a color-aware element.
+     *
+     * @default black colored
+     */
     Plain = 'plain',
     /** @default grey colored */
     Neutral = 'neutral',
@@ -35,24 +36,6 @@ export enum ViraColorVariant {
 }
 
 /**
- * Maps {@link ViraColorVariant} values that support colors to their respective vira theme color
- * keys.
- *
- * @category Internal
- */
-export const viraColorVariantToColorName: Record<ViraColorVariant, ViraThemeColorName> = {
-    [ViraColorVariant.Info]: ViraThemeColorName.blue,
-    [ViraColorVariant.Neutral]: ViraThemeColorName.grey,
-    [ViraColorVariant.Danger]: ViraThemeColorName.red,
-    [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
-    [ViraColorVariant.Positive]: ViraThemeColorName.green,
-    [ViraColorVariant.Brand]: ViraThemeColorName.brand,
-    [ViraColorVariant.Special]: ViraThemeColorName.purple,
-    [ViraColorVariant.Plain]: ViraThemeColorName.grey,
-    [ViraColorVariant.Custom]: ViraThemeColorName.grey,
-};
-
-/**
  * All defined color variants starting with the default.
  *
  * @category Internal
@@ -69,26 +52,32 @@ export const viraColorVariants = [
 ] as const;
 
 /**
- * Maps each iterated {@link ViraColorVariant} to the suffix used in its host class name on
- * color-aware elements (`vira-*-color-${suffix}`). Themed variants resolve to their
- * {@link ViraThemeColorName}; `Plain` and `Neutral` keep their variant names to avoid colliding on
- * shared theme color keys.
+ * Maps themed {@link ViraColorVariant} members to the {@link ViraThemeColorName} used as their host
+ * class suffix on color-aware elements (`vira-*-color-${themeColor}`). `Plain` and `Neutral` are
+ * intentionally omitted: they are always special-cased by each element so their host classes stay
+ * distinct from any theme color class (including `grey`).
  *
  * @category Internal
  */
 export const viraColorVariantToHostClassKey = {
     [ViraColorVariant.Info]: ViraThemeColorName.blue,
-    [ViraColorVariant.Plain]: ViraColorVariant.Plain,
-    [ViraColorVariant.Neutral]: ViraColorVariant.Neutral,
     [ViraColorVariant.Danger]: ViraThemeColorName.red,
     [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
     [ViraColorVariant.Positive]: ViraThemeColorName.green,
     [ViraColorVariant.Brand]: ViraThemeColorName.brand,
     [ViraColorVariant.Special]: ViraThemeColorName.purple,
-} as const satisfies Record<
-    ArrayElement<typeof viraColorVariants>,
-    ViraColorVariant | ViraThemeColorName
->;
+} as const satisfies Partial<Record<ArrayElement<typeof viraColorVariants>, ViraThemeColorName>>;
+
+/**
+ * {@link ViraThemeColorName} values that have no corresponding themed {@link ViraColorVariant} in
+ * {@link viraColorVariantToHostClassKey}. Color-aware elements generate a standalone host class for
+ * each so every {@link ViraThemeColorName} (including `grey`) can be passed as a `color` input.
+ *
+ * @category Internal
+ */
+export const standaloneThemeColorNames = getObjectTypedValues(ViraThemeColorName).filter(
+    (colorName) => !check.hasValue(getObjectTypedValues(viraColorVariantToHostClassKey), colorName),
+);
 
 /**
  * All available variants for controlling vira form sizes.

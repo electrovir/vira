@@ -15,6 +15,7 @@ import {
     ViraTabsBarDirection,
     ViraTabsIconLayout,
     viraTheme,
+    ViraThemeColorName,
     type ViraTab,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
@@ -363,6 +364,25 @@ export const viraTabsBookPage = defineBookPage({
                                     `,
                                 )}
                             </div>
+                        `,
+                    )}
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'theme colors',
+            render() {
+                return html`
+                    ${Object.values(ViraThemeColorName).map(
+                        (color) => html`
+                            <h4>${color}</h4>
+                            <${ViraTabs.assign({
+                                tabs: tabsWithoutIcons,
+                                router: mockRouter,
+                                currentRoute: selectedRoute,
+                                color,
+                            })}></${ViraTabs}>
                         `,
                     )}
                 `;

@@ -1,5 +1,10 @@
 import {check} from '@augment-vir/assert';
-import {arrayToObject, filterMap, type PartialWithUndefined} from '@augment-vir/common';
+import {
+    arrayToObject,
+    filterMap,
+    getObjectTypedKeys,
+    type PartialWithUndefined,
+} from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {
     classMap,
@@ -22,13 +27,12 @@ import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
+    standaloneThemeColorNames,
     ViraColorVariant,
-    viraColorVariants,
-    viraColorVariantToColorName,
     viraColorVariantToHostClassKey,
 } from '../styles/form-variants.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
-import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
+import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {createOverflowObserver} from '../util/overflow-observer.js';
 import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
@@ -95,11 +99,13 @@ export const ViraTabs = defineViraElement<
          */
         barDirection: ViraTabsBarDirection;
         /**
-         * Color variant for the tab selection indicator and active tab text.
+         * Color variant for the tab selection indicator and active tab text. Accepts any
+         * {@link ViraColorVariant} or a {@link ViraThemeColorName} (e.g.,
+         * `ViraThemeColorName.blue`).
          *
-         * @default ViraColorVariant.Info
+         * @default ViraColorVariant.Plain
          */
-        color: ViraColorVariant;
+        color: ViraColorVariant | ViraThemeColorName;
         /**
          * Layout direction for icons relative to their label text.
          *
@@ -139,18 +145,49 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-bar-left': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Left,
         'vira-tabs-bar-right': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Right,
         ...arrayToObject(
-            viraColorVariants,
+            getObjectTypedKeys(viraColorVariantToHostClassKey),
             (colorVariant) => {
+                const colorKey = viraColorVariantToHostClassKey[colorVariant];
                 return {
-                    key: `vira-tabs-color-${viraColorVariantToHostClassKey[colorVariant]}` as const,
+                    key: `vira-tabs-color-${colorKey}` as const,
                     value: ({
                         inputs,
                     }: {
-                        inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant}>>;
+                        inputs: Readonly<
+                            PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
+                        >;
                     }) => {
-                        return colorVariant === ViraColorVariant.Plain
-                            ? !inputs.color || inputs.color === colorVariant
-                            : inputs.color === colorVariant;
+                        return inputs.color === colorVariant || inputs.color === colorKey;
+                    },
+                };
+            },
+            {
+                useRequired: true,
+            },
+        ),
+        'vira-tabs-color-plain': ({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) => !inputs.color || inputs.color === ViraColorVariant.Plain,
+        'vira-tabs-color-neutral': ({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) => inputs.color === ViraColorVariant.Neutral,
+        ...arrayToObject(
+            standaloneThemeColorNames,
+            (colorName) => {
+                return {
+                    key: `vira-tabs-color-${colorName}` as const,
+                    value: ({
+                        inputs,
+                    }: {
+                        inputs: Readonly<
+                            PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
+                        >;
+                    }) => {
+                        return inputs.color === colorName;
                     },
                 };
             },
@@ -167,11 +204,11 @@ export const ViraTabs = defineViraElement<
     },
     cssVars: {
         'vira-tabs-active-color':
-            viraThemeByKeys[viraColorVariantToColorName[ViraColorVariant.Info]]['behind-bg'][
+            viraThemeByKeys[viraColorVariantToHostClassKey[ViraColorVariant.Info]]['behind-bg'][
                 ContrastLevelName.NonBodyText
             ].background.value,
         'vira-tabs-active-hover-color':
-            viraThemeByKeys[viraColorVariantToColorName[ViraColorVariant.Info]]['behind-bg'][
+            viraThemeByKeys[viraColorVariantToHostClassKey[ViraColorVariant.Info]]['behind-bg'][
                 ContrastLevelName.Header
             ].background.value,
         'vira-tabs-inactive-color':
@@ -182,41 +219,62 @@ export const ViraTabs = defineViraElement<
     },
 
     styles: ({hostClasses, cssVars}) => {
+        function buildThemedTabsColors(colorName: ViraThemeColorName) {
+            return {
+                active: viraThemeByKeys[colorName]['behind-bg'][ContrastLevelName.NonBodyText]
+                    .background,
+                hover: viraThemeByKeys[colorName]['behind-bg'][ContrastLevelName.Header].background,
+            };
+        }
+
+        function buildVariantCssRule(
+            variantSelector: CSSResult,
+            colors: {active: {value: CSSResult}; hover: {value: CSSResult}},
+        ): CSSResult {
+            return css`
+                ${variantSelector} {
+                    ${cssVars['vira-tabs-active-color'].name}: ${colors.active.value};
+                    ${cssVars['vira-tabs-active-hover-color'].name}: ${colors.hover.value};
+                }
+            `;
+        }
+
         function generateVariantCss(): CSSResult {
             const plainColors = {
                 active: viraTheme.colors['vira-grey-foreground-small-body'].foreground,
                 hover: viraTheme.colors['vira-grey-foreground-body'].foreground,
             };
 
-            const allStyles = viraColorVariants
-                .map((colorVariant) => {
-                    const variantSelector =
-                        hostClasses[
-                            `vira-tabs-color-${viraColorVariantToHostClassKey[colorVariant]}`
-                        ].selector;
+            const themedStyles = getObjectTypedKeys(viraColorVariantToHostClassKey).map(
+                (colorVariant) => {
+                    const colorKey = viraColorVariantToHostClassKey[colorVariant];
+                    const variantSelector = hostClasses[`vira-tabs-color-${colorKey}`].selector;
+                    const colors = buildThemedTabsColors(colorKey);
+                    return buildVariantCssRule(variantSelector, colors);
+                },
+            );
+            const plainStyle = buildVariantCssRule(
+                hostClasses['vira-tabs-color-plain'].selector,
+                plainColors,
+            );
+            const neutralStyle = buildVariantCssRule(
+                hostClasses['vira-tabs-color-neutral'].selector,
+                buildThemedTabsColors(ViraThemeColorName.grey),
+            );
+            const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
+                const variantSelector = hostClasses[`vira-tabs-color-${colorName}`].selector;
+                const colors = buildThemedTabsColors(colorName);
+                return buildVariantCssRule(variantSelector, colors);
+            });
 
-                    const colors =
-                        colorVariant === ViraColorVariant.Plain
-                            ? plainColors
-                            : {
-                                  active: viraThemeByKeys[
-                                      viraColorVariantToColorName[colorVariant]
-                                  ]['behind-bg'][ContrastLevelName.NonBodyText].background,
-                                  hover: viraThemeByKeys[viraColorVariantToColorName[colorVariant]][
-                                      'behind-bg'
-                                  ][ContrastLevelName.Header].background,
-                              };
-
-                    return css`
-                        ${variantSelector} {
-                            ${cssVars['vira-tabs-active-color'].name}: ${colors.active.value};
-                            ${cssVars['vira-tabs-active-hover-color'].name}: ${colors.hover.value};
-                        }
-                    `;
-                })
-                .join('\n');
-
-            return unsafeCSS(allStyles);
+            return unsafeCSS(
+                [
+                    ...themedStyles,
+                    plainStyle,
+                    neutralStyle,
+                    ...standaloneStyles,
+                ].join('\n'),
+            );
         }
 
         return css`

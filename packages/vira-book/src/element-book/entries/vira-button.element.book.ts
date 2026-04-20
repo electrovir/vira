@@ -8,6 +8,7 @@ import {
     viraColorVariants,
     viraEmphasisVariants,
     viraSizeVariants,
+    ViraThemeColorName,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
@@ -173,6 +174,31 @@ export const viraButtonBookPage = defineBookPage({
                     <${ViraButton.assign({
                         text: 'This is a long button label that wraps',
                     })}></${ViraButton}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'theme colors',
+            styles: css`
+                .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+            `,
+            render() {
+                return html`
+                    <div class="row">
+                        ${Object.values(ViraThemeColorName).map(
+                            (color) => html`
+                                <${ViraButton.assign({
+                                    text: color,
+                                    color,
+                                })}></${ViraButton}>
+                            `,
+                        )}
+                    </div>
                 `;
             },
         });

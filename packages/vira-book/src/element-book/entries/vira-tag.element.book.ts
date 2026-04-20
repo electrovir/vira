@@ -1,7 +1,13 @@
 import {check} from '@augment-vir/assert';
 import {defineBookPage} from 'element-book';
 import {classMap, css, html, listen} from 'element-vir';
-import {viraColorVariants, viraEmphasisVariants, viraSizeVariants, ViraTag} from 'vira';
+import {
+    viraColorVariants,
+    viraEmphasisVariants,
+    viraSizeVariants,
+    ViraTag,
+    ViraThemeColorName,
+} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const clickableVariants: ({
@@ -151,6 +157,31 @@ export const viraTagBookPage = defineBookPage({
                     });
                 },
             });
+        });
+
+        defineExample({
+            title: 'theme colors',
+            styles: css`
+                .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+            `,
+            render() {
+                return html`
+                    <div class="row">
+                        ${Object.values(ViraThemeColorName).map(
+                            (color) => html`
+                                <${ViraTag.assign({
+                                    text: color,
+                                    color,
+                                })}></${ViraTag}>
+                            `,
+                        )}
+                    </div>
+                `;
+            },
         });
     },
 });

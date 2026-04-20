@@ -9,6 +9,7 @@ import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     viraColorVariants,
     viraColorVariantToColorName,
+    viraColorVariantToHostClassKey,
     viraEmphasisVariants,
     viraSizeHeights,
     viraSizeVariants,
@@ -222,7 +223,7 @@ export const ViraButton = defineViraElement<
             viraColorVariants,
             (colorVariant) => {
                 return {
-                    key: `vira-button-color-${colorVariant}` as const,
+                    key: `vira-button-color-${viraColorVariantToHostClassKey[colorVariant]}` as const,
                     value: ({
                         inputs,
                     }: {
@@ -271,7 +272,9 @@ export const ViraButton = defineViraElement<
                 return viraColorVariants.map((colorVariant) => {
                     const colors = colorVariantColors[colorVariant][emphasis];
                     const variantSelector =
-                        hostClasses[`vira-button-color-${colorVariant}`].selector;
+                        hostClasses[
+                            `vira-button-color-${viraColorVariantToHostClassKey[colorVariant]}`
+                        ].selector;
                     const emphasisSelector =
                         hostClasses[`vira-button-emphasis-${emphasis}`].selector;
 

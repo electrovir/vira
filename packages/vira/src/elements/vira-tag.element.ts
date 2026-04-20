@@ -12,6 +12,7 @@ import {
     ViraColorVariant,
     viraColorVariants,
     viraColorVariantToColorName,
+    viraColorVariantToHostClassKey,
     ViraEmphasis,
     viraEmphasisVariants,
     ViraSize,
@@ -262,7 +263,7 @@ export const ViraTag = defineViraElement<
             viraColorVariants,
             (colorVariant) => {
                 return {
-                    key: `vira-tag-color-${colorVariant}` as const,
+                    key: `vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}` as const,
                     value: ({
                         inputs,
                     }: {
@@ -284,7 +285,10 @@ export const ViraTag = defineViraElement<
             const allStyles = viraEmphasisVariants.flatMap((emphasis) => {
                 return viraColorVariants.map((colorVariant) => {
                     const colors = tagColorVariantColors[colorVariant][emphasis];
-                    const variantSelector = hostClasses[`vira-tag-color-${colorVariant}`].selector;
+                    const variantSelector =
+                        hostClasses[
+                            `vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}`
+                        ].selector;
                     const emphasisSelector = hostClasses[`vira-tag-emphasis-${emphasis}`].selector;
 
                     return css`
@@ -319,7 +323,9 @@ export const ViraTag = defineViraElement<
         function generateNotCheckedCss(): CSSResult {
             const allStyles = viraColorVariants.map((colorVariant) => {
                 const colors = tagNotCheckedColors[colorVariant];
-                const variantSelector = hostClasses[`vira-tag-color-${colorVariant}`].selector;
+                const variantSelector =
+                    hostClasses[`vira-tag-color-${viraColorVariantToHostClassKey[colorVariant]}`]
+                        .selector;
                 const notCheckedSelector = hostClasses['vira-tag-not-checked'].selector;
 
                 return css`

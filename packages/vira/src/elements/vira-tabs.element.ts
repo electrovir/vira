@@ -23,8 +23,9 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     ViraColorVariant,
-    viraColorVariantToColorName,
     viraColorVariants,
+    viraColorVariantToColorName,
+    viraColorVariantToHostClassKey,
 } from '../styles/form-variants.js';
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
 import {viraThemeByKeys} from '../styles/vira-color-theme-object.js';
@@ -141,7 +142,7 @@ export const ViraTabs = defineViraElement<
             viraColorVariants,
             (colorVariant) => {
                 return {
-                    key: `vira-tabs-color-${colorVariant}` as const,
+                    key: `vira-tabs-color-${viraColorVariantToHostClassKey[colorVariant]}` as const,
                     value: ({
                         inputs,
                     }: {
@@ -189,7 +190,10 @@ export const ViraTabs = defineViraElement<
 
             const allStyles = viraColorVariants
                 .map((colorVariant) => {
-                    const variantSelector = hostClasses[`vira-tabs-color-${colorVariant}`].selector;
+                    const variantSelector =
+                        hostClasses[
+                            `vira-tabs-color-${viraColorVariantToHostClassKey[colorVariant]}`
+                        ].selector;
 
                     const colors =
                         colorVariant === ViraColorVariant.Plain

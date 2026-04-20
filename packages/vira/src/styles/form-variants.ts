@@ -1,3 +1,4 @@
+import {type ArrayElement} from '@augment-vir/common';
 import {ViraThemeColorName} from './vira-color-theme-object.js';
 
 /**
@@ -66,6 +67,28 @@ export const viraColorVariants = [
     ViraColorVariant.Brand,
     ViraColorVariant.Special,
 ] as const;
+
+/**
+ * Maps each iterated {@link ViraColorVariant} to the suffix used in its host class name on
+ * color-aware elements (`vira-*-color-${suffix}`). Themed variants resolve to their
+ * {@link ViraThemeColorName}; `Plain` and `Neutral` keep their variant names to avoid colliding on
+ * shared theme color keys.
+ *
+ * @category Internal
+ */
+export const viraColorVariantToHostClassKey = {
+    [ViraColorVariant.Info]: ViraThemeColorName.blue,
+    [ViraColorVariant.Plain]: ViraColorVariant.Plain,
+    [ViraColorVariant.Neutral]: ViraColorVariant.Neutral,
+    [ViraColorVariant.Danger]: ViraThemeColorName.red,
+    [ViraColorVariant.Warning]: ViraThemeColorName.yellow,
+    [ViraColorVariant.Positive]: ViraThemeColorName.green,
+    [ViraColorVariant.Brand]: ViraThemeColorName.brand,
+    [ViraColorVariant.Special]: ViraThemeColorName.purple,
+} as const satisfies Record<
+    ArrayElement<typeof viraColorVariants>,
+    ViraColorVariant | ViraThemeColorName
+>;
 
 /**
  * All available variants for controlling vira form sizes.

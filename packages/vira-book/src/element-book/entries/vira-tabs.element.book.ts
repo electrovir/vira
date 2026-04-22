@@ -37,6 +37,9 @@ const mockRouter = {
     setRouteOnDirectNavigation() {
         return false;
     },
+    setRoute() {
+        return true;
+    },
 };
 
 function createMockRoute(paths: ReadonlyArray<string>) {

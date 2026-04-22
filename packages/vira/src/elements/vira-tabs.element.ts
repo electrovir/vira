@@ -35,10 +35,13 @@ import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '.
 import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {createOverflowObserver} from '../util/overflow-observer.js';
-import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
+import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
+import {ViraMenuCornerStyle} from './pop-up/vira-menu.element.js';
+import {type HorizontalAnchor, type PopUpOffset} from './pop-up/vira-pop-up-trigger.element.js';
+import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 import {ViraLink} from './vira-link.element.js';
-import {ViraSelect} from './vira-select.element.js';
 
 /**
  * Controls which edge of the tab the selection indicator bar appears on.
@@ -86,10 +89,7 @@ export type ViraTab = {
 export const ViraTabs = defineViraElement<
     {
         tabs: ReadonlyArray<Readonly<ViraTab>>;
-        router: Pick<
-            SpaRouter<any, any, any>,
-            'createRouteUrl' | 'setRouteOnDirectNavigation' | 'setRoute'
-        >;
+        router: Pick<SpaRouter<any, any, any>, 'createRouteUrl' | 'setRouteOnDirectNavigation'>;
         currentRoute: Readonly<FullSpaRoute>;
     } & PartialWithUndefined<{
         /**
@@ -112,6 +112,16 @@ export const ViraTabs = defineViraElement<
          * @default ViraTabsIconLayout.Vertical
          */
         iconLayout: ViraTabsIconLayout;
+        /**
+         * Horizontal anchor for the dropdown menu. Only used when tabs overflow into a dropdown.
+         *
+         * @default HorizontalAnchor.Left
+         */
+        menuHorizontalAnchor: HorizontalAnchor;
+        /** Whether the dropdown trigger is disabled. Only used when tabs overflow into a dropdown. */
+        menuIsDisabled: boolean;
+        /** Offset for the dropdown pop-up. Only used when tabs overflow into a dropdown. */
+        menuPopUpOffset: Readonly<PopUpOffset>;
         /** When true, tabs and their container expand to fill all available horizontal space. */
         shouldFillWidth: boolean;
     }>
@@ -126,12 +136,6 @@ export const ViraTabs = defineViraElement<
             isOverflowing: false,
             /** A callback to remove all internal observers. */
             cleanupObserver: undefined as undefined | (() => void),
-            /**
-             * Captured at the moment the overflow select is opened (mousedown or keydown on the
-             * select). Once the native picker opens, the OS owns keyboard input, so modifier state
-             * must be captured before that.
-             */
-            modifierKeyHeld: false,
         };
     },
     hostClasses: {
@@ -276,7 +280,6 @@ export const ViraTabs = defineViraElement<
         return css`
             :host {
                 display: flex;
-                position: relative;
                 box-sizing: border-box;
                 ${noUserSelect};
                 width: 100%;
@@ -427,19 +430,18 @@ export const ViraTabs = defineViraElement<
 
             ${hostClasses['vira-tabs-overflowing'].selector} .tabs-container {
                 visibility: hidden;
-                position: absolute;
                 height: 0;
             }
 
-            ${ViraSelect} {
+            .overflow-menu {
                 display: none;
             }
 
-            ${hostClasses['vira-tabs-overflowing'].selector} ${ViraSelect} {
-                display: inline-flex;
+            ${hostClasses['vira-tabs-overflowing'].selector} .overflow-menu {
+                display: flex;
                 align-items: center;
                 width: fit-content;
-                max-width: 100%;
+                padding-left: 8px;
             }
 
             ${hostClasses['vira-tabs-fill-width'].selector} {
@@ -464,6 +466,10 @@ export const ViraTabs = defineViraElement<
             .tabs-container ${ViraLink} {
                 display: flex;
                 padding: 8px 16px;
+            }
+
+            ${ViraMenuTrigger} {
+                margin: 3px 0;
             }
         `;
     },
@@ -535,67 +541,62 @@ export const ViraTabs = defineViraElement<
             routeHasPaths(inputs.currentRoute, tab.paths),
         );
 
-        const selectOptions = filterMap(
-            inputs.tabs,
-            (tab): ViraSelectOption | undefined => {
-                if (tab.isHidden) {
-                    return undefined;
-                }
+        const menuItems = renderMenuItemEntries(
+            filterMap(
+                inputs.tabs,
+                (tab): ViraMenuItemEntry | undefined => {
+                    if (tab.isHidden) {
+                        return undefined;
+                    }
 
-                return {
-                    value: tab.paths.fullPaths.join('/'),
-                    label: tab.label,
-                    disabled: tab.isDisabled,
-                };
-            },
-            check.isTruthy,
+                    const isSelected = routeHasPaths(inputs.currentRoute, tab.paths);
+
+                    return {
+                        content: html`
+                            <${ViraLink.assign({
+                                route: {
+                                    router: inputs.router,
+                                    route: {
+                                        paths: tab.paths.fullPaths,
+                                    },
+                                    scrollToTop: true,
+                                },
+                                disableLinkStyles: true,
+                            })}>
+                                ${tab.label}
+                            </${ViraLink}>
+                        `,
+                        selected: isSelected,
+                        disabled: tab.isDisabled,
+                        onClick() {
+                            if (!tab.isDisabled) {
+                                dispatch(new events.tabSelect(tab));
+                            }
+                        },
+                    };
+                },
+                check.isTruthy,
+            ),
         );
 
-        function captureModifierState(event: Readonly<MouseEvent | KeyboardEvent>) {
-            updateState({
-                modifierKeyHeld: event.ctrlKey || event.metaKey || event.shiftKey,
-            });
-        }
-
         return html`
-            <${ViraSelect.assign({
-                options: selectOptions,
-                value: selectedTab?.paths.fullPaths.join('/'),
+            <${ViraMenuTrigger.assign({
+                horizontalAnchor: inputs.menuHorizontalAnchor,
+                isDisabled: inputs.menuIsDisabled,
+                popUpOffset: inputs.menuPopUpOffset,
+                menuCornerStyle: ViraMenuCornerStyle.AllRounded,
             })}
-                ${listen('mousedown', captureModifierState)}
-                ${listen('keydown', captureModifierState)}
-                ${listen(ViraSelect.events.valueChange, (event) => {
-                    try {
-                        const selectedValue = event.detail;
-                        const tab = inputs.tabs.find(
-                            (tab) => tab.paths.fullPaths.join('/') === selectedValue,
-                        );
-                        if (!tab || tab.isDisabled) {
-                            return;
-                        }
-
-                        dispatch(new events.tabSelect(tab));
-
-                        const route = {
-                            paths: tab.paths.fullPaths,
-                        };
-
-                        if (state.modifierKeyHeld) {
-                            globalThis.open(
-                                inputs.router.createRouteUrl(route),
-                                '_blank',
-                                'noopener,noreferrer',
-                            );
-                        } else {
-                            inputs.router.setRoute(route);
-                        }
-                    } finally {
-                        updateState({
-                            modifierKeyHeld: false,
-                        });
-                    }
+                class="overflow-menu"
+            >
+                <${ViraButton.assign({
+                    text: selectedTab?.label || '',
+                    showMenuCaret: true,
+                    color: ViraColorVariant.Neutral,
                 })}
-            ></${ViraSelect}>
+                    slot=${ViraMenuTrigger.slotNames.trigger}
+                ></${ViraButton}>
+                ${menuItems}
+            </${ViraMenuTrigger}>
             <ul
                 class="tabs-container"
                 role="tablist"

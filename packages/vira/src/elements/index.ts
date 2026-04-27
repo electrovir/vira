@@ -15,6 +15,7 @@ export * from './vira-form.element.js';
 export * from './vira-icon.element.js';
 export * from './vira-image.element.js';
 export * from './vira-input.element.js';
+export * from './vira-json-form.element.js';
 export * from './vira-link.element.js';
 export * from './vira-modal.element.js';
 export * from './vira-progress.element.js';

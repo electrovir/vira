@@ -20,6 +20,7 @@ import {viraFormBookPage} from './entries/vira-form.element.book.js';
 import {viraIconBookPage} from './entries/vira-icon.element.book.js';
 import {viraImageBookPage} from './entries/vira-image.element.book.js';
 import {viraInputBookPage} from './entries/vira-input.element.book.js';
+import {viraJsonFormBookPage} from './entries/vira-json-form.element.book.js';
 import {viraLinkBookPage} from './entries/vira-link.element.book.js';
 import {viraModalBookPage} from './entries/vira-modal.element.book.js';
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
@@ -50,6 +51,7 @@ const elementPages = [
     viraIconBookPage,
     viraImageBookPage,
     viraInputBookPage,
+    viraJsonFormBookPage,
     viraLinkBookPage,
     viraMenuItemBookPage,
     viraMenuOptionsBookPage,

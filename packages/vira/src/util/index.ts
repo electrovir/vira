@@ -6,4 +6,5 @@ export * from './pop-up-helpers.js';
 export * from './pop-up-manager.js';
 export * from './shared-text-input-logic.js';
 export * from './vira-form-fields.js';
+export * from './vira-json-schema.js';
 export * from './vira-select-option.js';

@@ -1,7 +1,7 @@
 import {defineBookPage} from 'element-book';
 import {css, html, listen, type HTMLTemplateResult} from 'element-vir';
 import {type JsonValue} from 'type-fest';
-import {ViraJsonForm, type ViraJsonSchema} from 'vira';
+import {viraFontCssVars, ViraJsonForm, viraTheme, type ViraJsonSchema} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const exampleStyles = css`
@@ -10,10 +10,10 @@ const exampleStyles = css`
         max-width: 100%;
         margin: 0;
         padding: 10px 12px;
-        background-color: rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: ${viraTheme.colors['vira-grey-foreground-lowest-contrast'].foreground
+            .value};
         border-radius: 8px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-family: ${viraFontCssVars['vira-monospace'].value};
         font-size: 12px;
         white-space: pre-wrap;
         word-break: break-word;

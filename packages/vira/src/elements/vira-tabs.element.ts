@@ -79,6 +79,12 @@ export type ViraTab = {
     icon: Readonly<ViraIconSvg>;
     isHidden: boolean;
     isDisabled: boolean;
+    /**
+     * When true, the tab is only considered selected when the current route's paths exactly equal
+     * `paths.fullPaths`. By default a tab is considered selected when its paths are a prefix of the
+     * current route.
+     */
+    exactMatch: boolean;
 }>;
 
 /**
@@ -484,7 +490,9 @@ export const ViraTabs = defineViraElement<
                     return undefined;
                 }
 
-                const isSelected = routeHasPaths(inputs.currentRoute, tab.paths);
+                const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
+                    exactMatch: tab.exactMatch,
+                });
 
                 const iconTemplate = tab.icon
                     ? html`
@@ -538,7 +546,9 @@ export const ViraTabs = defineViraElement<
             check.isTruthy,
         );
         const selectedTab = inputs.tabs.find((tab) =>
-            routeHasPaths(inputs.currentRoute, tab.paths),
+            routeHasPaths(inputs.currentRoute, tab.paths, {
+                exactMatch: tab.exactMatch,
+            }),
         );
 
         const menuItems = renderMenuItemEntries(
@@ -549,7 +559,9 @@ export const ViraTabs = defineViraElement<
                         return undefined;
                     }
 
-                    const isSelected = routeHasPaths(inputs.currentRoute, tab.paths);
+                    const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
+                        exactMatch: tab.exactMatch,
+                    });
 
                     return {
                         content: html`

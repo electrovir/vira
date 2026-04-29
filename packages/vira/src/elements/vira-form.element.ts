@@ -11,6 +11,7 @@ import {
 import {ViraCheckbox} from './vira-checkbox.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
 import {ViraSelect} from './vira-select.element.js';
+import {ViraTextArea} from './vira-text-area.element.js';
 
 /**
  * A form element.
@@ -146,6 +147,32 @@ export const ViraForm = defineViraElement<
                                 );
                             })}
                         ></${ViraSelect}>
+                    `;
+                } else if (field.type === ViraFormFieldType.TextArea) {
+                    return html`
+                        <${ViraTextArea.assign({
+                            value: field.value || '',
+                            disabled: inputs.isDisabled || field.isDisabled,
+                            hasError: field.hasError,
+                            label: applyRequiredLabel(
+                                field.label,
+                                !!field.isRequired && !inputs.hideRequiredMarkers,
+                            ),
+                            placeholder: field.placeholder,
+                            rows: field.rows,
+                            preventResize: field.preventResize,
+                        })}
+                            ${field.testId ? testId(field.testId) : nothing}
+                            ${listen(ViraTextArea.events.valueChange, (event) => {
+                                dispatch(
+                                    new events.valueChange({
+                                        key,
+                                        ...field,
+                                        value: event.detail,
+                                    }),
+                                );
+                            })}
+                        ></${ViraTextArea}>
                     `;
                 } else if (field.type === ViraFormFieldType.Number) {
                     return html`

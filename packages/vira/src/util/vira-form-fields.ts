@@ -20,6 +20,7 @@ export enum ViraFormFieldType {
     Number = 'number',
     Select = 'select',
     Checkbox = 'checkbox',
+    TextArea = 'text-area',
 }
 
 /**
@@ -100,6 +101,15 @@ export type ViraFormField =
           min: number;
           max: number;
           step: number;
+      }> &
+          CommonViraFormFields)
+    | ({
+          type: ViraFormFieldType.TextArea;
+          value: string | undefined;
+      } & PartialWithUndefined<{
+          placeholder: string;
+          rows: number;
+          preventResize: boolean;
       }> &
           CommonViraFormFields);
 

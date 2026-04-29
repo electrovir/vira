@@ -132,6 +132,7 @@ export function textInputListener({
     inputs,
     previousValue,
     event,
+    elementConstructor,
     inputBlockedCallback,
     newValueCallback,
 }: {
@@ -139,10 +140,15 @@ export function textInputListener({
     /** The value of the input element before this listener fired. */
     previousValue: string;
     event: Event;
+    /**
+     * The constructor for the underlying native element. Defaults to `HTMLInputElement`, but can be
+     * set to `HTMLTextAreaElement` for textarea-based elements.
+     */
+    elementConstructor?: typeof HTMLInputElement | typeof HTMLTextAreaElement | undefined;
     inputBlockedCallback: (blockedInput: string) => void;
     newValueCallback: (newValue: string) => void;
 }) {
-    const inputElement = extractEventTarget(event, HTMLInputElement);
+    const inputElement = extractEventTarget(event, elementConstructor || HTMLInputElement);
     /**
      * This is usually a single character, but can be a bunch of characters in some circumstances.
      * For example, when a bunch of characters are pasted, this will be the entire pasted contents.

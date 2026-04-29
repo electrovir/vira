@@ -22,3 +22,4 @@ export * from './vira-progress.element.js';
 export * from './vira-select.element.js';
 export * from './vira-tabs.element.js';
 export * from './vira-tag.element.js';
+export * from './vira-text-area.element.js';

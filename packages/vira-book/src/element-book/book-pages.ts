@@ -27,6 +27,7 @@ import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
+import {viraTextAreaBookPage} from './entries/vira-text-area.element.book.js';
 import {icons16BookPage, icons24BookPage, lucideIconsBookPage} from './icon-book-pages.js';
 import {elementsBookPage, iconsBookPage, stylesBookPage, utilBookPage} from './top-level-pages.js';
 
@@ -62,6 +63,7 @@ const elementPages = [
     viraSelectBookPage,
     viraTabsBookPage,
     viraTagBookPage,
+    viraTextAreaBookPage,
 ].sort((a, b) => a.title.localeCompare(b.title));
 
 const allPages = [

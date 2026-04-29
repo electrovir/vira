@@ -1,5 +1,6 @@
 import {assertWrap, check} from '@augment-vir/assert';
-import {omitObjectKeys, type PartialWithUndefined} from '@augment-vir/common';
+import {omitObjectKeys, wrapInTry, type PartialWithUndefined} from '@augment-vir/common';
+import {extractEventTarget} from '@augment-vir/web';
 import {css, defineElementEvent, html, listen, nothing, type HTMLTemplateResult} from 'element-vir';
 import {type JsonObject, type JsonValue} from 'type-fest';
 import {lucideIcons, X16Icon} from '../icons/index.js';
@@ -62,6 +63,8 @@ export const ViraJsonForm = defineViraElement<
             pendingTypes: {} as Readonly<Record<string, ViraJsonType>>,
             pendingArrayValues: {} as Readonly<Record<string, JsonValue>>,
             showRaw: false,
+            rawDraft: undefined as string | undefined,
+            rawError: undefined as string | undefined,
         };
     },
     styles: css`
@@ -78,18 +81,24 @@ export const ViraJsonForm = defineViraElement<
             justify-content: flex-end;
         }
 
-        .json-raw-pre {
+        .json-raw-textarea {
             margin: 0;
             padding: 10px 12px;
             border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
+            color: ${viraFormCssVars['vira-form-foreground-color'].value};
             font-family: ${viraFontCssVars['vira-monospace'].value};
             font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
-            white-space: pre-wrap;
-            word-break: break-word;
-            overflow-x: auto;
             box-sizing: border-box;
+            width: 100%;
+            min-height: 240px;
+            resize: vertical;
+        }
+
+        .json-raw-textarea:focus {
+            outline: none;
+            border-color: ${viraFormCssVars['vira-form-focus-outline-color'].value};
         }
 
         .json-validation-errors {
@@ -884,6 +893,8 @@ export const ViraJsonForm = defineViraElement<
                     ${listen('click', () => {
                         updateState({
                             showRaw: !state.showRaw,
+                            rawDraft: undefined,
+                            rawError: undefined,
                         });
                     })}
                 ></${ViraButton}>
@@ -891,9 +902,37 @@ export const ViraJsonForm = defineViraElement<
         `;
 
         if (state.showRaw) {
+            const rawText = state.rawDraft ?? JSON.stringify(inputs.value, undefined, 4);
             return html`
                 ${toolbarTemplate}
-                <pre class="json-raw-pre">${JSON.stringify(inputs.value, undefined, 4)}</pre>
+                <textarea
+                    class="json-raw-textarea"
+                    spellcheck="false"
+                    ?disabled=${isDisabled}
+                    .value=${rawText}
+                    ${listen('input', (event) => {
+                        const textarea = extractEventTarget(event, HTMLTextAreaElement);
+                        const text = textarea.value;
+                        const parsed = wrapInTry(() => JSON.parse(text) as JsonValue);
+                        if (parsed instanceof Error) {
+                            updateState({
+                                rawDraft: text,
+                                rawError: parsed.message,
+                            });
+                        } else {
+                            updateState({
+                                rawDraft: text,
+                                rawError: undefined,
+                            });
+                            emitRoot(parsed);
+                        }
+                    })}
+                ></textarea>
+                ${state.rawError
+                    ? html`
+                          <${ViraError}>${state.rawError}</${ViraError}>
+                      `
+                    : nothing}
             `;
         }
 

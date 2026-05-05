@@ -1,5 +1,6 @@
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {css, html, unsafeCSS} from 'element-vir';
+import {type FullSpaRoute} from 'spa-router-vir';
 import {viraFormCssVars, ViraLink} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
@@ -68,7 +69,10 @@ export const viraLinkBookPage = defineBookPage({
                     },
                     router: {
                         createRouteUrl() {
-                            return window.location.href;
+                            return {
+                                url: window.location.href,
+                                route: {} as FullSpaRoute,
+                            };
                         },
                         setRouteOnDirectNavigation(route, event) {
                             console.info(route, event);

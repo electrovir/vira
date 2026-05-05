@@ -171,9 +171,9 @@ export const ViraLink = defineViraElement<
                 </a>
             `;
         } else {
-            const linkUrl = inputs.link
+            const linkUrl: string = inputs.link
                 ? inputs.link.url
-                : inputs.route.router.createRouteUrl(inputs.route.route);
+                : inputs.route.router.createRouteUrl(inputs.route.route).url;
 
             /** Noopener and noreferrer are needed for security reasons, do not remove! */
             return html`

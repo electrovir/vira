@@ -1,5 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
+import {type FullSpaRoute} from 'spa-router-vir';
 import {
     HorizontalAnchor,
     renderMenuItemEntries,
@@ -137,7 +138,10 @@ const examples: {
                             },
                             router: {
                                 createRouteUrl() {
-                                    return window.location.href;
+                                    return {
+                                        url: window.location.href,
+                                        route: {} as FullSpaRoute,
+                                    };
                                 },
                                 setRouteOnDirectNavigation(route, event) {
                                     console.info(route, event);

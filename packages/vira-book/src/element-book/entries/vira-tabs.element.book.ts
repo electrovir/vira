@@ -3,7 +3,7 @@ import {addPx, removePx} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {readCssVarValue, setCssVarValue} from 'lit-css-vars';
-import {PathTree} from 'spa-router-vir';
+import {PathTree, type FullSpaRoute} from 'spa-router-vir';
 import {
     Bell24Icon,
     Chat24Icon,
@@ -32,7 +32,10 @@ const mockPathTree = new PathTree({
 
 const mockRouter = {
     createRouteUrl() {
-        return window.location.href;
+        return {
+            url: window.location.href,
+            route: {} as FullSpaRoute,
+        };
     },
     setRouteOnDirectNavigation() {
         return false;

@@ -120,6 +120,7 @@ export const ViraJsonForm = defineViraElement<
             border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
             border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
+            box-sizing: border-box;
         }
 
         .json-group-header {
@@ -145,7 +146,9 @@ export const ViraJsonForm = defineViraElement<
         }
 
         .json-row-nested {
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 4px;
         }
 
         .json-row-label {
@@ -153,10 +156,6 @@ export const ViraJsonForm = defineViraElement<
             min-width: 80px;
             font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
             word-break: break-word;
-        }
-
-        .json-row-nested .json-row-label {
-            padding-top: 10px;
         }
 
         .json-row-editor {
@@ -176,10 +175,6 @@ export const ViraJsonForm = defineViraElement<
             width: 24px;
             display: flex;
             justify-content: center;
-        }
-
-        .json-row-nested .json-row-delete {
-            padding-top: 4px;
         }
 
         .json-value-with-switcher {
@@ -233,7 +228,7 @@ export const ViraJsonForm = defineViraElement<
             font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
         }
     `,
-    render({inputs, state, dispatch, events, updateState}) {
+    render({inputs, state, dispatch, events, updateState, host}) {
         const isDisabled = !!inputs.isDisabled;
         const resolveContext: SchemaResolveContext = createResolveContext(inputs.schema);
 
@@ -891,8 +886,10 @@ export const ViraJsonForm = defineViraElement<
                 })}
                     title=${state.showRaw ? 'Show rich editor' : 'Show raw JSON'}
                     ${listen('click', () => {
+                        const goingToRaw = !state.showRaw;
+                        host.style.minWidth = goingToRaw ? `${host.offsetWidth}px` : '';
                         updateState({
-                            showRaw: !state.showRaw,
+                            showRaw: goingToRaw,
                             rawDraft: undefined,
                             rawError: undefined,
                         });

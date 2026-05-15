@@ -3,6 +3,7 @@ import {ChevronDown16Icon} from './icon-svgs/16/chevron-down-16.icon.js';
 import {ChevronUp16Icon} from './icon-svgs/16/chevron-up-16.icon.js';
 import {Dash16Icon} from './icon-svgs/16/dash-16.icon.js';
 import {Element16Icon} from './icon-svgs/16/element-16.icon.js';
+import {Plus16Icon} from './icon-svgs/16/plus-16.icon.js';
 import {Upload16Icon} from './icon-svgs/16/upload-16.icon.js';
 import {X16Icon} from './icon-svgs/16/x-16.icon.js';
 import {ArrowDown24Icon} from './icon-svgs/24/arrow-down-24.icon.js';
@@ -66,6 +67,7 @@ export * from './icon-svgs/16/chevron-down-16.icon.js';
 export * from './icon-svgs/16/chevron-up-16.icon.js';
 export * from './icon-svgs/16/dash-16.icon.js';
 export * from './icon-svgs/16/element-16.icon.js';
+export * from './icon-svgs/16/plus-16.icon.js';
 export * from './icon-svgs/16/upload-16.icon.js';
 export * from './icon-svgs/16/x-16.icon.js';
 export * from './icon-svgs/24/arrow-down-24.icon.js';
@@ -159,6 +161,7 @@ export const allIconsByName = {
     Moon24Icon,
     Options24Icon,
     Pencil24Icon,
+    Plus16Icon,
     Plus24Icon,
     Printer24Icon,
     Shield24Icon,
@@ -250,6 +253,7 @@ export const all16IconsByName = {
     ChevronUp16Icon,
     Dash16Icon,
     Element16Icon,
+    Plus16Icon,
     Upload16Icon,
     X16Icon,
 } as const;

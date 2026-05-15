@@ -1,9 +1,8 @@
 import {assertWrap, check} from '@augment-vir/assert';
 import {omitObjectKeys, wrapInTry, type PartialWithUndefined} from '@augment-vir/common';
-import {extractEventTarget} from '@augment-vir/web';
 import {css, defineElementEvent, html, listen, nothing, type HTMLTemplateResult} from 'element-vir';
 import {type JsonObject, type JsonValue} from 'type-fest';
-import {lucideIcons, X16Icon} from '../icons/index.js';
+import {Plus16Icon, X16Icon} from '../icons/index.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraColorVariant, ViraEmphasis, ViraSize} from '../styles/form-variants.js';
@@ -38,6 +37,7 @@ import {ViraCheckbox} from './vira-checkbox.element.js';
 import {ViraError} from './vira-error.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
 import {ViraSelect} from './vira-select.element.js';
+import {ViraTextArea} from './vira-text-area.element.js';
 
 /**
  * An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema
@@ -81,24 +81,10 @@ export const ViraJsonForm = defineViraElement<
             justify-content: flex-end;
         }
 
-        .json-raw-textarea {
-            margin: 0;
-            padding: 10px 12px;
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
+        ${ViraTextArea}.json-raw-textarea {
+            width: 100%;
             font-family: ${viraFontCssVars['vira-monospace'].value};
             font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
-            box-sizing: border-box;
-            width: 100%;
-            min-height: 240px;
-            resize: vertical;
-        }
-
-        .json-raw-textarea:focus {
-            outline: none;
-            border-color: ${viraFormCssVars['vira-form-focus-outline-color'].value};
         }
 
         .json-validation-errors {
@@ -113,68 +99,71 @@ export const ViraJsonForm = defineViraElement<
         }
 
         .json-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding: 10px 12px;
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
             box-sizing: border-box;
         }
 
-        .json-group-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .json-group-nested {
+            margin-top: 4px;
+            padding-left: 12px;
+            padding-bottom: 8px;
+            border-left: 2px solid ${viraFormCssVars['vira-form-border-color'].value};
+            border-bottom: 2px solid ${viraFormCssVars['vira-form-border-color'].value};
         }
 
-        .json-group-header-title {
-            flex-grow: 1;
-            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-            color: ${viraFormCssVars['vira-form-secondary-body-foreground'].value};
-            font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
+        .json-row-primitive > td {
+            padding: 4px 8px 4px 0;
+            vertical-align: middle;
         }
 
-        .json-row {
-            display: flex;
-            gap: 8px;
+        .json-row-primitive > td:last-child {
+            padding-right: 0;
         }
 
-        .json-row-primitive {
-            align-items: center;
-        }
-
-        .json-row-nested {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 4px;
-        }
-
-        .json-row-label {
-            flex-shrink: 0;
+        td.json-row-label {
+            text-align: left;
             min-width: 80px;
+            white-space: nowrap;
+            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+        }
+
+        td.json-row-editor {
+            width: 100%;
+        }
+
+        td.json-row-editor > * {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        td.json-row-delete {
+            width: 24px;
+            text-align: center;
+        }
+
+        .json-row-nested > td {
+            padding: 4px 0;
+        }
+
+        .json-row-nested-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .json-row-nested-header > .json-row-label {
+            flex-grow: 1;
             font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
             word-break: break-word;
         }
 
-        .json-row-editor {
-            flex-grow: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .json-row-editor > * {
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .json-row-delete {
-            flex-shrink: 0;
-            width: 24px;
-            display: flex;
-            justify-content: center;
+        .json-type-tag {
+            font-weight: normal;
+            color: ${viraFormCssVars['vira-form-secondary-body-foreground'].value};
         }
 
         .json-value-with-switcher {
@@ -202,8 +191,10 @@ export const ViraJsonForm = defineViraElement<
         .json-add-row {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 6px;
             flex-wrap: wrap;
+            padding: 8px 0;
         }
 
         .json-add-row ${ViraInput}, .json-add-row ${ViraSelect} {
@@ -223,6 +214,8 @@ export const ViraJsonForm = defineViraElement<
         }
 
         .json-empty-note {
+            display: block;
+            padding: 4px 0;
             color: ${viraFormCssVars['vira-form-placeholder-color'].value};
             font-style: italic;
             font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
@@ -461,8 +454,9 @@ export const ViraJsonForm = defineViraElement<
         }): HTMLTemplateResult {
             return html`
                 <${ViraButton.assign({
-                    icon: lucideIcons.Plus,
-                    color: ViraColorVariant.Plain,
+                    icon: Plus16Icon,
+                    color: ViraColorVariant.Positive,
+                    buttonSize: ViraSize.Small,
                     isDisabled: isAddDisabled,
                 })}
                     title=${tooltip}
@@ -480,11 +474,13 @@ export const ViraJsonForm = defineViraElement<
             pathKey,
             allowedTypes,
             canAdd,
+            disabledReason,
             onAdd,
         }: {
             pathKey: string;
             allowedTypes: ReadonlyArray<ViraJsonType>;
             canAdd: boolean;
+            disabledReason: string;
             onAdd: (type: ViraJsonType) => void;
         }): HTMLTemplateResult | typeof nothing {
             if (allowedTypes.length === 0) {
@@ -495,7 +491,7 @@ export const ViraJsonForm = defineViraElement<
                 const onlyType = assertWrap.isDefined(allowedTypes[0]);
                 return renderPlusButton({
                     isAddDisabled,
-                    tooltip: `Add ${viraJsonTypeLabels[onlyType]}`,
+                    tooltip: isAddDisabled ? disabledReason : `Add ${viraJsonTypeLabels[onlyType]}`,
                     onClick: () => onAdd(onlyType),
                 });
             }
@@ -517,7 +513,9 @@ export const ViraJsonForm = defineViraElement<
                 ></${ViraSelect}>
                 ${renderPlusButton({
                     isAddDisabled,
-                    tooltip: `Add ${viraJsonTypeLabels[selectedType]}`,
+                    tooltip: isAddDisabled
+                        ? disabledReason
+                        : `Add ${viraJsonTypeLabels[selectedType]}`,
                     onClick: () => onAdd(selectedType),
                 })}
             `;
@@ -592,13 +590,21 @@ export const ViraJsonForm = defineViraElement<
             `;
         }
 
+        function getNestedTypeLabel(schema: ViraJsonSchema | undefined, value: JsonValue): string {
+            const concreteType = getJsonType(value);
+            const narrowedSchema = pickBranchForType(schema, concreteType, resolveContext);
+            return (
+                getSchemaTitle(narrowedSchema, resolveContext) || viraJsonTypeLabels[concreteType]
+            );
+        }
+
         function renderObjectGroup(
             path: ViraJsonPath,
             value: JsonObject,
             schema: ViraJsonSchema | undefined,
-            onDelete: (() => void) | undefined,
         ): HTMLTemplateResult {
             const pathKey = pathToKey(path);
+            const isRoot = path.length === 0;
             const requiredKeys = new Set(getRequiredProperties(schema, resolveContext));
             const definedProperties = getDefinedProperties(schema, resolveContext);
             const definedKeys = new Set(Object.keys(definedProperties));
@@ -626,25 +632,36 @@ export const ViraJsonForm = defineViraElement<
                           }
                       }
                     : undefined;
+
+                if (isChildNested) {
+                    return html`
+                        <tr class="json-row-nested">
+                            <td colspan="3">
+                                <div class="json-row-nested-header">
+                                    <span class="json-row-label">
+                                        ${key}${isRequired ? '*' : ''}
+                                        <span class="json-type-tag">
+                                            : ${getNestedTypeLabel(childSchema, childValue)}
+                                        </span>
+                                    </span>
+                                    ${childOnDelete ? renderDeleteButton(childOnDelete) : nothing}
+                                </div>
+                                ${renderValue(childPath, childValue, childSchema)}
+                            </td>
+                        </tr>
+                    `;
+                }
+
                 return html`
-                    <div
-                        class="json-row ${isChildNested ? 'json-row-nested' : 'json-row-primitive'}"
-                    >
-                        <span class="json-row-label">${key}${isRequired ? '*' : ''}</span>
-                        <span class="json-row-editor">
-                            ${renderValue(
-                                childPath,
-                                childValue,
-                                childSchema,
-                                isChildNested ? childOnDelete : undefined,
-                            )}
-                        </span>
-                        <span class="json-row-delete">
-                            ${!isChildNested && childOnDelete
-                                ? renderDeleteButton(childOnDelete)
-                                : nothing}
-                        </span>
-                    </div>
+                    <tr class="json-row-primitive">
+                        <td class="json-row-label">${key}${isRequired ? '*' : ''}</td>
+                        <td class="json-row-editor">
+                            ${renderValue(childPath, childValue, childSchema)}
+                        </td>
+                        <td class="json-row-delete">
+                            ${childOnDelete ? renderDeleteButton(childOnDelete) : nothing}
+                        </td>
+                    </tr>
                 `;
             });
 
@@ -658,8 +675,9 @@ export const ViraJsonForm = defineViraElement<
                       return html`
                           <${ViraButton.assign({
                               text: `"${key}"`,
-                              icon: lucideIcons.Plus,
-                              color: ViraColorVariant.Plain,
+                              icon: Plus16Icon,
+                              color: ViraColorVariant.Positive,
+                              buttonSize: ViraSize.Small,
                           })}
                               ${listen('click', () => {
                                   emitReplaceAt(
@@ -681,61 +699,74 @@ export const ViraJsonForm = defineViraElement<
                 ? getAllowedJsonTypes(additional.schema, resolveContext)
                 : [];
 
+            const arbitraryAddDisabledReason = trimmedPendingKey
+                ? `Field "${trimmedPendingKey}" already exists.`
+                : 'Enter a field name to add.';
+
             const arbitraryAddRow =
                 additional.allowed && !isDisabled
                     ? html`
-                          <div class="json-add-row">
-                              <${ViraInput.assign({
-                                  value: pendingKey,
-                                  placeholder: 'new field name',
-                              })}
-                                  ${listen(ViraInput.events.valueChange, (event) => {
-                                      setPendingKey(pathKey, event.detail);
-                                  })}
-                              ></${ViraInput}>
-                              ${renderObjectAddControl({
-                                  pathKey,
-                                  allowedTypes: additionalAllowedTypes,
-                                  canAdd: canAddArbitraryField,
-                                  onAdd: (type) => {
-                                      if (!canAddArbitraryField) {
-                                          return;
-                                      }
-                                      emitReplaceAt(
-                                          [
-                                              ...path,
-                                              trimmedPendingKey,
-                                          ],
-                                          createDefaultForJsonType(type),
-                                      );
-                                      clearPending(pathKey);
-                                  },
-                              })}
-                          </div>
+                          <tr>
+                              <td colspan="3">
+                                  <div class="json-add-row">
+                                      <${ViraInput.assign({
+                                          value: pendingKey,
+                                          placeholder: 'new field name',
+                                      })}
+                                          ${listen(ViraInput.events.valueChange, (event) => {
+                                              setPendingKey(pathKey, event.detail);
+                                          })}
+                                      ></${ViraInput}>
+                                      ${renderObjectAddControl({
+                                          pathKey,
+                                          allowedTypes: additionalAllowedTypes,
+                                          canAdd: canAddArbitraryField,
+                                          disabledReason: arbitraryAddDisabledReason,
+                                          onAdd: (type) => {
+                                              if (!canAddArbitraryField) {
+                                                  return;
+                                              }
+                                              emitReplaceAt(
+                                                  [
+                                                      ...path,
+                                                      trimmedPendingKey,
+                                                  ],
+                                                  createDefaultForJsonType(type),
+                                              );
+                                              clearPending(pathKey);
+                                          },
+                                      })}
+                                  </div>
+                              </td>
+                          </tr>
                       `
                     : nothing;
 
-            const title = getSchemaTitle(schema, resolveContext) || 'object';
-
             return html`
-                <div class="json-group">
-                    <div class="json-group-header">
-                        <span class="json-group-header-title">${title}</span>
-                        ${onDelete ? renderDeleteButton(onDelete) : nothing}
-                    </div>
-                    ${rowTemplates.length === 0 && suggestedKeyButtons.length === 0
-                        ? html`
-                              <span class="json-empty-note">(empty object)</span>
-                          `
-                        : nothing}
-                    ${rowTemplates}
-                    ${suggestedKeyButtons.length > 0
-                        ? html`
-                              <div class="json-add-row">${suggestedKeyButtons}</div>
-                          `
-                        : nothing}
-                    ${arbitraryAddRow}
-                </div>
+                <table class="json-group ${isRoot ? '' : 'json-group-nested'}">
+                    <tbody>
+                        ${rowTemplates.length === 0 && suggestedKeyButtons.length === 0
+                            ? html`
+                                  <tr>
+                                      <td colspan="3">
+                                          <span class="json-empty-note">(empty object)</span>
+                                      </td>
+                                  </tr>
+                              `
+                            : nothing}
+                        ${rowTemplates}
+                        ${suggestedKeyButtons.length > 0
+                            ? html`
+                                  <tr>
+                                      <td colspan="3">
+                                          <div class="json-add-row">${suggestedKeyButtons}</div>
+                                      </td>
+                                  </tr>
+                              `
+                            : nothing}
+                        ${arbitraryAddRow}
+                    </tbody>
+                </table>
             `;
         }
 
@@ -743,9 +774,9 @@ export const ViraJsonForm = defineViraElement<
             path: ViraJsonPath,
             value: ReadonlyArray<JsonValue>,
             schema: ViraJsonSchema | undefined,
-            onDelete: (() => void) | undefined,
         ): HTMLTemplateResult {
             const pathKey = pathToKey(path);
+            const isRoot = path.length === 0;
             const newItemSchema = getNewItemSchema(schema, value.length, resolveContext);
             const allowedItemTypes = getAllowedJsonTypes(newItemSchema, resolveContext);
 
@@ -763,63 +794,78 @@ export const ViraJsonForm = defineViraElement<
                     : () => {
                           emitDeleteAt(childPath);
                       };
+
+                if (isChildNested) {
+                    return html`
+                        <tr class="json-row-nested">
+                            <td colspan="3">
+                                <div class="json-row-nested-header">
+                                    <span class="json-row-label">
+                                        [${index}]
+                                        <span class="json-type-tag">
+                                            : ${getNestedTypeLabel(childSchema, item)}
+                                        </span>
+                                    </span>
+                                    ${childOnDelete ? renderDeleteButton(childOnDelete) : nothing}
+                                </div>
+                                ${renderValue(childPath, item, childSchema)}
+                            </td>
+                        </tr>
+                    `;
+                }
+
                 return html`
-                    <div
-                        class="json-row ${isChildNested ? 'json-row-nested' : 'json-row-primitive'}"
-                    >
-                        <span class="json-row-label">[${index}]</span>
-                        <span class="json-row-editor">
-                            ${renderValue(
-                                childPath,
-                                item,
-                                childSchema,
-                                isChildNested ? childOnDelete : undefined,
-                            )}
-                        </span>
-                        <span class="json-row-delete">
-                            ${!isChildNested && childOnDelete
-                                ? renderDeleteButton(childOnDelete)
-                                : nothing}
-                        </span>
-                    </div>
+                    <tr class="json-row-primitive">
+                        <td class="json-row-label">[${index}]</td>
+                        <td class="json-row-editor">
+                            ${renderValue(childPath, item, childSchema)}
+                        </td>
+                        <td class="json-row-delete">
+                            ${childOnDelete ? renderDeleteButton(childOnDelete) : nothing}
+                        </td>
+                    </tr>
                 `;
             });
-
-            const title = getSchemaTitle(schema, resolveContext) || 'array';
 
             const addRow = isDisabled
                 ? nothing
                 : html`
-                      <div class="json-add-row">
-                          ${renderArrayAddControl({
-                              pathKey,
-                              allowedTypes: allowedItemTypes,
-                              onAdd: (newValue) => {
-                                  emitReplaceAt(
-                                      [
-                                          ...path,
-                                          value.length,
-                                      ],
-                                      newValue,
-                                  );
-                              },
-                          })}
-                      </div>
+                      <tr>
+                          <td colspan="3">
+                              <div class="json-add-row">
+                                  ${renderArrayAddControl({
+                                      pathKey,
+                                      allowedTypes: allowedItemTypes,
+                                      onAdd: (newValue) => {
+                                          emitReplaceAt(
+                                              [
+                                                  ...path,
+                                                  value.length,
+                                              ],
+                                              newValue,
+                                          );
+                                      },
+                                  })}
+                              </div>
+                          </td>
+                      </tr>
                   `;
 
             return html`
-                <div class="json-group">
-                    <div class="json-group-header">
-                        <span class="json-group-header-title">${title}</span>
-                        ${onDelete ? renderDeleteButton(onDelete) : nothing}
-                    </div>
-                    ${rowTemplates.length === 0
-                        ? html`
-                              <span class="json-empty-note">(empty array)</span>
-                          `
-                        : nothing}
-                    ${rowTemplates} ${addRow}
-                </div>
+                <table class="json-group ${isRoot ? '' : 'json-group-nested'}">
+                    <tbody>
+                        ${rowTemplates.length === 0
+                            ? html`
+                                  <tr>
+                                      <td colspan="3">
+                                          <span class="json-empty-note">(empty array)</span>
+                                      </td>
+                                  </tr>
+                              `
+                            : nothing}
+                        ${rowTemplates} ${addRow}
+                    </tbody>
+                </table>
             `;
         }
 
@@ -827,16 +873,15 @@ export const ViraJsonForm = defineViraElement<
             path: ViraJsonPath,
             value: JsonValue,
             schema: ViraJsonSchema | undefined,
-            onDelete: (() => void) | undefined,
         ): HTMLTemplateResult {
             const concreteType = getJsonType(value);
             const allowedTypes = getAllowedJsonTypes(schema, resolveContext);
             const narrowedSchema = pickBranchForType(schema, concreteType, resolveContext);
 
             if (check.isArray(value)) {
-                return renderArrayGroup(path, value, narrowedSchema, onDelete);
+                return renderArrayGroup(path, value, narrowedSchema);
             } else if (check.isObject(value)) {
-                return renderObjectGroup(path, value, narrowedSchema, onDelete);
+                return renderObjectGroup(path, value, narrowedSchema);
             }
 
             const editor = renderPrimitive(path, value, narrowedSchema);
@@ -902,14 +947,15 @@ export const ViraJsonForm = defineViraElement<
             const rawText = state.rawDraft ?? JSON.stringify(inputs.value, undefined, 4);
             return html`
                 ${toolbarTemplate}
-                <textarea
+                <${ViraTextArea.assign({
+                    value: rawText,
+                    disabled: isDisabled,
+                    disableBrowserHelps: true,
+                    rows: 12,
+                })}
                     class="json-raw-textarea"
-                    spellcheck="false"
-                    ?disabled=${isDisabled}
-                    .value=${rawText}
-                    ${listen('input', (event) => {
-                        const textarea = extractEventTarget(event, HTMLTextAreaElement);
-                        const text = textarea.value;
+                    ${listen(ViraTextArea.events.valueChange, (event) => {
+                        const text = event.detail;
                         const parsed = wrapInTry(() => JSON.parse(text) as JsonValue);
                         if (parsed instanceof Error) {
                             updateState({
@@ -924,7 +970,7 @@ export const ViraJsonForm = defineViraElement<
                             emitRoot(parsed);
                         }
                     })}
-                ></textarea>
+                ></${ViraTextArea}>
                 ${state.rawError
                     ? html`
                           <${ViraError}>${state.rawError}</${ViraError}>
@@ -953,7 +999,7 @@ export const ViraJsonForm = defineViraElement<
         }
 
         return html`
-            ${toolbarTemplate} ${renderValue([], inputs.value, inputs.schema, undefined)}
+            ${toolbarTemplate} ${renderValue([], inputs.value, inputs.schema)}
         `;
     },
 });

@@ -74,6 +74,7 @@ export const ViraTextArea = defineViraElement<
 
         textarea {
             ${noNativeFormStyles};
+            overscroll-behavior: contain;
             font: inherit;
             cursor: text;
             width: 100%;

@@ -129,6 +129,12 @@ const examples: ReadonlyArray<{
             icon: Element24Icon,
         },
     },
+    {
+        title: 'with a label',
+        inputs: {
+            label: 'My Label',
+        },
+    },
 ];
 
 export const viraDropdownPage = defineBookPage({

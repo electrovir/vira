@@ -1,5 +1,5 @@
 import {check} from '@augment-vir/assert';
-import {filterMap, type PartialWithUndefined} from '@augment-vir/common';
+import {filterMap, type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {
     classMap,
     css,
@@ -51,6 +51,7 @@ export const ViraDropdown = defineViraElement<
             icon: ViraIconSvg;
             selectionPrefix: string;
             isDisabled: boolean;
+            label: string;
             /** For debugging purposes only. Very bad for actual production code use. */
             z_debug_forceOpenState: boolean;
         } & PopUpTriggerPosition
@@ -131,6 +132,22 @@ export const ViraDropdown = defineViraElement<
         .using-placeholder {
             opacity: 0.4;
         }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2px;
+            width: 100%;
+            max-width: 100%;
+
+            & .dropdown-label {
+                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                text-align: left;
+                flex-shrink: 0;
+                flex-wrap: wrap;
+            }
+        }
     `,
     events: {
         selectedChange: defineElementEvent<string[]>(),
@@ -140,6 +157,11 @@ export const ViraDropdown = defineViraElement<
         return {
             /** `undefined` means the pop up is not currently showing. */
             showPopUpResult: undefined as ShowPopUpResult | undefined,
+            /**
+             * Used to couple the label and trigger together. This is not applied if no label is
+             * provided.
+             */
+            randomId: randomString(32),
         };
     },
     render({state, inputs, dispatch, events, updateState, testIds}) {
@@ -199,7 +221,7 @@ export const ViraDropdown = defineViraElement<
             </${ViraMenu}>
         `;
 
-        return html`
+        const triggerTemplate = html`
             <${ViraPopUpTrigger.assign({
                 ...inputs,
                 focusOnClose: true,
@@ -224,6 +246,8 @@ export const ViraDropdown = defineViraElement<
                         'open-upwards': !state.showPopUpResult?.popDown,
                     })}"
                     slot=${ViraPopUpTrigger.slotNames.trigger}
+                    id=${ifDefined(inputs.label ? state.randomId : undefined)}
+                    aria-label=${ifDefined(inputs.label || undefined)}
                     ${testId(testIds.trigger)}
                 >
                     ${leadingIconTemplate}
@@ -247,5 +271,16 @@ export const ViraDropdown = defineViraElement<
                 ${state.showPopUpResult ? menuTemplate : nothing}
             </${ViraPopUpTrigger}>
         `;
+
+        if (inputs.label) {
+            return html`
+                <label for=${state.randomId}>
+                    <span class="dropdown-label">${inputs.label}</span>
+                    ${triggerTemplate}
+                </label>
+            `;
+        } else {
+            return triggerTemplate;
+        }
     },
 });

@@ -39,6 +39,7 @@ import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-help
 import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
 import {ViraMenuCornerStyle} from './pop-up/vira-menu.element.js';
 import {type HorizontalAnchor, type PopUpOffset} from './pop-up/vira-pop-up-trigger.element.js';
+import {ViraBoldText} from './vira-bold-text.element.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 import {ViraLink} from './vira-link.element.js';
@@ -537,7 +538,12 @@ export const ViraTabs = defineViraElement<
                         })}>
                             <span class="tab-content">
                                 ${iconTemplate}
-                                <span class="tab-label">${tab.label}</span>
+                                <${ViraBoldText.assign({
+                                    text: tab.label,
+                                    bold: isSelected,
+                                })}
+                                    class="tab-label"
+                                ></${ViraBoldText}>
                             </span>
                         </${ViraLink}>
                     </li>
@@ -618,6 +624,7 @@ export const ViraTabs = defineViraElement<
                         cleanupObserver: createOverflowObserver({
                             element: tabsElement,
                             widthElement: host,
+                            hysteresisPx: 16,
                             onChange(isOverflowing) {
                                 updateState({
                                     isOverflowing,

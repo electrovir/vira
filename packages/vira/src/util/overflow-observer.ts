@@ -8,6 +8,7 @@ export function createOverflowObserver({
     element,
     widthElement,
     onChange,
+    hysteresisPx = 0,
 }: Readonly<{
     /** The element whose `scrollWidth` is measured for content size. */
     element: Element;
@@ -18,11 +19,27 @@ export function createOverflowObserver({
      */
     widthElement?: Element | undefined;
     onChange: (isOverflowing: boolean) => void;
+    /**
+     * Pixel margin required to flip the overflow state. Once overflowing, the content must fit
+     * within `availableWidth - hysteresisPx` to flip back; once not overflowing, the content must
+     * exceed `availableWidth + hysteresisPx` to flip on. Prevents rapid toggling from minute size
+     * changes.
+     */
+    hysteresisPx?: number | undefined;
 }>): () => void {
     const availableWidthElement = widthElement || element;
+    let isOverflowing = false;
 
     function checkOverflow() {
-        onChange(element.scrollWidth > availableWidthElement.clientWidth);
+        const contentWidth = element.scrollWidth;
+        const availableWidth = availableWidthElement.clientWidth;
+        const threshold = isOverflowing ? -hysteresisPx : hysteresisPx;
+        const nextOverflowing = contentWidth > availableWidth + threshold;
+
+        if (nextOverflowing !== isOverflowing) {
+            isOverflowing = nextOverflowing;
+            onChange(isOverflowing);
+        }
     }
 
     const resizeObserver = new ResizeObserver(checkOverflow);

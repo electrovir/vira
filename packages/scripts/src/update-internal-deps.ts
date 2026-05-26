@@ -12,14 +12,14 @@ type MonoRepoPackages = {
 async function updateInternalDeps() {
     const rootVersion = (await readPackageJson(monoRepoRootDir)).version;
     if (!rootVersion) {
-        throw new Error(`Found no root package version.`);
+        throw new Error('Found no root package version.');
     }
 
     const workspaces = await queryNpmWorkspace(monoRepoRootDir);
     const npmPackages = workspaces.reduce(
         (accum, workspacePackage) => {
             if (!workspacePackage.name) {
-                throw new Error(`Workspace has no name field.`);
+                throw new Error('Workspace has no name field.');
             }
 
             if (workspacePackage.private) {

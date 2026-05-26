@@ -5,7 +5,7 @@ import {wrapDefineElement} from 'element-vir';
  *
  * @category Internal
  */
-export const ViraTagNamePrefix = `vira-`;
+export const ViraTagNamePrefix = 'vira-';
 /**
  * Required tag name for all vira elements. This includes {@link ViraTagNamePrefix} in it.
  *

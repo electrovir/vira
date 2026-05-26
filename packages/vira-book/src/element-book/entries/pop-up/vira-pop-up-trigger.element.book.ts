@@ -32,10 +32,18 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     <${ViraPopUpTrigger.assign({
                         keepOpenAfterInteraction: true,
                     })}>
-                        <div class="trigger" slot=${ViraPopUpTrigger.slotNames.trigger}>
+                        <div
+                            class="trigger"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                        >
                             Trigger Pop Up
                         </div>
-                        <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>Pop up!</div>
+                        <div
+                            class="pop-up"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        >
+                            Pop up!
+                        </div>
                     </${ViraPopUpTrigger}>
                 `;
             },
@@ -66,10 +74,13 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     <${ViraPopUpTrigger.assign({
                         keepOpenAfterInteraction: true,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames.trigger}>
+                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
                             Trigger Long Clipped Pop Up
                         </div>
-                        <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>
+                        <div
+                            class="pop-up"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        >
                             really long content in here really long content in here really long
                             content in here really long content in here really long content in here
                         </div>
@@ -104,10 +115,13 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                         keepOpenAfterInteraction: true,
                         horizontalAnchor: HorizontalAnchor.Right,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames.trigger}>
+                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
                             Trigger Long Right Anchored Pop Up
                         </div>
-                        <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>
+                        <div
+                            class="pop-up"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        >
                             really long content in here really long content in here really long
                             content in here really long content in here really long content in here
                         </div>
@@ -142,10 +156,13 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                         keepOpenAfterInteraction: true,
                         horizontalAnchor: HorizontalAnchor.Left,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames.trigger}>
+                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
                             Trigger Long Left Anchored Pop Up
                         </div>
-                        <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>
+                        <div
+                            class="pop-up"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        >
                             really long content in here really long content in here really long
                             content in here really long content in here really long content in here
                         </div>
@@ -180,10 +197,15 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                         keepOpenAfterInteraction: true,
                         horizontalAnchor: HorizontalAnchor.Right,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames.trigger}>
+                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
                             Trigger Long Left Anchored Pop Up
                         </div>
-                        <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>not long</div>
+                        <div
+                            class="pop-up"
+                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        >
+                            not long
+                        </div>
                     </${ViraPopUpTrigger}>
                 `;
             },
@@ -221,10 +243,16 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                             // z_debug_forceOpenState: true,
                             // ignoreMaxWidth: true,
                         })}>
-                            <div class="trigger" slot=${ViraPopUpTrigger.slotNames.trigger}>
+                            <div
+                                class="trigger"
+                                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                            >
                                 Trigger
                             </div>
-                            <div class="pop-up" slot=${ViraPopUpTrigger.slotNames.popUp}>
+                            <div
+                                class="pop-up"
+                                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                            >
                                 This content is much wider than the container and should overflow
                                 <div>Item 1</div>
                                 <div>Item 2</div>

@@ -20,7 +20,9 @@ export const viraCollapsibleCardBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraCollapsibleCard}>
-                        <span slot=${ViraCollapsibleCard.slotNames.header}>Card Header</span>
+                        <span slot=${ViraCollapsibleCard.slotNames['vira-collapsible-card-header']}>
+                            Card Header
+                        </span>
                         <p>Card content goes here.</p>
                     </${ViraCollapsibleCard}>
                 `;
@@ -38,7 +40,7 @@ export const viraCollapsibleCardBookPage = defineBookPage({
                     <${ViraCollapsibleCard.assign({
                         startExpanded: true,
                     })}>
-                        <span slot=${ViraCollapsibleCard.slotNames.header}>
+                        <span slot=${ViraCollapsibleCard.slotNames['vira-collapsible-card-header']}>
                             Expanded Card Header
                         </span>
                         <p>This card starts expanded.</p>
@@ -58,7 +60,9 @@ export const viraCollapsibleCardBookPage = defineBookPage({
                     <${ViraCollapsibleCard.assign({
                         blockExpansion: true,
                     })}>
-                        <span slot=${ViraCollapsibleCard.slotNames.header}>Always Expanded</span>
+                        <span slot=${ViraCollapsibleCard.slotNames['vira-collapsible-card-header']}>
+                            Always Expanded
+                        </span>
                         <p>This card cannot be collapsed.</p>
                     </${ViraCollapsibleCard}>
                 `;
@@ -77,7 +81,9 @@ export const viraCollapsibleCardBookPage = defineBookPage({
                         rawCollapsible: true,
                         startExpanded: true,
                     })}>
-                        <span slot=${ViraCollapsibleCard.slotNames.header}>Raw Header</span>
+                        <span slot=${ViraCollapsibleCard.slotNames['vira-collapsible-card-header']}>
+                            Raw Header
+                        </span>
                         <p>No card border or padding styles.</p>
                     </${ViraCollapsibleCard}>
                 `;
@@ -117,7 +123,7 @@ export const viraCollapsibleCardBookPage = defineBookPage({
                     <${ViraCollapsibleCard.assign({
                         startExpanded: true,
                     })}>
-                        <span slot=${ViraCollapsibleCard.slotNames.header}>
+                        <span slot=${ViraCollapsibleCard.slotNames['vira-collapsible-card-header']}>
                             Magenta Card Header
                         </span>
                         <p>Card with a magenta background.</p>
@@ -141,7 +147,13 @@ export const viraCollapsibleCardBookPage = defineBookPage({
                 return html`
                     <div>
                         <${ViraCollapsibleCard}>
-                            <span slot=${ViraCollapsibleCard.slotNames.header}>Wide</span>
+                            <span
+                                slot=${ViraCollapsibleCard.slotNames[
+                                    'vira-collapsible-card-header'
+                                ]}
+                            >
+                                Wide
+                            </span>
                             <p>Content content content content content content content.</p>
                         </${ViraCollapsibleCard}>
                     </div>

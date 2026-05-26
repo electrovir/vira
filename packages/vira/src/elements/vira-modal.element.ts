@@ -71,7 +71,7 @@ export const ViraModal = defineViraElement<
         'vira-modal-phone-size': ({inputs}) => !!inputs.isMobileSize,
         'vira-modal-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
     },
-    slotNames: ['modalTitle'],
+    slotNames: ['vira-modal-modal-title'],
     cssVars: {
         'vira-modal-backdrop-filter': 'blur(3px)',
     },
@@ -241,7 +241,11 @@ export const ViraModal = defineViraElement<
                 >
                     <div class="header">
                         <div class="header-text-wrapper">
-                            <h1><slot name=${slotNames.modalTitle}>${inputs.modalTitle}</slot></h1>
+                            <h1>
+                                <slot name=${slotNames['vira-modal-modal-title']}>
+                                    ${inputs.modalTitle}
+                                </slot>
+                            </h1>
                             ${inputs.modalSubtitle
                                 ? html`
                                       <sub>${inputs.modalSubtitle}</sub>

@@ -60,7 +60,7 @@ export const ViraDrawer = defineViraElement<
         'vira-drawer-dragging': ({state}) => state.isDragging,
         'vira-drawer-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
     },
-    slotNames: ['drawerTitle'],
+    slotNames: ['vira-drawer-drawer-title'],
     cssVars: {
         'vira-drawer-backdrop-filter': 'blur(3px)',
         'vira-drawer-max-height': '80dvh',
@@ -300,7 +300,9 @@ export const ViraDrawer = defineViraElement<
                     <div class="header">
                         <div class="header-text-wrapper">
                             <h1>
-                                <slot name=${slotNames.drawerTitle}>${inputs.drawerTitle}</slot>
+                                <slot name=${slotNames['vira-drawer-drawer-title']}>
+                                    ${inputs.drawerTitle}
+                                </slot>
                             </h1>
                         </div>
                         <button

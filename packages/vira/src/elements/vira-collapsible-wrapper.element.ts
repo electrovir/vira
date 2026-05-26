@@ -23,7 +23,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{
     hostClasses: {
         'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
     },
-    slotNames: ['header'],
+    slotNames: ['vira-collapsible-wrapper-header'],
     styles: ({hostClasses}) => css`
         :host {
             display: flex;
@@ -81,7 +81,7 @@ export const ViraCollapsibleWrapper = defineViraElement<{
                     dispatch(new events.expandChange(!inputs.expanded));
                 })}
             >
-                <slot name=${slotNames.header}>Header</slot>
+                <slot name=${slotNames['vira-collapsible-wrapper-header']}>Header</slot>
             </button>
 
             <div

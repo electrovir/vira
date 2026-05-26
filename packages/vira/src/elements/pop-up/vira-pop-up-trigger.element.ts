@@ -126,8 +126,8 @@ export const ViraPopUpTrigger = defineViraElement<
         };
     },
     slotNames: [
-        'trigger',
-        'popUp',
+        'vira-pop-up-trigger-trigger',
+        'vira-pop-up-trigger-pop-up',
     ],
     hostClasses: {
         'vira-pop-up-trigger-disabled': ({inputs}) => !!inputs.isDisabled,
@@ -484,7 +484,7 @@ export const ViraPopUpTrigger = defineViraElement<
                 })}
             >
                 <div class="dropdown-trigger">
-                    <slot name=${slotNames.trigger}></slot>
+                    <slot name=${slotNames['vira-pop-up-trigger-trigger']}></slot>
                 </div>
 
                 <div
@@ -496,7 +496,7 @@ export const ViraPopUpTrigger = defineViraElement<
                     ${renderIf(
                         !!state.showPopUpResult,
                         html`
-                            <slot name=${slotNames.popUp}></slot>
+                            <slot name=${slotNames['vira-pop-up-trigger-pop-up']}></slot>
                         `,
                     )}
                 </div>

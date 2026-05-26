@@ -244,13 +244,19 @@ export const viraImageBookPage = defineBookPage({
                         >
                             ${example.loadingSlot
                                 ? html`
-                                      <div class="slot-wrapper" slot=${ViraImage.slotNames.loading}>
+                                      <div
+                                          class="slot-wrapper"
+                                          slot=${ViraImage.slotNames['vira-image-loading']}
+                                      >
                                           ${example.loadingSlot}
                                       </div>
                                   `
                                 : nothing}${example.errorSlot
                                 ? html`
-                                      <div class="slot-wrapper" slot=${ViraImage.slotNames.error}>
+                                      <div
+                                          class="slot-wrapper"
+                                          slot=${ViraImage.slotNames['vira-image-error']}
+                                      >
                                           ${example.errorSlot}
                                       </div>
                                   `

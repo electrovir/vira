@@ -49,8 +49,8 @@ export const ViraImage = defineViraElement<{
         'vira-image-height-constrained': ({inputs}) => inputs.dominantDimension === 'height',
     },
     slotNames: [
-        'loading',
-        'error',
+        'vira-image-loading',
+        'vira-image-error',
     ],
     events: {
         imageLoad: defineElementEvent<void>(),
@@ -112,7 +112,7 @@ export const ViraImage = defineViraElement<{
 
         const statusTemplate = state.erroredUrls[imageUrl]
             ? html`
-                  <slot class="status-wrapper" name=${slotNames.error}>
+                  <slot class="status-wrapper" name=${slotNames['vira-image-error']}>
                       <${ViraIcon.assign({
                           icon: StatusFailure24Icon,
                       })}
@@ -123,7 +123,7 @@ export const ViraImage = defineViraElement<{
             : state.loadedUrls[imageUrl]
               ? undefined
               : html`
-                    <slot class="status-wrapper" name=${slotNames.loading}>
+                    <slot class="status-wrapper" name=${slotNames['vira-image-loading']}>
                         <${ViraIcon.assign({
                             icon: LoaderAnimated24Icon,
                         })}></${ViraIcon}>

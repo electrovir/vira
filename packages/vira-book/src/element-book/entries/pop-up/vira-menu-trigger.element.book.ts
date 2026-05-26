@@ -219,7 +219,10 @@ export const viraMenuTriggerBookPage = defineBookPage({
                             },
                             ...example.inputs,
                         })}>
-                            <div class="trigger" slot=${ViraMenuTrigger.slotNames.trigger}>
+                            <div
+                                class="trigger"
+                                slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
+                            >
                                 Trigger Menu
                             </div>
                             ${renderMenuItemEntries(items)}

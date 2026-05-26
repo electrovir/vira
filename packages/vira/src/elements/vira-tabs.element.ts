@@ -611,7 +611,7 @@ export const ViraTabs = defineViraElement<
                     showMenuCaret: true,
                     color: ViraColorVariant.Neutral,
                 })}
-                    slot=${ViraMenuTrigger.slotNames.trigger}
+                    slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
                 ></${ViraButton}>
                 ${menuItems}
             </${ViraMenuTrigger}>

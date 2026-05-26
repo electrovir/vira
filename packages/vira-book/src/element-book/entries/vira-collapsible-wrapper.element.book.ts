@@ -42,7 +42,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                         >
                             <div
                                 class="section-header"
-                                slot=${ViraCollapsibleWrapper.slotNames.header}
+                                slot=${ViraCollapsibleWrapper.slotNames[
+                                    'vira-collapsible-wrapper-header'
+                                ]}
                             >
                                 Section ${index}
                             </div>
@@ -102,7 +104,9 @@ export const viraCollapsibleBookPage = defineBookPage({
                         >
                             <div
                                 class="section-header"
-                                slot=${ViraCollapsibleWrapper.slotNames.header}
+                                slot=${ViraCollapsibleWrapper.slotNames[
+                                    'vira-collapsible-wrapper-header'
+                                ]}
                             >
                                 Section ${index}
                             </div>

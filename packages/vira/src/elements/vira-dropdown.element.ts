@@ -204,7 +204,7 @@ export const ViraDropdown = defineViraElement<
                     ? ViraMenuPopUpDirection.Downwards
                     : ViraMenuPopUpDirection.Upwards,
             })}
-                slot=${ViraPopUpTrigger.slotNames.popUp}
+                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
             >
                 ${renderMenuItemEntries(
                     inputs.options.map((option) => {
@@ -245,7 +245,7 @@ export const ViraDropdown = defineViraElement<
                         open: !!state.showPopUpResult,
                         'open-upwards': !state.showPopUpResult?.popDown,
                     })}"
-                    slot=${ViraPopUpTrigger.slotNames.trigger}
+                    slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
                     aria-label=${ifDefined(inputs.label || undefined)}
                     ${testId(testIds.trigger)}

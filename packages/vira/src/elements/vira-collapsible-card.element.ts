@@ -138,7 +138,7 @@ export const ViraCollapsibleCard = defineViraElement<
         }
     `,
     slotNames: [
-        'header',
+        'vira-collapsible-card-header',
     ],
     render({inputs, slotNames, state, updateState, testIds, dispatch, events}) {
         if (inputs.blockExpansion) {
@@ -156,7 +156,9 @@ export const ViraCollapsibleCard = defineViraElement<
             ? nothing
             : html`
                   <div class="card-header">
-                      <slot name=${slotNames.header}><div class="header-filler"></div></slot>
+                      <slot name=${slotNames['vira-collapsible-card-header']}>
+                          <div class="header-filler"></div>
+                      </slot>
 
                       ${inputs.blockExpansion
                           ? nothing
@@ -189,7 +191,10 @@ export const ViraCollapsibleCard = defineViraElement<
                     dispatch(new events.expandToggle(event.detail));
                 })}
             >
-                <div class="header-wrapper" slot=${ViraCollapsibleWrapper.slotNames.header}>
+                <div
+                    class="header-wrapper"
+                    slot=${ViraCollapsibleWrapper.slotNames['vira-collapsible-wrapper-header']}
+                >
                     ${wrapperHeaderTemplate}
                 </div>
                 ${wrapperContentTemplate}

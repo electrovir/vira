@@ -51,7 +51,7 @@ export const ViraMenuTrigger = defineViraElement<
 >()({
     tagName: 'vira-menu-trigger',
     slotNames: [
-        'trigger',
+        'vira-menu-trigger-trigger',
     ],
     styles: css`
         :host {
@@ -103,7 +103,10 @@ export const ViraMenuTrigger = defineViraElement<
                     });
                 })}
             >
-                <slot name=${slotNames.trigger} slot=${ViraPopUpTrigger.slotNames.trigger}></slot>
+                <slot
+                    name=${slotNames['vira-menu-trigger-trigger']}
+                    slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                ></slot>
                 ${state.navController && state.showPopUpResult
                     ? html`
                           <${ViraMenu.assign({
@@ -112,7 +115,7 @@ export const ViraMenuTrigger = defineViraElement<
                                   : ViraMenuPopUpDirection.Upwards,
                               cornerStyle: inputs.menuCornerStyle,
                           })}
-                              slot=${ViraPopUpTrigger.slotNames.popUp}
+                              slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
                               class=${classMap({
                                   'full-width-menu':
                                       inputs.horizontalAnchor === HorizontalAnchor.Both,

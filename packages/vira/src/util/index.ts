@@ -8,3 +8,4 @@ export * from './shared-text-input-logic.js';
 export * from './vira-form-fields.js';
 export * from './vira-json-schema.js';
 export * from './vira-select-option.js';
+export * from './vira-theme-client.js';

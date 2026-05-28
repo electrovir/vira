@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "31.19.0",
+    "version": "31.20.0",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -42,10 +42,12 @@
         "@augment-vir/common": "^31.70.1",
         "@augment-vir/web": "^31.70.1",
         "@electrovir/color": "^1.7.9",
+        "@electrovir/local-storage-client": "^0.1.0",
         "date-vir": "^8.3.2",
         "device-navigation": "^4.5.5",
         "json-schema-to-ts": "^3.1.1",
         "lit-css-vars": "^3.6.2",
+        "object-shape-tester": "^6.13.0",
         "observavir": "^2.3.2",
         "page-active": "^1.0.3",
         "spa-router-vir": "^6.6.0",

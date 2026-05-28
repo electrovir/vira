@@ -23,3 +23,4 @@ export * from './vira-select.element.js';
 export * from './vira-tabs.element.js';
 export * from './vira-tag.element.js';
 export * from './vira-text-area.element.js';
+export * from './vira-theme-switcher.element.js';

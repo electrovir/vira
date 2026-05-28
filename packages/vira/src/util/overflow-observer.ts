@@ -2,6 +2,7 @@
  * Creates an observer that monitors whether an element's content overflows its visible width. Uses
  * a ResizeObserver for size changes and a MutationObserver for DOM content changes.
  *
+ * @category Util
  * @returns A cleanup function that disconnects all observers.
  */
 export function createOverflowObserver({

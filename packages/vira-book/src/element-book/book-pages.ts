@@ -28,6 +28,7 @@ import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
 import {viraTextAreaBookPage} from './entries/vira-text-area.element.book.js';
+import {viraThemeSwitcherBookPage} from './entries/vira-theme-switcher.element.book.js';
 import {icons16BookPage, icons24BookPage, lucideIconsBookPage} from './icon-book-pages.js';
 import {elementsBookPage, iconsBookPage, stylesBookPage, utilBookPage} from './top-level-pages.js';
 
@@ -64,6 +65,7 @@ const elementPages = [
     viraTabsBookPage,
     viraTagBookPage,
     viraTextAreaBookPage,
+    viraThemeSwitcherBookPage,
 ].sort((a, b) => a.title.localeCompare(b.title));
 
 const allPages = [

@@ -347,7 +347,7 @@ export const ViraJsonForm = defineViraElement<
                 return html`
                     <${ViraCheckbox.assign({
                         value: value === true,
-                        disabled: isDisabled,
+                        isDisabled,
                     })}
                         ${listen(ViraCheckbox.events.valueChange, (event) => {
                             emitReplaceAt(path, event.detail);

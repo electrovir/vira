@@ -1,5 +1,14 @@
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
-import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
+import {
+    css,
+    defineElementEvent,
+    html,
+    listen,
+    nothing,
+    testId,
+    type HTMLTemplateResult,
+} from 'element-vir';
+import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {
     applyRequiredLabel,
@@ -43,9 +52,29 @@ export const ViraForm = defineViraElement<
          * @default false
          */
         horizontalCheckboxes: boolean;
+        /**
+         * When `true`, all form field labels render to the left of their inputs instead of above
+         * them.
+         *
+         * @default false
+         */
+        useHorizontalLabels: boolean;
+        /**
+         * When `true`, all fields in this form are prevented from user edits. Inputs, selects, and
+         * text areas render their current value as plain text; checkboxes render disabled since
+         * they have no native readonly mode.
+         *
+         * @default false
+         */
+        isReadonly: boolean;
     }>
 >()({
     tagName: 'vira-form',
+    state() {
+        return {
+            lastIsValid: false,
+        };
+    },
     events: {
         valueChange: defineElementEvent<
             {
@@ -72,12 +101,35 @@ export const ViraForm = defineViraElement<
                 width: unset;
             }
         }
+
+        .horizontal-fields {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+
+            & th,
+            & td {
+                padding: 0;
+            }
+
+            & th {
+                padding: 0 8px;
+                vertical-align: middle;
+                white-space: nowrap;
+                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                text-align: right;
+            }
+
+            & td {
+                width: 100%;
+                vertical-align: top;
+
+                & > ${ViraCheckbox}, & > ${ViraInput}, & > ${ViraSelect}, & > ${ViraTextArea} {
+                    width: 100%;
+                }
+            }
+        }
     `,
-    state() {
-        return {
-            lastIsValid: false,
-        };
-    },
     render({inputs, dispatch, events, state, updateState}) {
         const currentIsValid = areFormFieldsValid(inputs.fields);
         if (currentIsValid !== state.lastIsValid) {
@@ -91,195 +143,260 @@ export const ViraForm = defineViraElement<
             );
         }
 
+        function wrapFormField({
+            fieldTemplate,
+            label,
+        }: Readonly<{
+            fieldTemplate: HTMLTemplateResult;
+            label: string | undefined;
+        }>) {
+            if (inputs.useHorizontalLabels) {
+                return html`
+                    <tr>
+                        <th scope="row">${label}</th>
+                        <td>${fieldTemplate}</td>
+                    </tr>
+                `;
+            } else {
+                return fieldTemplate;
+            }
+        }
+
         const formFieldTemplates = getObjectTypedEntries(inputs.fields).map(
             ([
                 key,
                 field,
             ]) => {
+                const label = applyRequiredLabel(
+                    field.label,
+                    !!field.isRequired && !inputs.hideRequiredMarkers,
+                );
+                const isDisabled = !!(inputs.isDisabled || field.isDisabled);
+                const childLabel = inputs.useHorizontalLabels ? undefined : label;
+                const horizontalLabelAttributes =
+                    inputs.useHorizontalLabels && label
+                        ? {
+                              'aria-label': label,
+                          }
+                        : {};
+
                 if (field.isHidden) {
                     return nothing;
                 } else if (field.type === ViraFormFieldType.Checkbox) {
-                    return html`
-                        <${ViraCheckbox.assign({
-                            value: field.value || false,
-                            disabled: inputs.isDisabled || field.isDisabled,
-                            hasError: field.hasError,
-                            horizontal: inputs.horizontalCheckboxes,
-                            label: applyRequiredLabel(
-                                field.label,
-                                !!field.isRequired && !inputs.hideRequiredMarkers,
-                            ),
-                        })}
-                            ${field.testId ? testId(field.testId) : nothing}
-                            ${listen(ViraCheckbox.events.valueChange, (event) => {
-                                dispatch(
-                                    new events.valueChange({
-                                        key,
-                                        ...field,
-                                        value: event.detail,
-                                    }),
-                                );
-                            })}
-                        ></${ViraCheckbox}>
-                    `;
-                } else if (field.type === ViraFormFieldType.Select) {
-                    return html`
-                        <${ViraSelect.assign({
-                            options: field.options,
-                            value: field.value,
-                            placeholder: field.placeholder,
-                            disabled: inputs.isDisabled || field.isDisabled,
-                            label: applyRequiredLabel(
-                                field.label,
-                                !!field.isRequired && !inputs.hideRequiredMarkers,
-                            ),
-                            hasError: field.hasError,
-                            icon: field.icon,
-                        })}
-                            ${field.testId ? testId(field.testId) : nothing}
-                            ${listen(ViraSelect.events.valueChange, (event) => {
-                                dispatch(
-                                    new events.valueChange({
-                                        key,
-                                        ...field,
-                                        value: event.detail,
-                                    }),
-                                );
-                            })}
-                        ></${ViraSelect}>
-                    `;
-                } else if (field.type === ViraFormFieldType.TextArea) {
-                    return html`
-                        <${ViraTextArea.assign({
-                            value: field.value || '',
-                            disabled: inputs.isDisabled || field.isDisabled,
-                            hasError: field.hasError,
-                            label: applyRequiredLabel(
-                                field.label,
-                                !!field.isRequired && !inputs.hideRequiredMarkers,
-                            ),
-                            placeholder: field.placeholder,
-                            rows: field.rows,
-                            preventResize: field.preventResize,
-                        })}
-                            ${field.testId ? testId(field.testId) : nothing}
-                            ${listen(ViraTextArea.events.valueChange, (event) => {
-                                dispatch(
-                                    new events.valueChange({
-                                        key,
-                                        ...field,
-                                        value: event.detail,
-                                    }),
-                                );
-                            })}
-                        ></${ViraTextArea}>
-                    `;
-                } else if (field.type === ViraFormFieldType.Number) {
-                    return html`
-                        <${ViraInput.assign({
-                            value: field.value?.toString() || '',
-                            disabled: inputs.isDisabled || field.isDisabled,
-                            allowedInputs: /\d/,
-                            hasError: field.hasError,
-                            icon: field.icon,
-                            label: applyRequiredLabel(
-                                field.label,
-                                !!field.isRequired && !inputs.hideRequiredMarkers,
-                            ),
-                            placeholder: field.placeholder,
-                            showClearButton: inputs.showClearButtons,
-                            type: ViraInputType.Number,
-                            attributePassthrough: {
-                                ...(field.min === undefined
-                                    ? {}
-                                    : {
-                                          min: String(field.min),
-                                      }),
-                                ...(field.max === undefined
-                                    ? {}
-                                    : {
-                                          max: String(field.max),
-                                      }),
-                                ...(field.step === undefined
-                                    ? {}
-                                    : {
-                                          step: String(field.step),
-                                      }),
-                            },
-                        })}
-                            ${field.testId ? testId(field.testId) : nothing}
-                            ${listen(ViraInput.events.valueChange, (event) => {
-                                const numericValue =
-                                    event.detail === '' ? undefined : Number(event.detail);
-                                dispatch(
-                                    new events.valueChange({
-                                        key,
-                                        ...field,
-                                        value: numericValue,
-                                    }),
-                                );
-                            })}
-                        ></${ViraInput}>
-                    `;
-                } else {
-                    return html`
-                        <${ViraInput.assign({
-                            value: field.value || '',
-                            disabled: inputs.isDisabled || field.isDisabled,
-                            hasError: field.hasError,
-                            icon: field.icon,
-                            label: applyRequiredLabel(
-                                field.label,
-                                !!field.isRequired && !inputs.hideRequiredMarkers,
-                            ),
-                            placeholder: field.placeholder,
-                            showClearButton: inputs.showClearButtons,
-                            attributePassthrough: field.isUsername
-                                ? {
-                                      autocomplete: 'username',
-                                  }
-                                : field.type === ViraFormFieldType.NewPassword
-                                  ? {
-                                        autocomplete: 'new-password',
-                                    }
-                                  : field.type === ViraFormFieldType.ExistingPassword
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraCheckbox.assign({
+                                value: field.value || false,
+                                isDisabled: !!(isDisabled || inputs.isReadonly),
+                                hasError: field.hasError,
+                                useHorizontalLabel: inputs.horizontalCheckboxes,
+                                fillWhenChecked: field.fillWhenChecked,
+                                fillWhenUnchecked: field.fillWhenUnchecked,
+                                label: childLabel,
+                                ...(inputs.useHorizontalLabels && label
                                     ? {
-                                          autocomplete: 'password',
+                                          attributePassthrough: {
+                                              'custom-checkbox': horizontalLabelAttributes,
+                                          },
                                       }
-                                    : field.type === ViraFormFieldType.Email
-                                      ? {
-                                            autocomplete: 'email',
-                                        }
-                                      : {},
-                            type: [
-                                ViraFormFieldType.NewPassword,
-                                ViraFormFieldType.ExistingPassword,
-                                ViraFormFieldType.PlainPassword,
-                            ].includes(field.type)
-                                ? ViraInputType.Password
-                                : field.type === ViraFormFieldType.Email
-                                  ? ViraInputType.Email
-                                  : ViraInputType.Default,
-                        })}
-                            ${field.testId ? testId(field.testId) : nothing}
-                            ${listen(ViraInput.events.valueChange, (event) => {
-                                dispatch(
-                                    new events.valueChange({
-                                        key,
-                                        ...field,
-                                        value: event.detail,
-                                    }),
-                                );
+                                    : {}),
                             })}
-                        ></${ViraInput}>
-                    `;
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraCheckbox.events.valueChange, (event) => {
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: event.detail,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraCheckbox}>
+                        `,
+                    });
+                } else if (field.type === ViraFormFieldType.Select) {
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraSelect.assign({
+                                options: field.options,
+                                value: field.value,
+                                placeholder: field.placeholder,
+                                disabled: isDisabled,
+                                isReadonly: inputs.isReadonly,
+                                label: childLabel,
+                                hasError: field.hasError,
+                                icon: field.icon,
+                                ...(inputs.useHorizontalLabels && label
+                                    ? {
+                                          attributePassthrough: {
+                                              select: horizontalLabelAttributes,
+                                          },
+                                      }
+                                    : {}),
+                            })}
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraSelect.events.valueChange, (event) => {
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: event.detail,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraSelect}>
+                        `,
+                    });
+                } else if (field.type === ViraFormFieldType.TextArea) {
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraTextArea.assign({
+                                value: field.value || '',
+                                disabled: isDisabled,
+                                hasError: field.hasError,
+                                isReadonly: inputs.isReadonly,
+                                label: childLabel,
+                                placeholder: field.placeholder,
+                                rows: field.rows,
+                                preventResize: field.preventResize,
+                                attributePassthrough: horizontalLabelAttributes,
+                            })}
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraTextArea.events.valueChange, (event) => {
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: event.detail,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraTextArea}>
+                        `,
+                    });
+                } else if (field.type === ViraFormFieldType.Number) {
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraInput.assign({
+                                value: field.value?.toString() || '',
+                                disabled: isDisabled,
+                                allowedInputs: /\d/,
+                                hasError: field.hasError,
+                                icon: field.icon,
+                                isReadonly: inputs.isReadonly,
+                                label: childLabel,
+                                placeholder: field.placeholder,
+                                showClearButton: inputs.showClearButtons,
+                                type: ViraInputType.Number,
+                                attributePassthrough: {
+                                    ...horizontalLabelAttributes,
+                                    ...(field.min === undefined
+                                        ? {}
+                                        : {
+                                              min: String(field.min),
+                                          }),
+                                    ...(field.max === undefined
+                                        ? {}
+                                        : {
+                                              max: String(field.max),
+                                          }),
+                                    ...(field.step === undefined
+                                        ? {}
+                                        : {
+                                              step: String(field.step),
+                                          }),
+                                },
+                            })}
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraInput.events.valueChange, (event) => {
+                                    const numericValue =
+                                        event.detail === '' ? undefined : Number(event.detail);
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: numericValue,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraInput}>
+                        `,
+                    });
+                } else {
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraInput.assign({
+                                value: field.value || '',
+                                disabled: isDisabled,
+                                hasError: field.hasError,
+                                icon: field.icon,
+                                isReadonly: inputs.isReadonly,
+                                label: childLabel,
+                                placeholder: field.placeholder,
+                                showClearButton: inputs.showClearButtons,
+                                attributePassthrough: {
+                                    ...horizontalLabelAttributes,
+                                    ...(field.isUsername
+                                        ? {
+                                              autocomplete: 'username',
+                                          }
+                                        : field.type === ViraFormFieldType.NewPassword
+                                          ? {
+                                                autocomplete: 'new-password',
+                                            }
+                                          : field.type === ViraFormFieldType.ExistingPassword
+                                            ? {
+                                                  autocomplete: 'password',
+                                              }
+                                            : field.type === ViraFormFieldType.Email
+                                              ? {
+                                                    autocomplete: 'email',
+                                                }
+                                              : {}),
+                                },
+                                type: [
+                                    ViraFormFieldType.NewPassword,
+                                    ViraFormFieldType.ExistingPassword,
+                                    ViraFormFieldType.PlainPassword,
+                                ].includes(field.type)
+                                    ? ViraInputType.Password
+                                    : field.type === ViraFormFieldType.Email
+                                      ? ViraInputType.Email
+                                      : ViraInputType.Default,
+                            })}
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraInput.events.valueChange, (event) => {
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: event.detail,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraInput}>
+                        `,
+                    });
                 }
             },
         );
 
+        const formFieldsWrapper = inputs.useHorizontalLabels
+            ? html`
+                  <table class="horizontal-fields">
+                      <tbody>${formFieldTemplates}</tbody>
+                  </table>
+              `
+            : formFieldTemplates;
+
         return html`
             <form ${listen('submit', (event) => event.preventDefault())}>
-                ${formFieldTemplates}
+                ${formFieldsWrapper}
                 <slot></slot>
             </form>
         `;

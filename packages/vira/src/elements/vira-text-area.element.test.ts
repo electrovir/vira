@@ -44,4 +44,22 @@ describe(ViraTextArea.tagName, () => {
 
         assert.strictEquals(lastEvent?.detail, textToType);
     });
+
+    it('renders the value as plain text when readonly', async () => {
+        const value = randomString();
+
+        const fixture = await testWeb.render(html`
+            <${ViraTextArea.assign({
+                value,
+                isReadonly: true,
+            })}></${ViraTextArea}>
+        `);
+
+        assert.instanceOf(fixture, ViraTextArea);
+        assert.isNull(fixture.shadowRoot.querySelector('textarea'));
+
+        const readonlyValue = fixture.shadowRoot.querySelector('.readonly-value');
+        assert.instanceOf(readonlyValue, HTMLSpanElement);
+        assert.strictEquals(readonlyValue.textContent.trim(), value);
+    });
 });

@@ -41,4 +41,22 @@ describe(ViraInput.tagName, () => {
 
         assert.strictEquals(lastEvent?.detail, textToType);
     });
+
+    it('renders the value as plain text when readonly', async () => {
+        const value = randomString();
+
+        const fixture = await testWeb.render(html`
+            <${ViraInput.assign({
+                value,
+                isReadonly: true,
+            })}></${ViraInput}>
+        `);
+
+        assert.instanceOf(fixture, ViraInput);
+        assert.isNull(fixture.shadowRoot.querySelector('input'));
+
+        const readonlyValue = fixture.shadowRoot.querySelector('.readonly-value');
+        assert.instanceOf(readonlyValue, HTMLSpanElement);
+        assert.strictEquals(readonlyValue.textContent.trim(), value);
+    });
 });

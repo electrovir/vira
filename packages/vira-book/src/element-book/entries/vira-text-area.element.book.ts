@@ -136,6 +136,14 @@ export const viraTextAreaBookPage = defineBookPage({
                 },
             },
             {
+                title: 'readonly',
+                inputs: {
+                    label: 'Label here',
+                    value: 'readonly value\nwith multiple lines',
+                    isReadonly: true,
+                },
+            },
+            {
                 title: 'with error',
                 inputs: {
                     value: 'has error',

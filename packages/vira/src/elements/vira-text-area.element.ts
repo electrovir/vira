@@ -115,6 +115,11 @@ export const ViraTextArea = defineViraElement<
             pointer-events: none;
         }
 
+        .readonly-value {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
         ${hostClasses['vira-text-area-prevent-resize'].selector} textarea {
             resize: none;
         }
@@ -172,6 +177,23 @@ export const ViraTextArea = defineViraElement<
             allowed: inputs.allowedInputs,
             blocked: inputs.blockedInputs,
         });
+
+        if (inputs.isReadonly) {
+            const readonlyValueTemplate = html`
+                <span class="readonly-value">${filteredValue}</span>
+            `;
+
+            if (inputs.label) {
+                return html`
+                    <label>
+                        <span class="text-area-label">${inputs.label}</span>
+                        ${readonlyValueTemplate}
+                    </label>
+                `;
+            } else {
+                return readonlyValueTemplate;
+            }
+        }
 
         const textAreaTemplate = html`
             <span class="text-area-wrapper">

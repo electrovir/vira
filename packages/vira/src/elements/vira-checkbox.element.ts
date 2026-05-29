@@ -40,10 +40,10 @@ export type ViraCheckboxInputs = {
 } & PartialWithUndefined<{
     stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
     attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
-    disabled: boolean;
+    isDisabled: boolean;
     label: string;
     hasError: boolean;
-    horizontal: boolean;
+    useHorizontalLabel: boolean;
     /** The checkbox will be filled with a form selection color when it is checked. */
     fillWhenChecked: boolean;
     /** The checkbox will be filled with a form error color when it is unchecked. */
@@ -60,7 +60,7 @@ export type ViraCheckboxInputs = {
 export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     tagName: 'vira-checkbox',
     hostClasses: {
-        'vira-checkbox-horizontal': ({inputs}) => !!inputs.horizontal,
+        'vira-checkbox-horizontal': ({inputs}) => !!inputs.useHorizontalLabel,
         'vira-checkbox-filled-checked': ({inputs}) => !!inputs.fillWhenChecked,
         'vira-checkbox-filled-unchecked': ({inputs}) => !!inputs.fillWhenUnchecked,
     },
@@ -171,8 +171,8 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         }
 
         ${hostClasses['vira-checkbox-horizontal'].selector} label {
-            flex-direction: row-reverse;
-            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
             gap: 8px;
 
             & .label-text {
@@ -185,7 +185,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     },
     render({inputs, dispatch, events}) {
         function updateValue(this: void) {
-            if (!inputs.disabled) {
+            if (!inputs.isDisabled) {
                 dispatch(new events.valueChange(!inputs.value));
             }
         }
@@ -205,7 +205,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         return html`
             <label
                 class=${classMap({
-                    disabled: !!inputs.disabled,
+                    disabled: !!inputs.isDisabled,
                 })}
                 ${attributes(inputs.attributePassthrough?.label)}
                 style=${ifDefined(inputs.stylePassthrough?.label)}
@@ -215,14 +215,14 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 <span
                     class="custom-checkbox ${classMap({
                         checked: inputs.value,
-                        disabled: !!inputs.disabled,
+                        disabled: !!inputs.isDisabled,
                         error: !!inputs.hasError,
                     })}"
                     role="checkbox"
                     aria-label=${ifDefined(inputs.label || undefined)}
                     aria-checked=${inputs.value ? 'true' : 'false'}
-                    aria-disabled=${inputs.disabled ? 'true' : 'false'}
-                    tabindex=${inputs.disabled ? '-1' : '0'}
+                    aria-disabled=${inputs.isDisabled ? 'true' : 'false'}
+                    tabindex=${inputs.isDisabled ? '-1' : '0'}
                     ${attributes(inputs.attributePassthrough?.['custom-checkbox'])}
                     style=${ifDefined(inputs.stylePassthrough?.['custom-checkbox'])}
                     ${listenToActivate(updateValue)}

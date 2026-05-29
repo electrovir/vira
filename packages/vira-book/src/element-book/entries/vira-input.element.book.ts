@@ -150,6 +150,14 @@ export const viraInputBookPage = defineBookPage({
                 },
             },
             {
+                title: 'readonly',
+                inputs: {
+                    label: 'Label here',
+                    value: 'readonly value',
+                    isReadonly: true,
+                },
+            },
+            {
                 title: 'numbers only',
                 inputs: {
                     value: '',

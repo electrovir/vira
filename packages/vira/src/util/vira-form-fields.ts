@@ -91,7 +91,13 @@ export type ViraFormField =
     | ({
           type: ViraFormFieldType.Checkbox;
           value: boolean | undefined;
-      } & CommonViraFormFields)
+      } & PartialWithUndefined<{
+          /** The checkbox will be filled with a form selection color when it is checked. */
+          fillWhenChecked: boolean;
+          /** The checkbox will be filled with a form error color when it is unchecked. */
+          fillWhenUnchecked: boolean;
+      }> &
+          CommonViraFormFields)
     | ({
           type: ViraFormFieldType.Number;
           value: number | undefined;

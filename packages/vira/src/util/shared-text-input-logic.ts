@@ -15,6 +15,7 @@ export type SharedTextInputElementInputs = {
     placeholder: string;
     /** Set to true to trigger disabled styles and to block all user input. */
     disabled: boolean;
+    isReadonly: boolean;
     /**
      * Only letters in the given string or matches to the given RegExp will be allowed.
      * blockedInputs takes precedence over this input.

@@ -87,7 +87,7 @@ export const viraCheckboxBookPage = defineBookPage({
                 return html`
                     <${ViraCheckbox.assign({
                         value: false,
-                        disabled: true,
+                        isDisabled: true,
                     })}></${ViraCheckbox}>
                 `;
             },
@@ -98,7 +98,7 @@ export const viraCheckboxBookPage = defineBookPage({
                 return html`
                     <${ViraCheckbox.assign({
                         value: true,
-                        disabled: true,
+                        isDisabled: true,
                     })}></${ViraCheckbox}>
                 `;
             },
@@ -110,7 +110,7 @@ export const viraCheckboxBookPage = defineBookPage({
                 return html`
                     <${ViraCheckbox.assign({
                         value: controls.Checked,
-                        disabled: controls.Disabled,
+                        isDisabled: controls.Disabled,
                     })}></${ViraCheckbox}>
                 `;
             },
@@ -160,7 +160,7 @@ export const viraCheckboxBookPage = defineBookPage({
                     <${ViraCheckbox.assign({
                         value: state.checked,
                         label: 'label goes here',
-                        horizontal: true,
+                        useHorizontalLabel: true,
                     })}
                         ${listen(ViraCheckbox.events.valueChange, (event) => {
                             updateState({
@@ -215,7 +215,7 @@ export const viraCheckboxBookPage = defineBookPage({
                     <${ViraCheckbox.assign({
                         value: state.checked,
                         label: 'label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here ',
-                        horizontal: true,
+                        useHorizontalLabel: true,
                     })}
                         ${listen(ViraCheckbox.events.valueChange, (event) => {
                             updateState({
@@ -290,6 +290,30 @@ export const viraCheckboxBookPage = defineBookPage({
                             });
                         })}
                     ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled fill when checked',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: true,
+                        isDisabled: true,
+                        fillWhenChecked: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled fill when unchecked',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        isDisabled: true,
+                        fillWhenUnchecked: true,
+                    })}></${ViraCheckbox}>
                 `;
             },
         });

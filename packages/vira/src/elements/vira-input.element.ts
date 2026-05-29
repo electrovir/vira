@@ -185,6 +185,10 @@ export const ViraInput = defineViraElement<
                 margin-right: calc(${cssVars['vira-input-padding-horizontal'].value} - 4px);
             }
 
+            .readonly-value {
+                overflow-wrap: anywhere;
+            }
+
             input {
                 ${noNativeFormStyles};
                 cursor: text;
@@ -322,6 +326,23 @@ export const ViraInput = defineViraElement<
             allowed: inputs.allowedInputs,
             blocked: inputs.blockedInputs,
         });
+
+        if (inputs.isReadonly) {
+            const readonlyValueTemplate = html`
+                <span class="readonly-value">${filteredValue}</span>
+            `;
+
+            if (inputs.label) {
+                return html`
+                    <label>
+                        <span class="input-label">${inputs.label}</span>
+                        ${readonlyValueTemplate}
+                    </label>
+                `;
+            } else {
+                return readonlyValueTemplate;
+            }
+        }
 
         const iconTemplate = inputs.icon
             ? html`

@@ -60,6 +60,11 @@ export const ViraSelect = defineViraElement<
         /** If set to `true`, only minimal styles are applied. */
         rawSelect: boolean;
         disabled: boolean;
+        /**
+         * When `true`, the currently selected option's label is rendered as plain text with no
+         * wrapper, border, or focus styles.
+         */
+        isReadonly: boolean;
         attributePassthrough: Readonly<
             PartialWithUndefined<{
                 label: AttributeValues;
@@ -223,6 +228,10 @@ export const ViraSelect = defineViraElement<
             }
         }
 
+        .readonly-value {
+            overflow-wrap: anywhere;
+        }
+
         ${hostClasses['vira-select-disabled'].selector} {
             cursor: not-allowed;
 
@@ -300,6 +309,28 @@ export const ViraSelect = defineViraElement<
     },
     render({inputs, state, dispatch, events}) {
         const value = inputs.value || undefined;
+
+        if (inputs.isReadonly) {
+            const selectedOption = inputs.options
+                .flatMap((entry) => (isViraSelectOptionGroup(entry) ? [...entry.options] : [entry]))
+                .find((option) => option.value === value);
+            const readonlyValueTemplate = html`
+                <span class="readonly-value">
+                    ${selectedOption?.label || inputs.placeholder || ''}
+                </span>
+            `;
+
+            if (inputs.label) {
+                return html`
+                    <label ${attributes(inputs.attributePassthrough?.label)}>
+                        <span class="select-label">${inputs.label}</span>
+                        ${readonlyValueTemplate}
+                    </label>
+                `;
+            } else {
+                return readonlyValueTemplate;
+            }
+        }
 
         const placeholderOptionTemplate =
             inputs.placeholder || value == undefined

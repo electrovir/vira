@@ -115,6 +115,15 @@ const examples: {
         },
     },
     {
+        title: 'readonly',
+        inputs: {
+            options: mockOptions,
+            label: 'Pick an option',
+            value: '3',
+            isReadonly: true,
+        },
+    },
+    {
         title: 'error',
         inputs: {
             options: mockOptions,

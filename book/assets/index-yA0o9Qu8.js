@@ -32419,7 +32419,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
         }
     `,render(){return w`
             <slot></slot>
-        `}}),W=cd()({tagName:`vira-checkbox`,hostClasses:{"vira-checkbox-horizontal":({inputs:e})=>!!e.horizontal,"vira-checkbox-filled-checked":({inputs:e})=>!!e.fillWhenChecked,"vira-checkbox-filled-unchecked":({inputs:e})=>!!e.fillWhenUnchecked},styles:({hostClasses:e})=>S`
+        `}}),W=cd()({tagName:`vira-checkbox`,hostClasses:{"vira-checkbox-horizontal":({inputs:e})=>!!e.useHorizontalLabel,"vira-checkbox-filled-checked":({inputs:e})=>!!e.fillWhenChecked,"vira-checkbox-filled-unchecked":({inputs:e})=>!!e.fillWhenUnchecked},styles:({hostClasses:e})=>S`
         :host {
             display: inline-flex;
         }
@@ -32522,15 +32522,15 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
         }
 
         ${e[`vira-checkbox-horizontal`].selector} label {
-            flex-direction: row-reverse;
-            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
             gap: 8px;
 
             & .label-text {
                 padding-block: calc((24px - 1em) / 2);
             }
         }
-    `,events:{valueChange:x()},render({inputs:e,dispatch:t,events:n}){function r(){e.disabled||t(new n.valueChange(!e.value))}let i=e.label?w`
+    `,events:{valueChange:x()},render({inputs:e,dispatch:t,events:n}){function r(){e.isDisabled||t(new n.valueChange(!e.value))}let i=e.label?w`
                   <span
                       class="label-text"
                       ${Yl(e.attributePassthrough?.text)}
@@ -32540,19 +32540,19 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                   </span>
               `:g;return w`
             <label
-                class=${Bl({disabled:!!e.disabled})}
+                class=${Bl({disabled:!!e.isDisabled})}
                 ${Yl(e.attributePassthrough?.label)}
                 style=${M(e.stylePassthrough?.label)}
                 ${N(`mousedown`,r)}
             >
                 ${i}
                 <span
-                    class="custom-checkbox ${Bl({checked:e.value,disabled:!!e.disabled,error:!!e.hasError})}"
+                    class="custom-checkbox ${Bl({checked:e.value,disabled:!!e.isDisabled,error:!!e.hasError})}"
                     role="checkbox"
                     aria-label=${M(e.label||void 0)}
                     aria-checked=${e.value?`true`:`false`}
-                    aria-disabled=${e.disabled?`true`:`false`}
-                    tabindex=${e.disabled?`-1`:`0`}
+                    aria-disabled=${e.isDisabled?`true`:`false`}
+                    tabindex=${e.isDisabled?`-1`:`0`}
                     ${Yl(e.attributePassthrough?.[`custom-checkbox`])}
                     style=${M(e.stylePassthrough?.[`custom-checkbox`])}
                     ${Ql(r)}
@@ -33039,6 +33039,10 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 margin-right: calc(${t[`vira-input-padding-horizontal`].value} - 4px);
             }
 
+            .readonly-value {
+                overflow-wrap: anywhere;
+            }
+
             input {
                 ${eX};
                 cursor: text;
@@ -33133,7 +33137,14 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                     display: none;
                 }
             }
-        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=CX({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs}),s=e.icon?w`
+        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=CX({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+                <span class="readonly-value">${o}</span>
+            `;return e.label?w`
+                    <label>
+                        <span class="input-label">${e.label}</span>
+                        ${t}
+                    </label>
+                `:t}let s=e.icon?w`
                   <${TX.assign({icon:e.icon})}
                       class="left-side-icon"
                   ></${TX}>
@@ -33737,6 +33748,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
         }
 
+        .readonly-value {
+            overflow-wrap: anywhere;
+        }
+
         ${e[`vira-select-disabled`].selector} {
             cursor: not-allowed;
 
@@ -33756,7 +33771,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             .wrapper-border {
             border-color: ${dX[`vira-form-error-color`].value};
         }
-    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0,a=e.placeholder||i==null?w`
+    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=w`
+                <span class="readonly-value">
+                    ${e.options.flatMap(e=>HX(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
+                </span>
+            `;return e.label?w`
+                    <label ${Yl(e.attributePassthrough?.label)}>
+                        <span class="select-label">${e.label}</span>
+                        ${t}
+                    </label>
+                `:t}let a=e.placeholder||i==null?w`
                       <option value="" disabled ?selected=${i==null}>
                           ${e.placeholder}
                       </option>
@@ -34389,6 +34413,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 margin-right: calc(${t[`vira-input-padding-horizontal`].value} - 4px);
             }
 
+            .readonly-value {
+                overflow-wrap: anywhere;
+            }
+
             input {
                 ${rd};
                 cursor: text;
@@ -34483,7 +34511,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     display: none;
                 }
             }
-        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs}),s=e.icon?w`
+        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+                <span class="readonly-value">${o}</span>
+            `;return e.label?w`
+                    <label>
+                        <span class="input-label">${e.label}</span>
+                        ${t}
+                    </label>
+                `:t}let s=e.icon?w`
                   <${V.assign({icon:e.icon})}
                       class="left-side-icon"
                   ></${V}>
@@ -34690,6 +34725,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
         }
 
+        .readonly-value {
+            overflow-wrap: anywhere;
+        }
+
         ${e[`vira-select-disabled`].selector} {
             cursor: not-allowed;
 
@@ -34709,7 +34748,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             .wrapper-border {
             border-color: ${z[`vira-form-error-color`].value};
         }
-    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0,a=e.placeholder||i==null?w`
+    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=w`
+                <span class="readonly-value">
+                    ${e.options.flatMap(e=>xZ(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
+                </span>
+            `;return e.label?w`
+                    <label ${Yl(e.attributePassthrough?.label)}>
+                        <span class="select-label">${e.label}</span>
+                        ${t}
+                    </label>
+                `:t}let a=e.placeholder||i==null?w`
                       <option value="" disabled ?selected=${i==null}>
                           ${e.placeholder}
                       </option>
@@ -34827,6 +34875,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             pointer-events: none;
         }
 
+        .readonly-value {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
         ${e[`vira-text-area-prevent-resize`].selector} textarea {
             resize: none;
         }
@@ -34850,7 +34903,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 display: none;
             }
         }
-    `,events:{valueChange:x(),inputBlocked:x()},state(){return{randomId:bt(32)}},hostClasses:{"vira-text-area-disabled":({inputs:e})=>!!e.disabled,"vira-text-area-error":({inputs:e})=>!!e.hasError,"vira-text-area-prevent-resize":({inputs:e})=>!!e.preventResize||!!e.disabled},render({inputs:e,dispatch:t,state:n,events:r}){let{filtered:i}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs}),a=w`
+    `,events:{valueChange:x(),inputBlocked:x()},state(){return{randomId:bt(32)}},hostClasses:{"vira-text-area-disabled":({inputs:e})=>!!e.disabled,"vira-text-area-error":({inputs:e})=>!!e.hasError,"vira-text-area-prevent-resize":({inputs:e})=>!!e.preventResize||!!e.disabled},render({inputs:e,dispatch:t,state:n,events:r}){let{filtered:i}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+                <span class="readonly-value">${i}</span>
+            `;return e.label?w`
+                    <label>
+                        <span class="text-area-label">${e.label}</span>
+                        ${t}
+                    </label>
+                `:t}let a=w`
             <span class="text-area-wrapper">
                 <textarea
                     id=${M(e.label?n.randomId:void 0)}
@@ -34874,7 +34934,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="text-area-label">${e.label}</span>
                     ${a}
                 </label>
-            `:a}}),wZ=cd()({tagName:`vira-form`,events:{valueChange:x(),validChange:x()},styles:S`
+            `:a}}),wZ=cd()({tagName:`vira-form`,state(){return{lastIsValid:!1}},events:{valueChange:x(),validChange:x()},styles:S`
         :host {
             display: flex;
         }
@@ -34890,34 +34950,71 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 width: unset;
             }
         }
-    `,state(){return{lastIsValid:!1}},render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=mZ(e.fields);a!==r.lastIsValid&&(i({lastIsValid:a}),t(new n.validChange({allFieldsAreValid:a})));let o=p(e.fields).map(([r,i])=>i.isHidden?g:i.type===Z.Checkbox?w`
-                        <${W.assign({value:i.value||!1,disabled:e.isDisabled||i.isDisabled,hasError:i.hasError,horizontal:e.horizontalCheckboxes,label:pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers)})}
-                            ${i.testId?uu(i.testId):g}
-                            ${N(W.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                        ></${W}>
-                    `:i.type===Z.Select?w`
-                        <${$.assign({options:i.options,value:i.value,placeholder:i.placeholder,disabled:e.isDisabled||i.isDisabled,label:pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),hasError:i.hasError,icon:i.icon})}
-                            ${i.testId?uu(i.testId):g}
-                            ${N($.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                        ></${$}>
-                    `:i.type===Z.TextArea?w`
-                        <${CZ.assign({value:i.value||``,disabled:e.isDisabled||i.isDisabled,hasError:i.hasError,label:pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize})}
-                            ${i.testId?uu(i.testId):g}
-                            ${N(CZ.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                        ></${CZ}>
-                    `:i.type===Z.Number?w`
-                        <${Q.assign({value:i.value?.toString()||``,disabled:e.isDisabled||i.isDisabled,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,label:pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),placeholder:i.placeholder,showClearButton:e.showClearButtons,type:yZ.Number,attributePassthrough:{...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
-                            ${i.testId?uu(i.testId):g}
-                            ${N(Q.events.valueChange,e=>{let a=e.detail===``?void 0:Number(e.detail);t(new n.valueChange({key:r,...i,value:a}))})}
-                        ></${Q}>
-                    `:w`
-                        <${Q.assign({value:i.value||``,disabled:e.isDisabled||i.isDisabled,hasError:i.hasError,icon:i.icon,label:pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?yZ.Password:i.type===Z.Email?yZ.Email:yZ.Default})}
-                            ${i.testId?uu(i.testId):g}
-                            ${N(Q.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                        ></${Q}>
-                    `);return w`
+
+        .horizontal-fields {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+
+            & th,
+            & td {
+                padding: 0;
+            }
+
+            & th {
+                padding: 0 8px;
+                vertical-align: middle;
+                white-space: nowrap;
+                font-weight: ${z[`vira-form-label-font-weight`].value};
+                text-align: right;
+            }
+
+            & td {
+                width: 100%;
+                vertical-align: top;
+
+                & > ${W}, & > ${Q}, & > ${$}, & > ${CZ} {
+                    width: 100%;
+                }
+            }
+        }
+    `,render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=mZ(e.fields);a!==r.lastIsValid&&(i({lastIsValid:a}),t(new n.validChange({allFieldsAreValid:a})));function o({fieldTemplate:t,label:n}){return e.useHorizontalLabels?w`
+                    <tr>
+                        <th scope="row">${n}</th>
+                        <td>${t}</td>
+                    </tr>
+                `:t}let s=p(e.fields).map(([r,i])=>{let a=pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),s=!!(e.isDisabled||i.isDisabled),c=e.useHorizontalLabels?void 0:a,l=e.useHorizontalLabels&&a?{"aria-label":a}:{};return i.isHidden?g:i.type===Z.Checkbox?o({label:a,fieldTemplate:w`
+                            <${W.assign({value:i.value||!1,isDisabled:!!(s||e.isReadonly),hasError:i.hasError,useHorizontalLabel:e.horizontalCheckboxes,fillWhenChecked:i.fillWhenChecked,fillWhenUnchecked:i.fillWhenUnchecked,label:c,...e.useHorizontalLabels&&a?{attributePassthrough:{"custom-checkbox":l}}:{}})}
+                                ${i.testId?uu(i.testId):g}
+                                ${N(W.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
+                            ></${W}>
+                        `}):i.type===Z.Select?o({label:a,fieldTemplate:w`
+                            <${$.assign({options:i.options,value:i.value,placeholder:i.placeholder,disabled:s,isReadonly:e.isReadonly,label:c,hasError:i.hasError,icon:i.icon,...e.useHorizontalLabels&&a?{attributePassthrough:{select:l}}:{}})}
+                                ${i.testId?uu(i.testId):g}
+                                ${N($.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
+                            ></${$}>
+                        `}):i.type===Z.TextArea?o({label:a,fieldTemplate:w`
+                            <${CZ.assign({value:i.value||``,disabled:s,hasError:i.hasError,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize,attributePassthrough:l})}
+                                ${i.testId?uu(i.testId):g}
+                                ${N(CZ.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
+                            ></${CZ}>
+                        `}):i.type===Z.Number?o({label:a,fieldTemplate:w`
+                            <${Q.assign({value:i.value?.toString()||``,disabled:s,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,type:yZ.Number,attributePassthrough:{...l,...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
+                                ${i.testId?uu(i.testId):g}
+                                ${N(Q.events.valueChange,e=>{let a=e.detail===``?void 0:Number(e.detail);t(new n.valueChange({key:r,...i,value:a}))})}
+                            ></${Q}>
+                        `}):o({label:a,fieldTemplate:w`
+                            <${Q.assign({value:i.value||``,disabled:s,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:{...l,...i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{}},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?yZ.Password:i.type===Z.Email?yZ.Email:yZ.Default})}
+                                ${i.testId?uu(i.testId):g}
+                                ${N(Q.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
+                            ></${Q}>
+                        `})}),c=e.useHorizontalLabels?w`
+                  <table class="horizontal-fields">
+                      <tbody>${s}</tbody>
+                  </table>
+              `:s;return w`
             <form ${N(`submit`,e=>e.preventDefault())}>
-                ${o}
+                ${c}
                 <slot></slot>
             </form>
         `}}),TZ=cd()({tagName:`vira-image`,state(){return{loadedUrls:{},erroredUrls:{}}},hostClasses:{"vira-image-height-constrained":({inputs:e})=>e.dominantDimension===`height`},slotNames:[`vira-image-loading`,`vira-image-error`],events:{imageLoad:x(),imageError:x()},styles:({hostClasses:e})=>S`
@@ -35147,7 +35244,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${N($.events.valueChange,t=>{u(e,i.find(e=>c(e)===t.detail)??t.detail)})}
                     ></${$}>
                 `}else if(r===EZ.Boolean)return w`
-                    <${W.assign({value:t===!0,disabled:o})}
+                    <${W.assign({value:t===!0,isDisabled:o})}
                         ${N(W.events.valueChange,t=>{u(e,t.detail)})}
                     ></${W}>
                 `;else if(r===EZ.Number||r===EZ.Integer){let r=IZ(n,s),i=r.length===1&&r[0]===EZ.Integer;return w`
@@ -37006,11 +37103,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
                 `}}),e({title:`disabled unchecked`,render(){return w`
-                    <${W.assign({value:!1,disabled:!0})}></${W}>
+                    <${W.assign({value:!1,isDisabled:!0})}></${W}>
                 `}}),e({title:`disabled checked`,render(){return w`
-                    <${W.assign({value:!0,disabled:!0})}></${W}>
+                    <${W.assign({value:!0,isDisabled:!0})}></${W}>
                 `}}),e({title:`dynamic`,descriptionParagraphs:[`Should only update when controls change.`],render({controls:e}){return w`
-                    <${W.assign({value:e.Checked,disabled:e.Disabled})}></${W}>
+                    <${W.assign({value:e.Checked,isDisabled:e.Disabled})}></${W}>
                 `}}),e({title:`no listener`,descriptionParagraphs:[`Should not update on user clicks.`],render(){return w`
                     <${W.assign({value:!0})}></${W}>
                 `}}),e({title:`with label`,state(){return{checked:!0}},render({state:e,updateState:t}){return w`
@@ -37018,7 +37115,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
                 `}}),e({title:`horizontal`,state(){return{checked:!0}},render({state:e,updateState:t}){return w`
-                    <${W.assign({value:e.checked,label:`label goes here`,horizontal:!0})}
+                    <${W.assign({value:e.checked,label:`label goes here`,useHorizontalLabel:!0})}
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
                 `}}),e({title:`long label`,state(){return{checked:!0}},styles:S`
@@ -37034,7 +37131,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     max-width: 400px;
                 }
             `,render({state:e,updateState:t}){return w`
-                    <${W.assign({value:e.checked,label:`label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here `,horizontal:!0})}
+                    <${W.assign({value:e.checked,label:`label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here label goes here `,useHorizontalLabel:!0})}
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
                 `}}),e({title:`fill when checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return w`
@@ -37049,6 +37146,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${W.assign({value:e.checked,fillWhenUnchecked:!0,fillWhenChecked:!0})}
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
+                `}}),e({title:`disabled fill when checked`,render(){return w`
+                    <${W.assign({value:!0,isDisabled:!0,fillWhenChecked:!0})}></${W}>
+                `}}),e({title:`disabled fill when unchecked`,render(){return w`
+                    <${W.assign({value:!1,isDisabled:!0,fillWhenUnchecked:!0})}></${W}>
                 `}})}}),z1=O({title:TG.tagName,parent:s1,descriptionParagraphs:[`A collapsible card element with built-in header, caret icon, and card styling. Wraps ViraCollapsibleWrapper with opinionated styles.`],defineExamples({defineExample:e}){e({title:`basic`,styles:S`
                 p {
                     ${rd}
@@ -37301,6 +37402,54 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             <${U.assign({text:`Submit`})}></${U}>
                         </div>
                     </${wZ}>
+                `}}),e({title:`horizontal labels`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,userRole:void 0,notes:``}},styles:S`
+                ${wZ} {
+                    width: 520px;
+                }
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+                    <${wZ.assign({fields:n,useHorizontalLabels:!0})}
+                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+                    ></${wZ}>
+                `}}),e({title:`readonly`,styles:S`
+                .readonly-example {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+
+                ${wZ} {
+                    width: 400px;
+                }
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+                    <div class="readonly-example">
+                        <${U.assign({text:e.isReadonly?`Edit`:`Done`})}
+                            ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
+                        ></${U}>
+                        <${wZ.assign({fields:n,isReadonly:e.isReadonly})}
+                            ${N(wZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
+                        ></${wZ}>
+                    </div>
+                `}}),e({title:`readonly horizontal labels`,styles:S`
+                .readonly-example {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+
+                ${wZ} {
+                    width: 520px;
+                }
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+                    <div class="readonly-example">
+                        <${U.assign({text:e.isReadonly?`Edit`:`Done`})}
+                            ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
+                        ></${U}>
+                        <${wZ.assign({fields:n,isReadonly:e.isReadonly,useHorizontalLabels:!0})}
+                            ${N(wZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
+                        ></${wZ}>
+                    </div>
                 `}}),e({title:`disabled`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0}},styles:S`
                 .buttons {
                     display: flex;
@@ -37499,7 +37648,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             style=${a}
                             ${N(Q.events.valueChange,e=>{t({value:e.detail}),console.info(`changed:`,e.detail)})}
                         ></${Q}>
-                    `}})}[{title:`basic`,inputs:{value:`default value`}},{title:`with icon`,inputs:{value:``,icon:Hf}},{title:`with placeholder`,inputs:{value:``,placeholder:`placeholder here`}},{title:`with suffix`,inputs:{value:`42`,suffix:`px`}},{title:`with clear button`,inputs:{value:`value`,placeholder:`with clear`,showClearButton:!0}},{title:`disabled`,inputs:{value:`disabled`,disabled:!0}},{title:`numbers only`,inputs:{value:``,allowedInputs:/\d/}},{title:`numbers blocked`,inputs:{value:``,blockedInputs:/\d/}},{title:`custom width`,styles:S`
+                    `}})}[{title:`basic`,inputs:{value:`default value`}},{title:`with icon`,inputs:{value:``,icon:Hf}},{title:`with placeholder`,inputs:{value:``,placeholder:`placeholder here`}},{title:`with suffix`,inputs:{value:`42`,suffix:`px`}},{title:`with clear button`,inputs:{value:`value`,placeholder:`with clear`,showClearButton:!0}},{title:`disabled`,inputs:{value:`disabled`,disabled:!0}},{title:`readonly`,inputs:{label:`Label here`,value:`readonly value`,isReadonly:!0}},{title:`numbers only`,inputs:{value:``,allowedInputs:/\d/}},{title:`numbers blocked`,inputs:{value:``,blockedInputs:/\d/}},{title:`custom width`,styles:S`
                     ${Q} {
                         width: 120px;
                     }
@@ -37655,7 +37804,7 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     ${t.styles||S``}
                 `,render(){return w`
                         <${oQ.assign({value:50,...t.inputs})}></${oQ}>
-                    `}})})}}),i0=[{value:`none`,label:`No group`},{groupName:`Fruits`,options:[{value:`apple`,label:`Apple`},{value:`banana`,label:`Banana`},{value:`cherry`,label:`Cherry`}]},{groupName:`Vegetables`,options:[{value:`carrot`,label:`Carrot`},{value:`broccoli`,label:`Broccoli`},{value:`spinach`,label:`Spinach`}]}],a0=[{value:`1`,label:`one`},{value:`2`,label:`two`},{value:`3`,label:`three`},{value:`4`,label:`four`},{value:`5`,label:`five`}],o0=[{title:`basic`,inputs:{options:a0}},{title:`with really long option`,inputs:{options:[...a0,{label:`really really really really really really really really long option`,value:`something`}]}},{title:`with placeholder`,inputs:{options:a0,placeholder:`pick an option...`}},{title:`disabled`,inputs:{options:a0,disabled:!0}},{title:`error`,inputs:{options:a0,hasError:!0}},{title:`with icon`,inputs:{options:a0,icon:Hf}},{title:`custom width`,inputs:{options:a0},styles:S`
+                    `}})})}}),i0=[{value:`none`,label:`No group`},{groupName:`Fruits`,options:[{value:`apple`,label:`Apple`},{value:`banana`,label:`Banana`},{value:`cherry`,label:`Cherry`}]},{groupName:`Vegetables`,options:[{value:`carrot`,label:`Carrot`},{value:`broccoli`,label:`Broccoli`},{value:`spinach`,label:`Spinach`}]}],a0=[{value:`1`,label:`one`},{value:`2`,label:`two`},{value:`3`,label:`three`},{value:`4`,label:`four`},{value:`5`,label:`five`}],o0=[{title:`basic`,inputs:{options:a0}},{title:`with really long option`,inputs:{options:[...a0,{label:`really really really really really really really really long option`,value:`something`}]}},{title:`with placeholder`,inputs:{options:a0,placeholder:`pick an option...`}},{title:`disabled`,inputs:{options:a0,disabled:!0}},{title:`readonly`,inputs:{options:a0,label:`Pick an option`,value:`3`,isReadonly:!0}},{title:`error`,inputs:{options:a0,hasError:!0}},{title:`with icon`,inputs:{options:a0,icon:Hf}},{title:`custom width`,inputs:{options:a0},styles:S`
             ${$} {
                 width: 100px;
             }
@@ -37817,7 +37966,8 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                             style=${a}
                             ${N(CZ.events.valueChange,e=>{t({value:e.detail}),console.info(`changed:`,e.detail)})}
                         ></${CZ}>
-                    `}})}[{title:`basic`,inputs:{value:`default value`}},{title:`with placeholder`,inputs:{value:``,placeholder:`placeholder here`}},{title:`with label`,inputs:{label:`Label here`,placeholder:`has label`,value:``}},{title:`disabled`,inputs:{value:`disabled`,disabled:!0}},{title:`with error`,inputs:{value:`has error`,hasError:!0}},{title:`prevent resize`,inputs:{value:``,placeholder:`cannot resize`,preventResize:!0}},{title:`tall`,inputs:{value:``,placeholder:`8 rows`,rows:8}},{title:`short`,inputs:{value:``,placeholder:`2 rows`,rows:2}},{title:`numbers only`,inputs:{value:``,placeholder:`digits only`,allowedInputs:/\d/}},{title:`numbers blocked`,inputs:{value:``,placeholder:`no digits`,blockedInputs:/\d/}},{title:`custom width`,styles:S`
+                    `}})}[{title:`basic`,inputs:{value:`default value`}},{title:`with placeholder`,inputs:{value:``,placeholder:`placeholder here`}},{title:`with label`,inputs:{label:`Label here`,placeholder:`has label`,value:``}},{title:`disabled`,inputs:{value:`disabled`,disabled:!0}},{title:`readonly`,inputs:{label:`Label here`,value:`readonly value
+with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has error`,hasError:!0}},{title:`prevent resize`,inputs:{value:``,placeholder:`cannot resize`,preventResize:!0}},{title:`tall`,inputs:{value:``,placeholder:`8 rows`,rows:8}},{title:`short`,inputs:{value:``,placeholder:`2 rows`,rows:2}},{title:`numbers only`,inputs:{value:``,placeholder:`digits only`,allowedInputs:/\d/}},{title:`numbers blocked`,inputs:{value:``,placeholder:`no digits`,blockedInputs:/\d/}},{title:`custom width`,styles:S`
                     ${CZ} {
                         width: 480px;
                     }

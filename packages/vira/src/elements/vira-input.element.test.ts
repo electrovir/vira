@@ -3,6 +3,7 @@ import {randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html, listen} from 'element-vir';
 import {type ReadonlyDeep} from 'type-fest';
+import {ViraButton} from './vira-button.element.js';
 import {ViraInput} from './vira-input.element.js';
 
 describe(ViraInput.tagName, () => {
@@ -40,6 +41,36 @@ describe(ViraInput.tagName, () => {
         const lastEvent = events.slice(-1)[0];
 
         assert.strictEquals(lastEvent?.detail, textToType);
+    });
+
+    it('matches the default button height', async () => {
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraInput.assign({
+                    value: '',
+                })}></${ViraInput}>
+                <${ViraButton.assign({
+                    text: 'Button',
+                })}></${ViraButton}>
+            </div>
+        `);
+
+        const input = fixture.querySelector(ViraInput.tagName);
+        assert.instanceOf(input, ViraInput);
+
+        const button = fixture.querySelector(ViraButton.tagName);
+        assert.instanceOf(button, ViraButton);
+
+        assert.deepEquals(
+            {
+                buttonHeight: button.getBoundingClientRect().height,
+                inputHeight: input.getBoundingClientRect().height,
+            },
+            {
+                buttonHeight: 32,
+                inputHeight: 32,
+            },
+        );
     });
 
     it('renders the value as plain text when readonly', async () => {

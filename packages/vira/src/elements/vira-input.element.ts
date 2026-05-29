@@ -16,6 +16,7 @@ import {CloseX24Icon} from '../icons/icon-svgs/24/close-x-24.icon.js';
 import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
+import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
@@ -65,7 +66,7 @@ export const ViraInput = defineViraElement<
     tagName: 'vira-input',
     cssVars: {
         'vira-input-padding-horizontal': '10px',
-        'vira-input-padding-vertical': '6px',
+        'vira-input-padding-vertical': '5px',
     },
     styles: ({hostClasses, cssVars}) => {
         return css`
@@ -166,6 +167,7 @@ export const ViraInput = defineViraElement<
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
+                min-height: ${viraSizeHeights[ViraSize.Medium]}px;
                 box-sizing: border-box;
                 align-items: center;
                 position: relative;

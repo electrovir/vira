@@ -32842,7 +32842,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 d="M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7Zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"
             />
         </svg>
-    `}),cX=_({"vira-extended-animation-duration":`1.2s`,"vira-pretty-animation-duration":`300ms`,"vira-interaction-animation-duration":`84ms`}),Y=_({"vira-red-100":`#FFF6F5`,"vira-red-150":`#FFEDEB`,"vira-red-200":`#FFE4E1`,"vira-red-250":`#FFDCD8`,"vira-red-300":`#FFD1CB`,"vira-red-350":`#FFC1B8`,"vira-red-400":`#FFA79B`,"vira-red-450":`#FF8274`,"vira-red-500":`#FF564A`,"vira-red-550":`#F43A32`,"vira-red-600":`#E2322C`,"vira-red-650":`#D02C27`,"vira-red-700":`#BB2520`,"vira-red-750":`#9E231D`,"vira-red-800":`#82211A`,"vira-red-850":`#701A13`,"vira-red-900":`#611710`,"vira-red-950":`#52140D`,"vira-red-1000":`#43130D`,"vira-yellow-100":`#FEF9E4`,"vira-yellow-150":`#FDF2D1`,"vira-yellow-200":`#FDEABF`,"vira-yellow-250":`#FEE2AD`,"vira-yellow-300":`#FDD89B`,"vira-yellow-350":`#FAC986`,"vira-yellow-400":`#EFB669`,"vira-yellow-450":`#E29D34`,"vira-yellow-500":`#CE8800`,"vira-yellow-550":`#BB7B00`,"vira-yellow-600":`#AC7100`,"vira-yellow-650":`#9E6800`,"vira-yellow-700":`#8C5C00`,"vira-yellow-750":`#794D00`,"vira-yellow-800":`#683E00`,"vira-yellow-850":`#5B3301`,"vira-yellow-900":`#502A05`,"vira-yellow-950":`#442308`,"vira-yellow-1000":`#381D0B`,"vira-green-100":`#EBFFEE`,"vira-green-150":`#DDFBE2`,"vira-green-200":`#CDF8D6`,"vira-green-250":`#BFF5CC`,"vira-green-300":`#AFF0C0`,"vira-green-350":`#9AE8B1`,"vira-green-400":`#7FD99C`,"vira-green-450":`#52C87F`,"vira-green-500":`#1BB565`,"vira-green-550":`#04A559`,"vira-green-600":`#009852`,"vira-green-650":`#008C4A`,"vira-green-700":`#007C41`,"vira-green-750":`#016A38`,"vira-green-800":`#095831`,"vira-green-850":`#024B29`,"vira-green-900":`#014024`,"vira-green-950":`#02371F`,"vira-green-1000":`#062D1B`,"vira-teal-100":`#E8FEFD`,"vira-teal-150":`#D9FAF8`,"vira-teal-200":`#C9F6F3`,"vira-teal-250":`#BAF2ED`,"vira-teal-300":`#A9EDE6`,"vira-teal-350":`#95E4DB`,"vira-teal-400":`#79D5CA`,"vira-teal-450":`#47C3B7`,"vira-teal-500":`#00B0A4`,"vira-teal-550":`#00A094`,"vira-teal-600":`#009389`,"vira-teal-650":`#00877D`,"vira-teal-700":`#00786F`,"vira-teal-750":`#00665F`,"vira-teal-800":`#01554F`,"vira-teal-850":`#004843`,"vira-teal-900":`#003E3A`,"vira-teal-950":`#033531`,"vira-teal-1000":`#072B29`,"vira-blue-100":`#F5F9FF`,"vira-blue-150":`#EAF3FF`,"vira-blue-200":`#E0EDFF`,"vira-blue-250":`#D6E7FF`,"vira-blue-300":`#CBDFFF`,"vira-blue-350":`#B9D4FF`,"vira-blue-400":`#9EC3FF`,"vira-blue-450":`#7AADFF`,"vira-blue-500":`#5697FF`,"vira-blue-550":`#4988ED`,"vira-blue-600":`#427DDC`,"vira-blue-650":`#3B72CA`,"vira-blue-700":`#3365B6`,"vira-blue-750":`#2D569A`,"vira-blue-800":`#27487E`,"vira-blue-850":`#203D6C`,"vira-blue-900":`#1B345D`,"vira-blue-950":`#172C4F`,"vira-blue-1000":`#142540`,"vira-brand-100":`#F5F9FF`,"vira-brand-150":`#EAF3FF`,"vira-brand-200":`#E0EDFF`,"vira-brand-250":`#D6E7FF`,"vira-brand-300":`#CBDFFF`,"vira-brand-350":`#B9D4FF`,"vira-brand-400":`#9EC3FF`,"vira-brand-450":`#7AADFF`,"vira-brand-500":`#5697FF`,"vira-brand-550":`#4988ED`,"vira-brand-600":`#427DDC`,"vira-brand-650":`#3B72CA`,"vira-brand-700":`#3365B6`,"vira-brand-750":`#2D569A`,"vira-brand-800":`#27487E`,"vira-brand-850":`#203D6C`,"vira-brand-900":`#1B345D`,"vira-brand-950":`#172C4F`,"vira-brand-1000":`#142540`,"vira-purple-100":`#F9F7FF`,"vira-purple-150":`#F3EFFF`,"vira-purple-200":`#EDE8FF`,"vira-purple-250":`#E6E1FF`,"vira-purple-300":`#DED8FF`,"vira-purple-350":`#D2CBFF`,"vira-purple-400":`#C1B7FF`,"vira-purple-450":`#AD9BFF`,"vira-purple-500":`#9B80FF`,"vira-purple-550":`#8D6EF4`,"vira-purple-600":`#8265E3`,"vira-purple-650":`#775BD1`,"vira-purple-700":`#6A50BB`,"vira-purple-750":`#5A459E`,"vira-purple-800":`#4A3B82`,"vira-purple-850":`#3E3170`,"vira-purple-900":`#352A61`,"vira-purple-950":`#2D2452`,"vira-purple-1000":`#251F43`,"vira-pink-100":`#FEF5FF`,"vira-pink-150":`#FFEAFF`,"vira-pink-200":`#FFE0FC`,"vira-pink-250":`#FFD7F8`,"vira-pink-300":`#FFCBF2`,"vira-pink-350":`#FFB9E9`,"vira-pink-400":`#FF9BDF`,"vira-pink-450":`#FF6DD6`,"vira-pink-500":`#F04AC5`,"vira-pink-550":`#DD3EB4`,"vira-pink-600":`#CC37A7`,"vira-pink-650":`#BC3099`,"vira-pink-700":`#A82988`,"vira-pink-750":`#8F2674`,"vira-pink-800":`#752361`,"vira-pink-850":`#641C53`,"vira-pink-900":`#561848`,"vira-pink-950":`#49153E`,"vira-pink-1000":`#3B1333`,"vira-grey-100":`#F9F9F9`,"vira-grey-150":`#F2F2F2`,"vira-grey-200":`#EBEBEB`,"vira-grey-250":`#E5E5E5`,"vira-grey-300":`#DEDEDE`,"vira-grey-350":`#D2D2D2`,"vira-grey-400":`#C2C2C2`,"vira-grey-450":`#ADADAD`,"vira-grey-500":`#999999`,"vira-grey-550":`#8A8A8A`,"vira-grey-600":`#7F7F7F`,"vira-grey-650":`#747474`,"vira-grey-700":`#676767`,"vira-grey-750":`#585858`,"vira-grey-800":`#494949`,"vira-grey-850":`#3E3E3E`,"vira-grey-900":`#353535`,"vira-grey-950":`#2D2D2D`,"vira-grey-1000":`#252525`}),lX=_u({foreground:`black`,background:`white`,prefix:`vira`},{"vira-red-foreground-highest-contrast":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-small-body":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-body":{foreground:Y[`vira-red-750`]},"vira-red-foreground-non-body":{foreground:Y[`vira-red-650`]},"vira-red-foreground-header":{foreground:Y[`vira-red-500`]},"vira-red-foreground-placeholder":{foreground:Y[`vira-red-400`]},"vira-red-foreground-decoration":{foreground:Y[`vira-red-350`]},"vira-red-foreground-invisible":{foreground:Y[`vira-red-250`]},"vira-red-foreground-lowest-contrast":{foreground:Y[`vira-red-100`]},"vira-red-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-1000`]},"vira-red-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-1000`]},"vira-red-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-700`]},"vira-red-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-600`]},"vira-red-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-450`]},"vira-red-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-400`]},"vira-red-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-350`]},"vira-red-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-200`]},"vira-red-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-100`]},"vira-red-behind-fg-highest-contrast":{background:Y[`vira-red-100`]},"vira-red-behind-fg-small-body":{background:Y[`vira-red-250`]},"vira-red-behind-fg-body":{background:Y[`vira-red-350`]},"vira-red-behind-fg-non-body":{background:Y[`vira-red-400`]},"vira-red-behind-fg-header":{background:Y[`vira-red-500`]},"vira-red-behind-fg-placeholder":{background:Y[`vira-red-650`]},"vira-red-behind-fg-decoration":{background:Y[`vira-red-750`]},"vira-red-behind-fg-invisible":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-lowest-contrast":{background:Y[`vira-red-1000`]},"vira-red-on-self-highest-contrast":{foreground:Y[`vira-red-850`],background:Y[`vira-red-100`]},"vira-red-on-self-small-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-100`]},"vira-red-on-self-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-250`]},"vira-red-on-self-non-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-350`]},"vira-red-on-self-header":{foreground:Y[`vira-red-850`],background:Y[`vira-red-450`]},"vira-red-on-self-placeholder":{foreground:Y[`vira-red-850`],background:Y[`vira-red-500`]},"vira-red-on-self-decoration":{foreground:Y[`vira-red-850`],background:Y[`vira-red-650`]},"vira-red-on-self-invisible":{foreground:Y[`vira-red-850`],background:Y[`vira-red-1000`]},"vira-red-on-self-lowest-contrast":{foreground:Y[`vira-red-850`],background:Y[`vira-red-1000`]},"vira-yellow-foreground-highest-contrast":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-small-body":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-body":{foreground:Y[`vira-yellow-750`]},"vira-yellow-foreground-non-body":{foreground:Y[`vira-yellow-650`]},"vira-yellow-foreground-header":{foreground:Y[`vira-yellow-500`]},"vira-yellow-foreground-placeholder":{foreground:Y[`vira-yellow-400`]},"vira-yellow-foreground-decoration":{foreground:Y[`vira-yellow-350`]},"vira-yellow-foreground-invisible":{foreground:Y[`vira-yellow-250`]},"vira-yellow-foreground-lowest-contrast":{foreground:Y[`vira-yellow-100`]},"vira-yellow-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-700`]},"vira-yellow-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-600`]},"vira-yellow-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-450`]},"vira-yellow-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-400`]},"vira-yellow-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-350`]},"vira-yellow-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-250`]},"vira-yellow-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-100`]},"vira-yellow-behind-fg-highest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-behind-fg-small-body":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-fg-body":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-fg-non-body":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-fg-header":{background:Y[`vira-yellow-500`]},"vira-yellow-behind-fg-placeholder":{background:Y[`vira-yellow-650`]},"vira-yellow-behind-fg-decoration":{background:Y[`vira-yellow-750`]},"vira-yellow-behind-fg-invisible":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-lowest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-highest-contrast":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-small-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-300`]},"vira-yellow-on-self-non-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-350`]},"vira-yellow-on-self-header":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-450`]},"vira-yellow-on-self-placeholder":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-550`]},"vira-yellow-on-self-decoration":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-650`]},"vira-yellow-on-self-invisible":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-lowest-contrast":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-1000`]},"vira-green-foreground-highest-contrast":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-small-body":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-body":{foreground:Y[`vira-green-800`]},"vira-green-foreground-non-body":{foreground:Y[`vira-green-650`]},"vira-green-foreground-header":{foreground:Y[`vira-green-550`]},"vira-green-foreground-placeholder":{foreground:Y[`vira-green-450`]},"vira-green-foreground-decoration":{foreground:Y[`vira-green-350`]},"vira-green-foreground-invisible":{foreground:Y[`vira-green-250`]},"vira-green-foreground-lowest-contrast":{foreground:Y[`vira-green-100`]},"vira-green-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-1000`]},"vira-green-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-1000`]},"vira-green-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-750`]},"vira-green-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-650`]},"vira-green-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-500`]},"vira-green-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-400`]},"vira-green-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-350`]},"vira-green-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-250`]},"vira-green-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-100`]},"vira-green-behind-fg-highest-contrast":{background:Y[`vira-green-100`]},"vira-green-behind-fg-small-body":{background:Y[`vira-green-250`]},"vira-green-behind-fg-body":{background:Y[`vira-green-350`]},"vira-green-behind-fg-non-body":{background:Y[`vira-green-450`]},"vira-green-behind-fg-header":{background:Y[`vira-green-550`]},"vira-green-behind-fg-placeholder":{background:Y[`vira-green-650`]},"vira-green-behind-fg-decoration":{background:Y[`vira-green-800`]},"vira-green-behind-fg-invisible":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-lowest-contrast":{background:Y[`vira-green-1000`]},"vira-green-on-self-highest-contrast":{foreground:Y[`vira-green-850`],background:Y[`vira-green-100`]},"vira-green-on-self-small-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-100`]},"vira-green-on-self-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-300`]},"vira-green-on-self-non-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-400`]},"vira-green-on-self-header":{foreground:Y[`vira-green-850`],background:Y[`vira-green-450`]},"vira-green-on-self-placeholder":{foreground:Y[`vira-green-850`],background:Y[`vira-green-550`]},"vira-green-on-self-decoration":{foreground:Y[`vira-green-850`],background:Y[`vira-green-700`]},"vira-green-on-self-invisible":{foreground:Y[`vira-green-850`],background:Y[`vira-green-1000`]},"vira-green-on-self-lowest-contrast":{foreground:Y[`vira-green-850`],background:Y[`vira-green-1000`]},"vira-teal-foreground-highest-contrast":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-small-body":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-body":{foreground:Y[`vira-teal-800`]},"vira-teal-foreground-non-body":{foreground:Y[`vira-teal-650`]},"vira-teal-foreground-header":{foreground:Y[`vira-teal-550`]},"vira-teal-foreground-placeholder":{foreground:Y[`vira-teal-450`]},"vira-teal-foreground-decoration":{foreground:Y[`vira-teal-350`]},"vira-teal-foreground-invisible":{foreground:Y[`vira-teal-250`]},"vira-teal-foreground-lowest-contrast":{foreground:Y[`vira-teal-100`]},"vira-teal-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-750`]},"vira-teal-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-600`]},"vira-teal-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-500`]},"vira-teal-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-400`]},"vira-teal-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-350`]},"vira-teal-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-250`]},"vira-teal-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-100`]},"vira-teal-behind-fg-highest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-behind-fg-small-body":{background:Y[`vira-teal-250`]},"vira-teal-behind-fg-body":{background:Y[`vira-teal-350`]},"vira-teal-behind-fg-non-body":{background:Y[`vira-teal-450`]},"vira-teal-behind-fg-header":{background:Y[`vira-teal-500`]},"vira-teal-behind-fg-placeholder":{background:Y[`vira-teal-650`]},"vira-teal-behind-fg-decoration":{background:Y[`vira-teal-750`]},"vira-teal-behind-fg-invisible":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-lowest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-on-self-highest-contrast":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-100`]},"vira-teal-on-self-small-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-100`]},"vira-teal-on-self-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-300`]},"vira-teal-on-self-non-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-400`]},"vira-teal-on-self-header":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-450`]},"vira-teal-on-self-placeholder":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-550`]},"vira-teal-on-self-decoration":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-700`]},"vira-teal-on-self-invisible":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-1000`]},"vira-teal-on-self-lowest-contrast":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-1000`]},"vira-blue-foreground-highest-contrast":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-small-body":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-body":{foreground:Y[`vira-blue-750`]},"vira-blue-foreground-non-body":{foreground:Y[`vira-blue-650`]},"vira-blue-foreground-header":{foreground:Y[`vira-blue-500`]},"vira-blue-foreground-placeholder":{foreground:Y[`vira-blue-450`]},"vira-blue-foreground-decoration":{foreground:Y[`vira-blue-350`]},"vira-blue-foreground-invisible":{foreground:Y[`vira-blue-250`]},"vira-blue-foreground-lowest-contrast":{foreground:Y[`vira-blue-100`]},"vira-blue-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-750`]},"vira-blue-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-600`]},"vira-blue-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-450`]},"vira-blue-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-400`]},"vira-blue-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-350`]},"vira-blue-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-250`]},"vira-blue-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-100`]},"vira-blue-behind-fg-highest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-behind-fg-small-body":{background:Y[`vira-blue-250`]},"vira-blue-behind-fg-body":{background:Y[`vira-blue-350`]},"vira-blue-behind-fg-non-body":{background:Y[`vira-blue-400`]},"vira-blue-behind-fg-header":{background:Y[`vira-blue-500`]},"vira-blue-behind-fg-placeholder":{background:Y[`vira-blue-650`]},"vira-blue-behind-fg-decoration":{background:Y[`vira-blue-750`]},"vira-blue-behind-fg-invisible":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-lowest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-on-self-highest-contrast":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-100`]},"vira-blue-on-self-small-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-100`]},"vira-blue-on-self-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-300`]},"vira-blue-on-self-non-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-350`]},"vira-blue-on-self-header":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-450`]},"vira-blue-on-self-placeholder":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-550`]},"vira-blue-on-self-decoration":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-650`]},"vira-blue-on-self-invisible":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-1000`]},"vira-blue-on-self-lowest-contrast":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-1000`]},"vira-brand-foreground-highest-contrast":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-small-body":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-body":{foreground:Y[`vira-brand-750`]},"vira-brand-foreground-non-body":{foreground:Y[`vira-brand-650`]},"vira-brand-foreground-header":{foreground:Y[`vira-brand-500`]},"vira-brand-foreground-placeholder":{foreground:Y[`vira-brand-450`]},"vira-brand-foreground-decoration":{foreground:Y[`vira-brand-350`]},"vira-brand-foreground-invisible":{foreground:Y[`vira-brand-250`]},"vira-brand-foreground-lowest-contrast":{foreground:Y[`vira-brand-100`]},"vira-brand-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-750`]},"vira-brand-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-600`]},"vira-brand-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-450`]},"vira-brand-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-400`]},"vira-brand-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-350`]},"vira-brand-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-250`]},"vira-brand-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-100`]},"vira-brand-behind-fg-highest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-behind-fg-small-body":{background:Y[`vira-brand-250`]},"vira-brand-behind-fg-body":{background:Y[`vira-brand-350`]},"vira-brand-behind-fg-non-body":{background:Y[`vira-brand-400`]},"vira-brand-behind-fg-header":{background:Y[`vira-brand-500`]},"vira-brand-behind-fg-placeholder":{background:Y[`vira-brand-650`]},"vira-brand-behind-fg-decoration":{background:Y[`vira-brand-750`]},"vira-brand-behind-fg-invisible":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-lowest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-on-self-highest-contrast":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-100`]},"vira-brand-on-self-small-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-100`]},"vira-brand-on-self-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-300`]},"vira-brand-on-self-non-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-350`]},"vira-brand-on-self-header":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-450`]},"vira-brand-on-self-placeholder":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-550`]},"vira-brand-on-self-decoration":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-650`]},"vira-brand-on-self-invisible":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-1000`]},"vira-brand-on-self-lowest-contrast":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-1000`]},"vira-purple-foreground-highest-contrast":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-small-body":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-body":{foreground:Y[`vira-purple-750`]},"vira-purple-foreground-non-body":{foreground:Y[`vira-purple-650`]},"vira-purple-foreground-header":{foreground:Y[`vira-purple-500`]},"vira-purple-foreground-placeholder":{foreground:Y[`vira-purple-400`]},"vira-purple-foreground-decoration":{foreground:Y[`vira-purple-350`]},"vira-purple-foreground-invisible":{foreground:Y[`vira-purple-250`]},"vira-purple-foreground-lowest-contrast":{foreground:Y[`vira-purple-100`]},"vira-purple-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-700`]},"vira-purple-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-600`]},"vira-purple-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-450`]},"vira-purple-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-400`]},"vira-purple-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-350`]},"vira-purple-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-200`]},"vira-purple-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-100`]},"vira-purple-behind-fg-highest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-behind-fg-small-body":{background:Y[`vira-purple-250`]},"vira-purple-behind-fg-body":{background:Y[`vira-purple-350`]},"vira-purple-behind-fg-non-body":{background:Y[`vira-purple-400`]},"vira-purple-behind-fg-header":{background:Y[`vira-purple-500`]},"vira-purple-behind-fg-placeholder":{background:Y[`vira-purple-600`]},"vira-purple-behind-fg-decoration":{background:Y[`vira-purple-750`]},"vira-purple-behind-fg-invisible":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-lowest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-on-self-highest-contrast":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-100`]},"vira-purple-on-self-small-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-100`]},"vira-purple-on-self-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-300`]},"vira-purple-on-self-non-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-350`]},"vira-purple-on-self-header":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-450`]},"vira-purple-on-self-placeholder":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-500`]},"vira-purple-on-self-decoration":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-650`]},"vira-purple-on-self-invisible":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-1000`]},"vira-purple-on-self-lowest-contrast":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-1000`]},"vira-pink-foreground-highest-contrast":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-small-body":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-body":{foreground:Y[`vira-pink-750`]},"vira-pink-foreground-non-body":{foreground:Y[`vira-pink-650`]},"vira-pink-foreground-header":{foreground:Y[`vira-pink-500`]},"vira-pink-foreground-placeholder":{foreground:Y[`vira-pink-400`]},"vira-pink-foreground-decoration":{foreground:Y[`vira-pink-350`]},"vira-pink-foreground-invisible":{foreground:Y[`vira-pink-250`]},"vira-pink-foreground-lowest-contrast":{foreground:Y[`vira-pink-100`]},"vira-pink-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-700`]},"vira-pink-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-550`]},"vira-pink-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-450`]},"vira-pink-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-400`]},"vira-pink-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-350`]},"vira-pink-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-200`]},"vira-pink-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-100`]},"vira-pink-behind-fg-highest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-behind-fg-small-body":{background:Y[`vira-pink-200`]},"vira-pink-behind-fg-body":{background:Y[`vira-pink-350`]},"vira-pink-behind-fg-non-body":{background:Y[`vira-pink-400`]},"vira-pink-behind-fg-header":{background:Y[`vira-pink-500`]},"vira-pink-behind-fg-placeholder":{background:Y[`vira-pink-600`]},"vira-pink-behind-fg-decoration":{background:Y[`vira-pink-750`]},"vira-pink-behind-fg-invisible":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-lowest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-on-self-highest-contrast":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-100`]},"vira-pink-on-self-small-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-100`]},"vira-pink-on-self-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-250`]},"vira-pink-on-self-non-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-350`]},"vira-pink-on-self-header":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-450`]},"vira-pink-on-self-placeholder":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-500`]},"vira-pink-on-self-decoration":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-650`]},"vira-pink-on-self-invisible":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-lowest-contrast":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-1000`]},"vira-grey-foreground-highest-contrast":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-small-body":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-body":{foreground:Y[`vira-grey-750`]},"vira-grey-foreground-non-body":{foreground:Y[`vira-grey-650`]},"vira-grey-foreground-header":{foreground:Y[`vira-grey-500`]},"vira-grey-foreground-placeholder":{foreground:Y[`vira-grey-450`]},"vira-grey-foreground-decoration":{foreground:Y[`vira-grey-350`]},"vira-grey-foreground-invisible":{foreground:Y[`vira-grey-250`]},"vira-grey-foreground-lowest-contrast":{foreground:Y[`vira-grey-100`]},"vira-grey-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-750`]},"vira-grey-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-600`]},"vira-grey-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-500`]},"vira-grey-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-400`]},"vira-grey-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-350`]},"vira-grey-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-250`]},"vira-grey-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-100`]},"vira-grey-behind-fg-highest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-behind-fg-small-body":{background:Y[`vira-grey-250`]},"vira-grey-behind-fg-body":{background:Y[`vira-grey-350`]},"vira-grey-behind-fg-non-body":{background:Y[`vira-grey-400`]},"vira-grey-behind-fg-header":{background:Y[`vira-grey-500`]},"vira-grey-behind-fg-placeholder":{background:Y[`vira-grey-650`]},"vira-grey-behind-fg-decoration":{background:Y[`vira-grey-750`]},"vira-grey-behind-fg-invisible":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-lowest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-on-self-highest-contrast":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-100`]},"vira-grey-on-self-small-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-100`]},"vira-grey-on-self-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-300`]},"vira-grey-on-self-non-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-350`]},"vira-grey-on-self-header":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-450`]},"vira-grey-on-self-placeholder":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-550`]},"vira-grey-on-self-decoration":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-650`]},"vira-grey-on-self-invisible":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-1000`]},"vira-grey-on-self-lowest-contrast":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-1000`]}});bu(lX,`dark`,{defaultOverride:{foreground:`white`,background:`black`},colorOverrides:{"vira-red-foreground-highest-contrast":{foreground:Y[`vira-red-100`]},"vira-red-foreground-small-body":{foreground:Y[`vira-red-250`]},"vira-red-foreground-body":{foreground:Y[`vira-red-350`]},"vira-red-foreground-non-body":{foreground:Y[`vira-red-400`]},"vira-red-foreground-header":{foreground:Y[`vira-red-450`]},"vira-red-foreground-placeholder":{foreground:Y[`vira-red-600`]},"vira-red-foreground-decoration":{foreground:Y[`vira-red-750`]},"vira-red-foreground-invisible":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-lowest-contrast":{foreground:Y[`vira-red-1000`]},"vira-red-behind-bg-highest-contrast":{background:Y[`vira-red-100`]},"vira-red-behind-bg-small-body":{background:Y[`vira-red-250`]},"vira-red-behind-bg-body":{background:Y[`vira-red-350`]},"vira-red-behind-bg-non-body":{background:Y[`vira-red-400`]},"vira-red-behind-bg-header":{background:Y[`vira-red-500`]},"vira-red-behind-bg-placeholder":{background:Y[`vira-red-650`]},"vira-red-behind-bg-decoration":{background:Y[`vira-red-750`]},"vira-red-behind-bg-invisible":{background:Y[`vira-red-1000`]},"vira-red-behind-bg-lowest-contrast":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-highest-contrast":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-small-body":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-body":{background:Y[`vira-red-700`]},"vira-red-behind-fg-non-body":{background:Y[`vira-red-600`]},"vira-red-behind-fg-header":{background:Y[`vira-red-450`]},"vira-red-behind-fg-placeholder":{background:Y[`vira-red-400`]},"vira-red-behind-fg-decoration":{background:Y[`vira-red-350`]},"vira-red-behind-fg-invisible":{background:Y[`vira-red-200`]},"vira-red-behind-fg-lowest-contrast":{background:Y[`vira-red-100`]},"vira-red-on-self-highest-contrast":{foreground:Y[`vira-red-200`],background:Y[`vira-red-1000`]},"vira-red-on-self-small-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-1000`]},"vira-red-on-self-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-750`]},"vira-red-on-self-non-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-600`]},"vira-red-on-self-header":{foreground:Y[`vira-red-200`],background:Y[`vira-red-500`]},"vira-red-on-self-placeholder":{foreground:Y[`vira-red-200`],background:Y[`vira-red-450`]},"vira-red-on-self-decoration":{foreground:Y[`vira-red-200`],background:Y[`vira-red-400`]},"vira-red-on-self-invisible":{foreground:Y[`vira-red-200`],background:Y[`vira-red-100`]},"vira-red-on-self-lowest-contrast":{foreground:Y[`vira-red-200`],background:Y[`vira-red-100`]},"vira-yellow-foreground-highest-contrast":{foreground:Y[`vira-yellow-100`]},"vira-yellow-foreground-small-body":{foreground:Y[`vira-yellow-250`]},"vira-yellow-foreground-body":{foreground:Y[`vira-yellow-350`]},"vira-yellow-foreground-non-body":{foreground:Y[`vira-yellow-400`]},"vira-yellow-foreground-placeholder":{foreground:Y[`vira-yellow-600`]},"vira-yellow-foreground-decoration":{foreground:Y[`vira-yellow-750`]},"vira-yellow-foreground-invisible":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-lowest-contrast":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-highest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-behind-bg-small-body":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-bg-body":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-bg-non-body":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-bg-header":{background:Y[`vira-yellow-500`]},"vira-yellow-behind-bg-placeholder":{background:Y[`vira-yellow-650`]},"vira-yellow-behind-bg-decoration":{background:Y[`vira-yellow-750`]},"vira-yellow-behind-bg-invisible":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-lowest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-highest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-small-body":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-body":{background:Y[`vira-yellow-700`]},"vira-yellow-behind-fg-non-body":{background:Y[`vira-yellow-600`]},"vira-yellow-behind-fg-header":{background:Y[`vira-yellow-450`]},"vira-yellow-behind-fg-placeholder":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-fg-decoration":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-fg-invisible":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-fg-lowest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-on-self-highest-contrast":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-small-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-950`]},"vira-yellow-on-self-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-750`]},"vira-yellow-on-self-non-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-600`]},"vira-yellow-on-self-header":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-500`]},"vira-yellow-on-self-placeholder":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-450`]},"vira-yellow-on-self-decoration":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-400`]},"vira-yellow-on-self-invisible":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-lowest-contrast":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-100`]},"vira-green-foreground-highest-contrast":{foreground:Y[`vira-green-100`]},"vira-green-foreground-small-body":{foreground:Y[`vira-green-250`]},"vira-green-foreground-body":{foreground:Y[`vira-green-350`]},"vira-green-foreground-non-body":{foreground:Y[`vira-green-450`]},"vira-green-foreground-header":{foreground:Y[`vira-green-500`]},"vira-green-foreground-placeholder":{foreground:Y[`vira-green-650`]},"vira-green-foreground-decoration":{foreground:Y[`vira-green-750`]},"vira-green-foreground-invisible":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-lowest-contrast":{foreground:Y[`vira-green-1000`]},"vira-green-behind-bg-highest-contrast":{background:Y[`vira-green-100`]},"vira-green-behind-bg-small-body":{background:Y[`vira-green-250`]},"vira-green-behind-bg-body":{background:Y[`vira-green-350`]},"vira-green-behind-bg-non-body":{background:Y[`vira-green-450`]},"vira-green-behind-bg-header":{background:Y[`vira-green-550`]},"vira-green-behind-bg-placeholder":{background:Y[`vira-green-650`]},"vira-green-behind-bg-decoration":{background:Y[`vira-green-800`]},"vira-green-behind-bg-invisible":{background:Y[`vira-green-1000`]},"vira-green-behind-bg-lowest-contrast":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-highest-contrast":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-small-body":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-body":{background:Y[`vira-green-750`]},"vira-green-behind-fg-non-body":{background:Y[`vira-green-650`]},"vira-green-behind-fg-header":{background:Y[`vira-green-500`]},"vira-green-behind-fg-placeholder":{background:Y[`vira-green-400`]},"vira-green-behind-fg-decoration":{background:Y[`vira-green-350`]},"vira-green-behind-fg-invisible":{background:Y[`vira-green-250`]},"vira-green-behind-fg-lowest-contrast":{background:Y[`vira-green-100`]},"vira-green-on-self-highest-contrast":{foreground:Y[`vira-green-200`],background:Y[`vira-green-1000`]},"vira-green-on-self-small-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-950`]},"vira-green-on-self-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-750`]},"vira-green-on-self-non-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-650`]},"vira-green-on-self-header":{foreground:Y[`vira-green-200`],background:Y[`vira-green-500`]},"vira-green-on-self-placeholder":{foreground:Y[`vira-green-200`],background:Y[`vira-green-450`]},"vira-green-on-self-decoration":{foreground:Y[`vira-green-200`],background:Y[`vira-green-400`]},"vira-green-on-self-invisible":{foreground:Y[`vira-green-200`],background:Y[`vira-green-100`]},"vira-green-on-self-lowest-contrast":{foreground:Y[`vira-green-200`],background:Y[`vira-green-100`]},"vira-teal-foreground-highest-contrast":{foreground:Y[`vira-teal-100`]},"vira-teal-foreground-small-body":{foreground:Y[`vira-teal-250`]},"vira-teal-foreground-body":{foreground:Y[`vira-teal-350`]},"vira-teal-foreground-non-body":{foreground:Y[`vira-teal-450`]},"vira-teal-foreground-header":{foreground:Y[`vira-teal-500`]},"vira-teal-foreground-placeholder":{foreground:Y[`vira-teal-650`]},"vira-teal-foreground-decoration":{foreground:Y[`vira-teal-750`]},"vira-teal-foreground-invisible":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-lowest-contrast":{foreground:Y[`vira-teal-1000`]},"vira-teal-behind-bg-highest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-behind-bg-small-body":{background:Y[`vira-teal-250`]},"vira-teal-behind-bg-body":{background:Y[`vira-teal-350`]},"vira-teal-behind-bg-non-body":{background:Y[`vira-teal-450`]},"vira-teal-behind-bg-placeholder":{background:Y[`vira-teal-650`]},"vira-teal-behind-bg-decoration":{background:Y[`vira-teal-750`]},"vira-teal-behind-bg-invisible":{background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-lowest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-highest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-small-body":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-body":{background:Y[`vira-teal-750`]},"vira-teal-behind-fg-non-body":{background:Y[`vira-teal-600`]},"vira-teal-behind-fg-placeholder":{background:Y[`vira-teal-400`]},"vira-teal-behind-fg-decoration":{background:Y[`vira-teal-350`]},"vira-teal-behind-fg-invisible":{background:Y[`vira-teal-250`]},"vira-teal-behind-fg-lowest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-on-self-highest-contrast":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-1000`]},"vira-teal-on-self-small-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-950`]},"vira-teal-on-self-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-750`]},"vira-teal-on-self-non-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-650`]},"vira-teal-on-self-header":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-500`]},"vira-teal-on-self-placeholder":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-450`]},"vira-teal-on-self-decoration":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-400`]},"vira-teal-on-self-invisible":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-100`]},"vira-teal-on-self-lowest-contrast":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-100`]},"vira-blue-foreground-highest-contrast":{foreground:Y[`vira-blue-100`]},"vira-blue-foreground-small-body":{foreground:Y[`vira-blue-250`]},"vira-blue-foreground-body":{foreground:Y[`vira-blue-350`]},"vira-blue-foreground-non-body":{foreground:Y[`vira-blue-400`]},"vira-blue-foreground-placeholder":{foreground:Y[`vira-blue-600`]},"vira-blue-foreground-decoration":{foreground:Y[`vira-blue-750`]},"vira-blue-foreground-invisible":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-lowest-contrast":{foreground:Y[`vira-blue-1000`]},"vira-blue-behind-bg-highest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-behind-bg-small-body":{background:Y[`vira-blue-250`]},"vira-blue-behind-bg-body":{background:Y[`vira-blue-350`]},"vira-blue-behind-bg-non-body":{background:Y[`vira-blue-400`]},"vira-blue-behind-bg-header":{background:Y[`vira-blue-500`]},"vira-blue-behind-bg-placeholder":{background:Y[`vira-blue-650`]},"vira-blue-behind-bg-decoration":{background:Y[`vira-blue-750`]},"vira-blue-behind-bg-invisible":{background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-lowest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-highest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-small-body":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-body":{background:Y[`vira-blue-750`]},"vira-blue-behind-fg-non-body":{background:Y[`vira-blue-600`]},"vira-blue-behind-fg-header":{background:Y[`vira-blue-450`]},"vira-blue-behind-fg-placeholder":{background:Y[`vira-blue-400`]},"vira-blue-behind-fg-decoration":{background:Y[`vira-blue-350`]},"vira-blue-behind-fg-invisible":{background:Y[`vira-blue-250`]},"vira-blue-behind-fg-lowest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-on-self-highest-contrast":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-1000`]},"vira-blue-on-self-small-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-950`]},"vira-blue-on-self-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-750`]},"vira-blue-on-self-non-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-600`]},"vira-blue-on-self-header":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-500`]},"vira-blue-on-self-placeholder":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-450`]},"vira-blue-on-self-decoration":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-400`]},"vira-blue-on-self-invisible":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-100`]},"vira-blue-on-self-lowest-contrast":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-100`]},"vira-brand-foreground-highest-contrast":{foreground:Y[`vira-brand-100`]},"vira-brand-foreground-small-body":{foreground:Y[`vira-brand-250`]},"vira-brand-foreground-body":{foreground:Y[`vira-brand-350`]},"vira-brand-foreground-non-body":{foreground:Y[`vira-brand-400`]},"vira-brand-foreground-placeholder":{foreground:Y[`vira-brand-600`]},"vira-brand-foreground-decoration":{foreground:Y[`vira-brand-750`]},"vira-brand-foreground-invisible":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-lowest-contrast":{foreground:Y[`vira-brand-1000`]},"vira-brand-behind-bg-highest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-behind-bg-small-body":{background:Y[`vira-brand-250`]},"vira-brand-behind-bg-body":{background:Y[`vira-brand-350`]},"vira-brand-behind-bg-non-body":{background:Y[`vira-brand-400`]},"vira-brand-behind-bg-header":{background:Y[`vira-brand-500`]},"vira-brand-behind-bg-placeholder":{background:Y[`vira-brand-650`]},"vira-brand-behind-bg-decoration":{background:Y[`vira-brand-750`]},"vira-brand-behind-bg-invisible":{background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-lowest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-highest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-small-body":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-body":{background:Y[`vira-brand-750`]},"vira-brand-behind-fg-non-body":{background:Y[`vira-brand-600`]},"vira-brand-behind-fg-header":{background:Y[`vira-brand-450`]},"vira-brand-behind-fg-placeholder":{background:Y[`vira-brand-400`]},"vira-brand-behind-fg-decoration":{background:Y[`vira-brand-350`]},"vira-brand-behind-fg-invisible":{background:Y[`vira-brand-250`]},"vira-brand-behind-fg-lowest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-on-self-highest-contrast":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-1000`]},"vira-brand-on-self-small-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-950`]},"vira-brand-on-self-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-750`]},"vira-brand-on-self-non-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-600`]},"vira-brand-on-self-header":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-500`]},"vira-brand-on-self-placeholder":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-450`]},"vira-brand-on-self-decoration":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-400`]},"vira-brand-on-self-invisible":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-100`]},"vira-brand-on-self-lowest-contrast":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-100`]},"vira-purple-foreground-highest-contrast":{foreground:Y[`vira-purple-100`]},"vira-purple-foreground-small-body":{foreground:Y[`vira-purple-250`]},"vira-purple-foreground-body":{foreground:Y[`vira-purple-350`]},"vira-purple-foreground-non-body":{foreground:Y[`vira-purple-400`]},"vira-purple-foreground-header":{foreground:Y[`vira-purple-450`]},"vira-purple-foreground-placeholder":{foreground:Y[`vira-purple-600`]},"vira-purple-foreground-decoration":{foreground:Y[`vira-purple-750`]},"vira-purple-foreground-invisible":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-lowest-contrast":{foreground:Y[`vira-purple-1000`]},"vira-purple-behind-bg-highest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-behind-bg-small-body":{background:Y[`vira-purple-250`]},"vira-purple-behind-bg-body":{background:Y[`vira-purple-350`]},"vira-purple-behind-bg-non-body":{background:Y[`vira-purple-400`]},"vira-purple-behind-bg-header":{background:Y[`vira-purple-500`]},"vira-purple-behind-bg-placeholder":{background:Y[`vira-purple-600`]},"vira-purple-behind-bg-decoration":{background:Y[`vira-purple-750`]},"vira-purple-behind-bg-invisible":{background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-lowest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-highest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-small-body":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-body":{background:Y[`vira-purple-700`]},"vira-purple-behind-fg-non-body":{background:Y[`vira-purple-600`]},"vira-purple-behind-fg-header":{background:Y[`vira-purple-450`]},"vira-purple-behind-fg-placeholder":{background:Y[`vira-purple-400`]},"vira-purple-behind-fg-decoration":{background:Y[`vira-purple-350`]},"vira-purple-behind-fg-invisible":{background:Y[`vira-purple-200`]},"vira-purple-behind-fg-lowest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-on-self-highest-contrast":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-1000`]},"vira-purple-on-self-small-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-950`]},"vira-purple-on-self-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-750`]},"vira-purple-on-self-non-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-600`]},"vira-purple-on-self-header":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-500`]},"vira-purple-on-self-placeholder":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-450`]},"vira-purple-on-self-decoration":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-400`]},"vira-purple-on-self-invisible":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-100`]},"vira-purple-on-self-lowest-contrast":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-100`]},"vira-pink-foreground-highest-contrast":{foreground:Y[`vira-pink-100`]},"vira-pink-foreground-small-body":{foreground:Y[`vira-pink-200`]},"vira-pink-foreground-body":{foreground:Y[`vira-pink-350`]},"vira-pink-foreground-non-body":{foreground:Y[`vira-pink-400`]},"vira-pink-foreground-header":{foreground:Y[`vira-pink-450`]},"vira-pink-foreground-placeholder":{foreground:Y[`vira-pink-600`]},"vira-pink-foreground-decoration":{foreground:Y[`vira-pink-750`]},"vira-pink-foreground-invisible":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-lowest-contrast":{foreground:Y[`vira-pink-1000`]},"vira-pink-behind-bg-highest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-behind-bg-small-body":{background:Y[`vira-pink-200`]},"vira-pink-behind-bg-body":{background:Y[`vira-pink-350`]},"vira-pink-behind-bg-non-body":{background:Y[`vira-pink-400`]},"vira-pink-behind-bg-header":{background:Y[`vira-pink-500`]},"vira-pink-behind-bg-placeholder":{background:Y[`vira-pink-600`]},"vira-pink-behind-bg-decoration":{background:Y[`vira-pink-750`]},"vira-pink-behind-bg-invisible":{background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-lowest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-highest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-small-body":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-body":{background:Y[`vira-pink-700`]},"vira-pink-behind-fg-non-body":{background:Y[`vira-pink-550`]},"vira-pink-behind-fg-header":{background:Y[`vira-pink-450`]},"vira-pink-behind-fg-placeholder":{background:Y[`vira-pink-400`]},"vira-pink-behind-fg-decoration":{background:Y[`vira-pink-350`]},"vira-pink-behind-fg-invisible":{background:Y[`vira-pink-200`]},"vira-pink-behind-fg-lowest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-on-self-highest-contrast":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-small-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-750`]},"vira-pink-on-self-non-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-600`]},"vira-pink-on-self-header":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-500`]},"vira-pink-on-self-placeholder":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-450`]},"vira-pink-on-self-decoration":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-350`]},"vira-pink-on-self-invisible":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-100`]},"vira-pink-on-self-lowest-contrast":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-100`]},"vira-grey-foreground-highest-contrast":{foreground:Y[`vira-grey-100`]},"vira-grey-foreground-small-body":{foreground:Y[`vira-grey-250`]},"vira-grey-foreground-body":{foreground:Y[`vira-grey-350`]},"vira-grey-foreground-non-body":{foreground:Y[`vira-grey-400`]},"vira-grey-foreground-placeholder":{foreground:Y[`vira-grey-600`]},"vira-grey-foreground-decoration":{foreground:Y[`vira-grey-750`]},"vira-grey-foreground-invisible":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-lowest-contrast":{foreground:Y[`vira-grey-1000`]},"vira-grey-behind-bg-highest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-behind-bg-small-body":{background:Y[`vira-grey-250`]},"vira-grey-behind-bg-body":{background:Y[`vira-grey-350`]},"vira-grey-behind-bg-non-body":{background:Y[`vira-grey-400`]},"vira-grey-behind-bg-placeholder":{background:Y[`vira-grey-650`]},"vira-grey-behind-bg-decoration":{background:Y[`vira-grey-750`]},"vira-grey-behind-bg-invisible":{background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-lowest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-highest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-small-body":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-body":{background:Y[`vira-grey-750`]},"vira-grey-behind-fg-non-body":{background:Y[`vira-grey-600`]},"vira-grey-behind-fg-placeholder":{background:Y[`vira-grey-400`]},"vira-grey-behind-fg-decoration":{background:Y[`vira-grey-350`]},"vira-grey-behind-fg-invisible":{background:Y[`vira-grey-250`]},"vira-grey-behind-fg-lowest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-on-self-highest-contrast":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-1000`]},"vira-grey-on-self-small-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-950`]},"vira-grey-on-self-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-750`]},"vira-grey-on-self-non-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-650`]},"vira-grey-on-self-header":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-500`]},"vira-grey-on-self-placeholder":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-450`]},"vira-grey-on-self-decoration":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-400`]},"vira-grey-on-self-invisible":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-100`]},"vira-grey-on-self-lowest-contrast":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-100`]}}});var uX=`8px`,dX=_({"vira-form-border-color":lX.colors[`vira-grey-foreground-decoration`].foreground.value,"vira-form-placeholder-color":lX.colors[`vira-grey-foreground-placeholder`].foreground.value,"vira-form-background-color":lX.colors[I].background.value,"vira-form-foreground-color":lX.colors[I].foreground.value,"vira-form-modal-backdrop-color":`rgba(0, 0, 0, 0.35)`,"vira-form-secondary-body-foreground":lX.colors[`vira-grey-foreground-header`].foreground.value,"vira-form-text-selection-color":lX.colors[`vira-brand-behind-bg-decoration`].background.value,"vira-form-selection-hover-color":lX.colors[`vira-brand-behind-bg-invisible`].background.value,"vira-form-selection-active-color":lX.colors[`vira-brand-behind-bg-decoration`].background.value,"vira-form-error-color":lX.colors[`vira-red-behind-bg-non-body`].background.value,"vira-form-error-hover-color":lX.colors[`vira-red-behind-bg-header`].background.value,"vira-form-error-active-color":lX.colors[`vira-red-behind-bg-body`].background.value,"vira-form-warning-color":lX.colors[`vira-yellow-behind-bg-non-body`].background.value,"vira-form-warning-hover-color":lX.colors[`vira-yellow-behind-bg-header`].background.value,"vira-form-warning-active-color":lX.colors[`vira-yellow-behind-bg-body`].background.value,"vira-form-positive-color":lX.colors[`vira-green-behind-bg-non-body`].background.value,"vira-form-positive-hover-color":lX.colors[`vira-green-behind-bg-header`].background.value,"vira-form-positive-active-color":lX.colors[`vira-green-behind-bg-body`].background.value,"vira-form-success-color":lX.colors[`vira-green-behind-bg-non-body`].background.value,"vira-form-label-font-weight":`bold`,"vira-form-small-text-size":`14px`,"vira-form-medium-text-size":`16px`,"vira-form-large-text-size":`22px`,"vira-form-radius":uX,"vira-form-wrapper-radius":`16px`,"vira-form-focus-outline-color":lX.colors[`vira-brand-foreground-header`].foreground.value,"vira-form-focus-outline-border-radius":S`calc(var(--vira-form-radius, ${d(uX)}) + 2px)`,"vira-form-plain-color":Y[`vira-grey-100`].value,"vira-form-plain-hover-color":lX.colors[`vira-grey-foreground-invisible`].foreground.value,"vira-form-plain-active-color":lX.colors[`vira-grey-foreground-decoration`].foreground.value,"vira-form-accent-primary-color":lX.colors[`vira-brand-behind-bg-non-body`].background.value,"vira-form-accent-primary-hover-color":lX.colors[`vira-brand-behind-bg-header`].background.value,"vira-form-accent-primary-active-color":lX.colors[`vira-brand-behind-bg-body`].background.value,"vira-form-danger-color":lX.colors[`vira-red-behind-bg-non-body`].background.value,"vira-form-danger-hover-color":lX.colors[`vira-red-behind-bg-header`].background.value,"vira-form-danger-active-color":lX.colors[`vira-red-behind-bg-body`].background.value,"vira-form-filled-background-color":lX.colors[`vira-grey-foreground-invisible`].foreground.value,"vira-form-filled-active-background-color":lX.colors[`vira-grey-foreground-decoration`].foreground.value});function fX(e){return b.isString(e)?d(e):e.value}function pX({elementBorderSize:e=`1px`,outlineGap:t=`2px`,outlineWidth:n=`2px`,noNesting:r,outlineColor:i=dX[`vira-form-focus-outline-color`],borderRadius:a=dX[`vira-form-focus-outline-border-radius`],renderInside:o}={}){let s=S`calc(${fX(t)})`,c=S`calc(${fX(n)} + ${fX(t)} + ${fX(e)})`,l=o?S`
+    `}),cX=_({"vira-extended-animation-duration":`1.2s`,"vira-pretty-animation-duration":`300ms`,"vira-interaction-animation-duration":`84ms`}),Y=_({"vira-red-100":`#FFF6F5`,"vira-red-150":`#FFEDEB`,"vira-red-200":`#FFE4E1`,"vira-red-250":`#FFDCD8`,"vira-red-300":`#FFD1CB`,"vira-red-350":`#FFC1B8`,"vira-red-400":`#FFA79B`,"vira-red-450":`#FF8274`,"vira-red-500":`#FF564A`,"vira-red-550":`#F43A32`,"vira-red-600":`#E2322C`,"vira-red-650":`#D02C27`,"vira-red-700":`#BB2520`,"vira-red-750":`#9E231D`,"vira-red-800":`#82211A`,"vira-red-850":`#701A13`,"vira-red-900":`#611710`,"vira-red-950":`#52140D`,"vira-red-1000":`#43130D`,"vira-yellow-100":`#FEF9E4`,"vira-yellow-150":`#FDF2D1`,"vira-yellow-200":`#FDEABF`,"vira-yellow-250":`#FEE2AD`,"vira-yellow-300":`#FDD89B`,"vira-yellow-350":`#FAC986`,"vira-yellow-400":`#EFB669`,"vira-yellow-450":`#E29D34`,"vira-yellow-500":`#CE8800`,"vira-yellow-550":`#BB7B00`,"vira-yellow-600":`#AC7100`,"vira-yellow-650":`#9E6800`,"vira-yellow-700":`#8C5C00`,"vira-yellow-750":`#794D00`,"vira-yellow-800":`#683E00`,"vira-yellow-850":`#5B3301`,"vira-yellow-900":`#502A05`,"vira-yellow-950":`#442308`,"vira-yellow-1000":`#381D0B`,"vira-green-100":`#EBFFEE`,"vira-green-150":`#DDFBE2`,"vira-green-200":`#CDF8D6`,"vira-green-250":`#BFF5CC`,"vira-green-300":`#AFF0C0`,"vira-green-350":`#9AE8B1`,"vira-green-400":`#7FD99C`,"vira-green-450":`#52C87F`,"vira-green-500":`#1BB565`,"vira-green-550":`#04A559`,"vira-green-600":`#009852`,"vira-green-650":`#008C4A`,"vira-green-700":`#007C41`,"vira-green-750":`#016A38`,"vira-green-800":`#095831`,"vira-green-850":`#024B29`,"vira-green-900":`#014024`,"vira-green-950":`#02371F`,"vira-green-1000":`#062D1B`,"vira-teal-100":`#E8FEFD`,"vira-teal-150":`#D9FAF8`,"vira-teal-200":`#C9F6F3`,"vira-teal-250":`#BAF2ED`,"vira-teal-300":`#A9EDE6`,"vira-teal-350":`#95E4DB`,"vira-teal-400":`#79D5CA`,"vira-teal-450":`#47C3B7`,"vira-teal-500":`#00B0A4`,"vira-teal-550":`#00A094`,"vira-teal-600":`#009389`,"vira-teal-650":`#00877D`,"vira-teal-700":`#00786F`,"vira-teal-750":`#00665F`,"vira-teal-800":`#01554F`,"vira-teal-850":`#004843`,"vira-teal-900":`#003E3A`,"vira-teal-950":`#033531`,"vira-teal-1000":`#072B29`,"vira-blue-100":`#F5F9FF`,"vira-blue-150":`#EAF3FF`,"vira-blue-200":`#E0EDFF`,"vira-blue-250":`#D6E7FF`,"vira-blue-300":`#CBDFFF`,"vira-blue-350":`#B9D4FF`,"vira-blue-400":`#9EC3FF`,"vira-blue-450":`#7AADFF`,"vira-blue-500":`#5697FF`,"vira-blue-550":`#4988ED`,"vira-blue-600":`#427DDC`,"vira-blue-650":`#3B72CA`,"vira-blue-700":`#3365B6`,"vira-blue-750":`#2D569A`,"vira-blue-800":`#27487E`,"vira-blue-850":`#203D6C`,"vira-blue-900":`#1B345D`,"vira-blue-950":`#172C4F`,"vira-blue-1000":`#142540`,"vira-brand-100":`#F5F9FF`,"vira-brand-150":`#EAF3FF`,"vira-brand-200":`#E0EDFF`,"vira-brand-250":`#D6E7FF`,"vira-brand-300":`#CBDFFF`,"vira-brand-350":`#B9D4FF`,"vira-brand-400":`#9EC3FF`,"vira-brand-450":`#7AADFF`,"vira-brand-500":`#5697FF`,"vira-brand-550":`#4988ED`,"vira-brand-600":`#427DDC`,"vira-brand-650":`#3B72CA`,"vira-brand-700":`#3365B6`,"vira-brand-750":`#2D569A`,"vira-brand-800":`#27487E`,"vira-brand-850":`#203D6C`,"vira-brand-900":`#1B345D`,"vira-brand-950":`#172C4F`,"vira-brand-1000":`#142540`,"vira-purple-100":`#F9F7FF`,"vira-purple-150":`#F3EFFF`,"vira-purple-200":`#EDE8FF`,"vira-purple-250":`#E6E1FF`,"vira-purple-300":`#DED8FF`,"vira-purple-350":`#D2CBFF`,"vira-purple-400":`#C1B7FF`,"vira-purple-450":`#AD9BFF`,"vira-purple-500":`#9B80FF`,"vira-purple-550":`#8D6EF4`,"vira-purple-600":`#8265E3`,"vira-purple-650":`#775BD1`,"vira-purple-700":`#6A50BB`,"vira-purple-750":`#5A459E`,"vira-purple-800":`#4A3B82`,"vira-purple-850":`#3E3170`,"vira-purple-900":`#352A61`,"vira-purple-950":`#2D2452`,"vira-purple-1000":`#251F43`,"vira-pink-100":`#FEF5FF`,"vira-pink-150":`#FFEAFF`,"vira-pink-200":`#FFE0FC`,"vira-pink-250":`#FFD7F8`,"vira-pink-300":`#FFCBF2`,"vira-pink-350":`#FFB9E9`,"vira-pink-400":`#FF9BDF`,"vira-pink-450":`#FF6DD6`,"vira-pink-500":`#F04AC5`,"vira-pink-550":`#DD3EB4`,"vira-pink-600":`#CC37A7`,"vira-pink-650":`#BC3099`,"vira-pink-700":`#A82988`,"vira-pink-750":`#8F2674`,"vira-pink-800":`#752361`,"vira-pink-850":`#641C53`,"vira-pink-900":`#561848`,"vira-pink-950":`#49153E`,"vira-pink-1000":`#3B1333`,"vira-grey-100":`#F9F9F9`,"vira-grey-150":`#F2F2F2`,"vira-grey-200":`#EBEBEB`,"vira-grey-250":`#E5E5E5`,"vira-grey-300":`#DEDEDE`,"vira-grey-350":`#D2D2D2`,"vira-grey-400":`#C2C2C2`,"vira-grey-450":`#ADADAD`,"vira-grey-500":`#999999`,"vira-grey-550":`#8A8A8A`,"vira-grey-600":`#7F7F7F`,"vira-grey-650":`#747474`,"vira-grey-700":`#676767`,"vira-grey-750":`#585858`,"vira-grey-800":`#494949`,"vira-grey-850":`#3E3E3E`,"vira-grey-900":`#353535`,"vira-grey-950":`#2D2D2D`,"vira-grey-1000":`#252525`}),X=_u({foreground:`black`,background:`white`,prefix:`vira`},{"vira-red-foreground-highest-contrast":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-small-body":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-body":{foreground:Y[`vira-red-750`]},"vira-red-foreground-non-body":{foreground:Y[`vira-red-650`]},"vira-red-foreground-header":{foreground:Y[`vira-red-500`]},"vira-red-foreground-placeholder":{foreground:Y[`vira-red-400`]},"vira-red-foreground-decoration":{foreground:Y[`vira-red-350`]},"vira-red-foreground-invisible":{foreground:Y[`vira-red-250`]},"vira-red-foreground-lowest-contrast":{foreground:Y[`vira-red-100`]},"vira-red-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-1000`]},"vira-red-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-1000`]},"vira-red-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-700`]},"vira-red-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-600`]},"vira-red-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-450`]},"vira-red-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-400`]},"vira-red-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-350`]},"vira-red-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-200`]},"vira-red-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-red-100`]},"vira-red-behind-fg-highest-contrast":{background:Y[`vira-red-100`]},"vira-red-behind-fg-small-body":{background:Y[`vira-red-250`]},"vira-red-behind-fg-body":{background:Y[`vira-red-350`]},"vira-red-behind-fg-non-body":{background:Y[`vira-red-400`]},"vira-red-behind-fg-header":{background:Y[`vira-red-500`]},"vira-red-behind-fg-placeholder":{background:Y[`vira-red-650`]},"vira-red-behind-fg-decoration":{background:Y[`vira-red-750`]},"vira-red-behind-fg-invisible":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-lowest-contrast":{background:Y[`vira-red-1000`]},"vira-red-on-self-highest-contrast":{foreground:Y[`vira-red-850`],background:Y[`vira-red-100`]},"vira-red-on-self-small-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-100`]},"vira-red-on-self-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-250`]},"vira-red-on-self-non-body":{foreground:Y[`vira-red-850`],background:Y[`vira-red-350`]},"vira-red-on-self-header":{foreground:Y[`vira-red-850`],background:Y[`vira-red-450`]},"vira-red-on-self-placeholder":{foreground:Y[`vira-red-850`],background:Y[`vira-red-500`]},"vira-red-on-self-decoration":{foreground:Y[`vira-red-850`],background:Y[`vira-red-650`]},"vira-red-on-self-invisible":{foreground:Y[`vira-red-850`],background:Y[`vira-red-1000`]},"vira-red-on-self-lowest-contrast":{foreground:Y[`vira-red-850`],background:Y[`vira-red-1000`]},"vira-yellow-foreground-highest-contrast":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-small-body":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-body":{foreground:Y[`vira-yellow-750`]},"vira-yellow-foreground-non-body":{foreground:Y[`vira-yellow-650`]},"vira-yellow-foreground-header":{foreground:Y[`vira-yellow-500`]},"vira-yellow-foreground-placeholder":{foreground:Y[`vira-yellow-400`]},"vira-yellow-foreground-decoration":{foreground:Y[`vira-yellow-350`]},"vira-yellow-foreground-invisible":{foreground:Y[`vira-yellow-250`]},"vira-yellow-foreground-lowest-contrast":{foreground:Y[`vira-yellow-100`]},"vira-yellow-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-700`]},"vira-yellow-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-600`]},"vira-yellow-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-450`]},"vira-yellow-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-400`]},"vira-yellow-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-350`]},"vira-yellow-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-250`]},"vira-yellow-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-yellow-100`]},"vira-yellow-behind-fg-highest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-behind-fg-small-body":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-fg-body":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-fg-non-body":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-fg-header":{background:Y[`vira-yellow-500`]},"vira-yellow-behind-fg-placeholder":{background:Y[`vira-yellow-650`]},"vira-yellow-behind-fg-decoration":{background:Y[`vira-yellow-750`]},"vira-yellow-behind-fg-invisible":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-lowest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-highest-contrast":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-small-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-300`]},"vira-yellow-on-self-non-body":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-350`]},"vira-yellow-on-self-header":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-450`]},"vira-yellow-on-self-placeholder":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-550`]},"vira-yellow-on-self-decoration":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-650`]},"vira-yellow-on-self-invisible":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-lowest-contrast":{foreground:Y[`vira-yellow-850`],background:Y[`vira-yellow-1000`]},"vira-green-foreground-highest-contrast":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-small-body":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-body":{foreground:Y[`vira-green-800`]},"vira-green-foreground-non-body":{foreground:Y[`vira-green-650`]},"vira-green-foreground-header":{foreground:Y[`vira-green-550`]},"vira-green-foreground-placeholder":{foreground:Y[`vira-green-450`]},"vira-green-foreground-decoration":{foreground:Y[`vira-green-350`]},"vira-green-foreground-invisible":{foreground:Y[`vira-green-250`]},"vira-green-foreground-lowest-contrast":{foreground:Y[`vira-green-100`]},"vira-green-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-1000`]},"vira-green-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-1000`]},"vira-green-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-750`]},"vira-green-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-650`]},"vira-green-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-500`]},"vira-green-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-400`]},"vira-green-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-350`]},"vira-green-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-250`]},"vira-green-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-green-100`]},"vira-green-behind-fg-highest-contrast":{background:Y[`vira-green-100`]},"vira-green-behind-fg-small-body":{background:Y[`vira-green-250`]},"vira-green-behind-fg-body":{background:Y[`vira-green-350`]},"vira-green-behind-fg-non-body":{background:Y[`vira-green-450`]},"vira-green-behind-fg-header":{background:Y[`vira-green-550`]},"vira-green-behind-fg-placeholder":{background:Y[`vira-green-650`]},"vira-green-behind-fg-decoration":{background:Y[`vira-green-800`]},"vira-green-behind-fg-invisible":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-lowest-contrast":{background:Y[`vira-green-1000`]},"vira-green-on-self-highest-contrast":{foreground:Y[`vira-green-850`],background:Y[`vira-green-100`]},"vira-green-on-self-small-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-100`]},"vira-green-on-self-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-300`]},"vira-green-on-self-non-body":{foreground:Y[`vira-green-850`],background:Y[`vira-green-400`]},"vira-green-on-self-header":{foreground:Y[`vira-green-850`],background:Y[`vira-green-450`]},"vira-green-on-self-placeholder":{foreground:Y[`vira-green-850`],background:Y[`vira-green-550`]},"vira-green-on-self-decoration":{foreground:Y[`vira-green-850`],background:Y[`vira-green-700`]},"vira-green-on-self-invisible":{foreground:Y[`vira-green-850`],background:Y[`vira-green-1000`]},"vira-green-on-self-lowest-contrast":{foreground:Y[`vira-green-850`],background:Y[`vira-green-1000`]},"vira-teal-foreground-highest-contrast":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-small-body":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-body":{foreground:Y[`vira-teal-800`]},"vira-teal-foreground-non-body":{foreground:Y[`vira-teal-650`]},"vira-teal-foreground-header":{foreground:Y[`vira-teal-550`]},"vira-teal-foreground-placeholder":{foreground:Y[`vira-teal-450`]},"vira-teal-foreground-decoration":{foreground:Y[`vira-teal-350`]},"vira-teal-foreground-invisible":{foreground:Y[`vira-teal-250`]},"vira-teal-foreground-lowest-contrast":{foreground:Y[`vira-teal-100`]},"vira-teal-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-750`]},"vira-teal-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-600`]},"vira-teal-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-500`]},"vira-teal-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-400`]},"vira-teal-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-350`]},"vira-teal-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-250`]},"vira-teal-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-teal-100`]},"vira-teal-behind-fg-highest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-behind-fg-small-body":{background:Y[`vira-teal-250`]},"vira-teal-behind-fg-body":{background:Y[`vira-teal-350`]},"vira-teal-behind-fg-non-body":{background:Y[`vira-teal-450`]},"vira-teal-behind-fg-header":{background:Y[`vira-teal-500`]},"vira-teal-behind-fg-placeholder":{background:Y[`vira-teal-650`]},"vira-teal-behind-fg-decoration":{background:Y[`vira-teal-750`]},"vira-teal-behind-fg-invisible":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-lowest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-on-self-highest-contrast":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-100`]},"vira-teal-on-self-small-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-100`]},"vira-teal-on-self-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-300`]},"vira-teal-on-self-non-body":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-400`]},"vira-teal-on-self-header":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-450`]},"vira-teal-on-self-placeholder":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-550`]},"vira-teal-on-self-decoration":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-700`]},"vira-teal-on-self-invisible":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-1000`]},"vira-teal-on-self-lowest-contrast":{foreground:Y[`vira-teal-850`],background:Y[`vira-teal-1000`]},"vira-blue-foreground-highest-contrast":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-small-body":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-body":{foreground:Y[`vira-blue-750`]},"vira-blue-foreground-non-body":{foreground:Y[`vira-blue-650`]},"vira-blue-foreground-header":{foreground:Y[`vira-blue-500`]},"vira-blue-foreground-placeholder":{foreground:Y[`vira-blue-450`]},"vira-blue-foreground-decoration":{foreground:Y[`vira-blue-350`]},"vira-blue-foreground-invisible":{foreground:Y[`vira-blue-250`]},"vira-blue-foreground-lowest-contrast":{foreground:Y[`vira-blue-100`]},"vira-blue-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-750`]},"vira-blue-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-600`]},"vira-blue-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-450`]},"vira-blue-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-400`]},"vira-blue-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-350`]},"vira-blue-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-250`]},"vira-blue-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-blue-100`]},"vira-blue-behind-fg-highest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-behind-fg-small-body":{background:Y[`vira-blue-250`]},"vira-blue-behind-fg-body":{background:Y[`vira-blue-350`]},"vira-blue-behind-fg-non-body":{background:Y[`vira-blue-400`]},"vira-blue-behind-fg-header":{background:Y[`vira-blue-500`]},"vira-blue-behind-fg-placeholder":{background:Y[`vira-blue-650`]},"vira-blue-behind-fg-decoration":{background:Y[`vira-blue-750`]},"vira-blue-behind-fg-invisible":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-lowest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-on-self-highest-contrast":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-100`]},"vira-blue-on-self-small-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-100`]},"vira-blue-on-self-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-300`]},"vira-blue-on-self-non-body":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-350`]},"vira-blue-on-self-header":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-450`]},"vira-blue-on-self-placeholder":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-550`]},"vira-blue-on-self-decoration":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-650`]},"vira-blue-on-self-invisible":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-1000`]},"vira-blue-on-self-lowest-contrast":{foreground:Y[`vira-blue-850`],background:Y[`vira-blue-1000`]},"vira-brand-foreground-highest-contrast":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-small-body":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-body":{foreground:Y[`vira-brand-750`]},"vira-brand-foreground-non-body":{foreground:Y[`vira-brand-650`]},"vira-brand-foreground-header":{foreground:Y[`vira-brand-500`]},"vira-brand-foreground-placeholder":{foreground:Y[`vira-brand-450`]},"vira-brand-foreground-decoration":{foreground:Y[`vira-brand-350`]},"vira-brand-foreground-invisible":{foreground:Y[`vira-brand-250`]},"vira-brand-foreground-lowest-contrast":{foreground:Y[`vira-brand-100`]},"vira-brand-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-750`]},"vira-brand-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-600`]},"vira-brand-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-450`]},"vira-brand-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-400`]},"vira-brand-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-350`]},"vira-brand-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-250`]},"vira-brand-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-brand-100`]},"vira-brand-behind-fg-highest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-behind-fg-small-body":{background:Y[`vira-brand-250`]},"vira-brand-behind-fg-body":{background:Y[`vira-brand-350`]},"vira-brand-behind-fg-non-body":{background:Y[`vira-brand-400`]},"vira-brand-behind-fg-header":{background:Y[`vira-brand-500`]},"vira-brand-behind-fg-placeholder":{background:Y[`vira-brand-650`]},"vira-brand-behind-fg-decoration":{background:Y[`vira-brand-750`]},"vira-brand-behind-fg-invisible":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-lowest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-on-self-highest-contrast":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-100`]},"vira-brand-on-self-small-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-100`]},"vira-brand-on-self-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-300`]},"vira-brand-on-self-non-body":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-350`]},"vira-brand-on-self-header":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-450`]},"vira-brand-on-self-placeholder":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-550`]},"vira-brand-on-self-decoration":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-650`]},"vira-brand-on-self-invisible":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-1000`]},"vira-brand-on-self-lowest-contrast":{foreground:Y[`vira-brand-850`],background:Y[`vira-brand-1000`]},"vira-purple-foreground-highest-contrast":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-small-body":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-body":{foreground:Y[`vira-purple-750`]},"vira-purple-foreground-non-body":{foreground:Y[`vira-purple-650`]},"vira-purple-foreground-header":{foreground:Y[`vira-purple-500`]},"vira-purple-foreground-placeholder":{foreground:Y[`vira-purple-400`]},"vira-purple-foreground-decoration":{foreground:Y[`vira-purple-350`]},"vira-purple-foreground-invisible":{foreground:Y[`vira-purple-250`]},"vira-purple-foreground-lowest-contrast":{foreground:Y[`vira-purple-100`]},"vira-purple-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-700`]},"vira-purple-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-600`]},"vira-purple-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-450`]},"vira-purple-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-400`]},"vira-purple-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-350`]},"vira-purple-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-200`]},"vira-purple-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-purple-100`]},"vira-purple-behind-fg-highest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-behind-fg-small-body":{background:Y[`vira-purple-250`]},"vira-purple-behind-fg-body":{background:Y[`vira-purple-350`]},"vira-purple-behind-fg-non-body":{background:Y[`vira-purple-400`]},"vira-purple-behind-fg-header":{background:Y[`vira-purple-500`]},"vira-purple-behind-fg-placeholder":{background:Y[`vira-purple-600`]},"vira-purple-behind-fg-decoration":{background:Y[`vira-purple-750`]},"vira-purple-behind-fg-invisible":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-lowest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-on-self-highest-contrast":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-100`]},"vira-purple-on-self-small-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-100`]},"vira-purple-on-self-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-300`]},"vira-purple-on-self-non-body":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-350`]},"vira-purple-on-self-header":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-450`]},"vira-purple-on-self-placeholder":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-500`]},"vira-purple-on-self-decoration":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-650`]},"vira-purple-on-self-invisible":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-1000`]},"vira-purple-on-self-lowest-contrast":{foreground:Y[`vira-purple-850`],background:Y[`vira-purple-1000`]},"vira-pink-foreground-highest-contrast":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-small-body":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-body":{foreground:Y[`vira-pink-750`]},"vira-pink-foreground-non-body":{foreground:Y[`vira-pink-650`]},"vira-pink-foreground-header":{foreground:Y[`vira-pink-500`]},"vira-pink-foreground-placeholder":{foreground:Y[`vira-pink-400`]},"vira-pink-foreground-decoration":{foreground:Y[`vira-pink-350`]},"vira-pink-foreground-invisible":{foreground:Y[`vira-pink-250`]},"vira-pink-foreground-lowest-contrast":{foreground:Y[`vira-pink-100`]},"vira-pink-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-700`]},"vira-pink-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-550`]},"vira-pink-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-450`]},"vira-pink-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-400`]},"vira-pink-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-350`]},"vira-pink-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-200`]},"vira-pink-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-pink-100`]},"vira-pink-behind-fg-highest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-behind-fg-small-body":{background:Y[`vira-pink-200`]},"vira-pink-behind-fg-body":{background:Y[`vira-pink-350`]},"vira-pink-behind-fg-non-body":{background:Y[`vira-pink-400`]},"vira-pink-behind-fg-header":{background:Y[`vira-pink-500`]},"vira-pink-behind-fg-placeholder":{background:Y[`vira-pink-600`]},"vira-pink-behind-fg-decoration":{background:Y[`vira-pink-750`]},"vira-pink-behind-fg-invisible":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-lowest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-on-self-highest-contrast":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-100`]},"vira-pink-on-self-small-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-100`]},"vira-pink-on-self-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-250`]},"vira-pink-on-self-non-body":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-350`]},"vira-pink-on-self-header":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-450`]},"vira-pink-on-self-placeholder":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-500`]},"vira-pink-on-self-decoration":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-650`]},"vira-pink-on-self-invisible":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-lowest-contrast":{foreground:Y[`vira-pink-850`],background:Y[`vira-pink-1000`]},"vira-grey-foreground-highest-contrast":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-small-body":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-body":{foreground:Y[`vira-grey-750`]},"vira-grey-foreground-non-body":{foreground:Y[`vira-grey-650`]},"vira-grey-foreground-header":{foreground:Y[`vira-grey-500`]},"vira-grey-foreground-placeholder":{foreground:Y[`vira-grey-450`]},"vira-grey-foreground-decoration":{foreground:Y[`vira-grey-350`]},"vira-grey-foreground-invisible":{foreground:Y[`vira-grey-250`]},"vira-grey-foreground-lowest-contrast":{foreground:Y[`vira-grey-100`]},"vira-grey-behind-bg-highest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-small-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-750`]},"vira-grey-behind-bg-non-body":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-600`]},"vira-grey-behind-bg-header":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-500`]},"vira-grey-behind-bg-placeholder":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-400`]},"vira-grey-behind-bg-decoration":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-350`]},"vira-grey-behind-bg-invisible":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-250`]},"vira-grey-behind-bg-lowest-contrast":{foreground:{refDefaultBackground:!0},background:Y[`vira-grey-100`]},"vira-grey-behind-fg-highest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-behind-fg-small-body":{background:Y[`vira-grey-250`]},"vira-grey-behind-fg-body":{background:Y[`vira-grey-350`]},"vira-grey-behind-fg-non-body":{background:Y[`vira-grey-400`]},"vira-grey-behind-fg-header":{background:Y[`vira-grey-500`]},"vira-grey-behind-fg-placeholder":{background:Y[`vira-grey-650`]},"vira-grey-behind-fg-decoration":{background:Y[`vira-grey-750`]},"vira-grey-behind-fg-invisible":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-lowest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-on-self-highest-contrast":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-100`]},"vira-grey-on-self-small-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-100`]},"vira-grey-on-self-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-300`]},"vira-grey-on-self-non-body":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-350`]},"vira-grey-on-self-header":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-450`]},"vira-grey-on-self-placeholder":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-550`]},"vira-grey-on-self-decoration":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-650`]},"vira-grey-on-self-invisible":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-1000`]},"vira-grey-on-self-lowest-contrast":{foreground:Y[`vira-grey-850`],background:Y[`vira-grey-1000`]}});bu(X,`dark`,{defaultOverride:{foreground:`white`,background:`black`},colorOverrides:{"vira-red-foreground-highest-contrast":{foreground:Y[`vira-red-100`]},"vira-red-foreground-small-body":{foreground:Y[`vira-red-250`]},"vira-red-foreground-body":{foreground:Y[`vira-red-350`]},"vira-red-foreground-non-body":{foreground:Y[`vira-red-400`]},"vira-red-foreground-header":{foreground:Y[`vira-red-450`]},"vira-red-foreground-placeholder":{foreground:Y[`vira-red-600`]},"vira-red-foreground-decoration":{foreground:Y[`vira-red-750`]},"vira-red-foreground-invisible":{foreground:Y[`vira-red-1000`]},"vira-red-foreground-lowest-contrast":{foreground:Y[`vira-red-1000`]},"vira-red-behind-bg-highest-contrast":{background:Y[`vira-red-100`]},"vira-red-behind-bg-small-body":{background:Y[`vira-red-250`]},"vira-red-behind-bg-body":{background:Y[`vira-red-350`]},"vira-red-behind-bg-non-body":{background:Y[`vira-red-400`]},"vira-red-behind-bg-header":{background:Y[`vira-red-500`]},"vira-red-behind-bg-placeholder":{background:Y[`vira-red-650`]},"vira-red-behind-bg-decoration":{background:Y[`vira-red-750`]},"vira-red-behind-bg-invisible":{background:Y[`vira-red-1000`]},"vira-red-behind-bg-lowest-contrast":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-highest-contrast":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-small-body":{background:Y[`vira-red-1000`]},"vira-red-behind-fg-body":{background:Y[`vira-red-700`]},"vira-red-behind-fg-non-body":{background:Y[`vira-red-600`]},"vira-red-behind-fg-header":{background:Y[`vira-red-450`]},"vira-red-behind-fg-placeholder":{background:Y[`vira-red-400`]},"vira-red-behind-fg-decoration":{background:Y[`vira-red-350`]},"vira-red-behind-fg-invisible":{background:Y[`vira-red-200`]},"vira-red-behind-fg-lowest-contrast":{background:Y[`vira-red-100`]},"vira-red-on-self-highest-contrast":{foreground:Y[`vira-red-200`],background:Y[`vira-red-1000`]},"vira-red-on-self-small-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-1000`]},"vira-red-on-self-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-750`]},"vira-red-on-self-non-body":{foreground:Y[`vira-red-200`],background:Y[`vira-red-600`]},"vira-red-on-self-header":{foreground:Y[`vira-red-200`],background:Y[`vira-red-500`]},"vira-red-on-self-placeholder":{foreground:Y[`vira-red-200`],background:Y[`vira-red-450`]},"vira-red-on-self-decoration":{foreground:Y[`vira-red-200`],background:Y[`vira-red-400`]},"vira-red-on-self-invisible":{foreground:Y[`vira-red-200`],background:Y[`vira-red-100`]},"vira-red-on-self-lowest-contrast":{foreground:Y[`vira-red-200`],background:Y[`vira-red-100`]},"vira-yellow-foreground-highest-contrast":{foreground:Y[`vira-yellow-100`]},"vira-yellow-foreground-small-body":{foreground:Y[`vira-yellow-250`]},"vira-yellow-foreground-body":{foreground:Y[`vira-yellow-350`]},"vira-yellow-foreground-non-body":{foreground:Y[`vira-yellow-400`]},"vira-yellow-foreground-placeholder":{foreground:Y[`vira-yellow-600`]},"vira-yellow-foreground-decoration":{foreground:Y[`vira-yellow-750`]},"vira-yellow-foreground-invisible":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-foreground-lowest-contrast":{foreground:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-highest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-behind-bg-small-body":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-bg-body":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-bg-non-body":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-bg-header":{background:Y[`vira-yellow-500`]},"vira-yellow-behind-bg-placeholder":{background:Y[`vira-yellow-650`]},"vira-yellow-behind-bg-decoration":{background:Y[`vira-yellow-750`]},"vira-yellow-behind-bg-invisible":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-bg-lowest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-highest-contrast":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-small-body":{background:Y[`vira-yellow-1000`]},"vira-yellow-behind-fg-body":{background:Y[`vira-yellow-700`]},"vira-yellow-behind-fg-non-body":{background:Y[`vira-yellow-600`]},"vira-yellow-behind-fg-header":{background:Y[`vira-yellow-450`]},"vira-yellow-behind-fg-placeholder":{background:Y[`vira-yellow-400`]},"vira-yellow-behind-fg-decoration":{background:Y[`vira-yellow-350`]},"vira-yellow-behind-fg-invisible":{background:Y[`vira-yellow-250`]},"vira-yellow-behind-fg-lowest-contrast":{background:Y[`vira-yellow-100`]},"vira-yellow-on-self-highest-contrast":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-1000`]},"vira-yellow-on-self-small-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-950`]},"vira-yellow-on-self-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-750`]},"vira-yellow-on-self-non-body":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-600`]},"vira-yellow-on-self-header":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-500`]},"vira-yellow-on-self-placeholder":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-450`]},"vira-yellow-on-self-decoration":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-400`]},"vira-yellow-on-self-invisible":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-100`]},"vira-yellow-on-self-lowest-contrast":{foreground:Y[`vira-yellow-200`],background:Y[`vira-yellow-100`]},"vira-green-foreground-highest-contrast":{foreground:Y[`vira-green-100`]},"vira-green-foreground-small-body":{foreground:Y[`vira-green-250`]},"vira-green-foreground-body":{foreground:Y[`vira-green-350`]},"vira-green-foreground-non-body":{foreground:Y[`vira-green-450`]},"vira-green-foreground-header":{foreground:Y[`vira-green-500`]},"vira-green-foreground-placeholder":{foreground:Y[`vira-green-650`]},"vira-green-foreground-decoration":{foreground:Y[`vira-green-750`]},"vira-green-foreground-invisible":{foreground:Y[`vira-green-1000`]},"vira-green-foreground-lowest-contrast":{foreground:Y[`vira-green-1000`]},"vira-green-behind-bg-highest-contrast":{background:Y[`vira-green-100`]},"vira-green-behind-bg-small-body":{background:Y[`vira-green-250`]},"vira-green-behind-bg-body":{background:Y[`vira-green-350`]},"vira-green-behind-bg-non-body":{background:Y[`vira-green-450`]},"vira-green-behind-bg-header":{background:Y[`vira-green-550`]},"vira-green-behind-bg-placeholder":{background:Y[`vira-green-650`]},"vira-green-behind-bg-decoration":{background:Y[`vira-green-800`]},"vira-green-behind-bg-invisible":{background:Y[`vira-green-1000`]},"vira-green-behind-bg-lowest-contrast":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-highest-contrast":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-small-body":{background:Y[`vira-green-1000`]},"vira-green-behind-fg-body":{background:Y[`vira-green-750`]},"vira-green-behind-fg-non-body":{background:Y[`vira-green-650`]},"vira-green-behind-fg-header":{background:Y[`vira-green-500`]},"vira-green-behind-fg-placeholder":{background:Y[`vira-green-400`]},"vira-green-behind-fg-decoration":{background:Y[`vira-green-350`]},"vira-green-behind-fg-invisible":{background:Y[`vira-green-250`]},"vira-green-behind-fg-lowest-contrast":{background:Y[`vira-green-100`]},"vira-green-on-self-highest-contrast":{foreground:Y[`vira-green-200`],background:Y[`vira-green-1000`]},"vira-green-on-self-small-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-950`]},"vira-green-on-self-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-750`]},"vira-green-on-self-non-body":{foreground:Y[`vira-green-200`],background:Y[`vira-green-650`]},"vira-green-on-self-header":{foreground:Y[`vira-green-200`],background:Y[`vira-green-500`]},"vira-green-on-self-placeholder":{foreground:Y[`vira-green-200`],background:Y[`vira-green-450`]},"vira-green-on-self-decoration":{foreground:Y[`vira-green-200`],background:Y[`vira-green-400`]},"vira-green-on-self-invisible":{foreground:Y[`vira-green-200`],background:Y[`vira-green-100`]},"vira-green-on-self-lowest-contrast":{foreground:Y[`vira-green-200`],background:Y[`vira-green-100`]},"vira-teal-foreground-highest-contrast":{foreground:Y[`vira-teal-100`]},"vira-teal-foreground-small-body":{foreground:Y[`vira-teal-250`]},"vira-teal-foreground-body":{foreground:Y[`vira-teal-350`]},"vira-teal-foreground-non-body":{foreground:Y[`vira-teal-450`]},"vira-teal-foreground-header":{foreground:Y[`vira-teal-500`]},"vira-teal-foreground-placeholder":{foreground:Y[`vira-teal-650`]},"vira-teal-foreground-decoration":{foreground:Y[`vira-teal-750`]},"vira-teal-foreground-invisible":{foreground:Y[`vira-teal-1000`]},"vira-teal-foreground-lowest-contrast":{foreground:Y[`vira-teal-1000`]},"vira-teal-behind-bg-highest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-behind-bg-small-body":{background:Y[`vira-teal-250`]},"vira-teal-behind-bg-body":{background:Y[`vira-teal-350`]},"vira-teal-behind-bg-non-body":{background:Y[`vira-teal-450`]},"vira-teal-behind-bg-placeholder":{background:Y[`vira-teal-650`]},"vira-teal-behind-bg-decoration":{background:Y[`vira-teal-750`]},"vira-teal-behind-bg-invisible":{background:Y[`vira-teal-1000`]},"vira-teal-behind-bg-lowest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-highest-contrast":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-small-body":{background:Y[`vira-teal-1000`]},"vira-teal-behind-fg-body":{background:Y[`vira-teal-750`]},"vira-teal-behind-fg-non-body":{background:Y[`vira-teal-600`]},"vira-teal-behind-fg-placeholder":{background:Y[`vira-teal-400`]},"vira-teal-behind-fg-decoration":{background:Y[`vira-teal-350`]},"vira-teal-behind-fg-invisible":{background:Y[`vira-teal-250`]},"vira-teal-behind-fg-lowest-contrast":{background:Y[`vira-teal-100`]},"vira-teal-on-self-highest-contrast":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-1000`]},"vira-teal-on-self-small-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-950`]},"vira-teal-on-self-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-750`]},"vira-teal-on-self-non-body":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-650`]},"vira-teal-on-self-header":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-500`]},"vira-teal-on-self-placeholder":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-450`]},"vira-teal-on-self-decoration":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-400`]},"vira-teal-on-self-invisible":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-100`]},"vira-teal-on-self-lowest-contrast":{foreground:Y[`vira-teal-200`],background:Y[`vira-teal-100`]},"vira-blue-foreground-highest-contrast":{foreground:Y[`vira-blue-100`]},"vira-blue-foreground-small-body":{foreground:Y[`vira-blue-250`]},"vira-blue-foreground-body":{foreground:Y[`vira-blue-350`]},"vira-blue-foreground-non-body":{foreground:Y[`vira-blue-400`]},"vira-blue-foreground-placeholder":{foreground:Y[`vira-blue-600`]},"vira-blue-foreground-decoration":{foreground:Y[`vira-blue-750`]},"vira-blue-foreground-invisible":{foreground:Y[`vira-blue-1000`]},"vira-blue-foreground-lowest-contrast":{foreground:Y[`vira-blue-1000`]},"vira-blue-behind-bg-highest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-behind-bg-small-body":{background:Y[`vira-blue-250`]},"vira-blue-behind-bg-body":{background:Y[`vira-blue-350`]},"vira-blue-behind-bg-non-body":{background:Y[`vira-blue-400`]},"vira-blue-behind-bg-header":{background:Y[`vira-blue-500`]},"vira-blue-behind-bg-placeholder":{background:Y[`vira-blue-650`]},"vira-blue-behind-bg-decoration":{background:Y[`vira-blue-750`]},"vira-blue-behind-bg-invisible":{background:Y[`vira-blue-1000`]},"vira-blue-behind-bg-lowest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-highest-contrast":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-small-body":{background:Y[`vira-blue-1000`]},"vira-blue-behind-fg-body":{background:Y[`vira-blue-750`]},"vira-blue-behind-fg-non-body":{background:Y[`vira-blue-600`]},"vira-blue-behind-fg-header":{background:Y[`vira-blue-450`]},"vira-blue-behind-fg-placeholder":{background:Y[`vira-blue-400`]},"vira-blue-behind-fg-decoration":{background:Y[`vira-blue-350`]},"vira-blue-behind-fg-invisible":{background:Y[`vira-blue-250`]},"vira-blue-behind-fg-lowest-contrast":{background:Y[`vira-blue-100`]},"vira-blue-on-self-highest-contrast":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-1000`]},"vira-blue-on-self-small-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-950`]},"vira-blue-on-self-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-750`]},"vira-blue-on-self-non-body":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-600`]},"vira-blue-on-self-header":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-500`]},"vira-blue-on-self-placeholder":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-450`]},"vira-blue-on-self-decoration":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-400`]},"vira-blue-on-self-invisible":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-100`]},"vira-blue-on-self-lowest-contrast":{foreground:Y[`vira-blue-200`],background:Y[`vira-blue-100`]},"vira-brand-foreground-highest-contrast":{foreground:Y[`vira-brand-100`]},"vira-brand-foreground-small-body":{foreground:Y[`vira-brand-250`]},"vira-brand-foreground-body":{foreground:Y[`vira-brand-350`]},"vira-brand-foreground-non-body":{foreground:Y[`vira-brand-400`]},"vira-brand-foreground-placeholder":{foreground:Y[`vira-brand-600`]},"vira-brand-foreground-decoration":{foreground:Y[`vira-brand-750`]},"vira-brand-foreground-invisible":{foreground:Y[`vira-brand-1000`]},"vira-brand-foreground-lowest-contrast":{foreground:Y[`vira-brand-1000`]},"vira-brand-behind-bg-highest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-behind-bg-small-body":{background:Y[`vira-brand-250`]},"vira-brand-behind-bg-body":{background:Y[`vira-brand-350`]},"vira-brand-behind-bg-non-body":{background:Y[`vira-brand-400`]},"vira-brand-behind-bg-header":{background:Y[`vira-brand-500`]},"vira-brand-behind-bg-placeholder":{background:Y[`vira-brand-650`]},"vira-brand-behind-bg-decoration":{background:Y[`vira-brand-750`]},"vira-brand-behind-bg-invisible":{background:Y[`vira-brand-1000`]},"vira-brand-behind-bg-lowest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-highest-contrast":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-small-body":{background:Y[`vira-brand-1000`]},"vira-brand-behind-fg-body":{background:Y[`vira-brand-750`]},"vira-brand-behind-fg-non-body":{background:Y[`vira-brand-600`]},"vira-brand-behind-fg-header":{background:Y[`vira-brand-450`]},"vira-brand-behind-fg-placeholder":{background:Y[`vira-brand-400`]},"vira-brand-behind-fg-decoration":{background:Y[`vira-brand-350`]},"vira-brand-behind-fg-invisible":{background:Y[`vira-brand-250`]},"vira-brand-behind-fg-lowest-contrast":{background:Y[`vira-brand-100`]},"vira-brand-on-self-highest-contrast":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-1000`]},"vira-brand-on-self-small-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-950`]},"vira-brand-on-self-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-750`]},"vira-brand-on-self-non-body":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-600`]},"vira-brand-on-self-header":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-500`]},"vira-brand-on-self-placeholder":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-450`]},"vira-brand-on-self-decoration":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-400`]},"vira-brand-on-self-invisible":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-100`]},"vira-brand-on-self-lowest-contrast":{foreground:Y[`vira-brand-200`],background:Y[`vira-brand-100`]},"vira-purple-foreground-highest-contrast":{foreground:Y[`vira-purple-100`]},"vira-purple-foreground-small-body":{foreground:Y[`vira-purple-250`]},"vira-purple-foreground-body":{foreground:Y[`vira-purple-350`]},"vira-purple-foreground-non-body":{foreground:Y[`vira-purple-400`]},"vira-purple-foreground-header":{foreground:Y[`vira-purple-450`]},"vira-purple-foreground-placeholder":{foreground:Y[`vira-purple-600`]},"vira-purple-foreground-decoration":{foreground:Y[`vira-purple-750`]},"vira-purple-foreground-invisible":{foreground:Y[`vira-purple-1000`]},"vira-purple-foreground-lowest-contrast":{foreground:Y[`vira-purple-1000`]},"vira-purple-behind-bg-highest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-behind-bg-small-body":{background:Y[`vira-purple-250`]},"vira-purple-behind-bg-body":{background:Y[`vira-purple-350`]},"vira-purple-behind-bg-non-body":{background:Y[`vira-purple-400`]},"vira-purple-behind-bg-header":{background:Y[`vira-purple-500`]},"vira-purple-behind-bg-placeholder":{background:Y[`vira-purple-600`]},"vira-purple-behind-bg-decoration":{background:Y[`vira-purple-750`]},"vira-purple-behind-bg-invisible":{background:Y[`vira-purple-1000`]},"vira-purple-behind-bg-lowest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-highest-contrast":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-small-body":{background:Y[`vira-purple-1000`]},"vira-purple-behind-fg-body":{background:Y[`vira-purple-700`]},"vira-purple-behind-fg-non-body":{background:Y[`vira-purple-600`]},"vira-purple-behind-fg-header":{background:Y[`vira-purple-450`]},"vira-purple-behind-fg-placeholder":{background:Y[`vira-purple-400`]},"vira-purple-behind-fg-decoration":{background:Y[`vira-purple-350`]},"vira-purple-behind-fg-invisible":{background:Y[`vira-purple-200`]},"vira-purple-behind-fg-lowest-contrast":{background:Y[`vira-purple-100`]},"vira-purple-on-self-highest-contrast":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-1000`]},"vira-purple-on-self-small-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-950`]},"vira-purple-on-self-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-750`]},"vira-purple-on-self-non-body":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-600`]},"vira-purple-on-self-header":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-500`]},"vira-purple-on-self-placeholder":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-450`]},"vira-purple-on-self-decoration":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-400`]},"vira-purple-on-self-invisible":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-100`]},"vira-purple-on-self-lowest-contrast":{foreground:Y[`vira-purple-200`],background:Y[`vira-purple-100`]},"vira-pink-foreground-highest-contrast":{foreground:Y[`vira-pink-100`]},"vira-pink-foreground-small-body":{foreground:Y[`vira-pink-200`]},"vira-pink-foreground-body":{foreground:Y[`vira-pink-350`]},"vira-pink-foreground-non-body":{foreground:Y[`vira-pink-400`]},"vira-pink-foreground-header":{foreground:Y[`vira-pink-450`]},"vira-pink-foreground-placeholder":{foreground:Y[`vira-pink-600`]},"vira-pink-foreground-decoration":{foreground:Y[`vira-pink-750`]},"vira-pink-foreground-invisible":{foreground:Y[`vira-pink-1000`]},"vira-pink-foreground-lowest-contrast":{foreground:Y[`vira-pink-1000`]},"vira-pink-behind-bg-highest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-behind-bg-small-body":{background:Y[`vira-pink-200`]},"vira-pink-behind-bg-body":{background:Y[`vira-pink-350`]},"vira-pink-behind-bg-non-body":{background:Y[`vira-pink-400`]},"vira-pink-behind-bg-header":{background:Y[`vira-pink-500`]},"vira-pink-behind-bg-placeholder":{background:Y[`vira-pink-600`]},"vira-pink-behind-bg-decoration":{background:Y[`vira-pink-750`]},"vira-pink-behind-bg-invisible":{background:Y[`vira-pink-1000`]},"vira-pink-behind-bg-lowest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-highest-contrast":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-small-body":{background:Y[`vira-pink-1000`]},"vira-pink-behind-fg-body":{background:Y[`vira-pink-700`]},"vira-pink-behind-fg-non-body":{background:Y[`vira-pink-550`]},"vira-pink-behind-fg-header":{background:Y[`vira-pink-450`]},"vira-pink-behind-fg-placeholder":{background:Y[`vira-pink-400`]},"vira-pink-behind-fg-decoration":{background:Y[`vira-pink-350`]},"vira-pink-behind-fg-invisible":{background:Y[`vira-pink-200`]},"vira-pink-behind-fg-lowest-contrast":{background:Y[`vira-pink-100`]},"vira-pink-on-self-highest-contrast":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-small-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-1000`]},"vira-pink-on-self-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-750`]},"vira-pink-on-self-non-body":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-600`]},"vira-pink-on-self-header":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-500`]},"vira-pink-on-self-placeholder":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-450`]},"vira-pink-on-self-decoration":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-350`]},"vira-pink-on-self-invisible":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-100`]},"vira-pink-on-self-lowest-contrast":{foreground:Y[`vira-pink-200`],background:Y[`vira-pink-100`]},"vira-grey-foreground-highest-contrast":{foreground:Y[`vira-grey-100`]},"vira-grey-foreground-small-body":{foreground:Y[`vira-grey-250`]},"vira-grey-foreground-body":{foreground:Y[`vira-grey-350`]},"vira-grey-foreground-non-body":{foreground:Y[`vira-grey-400`]},"vira-grey-foreground-placeholder":{foreground:Y[`vira-grey-600`]},"vira-grey-foreground-decoration":{foreground:Y[`vira-grey-750`]},"vira-grey-foreground-invisible":{foreground:Y[`vira-grey-1000`]},"vira-grey-foreground-lowest-contrast":{foreground:Y[`vira-grey-1000`]},"vira-grey-behind-bg-highest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-behind-bg-small-body":{background:Y[`vira-grey-250`]},"vira-grey-behind-bg-body":{background:Y[`vira-grey-350`]},"vira-grey-behind-bg-non-body":{background:Y[`vira-grey-400`]},"vira-grey-behind-bg-placeholder":{background:Y[`vira-grey-650`]},"vira-grey-behind-bg-decoration":{background:Y[`vira-grey-750`]},"vira-grey-behind-bg-invisible":{background:Y[`vira-grey-1000`]},"vira-grey-behind-bg-lowest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-highest-contrast":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-small-body":{background:Y[`vira-grey-1000`]},"vira-grey-behind-fg-body":{background:Y[`vira-grey-750`]},"vira-grey-behind-fg-non-body":{background:Y[`vira-grey-600`]},"vira-grey-behind-fg-placeholder":{background:Y[`vira-grey-400`]},"vira-grey-behind-fg-decoration":{background:Y[`vira-grey-350`]},"vira-grey-behind-fg-invisible":{background:Y[`vira-grey-250`]},"vira-grey-behind-fg-lowest-contrast":{background:Y[`vira-grey-100`]},"vira-grey-on-self-highest-contrast":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-1000`]},"vira-grey-on-self-small-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-950`]},"vira-grey-on-self-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-750`]},"vira-grey-on-self-non-body":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-650`]},"vira-grey-on-self-header":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-500`]},"vira-grey-on-self-placeholder":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-450`]},"vira-grey-on-self-decoration":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-400`]},"vira-grey-on-self-invisible":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-100`]},"vira-grey-on-self-lowest-contrast":{foreground:Y[`vira-grey-200`],background:Y[`vira-grey-100`]}}});var lX=`8px`,uX=_({"vira-form-border-color":X.colors[`vira-grey-foreground-decoration`].foreground.value,"vira-form-placeholder-color":X.colors[`vira-grey-foreground-placeholder`].foreground.value,"vira-form-background-color":X.colors[I].background.value,"vira-form-foreground-color":X.colors[I].foreground.value,"vira-form-modal-backdrop-color":`rgba(0, 0, 0, 0.35)`,"vira-form-secondary-body-foreground":X.colors[`vira-grey-foreground-header`].foreground.value,"vira-form-text-selection-color":X.colors[`vira-brand-behind-bg-decoration`].background.value,"vira-form-selection-hover-color":X.colors[`vira-brand-behind-bg-invisible`].background.value,"vira-form-selection-active-color":X.colors[`vira-brand-behind-bg-decoration`].background.value,"vira-form-error-color":X.colors[`vira-red-behind-bg-non-body`].background.value,"vira-form-error-hover-color":X.colors[`vira-red-behind-bg-header`].background.value,"vira-form-error-active-color":X.colors[`vira-red-behind-bg-body`].background.value,"vira-form-warning-color":X.colors[`vira-yellow-behind-bg-non-body`].background.value,"vira-form-warning-hover-color":X.colors[`vira-yellow-behind-bg-header`].background.value,"vira-form-warning-active-color":X.colors[`vira-yellow-behind-bg-body`].background.value,"vira-form-positive-color":X.colors[`vira-green-behind-bg-non-body`].background.value,"vira-form-positive-hover-color":X.colors[`vira-green-behind-bg-header`].background.value,"vira-form-positive-active-color":X.colors[`vira-green-behind-bg-body`].background.value,"vira-form-success-color":X.colors[`vira-green-behind-bg-non-body`].background.value,"vira-form-label-font-weight":`bold`,"vira-form-small-text-size":`14px`,"vira-form-medium-text-size":`16px`,"vira-form-large-text-size":`22px`,"vira-form-radius":lX,"vira-form-wrapper-radius":`16px`,"vira-form-focus-outline-color":X.colors[`vira-brand-foreground-header`].foreground.value,"vira-form-focus-outline-border-radius":S`calc(var(--vira-form-radius, ${d(lX)}) + 2px)`,"vira-form-plain-color":Y[`vira-grey-100`].value,"vira-form-plain-hover-color":X.colors[`vira-grey-foreground-invisible`].foreground.value,"vira-form-plain-active-color":X.colors[`vira-grey-foreground-decoration`].foreground.value,"vira-form-accent-primary-color":X.colors[`vira-brand-behind-bg-non-body`].background.value,"vira-form-accent-primary-hover-color":X.colors[`vira-brand-behind-bg-header`].background.value,"vira-form-accent-primary-active-color":X.colors[`vira-brand-behind-bg-body`].background.value,"vira-form-danger-color":X.colors[`vira-red-behind-bg-non-body`].background.value,"vira-form-danger-hover-color":X.colors[`vira-red-behind-bg-header`].background.value,"vira-form-danger-active-color":X.colors[`vira-red-behind-bg-body`].background.value,"vira-form-filled-background-color":X.colors[`vira-grey-foreground-invisible`].foreground.value,"vira-form-filled-active-background-color":X.colors[`vira-grey-foreground-decoration`].foreground.value});function dX(e){return b.isString(e)?d(e):e.value}function fX({elementBorderSize:e=`1px`,outlineGap:t=`2px`,outlineWidth:n=`2px`,noNesting:r,outlineColor:i=uX[`vira-form-focus-outline-color`],borderRadius:a=uX[`vira-form-focus-outline-border-radius`],renderInside:o}={}){let s=S`calc(${dX(t)})`,c=S`calc(${dX(n)} + ${dX(t)} + ${dX(e)})`,l=o?S`
               content: '';
               top: ${s};
               left: ${s};
@@ -32851,8 +32851,8 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
               height: calc(100% - calc(${s} * 2));
               box-sizing: border-box;
               pointer-events: none;
-              border: ${fX(n)} solid ${fX(i)};
-              border-radius: ${fX(a)};
+              border: ${dX(n)} solid ${dX(i)};
+              border-radius: ${dX(a)};
               z-index: 100;
           `:S`
               content: '';
@@ -32863,8 +32863,8 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
               height: calc(100% + calc(${c} * 2));
               box-sizing: border-box;
               pointer-events: none;
-              border: ${fX(n)} solid ${fX(i)};
-              border-radius: ${fX(a)};
+              border: ${dX(n)} solid ${dX(i)};
+              border-radius: ${dX(a)};
               z-index: 100;
           `;return r?l:S`
         outline: none;
@@ -32876,26 +32876,26 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
         &:focus:focus-visible:not(:active):not([disabled])::after {
             ${l}
         }
-    `}var mX=S`
+    `}var pX=[`highest-contrast`,`lowest-contrast`,...$e(B).sort((e,t)=>Number(t.includes(`-`))-Number(e.includes(`-`)))],mX=oe(ae(l(Object.keys(X.colors),e=>e.split(`-`)[1],e=>e!==`default`)).filter(b.isTruthy),e=>({key:e,value:e}),{useRequired:!0}),hX=me(X.colors);Nt(mX,e=>oe(ae(l(hX,t=>pX.reduce((e,t)=>Vt({value:e,suffix:`-${t}`}),u({value:t,prefix:`vira-${e}-`})),(t,n)=>n.startsWith(`vira-${e}-`))),t=>({key:t,value:oe(pX,n=>{let r=`vira-${e}-${t}-${n}`;if(b.hasKey(X.colors,r))return{key:n,value:X.colors[r]}})})));var gX;(function(e){e.Info=`info`,e.Plain=`plain`,e.Neutral=`neutral`,e.Danger=`danger`,e.Warning=`warning`,e.Positive=`positive`,e.Brand=`brand`,e.Special=`special`,e.Custom=`custom`})(gX||={}),gX.Info,gX.Plain,gX.Neutral,gX.Danger,gX.Warning,gX.Positive,gX.Brand,gX.Special;var _X={[gX.Info]:mX.blue,[gX.Danger]:mX.red,[gX.Warning]:mX.yellow,[gX.Positive]:mX.green,[gX.Brand]:mX.brand,[gX.Special]:mX.purple};Hn(mX).filter(e=>!b.hasValue(Hn(_X),e));var vX;(function(e){e.Large=`large`,e.Medium=`medium`,e.Small=`small`,e.None=`none`})(vX||={}),vX.Small,vX.Medium,vX.Large;var yX;(function(e){e.Standard=`standard`,e.Subtle=`subtle`,e.None=`none`})(yX||={}),yX.Standard,yX.Subtle;var bX={[vX.Large]:40,[vX.Medium]:32,[vX.Small]:24},xX=S`
     pointer-events: none;
     opacity: 0.3;
     cursor: not-allowed;
-`,hX=_({"vira-monospace":`monospace`}),gX=_({"menu-shadow-color":`#e2e2e2`,"modal-shadow-color":`#4f4f4f`}),_X={menuShadow:S`
-        filter: drop-shadow(0px 5px 5px ${gX[`menu-shadow-color`].value});
+`,SX=_({"vira-monospace":`monospace`}),CX=_({"menu-shadow-color":`#e2e2e2`,"modal-shadow-color":`#4f4f4f`}),wX={menuShadow:S`
+        filter: drop-shadow(0px 5px 5px ${CX[`menu-shadow-color`].value});
         /*
            This helps force the drop shadow to re-render when the element moves or the page changes.
        */
         will-change: filter;
     `,modal:S`
-        box-shadow: 0 5px 15px ${gX[`modal-shadow-color`].value};
-    `},vX=S`
+        box-shadow: 0 5px 15px ${CX[`modal-shadow-color`].value};
+    `},TX=S`
     /* iOS Safari */
     -webkit-touch-callout: none;
     /* Safari */
     -webkit-user-select: none;
     /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     user-select: none;
-`,yX=`vira-`,bX=du({assertInputs:e=>{if(!e.tagName.startsWith(`vira-`))throw Error(`Tag name should start with '${yX}' but got '${e.tagName}'`)}});function xX({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split(``).every(e=>xX({input:e,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function SX({value:e,allowed:t,blocked:n}){let r=String(e),i=t?xX({input:r,matcher:t}):!0,a=n?xX({input:r,matcher:n}):!1;return i&&!a}function CX(e){let t=String(e.value);if(!e.value)return{filtered:t,blocked:``};let{filtered:n,blocked:r}=t.split(``).reduce((t,n)=>(SX({...e,value:n})?t.filtered.push(n):t.blocked.push(n),t),{filtered:[],blocked:[]});return{filtered:n.join(``),blocked:r.join(``)}}function wX({inputs:e,previousValue:t,event:n,elementConstructor:r,inputBlockedCallback:i,newValueCallback:a}){let o=bd(n,r||HTMLInputElement),s=b.hasKey(n,`data`)&&lt.isString(n.data)||``;if(s){let{blocked:t}=CX({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});t.length&&i(t)}let c=CX({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==c&&(o.value=c),t!==c&&a(c)}var TX=bX()({tagName:`vira-icon`,hostClasses:{"vira-icon-fit-container":({inputs:e})=>!!e.fitContainer||!!e.icon?.size},styles:({hostClasses:e})=>S`
+`,EX=`vira-`,DX=du({assertInputs:e=>{if(!e.tagName.startsWith(`vira-`))throw Error(`Tag name should start with '${EX}' but got '${e.tagName}'`)}});function OX({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split(``).every(e=>OX({input:e,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function kX({value:e,allowed:t,blocked:n}){let r=String(e),i=t?OX({input:r,matcher:t}):!0,a=n?OX({input:r,matcher:n}):!1;return i&&!a}function AX(e){let t=String(e.value);if(!e.value)return{filtered:t,blocked:``};let{filtered:n,blocked:r}=t.split(``).reduce((t,n)=>(kX({...e,value:n})?t.filtered.push(n):t.blocked.push(n),t),{filtered:[],blocked:[]});return{filtered:n.join(``),blocked:r.join(``)}}function jX({inputs:e,previousValue:t,event:n,elementConstructor:r,inputBlockedCallback:i,newValueCallback:a}){let o=bd(n,r||HTMLInputElement),s=b.hasKey(n,`data`)&&lt.isString(n.data)||``;if(s){let{blocked:t}=AX({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});t.length&&i(t)}let c=AX({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==c&&(o.value=c),t!==c&&a(c)}var MX=DX()({tagName:`vira-icon`,hostClasses:{"vira-icon-fit-container":({inputs:e})=>!!e.fitContainer||!!e.icon?.size},styles:({hostClasses:e})=>S`
         :host {
             display: inline-flex;
             justify-content: center;
@@ -32922,13 +32922,13 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 width: 100%;
             }
         }
-    `,render({inputs:e,host:t}){if(e.icon)e.icon.size&&(t.style.width=Rt(e.icon.size),t.style.height=Rt(e.icon.size));else return``;return e.icon.svgTemplate}}),EX;(function(e){e.Default=`text`,e.Password=`password`,e.Email=`email`,e.Number=`number`})(EX||={});var DX=bX()({tagName:`vira-input`,cssVars:{"vira-input-padding-horizontal":`10px`,"vira-input-padding-vertical":`6px`},styles:({hostClasses:e,cssVars:t})=>S`
+    `,render({inputs:e,host:t}){if(e.icon)e.icon.size&&(t.style.width=Rt(e.icon.size),t.style.height=Rt(e.icon.size));else return``;return e.icon.svgTemplate}}),NX;(function(e){e.Default=`text`,e.Password=`password`,e.Email=`email`,e.Number=`number`})(NX||={});var PX=DX()({tagName:`vira-input`,cssVars:{"vira-input-padding-horizontal":`10px`,"vira-input-padding-vertical":`5px`},styles:({hostClasses:e,cssVars:t})=>S`
             :host {
                 position: relative;
                 display: inline-flex;
                 width: 224px;
                 box-sizing: border-box;
-                color: ${dX[`vira-form-foreground-color`].value};
+                color: ${uX[`vira-form-foreground-color`].value};
             }
 
             label {
@@ -32941,7 +32941,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 cursor: text;
 
                 & .input-label {
-                    font-weight: ${dX[`vira-form-label-font-weight`].value};
+                    font-weight: ${uX[`vira-form-label-font-weight`].value};
                     text-align: left;
                     flex-shrink: 0;
                     flex-wrap: wrap;
@@ -32977,7 +32977,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 pointer-events: none;
                 z-index: -1;
                 width: min-content;
-                ${vX};
+                ${TX};
                 vertical-align: middle;
                 max-height: 100%;
             }
@@ -33004,7 +33004,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 left: 0;
                 width: 100%;
                 height: 100%;
-                border-radius: ${dX[`vira-form-radius`].value};
+                border-radius: ${uX[`vira-form-radius`].value};
                 z-index: 0;
                 pointer-events: none;
             }
@@ -33012,7 +33012,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
             .wrapper-border {
                 top: -1px;
                 left: -1px;
-                border: 1px solid ${dX[`vira-form-border-color`].value};
+                border: 1px solid ${uX[`vira-form-border-color`].value};
             }
 
             .input-wrapper {
@@ -33020,12 +33020,13 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
+                min-height: ${bX[vX.Medium]}px;
                 box-sizing: border-box;
                 align-items: center;
                 position: relative;
                 padding: 0 ${t[`vira-input-padding-horizontal`].value};
-                border-radius: ${dX[`vira-form-radius`].value};
-                background-color: ${dX[`vira-form-background-color`].value};
+                border-radius: ${uX[`vira-form-radius`].value};
+                background-color: ${uX[`vira-form-background-color`].value};
                 /*
                     Border colors are actually applied via the .wrapper-border class. However, we must
                     apply a border here still so that it takes up space.
@@ -33058,15 +33059,15 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 outline: none;
 
                 &:focus:focus-visible:not([disabled]) ~ .focus-border {
-                    ${pX({elementBorderSize:`1px`,noNesting:!0})}
+                    ${fX({elementBorderSize:`1px`,noNesting:!0})}
                 }
             }
 
             ::selection {
-                background: ${dX[`vira-form-text-selection-color`].value}; /* WebKit/Blink Browsers */
+                background: ${uX[`vira-form-text-selection-color`].value}; /* WebKit/Blink Browsers */
             }
             ::-moz-selection {
-                background: ${dX[`vira-form-text-selection-color`].value}; /* Gecko Browsers */
+                background: ${uX[`vira-form-text-selection-color`].value}; /* Gecko Browsers */
             }
 
             input:placeholder-shown {
@@ -33075,12 +33076,12 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
             }
 
             input::placeholder {
-                color: ${dX[`vira-form-placeholder-color`].value};
+                color: ${uX[`vira-form-placeholder-color`].value};
             }
 
             .suffix {
                 font-weight: bold;
-                ${vX};
+                ${TX};
             }
 
             button {
@@ -33093,28 +33094,28 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
 
             .clear-x-button,
             .show-password-button {
-                color: ${dX[`vira-form-placeholder-color`].value};
+                color: ${uX[`vira-form-placeholder-color`].value};
             }
 
             .clear-x-button:hover {
-                color: ${dX[`vira-form-error-color`].value};
+                color: ${uX[`vira-form-error-color`].value};
             }
 
             .clear-x-button:active {
-                color: ${dX[`vira-form-error-active-color`].value};
+                color: ${uX[`vira-form-error-active-color`].value};
             }
 
             .show-password-button:hover {
-                color: ${dX[`vira-form-accent-primary-color`].value};
+                color: ${uX[`vira-form-accent-primary-color`].value};
             }
 
             .show-password-button:active {
-                color: ${dX[`vira-form-accent-primary-active-color`].value};
+                color: ${uX[`vira-form-accent-primary-active-color`].value};
             }
 
             ${e[`vira-input-error`].selector} {
                 & .wrapper-border {
-                    border-color: ${dX[`vira-form-error-color`].value};
+                    border-color: ${uX[`vira-form-error-color`].value};
                 }
             }
 
@@ -33126,7 +33127,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 }
 
                 & > * {
-                    ${mX};
+                    ${xX};
                 }
 
                 & .show-password-button {
@@ -33137,7 +33138,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                     display: none;
                 }
             }
-        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=CX({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=AX({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
                 <span class="readonly-value">${o}</span>
             `;return e.label?w`
                     <label>
@@ -33145,12 +33146,12 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                         ${t}
                     </label>
                 `:t}let s=e.icon?w`
-                  <${TX.assign({icon:e.icon})}
+                  <${MX.assign({icon:e.icon})}
                       class="left-side-icon"
-                  ></${TX}>
+                  ></${MX}>
               `:g,c=e.fitText?S`
                   width: ${n.forcedInputWidth}px;
-              `:g,l=N(`mousedown`,e=>{let t=bd(e,HTMLElement,{useOriginalTarget:!0}),n=T.instanceOf(a.shadowRoot.querySelector(`input`),HTMLInputElement);t!==n&&(e.preventDefault(),n.focus())}),u=e.disableBrowserHelps||e.type===EX.Password,d=w`
+              `:g,l=N(`mousedown`,e=>{let t=bd(e,HTMLElement,{useOriginalTarget:!0}),n=T.instanceOf(a.shadowRoot.querySelector(`input`),HTMLInputElement);t!==n&&(e.preventDefault(),n.focus())}),u=e.disableBrowserHelps||e.type===NX.Password,d=w`
             <span class="input-wrapper" ${e.label?g:l}>
                 ${s}
                 ${ou(!!e.fitText,w`
@@ -33166,7 +33167,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                     id=${M(e.label?n.randomId:void 0)}
                     aria-label=${M(e.label||void 0)}
                     autofocus=${!1}
-                    type=${OX(e.type,n.showPassword)}
+                    type=${FX(e.type,n.showPassword)}
                     style=${c}
                     autocomplete=${M(u?`off`:void 0)}
                     autocorrect=${M(u?`off`:void 0)}
@@ -33174,7 +33175,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                     spellcheck=${M(u?`false`:void 0)}
                     ?disabled=${e.disabled}
                     .value=${o}
-                    ${N(`input`,n=>{wX({inputs:e,previousValue:o,event:n,inputBlockedCallback(e){t(new i.inputBlocked(e))},newValueCallback(e){t(new i.valueChange(e))}})})}
+                    ${N(`input`,n=>{jX({inputs:e,previousValue:o,event:n,inputBlockedCallback(e){t(new i.inputBlocked(e))},newValueCallback(e){t(new i.valueChange(e))}})})}
                     placeholder=${M(e.placeholder||void 0)}
                     ${Yl(e.attributePassthrough)}
                 />
@@ -33186,17 +33187,17 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                             ${N(`mousedown`,e=>{e.stopImmediatePropagation(),e.preventDefault()})}
                             ${N(`click`,()=>{e.disabled||t(new i.valueChange(``))})}
                         >
-                            <${TX.assign({icon:rX})}></${TX}>
+                            <${MX.assign({icon:rX})}></${MX}>
                         </button>
                     `)}
-                ${ou(e.type===EX.Password,w`
+                ${ou(e.type===NX.Password,w`
                         <button
                             class="show-password-button"
                             title="show password"
                             ${N(`mousedown`,e=>{e.stopImmediatePropagation(),e.preventDefault()})}
                             ${N(`click`,()=>{r({showPassword:!n.showPassword})})}
                         >
-                            <${TX.assign({icon:n.showPassword?sX:oX})}></${TX}>
+                            <${MX.assign({icon:n.showPassword?sX:oX})}></${MX}>
                         </button>
                     `)}
                 ${ou(!!e.suffix,w`
@@ -33217,11 +33218,11 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                     <span class="input-label">${e.label}</span>
                     ${d}
                 </label>
-            `:d}});function OX(e,t){return e===EX.Password&&t?EX.Default:e||EX.Default}var kX=Ee()({tagName:`vir-color-slider`,cssVars:{"vir-color-slider-gradient":`black`},styles:({cssVars:e})=>S`
+            `:d}});function FX(e,t){return e===NX.Password&&t?NX.Default:e||NX.Default}var IX=Ee()({tagName:`vir-color-slider`,cssVars:{"vir-color-slider-gradient":`black`},styles:({cssVars:e})=>S`
         :host {
             display: flex;
             align-items: center;
-            font-family: ${hX[`vira-monospace`].value};
+            font-family: ${SX[`vira-monospace`].value};
             gap: 2px;
         }
 
@@ -33234,7 +33235,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
             cursor: pointer;
         }
 
-        ${DX} {
+        ${PX} {
             width: 76px;
         }
 
@@ -33253,10 +33254,10 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
                 ${nu(e=>{y.instanceOf(e,HTMLInputElement),e.min=String(a.min),e.max=String(a.max),e.value=String(s)})}
                 ${N(`input`,e=>{let r=bd(e,HTMLInputElement),i=Number(r.value);isNaN(i)||n(new t.valueChange(i))})}
             />
-            <${DX.assign({value:c})}
-                ${N(DX.events.valueChange,e=>{let r=a.radix?parseInt(e.detail,a.radix):Number(e.detail);isNaN(r)||n(new t.valueChange(r))})}
-            ></${DX}>
-        `}}),AX=Ee()({tagName:`vir-color-format-sliders`,styles:S`
+            <${PX.assign({value:c})}
+                ${N(PX.events.valueChange,e=>{let r=a.radix?parseInt(e.detail,a.radix):Number(e.detail);isNaN(r)||n(new t.valueChange(r))})}
+            ></${PX}>
+        `}}),LX=Ee()({tagName:`vir-color-format-sliders`,styles:S`
         :host {
             display: flex;
             flex-direction: column;
@@ -33266,15 +33267,15 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
             ${$Y};
         }
     `,events:{colorChange:x()},render({inputs:e,dispatch:t,events:n}){let r=kG[e.colorFormatName],i=me(r.coords).map(i=>w`
-                    <${kX.assign({color:e.color,colorCoordinateName:i,colorFormatName:e.colorFormatName})}
-                        ${N(kX.events.valueChange,a=>{let o=e.color.clone();o.set({[e.colorFormatName]:{[i]:a.detail}});let s=o.toCss()[r.conversionFormat];t(new n.colorChange(s))})}
-                    ></${kX}>
+                    <${IX.assign({color:e.color,colorCoordinateName:i,colorFormatName:e.colorFormatName})}
+                        ${N(IX.events.valueChange,a=>{let o=e.color.clone();o.set({[e.colorFormatName]:{[i]:a.detail}});let s=o.toCss()[r.conversionFormat];t(new n.colorChange(s))})}
+                    ></${IX}>
                 `);return w`
             ${e.showFormatName?w`
                       <h3>${e.colorFormatName}</h3>
                   `:g}
             ${i}
-        `}}),jX=Ee()({tagName:`vir-color-swatch`,styles:S`
+        `}}),RX=Ee()({tagName:`vir-color-swatch`,styles:S`
         :host {
             display: flex;
             height: 400px;
@@ -33305,7 +33306,7 @@ import{$ as e,A as t,B as n,C as r,Ct as i,D as a,E as o,Et as s,F as c,G as l,H
             >
                 <slot></slot>
             </div>
-        `}}),MX=Ee()({tagName:`vir-contrast-indicator`,styles:S`
+        `}}),zX=Ee()({tagName:`vir-contrast-indicator`,styles:S`
         :host {
             display: inline-flex;
             max-width: 100%;
@@ -33372,7 +33373,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="gauge-text">${r}</span>
                 </span>
             </div>
-        `}}),NX=Ee()({tagName:`vir-color-pair`,state(){return{previewElement:void 0,forceShowEverything:!1}},hostClasses:{"vir-color-pair-no-contrast-tips":({inputs:e,state:t})=>!e.showContrast&&!t.forceShowEverything},styles:({hostClasses:e})=>S`
+        `}}),BX=Ee()({tagName:`vir-color-pair`,state(){return{previewElement:void 0,forceShowEverything:!1}},hostClasses:{"vir-color-pair-no-contrast-tips":({inputs:e,state:t})=>!e.showContrast&&!t.forceShowEverything},styles:({hostClasses:e})=>S`
         :host {
             display: flex;
             flex-direction: column;
@@ -33437,7 +33438,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
 
         .css-var-names {
-            font-family: ${hX[`vira-monospace`].value};
+            font-family: ${SX[`vira-monospace`].value};
             display: flex;
             max-width: 100%;
             flex-direction: column;
@@ -33456,7 +33457,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
         }
 
-        ${MX} {
+        ${zX} {
             margin-top: 1px;
         }
     `,render({state:e,updateState:t,inputs:n}){let r=[`foreground`,`background`].map(t=>w`
@@ -33469,7 +33470,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             `),i=n.showVarNames||e.forceShowEverything?w`
                       <div class="css-var-names">${r}</div>
                   `:g,a=e.previewElement?Ru({foreground:globalThis.getComputedStyle(e.previewElement).getPropertyValue(`color`),background:globalThis.getComputedStyle(e.previewElement).getPropertyValue(`background-color`)}):void 0,o=a&&(n.showContrast||e.forceShowEverything)?w`
-                      <${MX.assign({contrast:a,fontWeight:n.fontWeight})}></${MX}>
+                      <${zX.assign({contrast:a,fontWeight:n.fontWeight})}></${zX}>
                   `:g;return w`
             <button
                 ${N(`click`,()=>{t({forceShowEverything:!e.forceShowEverything})})}
@@ -33497,7 +33498,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 </div>
             </button>
             ${o} ${i}
-        `}});function PX({open:e,callback:t,popUpManager:n,host:r,options:i}){if(e){let e=n.showPopUp(r,i);t?.(e)}else n.removePopUp(),t?.(void 0)}function FX(e){return e instanceof HTMLInputElement&&(e.type===`text`||e.type===`search`||e.type===`email`||e.type===`url`||e.type===`tel`||e.type===`password`||e.type===`number`)||e instanceof HTMLTextAreaElement||e instanceof HTMLElement&&e.isContentEditable}var IX={top:0,left:0,right:0,bottom:0},LX=class extends qn(`hide-pop-up`){},RX=class extends Kn()(`nav-select`){},zX=class{navController;listenTarget=new Yn;options={minDownSpace:200,minRightSpace:400,verticalDiffThreshold:20,horizontalDiffThreshold:100,supportNavigation:!0};cleanupCallbacks=[];lastRootElement;constructor(e,t){this.navController=e,this.options={...this.options,...t}}attachGlobalListeners(){this.cleanupCallbacks=[uf(!1,e=>{e||this.removePopUp()}),this.navController.listen(qd,e=>{let t=e.composedPath()[0];t instanceof Element&&FX(t)||e.detail.success&&(this.listenTarget.dispatch(new RX({detail:e.detail.coords})),this.navController.currentNavEntry?.entry.focus(!0),e.stopImmediatePropagation(),e.preventDefault())}),Zn(`mousedown`,e=>{this.lastRootElement&&e.composedPath().includes(this.lastRootElement)||this.removePopUp()},{passive:!0}),Zn(`keydown`,e=>{let t=e.code;if(t===`Escape`)this.removePopUp();else if(this.options.supportNavigation){let n=e.composedPath()[0];if(n instanceof Element&&FX(n))return;t===`ArrowDown`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Down,allowWrapping:!1})):t===`ArrowUp`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Up,allowWrapping:!1})):t===`ArrowLeft`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Left,allowWrapping:!1})):t===`ArrowRight`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Right,allowWrapping:!1})):(t===`Enter`||t===`Return`||t===`Space`)&&this.navController.enterInto({fallbackToActivate:!0}).success&&(e.stopImmediatePropagation(),e.preventDefault())}})]}listen(e,t,n){return this.listenTarget.listen(e,t,n)}removePopUp(){this.cleanupCallbacks.forEach(e=>e()),this.listenTarget.dispatch(new LX)}showPopUp(e,t){this.lastRootElement=e;let n={...this.options,...t},r=xd(e);y.instanceOf(r,HTMLElement);let i=e.getBoundingClientRect(),a=r.getBoundingClientRect(),o=r.offsetWidth-r.clientWidth,s=r.offsetHeight-r.clientHeight,c=r===document.body?{top:0,left:0,right:a.width,bottom:a.height}:{top:a.top,left:a.left,right:a.right-o,bottom:a.bottom-s},l=et(IX,e=>i[e]),u=et(IX,e=>{let t=c[e],n=l[e];return Math.abs(t-n)}),d=u.top>u.bottom+n.verticalDiffThreshold&&u.bottom<n.minDownSpace,f=u.left>u.right+n.horizontalDiffThreshold&&u.right<n.minRightSpace;return this.attachGlobalListeners(),{popDown:!d,popRight:!f,positions:{container:c,root:l,diff:u}}}destroy(){this.removePopUp(),this.listenTarget.destroy()}},BX;(function(e){e.Left=`left`,e.Right=`right`,e.Both=`both`,e.Auto=`auto`})(BX||={});var VX=bX()({tagName:`vira-pop-up-trigger`,state({host:e}){return{showPopUpResult:void 0,popUpManager:new zX(new tf(e,{activateOnMouseUp:!0}))}},slotNames:[`vira-pop-up-trigger-trigger`,`vira-pop-up-trigger-pop-up`],hostClasses:{"vira-pop-up-trigger-disabled":({inputs:e})=>!!e.isDisabled,"vira-pop-up-trigger-inside-focus":({inputs:e})=>!!e.useInsideFocus,"vira-pop-up-trigger-outside-focus":({inputs:e})=>!e.useInsideFocus},styles:({hostClasses:e})=>S`
+        `}});function VX({open:e,callback:t,popUpManager:n,host:r,options:i}){if(e){let e=n.showPopUp(r,i);t?.(e)}else n.removePopUp(),t?.(void 0)}function HX(e){return e instanceof HTMLInputElement&&(e.type===`text`||e.type===`search`||e.type===`email`||e.type===`url`||e.type===`tel`||e.type===`password`||e.type===`number`)||e instanceof HTMLTextAreaElement||e instanceof HTMLElement&&e.isContentEditable}var UX={top:0,left:0,right:0,bottom:0},WX=class extends qn(`hide-pop-up`){},GX=class extends Kn()(`nav-select`){},KX=class{navController;listenTarget=new Yn;options={minDownSpace:200,minRightSpace:400,verticalDiffThreshold:20,horizontalDiffThreshold:100,supportNavigation:!0};cleanupCallbacks=[];lastRootElement;constructor(e,t){this.navController=e,this.options={...this.options,...t}}attachGlobalListeners(){this.cleanupCallbacks=[uf(!1,e=>{e||this.removePopUp()}),this.navController.listen(qd,e=>{let t=e.composedPath()[0];t instanceof Element&&HX(t)||e.detail.success&&(this.listenTarget.dispatch(new GX({detail:e.detail.coords})),this.navController.currentNavEntry?.entry.focus(!0),e.stopImmediatePropagation(),e.preventDefault())}),Zn(`mousedown`,e=>{this.lastRootElement&&e.composedPath().includes(this.lastRootElement)||this.removePopUp()},{passive:!0}),Zn(`keydown`,e=>{let t=e.code;if(t===`Escape`)this.removePopUp();else if(this.options.supportNavigation){let n=e.composedPath()[0];if(n instanceof Element&&HX(n))return;t===`ArrowDown`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Down,allowWrapping:!1})):t===`ArrowUp`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Up,allowWrapping:!1})):t===`ArrowLeft`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Left,allowWrapping:!1})):t===`ArrowRight`?(e.stopImmediatePropagation(),e.preventDefault(),this.navController.navigate({direction:Ed.Right,allowWrapping:!1})):(t===`Enter`||t===`Return`||t===`Space`)&&this.navController.enterInto({fallbackToActivate:!0}).success&&(e.stopImmediatePropagation(),e.preventDefault())}})]}listen(e,t,n){return this.listenTarget.listen(e,t,n)}removePopUp(){this.cleanupCallbacks.forEach(e=>e()),this.listenTarget.dispatch(new WX)}showPopUp(e,t){this.lastRootElement=e;let n={...this.options,...t},r=xd(e);y.instanceOf(r,HTMLElement);let i=e.getBoundingClientRect(),a=r.getBoundingClientRect(),o=r.offsetWidth-r.clientWidth,s=r.offsetHeight-r.clientHeight,c=r===document.body?{top:0,left:0,right:a.width,bottom:a.height}:{top:a.top,left:a.left,right:a.right-o,bottom:a.bottom-s},l=et(UX,e=>i[e]),u=et(UX,e=>{let t=c[e],n=l[e];return Math.abs(t-n)}),d=u.top>u.bottom+n.verticalDiffThreshold&&u.bottom<n.minDownSpace,f=u.left>u.right+n.horizontalDiffThreshold&&u.right<n.minRightSpace;return this.attachGlobalListeners(),{popDown:!d,popRight:!f,positions:{container:c,root:l,diff:u}}}destroy(){this.removePopUp(),this.listenTarget.destroy()}},qX;(function(e){e.Left=`left`,e.Right=`right`,e.Both=`both`,e.Auto=`auto`})(qX||={});var JX=DX()({tagName:`vira-pop-up-trigger`,state({host:e}){return{showPopUpResult:void 0,popUpManager:new KX(new tf(e,{activateOnMouseUp:!0}))}},slotNames:[`vira-pop-up-trigger-trigger`,`vira-pop-up-trigger-pop-up`],hostClasses:{"vira-pop-up-trigger-disabled":({inputs:e})=>!!e.isDisabled,"vira-pop-up-trigger-inside-focus":({inputs:e})=>!!e.useInsideFocus,"vira-pop-up-trigger-outside-focus":({inputs:e})=>!e.useInsideFocus},styles:({hostClasses:e})=>S`
         :host {
             display: inline-flex;
             box-sizing: border-box;
@@ -33516,19 +33517,19 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
 
         ${e[`vira-pop-up-trigger-inside-focus`].selector} .dropdown-wrapper {
-            ${pX({renderInside:!0})}
+            ${fX({renderInside:!0})}
         }
         ${e[`vira-pop-up-trigger-outside-focus`].selector} .dropdown-wrapper {
-            ${pX()}
+            ${fX()}
         }
 
         .dropdown-trigger {
             box-sizing: border-box;
-            ${vX};
+            ${TX};
         }
 
         ${e[`vira-pop-up-trigger-disabled`].selector} {
-            ${mX}
+            ${xX}
             pointer-events: auto;
         }
 
@@ -33560,15 +33561,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         .open-upwards .pop-up-positioner {
             flex-direction: column-reverse;
         }
-    `,events:{navSelect:x(),openChange:x(),init:x()},cleanup({state:e,updateState:t}){t({showPopUpResult:void 0}),e.popUpManager.destroy()},init({state:e,updateState:t,host:n,inputs:r,dispatch:i,events:a}){e.popUpManager.listen(LX,()=>{if(t({showPopUpResult:void 0}),i(new a.openChange(void 0)),r.focusOnClose&&!r.isDisabled){let e=n.shadowRoot.querySelector(`.dropdown-wrapper`);y.instanceOf(e,HTMLButtonElement,`failed to find dropdown wrapper child`),e.focus()}}),e.popUpManager.listen(RX,o=>{r.keepOpenAfterInteraction||PX({open:!1,callback(e){t({showPopUpResult:e})},host:n,popUpManager:e.popUpManager}),i(new a.navSelect(o.detail))}),i(new a.init({navController:e.popUpManager.navController,popUpManager:e.popUpManager}))},render({dispatch:e,events:t,state:n,inputs:r,updateState:i,host:a,slotNames:o}){function s({emitEvent:o,open:s},c){if(n.showPopUpResult&&r.keepOpenAfterInteraction&&c){let e=a.shadowRoot.querySelector(`.dropdown-trigger`);if(e&&!c.composedPath().includes(e))return}PX({open:s,callback(n){i({showPopUpResult:n}),o&&e(new t.openChange(n))},host:a,popUpManager:n.popUpManager})}r.isDisabled?s({open:!1,emitEvent:!1},void 0):r.z_debug_forceOpenState!=null&&(!r.z_debug_forceOpenState&&n.showPopUpResult?s({emitEvent:!1,open:!1},void 0):r.z_debug_forceOpenState&&!n.showPopUpResult&&s({emitEvent:!1,open:!0},void 0));let c=r.horizontalAnchor===BX.Auto||r.horizontalAnchor===void 0?n.showPopUpResult?.popRight?BX.Left:BX.Right:r.horizontalAnchor,l=S`
-            ${c===BX.Right&&n.showPopUpResult?r.ignoreMaxWidth?S`
+    `,events:{navSelect:x(),openChange:x(),init:x()},cleanup({state:e,updateState:t}){t({showPopUpResult:void 0}),e.popUpManager.destroy()},init({state:e,updateState:t,host:n,inputs:r,dispatch:i,events:a}){e.popUpManager.listen(WX,()=>{if(t({showPopUpResult:void 0}),i(new a.openChange(void 0)),r.focusOnClose&&!r.isDisabled){let e=n.shadowRoot.querySelector(`.dropdown-wrapper`);y.instanceOf(e,HTMLButtonElement,`failed to find dropdown wrapper child`),e.focus()}}),e.popUpManager.listen(GX,o=>{r.keepOpenAfterInteraction||VX({open:!1,callback(e){t({showPopUpResult:e})},host:n,popUpManager:e.popUpManager}),i(new a.navSelect(o.detail))}),i(new a.init({navController:e.popUpManager.navController,popUpManager:e.popUpManager}))},render({dispatch:e,events:t,state:n,inputs:r,updateState:i,host:a,slotNames:o}){function s({emitEvent:o,open:s},c){if(n.showPopUpResult&&r.keepOpenAfterInteraction&&c){let e=a.shadowRoot.querySelector(`.dropdown-trigger`);if(e&&!c.composedPath().includes(e))return}VX({open:s,callback(n){i({showPopUpResult:n}),o&&e(new t.openChange(n))},host:a,popUpManager:n.popUpManager})}r.isDisabled?s({open:!1,emitEvent:!1},void 0):r.z_debug_forceOpenState!=null&&(!r.z_debug_forceOpenState&&n.showPopUpResult?s({emitEvent:!1,open:!1},void 0):r.z_debug_forceOpenState&&!n.showPopUpResult&&s({emitEvent:!1,open:!0},void 0));let c=r.horizontalAnchor===qX.Auto||r.horizontalAnchor===void 0?n.showPopUpResult?.popRight?qX.Left:qX.Right:r.horizontalAnchor,l=S`
+            ${c===qX.Right&&n.showPopUpResult?r.ignoreMaxWidth?S`
                           left: unset;
                       `:S`
                           left: -${n.showPopUpResult.positions.diff.left}px;
                       `:S`
                       left: ${r.popUpOffset?.left||0}px;
                   `}
-            ${n.showPopUpResult&&c===BX.Left?r.ignoreMaxWidth?S`
+            ${n.showPopUpResult&&c===qX.Left?r.ignoreMaxWidth?S`
                           right: unset;
                       `:S`
                           right: -${n.showPopUpResult.positions.diff.right}px;
@@ -33598,7 +33599,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 role="listbox"
                 aria-expanded=${!!n.showPopUpResult}
                 ${N(`keydown`,e=>{!n.showPopUpResult&&e.code.startsWith(`Arrow`)&&s({emitEvent:!0,open:!0},e)})}
-                ${N(`click`,e=>{if(e.detail===0){let t=!1;if(Sd(({element:e})=>FX(e)?(t=!0,!0):!1),t)return;d(e)}else if(e.button===0&&n.showPopUpResult){let t=a.shadowRoot.querySelector(`.dropdown-trigger`);t&&!e.composedPath().includes(t)&&s({emitEvent:!0,open:!1},e)}})}
+                ${N(`click`,e=>{if(e.detail===0){let t=!1;if(Sd(({element:e})=>HX(e)?(t=!0,!0):!1),t)return;d(e)}else if(e.button===0&&n.showPopUpResult){let t=a.shadowRoot.querySelector(`.dropdown-trigger`);t&&!e.composedPath().includes(t)&&s({emitEvent:!0,open:!1},e)}})}
                 ${N(`mousedown`,e=>{if(e.button!==0)return;let t=T.instanceOf(a.shadowRoot.querySelector(`.dropdown-trigger`),HTMLElement);e.composedPath().includes(t)&&d(e)})}
             >
                 <div class="dropdown-trigger">
@@ -33606,7 +33607,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 </div>
 
                 <div
-                    class="pop-up-positioner ${Bl({"right-aligned":c===BX.Right})}"
+                    class="pop-up-positioner ${Bl({"right-aligned":c===qX.Right})}"
                     style=${u}
                 >
                     ${ou(!!n.showPopUpResult,w`
@@ -33614,7 +33615,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         `)}
                 </div>
             </button>
-        `}});function HX(e){return`groupName`in e}function UX(e,t){return w`
+        `}});function YX(e){return`groupName`in e}function XX(e,t){return w`
         <option
             ?selected=${e.value===t}
             aria-label=${e.label}
@@ -33623,13 +33624,13 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             ${e.label}
         </option>
-    `}var WX=bX()({tagName:`vira-select`,state(){return{randomId:bt(32),cleanupListeners:void 0}},events:{valueChange:x()},cssVars:{"vira-select-padding-horizontal":`10px`,"vira-select-padding-vertical":`6px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>S`
+    `}var ZX=DX()({tagName:`vira-select`,state(){return{randomId:bt(32),cleanupListeners:void 0}},events:{valueChange:x()},cssVars:{"vira-select-padding-horizontal":`10px`,"vira-select-padding-vertical":`6px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>S`
         :host {
             position: relative;
             display: inline-flex;
             width: 223px;
             box-sizing: border-box;
-            color: ${dX[`vira-form-foreground-color`].value};
+            color: ${uX[`vira-form-foreground-color`].value};
         }
 
         .select-wrapper {
@@ -33661,7 +33662,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 text-overflow: ellipsis;
 
                 &.placeholder {
-                    color: ${dX[`vira-form-placeholder-color`].value};
+                    color: ${uX[`vira-form-placeholder-color`].value};
                 }
 
                 &.with-icon {
@@ -33669,7 +33670,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 }
             }
 
-            & ${TX} {
+            & ${MX} {
                 position: absolute;
                 pointer-events: none;
 
@@ -33691,9 +33692,9 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
         ${e[`vira-select-not-raw`].selector} {
             .select-wrapper {
-                border-radius: ${dX[`vira-form-radius`].value};
-                color: ${dX[`vira-form-foreground-color`].value};
-                background-color: ${dX[`vira-form-background-color`].value};
+                border-radius: ${uX[`vira-form-radius`].value};
+                color: ${uX[`vira-form-foreground-color`].value};
+                background-color: ${uX[`vira-form-background-color`].value};
                 /*
                     Border colors are actually applied via the .wrapper-border class. However, we must
                     apply a border here still so that it takes up space.
@@ -33707,7 +33708,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${t[`vira-select-padding-horizontal`].value};
 
                     &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
-                        ${pX({elementBorderSize:`1px`,noNesting:!0})}
+                        ${fX({elementBorderSize:`1px`,noNesting:!0})}
                     }
                 }
 
@@ -33717,7 +33718,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    border-radius: ${dX[`vira-form-radius`].value};
+                    border-radius: ${uX[`vira-form-radius`].value};
                     z-index: 0;
                     pointer-events: none;
                 }
@@ -33725,7 +33726,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 & .wrapper-border {
                     top: -1px;
                     left: -1px;
-                    border: 1px solid ${dX[`vira-form-border-color`].value};
+                    border: 1px solid ${uX[`vira-form-border-color`].value};
                     transition: border
                         ${cX[`vira-interaction-animation-duration`].value};
                 }
@@ -33741,7 +33742,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             max-width: 100%;
 
             & .select-label {
-                font-weight: ${dX[`vira-form-label-font-weight`].value};
+                font-weight: ${uX[`vira-form-label-font-weight`].value};
                 text-align: left;
                 flex-shrink: 0;
                 flex-wrap: wrap;
@@ -33757,10 +33758,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
             & select,
             & .wrapper-border {
-                ${mX}
+                ${xX}
             }
-            ${TX} {
-                ${mX}
+            ${MX} {
+                ${xX}
             }
             & * {
                 cursor: not-allowed;
@@ -33769,11 +33770,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
         :host(.${e[`vira-select-not-raw`].name}.${e[`vira-select-error`].name})
             .wrapper-border {
-            border-color: ${dX[`vira-form-error-color`].value};
+            border-color: ${uX[`vira-form-error-color`].value};
         }
     `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=w`
                 <span class="readonly-value">
-                    ${e.options.flatMap(e=>HX(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
+                    ${e.options.flatMap(e=>YX(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
                 </span>
             `;return e.label?w`
                     <label ${Yl(e.attributePassthrough?.label)}>
@@ -33793,15 +33794,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     id=${M(e.label?t.randomId:void 0)}
                     aria-label=${M(e.label||void 0)}
                     aria-disabled=${M(e.disabled?`true`:void 0)}
-                    ${N(`input`,t=>{let a=bd(t,HTMLSelectElement),o=a.value;a.value!==i&&(a.selectedIndex=e.options.flatMap(e=>HX(e)?[...e.options]:[e]).findIndex(e=>e.value===i)),n(new r.valueChange(o))})}
+                    ${N(`input`,t=>{let a=bd(t,HTMLSelectElement),o=a.value;a.value!==i&&(a.selectedIndex=e.options.flatMap(e=>YX(e)?[...e.options]:[e]).findIndex(e=>e.value===i)),n(new r.valueChange(o))})}
                     ${Yl(e.attributePassthrough?.select)}
                 >
                     ${a}
-                    ${e.options.map(e=>HX(e)?w`
+                    ${e.options.map(e=>YX(e)?w`
                                 <optgroup label=${e.groupName}>
-                                    ${e.options.map(e=>UX(e,i))}
+                                    ${e.options.map(e=>XX(e,i))}
                                 </optgroup>
-                            `:UX(e,i))}
+                            `:XX(e,i))}
                 </select>
                 <!--
                     These separate style elements are necessary so that we can select them as
@@ -33812,19 +33813,19 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
                 <div class="border-style wrapper-border"></div>
 
-                <${TX.assign({icon:e.icon})}
+                <${MX.assign({icon:e.icon})}
                     class="input-icon"
-                ></${TX}>
-                <${TX.assign({icon:iX})}
+                ></${MX}>
+                <${MX.assign({icon:iX})}
                     class="trigger-icon"
-                ></${TX}>
+                ></${MX}>
             </span>
         `;return e.label?w`
                 <label for=${t.randomId} ${Yl(e.attributePassthrough?.label)}>
                     <span class="select-label">${e.label}</span>
                     ${o}
                 </label>
-            `:o}}),GX=class extends Kn()(`local-storage-client-all-values-event`){},KX=class{shapes;options;listenTarget=new Yn;keyEvents;get AllValuesType(){throw Error(`Cannot use AllValuesType as a runtime value. It is a type only.`)}get ValueType(){throw Error(`Cannot use ValueType as a runtime value. It is a type only.`)}constructor(e,t={}){this.shapes=e,this.options=t,this.storeName=t.storeName||`local-storage-client`,this.keyEvents=et(e,e=>class extends Kn()(`local-storage-client-${String(e)}-event`){}),this.get=et(this.shapes,e=>(t={})=>this.getAllValues(t)[e]),this.listen=et(this.shapes,e=>t=>this.listenTarget.listen(this.keyEvents[e],async e=>{await t(e.detail)})),this.set=et(this.shapes,e=>t=>{ue(t,this.shapes[e],{allowExtraKeys:!0},`LocalStorageClient: Invalid value for key '${String(e)}'.`);let n=this.getAllValues();return n[e]=t,globalThis.localStorage.setItem(this.storeName,JSON.stringify(n)),this.listenTarget.dispatch(new GX({detail:n})),this.listenTarget.dispatch(new this.keyEvents[e]({detail:t})),t}),this.delete=et(this.shapes,e=>()=>{let t=this.getAllValues();delete t[e],globalThis.localStorage.setItem(this.storeName,JSON.stringify(t)),this.listenTarget.dispatch(new GX({detail:t})),this.listenTarget.dispatch(new this.keyEvents[e]({detail:void 0}))})}storeName;getAllValues({throwErrorOnFailure:e=!1}={}){return St(()=>Mt(JSON.parse(globalThis.localStorage.getItem(this.storeName)||`{}`),(t,n)=>{let r=this.shapes[t];if(r){if(e)ue(n,r,{allowExtraKeys:!0});else if(!Ke(n,r,{allowExtraKeys:!0}))return;return{key:t,value:n}}}),{handleError:t=>{if(e)throw Ce(t,`LocalStorageClient: store '${this.storeName}' is corrupt and cannot be loaded.`);return{}}})}listenToAllValues(e){return this.listenTarget.listen(GX,async t=>{await e(t.detail)})}listen;get;set;delete;clear(){globalThis.localStorage.removeItem(this.storeName)}destroy(){this.listenTarget.destroy()}},qX=new KX({lastFormat:_l(OG)}),JX=Hn(OG).map(e=>({value:e,label:e.toUpperCase()})),YX=Ee()({tagName:`vir-color-picker`,cssVars:{"vir-color-picker-swatch-width":{default:`100px`,syntax:ke.Length},"vir-color-picker-swatch-height":{default:`100px`,syntax:ke.Length}},state(){return{selectedFormatName:qX.get.lastFormat()||OG.rgb,rawInput:void 0}},hostClasses:{"vir-color-picker-always-show":({inputs:e})=>!!e.alwaysShowPicker},styles:({cssVars:e,hostClasses:t})=>S`
+            `:o}}),QX=class extends Kn()(`local-storage-client-all-values-event`){},$X=class{shapes;options;listenTarget=new Yn;keyEvents;get AllValuesType(){throw Error(`Cannot use AllValuesType as a runtime value. It is a type only.`)}get ValueType(){throw Error(`Cannot use ValueType as a runtime value. It is a type only.`)}constructor(e,t={}){this.shapes=e,this.options=t,this.storeName=t.storeName||`local-storage-client`,this.keyEvents=et(e,e=>class extends Kn()(`local-storage-client-${String(e)}-event`){}),this.get=et(this.shapes,e=>(t={})=>this.getAllValues(t)[e]),this.listen=et(this.shapes,e=>t=>this.listenTarget.listen(this.keyEvents[e],async e=>{await t(e.detail)})),this.set=et(this.shapes,e=>t=>{ue(t,this.shapes[e],{allowExtraKeys:!0},`LocalStorageClient: Invalid value for key '${String(e)}'.`);let n=this.getAllValues();return n[e]=t,globalThis.localStorage.setItem(this.storeName,JSON.stringify(n)),this.listenTarget.dispatch(new QX({detail:n})),this.listenTarget.dispatch(new this.keyEvents[e]({detail:t})),t}),this.delete=et(this.shapes,e=>()=>{let t=this.getAllValues();delete t[e],globalThis.localStorage.setItem(this.storeName,JSON.stringify(t)),this.listenTarget.dispatch(new QX({detail:t})),this.listenTarget.dispatch(new this.keyEvents[e]({detail:void 0}))})}storeName;getAllValues({throwErrorOnFailure:e=!1}={}){return St(()=>Mt(JSON.parse(globalThis.localStorage.getItem(this.storeName)||`{}`),(t,n)=>{let r=this.shapes[t];if(r){if(e)ue(n,r,{allowExtraKeys:!0});else if(!Ke(n,r,{allowExtraKeys:!0}))return;return{key:t,value:n}}}),{handleError:t=>{if(e)throw Ce(t,`LocalStorageClient: store '${this.storeName}' is corrupt and cannot be loaded.`);return{}}})}listenToAllValues(e){return this.listenTarget.listen(QX,async t=>{await e(t.detail)})}listen;get;set;delete;clear(){globalThis.localStorage.removeItem(this.storeName)}destroy(){this.listenTarget.destroy()}},eZ=new $X({lastFormat:_l(OG)}),tZ=Hn(OG).map(e=>({value:e,label:e.toUpperCase()})),nZ=Ee()({tagName:`vir-color-picker`,cssVars:{"vir-color-picker-swatch-width":{default:`100px`,syntax:ke.Length},"vir-color-picker-swatch-height":{default:`100px`,syntax:ke.Length}},state(){return{selectedFormatName:eZ.get.lastFormat()||OG.rgb,rawInput:void 0}},hostClasses:{"vir-color-picker-always-show":({inputs:e})=>!!e.alwaysShowPicker},styles:({cssVars:e,hostClasses:t})=>S`
         :host {
             display: inline-flex;
         }
@@ -33841,7 +33842,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             display: flex;
         }
 
-        ${VX} {
+        ${JX} {
             width: 100%;
             height: 100%;
             box-sizing: border-box;
@@ -33853,7 +33854,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             gap: 4px;
             align-items: center;
 
-            & ${jX} {
+            & ${RX} {
                 width: ${e[`vir-color-picker-swatch-width`].value};
                 height: ${e[`vir-color-picker-swatch-height`].value};
                 box-sizing: border-box;
@@ -33861,7 +33862,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
 
         .code-button {
-            font-family: ${hX[`vira-monospace`].value};
+            font-family: ${SX[`vira-monospace`].value};
             font-size: 12px;
             color: #666;
             display: flex;
@@ -33869,7 +33870,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             gap: 2px;
             align-items: center;
 
-            & ${TX} {
+            & ${MX} {
                 width: 18px;
                 aspect-ratio: 1;
             }
@@ -33894,7 +33895,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
 
         .pop-up .picker {
-            ${_X.menuShadow}
+            ${wX.menuShadow}
         }
 
         .raw-input-wrapper {
@@ -33904,10 +33905,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             justify-content: center;
             gap: 8px;
             font-size: 12px;
-            ${dX[`vira-form-border-color`].name}: #ddd;
+            ${uX[`vira-form-border-color`].name}: #ddd;
             color: #666;
 
-            & ${DX} {
+            & ${PX} {
                 flex-grow: 1;
                 width: unset;
                 color: inherit;
@@ -33917,14 +33918,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
     `,events:{colorChange:x()},render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=XY.isColor(e.color)?e.color:new XY(e.color||`black`),o=kG[r.selectedFormatName],s=r.rawInput??a.toCss()[o.rawSyntax],c=w`
             <div class="raw-input-wrapper">
-                <${DX.assign({value:s})}
-                    ${N(DX.events.valueChange,e=>{let r=e.detail;i({rawInput:r}),XY.isValidColorString(r)&&t(new n.colorChange(r))})}
-                ></${DX}>
+                <${PX.assign({value:s})}
+                    ${N(PX.events.valueChange,e=>{let r=e.detail;i({rawInput:r}),XY.isValidColorString(r)&&t(new n.colorChange(r))})}
+                ></${PX}>
                 <button
                     class="code-button"
                     ${N(`click`,async()=>{await globalThis.navigator.clipboard.writeText(s)})}
                 >
-                    <${TX.assign({icon:aX,fitContainer:!0})}></${TX}>
+                    <${MX.assign({icon:aX,fitContainer:!0})}></${MX}>
                 </button>
             </div>
         `,l=w`
@@ -33933,52 +33934,52 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 ${N(`click`,async()=>{await globalThis.navigator.clipboard.writeText(a.hexString)})}
             >
                 <span>${a.hexString}</span>
-                <${TX.assign({icon:aX,fitContainer:!0})}></${TX}>
+                <${MX.assign({icon:aX,fitContainer:!0})}></${MX}>
             </button>
         `,u=w`
             <div class="swatch-wrapper">
-                <${jX.assign({backgroundColor:a})}></${jX}>
+                <${RX.assign({backgroundColor:a})}></${RX}>
                 ${e.showHexValue?l:g}
             </div>
         `,d=w`
             <div class="picker">
-                <${WX.assign({options:JX,value:r.selectedFormatName})}
-                    ${N(WX.events.valueChange,e=>{let t=lt.isEnumValue(e.detail,OG);t&&(i({selectedFormatName:t}),qX.set.lastFormat(t))})}
-                ></${WX}>
+                <${ZX.assign({options:tZ,value:r.selectedFormatName})}
+                    ${N(ZX.events.valueChange,e=>{let t=lt.isEnumValue(e.detail,OG);t&&(i({selectedFormatName:t}),eZ.set.lastFormat(t))})}
+                ></${ZX}>
                 ${c}
-                <${AX.assign({color:a,colorFormatName:r.selectedFormatName,showFormatName:!1})}
-                    ${N(AX.events.colorChange,e=>{t(new n.colorChange(e.detail)),i({rawInput:void 0})})}
-                ></${AX}>
+                <${LX.assign({color:a,colorFormatName:r.selectedFormatName,showFormatName:!1})}
+                    ${N(LX.events.colorChange,e=>{t(new n.colorChange(e.detail)),i({rawInput:void 0})})}
+                ></${LX}>
             </div>
         `;return e.alwaysShowPicker?w`
                 ${u} ${d}
             `:w`
-                <${VX.assign({keepOpenAfterInteraction:!0})}>
+                <${JX.assign({keepOpenAfterInteraction:!0})}>
                     <button
                         class="trigger"
-                        slot=${VX.slotNames.trigger}
-                        ${N(`mousedown`,()=>{let e=qX.get.lastFormat();e&&i({selectedFormatName:e})})}
+                        slot=${JX.slotNames.trigger}
+                        ${N(`mousedown`,()=>{let e=eZ.get.lastFormat();e&&i({selectedFormatName:e})})}
                     >
                         ${u}
                     </button>
-                    <div class="pop-up" slot=${VX.slotNames.popUp}>
+                    <div class="pop-up" slot=${JX.slotNames.popUp}>
                         ${d}
                     </div>
-                </${VX}>
-            `}});function XX(e){return[m(e.prefix),`theme-vir-style`].join(`-`)}function ZX(e,n,r){return t(Be(Hn(e.colors).flatMap(e=>[QX({layerKey:`background`,themeColor:e,themeOverride:n}),QX({layerKey:`foreground`,themeColor:e,themeOverride:n})])),XX(e),r)}function QX({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}function $X(e,t){let n=t?.paletteVarName;return[`export const theme = defineColorTheme(\n${iZ(e.init.default,1,void 0,n)},\n${aZ(e.init.colors,1,e.init.default,n)},\n);`,...(t?.overrides||[]).map(e=>eZ(e,n))].join(`
+                </${JX}>
+            `}});function rZ(e){return[m(e.prefix),`theme-vir-style`].join(`-`)}function iZ(e,n,r){return t(Be(Hn(e.colors).flatMap(e=>[aZ({layerKey:`background`,themeColor:e,themeOverride:n}),aZ({layerKey:`foreground`,themeColor:e,themeOverride:n})])),rZ(e),r)}function aZ({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}function oZ(e,t){let n=t?.paletteVarName;return[`export const theme = defineColorTheme(\n${fZ(e.init.default,1,void 0,n)},\n${pZ(e.init.colors,1,e.init.default,n)},\n);`,...(t?.overrides||[]).map(e=>sZ(e,n))].join(`
 
-`)}function eZ(e,t){let n=[],r=[];tZ(e.asTheme.init.default.foreground,e.originalTheme.init.default.foreground)||r.push(`${X(3)}foreground: ${rZ(e.asTheme.init.default.foreground,3,t)},`),tZ(e.asTheme.init.default.background,e.originalTheme.init.default.background)||r.push(`${X(3)}background: ${rZ(e.asTheme.init.default.background,3,t)},`),r.length>0&&n.push(`${X(2)}defaultOverride: {\n${r.join(`
-`)}\n${X(2)}},`);let i=[];return p(e.asTheme.init.colors).forEach(([n,r])=>{let a=e.originalTheme.init.colors[n];if(!a)return;let o=[];`foreground`in r&&(!(`foreground`in a)||!tZ(r.foreground,a.foreground))&&o.push(`${X(4)}foreground: ${rZ(r.foreground,4,t)},`),`background`in r&&(!(`background`in a)||!tZ(r.background,a.background))&&o.push(`${X(4)}background: ${rZ(r.background,4,t)},`),o.length>0&&i.push(`${X(3)}'${n}': {\n${o.join(`
-`)}\n${X(3)}},`)}),i.length>0&&n.push(`${X(2)}colorOverrides: {\n${i.join(`
-`)}\n${X(2)}},`),`export const ${te(e.name)}Override = defineColorThemeOverride(\n${X(1)}theme,\n${X(1)}'${e.name}',\n${X(1)}{\n${n.join(`
-`)}\n${X(1)}},\n);`}function X(e){return`    `.repeat(e)}function tZ(e,t){return typeof e==typeof t?(b.isString(e)||e instanceof c?String(e):JSON.stringify(e))===(b.isString(t)||t instanceof c?String(t):JSON.stringify(t)):!1}function nZ(e){let t=e.match(/^var\(--([^,)]+)/);return t?t[1]:void 0}function rZ(e,t,n){if(typeof e==`string`)return`'${e}'`;if(typeof e==`number`)return String(e);if(e instanceof c){let t=String(e);if(n){let e=nZ(t);if(e)return`${n}['${e}']`}return`css\`${t}\``}else if(`refBackground`in e||`refForeground`in e||`refDefaultBackground`in e||`refDefaultForeground`in e){let n=[];return`refForeground`in e&&n.push(`${X(t+1)}refForeground: '${e.refForeground}',`),`refBackground`in e&&n.push(`${X(t+1)}refBackground: '${e.refBackground}',`),`refDefaultForeground`in e&&n.push(`${X(t+1)}refDefaultForeground: true,`),`refDefaultBackground`in e&&n.push(`${X(t+1)}refDefaultBackground: true,`),`{\n${n.join(`
-`)}\n${X(t)}}`}else return`'${e.default}'`}function iZ(e,t,n,r){let i=[];return`foreground`in e&&(!n||!tZ(e.foreground,n.foreground))&&!b.hasKey(e.foreground,`refDefaultForeground`)&&(n&&tZ(e.foreground,n.background)?i.push(`${X(t+1)}foreground: {\n${X(t+2)}refDefaultBackground: true,\n${X(t+1)}},`):i.push(`${X(t+1)}foreground: ${rZ(e.foreground,t+1,r)},`)),`background`in e&&(!n||!tZ(e.background,n.background))&&!b.hasKey(e.background,`refDefaultBackground`)&&(n&&tZ(e.background,n.foreground)?i.push(`${X(t+1)}background: {\n${X(t+2)}refDefaultForeground: true,\n${X(t+1)}},`):i.push(`${X(t+1)}background: ${rZ(e.background,t+1,r)},`)),`${X(t)}{\n${i.join(`
-`)}\n${X(t)}}`}function aZ(e,t,n,r){let i=p(e).map(([e,i])=>`${X(t+1)}'${e}': ${iZ(i,t+1,n,r).trimStart()},`);return`${X(t)}{\n${i.join(`
-`)}\n${X(t)}}`}var oZ=`None`;function sZ({parent:e,title:t,theme:n,hideInverseColors:r,overrides:i,useVerticalLayout:a,prefixGroupByCount:o=2,hideCopyCode:s}){let c={"Show Var Names":ft({controlType:E.Checkbox,initValue:!1}),"Show Contrast Tips":ft({controlType:E.Checkbox,initValue:!0})},l={"Theme Override":ft({controlType:E.Dropdown,initValue:oZ,options:[oZ,...(i||[]).map(e=>{if(e.name===oZ)throw Error(`Cannot have theme override named '${oZ}'`);return e.name})]})},u=O({parent:e,title:t,controls:c});function d({controls:e,theme:t,themeColorName:n}){let i=b.isKeyOf(n,t.colors)?t.colors[n]:void 0,a=b.isKeyOf(n,t.inverse)?t.inverse[n]:void 0;if(!i||!a)throw Error(`No theme color found by name '${n}'`);let o=w`
-            <${NX.assign({color:i,showVarValues:!0,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${NX}>
+`)}function sZ(e,t){let n=[],r=[];lZ(e.asTheme.init.default.foreground,e.originalTheme.init.default.foreground)||r.push(`${cZ(3)}foreground: ${dZ(e.asTheme.init.default.foreground,3,t)},`),lZ(e.asTheme.init.default.background,e.originalTheme.init.default.background)||r.push(`${cZ(3)}background: ${dZ(e.asTheme.init.default.background,3,t)},`),r.length>0&&n.push(`${cZ(2)}defaultOverride: {\n${r.join(`
+`)}\n${cZ(2)}},`);let i=[];return p(e.asTheme.init.colors).forEach(([n,r])=>{let a=e.originalTheme.init.colors[n];if(!a)return;let o=[];`foreground`in r&&(!(`foreground`in a)||!lZ(r.foreground,a.foreground))&&o.push(`${cZ(4)}foreground: ${dZ(r.foreground,4,t)},`),`background`in r&&(!(`background`in a)||!lZ(r.background,a.background))&&o.push(`${cZ(4)}background: ${dZ(r.background,4,t)},`),o.length>0&&i.push(`${cZ(3)}'${n}': {\n${o.join(`
+`)}\n${cZ(3)}},`)}),i.length>0&&n.push(`${cZ(2)}colorOverrides: {\n${i.join(`
+`)}\n${cZ(2)}},`),`export const ${te(e.name)}Override = defineColorThemeOverride(\n${cZ(1)}theme,\n${cZ(1)}'${e.name}',\n${cZ(1)}{\n${n.join(`
+`)}\n${cZ(1)}},\n);`}function cZ(e){return`    `.repeat(e)}function lZ(e,t){return typeof e==typeof t?(b.isString(e)||e instanceof c?String(e):JSON.stringify(e))===(b.isString(t)||t instanceof c?String(t):JSON.stringify(t)):!1}function uZ(e){let t=e.match(/^var\(--([^,)]+)/);return t?t[1]:void 0}function dZ(e,t,n){if(typeof e==`string`)return`'${e}'`;if(typeof e==`number`)return String(e);if(e instanceof c){let t=String(e);if(n){let e=uZ(t);if(e)return`${n}['${e}']`}return`css\`${t}\``}else if(`refBackground`in e||`refForeground`in e||`refDefaultBackground`in e||`refDefaultForeground`in e){let n=[];return`refForeground`in e&&n.push(`${cZ(t+1)}refForeground: '${e.refForeground}',`),`refBackground`in e&&n.push(`${cZ(t+1)}refBackground: '${e.refBackground}',`),`refDefaultForeground`in e&&n.push(`${cZ(t+1)}refDefaultForeground: true,`),`refDefaultBackground`in e&&n.push(`${cZ(t+1)}refDefaultBackground: true,`),`{\n${n.join(`
+`)}\n${cZ(t)}}`}else return`'${e.default}'`}function fZ(e,t,n,r){let i=[];return`foreground`in e&&(!n||!lZ(e.foreground,n.foreground))&&!b.hasKey(e.foreground,`refDefaultForeground`)&&(n&&lZ(e.foreground,n.background)?i.push(`${cZ(t+1)}foreground: {\n${cZ(t+2)}refDefaultBackground: true,\n${cZ(t+1)}},`):i.push(`${cZ(t+1)}foreground: ${dZ(e.foreground,t+1,r)},`)),`background`in e&&(!n||!lZ(e.background,n.background))&&!b.hasKey(e.background,`refDefaultBackground`)&&(n&&lZ(e.background,n.foreground)?i.push(`${cZ(t+1)}background: {\n${cZ(t+2)}refDefaultForeground: true,\n${cZ(t+1)}},`):i.push(`${cZ(t+1)}background: ${dZ(e.background,t+1,r)},`)),`${cZ(t)}{\n${i.join(`
+`)}\n${cZ(t)}}`}function pZ(e,t,n,r){let i=p(e).map(([e,i])=>`${cZ(t+1)}'${e}': ${fZ(i,t+1,n,r).trimStart()},`);return`${cZ(t)}{\n${i.join(`
+`)}\n${cZ(t)}}`}var mZ=`None`;function hZ({parent:e,title:t,theme:n,hideInverseColors:r,overrides:i,useVerticalLayout:a,prefixGroupByCount:o=2,hideCopyCode:s}){let c={"Show Var Names":ft({controlType:E.Checkbox,initValue:!1}),"Show Contrast Tips":ft({controlType:E.Checkbox,initValue:!0})},l={"Theme Override":ft({controlType:E.Dropdown,initValue:mZ,options:[mZ,...(i||[]).map(e=>{if(e.name===mZ)throw Error(`Cannot have theme override named '${mZ}'`);return e.name})]})},u=O({parent:e,title:t,controls:c});function d({controls:e,theme:t,themeColorName:n}){let i=b.isKeyOf(n,t.colors)?t.colors[n]:void 0,a=b.isKeyOf(n,t.inverse)?t.inverse[n]:void 0;if(!i||!a)throw Error(`No theme color found by name '${n}'`);let o=w`
+            <${BX.assign({color:i,showVarValues:!0,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${BX}>
         `,s=r?void 0:a;return w`
             <div class="with-inverse">${o}${s?w`
-                  <${NX.assign({color:s,showVarValues:!1,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${NX}>
+                  <${BX.assign({color:s,showVarValues:!1,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${BX}>
               `:g}</div>
         `}function f(e,t,n){let r=ce(Object.keys(t.colors),e=>o?e.split(`-`).slice(0,o).join(`-`):e);Object.entries(r).forEach(([r,i])=>{i&&e({title:r,styles:S`
                         :host {
@@ -34002,11 +34003,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             </div>
                         `}})})}let p=[`Click a color preview to show CSS var names and values.`];return[u,O({parent:u,title:`Default`,descriptionParagraphs:p,useVerticalExamples:a,controls:{...s?{}:{copy:ft({controlType:E.Custom,content:w`
                               <button
-                                  ${N(`click`,async()=>{let e=$X(n,{paletteVarName:`viraColorPalette`,overrides:i});await navigator.clipboard.writeText(e)})}
+                                  ${N(`click`,async()=>{let e=oZ(n,{paletteVarName:`viraColorPalette`,overrides:i});await navigator.clipboard.writeText(e)})}
                               >
                                   Copy Code
                               </button>
-                          `})},...l},defineExamples({defineExample:e}){f(e,n,i)}}),...(i||[]).map(e=>O({parent:u,title:e.name,useVerticalExamples:a,descriptionParagraphs:p,defineExamples({defineExample:t}){f(t,e.asTheme,void 0)}}))]}var cZ=[`pagehide`,`pageshow`,`popstate`],lZ=30,uZ=cd()({tagName:`vira-drawer`,events:{drawerClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0,isDragging:!1,dragStartY:0,dragCurrentY:0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-drawer-dragging":({state:e})=>e.isDragging,"vira-drawer-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`vira-drawer-drawer-title`],cssVars:{"vira-drawer-backdrop-filter":`blur(3px)`,"vira-drawer-max-height":`80dvh`},styles:({cssVars:e,hostClasses:t})=>S`
+                          `})},...l},defineExamples({defineExample:e}){f(e,n,i)}}),...(i||[]).map(e=>O({parent:u,title:e.name,useVerticalExamples:a,descriptionParagraphs:p,defineExamples({defineExample:t}){f(t,e.asTheme,void 0)}}))]}var gZ=[`pagehide`,`pageshow`,`popstate`],_Z=30,vZ=cd()({tagName:`vira-drawer`,events:{drawerClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0,isDragging:!1,dragStartY:0,dragCurrentY:0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-drawer-dragging":({state:e})=>e.isDragging,"vira-drawer-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`vira-drawer-drawer-title`],cssVars:{"vira-drawer-backdrop-filter":`blur(3px)`,"vira-drawer-max-height":`80dvh`},styles:({cssVars:e,hostClasses:t})=>S`
         :host {
             display: contents;
         }
@@ -34118,7 +34119,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 padding: 0;
             }
         }
-    `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=cZ.map(e=>Zn(e,()=>{i(new r.drawerClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.drawerClose))}if(t.dialogElement)if(t.isDragging){let e=Math.max(0,t.dragCurrentY-t.dragStartY);t.dialogElement.style.transform=`translateY(${String(e)}px)`,t.dialogElement.style.transition=`none`}else t.dialogElement.style.transform=``,t.dialogElement.style.transition=``;return w`
+    `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=gZ.map(e=>Zn(e,()=>{i(new r.drawerClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.drawerClose))}if(t.dialogElement)if(t.isDragging){let e=Math.max(0,t.dragCurrentY-t.dragStartY);t.dialogElement.style.transform=`translateY(${String(e)}px)`,t.dialogElement.style.transition=`none`}else t.dialogElement.style.transform=``,t.dialogElement.style.transition=``;return w`
             <dialog
                 ${eu(e=>{n({dialogElement:T.instanceOf(e,HTMLDialogElement)})})}
                 ${N(`close`,()=>{o()})}
@@ -34131,7 +34132,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <div
                         class="drag-handle-wrapper"
                         ${N(`dblclick`,()=>{o()})}
-                        ${N(`pointerdown`,e=>{n({isDragging:!0,dragStartY:e.clientY,dragCurrentY:e.clientY});function r(e){n({dragCurrentY:e.clientY})}function i(e){let r=e.clientY-t.dragStartY;n({isDragging:!1,dragStartY:0,dragCurrentY:0}),r>lZ&&o(),a.forEach(e=>e())}let a=[Zn(`pointermove`,r),Zn(`pointerup`,i)]})}
+                        ${N(`pointerdown`,e=>{n({isDragging:!0,dragStartY:e.clientY,dragCurrentY:e.clientY});function r(e){n({dragCurrentY:e.clientY})}function i(e){let r=e.clientY-t.dragStartY;n({isDragging:!1,dragStartY:0,dragCurrentY:0}),r>_Z&&o(),a.forEach(e=>e())}let a=[Zn(`pointermove`,r),Zn(`pointerup`,i)]})}
                     >
                         <div class="drag-handle"></div>
                     </div>
@@ -34158,7 +34159,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                           `:g}
                 </div>
             </dialog>
-        `}}),dZ=cd()({tagName:`vira-dropdown`,testIds:[`leadingIcon`,`prefixText`,`trigger`],styles:S`
+        `}}),yZ=cd()({tagName:`vira-dropdown`,testIds:[`leadingIcon`,`prefixText`,`trigger`],styles:S`
         :host {
             display: inline-flex;
             vertical-align: middle;
@@ -34289,14 +34290,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="dropdown-label">${t.label}</span>
                     ${p}
                 </label>
-            `:p}}),fZ=cd()({tagName:`vira-error`,cssVars:{"vira-error-font-weight":`bold`},styles:({cssVars:e})=>S`
+            `:p}}),bZ=cd()({tagName:`vira-error`,cssVars:{"vira-error-font-weight":`bold`},styles:({cssVars:e})=>S`
         :host {
             color: ${z[`vira-form-error-color`].value};
             font-weight: ${e[`vira-error-font-weight`].value};
         }
     `,render(){return w`
             <slot></slot>
-        `}}),Z=function(e){return e.Text=`text`,e.ExistingPassword=`existing-password`,e.NewPassword=`new-password`,e.PlainPassword=`plain-password`,e.Email=`email`,e.Number=`number`,e.Select=`select`,e.Checkbox=`checkbox`,e.TextArea=`text-area`,e}({});function pZ(e,t){if(e)return t?Bt({value:e,suffix:`*`}):e}function mZ(e){return Hn(e).every(e=>e.isHidden||!e.isRequired?!0:b.isString(e.value)?!!e.value:e.value!=null)}function hZ({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split(``).every(e=>hZ({input:e,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function gZ({value:e,allowed:t,blocked:n}){let r=String(e),i=t?hZ({input:r,matcher:t}):!0,a=n?hZ({input:r,matcher:n}):!1;return i&&!a}function _Z(e){let t=String(e.value);if(!e.value)return{filtered:t,blocked:``};let{filtered:n,blocked:r}=t.split(``).reduce((t,n)=>(gZ({...e,value:n})?t.filtered.push(n):t.blocked.push(n),t),{filtered:[],blocked:[]});return{filtered:n.join(``),blocked:r.join(``)}}function vZ({inputs:e,previousValue:t,event:n,elementConstructor:r,inputBlockedCallback:i,newValueCallback:a}){let o=bd(n,r||HTMLInputElement),s=b.hasKey(n,`data`)&&lt.isString(n.data)||``;if(s){let{blocked:t}=_Z({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});t.length&&i(t)}let c=_Z({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==c&&(o.value=c),t!==c&&a(c)}var yZ=function(e){return e.Default=`text`,e.Password=`password`,e.Email=`email`,e.Number=`number`,e}({}),Q=cd()({tagName:`vira-input`,cssVars:{"vira-input-padding-horizontal":`10px`,"vira-input-padding-vertical":`6px`},styles:({hostClasses:e,cssVars:t})=>S`
+        `}}),Z=function(e){return e.Text=`text`,e.ExistingPassword=`existing-password`,e.NewPassword=`new-password`,e.PlainPassword=`plain-password`,e.Email=`email`,e.Number=`number`,e.Select=`select`,e.Checkbox=`checkbox`,e.TextArea=`text-area`,e}({});function xZ(e,t){if(e)return t?Bt({value:e,suffix:`*`}):e}function SZ(e){return Hn(e).every(e=>e.isHidden||!e.isRequired?!0:b.isString(e.value)?!!e.value:e.value!=null)}function CZ({input:e,matcher:t}){return!e||!t?!0:e.length>1?e.split(``).every(e=>CZ({input:e,matcher:t})):t instanceof RegExp?!!e.match(t):t.includes(e)}function wZ({value:e,allowed:t,blocked:n}){let r=String(e),i=t?CZ({input:r,matcher:t}):!0,a=n?CZ({input:r,matcher:n}):!1;return i&&!a}function TZ(e){let t=String(e.value);if(!e.value)return{filtered:t,blocked:``};let{filtered:n,blocked:r}=t.split(``).reduce((t,n)=>(wZ({...e,value:n})?t.filtered.push(n):t.blocked.push(n),t),{filtered:[],blocked:[]});return{filtered:n.join(``),blocked:r.join(``)}}function EZ({inputs:e,previousValue:t,event:n,elementConstructor:r,inputBlockedCallback:i,newValueCallback:a}){let o=bd(n,r||HTMLInputElement),s=b.hasKey(n,`data`)&&lt.isString(n.data)||``;if(s){let{blocked:t}=TZ({value:s,allowed:e.allowedInputs,blocked:e.blockedInputs});t.length&&i(t)}let c=TZ({value:o.value,allowed:e.allowedInputs,blocked:e.blockedInputs}).filtered;o.value!==c&&(o.value=c),t!==c&&a(c)}var DZ=function(e){return e.Default=`text`,e.Password=`password`,e.Email=`email`,e.Number=`number`,e}({}),Q=cd()({tagName:`vira-input`,cssVars:{"vira-input-padding-horizontal":`10px`,"vira-input-padding-vertical":`5px`},styles:({hostClasses:e,cssVars:t})=>S`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -34394,6 +34395,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
+                min-height: ${td[Zu.Medium]}px;
                 box-sizing: border-box;
                 align-items: center;
                 position: relative;
@@ -34511,7 +34513,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     display: none;
                 }
             }
-        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+        `,events:{valueChange:x(),inputBlocked:x()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:bt(32)}},hostClasses:{"vira-input-disabled":({inputs:e})=>!!e.disabled,"vira-input-fit-text":({inputs:e})=>!!e.fitText,"vira-input-clear-button-shown":({inputs:e})=>!!e.showClearButton,"vira-input-error":({inputs:e})=>!!e.hasError},render:({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a})=>{let{filtered:o}=TZ({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
                 <span class="readonly-value">${o}</span>
             `;return e.label?w`
                     <label>
@@ -34540,7 +34542,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     id=${M(e.label?n.randomId:void 0)}
                     aria-label=${M(e.label||void 0)}
                     autofocus=${!1}
-                    type=${bZ(e.type,n.showPassword)}
+                    type=${OZ(e.type,n.showPassword)}
                     style=${c}
                     autocomplete=${M(u?`off`:void 0)}
                     autocorrect=${M(u?`off`:void 0)}
@@ -34548,7 +34550,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     spellcheck=${M(u?`false`:void 0)}
                     ?disabled=${e.disabled}
                     .value=${o}
-                    ${N(`input`,n=>{vZ({inputs:e,previousValue:o,event:n,inputBlockedCallback(e){t(new i.inputBlocked(e))},newValueCallback(e){t(new i.valueChange(e))}})})}
+                    ${N(`input`,n=>{EZ({inputs:e,previousValue:o,event:n,inputBlockedCallback(e){t(new i.inputBlocked(e))},newValueCallback(e){t(new i.valueChange(e))}})})}
                     placeholder=${M(e.placeholder||void 0)}
                     ${Yl(e.attributePassthrough)}
                 />
@@ -34591,7 +34593,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="input-label">${e.label}</span>
                     ${d}
                 </label>
-            `:d}});function bZ(e,t){return e===`password`&&t?`text`:e||`text`}function xZ(e){return`groupName`in e}function SZ(e,t){return w`
+            `:d}});function OZ(e,t){return e===`password`&&t?`text`:e||`text`}function kZ(e){return`groupName`in e}function AZ(e,t){return w`
         <option
             ?selected=${e.value===t}
             aria-label=${e.label}
@@ -34750,7 +34752,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
     `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return T.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[Xn(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),Xn(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=w`
                 <span class="readonly-value">
-                    ${e.options.flatMap(e=>xZ(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
+                    ${e.options.flatMap(e=>kZ(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
                 </span>
             `;return e.label?w`
                     <label ${Yl(e.attributePassthrough?.label)}>
@@ -34770,15 +34772,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     id=${M(e.label?t.randomId:void 0)}
                     aria-label=${M(e.label||void 0)}
                     aria-disabled=${M(e.disabled?`true`:void 0)}
-                    ${N(`input`,t=>{let a=bd(t,HTMLSelectElement),o=a.value;a.value!==i&&(a.selectedIndex=e.options.flatMap(e=>xZ(e)?[...e.options]:[e]).findIndex(e=>e.value===i)),n(new r.valueChange(o))})}
+                    ${N(`input`,t=>{let a=bd(t,HTMLSelectElement),o=a.value;a.value!==i&&(a.selectedIndex=e.options.flatMap(e=>kZ(e)?[...e.options]:[e]).findIndex(e=>e.value===i)),n(new r.valueChange(o))})}
                     ${Yl(e.attributePassthrough?.select)}
                 >
                     ${a}
-                    ${e.options.map(e=>xZ(e)?w`
+                    ${e.options.map(e=>kZ(e)?w`
                                 <optgroup label=${e.groupName}>
-                                    ${e.options.map(e=>SZ(e,i))}
+                                    ${e.options.map(e=>AZ(e,i))}
                                 </optgroup>
-                            `:SZ(e,i))}
+                            `:AZ(e,i))}
                 </select>
                 <!--
                     These separate style elements are necessary so that we can select them as
@@ -34801,7 +34803,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="select-label">${e.label}</span>
                     ${o}
                 </label>
-            `:o}}),CZ=cd()({tagName:`vira-text-area`,cssVars:{"vira-text-area-padding-horizontal":`10px`,"vira-text-area-padding-vertical":`6px`},styles:({hostClasses:e,cssVars:t})=>S`
+            `:o}}),jZ=cd()({tagName:`vira-text-area`,cssVars:{"vira-text-area-padding-horizontal":`10px`,"vira-text-area-padding-vertical":`6px`},styles:({hostClasses:e,cssVars:t})=>S`
         :host {
             position: relative;
             display: inline-flex;
@@ -34903,7 +34905,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 display: none;
             }
         }
-    `,events:{valueChange:x(),inputBlocked:x()},state(){return{randomId:bt(32)}},hostClasses:{"vira-text-area-disabled":({inputs:e})=>!!e.disabled,"vira-text-area-error":({inputs:e})=>!!e.hasError,"vira-text-area-prevent-resize":({inputs:e})=>!!e.preventResize||!!e.disabled},render({inputs:e,dispatch:t,state:n,events:r}){let{filtered:i}=_Z({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+    `,events:{valueChange:x(),inputBlocked:x()},state(){return{randomId:bt(32)}},hostClasses:{"vira-text-area-disabled":({inputs:e})=>!!e.disabled,"vira-text-area-error":({inputs:e})=>!!e.hasError,"vira-text-area-prevent-resize":({inputs:e})=>!!e.preventResize||!!e.disabled},render({inputs:e,dispatch:t,state:n,events:r}){let{filtered:i}=TZ({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
                 <span class="readonly-value">${i}</span>
             `;return e.label?w`
                     <label>
@@ -34923,7 +34925,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     spellcheck=${M(e.disableBrowserHelps?`false`:void 0)}
                     placeholder=${M(e.placeholder||void 0)}
                     .value=${i}
-                    ${N(`input`,n=>{vZ({inputs:e,previousValue:i,event:n,elementConstructor:HTMLTextAreaElement,inputBlockedCallback(e){t(new r.inputBlocked(e))},newValueCallback(e){t(new r.valueChange(e))}})})}
+                    ${N(`input`,n=>{EZ({inputs:e,previousValue:i,event:n,elementConstructor:HTMLTextAreaElement,inputBlockedCallback(e){t(new r.inputBlocked(e))},newValueCallback(e){t(new r.valueChange(e))}})})}
                     ${Yl(e.attributePassthrough)}
                 ></textarea>
 
@@ -34934,7 +34936,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <span class="text-area-label">${e.label}</span>
                     ${a}
                 </label>
-            `:a}}),wZ=cd()({tagName:`vira-form`,state(){return{lastIsValid:!1}},events:{valueChange:x(),validChange:x()},styles:S`
+            `:a}}),MZ=cd()({tagName:`vira-form`,state(){return{lastIsValid:!1}},events:{valueChange:x(),validChange:x()},styles:S`
         :host {
             display: flex;
         }
@@ -34973,17 +34975,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 width: 100%;
                 vertical-align: top;
 
-                & > ${W}, & > ${Q}, & > ${$}, & > ${CZ} {
+                & > ${W}, & > ${Q}, & > ${$}, & > ${jZ} {
                     width: 100%;
                 }
             }
         }
-    `,render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=mZ(e.fields);a!==r.lastIsValid&&(i({lastIsValid:a}),t(new n.validChange({allFieldsAreValid:a})));function o({fieldTemplate:t,label:n}){return e.useHorizontalLabels?w`
+    `,render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=SZ(e.fields);a!==r.lastIsValid&&(i({lastIsValid:a}),t(new n.validChange({allFieldsAreValid:a})));function o({fieldTemplate:t,label:n}){return e.useHorizontalLabels?w`
                     <tr>
                         <th scope="row">${n}</th>
                         <td>${t}</td>
                     </tr>
-                `:t}let s=p(e.fields).map(([r,i])=>{let a=pZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),s=!!(e.isDisabled||i.isDisabled),c=e.useHorizontalLabels?void 0:a,l=e.useHorizontalLabels&&a?{"aria-label":a}:{};return i.isHidden?g:i.type===Z.Checkbox?o({label:a,fieldTemplate:w`
+                `:t}let s=p(e.fields).map(([r,i])=>{let a=xZ(i.label,!!i.isRequired&&!e.hideRequiredMarkers),s=!!(e.isDisabled||i.isDisabled),c=e.useHorizontalLabels?void 0:a,l=e.useHorizontalLabels&&a?{"aria-label":a}:{};return i.isHidden?g:i.type===Z.Checkbox?o({label:a,fieldTemplate:w`
                             <${W.assign({value:i.value||!1,isDisabled:!!(s||e.isReadonly),hasError:i.hasError,useHorizontalLabel:e.horizontalCheckboxes,fillWhenChecked:i.fillWhenChecked,fillWhenUnchecked:i.fillWhenUnchecked,label:c,...e.useHorizontalLabels&&a?{attributePassthrough:{"custom-checkbox":l}}:{}})}
                                 ${i.testId?uu(i.testId):g}
                                 ${N(W.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
@@ -34994,17 +34996,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 ${N($.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${$}>
                         `}):i.type===Z.TextArea?o({label:a,fieldTemplate:w`
-                            <${CZ.assign({value:i.value||``,disabled:s,hasError:i.hasError,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize,attributePassthrough:l})}
+                            <${jZ.assign({value:i.value||``,disabled:s,hasError:i.hasError,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize,attributePassthrough:l})}
                                 ${i.testId?uu(i.testId):g}
-                                ${N(CZ.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                            ></${CZ}>
+                                ${N(jZ.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
+                            ></${jZ}>
                         `}):i.type===Z.Number?o({label:a,fieldTemplate:w`
-                            <${Q.assign({value:i.value?.toString()||``,disabled:s,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,type:yZ.Number,attributePassthrough:{...l,...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
+                            <${Q.assign({value:i.value?.toString()||``,disabled:s,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,type:DZ.Number,attributePassthrough:{...l,...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
                                 ${i.testId?uu(i.testId):g}
                                 ${N(Q.events.valueChange,e=>{let a=e.detail===``?void 0:Number(e.detail);t(new n.valueChange({key:r,...i,value:a}))})}
                             ></${Q}>
                         `}):o({label:a,fieldTemplate:w`
-                            <${Q.assign({value:i.value||``,disabled:s,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:{...l,...i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{}},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?yZ.Password:i.type===Z.Email?yZ.Email:yZ.Default})}
+                            <${Q.assign({value:i.value||``,disabled:s,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:{...l,...i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{}},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?DZ.Password:i.type===Z.Email?DZ.Email:DZ.Default})}
                                 ${i.testId?uu(i.testId):g}
                                 ${N(Q.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${Q}>
@@ -35017,7 +35019,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 ${c}
                 <slot></slot>
             </form>
-        `}}),TZ=cd()({tagName:`vira-image`,state(){return{loadedUrls:{},erroredUrls:{}}},hostClasses:{"vira-image-height-constrained":({inputs:e})=>e.dominantDimension===`height`},slotNames:[`vira-image-loading`,`vira-image-error`],events:{imageLoad:x(),imageError:x()},styles:({hostClasses:e})=>S`
+        `}}),NZ=cd()({tagName:`vira-image`,state(){return{loadedUrls:{},erroredUrls:{}}},hostClasses:{"vira-image-height-constrained":({inputs:e})=>e.dominantDimension===`height`},slotNames:[`vira-image-loading`,`vira-image-error`],events:{imageLoad:x(),imageError:x()},styles:({hostClasses:e})=>S`
         :host {
             display: inline-flex;
             overflow: hidden;
@@ -35081,7 +35083,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 ${N(`error`,async a=>{e._debugLoadDelay&&await Fe(e._debugLoadDelay),n({erroredUrls:{...t.erroredUrls,[o]:!0}}),r(new i.imageError(a.error))})}
                 src=${o}
             />
-        `}}),EZ=function(e){return e.String=`string`,e.Number=`number`,e.Integer=`integer`,e.Boolean=`boolean`,e.Null=`null`,e.Object=`object`,e.Array=`array`,e}({}),DZ={string:`string`,number:`number`,integer:`integer`,boolean:`boolean`,null:`null`,object:`object`,array:`array`},OZ=[`string`,`number`,`integer`,`boolean`,`null`,`object`,`array`];function kZ(e){return e===null?`null`:b.isArray(e)?`array`:b.isObject(e)?`object`:b.isBoolean(e)?`boolean`:b.isNumber(e)?`number`:`string`}function AZ(e){if(!(e===void 0||e===!1))return e===!0?{}:e}function jZ(e){if(OZ.includes(e))return e}function MZ(e){return{root:AZ(e),seenRefs:new Set}}function NZ(e,t){if(t.seenRefs.has(e)||!t.root)return{resolved:void 0,context:t};let n=e.startsWith(`#/$defs/`)?u({value:e,prefix:`#/$defs/`}):e.startsWith(`#/definitions/`)?u({value:e,prefix:`#/definitions/`}):void 0;return n?{resolved:AZ((t.root.$defs??t.root.definitions)?.[n]),context:{root:t.root,seenRefs:new Set([...t.seenRefs,e])}}:{resolved:void 0,context:t}}function PZ(e,t){let n=AZ(e);if(!n)return{resolved:void 0,context:t};let r=n.$ref;return b.isString(r)?NZ(r,t):{resolved:n,context:t}}function FZ(e,t){let{resolved:n}=PZ(e,t);if(!n)return[];let r=[...n.anyOf??[],...n.oneOf??[]];return r.length===0?[n]:r.flatMap(e=>FZ(e,{root:t.root,seenRefs:t.seenRefs}))}function IZ(e,t){let n=FZ(e,t);if(n.length===0)return OZ;let r=[];for(let e of n){let t=e.type;if(t==null)if(`const`in e||`enum`in e){let t=`enum`in e&&b.isArray(e.enum)?e.enum:[e.const];for(let e of t)r.push(kZ(e))}else return OZ;else if(b.isArray(t))for(let e of t){let t=jZ(e);t&&r.push(t)}else{let e=jZ(t);e&&r.push(e)}}return ae(r)}function LZ(e){return{string:``,number:0,integer:0,boolean:!1,null:null,object:{},array:[]}[e]}function RZ(e,t,n){let r=FZ(e,n);for(let e of r){let r=IZ(e,n);if(r.length===0||r.includes(t))return e}let i=t===`number`?`integer`:t===`integer`?`number`:void 0;if(i){for(let e of r)if(IZ(e,n).includes(i))return e}return r[0]}function zZ(e,t,n){let r=RZ(e,`object`,n);if(!r)return;let i=r.properties?.[t];if(i!==void 0)return i;let a=r.patternProperties;if(a)for(let[e,n]of Object.entries(a))try{if(new RegExp(e).test(t))return n}catch{continue}return r.additionalProperties}function BZ(e,t,n){let r=RZ(e,`array`,n);if(!r)return;let i=r.items;return b.isArray(i)?i[t]??r.additionalItems:i}function VZ(e,t,n){return BZ(e,t,n)}function HZ(e,t){if(e===void 0)return{allowed:!0,schema:void 0};let n=RZ(e,`object`,t);if(!n)return{allowed:!1,schema:void 0};let r=n.additionalProperties;return r===void 0||r===!1?{allowed:!1,schema:void 0}:{allowed:!0,schema:r===!0?void 0:r}}function UZ(e,t){let n=FZ(e,t);if(n.length===0)return;let r=[];for(let e of n)if(`enum`in e&&b.isArray(e.enum))for(let t of e.enum)r.push(t);else if(`const`in e)r.push(e.const);else return;return r.length>0?r:void 0}function WZ(e,t){return RZ(e,`object`,t)?.required??[]}function GZ(e,t){return RZ(e,`object`,t)?.properties??{}}function KZ(e,t){let n=FZ(e,t);for(let e of n)if(b.isString(e.title))return e.title}function qZ(e){return e.length===0?`root`:e.map(e=>typeof e==`number`?`[${e}]`:`.${e}`).join(``).replace(/^\./,``)}function JZ(e,t){return t===`integer`?b.isNumber(e)&&Number.isInteger(e):kZ(e)===t}function YZ(e,t){if(t===void 0)return[];let n=MZ(t),r=[];return XZ(e,t,[],n,r),r}function XZ(e,t,n,r,i){let a=FZ(t,r);if(a.length===0)return;let o=[];for(let t of a){let i=[];if(ZZ(e,t,n,r,i),i.length===0)return;o.push(i)}a.length===1?i.push(...T.isDefined(o[0])):i.push(`${qZ(n)} did not match any allowed schema branch (anyOf/oneOf).`)}function ZZ(e,t,n,r,i){let a=IZ(t,r),o=kZ(e);if(a.length>0&&!a.some(t=>JZ(e,t))){let t=a.map(e=>DZ[e]).join(` | `);i.push(`${qZ(n)} expected ${t} but got ${o===`number`&&Number.isInteger(e)?`integer`:DZ[o]}.`);return}if(`const`in t&&!QZ(e,t.const)){i.push(`${qZ(n)} must equal const value.`);return}if(`enum`in t&&b.isArray(t.enum)&&!t.enum.some(t=>QZ(e,t))){i.push(`${qZ(n)} must be one of the enum values.`);return}if(b.isObject(e)){let a=t.required??[];for(let t of a)t in e||i.push(`${qZ(n)} is missing required property "${t}".`);let o=t.additionalProperties,s=new Set(Object.keys(t.properties??{}));for(let[a,c]of Object.entries(e)){let e=[...n,a],l=t.properties?.[a];if(l!==void 0)XZ(c,l,e,r,i);else if(o===!1)i.push(`${qZ(e)} is not allowed (additionalProperties is false).`);else if(b.isObject(o))XZ(c,o,e,r,i);else if(o===void 0&&s.size>0)continue}}else if(b.isArray(e)){let a=t.items;e.forEach((e,o)=>{let s=[...n,o];if(b.isArray(a)){let n=a[o]??t.additionalItems;n!==void 0&&XZ(e,n,s,r,i)}else a!==void 0&&XZ(e,a,s,r,i)})}}function QZ(e,t){if(e===t)return!0;if(b.isArray(e)&&b.isArray(t))return e.length===t.length&&e.every((e,n)=>QZ(e,t[n]??null));if(b.isObject(e)&&b.isObject(t)){let n=Object.keys(e),r=Object.keys(t);return n.length===r.length?n.every(n=>QZ(e[n]??null,t[n]??null)):!1}return!1}function $Z(e){return JSON.stringify(e)}function eQ(e,t,n){if(t.length===0)return n;let r=T.isDefined(t[0]),i=t.slice(1);if(typeof r==`number`){let t=b.isArray(e)?e:[],a=eQ(t[r]??null,i,n);if(r>=t.length){let e=[...t];for(;e.length<r;)e.push(null);return e.push(a),e}return t.map((e,t)=>t===r?a:e)}else{let t=b.isObject(e)?e:{},a=t[r]??null;return{...t,[r]:eQ(a,i,n)}}}function tQ(e,t){if(t.length===0)return e;let n=T.isDefined(t[0]),r=t.slice(1);return r.length===0?typeof n==`number`&&b.isArray(e)?e.filter((e,t)=>t!==n):typeof n==`string`&&b.isObject(e)?Bn(e,[n]):e:typeof n==`number`&&b.isArray(e)?e.map((e,t)=>t===n?tQ(e,r):e):typeof n==`string`&&b.isObject(e)?{...e,[n]:tQ(e[n]??null,r)}:e}var nQ=cd()({tagName:`vira-json-form`,events:{valueChange:x()},state(){return{pendingKeys:{},pendingTypes:{},pendingArrayValues:{},showRaw:!1,rawDraft:void 0,rawError:void 0}},styles:S`
+        `}}),PZ=function(e){return e.String=`string`,e.Number=`number`,e.Integer=`integer`,e.Boolean=`boolean`,e.Null=`null`,e.Object=`object`,e.Array=`array`,e}({}),FZ={string:`string`,number:`number`,integer:`integer`,boolean:`boolean`,null:`null`,object:`object`,array:`array`},IZ=[`string`,`number`,`integer`,`boolean`,`null`,`object`,`array`];function LZ(e){return e===null?`null`:b.isArray(e)?`array`:b.isObject(e)?`object`:b.isBoolean(e)?`boolean`:b.isNumber(e)?`number`:`string`}function RZ(e){if(!(e===void 0||e===!1))return e===!0?{}:e}function zZ(e){if(IZ.includes(e))return e}function BZ(e){return{root:RZ(e),seenRefs:new Set}}function VZ(e,t){if(t.seenRefs.has(e)||!t.root)return{resolved:void 0,context:t};let n=e.startsWith(`#/$defs/`)?u({value:e,prefix:`#/$defs/`}):e.startsWith(`#/definitions/`)?u({value:e,prefix:`#/definitions/`}):void 0;return n?{resolved:RZ((t.root.$defs??t.root.definitions)?.[n]),context:{root:t.root,seenRefs:new Set([...t.seenRefs,e])}}:{resolved:void 0,context:t}}function HZ(e,t){let n=RZ(e);if(!n)return{resolved:void 0,context:t};let r=n.$ref;return b.isString(r)?VZ(r,t):{resolved:n,context:t}}function UZ(e,t){let{resolved:n}=HZ(e,t);if(!n)return[];let r=[...n.anyOf??[],...n.oneOf??[]];return r.length===0?[n]:r.flatMap(e=>UZ(e,{root:t.root,seenRefs:t.seenRefs}))}function WZ(e,t){let n=UZ(e,t);if(n.length===0)return IZ;let r=[];for(let e of n){let t=e.type;if(t==null)if(`const`in e||`enum`in e){let t=`enum`in e&&b.isArray(e.enum)?e.enum:[e.const];for(let e of t)r.push(LZ(e))}else return IZ;else if(b.isArray(t))for(let e of t){let t=zZ(e);t&&r.push(t)}else{let e=zZ(t);e&&r.push(e)}}return ae(r)}function GZ(e){return{string:``,number:0,integer:0,boolean:!1,null:null,object:{},array:[]}[e]}function KZ(e,t,n){let r=UZ(e,n);for(let e of r){let r=WZ(e,n);if(r.length===0||r.includes(t))return e}let i=t===`number`?`integer`:t===`integer`?`number`:void 0;if(i){for(let e of r)if(WZ(e,n).includes(i))return e}return r[0]}function qZ(e,t,n){let r=KZ(e,`object`,n);if(!r)return;let i=r.properties?.[t];if(i!==void 0)return i;let a=r.patternProperties;if(a)for(let[e,n]of Object.entries(a))try{if(new RegExp(e).test(t))return n}catch{continue}return r.additionalProperties}function JZ(e,t,n){let r=KZ(e,`array`,n);if(!r)return;let i=r.items;return b.isArray(i)?i[t]??r.additionalItems:i}function YZ(e,t,n){return JZ(e,t,n)}function XZ(e,t){if(e===void 0)return{allowed:!0,schema:void 0};let n=KZ(e,`object`,t);if(!n)return{allowed:!1,schema:void 0};let r=n.additionalProperties;return r===void 0||r===!1?{allowed:!1,schema:void 0}:{allowed:!0,schema:r===!0?void 0:r}}function ZZ(e,t){let n=UZ(e,t);if(n.length===0)return;let r=[];for(let e of n)if(`enum`in e&&b.isArray(e.enum))for(let t of e.enum)r.push(t);else if(`const`in e)r.push(e.const);else return;return r.length>0?r:void 0}function QZ(e,t){return KZ(e,`object`,t)?.required??[]}function $Z(e,t){return KZ(e,`object`,t)?.properties??{}}function eQ(e,t){let n=UZ(e,t);for(let e of n)if(b.isString(e.title))return e.title}function tQ(e){return e.length===0?`root`:e.map(e=>typeof e==`number`?`[${e}]`:`.${e}`).join(``).replace(/^\./,``)}function nQ(e,t){return t===`integer`?b.isNumber(e)&&Number.isInteger(e):LZ(e)===t}function rQ(e,t){if(t===void 0)return[];let n=BZ(t),r=[];return iQ(e,t,[],n,r),r}function iQ(e,t,n,r,i){let a=UZ(t,r);if(a.length===0)return;let o=[];for(let t of a){let i=[];if(aQ(e,t,n,r,i),i.length===0)return;o.push(i)}a.length===1?i.push(...T.isDefined(o[0])):i.push(`${tQ(n)} did not match any allowed schema branch (anyOf/oneOf).`)}function aQ(e,t,n,r,i){let a=WZ(t,r),o=LZ(e);if(a.length>0&&!a.some(t=>nQ(e,t))){let t=a.map(e=>FZ[e]).join(` | `);i.push(`${tQ(n)} expected ${t} but got ${o===`number`&&Number.isInteger(e)?`integer`:FZ[o]}.`);return}if(`const`in t&&!oQ(e,t.const)){i.push(`${tQ(n)} must equal const value.`);return}if(`enum`in t&&b.isArray(t.enum)&&!t.enum.some(t=>oQ(e,t))){i.push(`${tQ(n)} must be one of the enum values.`);return}if(b.isObject(e)){let a=t.required??[];for(let t of a)t in e||i.push(`${tQ(n)} is missing required property "${t}".`);let o=t.additionalProperties,s=new Set(Object.keys(t.properties??{}));for(let[a,c]of Object.entries(e)){let e=[...n,a],l=t.properties?.[a];if(l!==void 0)iQ(c,l,e,r,i);else if(o===!1)i.push(`${tQ(e)} is not allowed (additionalProperties is false).`);else if(b.isObject(o))iQ(c,o,e,r,i);else if(o===void 0&&s.size>0)continue}}else if(b.isArray(e)){let a=t.items;e.forEach((e,o)=>{let s=[...n,o];if(b.isArray(a)){let n=a[o]??t.additionalItems;n!==void 0&&iQ(e,n,s,r,i)}else a!==void 0&&iQ(e,a,s,r,i)})}}function oQ(e,t){if(e===t)return!0;if(b.isArray(e)&&b.isArray(t))return e.length===t.length&&e.every((e,n)=>oQ(e,t[n]??null));if(b.isObject(e)&&b.isObject(t)){let n=Object.keys(e),r=Object.keys(t);return n.length===r.length?n.every(n=>oQ(e[n]??null,t[n]??null)):!1}return!1}function sQ(e){return JSON.stringify(e)}function cQ(e,t,n){if(t.length===0)return n;let r=T.isDefined(t[0]),i=t.slice(1);if(typeof r==`number`){let t=b.isArray(e)?e:[],a=cQ(t[r]??null,i,n);if(r>=t.length){let e=[...t];for(;e.length<r;)e.push(null);return e.push(a),e}return t.map((e,t)=>t===r?a:e)}else{let t=b.isObject(e)?e:{},a=t[r]??null;return{...t,[r]:cQ(a,i,n)}}}function lQ(e,t){if(t.length===0)return e;let n=T.isDefined(t[0]),r=t.slice(1);return r.length===0?typeof n==`number`&&b.isArray(e)?e.filter((e,t)=>t!==n):typeof n==`string`&&b.isObject(e)?Bn(e,[n]):e:typeof n==`number`&&b.isArray(e)?e.map((e,t)=>t===n?lQ(e,r):e):typeof n==`string`&&b.isObject(e)?{...e,[n]:lQ(e[n]??null,r)}:e}var uQ=cd()({tagName:`vira-json-form`,events:{valueChange:x()},state(){return{pendingKeys:{},pendingTypes:{},pendingArrayValues:{},showRaw:!1,rawDraft:void 0,rawError:void 0}},styles:S`
         :host {
             display: flex;
             flex-direction: column;
@@ -35095,7 +35097,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             justify-content: flex-end;
         }
 
-        ${CZ}.json-raw-textarea {
+        ${jZ}.json-raw-textarea {
             width: 100%;
             font-family: ${Du[`vira-monospace`].value};
             font-size: ${z[`vira-form-small-text-size`].value};
@@ -35234,40 +35236,40 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             font-style: italic;
             font-size: ${z[`vira-form-small-text-size`].value};
         }
-    `,render({inputs:e,state:t,dispatch:n,events:r,updateState:i,host:a}){let o=!!e.isDisabled,s=MZ(e.schema);function c(e){return e==null?`null`:String(e)}function l(e){n(new r.valueChange(e))}function u(t,n){l(eQ(e.value,t,n))}function d(t){l(tQ(e.value,t))}function f(e,n){let r=t.pendingTypes[e];return r&&n.includes(r)?r:n[0]??EZ.String}function p(e,n){i({pendingTypes:{...t.pendingTypes,[e]:n}})}function m(e,n){i({pendingKeys:{...t.pendingKeys,[e]:n}})}function h(e,n){let r=t.pendingArrayValues[e];return r===void 0?n:r}function _(e,n){i({pendingArrayValues:{...t.pendingArrayValues,[e]:n}})}function v(e){i({pendingKeys:Bn(t.pendingKeys,[e]),pendingTypes:Bn(t.pendingTypes,[e]),pendingArrayValues:Bn(t.pendingArrayValues,[e])})}function ee(e){return w`
+    `,render({inputs:e,state:t,dispatch:n,events:r,updateState:i,host:a}){let o=!!e.isDisabled,s=BZ(e.schema);function c(e){return e==null?`null`:String(e)}function l(e){n(new r.valueChange(e))}function u(t,n){l(cQ(e.value,t,n))}function d(t){l(lQ(e.value,t))}function f(e,n){let r=t.pendingTypes[e];return r&&n.includes(r)?r:n[0]??PZ.String}function p(e,n){i({pendingTypes:{...t.pendingTypes,[e]:n}})}function m(e,n){i({pendingKeys:{...t.pendingKeys,[e]:n}})}function h(e,n){let r=t.pendingArrayValues[e];return r===void 0?n:r}function _(e,n){i({pendingArrayValues:{...t.pendingArrayValues,[e]:n}})}function v(e){i({pendingKeys:Bn(t.pendingKeys,[e]),pendingTypes:Bn(t.pendingTypes,[e]),pendingArrayValues:Bn(t.pendingArrayValues,[e])})}function ee(e){return w`
                 <${U.assign({icon:Ef,buttonEmphasis:$u.Subtle,color:qu.Danger,buttonSize:Zu.Small})}
                     title="Remove"
                     ${N(`click`,e)}
                 ></${U}>
-            `}function te(e,t,n){let r=kZ(t),i=UZ(n,s);if(i&&i.length>0){let n=i.map(e=>{let t=c(e);return{value:t,label:t}}),r=t==null||b.isString(t)||b.isNumber(t)||b.isBoolean(t);return w`
+            `}function te(e,t,n){let r=LZ(t),i=ZZ(n,s);if(i&&i.length>0){let n=i.map(e=>{let t=c(e);return{value:t,label:t}}),r=t==null||b.isString(t)||b.isNumber(t)||b.isBoolean(t);return w`
                     <${$.assign({options:n,value:r?c(t):void 0,disabled:o})}
                         ${N($.events.valueChange,t=>{u(e,i.find(e=>c(e)===t.detail)??t.detail)})}
                     ></${$}>
-                `}else if(r===EZ.Boolean)return w`
+                `}else if(r===PZ.Boolean)return w`
                     <${W.assign({value:t===!0,isDisabled:o})}
                         ${N(W.events.valueChange,t=>{u(e,t.detail)})}
                     ></${W}>
-                `;else if(r===EZ.Number||r===EZ.Integer){let r=IZ(n,s),i=r.length===1&&r[0]===EZ.Integer;return w`
-                    <${Q.assign({type:yZ.Number,value:b.isNumber(t)?String(t):``,disabled:o,allowedInputs:i?/[\d-]/:/[\d.-]/})}
+                `;else if(r===PZ.Number||r===PZ.Integer){let r=WZ(n,s),i=r.length===1&&r[0]===PZ.Integer;return w`
+                    <${Q.assign({type:DZ.Number,value:b.isNumber(t)?String(t):``,disabled:o,allowedInputs:i?/[\d-]/:/[\d.-]/})}
                         ${N(Q.events.valueChange,t=>{let n=t.detail,r=n===``?0:Number(n),a=Number.isFinite(r)?r:0;u(e,i?Math.trunc(a):a)})}
                     ></${Q}>
-                `}else if(r===EZ.Null)return w`
+                `}else if(r===PZ.Null)return w`
                     <span class="json-null-indicator">null</span>
                 `;return w`
                 <${Q.assign({value:b.isString(t)?t:``,disabled:o})}
                     ${N(Q.events.valueChange,t=>{u(e,t.detail)})}
                 ></${Q}>
-            `}function ne(e,t,n){if(e===EZ.String){let e=b.isString(t)?t:``;return w`
+            `}function ne(e,t,n){if(e===PZ.String){let e=b.isString(t)?t:``;return w`
                     <${Q.assign({value:e,placeholder:`new item value`})}
                         class="json-add-value-input"
                         ${N(Q.events.valueChange,e=>{n(e.detail)})}
                     ></${Q}>
-                `}else if(e===EZ.Number||e===EZ.Integer){let r=e===EZ.Integer,i=b.isNumber(t)?String(t):``;return w`
-                    <${Q.assign({type:yZ.Number,value:i,placeholder:`new item value`,allowedInputs:r?/[\d-]/:/[\d.-]/})}
+                `}else if(e===PZ.Number||e===PZ.Integer){let r=e===PZ.Integer,i=b.isNumber(t)?String(t):``;return w`
+                    <${Q.assign({type:DZ.Number,value:i,placeholder:`new item value`,allowedInputs:r?/[\d-]/:/[\d.-]/})}
                         class="json-add-value-input"
                         ${N(Q.events.valueChange,e=>{let t=e.detail,i=t===``?0:Number(t),a=Number.isFinite(i)?i:0;n(r?Math.trunc(a):a)})}
                     ></${Q}>
-                `}else if(e===EZ.Boolean)return w`
+                `}else if(e===PZ.Boolean)return w`
                     <${W.assign({value:t===!0})}
                         ${N(W.events.valueChange,e=>{n(e.detail)})}
                     ></${W}>
@@ -35276,20 +35278,20 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     title=${t}
                     ${N(`click`,()=>{e||n()})}
                 ></${U}>
-            `}function ie({pathKey:e,allowedTypes:t,canAdd:n,disabledReason:r,onAdd:i}){if(t.length===0)return g;let a=!n;if(t.length===1){let e=T.isDefined(t[0]);return re({isAddDisabled:a,tooltip:a?r:`Add ${DZ[e]}`,onClick:()=>i(e)})}let o=f(e,t),s=t.map(e=>({value:e,label:DZ[e]}));return w`
+            `}function ie({pathKey:e,allowedTypes:t,canAdd:n,disabledReason:r,onAdd:i}){if(t.length===0)return g;let a=!n;if(t.length===1){let e=T.isDefined(t[0]);return re({isAddDisabled:a,tooltip:a?r:`Add ${FZ[e]}`,onClick:()=>i(e)})}let o=f(e,t),s=t.map(e=>({value:e,label:FZ[e]}));return w`
                 <${$.assign({options:s,value:o})}
                     ${N($.events.valueChange,t=>{p(e,t.detail)})}
                 ></${$}>
-                ${re({isAddDisabled:a,tooltip:a?r:`Add ${DZ[o]}`,onClick:()=>i(o)})}
-            `}function ae({pathKey:e,allowedTypes:t,onAdd:n}){if(t.length===0)return g;if(t.length===1){let r=T.isDefined(t[0]);if(!(r===EZ.String||r===EZ.Number||r===EZ.Integer||r===EZ.Boolean))return re({isAddDisabled:!1,tooltip:`Add ${DZ[r]}`,onClick:()=>n(LZ(r))});let i=h(e,LZ(r));return w`
+                ${re({isAddDisabled:a,tooltip:a?r:`Add ${FZ[o]}`,onClick:()=>i(o)})}
+            `}function ae({pathKey:e,allowedTypes:t,onAdd:n}){if(t.length===0)return g;if(t.length===1){let r=T.isDefined(t[0]);if(!(r===PZ.String||r===PZ.Number||r===PZ.Integer||r===PZ.Boolean))return re({isAddDisabled:!1,tooltip:`Add ${FZ[r]}`,onClick:()=>n(GZ(r))});let i=h(e,GZ(r));return w`
                     ${ne(r,i,t=>_(e,t))}
-                    ${re({isAddDisabled:!1,tooltip:`Add ${DZ[r]}`,onClick:()=>{n(i),v(e)}})}
-                `}let r=f(e,t),i=t.map(e=>({value:e,label:DZ[e]}));return w`
+                    ${re({isAddDisabled:!1,tooltip:`Add ${FZ[r]}`,onClick:()=>{n(i),v(e)}})}
+                `}let r=f(e,t),i=t.map(e=>({value:e,label:FZ[e]}));return w`
                 <${$.assign({options:i,value:r})}
                     ${N($.events.valueChange,t=>{p(e,t.detail)})}
                 ></${$}>
-                ${re({isAddDisabled:!1,tooltip:`Add ${DZ[r]}`,onClick:()=>n(LZ(r))})}
-            `}function oe(e,t){let n=kZ(t);return KZ(RZ(e,n,s),s)||DZ[n]}function se(e,n,r){let i=$Z(e),a=e.length===0,c=new Set(WZ(r,s)),l=GZ(r,s),f=new Set(Object.keys(l)),p=Object.keys(n),h=HZ(r,s),_=p.map(t=>{let a=zZ(r,t,s),l=c.has(t),u=f.has(t),p=!o&&!l,m=n[t]??null,h=kZ(m),_=h===EZ.Object||h===EZ.Array,te=[...e,t],ne=p?()=>{d(te),u||v(i)}:void 0;return _?w`
+                ${re({isAddDisabled:!1,tooltip:`Add ${FZ[r]}`,onClick:()=>n(GZ(r))})}
+            `}function oe(e,t){let n=LZ(t);return eQ(KZ(e,n,s),s)||FZ[n]}function se(e,n,r){let i=sQ(e),a=e.length===0,c=new Set(QZ(r,s)),l=$Z(r,s),f=new Set(Object.keys(l)),p=Object.keys(n),h=XZ(r,s),_=p.map(t=>{let a=qZ(r,t,s),l=c.has(t),u=f.has(t),p=!o&&!l,m=n[t]??null,h=LZ(m),_=h===PZ.Object||h===PZ.Array,te=[...e,t],ne=p?()=>{d(te),u||v(i)}:void 0;return _?w`
                         <tr class="json-row-nested">
                             <td colspan="3">
                                 <div class="json-row-nested-header">
@@ -35314,18 +35316,18 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             ${ne?ee(ne):g}
                         </td>
                     </tr>
-                `}),te=[...f].filter(e=>!(e in n)),ne=o?[]:te.map(t=>{let n=l[t],r=IZ(n,s)[0]??EZ.String;return w`
+                `}),te=[...f].filter(e=>!(e in n)),ne=o?[]:te.map(t=>{let n=l[t],r=WZ(n,s)[0]??PZ.String;return w`
                           <${U.assign({text:`"${t}"`,icon:wf,color:qu.Positive,buttonSize:Zu.Small})}
-                              ${N(`click`,()=>{u([...e,t],LZ(r))})}
+                              ${N(`click`,()=>{u([...e,t],GZ(r))})}
                           ></${U}>
-                      `}),re=t.pendingKeys[i]??``,ae=re.trim(),se=!!ae&&!(ae in n),ce=h.allowed?IZ(h.schema,s):[],le=ae?`Field "${ae}" already exists.`:`Enter a field name to add.`,b=h.allowed&&!o?w`
+                      `}),re=t.pendingKeys[i]??``,ae=re.trim(),se=!!ae&&!(ae in n),ce=h.allowed?WZ(h.schema,s):[],le=ae?`Field "${ae}" already exists.`:`Enter a field name to add.`,b=h.allowed&&!o?w`
                           <tr>
                               <td colspan="3">
                                   <div class="json-add-row">
                                       <${Q.assign({value:re,placeholder:`new field name`})}
                                           ${N(Q.events.valueChange,e=>{m(i,e.detail)})}
                                       ></${Q}>
-                                      ${ie({pathKey:i,allowedTypes:ce,canAdd:se,disabledReason:le,onAdd:t=>{se&&(u([...e,ae],LZ(t)),v(i))}})}
+                                      ${ie({pathKey:i,allowedTypes:ce,canAdd:se,disabledReason:le,onAdd:t=>{se&&(u([...e,ae],GZ(t)),v(i))}})}
                                   </div>
                               </td>
                           </tr>
@@ -35350,7 +35352,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${b}
                     </tbody>
                 </table>
-            `}function ce(e,t,n){let r=$Z(e),i=e.length===0,a=IZ(VZ(n,t.length,s),s),c=t.map((t,r)=>{let i=BZ(n,r,s),a=kZ(t),c=a===EZ.Object||a===EZ.Array,l=[...e,r],u=o?void 0:()=>{d(l)};return c?w`
+            `}function ce(e,t,n){let r=sQ(e),i=e.length===0,a=WZ(YZ(n,t.length,s),s),c=t.map((t,r)=>{let i=JZ(n,r,s),a=LZ(t),c=a===PZ.Object||a===PZ.Array,l=[...e,r],u=o?void 0:()=>{d(l)};return c?w`
                         <tr class="json-row-nested">
                             <td colspan="3">
                                 <div class="json-row-nested-header">
@@ -35396,12 +35398,12 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ${c} ${l}
                     </tbody>
                 </table>
-            `}function y(e,t,n){let r=kZ(t),i=IZ(n,s),a=RZ(n,r,s);if(b.isArray(t))return ce(e,t,a);if(b.isObject(t))return se(e,t,a);let c=te(e,t,a);if(!(!o&&i.length>1&&!i.includes(EZ.Object)&&!i.includes(EZ.Array)))return c;let l=i.includes(r)?r:i[0]??r,d=i.map(e=>({value:e,label:DZ[e]}));return w`
+            `}function y(e,t,n){let r=LZ(t),i=WZ(n,s),a=KZ(n,r,s);if(b.isArray(t))return ce(e,t,a);if(b.isObject(t))return se(e,t,a);let c=te(e,t,a);if(!(!o&&i.length>1&&!i.includes(PZ.Object)&&!i.includes(PZ.Array)))return c;let l=i.includes(r)?r:i[0]??r,d=i.map(e=>({value:e,label:FZ[e]}));return w`
                 <div class="json-value-with-switcher">
                     <span class="json-value-editor-slot">${c}</span>
                     <${$.assign({options:d,value:l})}
                         title="Change type"
-                        ${N($.events.valueChange,t=>{let n=t.detail;u(e,LZ(n))})}
+                        ${N($.events.valueChange,t=>{let n=t.detail;u(e,GZ(n))})}
                     ></${$}>
                 </div>
             `}let le=w`
@@ -35413,16 +35415,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             </div>
         `;if(t.showRaw){let n=t.rawDraft??JSON.stringify(e.value,void 0,4);return w`
                 ${le}
-                <${CZ.assign({value:n,disabled:o,disableBrowserHelps:!0,rows:12})}
+                <${jZ.assign({value:n,disabled:o,disableBrowserHelps:!0,rows:12})}
                     class="json-raw-textarea"
-                    ${N(CZ.events.valueChange,e=>{let t=e.detail,n=St(()=>JSON.parse(t));n instanceof Error?i({rawDraft:t,rawError:n.message}):(i({rawDraft:t,rawError:void 0}),l(n))})}
-                ></${CZ}>
+                    ${N(jZ.events.valueChange,e=>{let t=e.detail,n=St(()=>JSON.parse(t));n instanceof Error?i({rawDraft:t,rawError:n.message}):(i({rawDraft:t,rawError:void 0}),l(n))})}
+                ></${jZ}>
                 ${t.rawError?w`
-                          <${fZ}>${t.rawError}</${fZ}>
+                          <${bZ}>${t.rawError}</${bZ}>
                       `:g}
-            `}let ue=YZ(e.value,e.schema);return ue.length>0?w`
+            `}let ue=rQ(e.value,e.schema);return ue.length>0?w`
                 ${le}
-                <${fZ}>
+                <${bZ}>
                     <div class="json-validation-errors">
                         <div>Value does not match schema:</div>
                         <ul>
@@ -35431,10 +35433,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 `)}
                         </ul>
                     </div>
-                </${fZ}>
+                </${bZ}>
             `:w`
             ${le} ${y([],e.value,e.schema)}
-        `}}),rQ=cd()({tagName:`vira-link`,state(){return{cleanupListeners:void 0}},hostClasses:{"vira-link-link-styles":({inputs:e})=>!e.disableLinkStyles},styles:({hostClasses:e})=>S`
+        `}}),dQ=cd()({tagName:`vira-link`,state(){return{cleanupListeners:void 0}},hostClasses:{"vira-link-link-styles":({inputs:e})=>!e.disableLinkStyles},styles:({hostClasses:e})=>S`
         :host {
             display: inline;
             text-decoration: underline;
@@ -35481,7 +35483,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 >
                     <slot></slot>
                 </a>
-            `}}),iQ=[`pagehide`,`pageshow`,`popstate`],aQ=cd()({tagName:`vira-modal`,events:{modalClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size":({inputs:e})=>!!e.isMobileSize,"vira-modal-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`vira-modal-modal-title`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`},styles:({hostClasses:e,cssVars:t})=>S`
+            `}}),fQ=[`pagehide`,`pageshow`,`popstate`],pQ=cd()({tagName:`vira-modal`,events:{modalClose:x()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size":({inputs:e})=>!!e.isMobileSize,"vira-modal-no-content-padding":({inputs:e})=>!!e.noContentPadding},slotNames:[`vira-modal-modal-title`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`},styles:({hostClasses:e,cssVars:t})=>S`
         :host {
             display: contents;
             min-width: 280px;
@@ -35578,7 +35580,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 max-width: 100dvw;
             }
         }
-    `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=iQ.map(e=>Zn(e,()=>{i(new r.modalClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.modalClose))}return w`
+    `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=fQ.map(e=>Zn(e,()=>{i(new r.modalClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.modalClose))}return w`
             <dialog
                 ${eu(e=>{n({dialogElement:T.instanceOf(e,HTMLDialogElement)})})}
                 ${N(`close`,()=>{o()})}
@@ -35614,7 +35616,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                           `:g}
                 </div>
             </dialog>
-        `}}),oQ=cd()({tagName:`vira-progress`,cssVars:{"vira-progress-border-radius":`99999999px`},styles:({cssVars:e})=>S`
+        `}}),mQ=cd()({tagName:`vira-progress`,cssVars:{"vira-progress-border-radius":`99999999px`},styles:({cssVars:e})=>S`
         :host {
             /* Default width that can easily be overridden because it's applied on the host. */
             width: 100px;
@@ -35648,7 +35650,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             ></div>
 
             <div class="background-bar"></div>
-        `}}),sQ=class extends Error{name=`SpaRouterError`},cQ=class extends sQ{name=`GlobalUrlEventsConsolidationError`},lQ=class extends sQ{name=`SanitizationDepthMaxed`};function uQ(e,t){return t.fullPaths.every((t,n)=>t.startsWith(`:`)?!!e[n]:e[n]===t)}function dQ(e,t){return t.fullPaths.length===e.length&&uQ(e,t)}function fQ(e,t,n){return n?.exactMatch?dQ(e.paths,t):uQ(e.paths,t)}function pQ(e,t){let n=Object.entries(e.children||{}),r=t.length?` at ${t.join(` -> `)}.`:`.`;if(e.allowBare&&e.anyChildren)throw Error(`Invalid tree: cannot define both allowBare and anyChildren${r}`);if(e.anyChildren&&n.length)throw Error(`Invalid tree: cannot define anyChildren and definite children${r}`);if(!e.allowBare&&!e.anyChildren&&!n.some(([e])=>!e.startsWith(`:`)))throw Error(`Invalid tree: allowBare is false but there are no definite children${r}`);e.anyChildren||n.forEach(([e,n])=>{b.isEmpty(n)||pQ(n,[...t,e])})}function mQ(e){return Rn(e)}function hQ(e,t){let n=e.children,r=t[t.length-1]||``,i=Object.defineProperty({path:r,fullPaths:t,children:n&&Object.keys(n).length?et(n,(e,n)=>hQ(n,[...t,e])):{}},"PathsType",{enumerable:!1,configurable:!1,get(){throw Error(`Do not access PathsType as value, it's only a type.`)}});return r.startsWith(`:`)?{...i,fill:n=>hQ(e,[...t.slice(0,-1),n])}:i}var gQ=class{tree;paths;pathsWithoutTypes;constructor(e){this.tree=e,pQ(this.tree,[]),this.paths=hQ(e,[]),this.pathsWithoutTypes=mQ(this.paths)}get PathsType(){throw Error(`PathTree.PathsType is a type only, it cannot be accessed as a runtime value.`)}sanitizePaths(e){return yQ(e,this.tree)}};function _Q(e,t,n){let r=e.endsWith(`/*`),i=r?e.slice(0,-2):e;return(i.startsWith(`/`)?i.slice(1):i)===t?r?n:!n:!1}function vQ(e,t,n){let r=e[t];return r?[t,r]:Object.entries(e).find(([,e])=>`redirectFrom`in e&&e.redirectFrom?.some(e=>_Q(e,t,n)))||Object.entries(e).find(([e])=>e.startsWith(`:`))}function yQ(e,t){if(`anyChildren`in t&&t.anyChildren)return e;if(`allowBare`in t){let n=t.children||{};if(b.isLengthAtLeast(e,1)){let r=e[0],i=vQ(n,r,e.length>1);if(i&&!(`disable`in i[1]&&i[1].disable)){let[a,o]=i;if(`redirectTo`in o&&o.redirectTo){if(!n[o.redirectTo])throw Error(`Invalid redirect from '${r}' to '${o.redirectTo}'.`);return yQ([o.redirectTo,...e.slice(1)],t)}return[!a.startsWith(`:`)&&a!==r?a:r,...yQ(e.slice(1),o)]}}if(t.allowBare)return[];{let e=p(n).find(([e,t])=>!e.startsWith(`:`)&&!(`disable`in t&&t.disable))?.[0];if(!e)throw Error(`Got blocked bare path but no children exist.`);return[e]}}else return[]}Qe({paths:[``],search:xl(Sl(void 0,El({keys:``,values:[``]}))),hash:xl(Sl(void 0,``))});var bQ=Qe({basePath:Cl(``),sanitizeRoute:(e=>e),maxListenerCount:Cl(1),disableWarnings:Cl(!1),isPaused:Cl(!1),isRouteAllowed:Cl((()=>!0))}),xQ=`://`;function SQ(...e){let t=e.join(`/`),[n,r=``]=t.includes(xQ)?t.split(xQ):[``,t],i=!1,a=r.replace(/\/{2,}/g,`/`).split(`/`).reduce((e,t,n,r)=>{if(i)return e;let a=r[n+1],o=t,s=a?.startsWith(`?`),c=!t.includes(`?`)&&s,l=a===`?`;if(s||c){i=!0;let e=!1,s=r.slice(n+2).reduce((t,n)=>(n.includes(`#`)&&(e=!0),e?t.concat(n):[t,n].join(`&`)),``);o=[t,a,l?u({value:s,prefix:`&`}):s].join(``)}return e.concat(o)},[]);return[n,n?xQ:``,a.join(`/`)].join(``)}var CQ;(function(e){e.Encode=`encode`,e.Decode=`decode`,e.None=`none`})(CQ||={});var wQ;(function(e){e.Clear=`clear`,e.Replace=`replace`,e.Append=`append`})(wQ||={});var TQ=Qe({encoding:xl(Sl(void 0,_l(CQ))),searchParamStrategy:xl(Sl(void 0,_l(wQ)))});function EQ(e,t){return e.map(e=>{if(e!=null)return DQ(String(e),t)}).filter(e=>e!=null)}function DQ(e,t){return t?.encoding===CQ.Decode?decodeURIComponent(e):t?.encoding===CQ.Encode?encodeURIComponent(e):e}var OQ=Qe(El({keys:``,values:[``]}));function kQ(e,t,n){let r=n?.searchParamStrategy===wQ.Clear?{}:et(e,(e,t)=>_t(t)),i=et(t,(e,t)=>{if(n?.searchParamStrategy===wQ.Append){let i=r[e],a=b.isArray(i)?i:[i];if(t){let e=b.isArray(t)?t:[t];return EQ([...a,...e],n)}else return EQ(a,n)}else if(b.isArray(t))return EQ(t,n);else if(t)return EQ([t],n);else return});return zn({...r,...i},(e,t)=>!!t)}function AQ(e,t){return b.isString(e)&&!e.includes(`?`)?{}:(b.isString(e)?e:e instanceof URLSearchParams?e.toString():e.search).replace(/(^.*\?)|(#[^#]*$)/,``).split(`&`).map(e=>{let[t,...n]=Qt(e,`=`);return[t,n.length?n.join(`=`):void 0]}).reduce((e,[n,r])=>{let i=NQ({options:t,key:n,value:r}),a=f(e,i.key,()=>[]);return r!=null&&a.push(i.value),e},{})}function jQ(e){if(e!=null)return b.isArray(e)?[...e]:e===``?[]:[e]}function MQ(e,t){let n=l(Object.entries(e),([e,n])=>{let r=jQ(n);return r?.length?r.map(n=>{let r=NQ({options:t,key:e,value:n});return[r.key,r.value].join(`=`)}):[e]},(e,[,t])=>t!=null).flat();return n.length?se({value:n.join(`&`),prefix:`?`}):``}function NQ({options:e,key:t,value:n}){return{key:DQ(t,e),value:DQ(String(n),e)}}function PQ({hash:e,hostname:t,password:n,pathname:r,port:i,protocol:a,search:o,username:s}){return[a?a+`://`:``,s?encodeURIComponent(s)+`:`:``,n?encodeURIComponent(n)+`@`:``,LQ({hostname:t,port:i}),IQ({hash:e,pathname:r,search:o})].join(``)}function FQ({pathname:e}){let t=u({value:e,prefix:`/`});return t?t.split(`/`):[]}function IQ({hash:e,pathname:t,search:n}){return[se({value:t,prefix:`/`}),n?se({value:n,prefix:`?`}):``,e?se({value:e,prefix:`#`}):``].join(``)}function LQ({hostname:e,port:t}){return[e,t?`:`+t:``].join(``)}function RQ({hostname:e,port:t,protocol:n}){return[n,LQ({hostname:e,port:t})].filter(b.isTruthy).join(`://`)}function zQ(e,t){let n=b.isString(e)?u({value:e,prefix:`.`}):e.toString(),r=n.replace(/^[^#]*(?:#|$)/,``),i=r?se({value:DQ(r,t),prefix:`#`}):``,a=n.replace(/#[^#]*$/,``),o=a.replace(/^[^?]*(?:\?|$)/,``),s=o?se({value:DQ(o,t),prefix:`?`}):``,c=a.replace(/\?[^?]*$/,``),l=c.includes(`://`)?c.replace(/:\/\/.*$/,``):``,d=c.replace(/^.*:\/\//,``).replace(/\/\//g,`/`),f=d.replace(/@.*/,``),p=d.replace(/^[^@]*@/,``),[m,...h]=f===p?[]:f.split(`:`).reverse(),g=decodeURIComponent(h.toReversed().join(``).replace(/[/:]/g,``)||``),_=decodeURIComponent(m?.replace(/[/:]/g,``)||``),v=Zt(p.replace(/\/.*/,``),`:`,{caseSensitive:!0}).toReversed(),ee=v[0]?.endsWith(`]`)?``:v[1]===`:`&&v[0]||``,te=p.replace(RegExp(`:${ee}($|/)`),`$1`).replace(/\/.*/,``),ne=te.endsWith(`]`)?void 0:te.match(/^(?<host>.*):(?<port>\d+)$/),re=ne?.groups?.host??te,ie=ne?.groups?.port??ee,ae=DQ(p.replace(/^[^/]*(\/|$)/,`$1`).replace(/^[^/]*(?:\/|$)/,`/`),t),oe=LQ({hostname:re,port:ie}),ce=RQ({hostname:re,port:ie,protocol:l}),y=PQ({hash:i,hostname:re,password:_,pathname:ae,port:ie,protocol:l,search:s,username:g}),le=AQ(s),ue=FQ({pathname:ae});return{fullPath:IQ({hash:i,pathname:ae,search:s}),hash:i,host:oe,hostname:re,href:y,origin:ce,password:_,pathname:ae,paths:ue,port:ie,protocol:l,search:s,searchParams:le,username:g}}Qe({hash:xl(Sl(void 0,``)),search:xl(Sl(void 0,``,El({keys:``,values:Sl(null,void 0,``,-1,!1,0n,[null,void 0,``,-1,!1,0n])}))),hostname:xl(Sl(void 0,``)),pathname:xl(Sl(void 0,``)),paths:xl(Sl(void 0,[``])),protocol:xl(Sl(void 0,``)),username:xl(Sl(void 0,``)),password:xl(Sl(void 0,``)),port:xl(Sl(void 0,``,-1))});function BQ(e,t,n){let r=!!n,i=t==null||Ke(t,TQ,{allowExtraKeys:!1}),a=i?zQ(``):b.instanceOf(e,URL)||b.isString(e)?zQ(e):e,o=i?e:t,s=b.isString(o)&&o.startsWith(`.`),c=b.isString(o)||b.instanceOf(o,URL)?zn(zQ(o),(e,t)=>b.isTruthy(t)):o,l=r?n:i?t:void 0,u=et(a,(e,t)=>{if(!b.hasKey(c,e))return t;let n=c[e];return b.isNumber(n)?String(n):b.isString(n)?e===`hash`&&n?se({value:n,prefix:`#`}):e===`pathname`?se({value:n,prefix:`/`}):n:t});b.hasKey(c,`paths`)&&c.paths&&(u.pathname=SQ(s?a.pathname:``,...c.paths));let d=b.isString(c.search)?AQ(se({value:c.search,prefix:`?`})):Ct(c.search||{}),f=kQ(u.searchParams,d,{...l,encoding:CQ.None}),p=MQ(f,l);return{...u,searchParams:f,search:p,paths:FQ(u),fullPath:IQ(u),host:LQ(u),origin:RQ(u),href:PQ({...u,search:p})}}({...Qe({protocol:``,username:``,password:``,host:``,hostname:``,port:``,origin:``,pathname:`/`,paths:[``],search:``,searchParams:OQ,hash:``,fullPath:`/`,href:`/`}).default});var VQ=0;function HQ(e){return!(e.type!==`click`&&e.type!==`mousedown`||e.metaKey||e.altKey||e.ctrlKey||e.shiftKey||e.button!==VQ)}var UQ=`locationchange`,WQ=globalThis.history;globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!1;var GQ=WQ?.pushState;function KQ(...e){if(!GQ)return;let t=GQ.apply(WQ,e);return globalThis.dispatchEvent(new Event(UQ)),t}var qQ=WQ?.replaceState;function JQ(...e){if(!qQ)return;let t=qQ.apply(WQ,e);return globalThis.dispatchEvent(new Event(UQ)),t}function YQ(){if(!(globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY||!WQ)){if(WQ.pushState===KQ)throw new cQ(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.pushState has already been overridden. Does this module have two copies in your repo?`);if(WQ.replaceState===JQ)throw new cQ(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.replaceState has already been overridden. Does this module have two copies in your repo?`);globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!0,WQ.pushState=KQ,WQ.replaceState=JQ,globalThis.addEventListener(`popstate`,()=>{globalThis.dispatchEvent(new Event(UQ))})}}function XQ(e,t){let n=zQ(e),r=u({value:u({value:n.pathname,prefix:se({value:t||``,prefix:`/`})}),prefix:`/`});return{paths:r?r.split(`/`):[],search:Object.keys(n.searchParams).length?n.searchParams:void 0,hash:n.hash?u({value:n.hash,prefix:`#`}):void 0}}var ZQ=class{innerObservable;removeGlobalListener;sanitizationDepth=0;params;constructor(e){ue(e,bQ),this.params={...e};let t=this.readCurrentRoute();this.innerObservable=new zl({defaultValue:t,equalityCheck:()=>!1}),YQ(),this.removeGlobalListener=Xn(globalThis,UQ,()=>{if(this.params.isPaused)return;if(this.sanitizationDepth>2)throw new lQ(`Looping route sanitization detected; aborting window URL change listener.`);let t=XQ(globalThis.location.href,this.params.basePath),n=e.sanitizeRoute(t);b.jsonEquals(t,n)?(this.sanitizationDepth=0,this.innerObservable.setValue(n)):(this.sanitizationDepth++,this.setRoute(n,{replace:!0}),e.disableWarnings||console.warn(`Route sanitized.`,{from:t,to:n}))}),this.setRoute(t,{replace:!0})}routeIncludesBasePath(e){return!e.paths||!this.params.basePath?!1:SQ(...e.paths).startsWith(this.params.basePath)}readCurrentRoute(){return this.sanitizeRoute(XQ(globalThis.location.href,this.params.basePath))}sanitizeRoute(e){return this.params.sanitizeRoute(e)}createRouteUrl(e){let t={...XQ(globalThis.location.href,this.params.basePath),...e},n=this.sanitizeRoute(t),r=this.routeIncludesBasePath(XQ(globalThis.location.href,void 0))&&!this.routeIncludesBasePath(n)&&this.params.basePath?{...n,paths:[this.params.basePath,...n.paths]}:n;return{url:BQ(globalThis.location.href,{paths:r.paths,search:r.search,hash:r.hash?se({value:r.hash,prefix:`#`}):``},{searchParamStrategy:wQ.Clear}).href,route:n}}setRoute(e,t={}){let{route:n,url:r}=this.createRouteUrl(e),{fullPath:i}=zQ(r);return this.params.isPaused||!t.force&&b.jsonEquals(zQ(globalThis.location.href).fullPath,i)||this.params.isRouteAllowed&&!this.params.isRouteAllowed(n)?!1:t.replace?(globalThis.history.replaceState(void 0,``,i),!0):(globalThis.history.pushState(void 0,``,i),!0)}setRouteOnDirectNavigation(e,t){return HQ(t)?(t.preventDefault(),this.setRoute(e)):!1}listen(e,t){let n=this.params.maxListenerCount==null?1:this.params.maxListenerCount;if(n&&this.innerObservable.getListenerCount()>=n)throw new sQ(`Attempting to attach more route listeners than the \`maxListenerCount\` of '${n}'.`);return this.innerObservable.listen(e,t),()=>this.removeListener(t)}removeListener(e){return this.innerObservable.removeListener(e)}getListenerCount(){return this.innerObservable.getListenerCount()}destroy(){this.params.isPaused=!0,this.removeGlobalListener(),this.innerObservable.destroy()}};function QQ({element:e,widthElement:t,onChange:n,hysteresisPx:r=0}){let i=t||e,a=!1;function o(){let t=e.scrollWidth>i.clientWidth+(a?-r:r);t!==a&&(a=t,n(a))}let s=new ResizeObserver(o);s.observe(e),i!==e&&s.observe(i);let c=new MutationObserver(o);return c.observe(e,{childList:!0,subtree:!0,characterData:!0}),o(),()=>{s.disconnect(),c.disconnect()}}var $Q=function(e){return e.Top=`top`,e.Bottom=`bottom`,e.Left=`left`,e.Right=`right`,e}({}),e$=function(e){return e.Vertical=`vertical`,e.Horizontal=`horizontal`,e}({}),t$=cd()({tagName:`vira-tabs`,events:{tabSelect:x()},state(){return{isOverflowing:!1,cleanupObserver:void 0}},hostClasses:{"vira-tabs-bar-top":({inputs:e})=>e.barDirection===`top`,"vira-tabs-bar-bottom":({inputs:e})=>!e.barDirection||e.barDirection===`bottom`,"vira-tabs-bar-left":({inputs:e})=>e.barDirection===`left`,"vira-tabs-bar-right":({inputs:e})=>e.barDirection===`right`,...oe(me(Yu),e=>{let t=Yu[e];return{key:`vira-tabs-color-${t}`,value:({inputs:n})=>n.color===e||n.color===t}},{useRequired:!0}),"vira-tabs-color-plain":({inputs:e})=>!e.color||e.color===qu.Plain,"vira-tabs-color-neutral":({inputs:e})=>e.color===qu.Neutral,...oe(Xu,e=>({key:`vira-tabs-color-${e}`,value:({inputs:t})=>t.color===e}),{useRequired:!0}),"vira-tabs-icon-layout-vertical":({inputs:e})=>!e.iconLayout||e.iconLayout===`vertical`,"vira-tabs-icon-layout-horizontal":({inputs:e})=>e.iconLayout===`horizontal`,"vira-tabs-overflowing":({state:e})=>e.isOverflowing,"vira-tabs-fill-width":({inputs:e})=>!!e.shouldFillWidth},cssVars:{"vira-tabs-active-color":Ku[Yu[qu.Info]][`behind-bg`][B.NonBodyText].background.value,"vira-tabs-active-hover-color":Ku[Yu[qu.Info]][`behind-bg`][B.Header].background.value,"vira-tabs-inactive-color":R.colors[`vira-grey-foreground-header`].foreground.value,"vira-tabs-inactive-hover-color":R.colors[`vira-grey-foreground-non-body`].foreground.value,"vira-tabs-bar-thickness":`3px`},styles:({hostClasses:e,cssVars:t})=>{function n(e){return{active:Ku[e][`behind-bg`][B.NonBodyText].background,hover:Ku[e][`behind-bg`][B.Header].background}}function r(e,n){return S`
+        `}}),hQ=class extends Error{name=`SpaRouterError`},gQ=class extends hQ{name=`GlobalUrlEventsConsolidationError`},_Q=class extends hQ{name=`SanitizationDepthMaxed`};function vQ(e,t){return t.fullPaths.every((t,n)=>t.startsWith(`:`)?!!e[n]:e[n]===t)}function yQ(e,t){return t.fullPaths.length===e.length&&vQ(e,t)}function bQ(e,t,n){return n?.exactMatch?yQ(e.paths,t):vQ(e.paths,t)}function xQ(e,t){let n=Object.entries(e.children||{}),r=t.length?` at ${t.join(` -> `)}.`:`.`;if(e.allowBare&&e.anyChildren)throw Error(`Invalid tree: cannot define both allowBare and anyChildren${r}`);if(e.anyChildren&&n.length)throw Error(`Invalid tree: cannot define anyChildren and definite children${r}`);if(!e.allowBare&&!e.anyChildren&&!n.some(([e])=>!e.startsWith(`:`)))throw Error(`Invalid tree: allowBare is false but there are no definite children${r}`);e.anyChildren||n.forEach(([e,n])=>{b.isEmpty(n)||xQ(n,[...t,e])})}function SQ(e){return Rn(e)}function CQ(e,t){let n=e.children,r=t[t.length-1]||``,i=Object.defineProperty({path:r,fullPaths:t,children:n&&Object.keys(n).length?et(n,(e,n)=>CQ(n,[...t,e])):{}},"PathsType",{enumerable:!1,configurable:!1,get(){throw Error(`Do not access PathsType as value, it's only a type.`)}});return r.startsWith(`:`)?{...i,fill:n=>CQ(e,[...t.slice(0,-1),n])}:i}var wQ=class{tree;paths;pathsWithoutTypes;constructor(e){this.tree=e,xQ(this.tree,[]),this.paths=CQ(e,[]),this.pathsWithoutTypes=SQ(this.paths)}get PathsType(){throw Error(`PathTree.PathsType is a type only, it cannot be accessed as a runtime value.`)}sanitizePaths(e){return DQ(e,this.tree)}};function TQ(e,t,n){let r=e.endsWith(`/*`),i=r?e.slice(0,-2):e;return(i.startsWith(`/`)?i.slice(1):i)===t?r?n:!n:!1}function EQ(e,t,n){let r=e[t];return r?[t,r]:Object.entries(e).find(([,e])=>`redirectFrom`in e&&e.redirectFrom?.some(e=>TQ(e,t,n)))||Object.entries(e).find(([e])=>e.startsWith(`:`))}function DQ(e,t){if(`anyChildren`in t&&t.anyChildren)return e;if(`allowBare`in t){let n=t.children||{};if(b.isLengthAtLeast(e,1)){let r=e[0],i=EQ(n,r,e.length>1);if(i&&!(`disable`in i[1]&&i[1].disable)){let[a,o]=i;if(`redirectTo`in o&&o.redirectTo){if(!n[o.redirectTo])throw Error(`Invalid redirect from '${r}' to '${o.redirectTo}'.`);return DQ([o.redirectTo,...e.slice(1)],t)}return[!a.startsWith(`:`)&&a!==r?a:r,...DQ(e.slice(1),o)]}}if(t.allowBare)return[];{let e=p(n).find(([e,t])=>!e.startsWith(`:`)&&!(`disable`in t&&t.disable))?.[0];if(!e)throw Error(`Got blocked bare path but no children exist.`);return[e]}}else return[]}Qe({paths:[``],search:xl(Sl(void 0,El({keys:``,values:[``]}))),hash:xl(Sl(void 0,``))});var OQ=Qe({basePath:Cl(``),sanitizeRoute:(e=>e),maxListenerCount:Cl(1),disableWarnings:Cl(!1),isPaused:Cl(!1),isRouteAllowed:Cl((()=>!0))}),kQ=`://`;function AQ(...e){let t=e.join(`/`),[n,r=``]=t.includes(kQ)?t.split(kQ):[``,t],i=!1,a=r.replace(/\/{2,}/g,`/`).split(`/`).reduce((e,t,n,r)=>{if(i)return e;let a=r[n+1],o=t,s=a?.startsWith(`?`),c=!t.includes(`?`)&&s,l=a===`?`;if(s||c){i=!0;let e=!1,s=r.slice(n+2).reduce((t,n)=>(n.includes(`#`)&&(e=!0),e?t.concat(n):[t,n].join(`&`)),``);o=[t,a,l?u({value:s,prefix:`&`}):s].join(``)}return e.concat(o)},[]);return[n,n?kQ:``,a.join(`/`)].join(``)}var jQ;(function(e){e.Encode=`encode`,e.Decode=`decode`,e.None=`none`})(jQ||={});var MQ;(function(e){e.Clear=`clear`,e.Replace=`replace`,e.Append=`append`})(MQ||={});var NQ=Qe({encoding:xl(Sl(void 0,_l(jQ))),searchParamStrategy:xl(Sl(void 0,_l(MQ)))});function PQ(e,t){return e.map(e=>{if(e!=null)return FQ(String(e),t)}).filter(e=>e!=null)}function FQ(e,t){return t?.encoding===jQ.Decode?decodeURIComponent(e):t?.encoding===jQ.Encode?encodeURIComponent(e):e}var IQ=Qe(El({keys:``,values:[``]}));function LQ(e,t,n){let r=n?.searchParamStrategy===MQ.Clear?{}:et(e,(e,t)=>_t(t)),i=et(t,(e,t)=>{if(n?.searchParamStrategy===MQ.Append){let i=r[e],a=b.isArray(i)?i:[i];if(t){let e=b.isArray(t)?t:[t];return PQ([...a,...e],n)}else return PQ(a,n)}else if(b.isArray(t))return PQ(t,n);else if(t)return PQ([t],n);else return});return zn({...r,...i},(e,t)=>!!t)}function RQ(e,t){return b.isString(e)&&!e.includes(`?`)?{}:(b.isString(e)?e:e instanceof URLSearchParams?e.toString():e.search).replace(/(^.*\?)|(#[^#]*$)/,``).split(`&`).map(e=>{let[t,...n]=Qt(e,`=`);return[t,n.length?n.join(`=`):void 0]}).reduce((e,[n,r])=>{let i=VQ({options:t,key:n,value:r}),a=f(e,i.key,()=>[]);return r!=null&&a.push(i.value),e},{})}function zQ(e){if(e!=null)return b.isArray(e)?[...e]:e===``?[]:[e]}function BQ(e,t){let n=l(Object.entries(e),([e,n])=>{let r=zQ(n);return r?.length?r.map(n=>{let r=VQ({options:t,key:e,value:n});return[r.key,r.value].join(`=`)}):[e]},(e,[,t])=>t!=null).flat();return n.length?se({value:n.join(`&`),prefix:`?`}):``}function VQ({options:e,key:t,value:n}){return{key:FQ(t,e),value:FQ(String(n),e)}}function HQ({hash:e,hostname:t,password:n,pathname:r,port:i,protocol:a,search:o,username:s}){return[a?a+`://`:``,s?encodeURIComponent(s)+`:`:``,n?encodeURIComponent(n)+`@`:``,GQ({hostname:t,port:i}),WQ({hash:e,pathname:r,search:o})].join(``)}function UQ({pathname:e}){let t=u({value:e,prefix:`/`});return t?t.split(`/`):[]}function WQ({hash:e,pathname:t,search:n}){return[se({value:t,prefix:`/`}),n?se({value:n,prefix:`?`}):``,e?se({value:e,prefix:`#`}):``].join(``)}function GQ({hostname:e,port:t}){return[e,t?`:`+t:``].join(``)}function KQ({hostname:e,port:t,protocol:n}){return[n,GQ({hostname:e,port:t})].filter(b.isTruthy).join(`://`)}function qQ(e,t){let n=b.isString(e)?u({value:e,prefix:`.`}):e.toString(),r=n.replace(/^[^#]*(?:#|$)/,``),i=r?se({value:FQ(r,t),prefix:`#`}):``,a=n.replace(/#[^#]*$/,``),o=a.replace(/^[^?]*(?:\?|$)/,``),s=o?se({value:FQ(o,t),prefix:`?`}):``,c=a.replace(/\?[^?]*$/,``),l=c.includes(`://`)?c.replace(/:\/\/.*$/,``):``,d=c.replace(/^.*:\/\//,``).replace(/\/\//g,`/`),f=d.replace(/@.*/,``),p=d.replace(/^[^@]*@/,``),[m,...h]=f===p?[]:f.split(`:`).reverse(),g=decodeURIComponent(h.toReversed().join(``).replace(/[/:]/g,``)||``),_=decodeURIComponent(m?.replace(/[/:]/g,``)||``),v=Zt(p.replace(/\/.*/,``),`:`,{caseSensitive:!0}).toReversed(),ee=v[0]?.endsWith(`]`)?``:v[1]===`:`&&v[0]||``,te=p.replace(RegExp(`:${ee}($|/)`),`$1`).replace(/\/.*/,``),ne=te.endsWith(`]`)?void 0:te.match(/^(?<host>.*):(?<port>\d+)$/),re=ne?.groups?.host??te,ie=ne?.groups?.port??ee,ae=FQ(p.replace(/^[^/]*(\/|$)/,`$1`).replace(/^[^/]*(?:\/|$)/,`/`),t),oe=GQ({hostname:re,port:ie}),ce=KQ({hostname:re,port:ie,protocol:l}),y=HQ({hash:i,hostname:re,password:_,pathname:ae,port:ie,protocol:l,search:s,username:g}),le=RQ(s),ue=UQ({pathname:ae});return{fullPath:WQ({hash:i,pathname:ae,search:s}),hash:i,host:oe,hostname:re,href:y,origin:ce,password:_,pathname:ae,paths:ue,port:ie,protocol:l,search:s,searchParams:le,username:g}}Qe({hash:xl(Sl(void 0,``)),search:xl(Sl(void 0,``,El({keys:``,values:Sl(null,void 0,``,-1,!1,0n,[null,void 0,``,-1,!1,0n])}))),hostname:xl(Sl(void 0,``)),pathname:xl(Sl(void 0,``)),paths:xl(Sl(void 0,[``])),protocol:xl(Sl(void 0,``)),username:xl(Sl(void 0,``)),password:xl(Sl(void 0,``)),port:xl(Sl(void 0,``,-1))});function JQ(e,t,n){let r=!!n,i=t==null||Ke(t,NQ,{allowExtraKeys:!1}),a=i?qQ(``):b.instanceOf(e,URL)||b.isString(e)?qQ(e):e,o=i?e:t,s=b.isString(o)&&o.startsWith(`.`),c=b.isString(o)||b.instanceOf(o,URL)?zn(qQ(o),(e,t)=>b.isTruthy(t)):o,l=r?n:i?t:void 0,u=et(a,(e,t)=>{if(!b.hasKey(c,e))return t;let n=c[e];return b.isNumber(n)?String(n):b.isString(n)?e===`hash`&&n?se({value:n,prefix:`#`}):e===`pathname`?se({value:n,prefix:`/`}):n:t});b.hasKey(c,`paths`)&&c.paths&&(u.pathname=AQ(s?a.pathname:``,...c.paths));let d=b.isString(c.search)?RQ(se({value:c.search,prefix:`?`})):Ct(c.search||{}),f=LQ(u.searchParams,d,{...l,encoding:jQ.None}),p=BQ(f,l);return{...u,searchParams:f,search:p,paths:UQ(u),fullPath:WQ(u),host:GQ(u),origin:KQ(u),href:HQ({...u,search:p})}}({...Qe({protocol:``,username:``,password:``,host:``,hostname:``,port:``,origin:``,pathname:`/`,paths:[``],search:``,searchParams:IQ,hash:``,fullPath:`/`,href:`/`}).default});var YQ=0;function XQ(e){return!(e.type!==`click`&&e.type!==`mousedown`||e.metaKey||e.altKey||e.ctrlKey||e.shiftKey||e.button!==YQ)}var ZQ=`locationchange`,QQ=globalThis.history;globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!1;var $Q=QQ?.pushState;function e$(...e){if(!$Q)return;let t=$Q.apply(QQ,e);return globalThis.dispatchEvent(new Event(ZQ)),t}var t$=QQ?.replaceState;function n$(...e){if(!t$)return;let t=t$.apply(QQ,e);return globalThis.dispatchEvent(new Event(ZQ)),t}function r$(){if(!(globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY||!QQ)){if(QQ.pushState===e$)throw new gQ(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.pushState has already been overridden. Does this module have two copies in your repo?`);if(QQ.replaceState===n$)throw new gQ(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.replaceState has already been overridden. Does this module have two copies in your repo?`);globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!0,QQ.pushState=e$,QQ.replaceState=n$,globalThis.addEventListener(`popstate`,()=>{globalThis.dispatchEvent(new Event(ZQ))})}}function i$(e,t){let n=qQ(e),r=u({value:u({value:n.pathname,prefix:se({value:t||``,prefix:`/`})}),prefix:`/`});return{paths:r?r.split(`/`):[],search:Object.keys(n.searchParams).length?n.searchParams:void 0,hash:n.hash?u({value:n.hash,prefix:`#`}):void 0}}var a$=class{innerObservable;removeGlobalListener;sanitizationDepth=0;params;constructor(e){ue(e,OQ),this.params={...e};let t=this.readCurrentRoute();this.innerObservable=new zl({defaultValue:t,equalityCheck:()=>!1}),r$(),this.removeGlobalListener=Xn(globalThis,ZQ,()=>{if(this.params.isPaused)return;if(this.sanitizationDepth>2)throw new _Q(`Looping route sanitization detected; aborting window URL change listener.`);let t=i$(globalThis.location.href,this.params.basePath),n=e.sanitizeRoute(t);b.jsonEquals(t,n)?(this.sanitizationDepth=0,this.innerObservable.setValue(n)):(this.sanitizationDepth++,this.setRoute(n,{replace:!0}),e.disableWarnings||console.warn(`Route sanitized.`,{from:t,to:n}))}),this.setRoute(t,{replace:!0})}routeIncludesBasePath(e){return!e.paths||!this.params.basePath?!1:AQ(...e.paths).startsWith(this.params.basePath)}readCurrentRoute(){return this.sanitizeRoute(i$(globalThis.location.href,this.params.basePath))}sanitizeRoute(e){return this.params.sanitizeRoute(e)}createRouteUrl(e){let t={...i$(globalThis.location.href,this.params.basePath),...e},n=this.sanitizeRoute(t),r=this.routeIncludesBasePath(i$(globalThis.location.href,void 0))&&!this.routeIncludesBasePath(n)&&this.params.basePath?{...n,paths:[this.params.basePath,...n.paths]}:n;return{url:JQ(globalThis.location.href,{paths:r.paths,search:r.search,hash:r.hash?se({value:r.hash,prefix:`#`}):``},{searchParamStrategy:MQ.Clear}).href,route:n}}setRoute(e,t={}){let{route:n,url:r}=this.createRouteUrl(e),{fullPath:i}=qQ(r);return this.params.isPaused||!t.force&&b.jsonEquals(qQ(globalThis.location.href).fullPath,i)||this.params.isRouteAllowed&&!this.params.isRouteAllowed(n)?!1:t.replace?(globalThis.history.replaceState(void 0,``,i),!0):(globalThis.history.pushState(void 0,``,i),!0)}setRouteOnDirectNavigation(e,t){return XQ(t)?(t.preventDefault(),this.setRoute(e)):!1}listen(e,t){let n=this.params.maxListenerCount==null?1:this.params.maxListenerCount;if(n&&this.innerObservable.getListenerCount()>=n)throw new hQ(`Attempting to attach more route listeners than the \`maxListenerCount\` of '${n}'.`);return this.innerObservable.listen(e,t),()=>this.removeListener(t)}removeListener(e){return this.innerObservable.removeListener(e)}getListenerCount(){return this.innerObservable.getListenerCount()}destroy(){this.params.isPaused=!0,this.removeGlobalListener(),this.innerObservable.destroy()}};function o$({element:e,widthElement:t,onChange:n,hysteresisPx:r=0}){let i=t||e,a=!1;function o(){let t=e.scrollWidth>i.clientWidth+(a?-r:r);t!==a&&(a=t,n(a))}let s=new ResizeObserver(o);s.observe(e),i!==e&&s.observe(i);let c=new MutationObserver(o);return c.observe(e,{childList:!0,subtree:!0,characterData:!0}),o(),()=>{s.disconnect(),c.disconnect()}}var s$=function(e){return e.Top=`top`,e.Bottom=`bottom`,e.Left=`left`,e.Right=`right`,e}({}),c$=function(e){return e.Vertical=`vertical`,e.Horizontal=`horizontal`,e}({}),l$=cd()({tagName:`vira-tabs`,events:{tabSelect:x()},state(){return{isOverflowing:!1,cleanupObserver:void 0}},hostClasses:{"vira-tabs-bar-top":({inputs:e})=>e.barDirection===`top`,"vira-tabs-bar-bottom":({inputs:e})=>!e.barDirection||e.barDirection===`bottom`,"vira-tabs-bar-left":({inputs:e})=>e.barDirection===`left`,"vira-tabs-bar-right":({inputs:e})=>e.barDirection===`right`,...oe(me(Yu),e=>{let t=Yu[e];return{key:`vira-tabs-color-${t}`,value:({inputs:n})=>n.color===e||n.color===t}},{useRequired:!0}),"vira-tabs-color-plain":({inputs:e})=>!e.color||e.color===qu.Plain,"vira-tabs-color-neutral":({inputs:e})=>e.color===qu.Neutral,...oe(Xu,e=>({key:`vira-tabs-color-${e}`,value:({inputs:t})=>t.color===e}),{useRequired:!0}),"vira-tabs-icon-layout-vertical":({inputs:e})=>!e.iconLayout||e.iconLayout===`vertical`,"vira-tabs-icon-layout-horizontal":({inputs:e})=>e.iconLayout===`horizontal`,"vira-tabs-overflowing":({state:e})=>e.isOverflowing,"vira-tabs-fill-width":({inputs:e})=>!!e.shouldFillWidth},cssVars:{"vira-tabs-active-color":Ku[Yu[qu.Info]][`behind-bg`][B.NonBodyText].background.value,"vira-tabs-active-hover-color":Ku[Yu[qu.Info]][`behind-bg`][B.Header].background.value,"vira-tabs-inactive-color":R.colors[`vira-grey-foreground-header`].foreground.value,"vira-tabs-inactive-hover-color":R.colors[`vira-grey-foreground-non-body`].foreground.value,"vira-tabs-bar-thickness":`3px`},styles:({hostClasses:e,cssVars:t})=>{function n(e){return{active:Ku[e][`behind-bg`][B.NonBodyText].background,hover:Ku[e][`behind-bg`][B.Header].background}}function r(e,n){return S`
                 ${e} {
                     ${t[`vira-tabs-active-color`].name}: ${n.active.value};
                     ${t[`vira-tabs-active-hover-color`].name}: ${n.hover.value};
@@ -35826,17 +35828,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     flex-grow: 1;
                 }
 
-                & .tabs-container ${rQ} {
+                & .tabs-container ${dQ} {
                     flex-grow: 1;
                     justify-content: center;
                 }
             }
 
-            ${rQ} {
+            ${dQ} {
                 text-decoration: none;
             }
 
-            .tabs-container ${rQ} {
+            .tabs-container ${dQ} {
                 display: flex;
                 padding: 8px 16px;
             }
@@ -35844,7 +35846,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             ${_f} {
                 margin: 3px 0;
             }
-        `},cleanup({state:e}){e.cleanupObserver?.()},render({inputs:e,state:t,updateState:n,host:r,dispatch:i,events:a}){let o=l(e.tabs,t=>{if(t.isHidden)return;let n=fQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),r=t.icon?w`
+        `},cleanup({state:e}){e.cleanupObserver?.()},render({inputs:e,state:t,updateState:n,host:r,dispatch:i,events:a}){let o=l(e.tabs,t=>{if(t.isHidden)return;let n=bQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),r=t.icon?w`
                           <${V.assign({icon:t.icon})}></${V}>
                       `:g,o=n||!!t.isDisabled;return w`
                     <li
@@ -35852,19 +35854,19 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         role="presentation"
                         ${N(`click`,()=>{t.isDisabled||i(new a.tabSelect(t))})}
                     >
-                        <${rQ.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0,attributePassthrough:{a:{role:`tab`,"aria-selected":String(n),"aria-disabled":String(!!t.isDisabled),tabindex:o?`-1`:void 0}}})}>
+                        <${dQ.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0,attributePassthrough:{a:{role:`tab`,"aria-selected":String(n),"aria-disabled":String(!!t.isDisabled),tabindex:o?`-1`:void 0}}})}>
                             <span class="tab-content">
                                 ${r}
                                 <${vf.assign({text:t.label,bold:n})}
                                     class="tab-label"
                                 ></${vf}>
                             </span>
-                        </${rQ}>
+                        </${dQ}>
                     </li>
-                `},b.isTruthy),s=e.tabs.find(t=>fQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch})),c=rf(l(e.tabs,t=>{if(t.isHidden)return;let n=fQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch});return{content:w`
-                            <${rQ.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0})}>
+                `},b.isTruthy),s=e.tabs.find(t=>bQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch})),c=rf(l(e.tabs,t=>{if(t.isHidden)return;let n=bQ(e.currentRoute,t.paths,{exactMatch:t.exactMatch});return{content:w`
+                            <${dQ.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0})}>
                                 ${t.label}
-                            </${rQ}>
+                            </${dQ}>
                         `,selected:n,disabled:t.isDisabled,onClick(){t.isDisabled||i(new a.tabSelect(t))}}},b.isTruthy));return w`
             <${_f.assign({horizontalAnchor:e.menuHorizontalAnchor,isDisabled:e.menuIsDisabled,popUpOffset:e.menuPopUpOffset,menuCornerStyle:ud.AllRounded})}
                 class="overflow-menu"
@@ -35877,11 +35879,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             <ul
                 class="tabs-container"
                 role="tablist"
-                ${eu(e=>{t.cleanupObserver?.(),n({cleanupObserver:QQ({element:e,widthElement:r,hysteresisPx:16,onChange(e){n({isOverflowing:e})}})})})}
+                ${eu(e=>{t.cleanupObserver?.(),n({cleanupObserver:o$({element:e,widthElement:r,hysteresisPx:16,onChange(e){n({isOverflowing:e})}})})})}
             >
                 ${o}
             </ul>
-        `}}),n$={value:S`transparent`};function r$(e){let t=Ku[e][`behind-bg`],n=Ku[e][`on-self`];return{[$u.Standard]:{idle:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background},hover:{textColor:t[B.Header].foreground,backgroundColor:t[B.Header].background,borderColor:t[B.Header].background},active:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background}},[$u.Subtle]:{idle:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background},hover:{textColor:n[B.NonBodyText].foreground,backgroundColor:n[B.NonBodyText].background,borderColor:n[B.NonBodyText].background},active:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background}}}}function i$(e){let t=Ku[e][`on-self`][B.BodyText];return{idle:{textColor:t.foreground,backgroundColor:n$,borderColor:t.background},hover:{textColor:t.foreground,backgroundColor:Ku[e][`behind-bg`][B.Invisible].background,borderColor:t.background},active:{textColor:t.foreground,backgroundColor:Ku[e][`behind-bg`][B.Decoration].background,borderColor:t.background}}}var a$={[$u.Standard]:{idle:{backgroundColor:R.colors[I].foreground,textColor:R.colors[I].background,borderColor:R.colors[I].foreground},hover:{backgroundColor:R.colors[`vira-grey-behind-bg-body`].background,textColor:R.colors[`vira-grey-behind-bg-body`].foreground,borderColor:R.colors[`vira-grey-behind-bg-body`].background},active:{backgroundColor:R.colors[I].foreground,textColor:R.colors[I].background,borderColor:R.colors[I].foreground}},[$u.Subtle]:{idle:{backgroundColor:n$,textColor:R.colors[I].foreground,borderColor:n$},hover:{backgroundColor:R.colors[`vira-grey-behind-fg-small-body`].background,textColor:R.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:R.colors[`vira-grey-behind-fg-small-body`].background},active:{backgroundColor:R.colors[`vira-grey-behind-fg-body`].background,textColor:R.colors[`vira-grey-behind-fg-body`].foreground,borderColor:R.colors[`vira-grey-behind-fg-body`].background}}},o$={idle:{textColor:R.colors[I].foreground,backgroundColor:n$,borderColor:R.colors[`vira-grey-on-self-body`].background},hover:{backgroundColor:R.colors[`vira-grey-behind-fg-small-body`].background,textColor:R.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:R.colors[`vira-grey-on-self-body`].background},active:{backgroundColor:R.colors[`vira-grey-behind-fg-body`].background,textColor:R.colors[`vira-grey-behind-fg-body`].foreground,borderColor:R.colors[`vira-grey-on-self-body`].background}},s$=cd()({tagName:`vira-tag`,cssVars:{"vira-tag-text-color":`transparent`,"vira-tag-background-color":`transparent`,"vira-tag-border-color":`transparent`,"vira-tag-hover-text-color":`transparent`,"vira-tag-hover-background-color":`transparent`,"vira-tag-hover-border-color":`transparent`,"vira-tag-active-text-color":`transparent`,"vira-tag-active-background-color":`transparent`,"vira-tag-active-border-color":`transparent`,"vira-tag-disabled-text-color":R.colors[`vira-grey-behind-bg-decoration`].foreground.value,"vira-tag-disabled-background-color":R.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-disabled-border-color":R.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-border-radius":`1000px`,"vira-tag-gap":`6px`,"vira-tag-horizontal-padding":`12px`,"vira-tag-border-width":`2px`},events:{toggle:x(),cancel:x()},hostClasses:{"vira-tag-selectable":({inputs:e})=>b.isBoolean(e.isClickable?.selected),"vira-tag-checked":({inputs:e})=>!!e.isClickable?.selected,"vira-tag-not-checked":({inputs:e})=>e.isClickable?.selected===!1,"vira-tag-cancellable":({inputs:e})=>!!e.isClickable?.cancellable,"vira-tag-not-clickable":({inputs:e})=>!e.isClickable,"vira-tag-disabled":({inputs:e})=>!!e.disabled,"vira-tag-size-large":({inputs:e})=>e.size===Zu.Large,"vira-tag-size-medium":({inputs:e})=>!e.size||e.size===Zu.Medium,"vira-tag-size-small":({inputs:e})=>e.size===Zu.Small,"vira-tag-emphasis-standard":({inputs:e})=>!e.emphasis||e.emphasis===$u.Standard,"vira-tag-emphasis-subtle":({inputs:e})=>e.emphasis===$u.Subtle,...oe(me(Yu),e=>{let t=Yu[e];return{key:`vira-tag-color-${t}`,value:({inputs:n})=>n.color===e||n.color===t}},{useRequired:!0}),"vira-tag-color-plain":({inputs:e})=>!e.color||e.color===qu.Plain,"vira-tag-color-neutral":({inputs:e})=>e.color===qu.Neutral,...oe(Xu,e=>({key:`vira-tag-color-${e}`,value:({inputs:t})=>t.color===e}),{useRequired:!0})},styles:({cssVars:e,hostClasses:t})=>{function n(t,n,r){return S`
+        `}}),u$={value:S`transparent`};function d$(e){let t=Ku[e][`behind-bg`],n=Ku[e][`on-self`];return{[$u.Standard]:{idle:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background},hover:{textColor:t[B.Header].foreground,backgroundColor:t[B.Header].background,borderColor:t[B.Header].background},active:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background}},[$u.Subtle]:{idle:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background},hover:{textColor:n[B.NonBodyText].foreground,backgroundColor:n[B.NonBodyText].background,borderColor:n[B.NonBodyText].background},active:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background}}}}function f$(e){let t=Ku[e][`on-self`][B.BodyText];return{idle:{textColor:t.foreground,backgroundColor:u$,borderColor:t.background},hover:{textColor:t.foreground,backgroundColor:Ku[e][`behind-bg`][B.Invisible].background,borderColor:t.background},active:{textColor:t.foreground,backgroundColor:Ku[e][`behind-bg`][B.Decoration].background,borderColor:t.background}}}var p$={[$u.Standard]:{idle:{backgroundColor:R.colors[I].foreground,textColor:R.colors[I].background,borderColor:R.colors[I].foreground},hover:{backgroundColor:R.colors[`vira-grey-behind-bg-body`].background,textColor:R.colors[`vira-grey-behind-bg-body`].foreground,borderColor:R.colors[`vira-grey-behind-bg-body`].background},active:{backgroundColor:R.colors[I].foreground,textColor:R.colors[I].background,borderColor:R.colors[I].foreground}},[$u.Subtle]:{idle:{backgroundColor:u$,textColor:R.colors[I].foreground,borderColor:u$},hover:{backgroundColor:R.colors[`vira-grey-behind-fg-small-body`].background,textColor:R.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:R.colors[`vira-grey-behind-fg-small-body`].background},active:{backgroundColor:R.colors[`vira-grey-behind-fg-body`].background,textColor:R.colors[`vira-grey-behind-fg-body`].foreground,borderColor:R.colors[`vira-grey-behind-fg-body`].background}}},m$={idle:{textColor:R.colors[I].foreground,backgroundColor:u$,borderColor:R.colors[`vira-grey-on-self-body`].background},hover:{backgroundColor:R.colors[`vira-grey-behind-fg-small-body`].background,textColor:R.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:R.colors[`vira-grey-on-self-body`].background},active:{backgroundColor:R.colors[`vira-grey-behind-fg-body`].background,textColor:R.colors[`vira-grey-behind-fg-body`].foreground,borderColor:R.colors[`vira-grey-on-self-body`].background}},h$=cd()({tagName:`vira-tag`,cssVars:{"vira-tag-text-color":`transparent`,"vira-tag-background-color":`transparent`,"vira-tag-border-color":`transparent`,"vira-tag-hover-text-color":`transparent`,"vira-tag-hover-background-color":`transparent`,"vira-tag-hover-border-color":`transparent`,"vira-tag-active-text-color":`transparent`,"vira-tag-active-background-color":`transparent`,"vira-tag-active-border-color":`transparent`,"vira-tag-disabled-text-color":R.colors[`vira-grey-behind-bg-decoration`].foreground.value,"vira-tag-disabled-background-color":R.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-disabled-border-color":R.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-border-radius":`1000px`,"vira-tag-gap":`6px`,"vira-tag-horizontal-padding":`12px`,"vira-tag-border-width":`2px`},events:{toggle:x(),cancel:x()},hostClasses:{"vira-tag-selectable":({inputs:e})=>b.isBoolean(e.isClickable?.selected),"vira-tag-checked":({inputs:e})=>!!e.isClickable?.selected,"vira-tag-not-checked":({inputs:e})=>e.isClickable?.selected===!1,"vira-tag-cancellable":({inputs:e})=>!!e.isClickable?.cancellable,"vira-tag-not-clickable":({inputs:e})=>!e.isClickable,"vira-tag-disabled":({inputs:e})=>!!e.disabled,"vira-tag-size-large":({inputs:e})=>e.size===Zu.Large,"vira-tag-size-medium":({inputs:e})=>!e.size||e.size===Zu.Medium,"vira-tag-size-small":({inputs:e})=>e.size===Zu.Small,"vira-tag-emphasis-standard":({inputs:e})=>!e.emphasis||e.emphasis===$u.Standard,"vira-tag-emphasis-subtle":({inputs:e})=>e.emphasis===$u.Subtle,...oe(me(Yu),e=>{let t=Yu[e];return{key:`vira-tag-color-${t}`,value:({inputs:n})=>n.color===e||n.color===t}},{useRequired:!0}),"vira-tag-color-plain":({inputs:e})=>!e.color||e.color===qu.Plain,"vira-tag-color-neutral":({inputs:e})=>e.color===qu.Neutral,...oe(Xu,e=>({key:`vira-tag-color-${e}`,value:({inputs:t})=>t.color===e}),{useRequired:!0})},styles:({cssVars:e,hostClasses:t})=>{function n(t,n,r){return S`
                 ${t}${n} {
                     ${e[`vira-tag-background-color`].name}: ${r.idle.backgroundColor.value};
                     ${e[`vira-tag-text-color`].name}: ${r.idle.textColor.value};
@@ -35895,7 +35897,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     ${e[`vira-tag-active-text-color`].name}: ${r.active.textColor.value};
                     ${e[`vira-tag-active-border-color`].name}: ${r.active.borderColor.value};
                 }
-            `}function r(){return d(ed.flatMap(e=>{let r=t[`vira-tag-emphasis-${e}`].selector,i=me(Yu).map(i=>{let a=Yu[i],o=r$(a)[e],s=t[`vira-tag-color-${a}`].selector;return n(s,r,o)}),a=n(t[`vira-tag-color-plain`].selector,r,a$[e]),o=n(t[`vira-tag-color-neutral`].selector,r,r$(Wu.grey)[e]),s=Xu.map(i=>{let a=r$(i)[e],o=t[`vira-tag-color-${i}`].selector;return n(o,r,a)});return[...i,a,o,...s]}).join(`
+            `}function r(){return d(ed.flatMap(e=>{let r=t[`vira-tag-emphasis-${e}`].selector,i=me(Yu).map(i=>{let a=Yu[i],o=d$(a)[e],s=t[`vira-tag-color-${a}`].selector;return n(s,r,o)}),a=n(t[`vira-tag-color-plain`].selector,r,p$[e]),o=n(t[`vira-tag-color-neutral`].selector,r,d$(Wu.grey)[e]),s=Xu.map(i=>{let a=d$(i)[e],o=t[`vira-tag-color-${i}`].selector;return n(o,r,a)});return[...i,a,o,...s]}).join(`
 `))}function i(n,r){let i=t[`vira-tag-not-checked`].selector;return S`
                 ${n}${i}${i}${i} {
                     ${e[`vira-tag-background-color`].name}: ${r.idle.backgroundColor.value};
@@ -35910,7 +35912,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     ${e[`vira-tag-active-text-color`].name}: ${r.active.textColor.value};
                     ${e[`vira-tag-active-border-color`].name}: ${r.active.borderColor.value};
                 }
-            `}function a(){let e=me(Yu).map(e=>{let n=Yu[e],r=i$(n),a=t[`vira-tag-color-${n}`].selector;return i(a,r)}),n=i(t[`vira-tag-color-plain`].selector,o$),r=i(t[`vira-tag-color-neutral`].selector,i$(Wu.grey)),a=Xu.map(e=>{let n=i$(e),r=t[`vira-tag-color-${e}`].selector;return i(r,n)});return d([...e,n,r,...a].join(`
+            `}function a(){let e=me(Yu).map(e=>{let n=Yu[e],r=f$(n),a=t[`vira-tag-color-${n}`].selector;return i(a,r)}),n=i(t[`vira-tag-color-plain`].selector,m$),r=i(t[`vira-tag-color-neutral`].selector,f$(Wu.grey)),a=Xu.map(e=>{let n=f$(e),r=t[`vira-tag-color-${e}`].selector;return i(r,n)});return d([...e,n,r,...a].join(`
 `))}function o(){return d(Qu.map(e=>S`
                     ${t[`vira-tag-size-${e}`].selector} button {
                         height: ${td[e]}px;
@@ -36033,7 +36035,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     class="cancel-x"
                 ></${V}>
             </button>
-        `}}),c$=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),l$=({useDarkTheme:e})=>{ZX(R,e?xu:void 0)},u$=`(prefers-color-scheme: dark)`,d$={selectedTheme:Qe({theme:_l(c$)})},f$=class{applyThemeCallback=l$;localStorageClient;removeThemePreferenceListener=Xn(globalThis.matchMedia(u$),`change`,e=>{y.instanceOf(e,MediaQueryListEvent),this.currentTheme===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new KX(d$,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.currentTheme)}get currentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(u$).matches;this.applyThemeCallback({useDarkTheme:t})}},p$=Nt(c$,e=>({[c$.Light]:vp,[c$.Dark]:$f,[c$.Auto]:jf})[e]),m$={[c$.Light]:`Light`,[c$.Dark]:`Dark`,[c$.Auto]:`Auto`},h$=cd()({tagName:`vira-theme-switcher`,styles:S`
+        `}}),g$=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),_$=({useDarkTheme:e})=>{iZ(R,e?xu:void 0)},v$=`(prefers-color-scheme: dark)`,y$={selectedTheme:Qe({theme:_l(g$)})},b$=class{applyThemeCallback=_$;localStorageClient;removeThemePreferenceListener=Xn(globalThis.matchMedia(v$),`change`,e=>{y.instanceOf(e,MediaQueryListEvent),this.currentTheme===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new $X(y$,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.currentTheme)}get currentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(v$).matches;this.applyThemeCallback({useDarkTheme:t})}},x$=Nt(g$,e=>({[g$.Light]:vp,[g$.Dark]:$f,[g$.Auto]:jf})[e]),S$={[g$.Light]:`Light`,[g$.Dark]:`Dark`,[g$.Auto]:`Auto`},C$=cd()({tagName:`vira-theme-switcher`,styles:S`
         :host {
             display: inline-flex;
             align-items: center;
@@ -36069,15 +36071,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             width: 20px;
             aspect-ratio: 1;
         }
-    `,state(){return{internalThemeClient:void 0,currentTheme:c$.Auto}},render({inputs:e,state:t,updateState:n}){let r=e.themeClient||t.internalThemeClient||new f$;n({internalThemeClient:r,currentTheme:r.currentTheme});let i=e.labels||m$;return Object.values(c$).map(e=>w`
+    `,state(){return{internalThemeClient:void 0,currentTheme:g$.Auto}},render({inputs:e,state:t,updateState:n}){let r=e.themeClient||t.internalThemeClient||new b$;n({internalThemeClient:r,currentTheme:r.currentTheme});let i=e.labels||S$;return Object.values(g$).map(e=>w`
                 <button
                     class=${Bl({selected:r.currentTheme===e})}
                     title=${i[e]}
                     ${N(`click`,t=>{t.stopPropagation(),r.setSelectedTheme(e),n({currentTheme:r.currentTheme})})}
                 >
-                    <${V.assign({icon:p$[e],fitContainer:!0})}></${V}>
+                    <${V.assign({icon:x$[e],fitContainer:!0})}></${V}>
                 </button>
-            `)}});function g$(e){return Gl({async updateCallback(t,n){if(n&&t in n.cache)return{cache:n.cache,element:n.cache[t],key:t};let r=await e[t]();return{cache:{...n?.cache,[t]:r},element:r,key:t}}})}function _$(e,{ready:t,loading:n,error:r,key:i}){return i&&e.update(i),e.value instanceof Error?r(e.value):e.value instanceof Promise?n(e.value.then(e=>({[e.key]:e.element}))):t({[e.value.key]:e.value.element})}function v$(e){return d(e.toString({format:`hex`}))}var y$=L[`vira-brand-500`].default;function b$(e){return Math.abs(e.contrast(`white`,`APCA`))>Math.abs(e.contrast(`black`,`APCA`))?`white`:`black`}function x$({background:e,foreground:t}){let n=e??new tl(b$(t)),r=t??new tl(b$(e));return{background:v$(n),foreground:v$(r)}}var S$;(function(e){e.Dark=`dark`,e.Light=`light`})(S$||={});function C$({themeColor:e=y$}={}){let t=new tl(e);return{nav:{hover:x$({background:t.clone().set({"hsl.l":93})}),active:x$({background:t.clone().set({"hsl.l":90})}),selected:x$({background:t.clone().set({"hsl.l":85})})},accent:{icon:v$(t.clone().set({"hsl.l":40}))}}}function w$({searchQuery:e,searchIn:t}){let n=t.length,r=e.length;if(r>n)return!1;if(r===n)return e===t;let i=t.toLowerCase(),a=e.toLowerCase();outer:for(let e=0,t=0;e<r;e++){let r=a.codePointAt(e);for(;t<n;)if(i.codePointAt(t++)===r)continue outer;return!1}return!0}var T$=bt(32);function E$(e){return e.join(T$)}function D$(e){return e.length?[E$(e),...D$(e.slice(0,-1))]:[]}var O$=[`error`,`errors`];function k$(e){return O$.includes(e)}function A$({flattenedNodes:e,searchQuery:t}){let n={};function r(e){Object.values(e.children).map(e=>(r(e),E$(e.fullUrlBreadcrumbs))).forEach(e=>n[e]=!0)}return e.forEach(e=>{let i=e.entry.errors.length&&k$(t),a=E$(e.fullUrlBreadcrumbs);if(w$({searchIn:[e.entry.title,...e.entry.descriptionParagraphs.map(e=>b.isString(e)?e:fu(e))].join(` `).toLowerCase(),searchQuery:t.toLowerCase()})||i||n[a]){let t=D$(e.fullUrlBreadcrumbs);r(e),t.forEach(e=>n[e]=!0)}else n[a]=!1}),e.filter(e=>{let t=n[E$(e.fullUrlBreadcrumbs)];if(!b.isBoolean(t))throw TypeError(`Failed to find '${e.fullUrlBreadcrumbs.join(` > `)}' in includeInSearchResults.`);return t})}function j$(e){return new ZQ({basePath:e,sanitizeRoute(e){return{paths:M$(e.paths),hash:void 0,search:void 0}}})}function M$(e){let t=e[0];if(!b.isEnumValue(t,br))return Sr.paths;if(t===br.Book)return[br.Book,...e.slice(1)];if(t===br.Search)return e[1]?[t,e[1]]:[br.Book,...e.slice(1)];throw Error(`Route path not handled for sanitization: ${e.join(`/`)}`)}var N$=Ie()(`element-book-change-route`),P$=du(),F$=P$()({tagName:`book-route-link`,cssVars:{"book-route-link-anchor-padding":`0px`},styles:({cssVars:e})=>S`
+            `)}});function w$(e){return Gl({async updateCallback(t,n){if(n&&t in n.cache)return{cache:n.cache,element:n.cache[t],key:t};let r=await e[t]();return{cache:{...n?.cache,[t]:r},element:r,key:t}}})}function T$(e,{ready:t,loading:n,error:r,key:i}){return i&&e.update(i),e.value instanceof Error?r(e.value):e.value instanceof Promise?n(e.value.then(e=>({[e.key]:e.element}))):t({[e.value.key]:e.value.element})}function E$(e){return d(e.toString({format:`hex`}))}var D$=L[`vira-brand-500`].default;function O$(e){return Math.abs(e.contrast(`white`,`APCA`))>Math.abs(e.contrast(`black`,`APCA`))?`white`:`black`}function k$({background:e,foreground:t}){let n=e??new tl(O$(t)),r=t??new tl(O$(e));return{background:E$(n),foreground:E$(r)}}var A$;(function(e){e.Dark=`dark`,e.Light=`light`})(A$||={});function j$({themeColor:e=D$}={}){let t=new tl(e);return{nav:{hover:k$({background:t.clone().set({"hsl.l":93})}),active:k$({background:t.clone().set({"hsl.l":90})}),selected:k$({background:t.clone().set({"hsl.l":85})})},accent:{icon:E$(t.clone().set({"hsl.l":40}))}}}function M$({searchQuery:e,searchIn:t}){let n=t.length,r=e.length;if(r>n)return!1;if(r===n)return e===t;let i=t.toLowerCase(),a=e.toLowerCase();outer:for(let e=0,t=0;e<r;e++){let r=a.codePointAt(e);for(;t<n;)if(i.codePointAt(t++)===r)continue outer;return!1}return!0}var N$=bt(32);function P$(e){return e.join(N$)}function F$(e){return e.length?[P$(e),...F$(e.slice(0,-1))]:[]}var I$=[`error`,`errors`];function L$(e){return I$.includes(e)}function R$({flattenedNodes:e,searchQuery:t}){let n={};function r(e){Object.values(e.children).map(e=>(r(e),P$(e.fullUrlBreadcrumbs))).forEach(e=>n[e]=!0)}return e.forEach(e=>{let i=e.entry.errors.length&&L$(t),a=P$(e.fullUrlBreadcrumbs);if(M$({searchIn:[e.entry.title,...e.entry.descriptionParagraphs.map(e=>b.isString(e)?e:fu(e))].join(` `).toLowerCase(),searchQuery:t.toLowerCase()})||i||n[a]){let t=F$(e.fullUrlBreadcrumbs);r(e),t.forEach(e=>n[e]=!0)}else n[a]=!1}),e.filter(e=>{let t=n[P$(e.fullUrlBreadcrumbs)];if(!b.isBoolean(t))throw TypeError(`Failed to find '${e.fullUrlBreadcrumbs.join(` > `)}' in includeInSearchResults.`);return t})}function z$(e){return new a$({basePath:e,sanitizeRoute(e){return{paths:B$(e.paths),hash:void 0,search:void 0}}})}function B$(e){let t=e[0];if(!b.isEnumValue(t,br))return Sr.paths;if(t===br.Book)return[br.Book,...e.slice(1)];if(t===br.Search)return e[1]?[t,e[1]]:[br.Book,...e.slice(1)];throw Error(`Route path not handled for sanitization: ${e.join(`/`)}`)}var V$=Ie()(`element-book-change-route`),H$=du(),U$=H$()({tagName:`book-route-link`,cssVars:{"book-route-link-anchor-padding":`0px`},styles:({cssVars:e})=>S`
         a {
             box-sizing: border-box;
             display: block;
@@ -36090,11 +36092,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
     `,render:({inputs:e,dispatch:t})=>w`
             <a
                 href=${e.router?.createRouteUrl({...e.route})??`#`}
-                ${N(`click`,n=>{(!e.router||HQ(n))&&(n.preventDefault(),window.scrollTo(0,0),t(new N$(e.route)))})}
+                ${N(`click`,n=>{(!e.router||XQ(n))&&(n.preventDefault(),window.scrollTo(0,0),t(new V$(e.route)))})}
             >
                 <slot></slot>
             </a>
-        `});function I$(e,t){return e.entry.entryType===tt.Root?!1:e.entry.entryType===tt.Page||b.jsonEquals(t,e.fullUrlBreadcrumbs.slice(0,-1))?!0:b.jsonEquals(t?.slice(0,-1),e.fullUrlBreadcrumbs.slice(0,-1))}var L$=P$()({tagName:`book-nav`,cssVars:{"book-nav-internal-indent":`0`},styles:({cssVars:e})=>S`
+        `});function W$(e,t){return e.entry.entryType===tt.Root?!1:e.entry.entryType===tt.Page||b.jsonEquals(t,e.fullUrlBreadcrumbs.slice(0,-1))?!0:b.jsonEquals(t?.slice(0,-1),e.fullUrlBreadcrumbs.slice(0,-1))}var G$=H$()({tagName:`book-nav`,cssVars:{"book-nav-internal-indent":`0`},styles:({cssVars:e})=>S`
         :host {
             display: flex;
             flex-direction: column;
@@ -36115,7 +36117,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
         .title-row {
             display: block;
-            ${F$.cssVars[`book-route-link-anchor-padding`].name}: 1px 24px 1px calc(calc(16px * ${e[`book-nav-internal-indent`].value}) + 8px);
+            ${U$.cssVars[`book-route-link-anchor-padding`].name}: 1px 24px 1px calc(calc(16px * ${e[`book-nav-internal-indent`].value}) + 8px);
         }
 
         ul {
@@ -36145,11 +36147,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             display: inline-flex;
             color: ${Cr[`element-book-accent-icon-color`].value};
         }
-    `,render({inputs:e}){let t=e.flattenedNodes.map(t=>{if(I$(t,e.selectedPath))return w`
+    `,render({inputs:e}){let t=e.flattenedNodes.map(t=>{if(W$(t,e.selectedPath))return w`
                 <li style=${S`
                 --book-nav-internal-indent: ${t.fullUrlBreadcrumbs.length-1};
             `}>
-                    <${F$.assign({router:e.router,route:{paths:[br.Book,...t.fullUrlBreadcrumbs]}})}
+                    <${U$.assign({router:e.router,route:{paths:[br.Book,...t.fullUrlBreadcrumbs]}})}
                         class=${Bl({"title-row":!0,selected:e.selectedPath?b.jsonEquals(e.selectedPath,t.fullUrlBreadcrumbs):!1})}
                     >
                         <div class="title-text">
@@ -36158,16 +36160,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 `)}
                             ${t.entry.title}
                         </div>
-                    </${F$}>
+                    </${U$}>
                 </li>
             `});return w`
-            <${F$.assign({route:Sr,router:e.router})}>
+            <${U$.assign({route:Sr,router:e.router})}>
                 <slot>Book</slot>
-            </${F$}>
+            </${U$}>
             <ul>
                 ${t}
             </ul>
-        `}}),R$=P$()({tagName:`book-page-controls`,events:{controlValueChange:x()},hostClasses:{"book-page-controls-has-controls":({inputs:e})=>!!Object.keys(e.config).length},styles:({hostClasses:e})=>S`
+        `}}),K$=H$()({tagName:`book-page-controls`,events:{controlValueChange:x()},hostClasses:{"book-page-controls-has-controls":({inputs:e})=>!!Object.keys(e.config).length},styles:({hostClasses:e})=>S`
         :host {
             display: flex;
             flex-wrap: wrap;
@@ -36201,7 +36203,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             bottom: 0;
             margin-left: -32px;
         }
-    `,render({inputs:e,dispatch:t,events:n}){return Object.entries(e.config).length?Object.entries(e.config).map(([r,i],a)=>{if(i.controlType===E.Hidden)return``;let o=z$(e.currentValues[r],i,i=>{let a=b.isArray(e.fullUrlBreadcrumbs)?e.fullUrlBreadcrumbs:e.fullUrlBreadcrumbs[r];if(!a)throw Error(`Failed to find breadcrumbs from given control name: '${r}'`);t(new n.controlValueChange({fullUrlBreadcrumbs:a,newValues:{...Object.fromEntries(Object.keys(e.config).map(t=>[t,e.currentValues[t]])),[r]:i}}))});return w`
+    `,render({inputs:e,dispatch:t,events:n}){return Object.entries(e.config).length?Object.entries(e.config).map(([r,i],a)=>{if(i.controlType===E.Hidden)return``;let o=q$(e.currentValues[r],i,i=>{let a=b.isArray(e.fullUrlBreadcrumbs)?e.fullUrlBreadcrumbs:e.fullUrlBreadcrumbs[r];if(!a)throw Error(`Failed to find breadcrumbs from given control name: '${r}'`);t(new n.controlValueChange({fullUrlBreadcrumbs:a,newValues:{...Object.fromEntries(Object.keys(e.config).map(t=>[t,e.currentValues[t]])),[r]:i}}))});return w`
                     <div class="control-wrapper">
                         ${ou(a===0,w`
                                 <${V.assign({icon:ep})}
@@ -36217,18 +36219,18 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             ${o}
                         </label>
                     </div>
-                `}):``}});function z$(e,t,n){return dt(t,E.Hidden)?``:dt(t,E.Checkbox)?w`
+                `}):``}});function q$(e,t,n){return dt(t,E.Hidden)?``:dt(t,E.Checkbox)?w`
             <${W.assign({value:!!e})}
                 ${N(W.events.valueChange,e=>{n(e.detail)})}
             ></${W}>
         `:dt(t,E.Color)?w`
-            <${YX.assign({color:e})}
+            <${nZ.assign({color:e})}
                 style=${S`
-                    ${YX.cssVars[`vir-color-picker-swatch-height`].name}: 24px;
-                    ${YX.cssVars[`vir-color-picker-swatch-width`].name}: 24px;
+                    ${nZ.cssVars[`vir-color-picker-swatch-height`].name}: 24px;
+                    ${nZ.cssVars[`vir-color-picker-swatch-width`].name}: 24px;
                 `}
-                ${N(YX.events.colorChange,e=>{n(e.detail)})}
-            ></${YX}>
+                ${N(nZ.events.colorChange,e=>{n(e.detail)})}
+            ></${nZ}>
         `:dt(t,E.Text)?w`
             <${Q.assign({value:e,showClearButton:!0,disableBrowserHelps:!0})}
                 ${N(Q.events.valueChange,e=>{n(e.detail)})}
@@ -36242,10 +36244,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 ${N($.events.valueChange,e=>{n(e.detail)})}
             ></${$}>
         `:dt(t,E.Custom)?t.content:w`
-            <${fZ}>
+            <${bZ}>
                 ${t.controlType} controls are not implemented yet.
-            </${fZ}>
-        `}var B$=P$()({tagName:`book-breadcrumbs`,styles:S`
+            </${bZ}>
+        `}var J$=H$()({tagName:`book-breadcrumbs`,styles:S`
         :host {
             display: flex;
             color: ${R.colors[`vira-grey-foreground-header`].foreground.value};
@@ -36257,13 +36259,13 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
     `,render:({inputs:e})=>{let t=e.currentRoute.paths.slice(1);return t.length?t.map((t,n,r)=>{let i=n>=r.length-1,a=r.slice(0,n+1),o=i?``:w`
                       <span class="spacer">&gt;</span>
                   `;return w`
-                <${F$.assign({route:{hash:void 0,search:void 0,paths:[br.Book,...a]},router:e.router})}>
+                <${U$.assign({route:{hash:void 0,search:void 0,paths:[br.Book,...a]},router:e.router})}>
                     ${t}
-                </${F$}>
+                </${U$}>
                 ${o}
             `}):w`
                 &nbsp;
-            `}}),V$=P$()({tagName:`book-breadcrumbs-bar`,styles:S`
+            `}}),Y$=H$()({tagName:`book-breadcrumbs-bar`,styles:S`
         :host {
             border-bottom: 1px solid
                 ${R.colors[`vira-grey-foreground-placeholder`].foreground.value};
@@ -36277,14 +36279,14 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             ${ou(!!e.currentSearch,w`
                     &nbsp;
                 `,w`
-                    <${B$.assign({currentRoute:e.currentRoute,router:e.router})}></${B$}>
+                    <${J$.assign({currentRoute:e.currentRoute,router:e.router})}></${J$}>
                 `)}
             <input
                 placeholder="search"
                 .value=${e.currentSearch}
-                ${N(`input`,async e=>{let n=e.currentTarget;if(!(n instanceof HTMLInputElement))throw TypeError(`Failed to find input element for search.`);let r=n.value;await Fe({milliseconds:200}),n.value===r&&(n.value?t(new N$({paths:[br.Search,encodeURIComponent(n.value)]})):t(new N$(Sr)))})}
+                ${N(`input`,async e=>{let n=e.currentTarget;if(!(n instanceof HTMLInputElement))throw TypeError(`Failed to find input element for search.`);let r=n.value;await Fe({milliseconds:200}),n.value===r&&(n.value?t(new V$({paths:[br.Search,encodeURIComponent(n.value)]})):t(new V$(Sr)))})}
             />
-        `}}),H$=P$()({tagName:`book-entry-description`,styles:S`
+        `}}),X$=H$()({tagName:`book-entry-description`,styles:S`
         :host {
             color: ${R.colors[`vira-grey-foreground-placeholder`].foreground.value};
             display: inline-flex;
@@ -36310,7 +36312,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         }
     `,render({inputs:e}){return e.descriptionParagraphs.map(e=>w`
                 <p>${e}</p>
-            `)}}),U$=P$()({tagName:`book-page-wrapper`,styles:S`
+            `)}}),Z$=H$()({tagName:`book-page-wrapper`,styles:S`
         :host {
             display: block;
         }
@@ -36331,7 +36333,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             flex-direction: column;
         }
 
-        ${F$} {
+        ${U$} {
             display: inline-block;
         }
     `,render({inputs:e}){let t=e.isTopLevel?w`
@@ -36342,19 +36344,19 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             <div class="page-header block-entry">
                 <div class="title-group">
                     ${e.blockNavigation?t:w`
-                  <${F$.assign({route:{paths:n,hash:void 0,search:void 0},router:e.router})}>
+                  <${U$.assign({route:{paths:n,hash:void 0,search:void 0},router:e.router})}>
                       ${t}
-                  </${F$}>
+                  </${U$}>
               `}
                     ${r?w`
-                              <${fZ}>${r.message}</${fZ}>
+                              <${bZ}>${r.message}</${bZ}>
                           `:w`
-                              <${H$.assign({descriptionParagraphs:e.pageNode.entry.descriptionParagraphs})}></${H$}>
-                              <${R$.assign({config:e.pageNode.entry.controls,currentValues:gr(e.controls,e.pageNode.fullUrlBreadcrumbs),fullUrlBreadcrumbs:e.pageNode.fullUrlBreadcrumbs})}></${R$}>
+                              <${X$.assign({descriptionParagraphs:e.pageNode.entry.descriptionParagraphs})}></${X$}>
+                              <${K$.assign({config:e.pageNode.entry.controls,currentValues:gr(e.controls,e.pageNode.fullUrlBreadcrumbs),fullUrlBreadcrumbs:e.pageNode.fullUrlBreadcrumbs})}></${K$}>
                           `}
                 </div>
             </div>
-        `}}),W$=P$()({tagName:`book-element-example-title`,styles:S`
+        `}}),Q$=H$()({tagName:`book-element-example-title`,styles:S`
         :host {
             display: flex;
             color: ${R.colors[`vira-grey-foreground-placeholder`].foreground.value};
@@ -36362,10 +36364,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             padding: 0 8px 4px;
         }
     `,render({inputs:e}){if(e.blockNavigation)return e.elementExampleNode.entry.title;let t=[br.Book,...e.elementExampleNode.fullUrlBreadcrumbs];return w`
-            <${F$.assign({route:{paths:t,hash:void 0,search:void 0},router:e.router})}>
+            <${U$.assign({route:{paths:t,hash:void 0,search:void 0},router:e.router})}>
                 ${e.elementExampleNode.entry.title}
-            </${F$}>
-        `}}),G$=Symbol(`unset-internal-state`),K$=P$()({tagName:`book-element-example-viewer`,state(){return{isUnset:G$}},render({state:e,inputs:t,updateState:n}){try{if(t.elementExampleNode.entry.errors.length)throw xt(t.elementExampleNode.entry.errors);if(!t.elementExampleNode.entry.render||typeof t.elementExampleNode.entry.render==`string`)throw Error(`Failed to render example '${t.elementExampleNode.entry.title}': render is not a function`);e.isUnset===G$&&n({isUnset:void 0,...t.elementExampleNode.entry.state?.()});let r=t.elementExampleNode.entry.render({state:e,updateState:n,controls:t.currentPageControls});if(r instanceof Promise)throw TypeError(`render output cannot be a promise`);return w`
+            </${U$}>
+        `}}),$$=Symbol(`unset-internal-state`),e1=H$()({tagName:`book-element-example-viewer`,state(){return{isUnset:$$}},render({state:e,inputs:t,updateState:n}){try{if(t.elementExampleNode.entry.errors.length)throw xt(t.elementExampleNode.entry.errors);if(!t.elementExampleNode.entry.render||typeof t.elementExampleNode.entry.render==`string`)throw Error(`Failed to render example '${t.elementExampleNode.entry.title}': render is not a function`);e.isUnset===$$&&n({isUnset:void 0,...t.elementExampleNode.entry.state?.()});let r=t.elementExampleNode.entry.render({state:e,updateState:n,controls:t.currentPageControls});if(r instanceof Promise)throw TypeError(`render output cannot be a promise`);return w`
                 ${ou(!!t.elementExampleNode.entry.styles,w`
                         <style>
                             ${t.elementExampleNode.entry.styles}
@@ -36373,10 +36375,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     `)}
                 ${r}
             `}catch(e){return console.error(`ERROR HERE`,qe(e)),console.error(e),w`
-                <${fZ}>
+                <${bZ}>
                     ${t.elementExampleNode.entry.title} failed: ${qe(e)}
-                </${fZ}>
-            `}},options:{allowPolymorphicState:!0}}),q$=P$()({tagName:`book-element-example-wrapper`,styles:S`
+                </${bZ}>
+            `}},options:{allowPolymorphicState:!0}}),t1=H$()({tagName:`book-element-example-wrapper`,styles:S`
         :host {
             display: inline-block;
             max-width: 100%;
@@ -36396,54 +36398,54 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             align-items: flex-start;
         }
 
-        ${W$} {
+        ${Q$} {
             color: ${R.colors[`vira-grey-foreground-placeholder`].foreground.value};
         }
 
-        :host(:hover) ${W$} {
+        :host(:hover) ${Q$} {
             color: ${Cr[`element-book-accent-icon-color`].value};
         }
     `,render({inputs:e}){return w`
             <div class="individual-example-wrapper">
-                <${W$.assign({blockNavigation:e.blockNavigation,elementExampleNode:e.elementExampleNode,router:e.router})}></${W$}>
-                <${K$.assign(e)}></${K$}>
+                <${Q$.assign({blockNavigation:e.blockNavigation,elementExampleNode:e.elementExampleNode,router:e.router})}></${Q$}>
+                <${e1.assign(e)}></${e1}>
             </div>
-        `}}),J$={milliseconds:10},Y$,X$=new Map,Z$=new Map;function Q$(){return Y$||=new IntersectionObserver(e=>{for(let t of e){let e=t.target,n=X$.get(e);if(n)if(t.isIntersecting){if(!Z$.has(e)){let t=globalThis.setTimeout(()=>{Z$.delete(e),n(),Y$?.unobserve(e),X$.delete(e)},fe(J$,{milliseconds:!0}).milliseconds);Z$.set(e,t)}}else{let t=Z$.get(e);t&&(clearTimeout(t),Z$.delete(e))}}},{rootMargin:`100px`}),Y$}function $$(e){let t=Z$.get(e);t&&(clearTimeout(t),Z$.delete(e)),X$.delete(e),Y$?.unobserve(e)}var e1=P$()({tagName:`book-lazy-entry`,state(){return{hasRendered:!1,placeholderElement:void 0}},styles:S`
+        `}}),n1={milliseconds:10},r1,i1=new Map,a1=new Map;function o1(){return r1||=new IntersectionObserver(e=>{for(let t of e){let e=t.target,n=i1.get(e);if(n)if(t.isIntersecting){if(!a1.has(e)){let t=globalThis.setTimeout(()=>{a1.delete(e),n(),r1?.unobserve(e),i1.delete(e)},fe(n1,{milliseconds:!0}).milliseconds);a1.set(e,t)}}else{let t=a1.get(e);t&&(clearTimeout(t),a1.delete(e))}}},{rootMargin:`100px`}),r1}function s1(e){let t=a1.get(e);t&&(clearTimeout(t),a1.delete(e)),i1.delete(e),r1?.unobserve(e)}var c1=H$()({tagName:`book-lazy-entry`,state(){return{hasRendered:!1,placeholderElement:void 0}},styles:S`
         .placeholder {
             /* Minimum height to ensure the placeholder is observable */
             min-height: 50px;
             display: block;
         }
-    `,cleanup({state:e}){e.placeholderElement&&$$(e.placeholderElement)},render({inputs:e,state:t,updateState:n}){return t.hasRendered?e.content:w`
+    `,cleanup({state:e}){e.placeholderElement&&s1(e.placeholderElement)},render({inputs:e,state:t,updateState:n}){return t.hasRendered?e.content:w`
             <div
                 class="placeholder"
-                ${eu(e=>{t.placeholderElement&&$$(t.placeholderElement),n({placeholderElement:e}),X$.set(e,()=>{n({hasRendered:!0})}),Q$().observe(e)})}
+                ${eu(e=>{t.placeholderElement&&s1(t.placeholderElement),n({placeholderElement:e}),i1.set(e,()=>{n({hasRendered:!0})}),o1().observe(e)})}
             >
                 &nbsp;
             </div>
-        `}});function t1(e,t,n,r){let i=mr(n,r),a=[];if(i){let n=t1(e,t,i,r);n&&a.push(n)}if(cr(n,tt.Page)&&!e.includes(n)){let e=gr(t,n.fullUrlBreadcrumbs);a.push({config:n.entry.controls,current:e,breadcrumbs:et(e,()=>n.fullUrlBreadcrumbs)})}return a.reduce((e,t)=>({config:{...e.config,...t.config},current:{...e.current,...t.current},breadcrumbs:{...e.breadcrumbs,...t.breadcrumbs}}),{config:{},current:{},breadcrumbs:{}})}function n1({blockNavigation:e,currentNodes:t,isTopLevel:n,router:r,isSearching:i,controls:a,originalTree:o}){if(!t.length&&i)return[w`
+        `}});function l1(e,t,n,r){let i=mr(n,r),a=[];if(i){let n=l1(e,t,i,r);n&&a.push(n)}if(cr(n,tt.Page)&&!e.includes(n)){let e=gr(t,n.fullUrlBreadcrumbs);a.push({config:n.entry.controls,current:e,breadcrumbs:et(e,()=>n.fullUrlBreadcrumbs)})}return a.reduce((e,t)=>({config:{...e.config,...t.config},current:{...e.current,...t.current},breadcrumbs:{...e.breadcrumbs,...t.breadcrumbs}}),{config:{},current:{},breadcrumbs:{}})}function u1({blockNavigation:e,currentNodes:t,isTopLevel:n,router:r,isSearching:i,controls:a,originalTree:o}){if(!t.length&&i)return[w`
                 No results
-            `];let s=b.isLengthAtLeast(t,1)?t1(t,a,t[0],o):void 0;return[s&&Object.values(s.config).length&&b.isLengthAtLeast(t,1)?w`
-                  <${R$.assign({config:s.config,currentValues:s.current,fullUrlBreadcrumbs:s.breadcrumbs})}></${R$}>
+            `];let s=b.isLengthAtLeast(t,1)?l1(t,a,t[0],o):void 0;return[s&&Object.values(s.config).length&&b.isLengthAtLeast(t,1)?w`
+                  <${K$.assign({config:s.config,currentValues:s.current,fullUrlBreadcrumbs:s.breadcrumbs})}></${K$}>
               `:g,ql(t,e=>e.fullUrlBreadcrumbs.join(`>`),t=>{if(cr(t,tt.Page))return w`
-                    <${U$.assign({blockNavigation:e,isTopLevel:n,pageNode:t,controls:a,router:r})}
+                    <${Z$.assign({blockNavigation:e,isTopLevel:n,pageNode:t,controls:a,router:r})}
                         class="block-entry"
-                    ></${U$}>
+                    ></${Z$}>
                 `;if(cr(t,tt.ElementExample)){let n=gr(a,t.fullUrlBreadcrumbs.slice(0,-1)),i=w`
-                    <${q$.assign({blockNavigation:e,elementExampleNode:t,currentPageControls:n,router:r})}></${q$}>
+                    <${t1.assign({blockNavigation:e,elementExampleNode:t,currentPageControls:n,router:r})}></${t1}>
                 `;return w`
-                    <${e1.assign({content:i})}
+                    <${c1.assign({content:i})}
                         class="inline-entry ${Bl({"block-entry":t.entry.isVertical})}"
-                    ></${e1}>
+                    ></${c1}>
                 `}else if(cr(t,tt.Root))return g;else{let e=w`
-                    <${fZ}>
+                    <${bZ}>
                         Unknown entry type for rendering: '${t.entry.entryType}'
-                    </${fZ}>
+                    </${bZ}>
                 `;return w`
-                    <${e1.assign({content:e})}
+                    <${c1.assign({content:e})}
                         class="block-entry"
-                    ></${e1}>
-                `}})]}var r1=P$()({tagName:`book-entry-display`,state(){return{lastElement:void 0}},styles:S`
+                    ></${c1}>
+                `}})]}var d1=H$()({tagName:`book-entry-display`,state(){return{lastElement:void 0}},styles:S`
         :host {
             display: flex;
             flex-direction: column;
@@ -36478,7 +36480,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             padding: 0;
         }
 
-        ${V$} {
+        ${Y$} {
             top: 0;
         }
 
@@ -36504,8 +36506,8 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 opacity: 1;
             }
         }
-    `,events:{loadingRender:x()},render:({inputs:e,dispatch:t,events:n,state:r,updateState:i})=>{let a=xr(e.currentRoute.paths),o=n1({blockNavigation:e.blockNavigation,currentNodes:e.currentNodes,isTopLevel:!0,router:e.router,isSearching:!!a,controls:e.controls,originalTree:e.originalTree});return w`
-            <${V$.assign({currentSearch:a,currentRoute:e.currentRoute,router:e.router})}></${V$}>
+    `,events:{loadingRender:x()},render:({inputs:e,dispatch:t,events:n,state:r,updateState:i})=>{let a=xr(e.currentRoute.paths),o=u1({blockNavigation:e.blockNavigation,currentNodes:e.currentNodes,isTopLevel:!0,router:e.router,isSearching:!!a,controls:e.controls,originalTree:e.originalTree});return w`
+            <${Y$.assign({currentSearch:a,currentRoute:e.currentRoute,router:e.router})}></${Y$}>
 
             ${ou(e.showLoading,w`
                     <div
@@ -36527,7 +36529,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     </div>
                     <slot></slot>
                 `)}
-        `}});function i1(e,t,n){let r=a1(e,t);return r.length?r:(n(Sr),a1(e,Sr.paths))}function a1(e,t){return e.filter(e=>er({searchFor:t.slice(1),searchIn:e.fullUrlBreadcrumbs}))}var o1=Ee()({tagName:`element-book-app`,state(){return{currentRoute:Sr,router:void 0,loading:!0,colors:{config:void 0,theme:C$(void 0)},treeBasedControls:void 0,originalWindowTitle:void 0,isDarkMode:globalThis.matchMedia(`(prefers-color-scheme: dark)`).matches,darkModeCleanup:void 0}},events:{pathUpdate:x()},slotNames:[`footer`,`navHeader`],styles:S`
+        `}});function f1(e,t,n){let r=p1(e,t);return r.length?r:(n(Sr),p1(e,Sr.paths))}function p1(e,t){return e.filter(e=>er({searchFor:t.slice(1),searchIn:e.fullUrlBreadcrumbs}))}var m1=Ee()({tagName:`element-book-app`,state(){return{currentRoute:Sr,router:void 0,loading:!0,colors:{config:void 0,theme:j$(void 0)},treeBasedControls:void 0,originalWindowTitle:void 0,isDarkMode:globalThis.matchMedia(`(prefers-color-scheme: dark)`).matches,darkModeCleanup:void 0}},events:{pathUpdate:x()},slotNames:[`footer`,`navHeader`],styles:S`
         :host {
             display: flex;
             flex-direction: column;
@@ -36544,12 +36546,12 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             position: relative;
         }
 
-        ${r1} {
+        ${d1} {
             flex-grow: 1;
             max-height: 100%;
         }
 
-        ${L$} {
+        ${G$} {
             flex-shrink: 0;
             overflow-x: hidden;
             overflow-y: auto;
@@ -36557,28 +36559,28 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             top: 0;
             max-width: min(400px, 40%);
         }
-    `,cleanup({state:e,updateState:t}){e.router&&e.router.destroy(),e.darkModeCleanup&&e.darkModeCleanup(),t({router:void 0,darkModeCleanup:void 0})},render:({state:e,inputs:n,host:r,updateState:i,dispatch:a,events:o,slotNames:s})=>{n._debug&&console.info(`rendering element-book app`);function c(t){return{...e.currentRoute,...t}}function l(t){let n=c(t);return!b.jsonEquals(e.currentRoute,n)}function u(t){n.preventWindowTitleChange||(e.originalWindowTitle||i({originalWindowTitle:document.title}),document.title=[e.originalWindowTitle,t].filter(b.isTruthy).join(` - `))}function d(t){if(!l(t))return;let r=c(t);e.router?e.router.setRoute(r):i({currentRoute:{...e.currentRoute,...r}}),n.elementBookRoutePaths&&!b.jsonEquals(n.elementBookRoutePaths,e.currentRoute.paths)&&a(new o.pathUpdate(r.paths))}try{if(n.elementBookRoutePaths&&!b.jsonEquals(n.elementBookRoutePaths,e.currentRoute.paths)&&d({paths:en(n.elementBookRoutePaths)}),n.internalRouterConfig?.useInternalRouter&&!e.router){let e=j$(n.internalRouterConfig.basePath);i({router:e}),e.listen(!0,e=>{i({currentRoute:e})})}else !n.internalRouterConfig?.useInternalRouter&&e.router&&e.router.destroy();let a={themeColor:n.themeColor};if(!b.jsonEquals(a,e.colors.config)){let e=C$(a);i({colors:{config:a,theme:e}}),Tr(r,e)}if(!e.darkModeCleanup){let e=globalThis.matchMedia(`(prefers-color-scheme: dark)`),t=e=>{i({isDarkMode:e.matches})};e.addEventListener(`change`,t),i({isDarkMode:e.matches,darkModeCleanup:()=>{e.removeEventListener(`change`,t)}})}t(n.darkMode??e.isDarkMode?xu.overrides:{},`element-book-dark-mode`);let o=n._debug??!1,c=dr({entries:n.pages,debug:o});(!e.treeBasedControls||e.treeBasedControls.pages!==n.pages||e.treeBasedControls.lastGlobalInputs!==n.globalValues)&&(n._debug&&console.info(`regenerating global controls`),i({treeBasedControls:{pages:n.pages,lastGlobalInputs:n.globalValues??{},controls:yr(c.tree,{children:e.treeBasedControls?.controls.children,controls:n.globalValues})}}));let f=xr(e.currentRoute.paths),p=(f?A$({flattenedNodes:c.flattenedNodes,searchQuery:f}):void 0)??i1(c.flattenedNodes,e.currentRoute.paths,d);u(p[0]?.entry.title);let m=e.treeBasedControls?.controls;return m?(n._debug&&console.info({currentControls:m}),w`
+    `,cleanup({state:e,updateState:t}){e.router&&e.router.destroy(),e.darkModeCleanup&&e.darkModeCleanup(),t({router:void 0,darkModeCleanup:void 0})},render:({state:e,inputs:n,host:r,updateState:i,dispatch:a,events:o,slotNames:s})=>{n._debug&&console.info(`rendering element-book app`);function c(t){return{...e.currentRoute,...t}}function l(t){let n=c(t);return!b.jsonEquals(e.currentRoute,n)}function u(t){n.preventWindowTitleChange||(e.originalWindowTitle||i({originalWindowTitle:document.title}),document.title=[e.originalWindowTitle,t].filter(b.isTruthy).join(` - `))}function d(t){if(!l(t))return;let r=c(t);e.router?e.router.setRoute(r):i({currentRoute:{...e.currentRoute,...r}}),n.elementBookRoutePaths&&!b.jsonEquals(n.elementBookRoutePaths,e.currentRoute.paths)&&a(new o.pathUpdate(r.paths))}try{if(n.elementBookRoutePaths&&!b.jsonEquals(n.elementBookRoutePaths,e.currentRoute.paths)&&d({paths:en(n.elementBookRoutePaths)}),n.internalRouterConfig?.useInternalRouter&&!e.router){let e=z$(n.internalRouterConfig.basePath);i({router:e}),e.listen(!0,e=>{i({currentRoute:e})})}else !n.internalRouterConfig?.useInternalRouter&&e.router&&e.router.destroy();let a={themeColor:n.themeColor};if(!b.jsonEquals(a,e.colors.config)){let e=j$(a);i({colors:{config:a,theme:e}}),Tr(r,e)}if(!e.darkModeCleanup){let e=globalThis.matchMedia(`(prefers-color-scheme: dark)`),t=e=>{i({isDarkMode:e.matches})};e.addEventListener(`change`,t),i({isDarkMode:e.matches,darkModeCleanup:()=>{e.removeEventListener(`change`,t)}})}t(n.darkMode??e.isDarkMode?xu.overrides:{},`element-book-dark-mode`);let o=n._debug??!1,c=dr({entries:n.pages,debug:o});(!e.treeBasedControls||e.treeBasedControls.pages!==n.pages||e.treeBasedControls.lastGlobalInputs!==n.globalValues)&&(n._debug&&console.info(`regenerating global controls`),i({treeBasedControls:{pages:n.pages,lastGlobalInputs:n.globalValues??{},controls:yr(c.tree,{children:e.treeBasedControls?.controls.children,controls:n.globalValues})}}));let f=xr(e.currentRoute.paths),p=(f?R$({flattenedNodes:c.flattenedNodes,searchQuery:f}):void 0)??f1(c.flattenedNodes,e.currentRoute.paths,d);u(p[0]?.entry.title);let m=e.treeBasedControls?.controls;return m?(n._debug&&console.info({currentControls:m}),w`
                 <div
                     class="root"
-                    ${N(N$,e=>{let t=e.detail;if(l(t)&&(i({loading:!0}),d(t),!(r.shadowRoot.querySelector(L$.tagName)instanceof L$)))throw TypeError(`Failed to find child '${L$.tagName}'`)})}
-                    ${N(R$.events.controlValueChange,t=>{if(!e.treeBasedControls)return;let n=vr(m,t.detail.fullUrlBreadcrumbs,t.detail.newValues);i({treeBasedControls:{...e.treeBasedControls,controls:n}})})}
+                    ${N(V$,e=>{let t=e.detail;if(l(t)&&(i({loading:!0}),d(t),!(r.shadowRoot.querySelector(G$.tagName)instanceof G$)))throw TypeError(`Failed to find child '${G$.tagName}'`)})}
+                    ${N(K$.events.controlValueChange,t=>{if(!e.treeBasedControls)return;let n=vr(m,t.detail.fullUrlBreadcrumbs,t.detail.newValues);i({treeBasedControls:{...e.treeBasedControls,controls:n}})})}
                 >
                     ${n.blockNavigation?g:w`
-                              <${L$.assign({flattenedNodes:c.flattenedNodes,router:e.router,selectedPath:f?void 0:e.currentRoute.paths.slice(1)})}>
+                              <${G$.assign({flattenedNodes:c.flattenedNodes,router:e.router,selectedPath:f?void 0:e.currentRoute.paths.slice(1)})}>
                                   <slot name=${s.navHeader}></slot>
-                              </${L$}>
+                              </${G$}>
                           `}
-                    <${r1.assign({blockNavigation:!!n.blockNavigation,controls:m,currentNodes:p,currentRoute:e.currentRoute,debug:o,originalTree:c.tree,router:e.router,showLoading:e.loading})}
-                        ${N(r1.events.loadingRender,async e=>{await pd();let t=r.shadowRoot.querySelector(r1.tagName);t?t.scroll({top:0,behavior:`instant`}):console.error(`Failed to find '${r1.tagName}' for scrolling.`),await pd(),i({loading:!e.detail})})}
+                    <${d1.assign({blockNavigation:!!n.blockNavigation,controls:m,currentNodes:p,currentRoute:e.currentRoute,debug:o,originalTree:c.tree,router:e.router,showLoading:e.loading})}
+                        ${N(d1.events.loadingRender,async e=>{await pd();let t=r.shadowRoot.querySelector(d1.tagName);t?t.scroll({top:0,behavior:`instant`}):console.error(`Failed to find '${d1.tagName}' for scrolling.`),await pd(),i({loading:!e.detail})})}
                     >
                         <slot name=${s.footer}></slot>
-                    </${r1}>
+                    </${d1}>
                 </div>
             `):w`
-                    <${fZ}>Failed to generate page controls.</${fZ}>
+                    <${bZ}>Failed to generate page controls.</${bZ}>
                 `}catch(e){return console.error(e),w`
-                <${fZ}>${qe(e)}</${fZ}>
-            `}}}),s1=O({title:`Elements`,parent:void 0}),c1=O({title:`Styles`,parent:void 0}),l1=O({title:`Util`,parent:void 0}),u1=O({title:`Icons`,controls:{"Stroke Color":ft({controlType:E.Color,initValue:``}),"Fill Color":ft({controlType:E.Color,initValue:``}),"Stroke Width":ft({controlType:E.Number,initValue:1.5})},parent:void 0}),d1=sZ({parent:c1,theme:R,title:`Vira Theme`,hideInverseColors:!0,overrides:[xu],hideCopyCode:!0}),f1=O({title:xp.name,parent:l1,descriptionParagraphs:[`Wraps an existing icon with specific colors to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){e({title:`stroke color`,styles:S`
+                <${bZ}>${qe(e)}</${bZ}>
+            `}}}),h1=O({title:`Elements`,parent:void 0}),g1=O({title:`Styles`,parent:void 0}),_1=O({title:`Util`,parent:void 0}),v1=O({title:`Icons`,controls:{"Stroke Color":ft({controlType:E.Color,initValue:``}),"Fill Color":ft({controlType:E.Color,initValue:``}),"Stroke Width":ft({controlType:E.Number,initValue:1.5})},parent:void 0}),y1=hZ({parent:g1,theme:R,title:`Vira Theme`,hideInverseColors:!0,overrides:[xu],hideCopyCode:!0}),b1=O({title:xp.name,parent:_1,descriptionParagraphs:[`Wraps an existing icon with specific colors to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){e({title:`stroke color`,styles:S`
                 :host {
                     display: flex;
                     gap: 16px;
@@ -36628,7 +36630,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${V.assign({icon:t})}></${V}>
                     <${V.assign({icon:n})}></${V}>
                     <${V.assign({icon:r})}></${V}>
-                `}})}}),p1=[{title:`smaller`,size:16,icon:Hf},{title:`larger`,size:48,icon:fp}],m1=O({title:mG.name,parent:l1,descriptionParagraphs:[`Wraps an existing icon with explicit dimensions to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){p1.forEach(t=>{e({title:t.title,styles:S`
+                `}})}}),x1=[{title:`smaller`,size:16,icon:Hf},{title:`larger`,size:48,icon:fp}],S1=O({title:mG.name,parent:_1,descriptionParagraphs:[`Wraps an existing icon with explicit dimensions to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){x1.forEach(t=>{e({title:t.title,styles:S`
                     :host {
                         display: flex;
                         gap: 16px;
@@ -36638,37 +36640,37 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <${V.assign({icon:t.icon})}></${V}>
                         <span>→</span>
                         <${V.assign({icon:e})}></${V}>
-                    `}})})}}),h1={async element1(){return await Fe({seconds:2}),(await Dt(async()=>{let{ViraElement1Mock:e}=await import(`./vira-element-1-CHqmfmKv.js`);return{ViraElement1Mock:e}},__vite__mapDeps([0,1]))).ViraElement1Mock},async element2(){return await Fe({seconds:2}),(await Dt(async()=>{let{ViraElement2Mock:e}=await import(`./vira-element-2-vx-WpbB5.js`);return{ViraElement2Mock:e}},__vite__mapDeps([2,1]))).ViraElement2Mock},errorElement(){throw Error(`import failure`)}},g1=Ee()({tagName:`example-direct-set-key-dynamic-elements`,state(){return{dynamicElements:g$(h1)}},render({state:e,inputs:t}){return _$(e.dynamicElements,{key:t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`,error(e){return w`
-                    <${fZ}>
+                    `}})})}}),C1={async element1(){return await Fe({seconds:2}),(await Dt(async()=>{let{ViraElement1Mock:e}=await import(`./vira-element-1-CHqmfmKv.js`);return{ViraElement1Mock:e}},__vite__mapDeps([0,1]))).ViraElement1Mock},async element2(){return await Fe({seconds:2}),(await Dt(async()=>{let{ViraElement2Mock:e}=await import(`./vira-element-2-vx-WpbB5.js`);return{ViraElement2Mock:e}},__vite__mapDeps([2,1]))).ViraElement2Mock},errorElement(){throw Error(`import failure`)}},w1=Ee()({tagName:`example-direct-set-key-dynamic-elements`,state(){return{dynamicElements:w$(C1)}},render({state:e,inputs:t}){return T$(e.dynamicElements,{key:t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`,error(e){return w`
+                    <${bZ}>
                         ${de(`Failed to import element`,qe(e))}
-                    </${fZ}>
+                    </${bZ}>
                 `},loading(){return w`
                     <${V.assign({icon:Xf})}></${V}>
                 `},ready(e){if(e.element1)return w`
                         <${e.element1}></${e.element1}>
                     `;if(e.element2)return w`
                         <${e.element2.assign({userName:`John`})}></${e.element2}>
-                    `;y.never(`The error element will always error`)}})}}),_1=Ee()({tagName:`example-async-update-key-dynamic-elements`,state(){return{dynamicElements:g$(h1)}},render({state:e,inputs:t}){return e.dynamicElements.update(t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`),_$(e.dynamicElements,{error(e){return w`
-                    <${fZ}>
+                    `;y.never(`The error element will always error`)}})}}),T1=Ee()({tagName:`example-async-update-key-dynamic-elements`,state(){return{dynamicElements:w$(C1)}},render({state:e,inputs:t}){return e.dynamicElements.update(t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`),T$(e.dynamicElements,{error(e){return w`
+                    <${bZ}>
                         ${de(`Failed to import element`,qe(e))}
-                    </${fZ}>
+                    </${bZ}>
                 `},loading(){return w`
                     <${V.assign({icon:Xf})}></${V}>
                 `},ready(e){if(e.element1)return w`
                         <${e.element1}></${e.element1}>
                     `;if(e.element2)return w`
                         <${e.element2.assign({userName:`John`})}></${e.element2}>
-                    `;y.never(`The error element will always error`)}})}}),v1=[{label:`1`,value:`1`},{label:`2`,value:`2`},{label:`3`,value:`3`}],y1=O({parent:l1,title:`Dynamic Element Loading`,defineExamples({defineExample:e}){e({title:`direct key setting`,state(){return{value:1}},styles:S`
+                    `;y.never(`The error element will always error`)}})}}),E1=[{label:`1`,value:`1`},{label:`2`,value:`2`},{label:`3`,value:`3`}],D1=O({parent:_1,title:`Dynamic Element Loading`,defineExamples({defineExample:e}){e({title:`direct key setting`,state(){return{value:1}},styles:S`
                 :host {
                     display: flex;
                     flex-direction: column;
                     gap: 8px;
                 }
             `,render({state:e,updateState:t}){return w`
-                    <${$.assign({value:String(e.value),options:v1})}
+                    <${$.assign({value:String(e.value),options:E1})}
                         ${N($.events.valueChange,e=>{let n=Number(e.detail);if(n!==1&&n!==2&&n!==3)throw Error(`Invalid selection: ${n}`);t({value:n})})}
                     ></${$}>
-                    <${g1.assign({numberValue:e.value})}></${g1}>
+                    <${w1.assign({numberValue:e.value})}></${w1}>
                 `}}),e({title:`async prop update key`,state(){return{value:1}},styles:S`
                 :host {
                     display: flex;
@@ -36676,11 +36678,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     gap: 8px;
                 }
             `,render({state:e,updateState:t}){return w`
-                    <${$.assign({value:String(e.value),options:v1})}
+                    <${$.assign({value:String(e.value),options:E1})}
                         ${N($.events.valueChange,e=>{let n=Number(e.detail);if(n!==1&&n!==2&&n!==3)throw Error(`Invalid selection: ${n}`);t({value:n})})}
                     ></${$}>
-                    <${_1.assign({numberValue:e.value})}></${_1}>
-                `}})}}),b1=[{title:`unselected`,content:`my label`,inputs:{selected:!1}},{title:`selected`,content:`my label`,inputs:{selected:!0}},{title:`with custom child`,content:`custom child`,inputs:{selected:!0},customTemplate:w`
+                    <${T1.assign({numberValue:e.value})}></${T1}>
+                `}})}}),O1=[{title:`unselected`,content:`my label`,inputs:{selected:!1}},{title:`selected`,content:`my label`,inputs:{selected:!0}},{title:`with custom child`,content:`custom child`,inputs:{selected:!0},customTemplate:w`
             <b>This is custom</b>
         `},{title:`constrained width`,content:`has more text than is possible to fit`,customStyle:S`
             :host {
@@ -36691,16 +36693,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 width: 400px;
             }
         `,inputs:{selected:!0}},{title:`disabled`,content:`my label`,inputs:{selected:!0,disabled:!0}},{title:`no default pointer styles`,content:`my label`,inputs:{selected:!0,disablePointerStyles:!0}},{title:`icon override`,content:`my label`,inputs:{selected:!1,iconOverride:xp(ep,{"vira-icon-stroke-color":`blue`})}},{title:`with ViraLink content`,customStyle:S`
-            ${rQ} {
+            ${dQ} {
                 text-decoration: none;
             }
         `,content:w`
-            <${rQ.assign({link:{url:`https://example.com`,newTab:!0},disableLinkStyles:!0})}>
+            <${dQ.assign({link:{url:`https://example.com`,newTab:!0},disableLinkStyles:!0})}>
                 link label
-            </${rQ}>
-        `,inputs:{selected:!1}}],x1=O({title:ld.tagName,parent:s1,defineExamples({defineExample:e}){b1.forEach(t=>{e({title:t.title,styles:t.customStyle,render(){return w`
+            </${dQ}>
+        `,inputs:{selected:!1}}],k1=O({title:ld.tagName,parent:h1,defineExamples({defineExample:e}){O1.forEach(t=>{e({title:t.title,styles:t.customStyle,render(){return w`
                         <${ld.assign(t.inputs)}>${t.content}</${ld}>
-                    `}})})}}),S1=[{content:`one`},{content:`two`},{content:`three`},{content:`four`},{content:`five`},{content:`six`}],C1=[{value:`1`,label:`Option one`},{value:`2`,label:`Option two`},{value:`3`,label:`Option three`}],w1={content:w`
+                    `}})})}}),A1=[{content:`one`},{content:`two`},{content:`three`},{content:`four`},{content:`five`},{content:`six`}],j1=[{value:`1`,label:`Option one`},{value:`2`,label:`Option two`},{value:`3`,label:`Option three`}],M1={content:w`
         <div
             style=${S`
                 white-space: nowrap;
@@ -36710,22 +36712,22 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             This menu item is much longer than the others
         </div>
-    `},T1=[{title:`basic`},{title:`rounded`,inputs:{menuCornerStyle:ud.AllRounded}},{title:`disabled`,inputs:{isDisabled:!0}},{title:`inside focus`,inputs:{useInsideFocus:!0}},{title:`long item`,menuItems:[...S1,w1]},{title:`restricted long item`,inputs:{horizontalAnchor:gf.Both},menuItems:[...S1,w1]},{title:`ViraLink URL item`,menuItems:[...S1,{content:w`
-                    <${rQ.assign({link:{url:`https://www.wikipedia.org`,newTab:!0},disableLinkStyles:!0})}>
+    `},N1=[{title:`basic`},{title:`rounded`,inputs:{menuCornerStyle:ud.AllRounded}},{title:`disabled`,inputs:{isDisabled:!0}},{title:`inside focus`,inputs:{useInsideFocus:!0}},{title:`long item`,menuItems:[...A1,M1]},{title:`restricted long item`,inputs:{horizontalAnchor:gf.Both},menuItems:[...A1,M1]},{title:`ViraLink URL item`,menuItems:[...A1,{content:w`
+                    <${dQ.assign({link:{url:`https://www.wikipedia.org`,newTab:!0},disableLinkStyles:!0})}>
                         Wikipedia link
-                    </${rQ}>
-                `}]},{title:`ViraLink route item`,menuItems:[...S1,{content:w`
-                    <${rQ.assign({route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}},disableLinkStyles:!0})}>
+                    </${dQ}>
+                `}]},{title:`ViraLink route item`,menuItems:[...A1,{content:w`
+                    <${dQ.assign({route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}},disableLinkStyles:!0})}>
                         Route link
-                    </${rQ}>
-                `}]}],E1=O({parent:s1,title:_f.tagName,descriptionParagraphs:[`No selection state logic is included in these examples.`],defineExamples({defineExample:e}){T1.forEach(t=>{e({title:t.title,styles:S`
+                    </${dQ}>
+                `}]}],P1=O({parent:h1,title:_f.tagName,descriptionParagraphs:[`No selection state logic is included in these examples.`],defineExamples({defineExample:e}){N1.forEach(t=>{e({title:t.title,styles:S`
                     .trigger {
                         cursor: pointer;
                         border: 4px solid #ccc;
                         padding: 8px 16px;
                     }
                 `,state(){return{selectedValue:void 0}},render({state:e,updateState:n}){let r=[{content:w`
-                            <${$.assign({options:C1,value:e.selectedValue,rawSelect:!0})}
+                            <${$.assign({options:j1,value:e.selectedValue,rawSelect:!0})}
                                 style=${S`
                                     width: 100%;
                                 `}
@@ -36733,7 +36735,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 ${N(`mousedown`,e=>{e.stopPropagation()})}
                                 ${N($.events.valueChange,e=>{n({selectedValue:e.detail})})}
                             ></${$}>
-                        `},...t.menuItems||S1];return w`
+                        `},...t.menuItems||A1];return w`
                         <${_f.assign({popUpOffset:{vertical:-1},...t.inputs})}>
                             <div
                                 class="trigger"
@@ -36743,7 +36745,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             </div>
                             ${rf(r)}
                         </${_f}>
-                    `}})})}}),D1=[{title:`basic`,items:[{content:`one`},{content:`two`},{content:`three`}]},{title:`with selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`}]},{title:`with multi selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`,selected:!0}]},{title:`with disabled item`,items:[{content:`one`},{content:`two`,disabled:!0},{content:`three`}]}],O1=O({parent:s1,title:fd.tagName,defineExamples({defineExample:e}){D1.forEach(t=>{e({title:t.title,render(){return w`
+                    `}})})}}),F1=[{title:`basic`,items:[{content:`one`},{content:`two`},{content:`three`}]},{title:`with selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`}]},{title:`with multi selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`,selected:!0}]},{title:`with disabled item`,items:[{content:`one`},{content:`two`,disabled:!0},{content:`three`}]}],I1=O({parent:h1,title:fd.tagName,defineExamples({defineExample:e}){F1.forEach(t=>{e({title:t.title,render(){return w`
                         <${fd.assign({...t.menuInputs})}>
                             ${t.items.map(e=>w`
                                     <${ld.assign({selected:e.selected,disabled:e.disabled,disablePointerStyles:e.disablePointerStyles})}>
@@ -36751,7 +36753,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                     </${ld}>
                                 `)}
                         </${fd}>
-                    `}})})}}),k1=O({parent:s1,title:H.tagName,defineExamples({defineExample:e}){e({title:`basic`,styles:S`
+                    `}})})}}),L1=O({parent:h1,title:H.tagName,defineExamples({defineExample:e}){e({title:`basic`,styles:S`
                 ${H} {
                     ${z[`vira-form-focus-outline-border-radius`].name}: 0;
                 }
@@ -36955,7 +36957,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             </div>
                         </${H}>
                     </div>
-                `}})}}),A1=[{title:`menu shadow`,styles:ad.menuShadow},{title:`modal`,styles:ad.modal}],j1=O({parent:c1,title:`Shadows`,defineExamples({defineExample:e}){A1.forEach(t=>{e({title:t.title,styles:S`
+                `}})}}),R1=[{title:`menu shadow`,styles:ad.menuShadow},{title:`modal`,styles:ad.modal}],z1=O({parent:g1,title:`Shadows`,defineExamples({defineExample:e}){R1.forEach(t=>{e({title:t.title,styles:S`
                     .shadow-block {
                         height: 100px;
                         width: 256px;
@@ -36966,7 +36968,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     }
                 `,render(){return w`
                         <div class="shadow-block"></div>
-                    `}})})}}),M1=O({parent:s1,title:vf.tagName,descriptionParagraphs:[`Reserves space for bolded text, even if the text isn't currently bold.`],controls:{bolded:{controlType:E.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`Not bold`,render(){return w`
+                    `}})})}}),B1=O({parent:h1,title:vf.tagName,descriptionParagraphs:[`Reserves space for bolded text, even if the text isn't currently bold.`],controls:{bolded:{controlType:E.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`Not bold`,render(){return w`
                     <${vf.assign({text:`Text here`,bold:!1})}></${vf}>
                 `}}),e({title:`Bold`,render(){return w`
                     <${vf.assign({text:`Text here`,bold:!0})}></${vf}>
@@ -36998,7 +37000,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             `,render(){return w`
                     <${vf.assign({text:`Not Bolded`,bold:!1})}></${vf}>
                     <${vf.assign({text:`Bolded`,bold:!0})}></${vf}>
-                `}})}}),N1=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:yp}},{label:`with 16px icon`,extraInputs:{icon:Tf}},{label:`only 24px icon`,extraInputs:{icon:yp,text:``}},{label:`only 16px icon`,extraInputs:{icon:Tf,text:``}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{showMenuCaret:!0}}],P1=S`
+                `}})}}),V1=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:yp}},{label:`with 16px icon`,extraInputs:{icon:Tf}},{label:`only 24px icon`,extraInputs:{icon:yp,text:``}},{label:`only 16px icon`,extraInputs:{icon:Tf,text:``}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{showMenuCaret:!0}}],H1=S`
     table {
         border-collapse: collapse;
     }
@@ -37012,7 +37014,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
     th {
         font-weight: normal;
     }
-`,F1=O({parent:s1,title:U.tagName,descriptionParagraphs:[`Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!`],defineExamples({defineExample:e}){Qu.forEach(t=>{e({title:t,styles:P1,render(){return N1.map(({label:e,extraInputs:n})=>w`
+`,U1=O({parent:h1,title:U.tagName,descriptionParagraphs:[`Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!`],defineExamples({defineExample:e}){Qu.forEach(t=>{e({title:t,styles:H1,render(){return V1.map(({label:e,extraInputs:n})=>w`
                             <h3>${e}</h3>
                             <table>
                                 <thead>
@@ -37074,7 +37076,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 <${U.assign({text:e,color:e})}></${U}>
                             `)}
                     </div>
-                `}})}}),I1=[{title:`basic`},{title:`success`,inputs:{cardState:SG.Success}},{title:`error`,inputs:{cardState:SG.Error}},{title:`long`,content:w`
+                `}})}}),W1=[{title:`basic`},{title:`success`,inputs:{cardState:SG.Success}},{title:`error`,inputs:{cardState:SG.Error}},{title:`long`,content:w`
             <p
                 style=${S`
                     ${nd}
@@ -37086,11 +37088,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 <br />
                 This is what it looks like.
             </p>
-        `}],L1=O({parent:s1,title:CG.tagName,descriptionParagraphs:[`A simple wrapper "card" element that is just a <slot> with some styles.`],defineExamples({defineExample:e}){I1.forEach(t=>{e({title:t.title,render(){return w`
+        `}],G1=O({parent:h1,title:CG.tagName,descriptionParagraphs:[`A simple wrapper "card" element that is just a <slot> with some styles.`],defineExamples({defineExample:e}){W1.forEach(t=>{e({title:t.title,render(){return w`
                         <${CG.assign(t.inputs||{})}>
                             ${t.content||`Content`}
                         </${CG}>
-                    `}})})}}),R1=O({parent:s1,title:W.tagName,controls:{Checked:{controlType:E.Checkbox,initValue:!1},Disabled:{controlType:E.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return w`
+                    `}})})}}),K1=O({parent:h1,title:W.tagName,controls:{Checked:{controlType:E.Checkbox,initValue:!1},Disabled:{controlType:E.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return w`
                     <${W.assign({value:e.checked})}
                         ${N(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
@@ -37150,7 +37152,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${W.assign({value:!0,isDisabled:!0,fillWhenChecked:!0})}></${W}>
                 `}}),e({title:`disabled fill when unchecked`,render(){return w`
                     <${W.assign({value:!1,isDisabled:!0,fillWhenUnchecked:!0})}></${W}>
-                `}})}}),z1=O({title:TG.tagName,parent:s1,descriptionParagraphs:[`A collapsible card element with built-in header, caret icon, and card styling. Wraps ViraCollapsibleWrapper with opinionated styles.`],defineExamples({defineExample:e}){e({title:`basic`,styles:S`
+                `}})}}),q1=O({title:TG.tagName,parent:h1,descriptionParagraphs:[`A collapsible card element with built-in header, caret icon, and card styling. Wraps ViraCollapsibleWrapper with opinionated styles.`],defineExamples({defineExample:e}){e({title:`basic`,styles:S`
                 p {
                     ${rd}
                 }
@@ -37237,7 +37239,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                             <p>Content content content content content content content.</p>
                         </${TG}>
                     </div>
-                `}})}}),B1=O({title:wG.tagName,parent:s1,descriptionParagraphs:[`A very basic collapsible wrapper element that expands to fit its content with smooth animations. The animations even adapt to dynamic child sizes!`,`This element does not make any assumptions on styling, all styles are applied by consumers.`],defineExamples({defineExample:e}){e({title:`stacked examples`,styles:S`
+                `}})}}),J1=O({title:wG.tagName,parent:h1,descriptionParagraphs:[`A very basic collapsible wrapper element that expands to fit its content with smooth animations. The animations even adapt to dynamic child sizes!`,`This element does not make any assumptions on styling, all styles are applied by consumers.`],defineExamples({defineExample:e}){e({title:`stacked examples`,styles:S`
                 .section-header {
                     padding: 16px;
                     border: 1px solid dodgerblue;
@@ -37305,68 +37307,68 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 contents Variable contents Variable contents
                             </p>
                         </${wG}>
-                    `)}})}}),V1=O({title:uZ.tagName,parent:s1,defineExamples({defineExample:e}){e({title:`basic`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return w`
+                    `)}})}}),Y1=O({title:vZ.tagName,parent:h1,defineExamples({defineExample:e}){e({title:`basic`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({drawerOpen:!0})})}
                     >
                         Show Drawer
                     </button>
-                    <${uZ.assign({open:e.drawerOpen,drawerTitle:`Drawer title`})}
-                        ${N(uZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
+                    <${vZ.assign({open:e.drawerOpen,drawerTitle:`Drawer title`})}
+                        ${N(vZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
                     >
                         Drawer Content
-                    </${uZ}>
+                    </${vZ}>
                 `}}),e({title:`long title`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({drawerOpen:!0})})}
                     >
                         Show Drawer
                     </button>
-                    <${uZ.assign({open:e.drawerOpen,drawerTitle:`This is a really long drawer title that should be truncated instead of pushing the close button around`})}
-                        ${N(uZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
+                    <${vZ.assign({open:e.drawerOpen,drawerTitle:`This is a really long drawer title that should be truncated instead of pushing the close button around`})}
+                        ${N(vZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
                     >
                         Drawer Content
-                    </${uZ}>
+                    </${vZ}>
                 `}}),e({title:`no content padding`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({drawerOpen:!0})})}
                     >
                         Show Drawer
                     </button>
-                    <${uZ.assign({open:e.drawerOpen,drawerTitle:`Drawer title`,noContentPadding:!0})}
-                        ${N(uZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
+                    <${vZ.assign({open:e.drawerOpen,drawerTitle:`Drawer title`,noContentPadding:!0})}
+                        ${N(vZ.events.drawerClose,()=>{t({drawerOpen:!1})})}
                     >
                         Drawer Content
-                    </${uZ}>
-                `}})}}),H1=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],U1=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`long selection`,inputs:{selected:[8]}},{title:`with disabled item`,inputs:{selected:[],options:[...H1,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:S`
+                    </${vZ}>
+                `}})}}),X1=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],Z1=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`long selection`,inputs:{selected:[8]}},{title:`with disabled item`,inputs:{selected:[],options:[...X1,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:S`
             :host {
                 max-width: 150px;
             }
         `},{title:`stretched width`,customStyle:S`
-            ${dZ} {
+            ${yZ} {
                 width: 400px;
             }
-        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[1]}},{title:`with an icon`,inputs:{icon:Hf}},{title:`with a label`,inputs:{label:`My Label`}}],W1=O({title:dZ.tagName,parent:s1,controls:{Selected:ft({controlType:E.Dropdown,initValue:``,options:[``,...H1.map(e=>e.label)]}),Prefix:ft({controlType:E.Text,initValue:``}),"Force State":ft({controlType:E.Dropdown,options:[``,`force open`,`force closed`],initValue:``}),"Multi Select":ft({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:ft({controlType:E.Dropdown,initValue:``,options:[``,...Object.keys(hG)]}),Disabled:ft({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:ft({controlType:E.Text,initValue:`Select something`})},defineExamples({defineExample:e}){U1.forEach(t=>{e({title:t.title,state(){return{selected:t.inputs?.selected||[]}},styles:t.customStyle,render({state:e,updateState:n,controls:r}){let i={...t.inputs,placeholder:t.inputs&&`placeholder`in t.inputs?t.inputs.placeholder:r.Placeholder,options:t.inputs?.options||H1,selected:r.Selected?[H1.find(e=>e.label===r.Selected)?.value].filter(b.isTruthy):e.selected,selectionPrefix:r.Prefix||t.inputs?.selectionPrefix,isDisabled:r.Disabled?r.Disabled===`all`:t.inputs?.isDisabled,icon:r.Icon?hG[r.Icon]:t.inputs?.icon,isMultiSelect:r[`Multi Select`]?r[`Multi Select`]===`all`:t.inputs?.isMultiSelect,z_debug_forceOpenState:r[`Force State`]?r[`Force State`]===`force open`:t.inputs?.z_debug_forceOpenState};return w`
-                        <${dZ.assign(i)}
-                            ${N(dZ.events.selectedChange,e=>{n({selected:e.detail})})}
-                        ></${dZ}>
-                    `}})})}}),G1=O({parent:s1,title:fZ.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
-                    <${fZ}>Error Content</${fZ}>
-                `}})}}),K1=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],q1=O({parent:s1,title:wZ.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0}},styles:S`
+        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[1]}},{title:`with an icon`,inputs:{icon:Hf}},{title:`with a label`,inputs:{label:`My Label`}}],Q1=O({title:yZ.tagName,parent:h1,controls:{Selected:ft({controlType:E.Dropdown,initValue:``,options:[``,...X1.map(e=>e.label)]}),Prefix:ft({controlType:E.Text,initValue:``}),"Force State":ft({controlType:E.Dropdown,options:[``,`force open`,`force closed`],initValue:``}),"Multi Select":ft({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:ft({controlType:E.Dropdown,initValue:``,options:[``,...Object.keys(hG)]}),Disabled:ft({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:ft({controlType:E.Text,initValue:`Select something`})},defineExamples({defineExample:e}){Z1.forEach(t=>{e({title:t.title,state(){return{selected:t.inputs?.selected||[]}},styles:t.customStyle,render({state:e,updateState:n,controls:r}){let i={...t.inputs,placeholder:t.inputs&&`placeholder`in t.inputs?t.inputs.placeholder:r.Placeholder,options:t.inputs?.options||X1,selected:r.Selected?[X1.find(e=>e.label===r.Selected)?.value].filter(b.isTruthy):e.selected,selectionPrefix:r.Prefix||t.inputs?.selectionPrefix,isDisabled:r.Disabled?r.Disabled===`all`:t.inputs?.isDisabled,icon:r.Icon?hG[r.Icon]:t.inputs?.icon,isMultiSelect:r[`Multi Select`]?r[`Multi Select`]===`all`:t.inputs?.isMultiSelect,z_debug_forceOpenState:r[`Force State`]?r[`Force State`]===`force open`:t.inputs?.z_debug_forceOpenState};return w`
+                        <${yZ.assign(i)}
+                            ${N(yZ.events.selectedChange,e=>{n({selected:e.detail})})}
+                        ></${yZ}>
+                    `}})})}}),$1=O({parent:h1,title:bZ.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
+                    <${bZ}>Error Content</${bZ}>
+                `}})}}),e0=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],t0=O({parent:h1,title:MZ.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0}},styles:S`
                 .buttons {
                     display: flex;
                     gap: 8px;
                     justify-content: flex-end;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole,placeholder:`placeholder`},quantity:{type:Z.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},disabledField:{type:Z.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Z.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return w`
-                    <${wZ.assign({fields:n})}
-                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole,placeholder:`placeholder`},quantity:{type:Z.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},disabledField:{type:Z.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Z.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return w`
+                    <${MZ.assign({fields:n})}
+                        ${N(MZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
                         <div class="buttons">
                             <${U.assign({text:`Cancel`,buttonEmphasis:$u.Subtle,color:qu.Neutral})}></${U}>
                             <${U.assign({text:`Submit`})}></${U}>
                         </div>
-                    </${wZ}>
+                    </${MZ}>
                 `}}),e({title:`with extra slot elements`,state(){return{firstName:``,lastName:``}},styles:S`
                 .buttons {
                     display: flex;
@@ -37374,15 +37376,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     justify-content: flex-end;
                 }
             `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName}};return w`
-                    <${wZ.assign({fields:n})}
-                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+                    <${MZ.assign({fields:n})}
+                        ${N(MZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
                         <${Q.assign({value:``,label:`More stuff`})}></${Q}>
                         <div class="buttons">
                             <${U.assign({text:`Cancel`,buttonEmphasis:$u.Subtle,color:qu.Neutral})}></${U}>
                             <${U.assign({text:`Submit`})}></${U}>
                         </div>
-                    </${wZ}>
+                    </${MZ}>
                 `}}),e({title:`custom width`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0}},styles:S`
                 .buttons {
                     display: flex;
@@ -37390,26 +37392,26 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     justify-content: flex-end;
                 }
 
-                ${wZ} {
+                ${MZ} {
                     width: 400px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole}};return w`
-                    <${wZ.assign({fields:n})}
-                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole}};return w`
+                    <${MZ.assign({fields:n})}
+                        ${N(MZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
                         <div class="buttons">
                             <${U.assign({text:`Cancel`,buttonEmphasis:$u.Subtle,color:qu.Neutral})}></${U}>
                             <${U.assign({text:`Submit`})}></${U}>
                         </div>
-                    </${wZ}>
+                    </${MZ}>
                 `}}),e({title:`horizontal labels`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,userRole:void 0,notes:``}},styles:S`
-                ${wZ} {
+                ${MZ} {
                     width: 520px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
-                    <${wZ.assign({fields:n,useHorizontalLabels:!0})}
-                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
-                    ></${wZ}>
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+                    <${MZ.assign({fields:n,useHorizontalLabels:!0})}
+                        ${N(MZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+                    ></${MZ}>
                 `}}),e({title:`readonly`,styles:S`
                 .readonly-example {
                     display: flex;
@@ -37418,17 +37420,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     gap: 10px;
                 }
 
-                ${wZ} {
+                ${MZ} {
                     width: 400px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
                     <div class="readonly-example">
                         <${U.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
                         ></${U}>
-                        <${wZ.assign({fields:n,isReadonly:e.isReadonly})}
-                            ${N(wZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
-                        ></${wZ}>
+                        <${MZ.assign({fields:n,isReadonly:e.isReadonly})}
+                            ${N(MZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
+                        ></${MZ}>
                     </div>
                 `}}),e({title:`readonly horizontal labels`,styles:S`
                 .readonly-example {
@@ -37438,17 +37440,17 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     gap: 10px;
                 }
 
-                ${wZ} {
+                ${MZ} {
                     width: 520px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole},notes:{type:Z.TextArea,label:`Notes`,value:e.notes}};return w`
                     <div class="readonly-example">
                         <${U.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
                         ></${U}>
-                        <${wZ.assign({fields:n,isReadonly:e.isReadonly,useHorizontalLabels:!0})}
-                            ${N(wZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
-                        ></${wZ}>
+                        <${MZ.assign({fields:n,isReadonly:e.isReadonly,useHorizontalLabels:!0})}
+                            ${N(MZ.events.valueChange,e=>{t({[e.detail.key]:e.detail.value})})}
+                        ></${MZ}>
                     </div>
                 `}}),e({title:`disabled`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0}},styles:S`
                 .buttons {
@@ -37456,16 +37458,16 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     gap: 8px;
                     justify-content: flex-end;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:K1,value:e.userRole}};return w`
-                    <${wZ.assign({fields:n,isDisabled:!0})}
-                        ${N(wZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:e0,value:e.userRole}};return w`
+                    <${MZ.assign({fields:n,isDisabled:!0})}
+                        ${N(MZ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
                         <div class="buttons">
                             <${U.assign({text:`Cancel`,buttonEmphasis:$u.Subtle,color:qu.Neutral})}></${U}>
                             <${U.assign({text:`Submit`})}></${U}>
                         </div>
-                    </${wZ}>
-                `}})}}),J1=O({title:V.tagName,parent:s1,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
+                    </${MZ}>
+                `}})}}),n0=O({title:V.tagName,parent:h1,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
                     <${V.assign({icon:Hf})}></${V}>
                 `}}),e({title:`using createColoredIcon`,render(){return w`
                     <${V.assign({icon:xp(Hf,{"vira-icon-stroke-color":`red`})})}></${V}>
@@ -37507,7 +37509,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 }
             `,render(){return w`
                     <${V.assign({icon:xp(pG.Anchor,{"vira-icon-stroke-color":`red`}),fitContainer:!0})}></${V}>
-                `}})}}),Y1=O({title:TZ.tagName,parent:s1,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:S`
+                `}})}}),r0=O({title:NZ.tagName,parent:h1,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:S`
                     border-radius: 32px;
                 `,loadingSlot:w`
                     <div
@@ -37596,7 +37598,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         ></${V}>
                     </div>
                 `}].forEach(t=>{e({title:t.title,styles:S`
-                    ${TZ} {
+                    ${NZ} {
                         border: 1px solid #ccc;
                         height: 200px;
                         width: 200px;
@@ -37604,11 +37606,11 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     }
 
                     ${t.allowReload?S`
-                              ${TZ} {
+                              ${NZ} {
                                   cursor: pointer;
                               }
 
-                              ${TZ}:hover {
+                              ${NZ}:hover {
                                   border-color: #0055ff;
                               }
                           `:S``}
@@ -37621,26 +37623,26 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         align-items: center;
                     }
                 `,state(){return{imageUrl:t.inputs.imageUrl}},render({state:e,updateState:n}){return w`
-                        <${TZ.assign({...t.inputs,imageUrl:e.imageUrl})}
+                        <${NZ.assign({...t.inputs,imageUrl:e.imageUrl})}
                             ${N(`click`,()=>{t.allowReload&&n({imageUrl:`${t.inputs.imageUrl}?di=${bt()}`})})}
                         >
                             ${t.loadingSlot?w`
                                       <div
                                           class="slot-wrapper"
-                                          slot=${TZ.slotNames[`vira-image-loading`]}
+                                          slot=${NZ.slotNames[`vira-image-loading`]}
                                       >
                                           ${t.loadingSlot}
                                       </div>
                                   `:g}${t.errorSlot?w`
                                       <div
                                           class="slot-wrapper"
-                                          slot=${TZ.slotNames[`vira-image-error`]}
+                                          slot=${NZ.slotNames[`vira-image-error`]}
                                       >
                                           ${t.errorSlot}
                                       </div>
                                   `:g}
-                        </${TZ}>
-                    `}})})}}),X1=O({title:Q.tagName,parent:s1,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:E.Color,initValue:z[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:z[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:z[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:z[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:z[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:S`
+                        </${NZ}>
+                    `}})})}}),i0=O({title:Q.tagName,parent:h1,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:E.Color,initValue:z[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:z[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:z[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:z[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:z[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:S`
                     ${t||S``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let i=et({[String(z[`vira-form-foreground-color`].name)]:n[`Text color`],[String(z[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(z[`vira-form-border-color`].name)]:n[`Border color`],[String(z[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(z[`vira-form-text-selection-color`].name)]:n[`Selection color`]},(e,t)=>t||`inherit`),a=Object.entries(i).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return w`
@@ -37668,7 +37670,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     ${Q} {
                         max-width: 150px;
                     }
-                `,inputs:{value:``,placeholder:`42`,fitText:!0}},{title:`password`,inputs:{value:`as password`,type:yZ.Password,attributePassthrough:{autocomplete:`new-password`}}},{title:`attribute passthrough`,inputs:{value:``,attributePassthrough:{type:`number`}}},{title:`email username`,inputs:{value:``,type:yZ.Email,attributePassthrough:{autocomplete:`username`}}},{title:`centered`,styles:S`
+                `,inputs:{value:``,placeholder:`42`,fitText:!0}},{title:`password`,inputs:{value:`as password`,type:DZ.Password,attributePassthrough:{autocomplete:`new-password`}}},{title:`attribute passthrough`,inputs:{value:``,attributePassthrough:{type:`number`}}},{title:`email username`,inputs:{value:``,type:DZ.Email,attributePassthrough:{autocomplete:`username`}}},{title:`centered`,styles:S`
                     ${Q} {
                         text-align: center;
                     }
@@ -37676,7 +37678,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     ${Q} {
                         width: unset;
                     }
-                `}].forEach(t)}}),Z1=S`
+                `}].forEach(t)}}),a0=S`
     .json-pre {
         width: 480px;
         max-width: 100%;
@@ -37698,49 +37700,49 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         gap: 12px;
     }
 
-    ${nQ} {
+    ${uQ} {
         width: 480px;
     }
-`;function Q1({schema:e,value:t,isDisabled:n,onChange:r}){return w`
+`;function o0({schema:e,value:t,isDisabled:n,onChange:r}){return w`
         <div class="example-stack">
             <pre class="json-pre">
 ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             >
-            <${nQ.assign({value:t,schema:e,isDisabled:n})}
-                ${N(nQ.events.valueChange,e=>r(e.detail))}
-            ></${nQ}>
+            <${uQ.assign({value:t,schema:e,isDisabled:n})}
+                ${N(uQ.events.valueChange,e=>r(e.detail))}
+            ></${uQ}>
             <pre class="json-pre">${JSON.stringify(t,void 0,4)}</pre>
         </div>
-    `}var $1=O({parent:s1,title:nQ.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraSelect is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:Z1,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return Q1({value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema with required fields`,styles:Z1,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return Q1({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema allowing additional properties`,styles:Z1,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return Q1({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange:e=>t({value:e})})}}),e({title:`nested objects and arrays`,styles:Z1,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return Q1({value:e.value,onChange:e=>t({value:e})})}}),e({title:`enum values`,styles:Z1,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return Q1({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange:e=>t({value:e})})}}),e({title:`array with single-type items`,styles:Z1,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return Q1({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange:e=>t({value:e})})}}),e({title:`union of types (anyOf)`,styles:Z1,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return Q1({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange:e=>t({value:e})})}}),e({title:`recursive schema with $ref`,styles:Z1,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return Q1({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema mismatch shows ViraError`,styles:Z1,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return Q1({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange:e=>t({value:e})})}}),e({title:`disabled`,styles:Z1,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return Q1({value:e.value,isDisabled:!0,onChange:e=>t({value:e})})}})}}),e0=O({title:rQ.tagName,parent:s1,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":ft({controlType:E.Color,initValue:``}),"Hover color":ft({controlType:E.Color,initValue:``}),"Active color":ft({controlType:E.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=S`
+    `}var s0=O({parent:h1,title:uQ.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraSelect is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:a0,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return o0({value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema with required fields`,styles:a0,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return o0({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema allowing additional properties`,styles:a0,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return o0({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange:e=>t({value:e})})}}),e({title:`nested objects and arrays`,styles:a0,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return o0({value:e.value,onChange:e=>t({value:e})})}}),e({title:`enum values`,styles:a0,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return o0({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange:e=>t({value:e})})}}),e({title:`array with single-type items`,styles:a0,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return o0({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange:e=>t({value:e})})}}),e({title:`union of types (anyOf)`,styles:a0,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return o0({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange:e=>t({value:e})})}}),e({title:`recursive schema with $ref`,styles:a0,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return o0({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange:e=>t({value:e})})}}),e({title:`schema mismatch shows ViraError`,styles:a0,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return o0({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange:e=>t({value:e})})}}),e({title:`disabled`,styles:a0,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return o0({value:e.value,isDisabled:!0,onChange:e=>t({value:e})})}})}}),c0=O({title:dQ.tagName,parent:h1,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":ft({controlType:E.Color,initValue:``}),"Hover color":ft({controlType:E.Color,initValue:``}),"Active color":ft({controlType:E.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=S`
                         ${z[`vira-form-accent-primary-color`].name}: ${d(e[`Hover color`]||`inherit`)};
                         ${z[`vira-form-accent-primary-active-color`].name}: ${d(e[`Active color`]||`inherit`)};
                         color: ${d(e[`CSS Color`]||`inherit`)};
                     `;return w`
-                        <${rQ.assign(n)} style=${t}>My Link</${rQ}>
-                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),t0=O({title:aQ.tagName,parent:s1,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
+                        <${dQ.assign(n)} style=${t}>My Link</${dQ}>
+                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),l0=O({title:pQ.tagName,parent:h1,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({modalOpen:!0})})}
                     >
                         Show Modal
                     </button>
-                    <${aQ.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
-                        ${N(aQ.events.modalClose,()=>{t({modalOpen:!1})})}
+                    <${pQ.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
+                        ${N(pQ.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content
-                    </${aQ}>
+                    </${pQ}>
                 `}}),e({title:`long title`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({modalOpen:!0})})}
                     >
                         Show Modal
                     </button>
-                    <${aQ.assign({open:e.modalOpen,modalTitle:`This is a really long modal title that should be truncated instead of pushing the close button around`,modalSubtitle:`This subtitle is also very long to test how the layout handles overflow in the header text wrapper area`})}
-                        ${N(aQ.events.modalClose,()=>{t({modalOpen:!1})})}
+                    <${pQ.assign({open:e.modalOpen,modalTitle:`This is a really long modal title that should be truncated instead of pushing the close button around`,modalSubtitle:`This subtitle is also very long to test how the layout handles overflow in the header text wrapper area`})}
+                        ${N(pQ.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content
-                    </${aQ}>
+                    </${pQ}>
                 `}}),e({title:`customized`,state(){return{modalOpen:!1}},styles:S`
-                ${aQ} {
+                ${pQ} {
                     min-width: 500px;
                     border-radius: 4px;
                     ${z[`vira-form-modal-backdrop-color`].name}: rgba(255, 255, 255, 0.4);
@@ -37751,30 +37753,30 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     >
                         Show Modal
                     </button>
-                    <${aQ.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
-                        ${N(aQ.events.modalClose,()=>{t({modalOpen:!1})})}
+                    <${pQ.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
+                        ${N(pQ.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content
-                    </${aQ}>
+                    </${pQ}>
                 `}}),e({title:`no content padding`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({modalOpen:!0})})}
                     >
                         Show Modal
                     </button>
-                    <${aQ.assign({open:e.modalOpen,modalTitle:`Modal title`,noContentPadding:!0})}
-                        ${N(aQ.events.modalClose,()=>{t({modalOpen:!1})})}
+                    <${pQ.assign({open:e.modalOpen,modalTitle:`Modal title`,noContentPadding:!0})}
+                        ${N(pQ.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content
-                    </${aQ}>
-                `}})}}),n0=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:S`
+                    </${pQ}>
+                `}})}}),u0=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:S`
             :host {
                 ${z[`vira-form-filled-background-color`].name}: red;
                 ${z[`vira-form-accent-primary-color`].name}: black;
-                ${oQ.cssVars[`vira-progress-border-radius`].name}: 5px;
+                ${mQ.cssVars[`vira-progress-border-radius`].name}: 5px;
             }
 
-            ${oQ} {
+            ${mQ} {
                 height: 50px;
                 width: 200px;
             }
@@ -37782,10 +37784,10 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             :host {
                 ${z[`vira-form-filled-background-color`].name}: red;
                 ${z[`vira-form-accent-primary-color`].name}: yellow;
-                ${oQ.cssVars[`vira-progress-border-radius`].name}: 5px;
+                ${mQ.cssVars[`vira-progress-border-radius`].name}: 5px;
             }
 
-            ${oQ} {
+            ${mQ} {
                 height: 50px;
                 width: 200px;
             }
@@ -37793,56 +37795,56 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             :host {
                 ${z[`vira-form-filled-background-color`].name}: red;
                 ${z[`vira-form-accent-primary-color`].name}: yellow;
-                ${oQ.cssVars[`vira-progress-border-radius`].name}: 5px;
+                ${mQ.cssVars[`vira-progress-border-radius`].name}: 5px;
             }
 
-            ${oQ} {
+            ${mQ} {
                 height: 50px;
                 width: 200px;
             }
-        `,inputs:{value:100}}],r0=O({parent:s1,title:oQ.tagName,defineExamples({defineExample:e}){n0.forEach(t=>{e({title:t.title,styles:S`
+        `,inputs:{value:100}}],d0=O({parent:h1,title:mQ.tagName,defineExamples({defineExample:e}){u0.forEach(t=>{e({title:t.title,styles:S`
                     ${t.styles||S``}
                 `,render(){return w`
-                        <${oQ.assign({value:50,...t.inputs})}></${oQ}>
-                    `}})})}}),i0=[{value:`none`,label:`No group`},{groupName:`Fruits`,options:[{value:`apple`,label:`Apple`},{value:`banana`,label:`Banana`},{value:`cherry`,label:`Cherry`}]},{groupName:`Vegetables`,options:[{value:`carrot`,label:`Carrot`},{value:`broccoli`,label:`Broccoli`},{value:`spinach`,label:`Spinach`}]}],a0=[{value:`1`,label:`one`},{value:`2`,label:`two`},{value:`3`,label:`three`},{value:`4`,label:`four`},{value:`5`,label:`five`}],o0=[{title:`basic`,inputs:{options:a0}},{title:`with really long option`,inputs:{options:[...a0,{label:`really really really really really really really really long option`,value:`something`}]}},{title:`with placeholder`,inputs:{options:a0,placeholder:`pick an option...`}},{title:`disabled`,inputs:{options:a0,disabled:!0}},{title:`readonly`,inputs:{options:a0,label:`Pick an option`,value:`3`,isReadonly:!0}},{title:`error`,inputs:{options:a0,hasError:!0}},{title:`with icon`,inputs:{options:a0,icon:Hf}},{title:`custom width`,inputs:{options:a0},styles:S`
+                        <${mQ.assign({value:50,...t.inputs})}></${mQ}>
+                    `}})})}}),f0=[{value:`none`,label:`No group`},{groupName:`Fruits`,options:[{value:`apple`,label:`Apple`},{value:`banana`,label:`Banana`},{value:`cherry`,label:`Cherry`}]},{groupName:`Vegetables`,options:[{value:`carrot`,label:`Carrot`},{value:`broccoli`,label:`Broccoli`},{value:`spinach`,label:`Spinach`}]}],p0=[{value:`1`,label:`one`},{value:`2`,label:`two`},{value:`3`,label:`three`},{value:`4`,label:`four`},{value:`5`,label:`five`}],m0=[{title:`basic`,inputs:{options:p0}},{title:`with really long option`,inputs:{options:[...p0,{label:`really really really really really really really really long option`,value:`something`}]}},{title:`with placeholder`,inputs:{options:p0,placeholder:`pick an option...`}},{title:`disabled`,inputs:{options:p0,disabled:!0}},{title:`readonly`,inputs:{options:p0,label:`Pick an option`,value:`3`,isReadonly:!0}},{title:`error`,inputs:{options:p0,hasError:!0}},{title:`with icon`,inputs:{options:p0,icon:Hf}},{title:`custom width`,inputs:{options:p0},styles:S`
             ${$} {
                 width: 100px;
             }
-        `},{title:`custom short height`,inputs:{options:a0,icon:Hf},styles:S`
+        `},{title:`custom short height`,inputs:{options:p0,icon:Hf},styles:S`
             ${$} {
                 height: 26px;
             }
-        `},{title:`custom tall height`,inputs:{options:a0,icon:Hf},styles:S`
+        `},{title:`custom tall height`,inputs:{options:p0,icon:Hf},styles:S`
             ${$} {
                 height: 42px;
             }
-        `},{title:`with label`,inputs:{options:a0,label:`Pick an option`}},{title:`with long label`,inputs:{options:a0,label:`Pick a really really really really long option`}},{title:`with unbound long label`,inputs:{options:a0,label:`Pick a really really really really long option`},styles:S`
+        `},{title:`with label`,inputs:{options:p0,label:`Pick an option`}},{title:`with long label`,inputs:{options:p0,label:`Pick a really really really really long option`}},{title:`with unbound long label`,inputs:{options:p0,label:`Pick a really really really really long option`},styles:S`
             ${$} {
                 width: unset;
             }
-        `},{title:`raw`,inputs:{options:[...a0,{label:`really really really really really really really really long option`,value:`something`}],rawSelect:!0,icon:Hf}},{title:`with option groups`,inputs:{options:i0}},{title:`option groups with placeholder`,inputs:{options:i0,placeholder:`Select a food...`}}],s0=O({parent:s1,title:$.tagName,defineExamples({defineExample:e}){o0.forEach(t=>{e({title:t.title,styles:S`
+        `},{title:`raw`,inputs:{options:[...p0,{label:`really really really really really really really really long option`,value:`something`}],rawSelect:!0,icon:Hf}},{title:`with option groups`,inputs:{options:f0}},{title:`option groups with placeholder`,inputs:{options:f0,placeholder:`Select a food...`}}],h0=O({parent:h1,title:$.tagName,defineExamples({defineExample:e}){m0.forEach(t=>{e({title:t.title,styles:S`
                     ${t.styles||S``}
                 `,state(){return{selected:void 0}},render({state:e,updateState:n}){return w`
                         <${$.assign({...t.inputs,value:e.selected??t.inputs.value})}
                             ${N($.events.valueChange,e=>{n({selected:e.detail})})}
                         ></${$}>
                     `}})}),e({title:`no listener`,descriptionParagraphs:[`All user input should be blocked if there is nothing updating the state.`],render(){return w`
-                    <${$.assign({options:a0,value:a0[0]?.value})}></${$}>
+                    <${$.assign({options:p0,value:p0[0]?.value})}></${$}>
                 `}}),e({title:`force update`,render(){return w`
-                    <${c0}></${c0}>
-                `}})}}),c0=cd()({tagName:`vira-select-force-update-example`,state(){return{intervalId:void 0,value:void 0}},init({updateState:e,state:t}){e({intervalId:globalThis.setInterval(()=>{let n=a0.findIndex(e=>e.value===t.value),r=T.isDefined(a0[(n+1)%a0.length]).value;e({value:r}),console.info(`Forcing select to ${r}`)},500)})},cleanup({state:e}){globalThis.clearInterval(e.intervalId)},render({state:e}){return w`
-            <${$.assign({options:a0,value:e.value})}></${$}>
-        `}}),l0=new gQ({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{}}}),u0={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function d0(e){return{paths:e,search:{},hash:``}}var f0=[{label:`Dashboard`,paths:l0.paths.children.tab1,icon:Hf},{label:`Notifications`,paths:l0.paths.children.tab2,icon:Mf},{label:`Messages`,paths:l0.paths.children.tab3,icon:Nf},{label:`Favorites`,paths:l0.paths.children.tab4,icon:fp}],p0=[{label:`Dashboard`,paths:l0.paths.children.tab1},{label:`Notifications`,paths:l0.paths.children.tab2},{label:`Messages`,paths:l0.paths.children.tab3},{label:`Favorites`,paths:l0.paths.children.tab4}],m0=d0(l0.paths.children.tab2.fullPaths),h0=[{title:`basic`,tabs:p0},{title:`with icons (vertical layout)`,tabs:f0},{title:`with icons (horizontal layout)`,tabs:f0,iconLayout:e$.Horizontal},{title:`plain color variant`,tabs:f0,color:qu.Plain},{title:`neutral color variant`,tabs:f0,color:qu.Neutral},{title:`danger color variant`,tabs:f0,color:qu.Danger},{title:`warning color variant`,tabs:f0,color:qu.Warning},{title:`positive color variant`,tabs:f0,color:qu.Positive},{title:`bar direction: top`,tabs:f0,barDirection:$Q.Top},{title:`bar direction: left`,tabs:f0,barDirection:$Q.Left},{title:`bar direction: right`,tabs:f0,barDirection:$Q.Right}],g0={max:600,min:150,default:600},_0=cd()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Rt(g0.default)},state(){return{intervalId:void 0,increment:2}},styles:({cssVars:e})=>S`
+                    <${g0}></${g0}>
+                `}})}}),g0=cd()({tagName:`vira-select-force-update-example`,state(){return{intervalId:void 0,value:void 0}},init({updateState:e,state:t}){e({intervalId:globalThis.setInterval(()=>{let n=p0.findIndex(e=>e.value===t.value),r=T.isDefined(p0[(n+1)%p0.length]).value;e({value:r}),console.info(`Forcing select to ${r}`)},500)})},cleanup({state:e}){globalThis.clearInterval(e.intervalId)},render({state:e}){return w`
+            <${$.assign({options:p0,value:e.value})}></${$}>
+        `}}),_0=new wQ({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{}}}),v0={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function y0(e){return{paths:e,search:{},hash:``}}var b0=[{label:`Dashboard`,paths:_0.paths.children.tab1,icon:Hf},{label:`Notifications`,paths:_0.paths.children.tab2,icon:Mf},{label:`Messages`,paths:_0.paths.children.tab3,icon:Nf},{label:`Favorites`,paths:_0.paths.children.tab4,icon:fp}],x0=[{label:`Dashboard`,paths:_0.paths.children.tab1},{label:`Notifications`,paths:_0.paths.children.tab2},{label:`Messages`,paths:_0.paths.children.tab3},{label:`Favorites`,paths:_0.paths.children.tab4}],S0=y0(_0.paths.children.tab2.fullPaths),C0=[{title:`basic`,tabs:x0},{title:`with icons (vertical layout)`,tabs:b0},{title:`with icons (horizontal layout)`,tabs:b0,iconLayout:c$.Horizontal},{title:`plain color variant`,tabs:b0,color:qu.Plain},{title:`neutral color variant`,tabs:b0,color:qu.Neutral},{title:`danger color variant`,tabs:b0,color:qu.Danger},{title:`warning color variant`,tabs:b0,color:qu.Warning},{title:`positive color variant`,tabs:b0,color:qu.Positive},{title:`bar direction: top`,tabs:b0,barDirection:s$.Top},{title:`bar direction: left`,tabs:b0,barDirection:s$.Left},{title:`bar direction: right`,tabs:b0,barDirection:s$.Right}],w0={max:600,min:150,default:600},T0=cd()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Rt(w0.default)},state(){return{intervalId:void 0,increment:2}},styles:({cssVars:e})=>S`
         :host {
             display: block;
             border: 1px solid
                 ${R.colors[`vira-grey-foreground-decoration`].foreground.value};
             width: ${e[`vira-dynamic-width-tabs-example-width`].value};
         }
-    `,init({state:e,updateState:t,host:n,cssVars:r}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let i=lt.isNumber(zt(Oe({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`]})))||g0.default;(i>=g0.max||i<=g0.min)&&t({increment:e.increment*-1}),h({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`],toValue:Rt(i+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return w`
+    `,init({state:e,updateState:t,host:n,cssVars:r}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let i=lt.isNumber(zt(Oe({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`]})))||w0.default;(i>=w0.max||i<=w0.min)&&t({increment:e.increment*-1}),h({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`],toValue:Rt(i+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return w`
             <slot></slot>
-        `}}),v0=O({parent:s1,title:t$.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){h0.forEach(({title:t,...n})=>{e({title:t,render(){return w`
-                        <${t$.assign({router:u0,currentRoute:m0,...n})}></${t$}>
+        `}}),E0=O({parent:h1,title:l$.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){C0.forEach(({title:t,...n})=>{e({title:t,render(){return w`
+                        <${l$.assign({router:v0,currentRoute:S0,...n})}></${l$}>
                     `}})}),e({title:`fill width`,styles:S`
                 :host {
                     width: 600px;
@@ -37850,14 +37852,14 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                         ${R.colors[`vira-grey-foreground-decoration`].foreground.value};
                 }
             `,render(){return w`
-                    <${t$.assign({tabs:f0,router:u0,currentRoute:m0,shouldFillWidth:!0})}></${t$}>
+                    <${l$.assign({tabs:b0,router:v0,currentRoute:S0,shouldFillWidth:!0})}></${l$}>
                 `}}),e({title:`overflow into menu`,styles:S`
                 :host {
                     max-width: 200px;
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${t$.assign({tabs:f0,router:u0,currentRoute:m0})}></${t$}>
+                    <${l$.assign({tabs:b0,router:v0,currentRoute:S0})}></${l$}>
                 `}}),e({title:`big font`,styles:S`
                 :host {
                     font-size: 32px;
@@ -37865,15 +37867,15 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${t$.assign({tabs:f0,router:u0,currentRoute:m0})}></${t$}>
+                    <${l$.assign({tabs:b0,router:v0,currentRoute:S0})}></${l$}>
                 `}}),e({title:`dynamic overflow`,styles:S`
                 :host {
-                    width: ${g0.max+20}px;
+                    width: ${w0.max+20}px;
                 }
             `,render(){return w`
-                    <${_0}>
-                        <${t$.assign({tabs:f0,router:u0,currentRoute:m0})}></${t$}>
-                    </${_0}>
+                    <${T0}>
+                        <${l$.assign({tabs:b0,router:v0,currentRoute:S0})}></${l$}>
+                    </${T0}>
                 `}}),e({title:`all combinations`,styles:S`
                 .grid {
                     display: grid;
@@ -37885,22 +37887,22 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                 h4 {
                     margin: 0;
                 }
-            `,render(){let e=[$Q.Top,$Q.Bottom,$Q.Left,$Q.Right];return w`
+            `,render(){let e=[s$.Top,s$.Bottom,s$.Left,s$.Right];return w`
                     ${[qu.Info,qu.Plain,qu.Neutral,qu.Danger,qu.Warning,qu.Positive].map(t=>w`
                             <h4>${t} variant</h4>
                             <div class="grid">
                                 ${e.map(e=>w`
                                         <span>${e}</span>
-                                        <${t$.assign({tabs:f0,router:u0,currentRoute:m0,barDirection:e,color:t})}></${t$}>
+                                        <${l$.assign({tabs:b0,router:v0,currentRoute:S0,barDirection:e,color:t})}></${l$}>
                                     `)}
                             </div>
                         `)}
                 `}}),e({title:`theme colors`,render(){return w`
                     ${Object.values(Wu).map(e=>w`
                             <h4>${e}</h4>
-                            <${t$.assign({tabs:p0,router:u0,currentRoute:m0,color:e})}></${t$}>
+                            <${l$.assign({tabs:x0,router:v0,currentRoute:S0,color:e})}></${l$}>
                         `)}
-                `}})}}),y0=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],b0=O({parent:s1,title:s$.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){Qu.forEach(t=>{e({title:t,styles:S`
+                `}})}}),D0=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],O0=O({parent:h1,title:h$.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){Qu.forEach(t=>{e({title:t,styles:S`
                     table {
                         border-collapse: collapse;
                     }
@@ -37918,7 +37920,7 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     .cancelled {
                         visibility: hidden;
                     }
-                `,state(){return{clicked:{}}},render({state:e,updateState:n}){return y0.map(({label:r,...i})=>w`
+                `,state(){return{clicked:{}}},render({state:e,updateState:n}){return D0.map(({label:r,...i})=>w`
                             <h3>${r}</h3>
                             <table>
                                 <thead>
@@ -37935,11 +37937,11 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                                                 <th>${a}</th>
                                                 ${Ju.map(o=>{let s=[r,a,o].join(`-`),c=b.isBoolean(i.isClickable?.selected)?{selected:!e.clicked[s]}:i.isClickable;return w`
                                                         <td>${w`
-                                                        <${s$.assign({text:`Label`,...i,size:t,emphasis:a,color:o,isClickable:c})}
+                                                        <${h$.assign({text:`Label`,...i,size:t,emphasis:a,color:o,isClickable:c})}
                                                             class=${Bl({cancelled:!!i.isClickable?.cancellable&&!!e.clicked[s]})}
-                                                            ${N(s$.events.cancel,()=>{n({clicked:{...e.clicked,[s]:!0}})})}
-                                                            ${N(s$.events.toggle,t=>{n({clicked:{...e.clicked,[s]:!t.detail}})})}
-                                                        ></${s$}>
+                                                            ${N(h$.events.cancel,()=>{n({clicked:{...e.clicked,[s]:!0}})})}
+                                                            ${N(h$.events.toggle,t=>{n({clicked:{...e.clicked,[s]:!t.detail}})})}
+                                                        ></${h$}>
                                                     `}</td>
                                                     `})}
                                             </tr>
@@ -37955,27 +37957,27 @@ ${e===void 0?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             `,render(){return w`
                     <div class="row">
                         ${Object.values(Wu).map(e=>w`
-                                <${s$.assign({text:e,color:e})}></${s$}>
+                                <${h$.assign({text:e,color:e})}></${h$}>
                             `)}
                     </div>
-                `}})}}),x0=O({title:CZ.tagName,parent:s1,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:E.Color,initValue:z[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:z[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:z[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:z[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:z[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:S`
+                `}})}}),k0=O({title:jZ.tagName,parent:h1,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:E.Color,initValue:z[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:z[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:z[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:z[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:z[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:S`
                     ${t||S``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let i=et({[String(z[`vira-form-foreground-color`].name)]:n[`Text color`],[String(z[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(z[`vira-form-border-color`].name)]:n[`Border color`],[String(z[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(z[`vira-form-text-selection-color`].name)]:n[`Selection color`]},(e,t)=>t||`inherit`),a=Object.entries(i).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return w`
-                        <${CZ.assign({...r,value:e.value})}
+                        <${jZ.assign({...r,value:e.value})}
                             style=${a}
-                            ${N(CZ.events.valueChange,e=>{t({value:e.detail}),console.info(`changed:`,e.detail)})}
-                        ></${CZ}>
+                            ${N(jZ.events.valueChange,e=>{t({value:e.detail}),console.info(`changed:`,e.detail)})}
+                        ></${jZ}>
                     `}})}[{title:`basic`,inputs:{value:`default value`}},{title:`with placeholder`,inputs:{value:``,placeholder:`placeholder here`}},{title:`with label`,inputs:{label:`Label here`,placeholder:`has label`,value:``}},{title:`disabled`,inputs:{value:`disabled`,disabled:!0}},{title:`readonly`,inputs:{label:`Label here`,value:`readonly value
 with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has error`,hasError:!0}},{title:`prevent resize`,inputs:{value:``,placeholder:`cannot resize`,preventResize:!0}},{title:`tall`,inputs:{value:``,placeholder:`8 rows`,rows:8}},{title:`short`,inputs:{value:``,placeholder:`2 rows`,rows:2}},{title:`numbers only`,inputs:{value:``,placeholder:`digits only`,allowedInputs:/\d/}},{title:`numbers blocked`,inputs:{value:``,placeholder:`no digits`,blockedInputs:/\d/}},{title:`custom width`,styles:S`
-                    ${CZ} {
+                    ${jZ} {
                         width: 480px;
                     }
-                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),S0=O({parent:s1,title:h$.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new f$}},render({state:e}){return w`
-                    <${h$.assign({themeClient:e.themeClient})}></${h$}>
+                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),A0=O({parent:h1,title:C$.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new b$}},render({state:e}){return w`
+                    <${C$.assign({themeClient:e.themeClient})}></${C$}>
                 `}}),e({title:`default (creates its own client)`,render(){return w`
-                    <${h$}></${h$}>
-                `}})}});function C0(e,t){Hn(e).forEach(e=>{t({title:e.name,styles:S`
+                    <${C$}></${C$}>
+                `}})}});function j0(e,t){Hn(e).forEach(e=>{t({title:e.name,styles:S`
                 button {
                     ${rd}
                     display: flex;
@@ -38013,14 +38015,14 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
                             style=${n}
                         ></${V}>
                     </button>
-                `}})})}var w0=O({title:`16px Icons`,parent:u1,defineExamples({defineExample:e}){C0(_G,e)}}),T0=O({title:`24px Icons`,parent:u1,defineExamples({defineExample:e}){C0(gG,e)}}),E0=O({title:`Lucide Icons`,parent:u1,defineExamples({defineExample:e}){C0(pG,e)}}),D0=[s1,u1,c1,l1],O0=[...[M1,F1,L1,R1,z1,B1,V1,W1,G1,q1,J1,Y1,X1,$1,e0,x1,O1,E1,t0,k1,r0,s0,v0,b0,x0,S0].sort((e,t)=>e.title.localeCompare(t.title)),f1,m1,y1,E0,w0,T0,j1,...d1],k0=[...D0,...O0];Ee()({tagName:`vira-book-app`,styles:S`
+                `}})})}var M0=O({title:`16px Icons`,parent:v1,defineExamples({defineExample:e}){j0(_G,e)}}),N0=O({title:`24px Icons`,parent:v1,defineExamples({defineExample:e}){j0(gG,e)}}),P0=O({title:`Lucide Icons`,parent:v1,defineExamples({defineExample:e}){j0(pG,e)}}),F0=[h1,v1,g1,_1],I0=[...[B1,U1,G1,K1,q1,J1,Y1,Q1,$1,t0,n0,r0,i0,s0,c0,k1,I1,P1,l0,L1,d0,h0,E0,O0,k0,A0].sort((e,t)=>e.title.localeCompare(t.title)),b1,S1,D1,P0,M0,N0,z1,...y1],L0=[...F0,...I0];Ee()({tagName:`vira-book-app`,styles:S`
         :host {
             display: block;
             height: 100%;
             width: 100%;
         }
 
-        ${o1} {
+        ${m1} {
             height: 100%;
             width: 100%;
         }
@@ -38032,7 +38034,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
             margin-left: 16px;
         }
     `,render(){return w`
-            <${o1.assign({internalRouterConfig:{basePath:SQ(`vira`),useInternalRouter:!0},pages:k0,themeColor:`#33ccff`})}>
-                <h1 slot=${o1.slotNames.navHeader}>Vira</h1>
-            </${o1}>
+            <${m1.assign({internalRouterConfig:{basePath:AQ(`vira`),useInternalRouter:!0},pages:L0,themeColor:`#33ccff`})}>
+                <h1 slot=${m1.slotNames.navHeader}>Vira</h1>
+            </${m1}>
         `}});

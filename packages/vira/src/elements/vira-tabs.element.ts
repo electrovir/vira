@@ -478,6 +478,11 @@ export const ViraTabs = defineViraElement<
             ${ViraMenuTrigger} {
                 margin: 3px 0;
             }
+
+            .overflow-menu ${ViraButton} {
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
         `;
     },
     cleanup({state}) {

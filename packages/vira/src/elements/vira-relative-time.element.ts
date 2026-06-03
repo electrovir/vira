@@ -1,5 +1,4 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {colorCss} from '@electrovir/color';
 import {
     type AnyDuration,
     type AtLeastOneDuration,
@@ -46,7 +45,7 @@ export const ViraRelativeTime = defineViraElement<
 
         ${ViraAbsoluteTime} {
             font-size: 12px;
-            ${colorCss(viraTheme.colors['vira-grey-foreground-non-body'])};
+            color: ${viraTheme.colors['vira-grey-foreground-non-body'].foreground.value};
         }
     `,
     state() {

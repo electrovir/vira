@@ -32810,9 +32810,11 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
                 ${md};
             }
         }
-    `,render({inputs:e,state:t,dispatch:n,events:r}){if(e.isReadonly){let t=E`
-                <span class="readonly-value">${e.value?up(e.value,{dateOnly:!0}):``}</span>
-            `;return e.label?E`
+    `,render({inputs:e,state:t,dispatch:n,events:r}){if(e.isReadonly){let t=e.value?E`
+                      <${lp.assign({time:e.value,dateOnly:!0})}></${lp}>
+                  `:E`
+                      <span class="readonly-value">&nbsp;</span>
+                  `;return e.label?E`
                     <label>
                         <span class="input-label">${e.label}</span>
                         ${t}

@@ -35774,7 +35774,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
 
         ${lp} {
             font-size: 12px;
-            ${JX(R.colors[`vira-grey-foreground-non-body`])};
+            color: ${R.colors[`vira-grey-foreground-non-body`].foreground.value};
         }
     `,state(){return{now:uu(),timeoutId:void 0}},init({inputs:e,updateState:t}){function n(){let r=e.updateInterval||{seconds:5};t({timeoutId:globalThis.setTimeout(()=>{t({now:uu()}),n()},Te(r,{milliseconds:!0}).milliseconds)})}n()},cleanup({state:e,updateState:t}){globalThis.clearTimeout(e.timeoutId),t({timeoutId:void 0})},render({state:e,inputs:t}){let n=Su({start:e.now,end:t.time},{years:!0,months:!0,days:!0,hours:!0,minutes:!0,seconds:!0},{useOnlyLargestUnit:!0,decimalCount:0});return E`
             <span title=${up(t.time)}>${n}</span>

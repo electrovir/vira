@@ -7,12 +7,14 @@ import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.elemen
 import {viraMenuOptionsBookPage} from './entries/pop-up/vira-menu.element.book.js';
 import {viraPopUpTriggerBookPage} from './entries/pop-up/vira-pop-up-trigger.element.book.js';
 import {shadowBookPage} from './entries/shadow.book.js';
+import {viraAbsoluteTimeBookPage} from './entries/vira-absolute-time.element.book.js';
 import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
 import {viraButtonBookPage} from './entries/vira-button.element.book.js';
 import {viraCardBookPage} from './entries/vira-card.element.book.js';
 import {viraCheckboxBookPage} from './entries/vira-checkbox.element.book.js';
 import {viraCollapsibleCardBookPage} from './entries/vira-collapsible-card.element.book.js';
 import {viraCollapsibleBookPage} from './entries/vira-collapsible-wrapper.element.book.js';
+import {viraDateInputBookPage} from './entries/vira-date-input.element.book.js';
 import {viraDrawerBookPage} from './entries/vira-drawer.element.book.js';
 import {viraDropdownPage} from './entries/vira-dropdown.element.book.js';
 import {viraErrorBookPage} from './entries/vira-error.element.book.js';
@@ -24,6 +26,7 @@ import {viraJsonFormBookPage} from './entries/vira-json-form.element.book.js';
 import {viraLinkBookPage} from './entries/vira-link.element.book.js';
 import {viraModalBookPage} from './entries/vira-modal.element.book.js';
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
+import {viraRelativeTimeBookPage} from './entries/vira-relative-time.element.book.js';
 import {viraSelectBookPage} from './entries/vira-select.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
@@ -40,12 +43,14 @@ const topLevelPages = [
 ];
 
 const elementPages = [
+    viraAbsoluteTimeBookPage,
     viraBoldTextPage,
     viraButtonBookPage,
     viraCardBookPage,
     viraCheckboxBookPage,
     viraCollapsibleCardBookPage,
     viraCollapsibleBookPage,
+    viraDateInputBookPage,
     viraDrawerBookPage,
     viraDropdownPage,
     viraErrorBookPage,
@@ -61,6 +66,7 @@ const elementPages = [
     viraModalBookPage,
     viraPopUpTriggerBookPage,
     viraProgressBookPage,
+    viraRelativeTimeBookPage,
     viraSelectBookPage,
     viraTabsBookPage,
     viraTagBookPage,

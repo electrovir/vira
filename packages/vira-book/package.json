@@ -19,6 +19,7 @@
         "@augment-vir/assert": "^31.71.3",
         "@augment-vir/common": "^31.71.3",
         "@electrovir/color": "^1.7.9",
+        "date-vir": "^8.3.2",
         "element-book": "^26.17.3",
         "element-vir": "*",
         "lit-css-vars": "^3.6.2",

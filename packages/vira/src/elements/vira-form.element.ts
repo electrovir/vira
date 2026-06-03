@@ -18,6 +18,7 @@ import {
     type ViraFormFields,
 } from '../util/vira-form-fields.js';
 import {ViraCheckbox} from './vira-checkbox.element.js';
+import {ViraDateInput} from './vira-date-input.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
 import {ViraSelect} from './vira-select.element.js';
 import {ViraTextArea} from './vira-text-area.element.js';
@@ -124,7 +125,16 @@ export const ViraForm = defineViraElement<
                 width: 100%;
                 vertical-align: top;
 
-                & > ${ViraCheckbox}, & > ${ViraInput}, & > ${ViraSelect}, & > ${ViraTextArea} {
+                &
+                    > ${ViraCheckbox},
+                    &
+                    > ${ViraDateInput},
+                    &
+                    > ${ViraInput},
+                    &
+                    > ${ViraSelect},
+                    &
+                    > ${ViraTextArea} {
                     width: 100%;
                 }
             }
@@ -324,6 +334,32 @@ export const ViraForm = defineViraElement<
                                     );
                                 })}
                             ></${ViraInput}>
+                        `,
+                    });
+                } else if (field.type === ViraFormFieldType.Date) {
+                    return wrapFormField({
+                        label,
+                        fieldTemplate: html`
+                            <${ViraDateInput.assign({
+                                value: field.value,
+                                min: field.min,
+                                max: field.max,
+                                isDisabled,
+                                hasError: field.hasError,
+                                isReadonly: inputs.isReadonly,
+                                label: childLabel,
+                            })}
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listen(ViraDateInput.events.valueChange, (event) => {
+                                    dispatch(
+                                        new events.valueChange({
+                                            key,
+                                            ...field,
+                                            value: event.detail,
+                                        }),
+                                    );
+                                })}
+                            ></${ViraDateInput}>
                         `,
                     });
                 } else {

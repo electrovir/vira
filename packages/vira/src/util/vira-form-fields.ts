@@ -1,5 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augment-vir/common';
+import {type FullDate} from 'date-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {type ViraSelectOption} from './vira-select-option.js';
 
@@ -21,6 +22,7 @@ export enum ViraFormFieldType {
     Select = 'select',
     Checkbox = 'checkbox',
     TextArea = 'text-area',
+    Date = 'date',
 }
 
 /**
@@ -116,6 +118,16 @@ export type ViraFormField =
           placeholder: string;
           rows: number;
           preventResize: boolean;
+      }> &
+          CommonViraFormFields)
+    | ({
+          type: ViraFormFieldType.Date;
+          value: FullDate | undefined;
+      } & PartialWithUndefined<{
+          /** Lower bound for selectable dates. Defaults to `1800-01-01` when omitted. */
+          min: FullDate;
+          /** Upper bound for selectable dates. Defaults to 10 years from now when omitted. */
+          max: FullDate;
       }> &
           CommonViraFormFields);
 

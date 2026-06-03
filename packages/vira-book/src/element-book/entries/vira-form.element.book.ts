@@ -1,3 +1,4 @@
+import {type FullDate} from 'date-vir';
 import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
 import {
@@ -46,6 +47,7 @@ export const viraFormBookPage = defineBookPage({
                     password: '',
                     userRole: undefined as string | undefined,
                     quantity: 0,
+                    birthDate: undefined as FullDate | undefined,
                 };
             },
             styles: css`
@@ -100,6 +102,11 @@ export const viraFormBookPage = defineBookPage({
                         max: 100,
                         step: 2,
                         placeholder: 'Enter quantity',
+                    },
+                    birthDate: {
+                        type: ViraFormFieldType.Date,
+                        label: 'Birth Date',
+                        value: state.birthDate,
                     },
                     disabledField: {
                         type: ViraFormFieldType.Text,

@@ -14,7 +14,7 @@ import {css, defineElementEvent, html, ifDefined, listen} from 'element-vir';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {formatAbsoluteTime} from './vira-absolute-time.element.js';
+import {ViraAbsoluteTime} from './vira-absolute-time.element.js';
 
 /**
  * A native date picker input that emits `FullDate` values. Fires `valueChange` whenever the user
@@ -101,14 +101,16 @@ export const ViraDateInput = defineViraElement<
     `,
     render({inputs, state, dispatch, events}) {
         if (inputs.isReadonly) {
-            const readonlyValue = inputs.value
-                ? formatAbsoluteTime(inputs.value, {
-                      dateOnly: true,
-                  })
-                : '';
-            const readonlyTemplate = html`
-                <span class="readonly-value">${readonlyValue}</span>
-            `;
+            const readonlyTemplate = inputs.value
+                ? html`
+                      <${ViraAbsoluteTime.assign({
+                          time: inputs.value,
+                          dateOnly: true,
+                      })}></${ViraAbsoluteTime}>
+                  `
+                : html`
+                      <span class="readonly-value">&nbsp;</span>
+                  `;
 
             if (inputs.label) {
                 return html`

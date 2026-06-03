@@ -1,12 +1,12 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "31.21.2",
+    "version": "31.22.0",
     "private": true,
     "repository": {
         "type": "git",
         "url": "git+https://github.com/electrovir/vira.git"
     },
-    "license": "(MIT or CC0 1.0)",
+    "license": "(MIT OR CC0-1.0)",
     "author": {
         "name": "electrovir",
         "url": "https://github.com/electrovir"
@@ -44,7 +44,7 @@
         "@stylistic/eslint-plugin-ts": "^4.4.1",
         "@typescript-eslint/eslint-plugin": "^8.60.0",
         "cspell": "^10.0.0",
-        "dependency-cruiser": "^17.4.2",
+        "dependency-cruiser": "^17.4.3",
         "esbuild": "^0.28.0",
         "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",

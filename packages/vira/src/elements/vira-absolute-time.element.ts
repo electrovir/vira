@@ -4,7 +4,7 @@ import {css} from 'element-vir';
 import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
- * Displays a {@link FullDate} as an absolute, human readable timestamp in the user's timezone (for
+ * Displays a `FullDate` as an absolute, human readable timestamp in the user's timezone (for
  * example `Jun 3, 2026 14:30 PDT`).
  *
  * @category Time
@@ -37,7 +37,7 @@ export const ViraAbsoluteTime = defineViraElement<
 });
 
 /**
- * Formats a {@link FullDate} into the same absolute string rendered by {@link ViraAbsoluteTime}.
+ * Formats a `FullDate` into the same absolute string rendered by {@link ViraAbsoluteTime}.
  *
  * @category Time
  */

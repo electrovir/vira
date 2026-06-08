@@ -74,7 +74,10 @@ export const viraFormBookPage = defineBookPage({
                     },
                     subscribe: {
                         type: ViraFormFieldType.Checkbox,
-                        label: 'Subscribe to updates',
+                        label: html`
+                            Subscribe to
+                            <strong>updates</strong>
+                        `,
                         value: state.subscribe,
                     },
                     email: {

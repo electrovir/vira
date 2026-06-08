@@ -1,6 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augment-vir/common';
 import {type FullDate} from 'date-vir';
+import {type HtmlInterpolation} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {type ViraSelectOption} from './vira-select-option.js';
 
@@ -93,13 +94,18 @@ export type ViraFormField =
     | ({
           type: ViraFormFieldType.Checkbox;
           value: boolean | undefined;
+          /**
+           * Label for the checkbox. Unlike other field types, this accepts arbitrary HTML so the
+           * checkbox's label slot can be filled with rich content.
+           */
+          label: HtmlInterpolation;
       } & PartialWithUndefined<{
           /** The checkbox will be filled with a form selection color when it is checked. */
           fillWhenChecked: boolean;
           /** The checkbox will be filled with a form error color when it is unchecked. */
           fillWhenUnchecked: boolean;
       }> &
-          CommonViraFormFields)
+          Omit<CommonViraFormFields, 'label'>)
     | ({
           type: ViraFormFieldType.Number;
           value: number | undefined;

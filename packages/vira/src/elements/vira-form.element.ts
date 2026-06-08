@@ -6,6 +6,7 @@ import {
     listen,
     nothing,
     testId,
+    type HtmlInterpolation,
     type HTMLTemplateResult,
 } from 'element-vir';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -158,7 +159,7 @@ export const ViraForm = defineViraElement<
             label,
         }: Readonly<{
             fieldTemplate: HTMLTemplateResult;
-            label: string | undefined;
+            label: HtmlInterpolation;
         }>) {
             if (inputs.useHorizontalLabels) {
                 return html`
@@ -177,24 +178,19 @@ export const ViraForm = defineViraElement<
                 key,
                 field,
             ]) => {
-                const label = applyRequiredLabel(
-                    field.label,
-                    !!field.isRequired && !inputs.hideRequiredMarkers,
-                );
                 const isDisabled = !!(inputs.isDisabled || field.isDisabled);
-                const childLabel = inputs.useHorizontalLabels ? undefined : label;
-                const horizontalLabelAttributes =
-                    inputs.useHorizontalLabels && label
-                        ? {
-                              'aria-label': label,
-                          }
-                        : {};
+                const showRequiredMarker = !!field.isRequired && !inputs.hideRequiredMarkers;
 
                 if (field.isHidden) {
                     return nothing;
                 } else if (field.type === ViraFormFieldType.Checkbox) {
+                    const checkboxLabel: HtmlInterpolation = showRequiredMarker
+                        ? html`
+                              ${field.label}*
+                          `
+                        : field.label;
                     return wrapFormField({
-                        label,
+                        label: checkboxLabel,
                         fieldTemplate: html`
                             <${ViraCheckbox.assign({
                                 value: field.value || false,
@@ -203,14 +199,6 @@ export const ViraForm = defineViraElement<
                                 useHorizontalLabel: inputs.horizontalCheckboxes,
                                 fillWhenChecked: field.fillWhenChecked,
                                 fillWhenUnchecked: field.fillWhenUnchecked,
-                                label: childLabel,
-                                ...(inputs.useHorizontalLabels && label
-                                    ? {
-                                          attributePassthrough: {
-                                              'custom-checkbox': horizontalLabelAttributes,
-                                          },
-                                      }
-                                    : {}),
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
                                 ${listen(ViraCheckbox.events.valueChange, (event) => {
@@ -222,10 +210,31 @@ export const ViraForm = defineViraElement<
                                         }),
                                     );
                                 })}
-                            ></${ViraCheckbox}>
+                            >
+                                ${inputs.useHorizontalLabels
+                                    ? nothing
+                                    : html`
+                                          <span
+                                              slot=${ViraCheckbox.slotNames['vira-checkbox-label']}
+                                          >
+                                              ${checkboxLabel}
+                                          </span>
+                                      `}
+                            </${ViraCheckbox}>
                         `,
                     });
-                } else if (field.type === ViraFormFieldType.Select) {
+                }
+
+                const label = applyRequiredLabel(field.label, showRequiredMarker);
+                const childLabel = inputs.useHorizontalLabels ? undefined : label;
+                const horizontalLabelAttributes =
+                    inputs.useHorizontalLabels && label
+                        ? {
+                              'aria-label': label,
+                          }
+                        : {};
+
+                if (field.type === ViraFormFieldType.Select) {
                     return wrapFormField({
                         label,
                         fieldTemplate: html`

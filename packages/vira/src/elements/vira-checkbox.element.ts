@@ -1,4 +1,5 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
+import {extractEventTarget} from '@augment-vir/web';
 import {
     attributes,
     classMap,
@@ -8,7 +9,6 @@ import {
     ifDefined,
     listen,
     listenToActivate,
-    nothing,
     type AttributeValues,
     type CSSResult,
 } from 'element-vir';
@@ -41,6 +41,10 @@ export type ViraCheckboxInputs = {
     stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
     attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
     isDisabled: boolean;
+    /**
+     * Text label for the checkbox. Used as the fallback when the `vira-checkbox-label` slot is not
+     * filled.
+     */
     label: string;
     hasError: boolean;
     useHorizontalLabel: boolean;
@@ -59,6 +63,14 @@ export type ViraCheckboxInputs = {
  */
 export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     tagName: 'vira-checkbox',
+    slotNames: [
+        'vira-checkbox-label',
+    ],
+    state() {
+        return {
+            hasSlottedLabel: false,
+        };
+    },
     hostClasses: {
         'vira-checkbox-horizontal': ({inputs}) => !!inputs.useHorizontalLabel,
         'vira-checkbox-filled-checked': ({inputs}) => !!inputs.fillWhenChecked,
@@ -131,6 +143,10 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             & .label-text {
                 cursor: pointer;
                 font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+
+                &.empty {
+                    display: none;
+                }
             }
 
             &:not(.disabled):hover .custom-checkbox {
@@ -171,7 +187,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         }
 
         ${hostClasses['vira-checkbox-horizontal'].selector} label {
-            flex-direction: row;
+            flex-direction: row-reverse;
             align-items: center;
             gap: 8px;
 
@@ -183,24 +199,36 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     events: {
         valueChange: defineElementEvent<boolean>(),
     },
-    render({inputs, dispatch, events}) {
+    render({inputs, dispatch, events, slotNames, state, updateState}) {
         function updateValue(this: void) {
             if (!inputs.isDisabled) {
                 dispatch(new events.valueChange(!inputs.value));
             }
         }
 
-        const textLabel = inputs.label
-            ? html`
-                  <span
-                      class="label-text"
-                      ${attributes(inputs.attributePassthrough?.['text'])}
-                      style=${ifDefined(inputs.stylePassthrough?.['text'])}
-                  >
-                      ${inputs.label}
-                  </span>
-              `
-            : nothing;
+        const hasLabel = !!inputs.label || state.hasSlottedLabel;
+
+        const textLabel = html`
+            <span
+                class="label-text ${classMap({
+                    empty: !hasLabel,
+                })}"
+                ${attributes(inputs.attributePassthrough?.['text'])}
+                style=${ifDefined(inputs.stylePassthrough?.['text'])}
+            >
+                <slot
+                    name=${slotNames['vira-checkbox-label']}
+                    ${listen('slotchange', (event) => {
+                        const slotElement = extractEventTarget(event, HTMLSlotElement);
+                        updateState({
+                            hasSlottedLabel: !!slotElement.assignedNodes().length,
+                        });
+                    })}
+                >
+                    ${inputs.label}
+                </slot>
+            </span>
+        `;
 
         return html`
             <label

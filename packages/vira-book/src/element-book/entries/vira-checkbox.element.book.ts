@@ -149,6 +149,36 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'slotted label',
+            descriptionParagraphs: [
+                'The label slot overrides the label input and can contain arbitrary HTML.',
+            ],
+            state() {
+                return {
+                    checked: true,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        label: 'fallback label',
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                            });
+                        })}
+                    >
+                        <span slot=${ViraCheckbox.slotNames['vira-checkbox-label']}>
+                            I agree to the
+                            <a href="#">terms and conditions</a>
+                        </span>
+                    </${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'horizontal',
             state() {
                 return {

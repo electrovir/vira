@@ -32456,7 +32456,7 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
         }
     `,render(){return E`
             <slot></slot>
-        `}}),W=$d()({tagName:`vira-checkbox`,hostClasses:{"vira-checkbox-horizontal":({inputs:e})=>!!e.useHorizontalLabel,"vira-checkbox-filled-checked":({inputs:e})=>!!e.fillWhenChecked,"vira-checkbox-filled-unchecked":({inputs:e})=>!!e.fillWhenUnchecked},styles:({hostClasses:e})=>T`
+        `}}),W=$d()({tagName:`vira-checkbox`,slotNames:[`vira-checkbox-label`],state(){return{hasSlottedLabel:!1}},hostClasses:{"vira-checkbox-horizontal":({inputs:e})=>!!e.useHorizontalLabel,"vira-checkbox-filled-checked":({inputs:e})=>!!e.fillWhenChecked,"vira-checkbox-filled-unchecked":({inputs:e})=>!!e.fillWhenUnchecked},styles:({hostClasses:e})=>T`
         :host {
             display: inline-flex;
         }
@@ -32521,6 +32521,10 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
             & .label-text {
                 cursor: pointer;
                 font-weight: ${z[`vira-form-label-font-weight`].value};
+
+                &.empty {
+                    display: none;
+                }
             }
 
             &:not(.disabled):hover .custom-checkbox {
@@ -32559,7 +32563,7 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
         }
 
         ${e[`vira-checkbox-horizontal`].selector} label {
-            flex-direction: row;
+            flex-direction: row-reverse;
             align-items: center;
             gap: 8px;
 
@@ -32567,22 +32571,27 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
                 padding-block: calc((24px - 1em) / 2);
             }
         }
-    `,events:{valueChange:C()},render({inputs:e,dispatch:t,events:n}){function r(){e.isDisabled||t(new n.valueChange(!e.value))}let i=e.label?E`
-                  <span
-                      class="label-text"
-                      ${zu(e.attributePassthrough?.text)}
-                      style=${N(e.stylePassthrough?.text)}
-                  >
-                      ${e.label}
-                  </span>
-              `:y;return E`
+    `,events:{valueChange:C()},render({inputs:e,dispatch:t,events:n,slotNames:r,state:i,updateState:a}){function o(){e.isDisabled||t(new n.valueChange(!e.value))}let s=E`
+            <span
+                class="label-text ${Au({empty:!(e.label||i.hasSlottedLabel)})}"
+                ${zu(e.attributePassthrough?.text)}
+                style=${N(e.stylePassthrough?.text)}
+            >
+                <slot
+                    name=${r[`vira-checkbox-label`]}
+                    ${P(`slotchange`,e=>{a({hasSlottedLabel:!!ff(e,HTMLSlotElement).assignedNodes().length})})}
+                >
+                    ${e.label}
+                </slot>
+            </span>
+        `;return E`
             <label
                 class=${Au({disabled:!!e.isDisabled})}
                 ${zu(e.attributePassthrough?.label)}
                 style=${N(e.stylePassthrough?.label)}
-                ${P(`mousedown`,r)}
+                ${P(`mousedown`,o)}
             >
-                ${i}
+                ${s}
                 <span
                     class="custom-checkbox ${Au({checked:e.value,disabled:!!e.isDisabled,error:!!e.hasError})}"
                     role="checkbox"
@@ -32592,7 +32601,7 @@ import{$ as e,A as t,At as n,B as r,C as i,Ct as a,D as o,Dt as s,E as c,Et as l
                     tabindex=${e.isDisabled?`-1`:`0`}
                     ${zu(e.attributePassthrough?.[`custom-checkbox`])}
                     style=${N(e.stylePassthrough?.[`custom-checkbox`])}
-                    ${Hu(r)}
+                    ${Hu(o)}
                 >
                     <${V.assign({icon:id,fitContainer:!0})}
                         ${zu(e.attributePassthrough?.[V.tagName])}
@@ -35097,33 +35106,43 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                         <th scope="row">${n}</th>
                         <td>${t}</td>
                     </tr>
-                `:t}let s=_(e.fields).map(([r,i])=>{let a=_Q(i.label,!!i.isRequired&&!e.hideRequiredMarkers),s=!!(e.isDisabled||i.isDisabled),c=e.useHorizontalLabels?void 0:a,l=e.useHorizontalLabels&&a?{"aria-label":a}:{};return i.isHidden?y:i.type===Z.Checkbox?o({label:a,fieldTemplate:E`
-                            <${W.assign({value:i.value||!1,isDisabled:!!(s||e.isReadonly),hasError:i.hasError,useHorizontalLabel:e.horizontalCheckboxes,fillWhenChecked:i.fillWhenChecked,fillWhenUnchecked:i.fillWhenUnchecked,label:c,...e.useHorizontalLabels&&a?{attributePassthrough:{"custom-checkbox":l}}:{}})}
+                `:t}let s=_(e.fields).map(([r,i])=>{let a=!!(e.isDisabled||i.isDisabled),s=!!i.isRequired&&!e.hideRequiredMarkers;if(i.isHidden)return y;if(i.type===Z.Checkbox){let c=s?E`
+                              ${i.label}*
+                          `:i.label;return o({label:c,fieldTemplate:E`
+                            <${W.assign({value:i.value||!1,isDisabled:!!(a||e.isReadonly),hasError:i.hasError,useHorizontalLabel:e.horizontalCheckboxes,fillWhenChecked:i.fillWhenChecked,fillWhenUnchecked:i.fillWhenUnchecked})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P(W.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
-                            ></${W}>
-                        `}):i.type===Z.Select?o({label:a,fieldTemplate:E`
-                            <${$.assign({options:i.options,value:i.value,placeholder:i.placeholder,disabled:s,isReadonly:e.isReadonly,label:c,hasError:i.hasError,icon:i.icon,...e.useHorizontalLabels&&a?{attributePassthrough:{select:l}}:{}})}
+                            >
+                                ${e.useHorizontalLabels?y:E`
+                                          <span
+                                              slot=${W.slotNames[`vira-checkbox-label`]}
+                                          >
+                                              ${c}
+                                          </span>
+                                      `}
+                            </${W}>
+                        `})}let c=_Q(i.label,s),l=e.useHorizontalLabels?void 0:c,u=e.useHorizontalLabels&&c?{"aria-label":c}:{};return i.type===Z.Select?o({label:c,fieldTemplate:E`
+                            <${$.assign({options:i.options,value:i.value,placeholder:i.placeholder,disabled:a,isReadonly:e.isReadonly,label:l,hasError:i.hasError,icon:i.icon,...e.useHorizontalLabels&&c?{attributePassthrough:{select:u}}:{}})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P($.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${$}>
-                        `}):i.type===Z.TextArea?o({label:a,fieldTemplate:E`
-                            <${DQ.assign({value:i.value||``,disabled:s,hasError:i.hasError,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize,attributePassthrough:l})}
+                        `}):i.type===Z.TextArea?o({label:c,fieldTemplate:E`
+                            <${DQ.assign({value:i.value||``,disabled:a,hasError:i.hasError,isReadonly:e.isReadonly,label:l,placeholder:i.placeholder,rows:i.rows,preventResize:i.preventResize,attributePassthrough:u})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P(DQ.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${DQ}>
-                        `}):i.type===Z.Number?o({label:a,fieldTemplate:E`
-                            <${Q.assign({value:i.value?.toString()||``,disabled:s,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,type:CQ.Number,attributePassthrough:{...l,...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
+                        `}):i.type===Z.Number?o({label:c,fieldTemplate:E`
+                            <${Q.assign({value:i.value?.toString()||``,disabled:a,allowedInputs:/\d/,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:l,placeholder:i.placeholder,showClearButton:e.showClearButtons,type:CQ.Number,attributePassthrough:{...u,...i.min===void 0?{}:{min:String(i.min)},...i.max===void 0?{}:{max:String(i.max)},...i.step===void 0?{}:{step:String(i.step)}}})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P(Q.events.valueChange,e=>{let a=e.detail===``?void 0:Number(e.detail);t(new n.valueChange({key:r,...i,value:a}))})}
                             ></${Q}>
-                        `}):i.type===Z.Date?o({label:a,fieldTemplate:E`
-                            <${xK.assign({value:i.value,min:i.min,max:i.max,isDisabled:s,hasError:i.hasError,isReadonly:e.isReadonly,label:c})}
+                        `}):i.type===Z.Date?o({label:c,fieldTemplate:E`
+                            <${xK.assign({value:i.value,min:i.min,max:i.max,isDisabled:a,hasError:i.hasError,isReadonly:e.isReadonly,label:l})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P(xK.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${xK}>
-                        `}):o({label:a,fieldTemplate:E`
-                            <${Q.assign({value:i.value||``,disabled:s,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:c,placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:{...l,...i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{}},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?CQ.Password:i.type===Z.Email?CQ.Email:CQ.Default})}
+                        `}):o({label:c,fieldTemplate:E`
+                            <${Q.assign({value:i.value||``,disabled:a,hasError:i.hasError,icon:i.icon,isReadonly:e.isReadonly,label:l,placeholder:i.placeholder,showClearButton:e.showClearButtons,attributePassthrough:{...u,...i.isUsername?{autocomplete:`username`}:i.type===Z.NewPassword?{autocomplete:`new-password`}:i.type===Z.ExistingPassword?{autocomplete:`password`}:i.type===Z.Email?{autocomplete:`email`}:{}},type:[Z.NewPassword,Z.ExistingPassword,Z.PlainPassword].includes(i.type)?CQ.Password:i.type===Z.Email?CQ.Email:CQ.Default})}
                                 ${i.testId?ed(i.testId):y}
                                 ${P(Q.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${Q}>
@@ -37262,6 +37281,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     <${W.assign({value:e.checked,label:`label goes here`})}
                         ${P(W.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${W}>
+                `}}),e({title:`slotted label`,descriptionParagraphs:[`The label slot overrides the label input and can contain arbitrary HTML.`],state(){return{checked:!0}},render({state:e,updateState:t}){return E`
+                    <${W.assign({value:e.checked,label:`fallback label`})}
+                        ${P(W.events.valueChange,e=>{t({checked:e.detail})})}
+                    >
+                        <span slot=${W.slotNames[`vira-checkbox-label`]}>
+                            I agree to the
+                            <a href="#">terms and conditions</a>
+                        </span>
+                    </${W}>
                 `}}),e({title:`horizontal`,state(){return{checked:!0}},render({state:e,updateState:t}){return E`
                     <${W.assign({value:e.checked,label:`label goes here`,useHorizontalLabel:!0})}
                         ${P(W.events.valueChange,e=>{t({checked:e.detail})})}
@@ -37526,7 +37554,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     gap: 8px;
                     justify-content: flex-end;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:Z.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:$0,value:e.userRole,placeholder:`placeholder`},quantity:{type:Z.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:Z.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:Z.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Z.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return E`
+            `,render({state:e,updateState:t}){let n={firstName:{type:Z.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:Z.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:Z.Checkbox,label:E`
+                            Subscribe to
+                            <strong>updates</strong>
+                        `,value:e.subscribe},email:{type:Z.Email,label:`Email Address`,value:e.email},password:{type:Z.NewPassword,label:`Password`,value:e.password},userRole:{type:Z.Select,label:`Role`,options:$0,value:e.userRole,placeholder:`placeholder`},quantity:{type:Z.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:Z.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:Z.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Z.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return E`
                     <${OQ.assign({fields:n})}
                         ${P(OQ.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >

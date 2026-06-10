@@ -224,6 +224,7 @@ export const ViraDropdown = defineViraElement<
         const triggerTemplate = html`
             <${ViraPopUpTrigger.assign({
                 ...inputs,
+                keepOpenAfterInteraction: inputs.isMultiSelect,
                 focusOnClose: true,
                 popUpOffset: {
                     vertical: -1,

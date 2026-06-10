@@ -34371,7 +34371,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 ${Yf(t.options.map(e=>({content:e.label,onClick(){n(new r.selectedChange([e.value]))},disabled:e.disabled,selected:o.includes(e)})))}
             </${rf}>
         `,p=E`
-            <${H.assign({...t,focusOnClose:!0,popUpOffset:{vertical:-1,right:24},horizontalAnchor:t.horizontalAnchor||sp.Both})}
+            <${H.assign({...t,keepOpenAfterInteraction:t.isMultiSelect,focusOnClose:!0,popUpOffset:{vertical:-1,right:24},horizontalAnchor:t.horizontalAnchor||sp.Both})}
                 ${P(H.events.openChange,t=>{!!e.showPopUpResult!=!!t.detail&&n(new r.openChange(t.detail)),i({showPopUpResult:t.detail})})}
             >
                 <div
@@ -37544,7 +37544,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
         `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[1]}},{title:`with an icon`,inputs:{icon:Fp}},{title:`with a label`,inputs:{label:`My Label`}}],Z0=k({title:hQ.tagName,parent:f0,controls:{Selected:St({controlType:D.Dropdown,initValue:``,options:[``,...Y0.map(e=>e.label)]}),Prefix:St({controlType:D.Text,initValue:``}),"Force State":St({controlType:D.Dropdown,options:[``,`force open`,`force closed`],initValue:``}),"Multi Select":St({controlType:D.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:St({controlType:D.Dropdown,initValue:``,options:[``,...Object.keys(uK)]}),Disabled:St({controlType:D.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:St({controlType:D.Text,initValue:`Select something`})},defineExamples({defineExample:e}){X0.forEach(t=>{e({title:t.title,state(){return{selected:t.inputs?.selected||[]}},styles:t.customStyle,render({state:e,updateState:n,controls:r}){let i={...t.inputs,placeholder:t.inputs&&`placeholder`in t.inputs?t.inputs.placeholder:r.Placeholder,options:t.inputs?.options||Y0,selected:r.Selected?[Y0.find(e=>e.label===r.Selected)?.value].filter(S.isTruthy):e.selected,selectionPrefix:r.Prefix||t.inputs?.selectionPrefix,isDisabled:r.Disabled?r.Disabled===`all`:t.inputs?.isDisabled,icon:r.Icon?uK[r.Icon]:t.inputs?.icon,isMultiSelect:r[`Multi Select`]?r[`Multi Select`]===`all`:t.inputs?.isMultiSelect,z_debug_forceOpenState:r[`Force State`]?r[`Force State`]===`force open`:t.inputs?.z_debug_forceOpenState};return E`
                         <${hQ.assign(i)}
-                            ${P(hQ.events.selectedChange,e=>{n({selected:e.detail})})}
+                            ${P(hQ.events.selectedChange,t=>{if(!i.isMultiSelect){n({selected:t.detail});return}let r=new Set(e.selected);t.detail.forEach(e=>{r.has(e)?r.delete(e):r.add(e)}),n({selected:[...r]})})}
                         ></${hQ}>
                     `}})})}}),Q0=k({parent:f0,title:gQ.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
                     <${gQ}>Error Content</${gQ}>

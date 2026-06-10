@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
@@ -25,9 +27,14 @@ const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
 ];
 
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
-    const events: {openChange: boolean[]; selectedChange: string[][]} = {
+    const events: {
+        openChange: boolean[];
+        selectedChange: string[][];
+        selectedValuesChange: string[][];
+    } = {
         openChange: [],
         selectedChange: [],
+        selectedValuesChange: [],
     };
     const fixture = await testWeb.render(html`
         <div
@@ -45,6 +52,9 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
                 })}
                 ${listen(ViraDropdown.events.selectedChange, (event) => {
                     events.selectedChange.push(event.detail);
+                })}
+                ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                    events.selectedValuesChange.push(event.detail);
                 })}
             ></${ViraDropdown}>
         </div>
@@ -67,6 +77,7 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
     assert.isNullish(findMenu());
     assert.isEmpty(events.openChange);
     assert.isEmpty(events.selectedChange);
+    assert.isEmpty(events.selectedValuesChange);
 
     return {
         events,
@@ -145,6 +156,66 @@ describe(ViraDropdown.tagName, () => {
         ]);
         assert.deepEquals(events.selectedChange, [
             ['1'],
+        ]);
+        assert.deepEquals(events.selectedValuesChange, [
+            ['1'],
+        ]);
+    });
+
+    it('emits the full selection from selectedValuesChange in multi select', async () => {
+        const {instance, toggle, events} = await setupDropdownTest({
+            isMultiSelect: true,
+            selected: ['0'],
+        });
+
+        await toggle();
+        const options = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+
+        assert.isLengthExactly(options, mockMenuItems.length);
+        assert.isDefined(options[2]);
+        await testWeb.click(options[2]);
+
+        await waitUntil(() => {
+            return events.selectedValuesChange.length === 1;
+        });
+        assert.deepEquals(events.selectedValuesChange, [
+            [
+                '0',
+                '2',
+            ],
+        ]);
+        assert.deepEquals(events.selectedChange, [
+            ['2'],
+        ]);
+    });
+
+    it('removes a value from selectedValuesChange when toggled off in multi select', async () => {
+        const {instance, toggle, events} = await setupDropdownTest({
+            isMultiSelect: true,
+            selected: [
+                '0',
+                '2',
+            ],
+        });
+
+        await toggle();
+        const options = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+
+        assert.isDefined(options[0]);
+        await testWeb.click(options[0]);
+
+        await waitUntil(() => {
+            return events.selectedValuesChange.length === 1;
+        });
+        assert.deepEquals(events.selectedValuesChange, [
+            ['2'],
+        ]);
+        assert.deepEquals(events.selectedChange, [
+            ['0'],
         ]);
     });
 

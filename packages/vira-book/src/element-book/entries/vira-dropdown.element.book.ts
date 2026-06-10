@@ -235,21 +235,10 @@ export const viraDropdownPage = defineBookPage({
 
                     return html`
                         <${ViraDropdown.assign(finalInputs)}
-                            ${listen(ViraDropdown.events.selectedChange, (event) => {
-                                if (!finalInputs.isMultiSelect) {
-                                    updateState({selected: event.detail});
-                                    return;
-                                }
-
-                                const selected = new Set(state.selected);
-                                event.detail.forEach((value) => {
-                                    if (selected.has(value)) {
-                                        selected.delete(value);
-                                    } else {
-                                        selected.add(value);
-                                    }
+                            ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                                updateState({
+                                    selected: event.detail,
                                 });
-                                updateState({selected: [...selected]});
                             })}
                         ></${ViraDropdown}>
                     `;

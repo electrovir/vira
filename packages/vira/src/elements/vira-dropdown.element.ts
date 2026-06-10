@@ -150,7 +150,14 @@ export const ViraDropdown = defineViraElement<
         }
     `,
     events: {
+        /**
+         * @deprecated Use `selectedValuesChange` instead. `selectedChange` is broken for
+         *   multi-select (it doesn't emit all the currently selected values) but is temporarily
+         *   left for backwards compatibility purposes. It will be removed entirely soon.
+         */
         selectedChange: defineElementEvent<string[]>(),
+        /** Emits all currently selected values. */
+        selectedValuesChange: defineElementEvent<string[]>(),
         openChange: defineElementEvent<ShowPopUpResult | undefined>(),
     },
     state() {
@@ -211,7 +218,23 @@ export const ViraDropdown = defineViraElement<
                         return {
                             content: option.label,
                             onClick() {
+                                const newSelectedValues = inputs.isMultiSelect
+                                    ? selectedOptions.includes(option)
+                                        ? filterMap(
+                                              selectedOptions,
+                                              (selectedOption) => selectedOption.value,
+                                              (value, selectedOption) => selectedOption !== option,
+                                          )
+                                        : [
+                                              ...selectedOptions.map(
+                                                  (selectedOption) => selectedOption.value,
+                                              ),
+                                              option.value,
+                                          ]
+                                    : [option.value];
+                                // eslint-disable-next-line @typescript-eslint/no-deprecated
                                 dispatch(new events.selectedChange([option.value]));
+                                dispatch(new events.selectedValuesChange(newSelectedValues));
                             },
                             disabled: option.disabled,
                             selected: selectedOptions.includes(option),

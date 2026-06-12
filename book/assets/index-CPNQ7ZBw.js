@@ -33884,7 +33884,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             .wrapper-border {
             border-color: ${oZ[`vira-form-error-color`].value};
         }
-    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return _t.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[or(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),or(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=E`
+    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return _t.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[or(n,`mousedown`,e=>{let t=r();if(!e.composedPath().includes(t)&&(e.preventDefault(),e.stopPropagation(),t.showPicker))try{t.showPicker()}catch{}}),or(n,`click`,e=>{let t=r();if(!e.composedPath().includes(t)&&(e.preventDefault(),e.stopPropagation(),t.showPicker))try{t.showPicker()}catch{}})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=E`
                 <span class="readonly-value">
                     ${e.options.flatMap(e=>GZ(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
                 </span>
@@ -34862,7 +34862,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             .wrapper-border {
             border-color: ${z[`vira-form-error-color`].value};
         }
-    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return _t.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[or(n,`mousedown`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())}),or(n,`click`,e=>{let t=r();e.composedPath().includes(t)||(e.preventDefault(),e.stopPropagation(),t.showPicker&&t.showPicker())})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=E`
+    `,init({state:e,updateState:t,host:n}){e.cleanupListeners?.();function r(){return _t.instanceOf(n.shadowRoot.querySelector(`select`),HTMLSelectElement)}let i=[or(n,`mousedown`,e=>{let t=r();if(!e.composedPath().includes(t)&&(e.preventDefault(),e.stopPropagation(),t.showPicker))try{t.showPicker()}catch{}}),or(n,`click`,e=>{let t=r();if(!e.composedPath().includes(t)&&(e.preventDefault(),e.stopPropagation(),t.showPicker))try{t.showPicker()}catch{}})];t({cleanupListeners:()=>{i.forEach(e=>e())}})},cleanup({state:e,updateState:t}){e.cleanupListeners?.(),t({cleanupListeners:void 0})},render({inputs:e,state:t,dispatch:n,events:r}){let i=e.value||void 0;if(e.isReadonly){let t=E`
                 <span class="readonly-value">
                     ${e.options.flatMap(e=>TQ(e)?[...e.options]:[e]).find(e=>e.value===i)?.label||e.placeholder||``}
                 </span>

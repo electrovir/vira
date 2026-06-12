@@ -275,7 +275,14 @@ export const ViraSelect = defineViraElement<
                 /** `showPicker` is not in Safari. */
                 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 if (selectElement.showPicker) {
-                    selectElement.showPicker();
+                    try {
+                        selectElement.showPicker();
+                    } catch {
+                        /**
+                         * Chromium throws `NotAllowedError` when `showPicker` runs without
+                         * transient user activation; the picker just won't open.
+                         */
+                    }
                 }
             }),
             listenTo(host, 'click', (event) => {
@@ -290,7 +297,14 @@ export const ViraSelect = defineViraElement<
                 /** `showPicker` is not in Safari. */
                 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 if (selectElement.showPicker) {
-                    selectElement.showPicker();
+                    try {
+                        selectElement.showPicker();
+                    } catch {
+                        /**
+                         * Chromium throws `NotAllowedError` when `showPicker` runs without
+                         * transient user activation; the picker just won't open.
+                         */
+                    }
                 }
             }),
         ];

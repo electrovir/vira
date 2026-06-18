@@ -574,6 +574,14 @@ export const ViraTabs = defineViraElement<
                         exactMatch: tab.exactMatch,
                     });
 
+                    const iconTemplate = tab.icon
+                        ? html`
+                              <${ViraIcon.assign({
+                                  icon: tab.icon,
+                              })}></${ViraIcon}>
+                          `
+                        : nothing;
+
                     return {
                         content: html`
                             <${ViraLink.assign({
@@ -585,8 +593,15 @@ export const ViraTabs = defineViraElement<
                                     scrollToTop: true,
                                 },
                                 disableLinkStyles: true,
+                                stylePassthrough: {
+                                    a: css`
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                    `,
+                                },
                             })}>
-                                ${tab.label}
+                                ${iconTemplate} ${tab.label}
                             </${ViraLink}>
                         `,
                         selected: isSelected,

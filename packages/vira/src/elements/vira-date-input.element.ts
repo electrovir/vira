@@ -108,6 +108,7 @@ export const ViraDateInput = defineViraElement<
                       <${ViraAbsoluteTime.assign({
                           time: inputs.value,
                           dateOnly: true,
+                          timezone: inputs.timezone,
                       })}></${ViraAbsoluteTime}>
                   `
                 : html`

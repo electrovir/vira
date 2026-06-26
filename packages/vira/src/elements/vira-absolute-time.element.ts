@@ -1,5 +1,10 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {type FullDate, createFullDateInUserTimezone, toFormattedString} from 'date-vir';
+import {
+    type FullDate,
+    createFullDate,
+    createFullDateInUserTimezone,
+    toFormattedString,
+} from 'date-vir';
 import {css} from 'element-vir';
 import {defineViraElement} from '../util/define-vira-element.js';
 
@@ -21,6 +26,13 @@ export const ViraAbsoluteTime = defineViraElement<
          * time of day would be meaningless noise.
          */
         dateOnly: boolean;
+        /**
+         * Timezone the value is displayed in. Defaults to the user's timezone. Set this for values
+         * that are conceptually anchored to a specific timezone (e.g. a date-only value stored at
+         * midnight UTC), where converting to the user's timezone would shift the displayed
+         * date/time.
+         */
+        timezone: string;
     }>
 >()({
     tagName: 'vira-absolute-time',
@@ -32,6 +44,7 @@ export const ViraAbsoluteTime = defineViraElement<
     render({inputs}) {
         return formatAbsoluteTime(inputs.time, {
             dateOnly: inputs.dateOnly,
+            timezone: inputs.timezone,
         });
     },
 });
@@ -46,11 +59,14 @@ export function formatAbsoluteTime(
     options?: Readonly<
         PartialWithUndefined<{
             dateOnly: boolean;
+            timezone: string;
         }>
     >,
 ) {
     return toFormattedString(
-        createFullDateInUserTimezone(time),
+        options?.timezone
+            ? createFullDate(time, options.timezone)
+            : createFullDateInUserTimezone(time),
         options?.dateOnly ? 'MMM d, yyyy' : 'MMM d, yyyy HH:mm ZZZZ',
     );
 }

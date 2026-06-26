@@ -1,4 +1,4 @@
-import {calculateRelativeDate, getNowInUtcTimezone} from 'date-vir';
+import {calculateRelativeDate, getNowInUtcTimezone, utcTimezone} from 'date-vir';
 import {defineBookPage} from 'element-book';
 import {html} from 'element-vir';
 import {ViraAbsoluteTime} from 'vira';
@@ -39,6 +39,19 @@ export const viraAbsoluteTimeBookPage = defineBookPage({
                     <${ViraAbsoluteTime.assign({
                         time: getNowInUtcTimezone(),
                         dateOnly: true,
+                    })}></${ViraAbsoluteTime}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'Date only in a specific timezone',
+            render() {
+                return html`
+                    <${ViraAbsoluteTime.assign({
+                        time: getNowInUtcTimezone(),
+                        dateOnly: true,
+                        timezone: utcTimezone,
                     })}></${ViraAbsoluteTime}>
                 `;
             },

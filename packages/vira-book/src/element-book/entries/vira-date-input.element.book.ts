@@ -146,5 +146,30 @@ export const viraDateInputBookPage = defineBookPage({
                 `;
             },
         });
+
+        defineExample({
+            title: 'readonly custom timezone',
+            state() {
+                return {
+                    value: createUtcFullDate('2026-04-29') as FullDate | undefined,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraDateInput.assign({
+                        value: state.value,
+                        label: 'UTC Date',
+                        isReadonly: true,
+                        timezone: utcTimezone,
+                    })}
+                        ${listen(ViraDateInput.events.valueChange, (event) => {
+                            updateState({
+                                value: event.detail,
+                            });
+                        })}
+                    ></${ViraDateInput}>
+                `;
+            },
+        });
     },
 });

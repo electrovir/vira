@@ -14,6 +14,7 @@ import {
     PopUpManager,
     type ShowPopUpResult,
 } from '../../util/pop-up-manager.js';
+import {ViraMenuItem} from './vira-menu-item.element.js';
 
 /**
  * Offsets applied to any menu opened by {@link ViraPopUpTrigger}.
@@ -480,6 +481,17 @@ export const ViraPopUpTrigger = defineViraElement<
                      */
                     if (event.composedPath().includes(dropdownTrigger)) {
                         respondToClick(event);
+                    }
+                })}
+                ${listen(ViraMenuItem.events.activate, (event) => {
+                    if (state.showPopUpResult) {
+                        triggerPopUp(
+                            {
+                                emitEvent: true,
+                                open: false,
+                            },
+                            event,
+                        );
                     }
                 })}
             >

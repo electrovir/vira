@@ -1,6 +1,6 @@
 import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {css, html} from 'element-vir';
+import {css, defineElementEvent, html} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
 import {Check24Icon} from '../../icons/icon-svgs/24/check-24.icon.js';
@@ -37,6 +37,14 @@ export const ViraMenuItem = defineViraElement<
             /** Removes event listeners registered during init. */
             cleanupListeners: undefined as undefined | (() => void),
         };
+    },
+    events: {
+        /**
+         * Fired when this menu item is activated by the user (a non-disabled click). Pop-up
+         * containers (e.g. `ViraPopUpTrigger`) listen to this to close the pop-up on selection,
+         * gated by `keepOpenAfterInteraction`.
+         */
+        activate: defineElementEvent<undefined>(),
     },
     hostClasses: {
         'vira-menu-item-selected': ({inputs}) => !!inputs.selected || !!inputs.iconOverride,
@@ -117,7 +125,7 @@ export const ViraMenuItem = defineViraElement<
             min-width: 0;
         }
     `,
-    init({state, updateState, host, inputs}) {
+    init({state, updateState, host, inputs, dispatch, events}) {
         host.setAttribute('role', 'menuitem');
         host.setAttribute('tabindex', inputs.disabled ? '-1' : '0');
         host.setAttribute('aria-selected', String(!!inputs.selected));
@@ -180,6 +188,27 @@ export const ViraMenuItem = defineViraElement<
         const listenerRemovers = [
             listenTo(host, 'click', propagateMouseEvent),
             listenTo(host, 'mousedown', propagateMouseEvent),
+            /**
+             * Emit `select` on a non-disabled activation so the containing pop-up can close. This
+             * uses the _capture_ phase because interactive slotted content can stop the click from
+             * bubbling back up to this host (which would prevent a bubble-phase listener from ever
+             * running). The `propagating` guard skips the synthetic click that
+             * `propagateMouseEvent` re-dispatches onto slotted content, so `select` fires exactly
+             * once per activation.
+             */
+            listenTo(
+                host,
+                'click',
+                (event) => {
+                    if (propagating[event.type] || inputs.disabled) {
+                        return;
+                    }
+                    dispatch(new events.activate(undefined));
+                },
+                {
+                    capture: true,
+                },
+            ),
             listenTo(host, 'mouseenter', () => {
                 if (!inputs.disabled) {
                     host.focus();

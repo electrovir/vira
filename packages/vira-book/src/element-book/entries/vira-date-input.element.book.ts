@@ -1,4 +1,4 @@
-import {createUtcFullDate, type FullDate} from 'date-vir';
+import {createUtcFullDate, type FullDate, utcTimezone} from 'date-vir';
 import {defineBookPage} from 'element-book';
 import {html, listen} from 'element-vir';
 import {ViraDateInput} from 'vira';
@@ -88,6 +88,30 @@ export const viraDateInputBookPage = defineBookPage({
                         value: state.value,
                         label: 'Birth Date',
                         isDisabled: true,
+                    })}
+                        ${listen(ViraDateInput.events.valueChange, (event) => {
+                            updateState({
+                                value: event.detail,
+                            });
+                        })}
+                    ></${ViraDateInput}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'custom timezone',
+            state() {
+                return {
+                    value: undefined as FullDate | undefined,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraDateInput.assign({
+                        value: state.value,
+                        label: 'UTC Date',
+                        timezone: utcTimezone,
                     })}
                         ${listen(ViraDateInput.events.valueChange, (event) => {
                             updateState({

@@ -40,6 +40,8 @@ export const ViraDateInput = defineViraElement<
         isDisabled: boolean;
         /** If true, the current value is rendered as plain text instead of an editable input. */
         isReadonly: boolean;
+        /** Timezone used to interpret the selected date. Defaults to the user's timezone. */
+        timezone: string;
     }>
 >()({
     tagName: 'vira-date-input',
@@ -148,7 +150,11 @@ export const ViraDateInput = defineViraElement<
                 .value=${inputValue}
                 ${listen('input', (event) => {
                     const element = extractEventTarget(event, HTMLInputElement);
-                    dispatch(new events.valueChange(parseInputElementValue(element, userTimezone)));
+                    dispatch(
+                        new events.valueChange(
+                            parseInputElementValue(element, inputs.timezone || userTimezone),
+                        ),
+                    );
                 })}
             />
         `;

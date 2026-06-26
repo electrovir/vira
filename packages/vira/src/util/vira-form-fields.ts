@@ -134,6 +134,8 @@ export type ViraFormField =
           min: FullDate;
           /** Upper bound for selectable dates. Defaults to 10 years from now when omitted. */
           max: FullDate;
+          /** Timezone used to interpret the selected date. Defaults to the user's timezone. */
+          timezone: string;
       }> &
           CommonViraFormFields);
 

@@ -16,10 +16,10 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^31.71.3",
-        "@augment-vir/common": "^31.71.3",
-        "@electrovir/color": "^1.7.9",
-        "date-vir": "^8.3.2",
+        "@augment-vir/assert": "^31.73.2",
+        "@augment-vir/common": "^31.73.2",
+        "@electrovir/color": "^1.7.10",
+        "date-vir": "^8.6.1",
         "element-book": "^26.17.3",
         "element-vir": "*",
         "lit-css-vars": "^3.6.2",
@@ -29,12 +29,12 @@
         "vira": "^31.24.2"
     },
     "devDependencies": {
-        "esbuild": "^0.28.0",
+        "esbuild": "^0.28.1",
         "markdown-code-example-inserter": "^3.0.5",
-        "type-fest": "^5.6.0",
+        "type-fest": "^5.7.0",
         "typedoc": "^0.28.19",
-        "typescript": "^5.9.3",
-        "vite": "^8.0.14",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.16",
         "vite-tsconfig-paths": "^6.1.1"
     },
     "engines": {

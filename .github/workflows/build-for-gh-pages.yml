@@ -20,8 +20,8 @@ jobs:
             - uses: actions/setup-node@v4.0.3
               with:
                   node-version-file: '.nvmrc'
-            - name: Install npm 11.4.2
-              run: npm install -g npm@11.4.2
+            - name: Install npm
+              run: npm install -g npm@11.17.0
             - name: build
               run: |
                   npm ci

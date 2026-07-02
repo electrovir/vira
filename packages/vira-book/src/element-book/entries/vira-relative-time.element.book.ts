@@ -1,4 +1,4 @@
-import {calculateRelativeDate, getNowInUtcTimezone} from 'date-vir';
+import {calculateRelativeDate, getNowInUtcTimezone, utcTimezone} from 'date-vir';
 import {defineBookPage} from 'element-book';
 import {html} from 'element-vir';
 import {ViraRelativeTime} from 'vira';
@@ -69,6 +69,21 @@ export const viraRelativeTimeBookPage = defineBookPage({
                             hours: -2,
                         }),
                         showAbsoluteTime: true,
+                    })}></${ViraRelativeTime}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'With absolute time in a specific timezone',
+            render() {
+                return html`
+                    <${ViraRelativeTime.assign({
+                        time: calculateRelativeDate(getNowInUtcTimezone(), {
+                            hours: -2,
+                        }),
+                        showAbsoluteTime: true,
+                        timezone: utcTimezone,
                     })}></${ViraRelativeTime}>
                 `;
             },

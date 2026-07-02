@@ -33,6 +33,13 @@ export const ViraRelativeTime = defineViraElement<
          * @default {seconds: 5}
          */
         updateInterval: Readonly<AtLeastOneDuration>;
+        /**
+         * Timezone the absolute time is displayed in. Defaults to the user's timezone. Set this for
+         * values that are conceptually anchored to a specific timezone (e.g. a date-only value
+         * stored at midnight UTC), where converting to the user's timezone would shift the
+         * displayed date/time.
+         */
+        timezone: string;
     }>
 >()({
     tagName: 'vira-relative-time',
@@ -107,11 +114,18 @@ export const ViraRelativeTime = defineViraElement<
         );
 
         return html`
-            <span title=${formatAbsoluteTime(inputs.time)}>${relativeTime}</span>
+            <span
+                title=${formatAbsoluteTime(inputs.time, {
+                    timezone: inputs.timezone,
+                })}
+            >
+                ${relativeTime}
+            </span>
             ${inputs.showAbsoluteTime
                 ? html`
                       <${ViraAbsoluteTime.assign({
                           time: inputs.time,
+                          timezone: inputs.timezone,
                       })}></${ViraAbsoluteTime}>
                   `
                 : nothing}

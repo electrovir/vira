@@ -15,11 +15,16 @@ import {ViraMenu} from './vira-menu.element.js';
 const interactiveContentClass = 'interactive-content';
 const interactiveTextClass = 'interactive-text';
 
-async function setupMenuTest(inputs?: Partial<(typeof ViraMenuTrigger)['InputsType']>) {
+async function setupMenuTest(
+    inputs?: Partial<(typeof ViraMenuTrigger)['InputsType']>,
+    plainItemKeepOpen?: boolean,
+) {
     const events: {
         openChange: boolean[];
+        plainItemClicks: number;
     } = {
         openChange: [],
+        plainItemClicks: 0,
     };
 
     const fixture = await testWeb.render(html`
@@ -58,6 +63,10 @@ async function setupMenuTest(inputs?: Partial<(typeof ViraMenuTrigger)['InputsTy
                     },
                     {
                         content: 'Plain',
+                        keepOpenAfterInteraction: plainItemKeepOpen,
+                        onClick() {
+                            events.plainItemClicks++;
+                        },
                     },
                 ])}
             </${ViraMenuTrigger}>
@@ -147,6 +156,59 @@ describe(ViraMenuTrigger.tagName, () => {
                 },
             },
             'the menu stayed open after clicking interactive content',
+        );
+        assert.deepEquals(events.openChange, [
+            true,
+            false,
+        ]);
+    });
+
+    it('keeps the pop-up open when a menu item sets keepOpenAfterInteraction', async () => {
+        const {open, findMenu, instance, events} = await setupMenuTest(undefined, true);
+
+        await open();
+
+        const items = Array.from(instance.querySelectorAll(ViraMenuItem.tagName));
+        assert.isLengthExactly(items, 2);
+        assert.isDefined(items[1]);
+        await testWeb.click(items[1]);
+
+        /** Give the pop-up a chance to (incorrectly) close before asserting it stayed open. */
+        await waitForAnimationFrame(5);
+
+        assert.isTruthy(
+            findMenu(),
+            'the menu should stay open when the clicked item sets keepOpenAfterInteraction',
+        );
+        assert.deepEquals(events.openChange, [
+            true,
+        ]);
+        assert.strictEquals(
+            events.plainItemClicks,
+            1,
+            'the consumer onClick should still fire for a kept-open item',
+        );
+    });
+
+    it('still closes for sibling items when only one item keeps the pop-up open', async () => {
+        const {open, findMenu, instance, events} = await setupMenuTest(undefined, true);
+
+        await open();
+
+        const interactiveText = assertWrap.instanceOf(
+            instance.querySelector(`.${interactiveTextClass}`),
+            HTMLElement,
+        );
+        await testWeb.click(interactiveText);
+
+        await waitUntil(
+            () => !findMenu(),
+            {
+                timeout: {
+                    seconds: 1,
+                },
+            },
+            'the menu never closed for a sibling item without keepOpenAfterInteraction',
         );
         assert.deepEquals(events.openChange, [
             true,

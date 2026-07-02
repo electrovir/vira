@@ -157,6 +157,16 @@ const examples: {
             },
         ],
     },
+    {
+        title: 'keep open item',
+        menuItems: [
+            {
+                content: 'Keeps the menu open when clicked',
+                keepOpenAfterInteraction: true,
+            },
+            ...mockMenuItems,
+        ],
+    },
 ];
 
 export const viraMenuTriggerBookPage = defineBookPage({
@@ -183,6 +193,7 @@ export const viraMenuTriggerBookPage = defineBookPage({
                 },
                 render({state, updateState}) {
                     const rawSelectItem: ViraMenuItemEntry = {
+                        keepOpenAfterInteraction: true,
                         content: html`
                             <${ViraSelect.assign({
                                 options: mockSelectOptions,

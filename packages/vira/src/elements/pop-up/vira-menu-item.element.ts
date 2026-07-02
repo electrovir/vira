@@ -29,6 +29,12 @@ export const ViraMenuItem = defineViraElement<
          * _always_ be shown, even if `selected` is set to `false`.
          */
         iconOverride: ViraIconSvg;
+        /**
+         * When `true`, activating this item will _not_ close the containing pop-up.
+         *
+         * @default false
+         */
+        keepOpenAfterInteraction: boolean;
     }>
 >()({
     tagName: 'vira-menu-item',
@@ -142,6 +148,22 @@ export const ViraMenuItem = defineViraElement<
                 return;
             }
 
+            /**
+             * Only forward `click`. Slotted content is activated by a single forwarded click, so
+             * forwarding `mousedown` as well would double-trigger interactions: a `<select>`, for
+             * example, opens its picker via `showPicker()` on both `mousedown` and `click`, and the
+             * first call consumes the transient user activation so the second throws
+             * `NotAllowedError`. `mousedown` still reaches this handler so disabled items can block
+             * it above.
+             */
+            if (event.type !== 'click') {
+                return;
+            }
+
+            if (inputs.keepOpenAfterInteraction) {
+                event.stopPropagation();
+            }
+
             const slotElement = assertWrap.instanceOf(
                 host.shadowRoot.querySelector('slot'),
                 HTMLSlotElement,
@@ -156,29 +178,24 @@ export const ViraMenuItem = defineViraElement<
                         event.preventDefault();
                         event.stopPropagation();
                         propagating[event.type] = true;
-                        if (event.type === 'click') {
-                            const hasModifiers =
-                                event instanceof MouseEvent &&
-                                (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+                        const hasModifiers =
+                            event instanceof MouseEvent &&
+                            (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
 
-                            if (hasModifiers) {
-                                /**
-                                 * If modifier keys are present, dispatch a synthetic MouseEvent so
-                                 * that the modifier keys are preserved. This is needed so that
-                                 * cmd+click opens links in a new tab.
-                                 */
-                                element.dispatchEvent(new MouseEvent('click', event));
-                            } else {
-                                /**
-                                 * Use `.click()` instead of dispatching a synthetic MouseEvent so
-                                 * that the resulting event is trusted and carries user activation.
-                                 * This is required for APIs like `showPicker()` on `<select>`
-                                 * elements.
-                                 */
-                                element.click();
-                            }
+                        if (hasModifiers) {
+                            /**
+                             * If modifier keys are present, dispatch a synthetic MouseEvent so that
+                             * the modifier keys are preserved. This is needed so that cmd+click
+                             * opens links in a new tab.
+                             */
+                            element.dispatchEvent(new MouseEvent('click', event));
                         } else {
-                            element.dispatchEvent(new MouseEvent(event.type, event));
+                            /**
+                             * Use `.click()` instead of dispatching a synthetic MouseEvent so that
+                             * the resulting event carries user activation. This is required for
+                             * APIs like `showPicker()` on `<select>` elements.
+                             */
+                            element.click();
                         }
                         delete propagating[event.type];
                     }
@@ -188,19 +205,15 @@ export const ViraMenuItem = defineViraElement<
         const listenerRemovers = [
             listenTo(host, 'click', propagateMouseEvent),
             listenTo(host, 'mousedown', propagateMouseEvent),
-            /**
-             * Emit `select` on a non-disabled activation so the containing pop-up can close. This
-             * uses the _capture_ phase because interactive slotted content can stop the click from
-             * bubbling back up to this host (which would prevent a bubble-phase listener from ever
-             * running). The `propagating` guard skips the synthetic click that
-             * `propagateMouseEvent` re-dispatches onto slotted content, so `select` fires exactly
-             * once per activation.
-             */
             listenTo(
                 host,
                 'click',
                 (event) => {
-                    if (propagating[event.type] || inputs.disabled) {
+                    if (
+                        propagating[event.type] ||
+                        inputs.disabled ||
+                        inputs.keepOpenAfterInteraction
+                    ) {
                         return;
                     }
                     dispatch(new events.activate(undefined));

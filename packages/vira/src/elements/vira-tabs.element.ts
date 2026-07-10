@@ -16,6 +16,7 @@ import {
     onDomCreated,
     unsafeCSS,
     type CSSResult,
+    type HTMLTemplateResult,
 } from 'element-vir';
 import {
     routeHasPaths,
@@ -23,8 +24,11 @@ import {
     type GenericTreePaths,
     type SpaRouter,
 } from 'spa-router-vir';
+import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
+import {Check24Icon} from '../icons/icon-svgs/24/check-24.icon.js';
 import {createFocusStyles} from '../styles/focus.js';
+import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     standaloneThemeColorNames,
@@ -34,7 +38,6 @@ import {
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
 import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {createOverflowObserver} from '../util/overflow-observer.js';
 import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
 import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
 import {ViraMenuCornerStyle} from './pop-up/vira-menu.element.js';
@@ -68,6 +71,11 @@ export enum ViraTabsIconLayout {
     Horizontal = 'horizontal',
 }
 
+function measureElementWidth(mirrorElement: Element, selector: string) {
+    const element = mirrorElement.querySelector(selector);
+    return element ? element.getBoundingClientRect().width : 0;
+}
+
 /**
  * A single tab entry for {@link ViraTabs}.
  *
@@ -86,7 +94,85 @@ export type ViraTab = {
      * current route.
      */
     exactMatch: boolean;
+    /**
+     * Optional cluster label. Consecutive tabs sharing the same `group` string render together
+     * under that label, separated from other clusters by an inset vertical divider. Tabs with no
+     * `group` render standalone (no label, no divider). Grouping only affects rendering when at
+     * least one tab has a `group`.
+     */
+    group: string;
 }>;
+
+/**
+ * Groups a flat list of tabs into clusters. Consecutive tabs sharing the same `group` string are
+ * merged into a single cluster; ungrouped tabs (and tabs whose `group` differs from their
+ * predecessor) each start a new cluster.
+ *
+ * @category Internal
+ */
+export function buildClusters(tabList: ReadonlyArray<Readonly<ViraTab>>) {
+    return tabList.reduce<
+        {
+            group: string | undefined;
+            tabs: ReadonlyArray<Readonly<ViraTab>>;
+        }[]
+    >((accumulatedClusters, tab) => {
+        const lastCluster = accumulatedClusters[accumulatedClusters.length - 1];
+        if (tab.group != undefined && lastCluster && lastCluster.group === tab.group) {
+            return [
+                ...accumulatedClusters.slice(0, -1),
+                {
+                    group: lastCluster.group,
+                    tabs: [
+                        ...lastCluster.tabs,
+                        tab,
+                    ],
+                },
+            ];
+        }
+        return [
+            ...accumulatedClusters,
+            {
+                group: tab.group,
+                tabs: [tab],
+            },
+        ];
+    }, []);
+}
+
+function renderGroupedContent(
+    tabList: ReadonlyArray<Readonly<ViraTab>>,
+    renderItem: (tab: Readonly<ViraTab>) => HTMLTemplateResult,
+) {
+    const clusters = buildClusters(tabList);
+    return clusters.map((cluster, clusterIndex) => {
+        const previousCluster = clusters[clusterIndex - 1];
+        const dividerTemplate =
+            previousCluster && previousCluster.group != undefined && cluster.group != undefined
+                ? html`
+                      <span class="tab-cluster-divider"></span>
+                  `
+                : nothing;
+        const labelTemplate =
+            cluster.group == undefined
+                ? nothing
+                : html`
+                      <span class="tab-group-label">${cluster.group}</span>
+                  `;
+        return html`
+            ${dividerTemplate}
+            <div
+                class=${classMap({
+                    'tab-cluster': true,
+                    standalone: cluster.group == undefined,
+                })}
+            >
+                ${labelTemplate}
+                <div class="tab-cluster-tabs">${cluster.tabs.map(renderItem)}</div>
+            </div>
+        `;
+    });
+}
 
 /**
  * A tab bar element that renders an array of tabs with an animated selection indicator.
@@ -129,6 +215,14 @@ export const ViraTabs = defineViraElement<
         menuIsDisabled: boolean;
         /** Offset for the dropdown pop-up. Only used when tabs overflow into a dropdown. */
         menuPopUpOffset: Readonly<PopUpOffset>;
+        /**
+         * Text shown on the overflow "more" trigger when the selected tab is _not_ collapsed into
+         * the menu. When the selected tab _is_ collapsed, the trigger shows that tab's label (with
+         * a checkmark) instead. Set this to a localized string; it defaults to `'More'`.
+         *
+         * @default 'More'
+         */
+        overflowLabel: string;
         /** When true, tabs and their container expand to fill all available horizontal space. */
         shouldFillWidth: boolean;
     }>
@@ -140,7 +234,8 @@ export const ViraTabs = defineViraElement<
     },
     state() {
         return {
-            isOverflowing: false,
+            /** How many of the visible tabs are collapsed into the overflow "more" menu. */
+            overflowCount: 0,
             /** A callback to remove all internal observers. */
             cleanupObserver: undefined as undefined | (() => void),
         };
@@ -206,7 +301,6 @@ export const ViraTabs = defineViraElement<
             !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical,
         'vira-tabs-icon-layout-horizontal': ({inputs}) =>
             inputs.iconLayout === ViraTabsIconLayout.Horizontal,
-        'vira-tabs-overflowing': ({state}) => state.isOverflowing,
         'vira-tabs-fill-width': ({inputs}) => !!inputs.shouldFillWidth,
     },
     cssVars: {
@@ -218,11 +312,9 @@ export const ViraTabs = defineViraElement<
             viraThemeByKeys[viraColorVariantToHostClassKey[ViraColorVariant.Info]]['behind-bg'][
                 ContrastLevelName.Header
             ].background.value,
-        'vira-tabs-inactive-color':
-            viraTheme.colors['vira-grey-foreground-header'].foreground.value,
-        'vira-tabs-inactive-hover-color':
-            viraTheme.colors['vira-grey-foreground-non-body'].foreground.value,
-        'vira-tabs-bar-thickness': '3px',
+        'vira-tabs-inactive-color': viraTheme.colors[themeDefaultKey].foreground.value,
+        'vira-tabs-inactive-hover-color': viraTheme.colors[themeDefaultKey].foreground.value,
+        'vira-tabs-bar-thickness': '2px',
     },
 
     styles: ({hostClasses, cssVars}) => {
@@ -290,15 +382,24 @@ export const ViraTabs = defineViraElement<
                 box-sizing: border-box;
                 ${noUserSelect};
                 width: 100%;
+                /** Tab labels, the overflow trigger, and menu items never wrap to a second line. */
+                white-space: nowrap;
             }
 
             .tabs-container {
                 display: flex;
                 position: relative;
-                list-style: none;
-                overflow: hidden;
                 margin: 0;
                 padding: 0;
+            }
+
+            .tabs-measure {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: visible;
+                visibility: hidden;
+                pointer-events: none;
             }
 
             ${hostClasses['vira-tabs-bar-top'].selector},
@@ -315,7 +416,7 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
-            li {
+            .tab-item {
                 ${noNativeFormStyles};
                 cursor: pointer;
                 display: flex;
@@ -324,7 +425,8 @@ export const ViraTabs = defineViraElement<
                 text-align: center;
                 position: relative;
                 color: ${cssVars['vira-tabs-inactive-color'].value};
-                font-size: ${viraFormCssVars['vira-form-medium-text-size'].value};
+                font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
+                font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
                 text-decoration: none;
                 ${createFocusStyles({
                     renderInside: true,
@@ -361,13 +463,12 @@ export const ViraTabs = defineViraElement<
                 border-bottom: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
-                & li::after {
+                & .tab-item::after {
                     bottom: 0;
                     left: 0;
                     right: 0;
                     height: ${cssVars['vira-tabs-bar-thickness'].value};
-                    border-radius: ${cssVars['vira-tabs-bar-thickness'].value}
-                        ${cssVars['vira-tabs-bar-thickness'].value} 0 0;
+                    border-radius: 0;
                 }
             }
 
@@ -375,13 +476,12 @@ export const ViraTabs = defineViraElement<
                 border-top: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
-                & li::after {
+                & .tab-item::after {
                     top: 0;
                     left: 0;
                     right: 0;
                     height: ${cssVars['vira-tabs-bar-thickness'].value};
-                    border-radius: 0 0 ${cssVars['vira-tabs-bar-thickness'].value}
-                        ${cssVars['vira-tabs-bar-thickness'].value};
+                    border-radius: 0;
                 }
             }
 
@@ -389,13 +489,12 @@ export const ViraTabs = defineViraElement<
                 border-left: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
-                & li::after {
+                & .tab-item::after {
                     top: 0;
                     bottom: 0;
                     left: 0;
                     width: ${cssVars['vira-tabs-bar-thickness'].value};
-                    border-radius: 0 ${cssVars['vira-tabs-bar-thickness'].value}
-                        ${cssVars['vira-tabs-bar-thickness'].value} 0;
+                    border-radius: 0;
                 }
             }
 
@@ -403,13 +502,12 @@ export const ViraTabs = defineViraElement<
                 border-right: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
-                & li::after {
+                & .tab-item::after {
                     top: 0;
                     bottom: 0;
                     right: 0;
                     width: ${cssVars['vira-tabs-bar-thickness'].value};
-                    border-radius: ${cssVars['vira-tabs-bar-thickness'].value} 0 0
-                        ${cssVars['vira-tabs-bar-thickness'].value};
+                    border-radius: 0;
                 }
             }
 
@@ -435,32 +533,16 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
-            ${hostClasses['vira-tabs-overflowing'].selector} .tabs-container {
-                visibility: hidden;
-                height: 0;
-            }
-
-            .overflow-menu {
-                display: none;
-            }
-
-            ${hostClasses['vira-tabs-overflowing'].selector} .overflow-menu {
-                display: flex;
-                align-items: center;
-                width: fit-content;
-                padding-left: 8px;
-            }
-
             ${hostClasses['vira-tabs-fill-width'].selector} {
                 & .tabs-container {
                     flex-grow: 1;
                 }
 
-                & li {
+                & .tab-item {
                     flex-grow: 1;
                 }
 
-                & .tabs-container ${ViraLink} {
+                & .tab-item ${ViraLink} {
                     flex-grow: 1;
                     justify-content: center;
                 }
@@ -470,18 +552,50 @@ export const ViraTabs = defineViraElement<
                 text-decoration: none;
             }
 
-            .tabs-container ${ViraLink} {
+            .tab-item ${ViraLink} {
                 display: flex;
                 padding: 8px 16px;
             }
 
-            ${ViraMenuTrigger} {
-                margin: 3px 0;
+            .tab-more {
+                display: flex;
+                flex-shrink: 0;
+                align-items: center;
+
+                & ${ViraButton} {
+                    flex-shrink: 0;
+                }
             }
 
-            .overflow-menu ${ViraButton} {
+            .tabs-container.grouped {
+                align-items: flex-end;
+            }
+
+            .tab-cluster {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+
+            .tab-cluster-tabs {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .tab-group-label {
+                font-size: 11px;
+                font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
+                padding: 8px 16px 4px;
+                color: ${viraTheme.colors['vira-grey-foreground-header'].foreground.value};
+            }
+
+            .tab-cluster-divider {
                 flex-shrink: 0;
-                white-space: nowrap;
+                align-self: stretch;
+                width: 1px;
+                margin: 8px 0;
+                background-color: ${viraTheme.colors['vira-grey-foreground-decoration'].foreground
+                    .value};
             }
         `;
     },
@@ -489,173 +603,418 @@ export const ViraTabs = defineViraElement<
         state.cleanupObserver?.();
     },
     render({inputs, state, updateState, host, dispatch, events}) {
-        const tabs = filterMap(
-            inputs.tabs,
-            (tab) => {
-                if (tab.isHidden) {
-                    return undefined;
+        function renderTabInner(tab: Readonly<ViraTab>, forMeasurement: boolean) {
+            const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
+                exactMatch: tab.exactMatch,
+            });
+
+            const iconTemplate = tab.icon
+                ? html`
+                      <${ViraIcon.assign({
+                          icon: tab.icon,
+                      })}></${ViraIcon}>
+                  `
+                : nothing;
+
+            const isInert = isSelected || !!tab.isDisabled;
+
+            return {
+                isSelected,
+                content: html`
+                    <${ViraLink.assign({
+                        route: {
+                            router: inputs.router,
+                            route: {
+                                paths: tab.paths.fullPaths,
+                            },
+                            scrollToTop: true,
+                        },
+                        disableLinkStyles: true,
+                        attributePassthrough: forMeasurement
+                            ? undefined
+                            : {
+                                  a: {
+                                      role: 'tab',
+                                      'aria-selected': String(isSelected),
+                                      'aria-disabled': String(!!tab.isDisabled),
+                                      tabindex: isInert ? '-1' : undefined,
+                                  },
+                              },
+                    })}>
+                        <span class="tab-content">
+                            ${iconTemplate}
+                            <${ViraBoldText.assign({
+                                text: tab.label,
+                                bold: isSelected,
+                            })}
+                                class="tab-label"
+                            ></${ViraBoldText}>
+                        </span>
+                    </${ViraLink}>
+                `,
+            };
+        }
+
+        function handleTabClick(tab: Readonly<ViraTab>) {
+            if (!tab.isDisabled) {
+                dispatch(new events.tabSelect(tab));
+            }
+        }
+
+        function renderTabItem(tab: Readonly<ViraTab>) {
+            const {isSelected, content} = renderTabInner(tab, false);
+            return html`
+                <div
+                    class=${classMap({
+                        'tab-item': true,
+                        selected: isSelected,
+                        disabled: !!tab.isDisabled,
+                    })}
+                    role="presentation"
+                    ${listen('click', () => handleTabClick(tab))}
+                >
+                    ${content}
+                </div>
+            `;
+        }
+
+        function renderMeasureTabItem(tab: Readonly<ViraTab>) {
+            const {isSelected, content} = renderTabInner(tab, true);
+            return html`
+                <div
+                    class=${classMap({
+                        'tab-item': true,
+                        'measure-selected': isSelected,
+                    })}
+                >
+                    ${content}
+                </div>
+            `;
+        }
+
+        function buildMenuItems(tabList: ReadonlyArray<Readonly<ViraTab>>) {
+            return renderMenuItemEntries(
+                filterMap(
+                    tabList,
+                    (tab): ViraMenuItemEntry | undefined => {
+                        const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
+                            exactMatch: tab.exactMatch,
+                        });
+
+                        const iconTemplate = tab.icon
+                            ? html`
+                                  <${ViraIcon.assign({
+                                      icon: tab.icon,
+                                  })}></${ViraIcon}>
+                              `
+                            : nothing;
+
+                        return {
+                            content: html`
+                                <${ViraLink.assign({
+                                    route: {
+                                        router: inputs.router,
+                                        route: {
+                                            paths: tab.paths.fullPaths,
+                                        },
+                                        scrollToTop: true,
+                                    },
+                                    disableLinkStyles: true,
+                                    stylePassthrough: {
+                                        a: css`
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                        `,
+                                    },
+                                })}>
+                                    ${iconTemplate} ${tab.label}
+                                </${ViraLink}>
+                            `,
+                            selected: isSelected,
+                            disabled: tab.isDisabled,
+                            onClick() {
+                                handleTabClick(tab);
+                            },
+                        };
+                    },
+                    check.isTruthy,
+                ),
+            );
+        }
+
+        function measureOverflow(mirrorElement: Element) {
+            const availableWidth = host.clientWidth;
+            if (!availableWidth) {
+                return;
+            }
+
+            /**
+             * Vertical (left/right) tab bars stack their tabs in a column, so horizontal
+             * width-based overflow does not apply: keep every tab inline.
+             */
+            const isVertical = globalThis
+                .getComputedStyle(mirrorElement)
+                .flexDirection.startsWith('column');
+            if (isVertical) {
+                if (state.overflowCount !== 0) {
+                    updateState({
+                        overflowCount: 0,
+                    });
+                }
+                return;
+            }
+
+            const tabElements = Array.from(mirrorElement.querySelectorAll('.tab-item'));
+            const tabCount = tabElements.length;
+            if (!tabCount) {
+                return;
+            }
+
+            const tabWidths = tabElements.map((element) => element.getBoundingClientRect().width);
+
+            /**
+             * In grouped mode a partially-shown cluster still renders its group label and its
+             * leading divider, so its inline width is `max(labelWidth, shownTabsWidth)` rather than
+             * a bare sum of tab widths. Capture each tab's cluster geometry (in tab order) so the
+             * inline width for any leading count can be derived from what is actually rendered.
+             */
+            const clusterElements = Array.from(mirrorElement.querySelectorAll('.tab-cluster'));
+            const containerLeft = mirrorElement.getBoundingClientRect().left;
+            const tabClusterInfo = clusterElements.flatMap((clusterElement) => {
+                const clusterLeft = clusterElement.getBoundingClientRect().left - containerLeft;
+                const labelElement = clusterElement.querySelector('.tab-group-label');
+                const clusterLabelWidth = labelElement
+                    ? labelElement.getBoundingClientRect().width
+                    : 0;
+                return Array.from(clusterElement.querySelectorAll('.tab-item')).map(
+                    (tabElement, indexInCluster) => {
+                        return {
+                            clusterLeft,
+                            clusterLabelWidth,
+                            indexInCluster,
+                            width: tabElement.getBoundingClientRect().width,
+                        };
+                    },
+                );
+            });
+
+            /** Width of the inline area when the first `count` tabs are shown. */
+            function inlineWidthForCount(count: number) {
+                if (count <= 0) {
+                    return 0;
+                } else if (!clusterElements.length) {
+                    return tabWidths.slice(0, count).reduce((sum, width) => sum + width, 0);
                 }
 
-                const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
-                    exactMatch: tab.exactMatch,
+                const lastInfo = tabClusterInfo[count - 1];
+                if (!lastInfo) {
+                    return 0;
+                }
+                const inlineTabsInLastCluster = tabClusterInfo
+                    .slice(count - 1 - lastInfo.indexInCluster, count)
+                    .reduce((sum, info) => sum + info.width, 0);
+                return (
+                    lastInfo.clusterLeft +
+                    Math.max(lastInfo.clusterLabelWidth, inlineTabsInLastCluster)
+                );
+            }
+
+            const totalWidth = inlineWidthForCount(tabCount);
+
+            /**
+             * Largest number of leading tabs whose inline width fits within the available width
+             * minus the given reserve (the width the "more" button will occupy). Can return 0.
+             */
+            function maxInlineForReserve(reservePx: number) {
+                const limit = availableWidth - reservePx;
+                return tabElements.reduce(
+                    (fittingCount, _tabElement, index) =>
+                        inlineWidthForCount(index + 1) <= limit ? index + 1 : fittingCount,
+                    0,
+                );
+            }
+
+            /** When every tab fits on its own, there is no overflow and no "more" button. */
+            if (totalWidth <= availableWidth) {
+                if (state.overflowCount !== 0) {
+                    updateState({
+                        overflowCount: 0,
+                    });
+                }
+                return;
+            }
+
+            const defaultButtonWidth = measureElementWidth(mirrorElement, '.measure-more-default');
+            const labeledButtonWidth = measureElementWidth(mirrorElement, '.measure-more-labeled');
+
+            const selectedElement = mirrorElement.querySelector('.tab-item.measure-selected');
+            const selectedIndex = selectedElement ? tabElements.indexOf(selectedElement) : -1;
+
+            /**
+             * Reserving the default ("more") trigger reveals whether the selected tab would end up
+             * collapsed.
+             */
+            const defaultInlineCount = maxInlineForReserve(defaultButtonWidth);
+            const selectedIsCollapsed = selectedIndex >= 0 && selectedIndex >= defaultInlineCount;
+
+            /**
+             * When the selected tab is collapsed, the trigger always shows that tab's own label
+             * (with a checkmark), reserving its width even when it cannot fully fit (it is allowed
+             * to overflow rather than hide which tab is selected). Otherwise the trigger shows the
+             * plain default overflow label.
+             */
+            const inlineCount = selectedIsCollapsed
+                ? maxInlineForReserve(labeledButtonWidth)
+                : defaultInlineCount;
+
+            const newOverflowCount = Math.max(1, tabCount - inlineCount);
+
+            if (newOverflowCount !== state.overflowCount) {
+                updateState({
+                    overflowCount: newOverflowCount,
                 });
+            }
+        }
 
-                const iconTemplate = tab.icon
-                    ? html`
-                          <${ViraIcon.assign({
-                              icon: tab.icon,
-                          })}></${ViraIcon}>
-                      `
-                    : nothing;
+        function setUpOverflowMeasurement(mirrorElement: Element) {
+            state.cleanupObserver?.();
 
-                const isInert = isSelected || !!tab.isDisabled;
+            let frameId: number | undefined = undefined;
+            function scheduleMeasure() {
+                if (frameId != undefined) {
+                    return;
+                }
+                frameId = requestAnimationFrame(() => {
+                    frameId = undefined;
+                    measureOverflow(mirrorElement);
+                });
+            }
 
-                return html`
-                    <li
-                        class=${classMap({
-                            selected: isSelected,
-                            disabled: !!tab.isDisabled,
-                        })}
-                        role="presentation"
-                        ${listen('click', () => {
-                            if (!tab.isDisabled) {
-                                dispatch(new events.tabSelect(tab));
-                            }
-                        })}
-                    >
-                        <${ViraLink.assign({
-                            route: {
-                                router: inputs.router,
-                                route: {
-                                    paths: tab.paths.fullPaths,
-                                },
-                                scrollToTop: true,
-                            },
-                            disableLinkStyles: true,
-                            attributePassthrough: {
-                                a: {
-                                    role: 'tab',
-                                    'aria-selected': String(isSelected),
-                                    'aria-disabled': String(!!tab.isDisabled),
-                                    tabindex: isInert ? '-1' : undefined,
-                                },
-                            },
-                        })}>
-                            <span class="tab-content">
-                                ${iconTemplate}
-                                <${ViraBoldText.assign({
-                                    text: tab.label,
-                                    bold: isSelected,
-                                })}
-                                    class="tab-label"
-                                ></${ViraBoldText}>
-                            </span>
-                        </${ViraLink}>
-                    </li>
-                `;
-            },
-            check.isTruthy,
-        );
-        const selectedTab = inputs.tabs.find((tab) =>
+            const resizeObserver = new ResizeObserver(scheduleMeasure);
+            resizeObserver.observe(host);
+            /**
+             * Observing the (out-of-flow) measurement mirror catches late layout of its async
+             * `ViraButton` children, whose real widths drive the overflow math.
+             */
+            resizeObserver.observe(mirrorElement);
+            const mutationObserver = new MutationObserver(scheduleMeasure);
+            mutationObserver.observe(mirrorElement, {
+                childList: true,
+                subtree: true,
+                characterData: true,
+            });
+            scheduleMeasure();
+
+            updateState({
+                cleanupObserver() {
+                    if (frameId != undefined) {
+                        cancelAnimationFrame(frameId);
+                    }
+                    resizeObserver.disconnect();
+                    mutationObserver.disconnect();
+                },
+            });
+        }
+
+        const visibleTabs = inputs.tabs.filter((tab) => !tab.isHidden);
+        const hasGroups = visibleTabs.some((tab) => tab.group != undefined);
+
+        const overflowCount = Math.min(visibleTabs.length, Math.max(0, state.overflowCount));
+        const inlineCount = visibleTabs.length - overflowCount;
+        const inlineTabs = visibleTabs.slice(0, inlineCount);
+        const overflowTabs = visibleTabs.slice(inlineCount);
+
+        const selectedIndex = visibleTabs.findIndex((tab) =>
             routeHasPaths(inputs.currentRoute, tab.paths, {
                 exactMatch: tab.exactMatch,
             }),
         );
+        const selectedTab = selectedIndex >= 0 ? visibleTabs[selectedIndex] : undefined;
+        /** Whether the selected tab is currently collapsed into the overflow menu. */
+        const selectedIsCollapsed = selectedIndex >= 0 && selectedIndex >= inlineCount;
 
-        const menuItems = renderMenuItemEntries(
-            filterMap(
-                inputs.tabs,
-                (tab): ViraMenuItemEntry | undefined => {
-                    if (tab.isHidden) {
-                        return undefined;
-                    }
+        const inlineContent = hasGroups
+            ? renderGroupedContent(inlineTabs, renderTabItem)
+            : inlineTabs.map(renderTabItem);
+        const measureContent = hasGroups
+            ? renderGroupedContent(visibleTabs, renderMeasureTabItem)
+            : visibleTabs.map(renderMeasureTabItem);
 
-                    const isSelected = routeHasPaths(inputs.currentRoute, tab.paths, {
-                        exactMatch: tab.exactMatch,
-                    });
+        const overflowLabel = inputs.overflowLabel || 'More';
 
-                    const iconTemplate = tab.icon
-                        ? html`
-                              <${ViraIcon.assign({
-                                  icon: tab.icon,
-                              })}></${ViraIcon}>
-                          `
-                        : nothing;
+        /**
+         * Hidden copies of the "more" button in each of its possible shapes, rendered inside the
+         * measurement mirror so their true widths can be measured before choosing which one fits:
+         * the default overflow label, and the collapsed selected tab's own label (with a
+         * checkmark).
+         */
+        const measureMoreButtons = html`
+            <${ViraButton.assign({
+                text: overflowLabel,
+                showMenuCaret: true,
+                color: ViraColorVariant.Neutral,
+            })}
+                class="measure-more-default"
+            ></${ViraButton}>
+            ${selectedTab
+                ? html`
+                      <${ViraButton.assign({
+                          text: selectedTab.label,
+                          icon: Check24Icon,
+                          showMenuCaret: true,
+                          color: ViraColorVariant.Neutral,
+                      })}
+                          class="measure-more-labeled"
+                      ></${ViraButton}>
+                  `
+                : nothing}
+        `;
 
-                    return {
-                        content: html`
-                            <${ViraLink.assign({
-                                route: {
-                                    router: inputs.router,
-                                    route: {
-                                        paths: tab.paths.fullPaths,
-                                    },
-                                    scrollToTop: true,
-                                },
-                                disableLinkStyles: true,
-                                stylePassthrough: {
-                                    a: css`
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 8px;
-                                    `,
-                                },
-                            })}>
-                                ${iconTemplate} ${tab.label}
-                            </${ViraLink}>
-                        `,
-                        selected: isSelected,
-                        disabled: tab.isDisabled,
-                        onClick() {
-                            if (!tab.isDisabled) {
-                                dispatch(new events.tabSelect(tab));
-                            }
-                        },
-                    };
-                },
-                check.isTruthy,
-            ),
-        );
+        const overflowMenuTemplate = overflowTabs.length
+            ? html`
+                  <div class="tab-more">
+                      <${ViraMenuTrigger.assign({
+                          horizontalAnchor: inputs.menuHorizontalAnchor,
+                          isDisabled: inputs.menuIsDisabled,
+                          popUpOffset: inputs.menuPopUpOffset,
+                          menuCornerStyle: ViraMenuCornerStyle.AllRounded,
+                      })}>
+                          <${ViraButton.assign({
+                              text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
+                              icon: selectedIsCollapsed ? Check24Icon : undefined,
+                              showMenuCaret: true,
+                              color: ViraColorVariant.Neutral,
+                          })}
+                              slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
+                          ></${ViraButton}>
+                          ${buildMenuItems(overflowTabs)}
+                      </${ViraMenuTrigger}>
+                  </div>
+              `
+            : nothing;
 
         return html`
-            <${ViraMenuTrigger.assign({
-                horizontalAnchor: inputs.menuHorizontalAnchor,
-                isDisabled: inputs.menuIsDisabled,
-                popUpOffset: inputs.menuPopUpOffset,
-                menuCornerStyle: ViraMenuCornerStyle.AllRounded,
-            })}
-                class="overflow-menu"
-            >
-                <${ViraButton.assign({
-                    text: selectedTab?.label || '',
-                    showMenuCaret: true,
-                    color: ViraColorVariant.Neutral,
+            <div
+                class=${classMap({
+                    'tabs-container': true,
+                    'tabs-measure': true,
+                    grouped: hasGroups,
                 })}
-                    slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
-                ></${ViraButton}>
-                ${menuItems}
-            </${ViraMenuTrigger}>
-            <ul
-                class="tabs-container"
+                aria-hidden="true"
+                ${onDomCreated(setUpOverflowMeasurement)}
+            >
+                ${measureContent} ${measureMoreButtons}
+            </div>
+            <div
+                class=${classMap({
+                    'tabs-container': true,
+                    grouped: hasGroups,
+                })}
                 role="tablist"
-                ${onDomCreated((tabsElement) => {
-                    state.cleanupObserver?.();
-                    updateState({
-                        cleanupObserver: createOverflowObserver({
-                            element: tabsElement,
-                            widthElement: host,
-                            hysteresisPx: 16,
-                            onChange(isOverflowing) {
-                                updateState({
-                                    isOverflowing,
-                                });
-                            },
-                        }),
-                    });
-                })}
             >
-                ${tabs}
-            </ul>
+                ${inlineContent} ${overflowMenuTemplate}
+            </div>
         `;
     },
 });

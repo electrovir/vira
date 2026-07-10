@@ -8,19 +8,21 @@ import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraColorVariant, ViraEmphasis, ViraSize} from '../styles/form-variants.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {
+    allowsFreeformString,
     createDefaultForJsonType,
     createResolveContext,
     deleteValueAtPath,
     getAdditionalPropertiesSchema,
     getAllowedJsonTypes,
     getDefinedProperties,
-    getEnumValues,
     getItemSchema,
     getJsonType,
     getNewItemSchema,
     getPropertySchema,
     getRequiredProperties,
+    getSchemaEnumValues,
     getSchemaTitle,
+    getStringEnumValues,
     pathToKey,
     pickBranchForType,
     setValueAtPath,
@@ -38,6 +40,18 @@ import {ViraError} from './vira-error.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
 import {ViraSelect} from './vira-select.element.js';
 import {ViraTextArea} from './vira-text-area.element.js';
+
+/**
+ * Editing mode for a string field that offers both a fixed set of enum options and free-form text.
+ *
+ * @category Internal
+ */
+export enum ViraJsonStringMode {
+    /** Pick from the schema's enum options via a dropdown. */
+    Options = 'options',
+    /** Enter an arbitrary string via a text input. */
+    Custom = 'custom',
+}
 
 /**
  * An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema
@@ -62,6 +76,7 @@ export const ViraJsonForm = defineViraElement<
             pendingKeys: {} as Readonly<Record<string, string>>,
             pendingTypes: {} as Readonly<Record<string, ViraJsonType>>,
             pendingArrayValues: {} as Readonly<Record<string, JsonValue>>,
+            stringModes: {} as Readonly<Record<string, ViraJsonStringMode>>,
             showRaw: false,
             rawDraft: undefined as string | undefined,
             rawError: undefined as string | undefined,
@@ -162,7 +177,7 @@ export const ViraJsonForm = defineViraElement<
         }
 
         .json-type-tag {
-            font-weight: normal;
+            font-weight: ${viraFontCssVars['vira-font-weight-normal'].value};
             color: ${viraFormCssVars['vira-form-secondary-body-foreground'].value};
         }
 
@@ -286,6 +301,29 @@ export const ViraJsonForm = defineViraElement<
             });
         }
 
+        function getStringMode(
+            pathKey: string,
+            value: string,
+            enumValues: ReadonlyArray<string>,
+        ): ViraJsonStringMode {
+            const stored = state.stringModes[pathKey];
+            if (stored) {
+                return stored;
+            }
+            return enumValues.includes(value)
+                ? ViraJsonStringMode.Options
+                : ViraJsonStringMode.Custom;
+        }
+
+        function setStringMode(pathKey: string, mode: ViraJsonStringMode) {
+            updateState({
+                stringModes: {
+                    ...state.stringModes,
+                    [pathKey]: mode,
+                },
+            });
+        }
+
         function clearPending(pathKey: string) {
             updateState({
                 pendingKeys: omitObjectKeys(state.pendingKeys, [pathKey]),
@@ -314,7 +352,7 @@ export const ViraJsonForm = defineViraElement<
             schema: ViraJsonSchema | undefined,
         ): HTMLTemplateResult {
             const type = getJsonType(value);
-            const enumValues = getEnumValues(schema, resolveContext);
+            const enumValues = getSchemaEnumValues(schema, resolveContext);
 
             if (enumValues && enumValues.length > 0) {
                 const options: ReadonlyArray<ViraSelectOption> = enumValues.map((entry) => {
@@ -869,6 +907,74 @@ export const ViraJsonForm = defineViraElement<
             `;
         }
 
+        function renderStringEnumOrRaw(
+            path: ViraJsonPath,
+            value: string,
+            enumValues: ReadonlyArray<string>,
+        ): HTMLTemplateResult {
+            const pathKey = pathToKey(path);
+            const mode = getStringMode(pathKey, value, enumValues);
+
+            const editor =
+                mode === ViraJsonStringMode.Options
+                    ? html`
+                          <${ViraSelect.assign({
+                              options: enumValues.map((entry) => {
+                                  return {
+                                      value: entry,
+                                      label: entry,
+                                  };
+                              }),
+                              value: enumValues.includes(value) ? value : undefined,
+                              disabled: isDisabled,
+                          })}
+                              ${listen(ViraSelect.events.valueChange, (event) => {
+                                  emitReplaceAt(path, event.detail);
+                              })}
+                          ></${ViraSelect}>
+                      `
+                    : html`
+                          <${ViraInput.assign({
+                              value,
+                              disabled: isDisabled,
+                          })}
+                              ${listen(ViraInput.events.valueChange, (event) => {
+                                  emitReplaceAt(path, event.detail);
+                              })}
+                          ></${ViraInput}>
+                      `;
+
+            if (isDisabled) {
+                return editor;
+            }
+
+            const modeOptions: ReadonlyArray<ViraSelectOption> = [
+                {
+                    value: ViraJsonStringMode.Options,
+                    label: 'Options',
+                },
+                {
+                    value: ViraJsonStringMode.Custom,
+                    label: 'Custom',
+                },
+            ];
+
+            return html`
+                <div class="json-value-with-switcher">
+                    <span class="json-value-editor-slot">${editor}</span>
+                    <${ViraSelect.assign({
+                        options: modeOptions,
+                        value: mode,
+                    })}
+                        title="Choose from options or enter a custom value"
+                        ${listen(ViraSelect.events.valueChange, (event) => {
+                            setStringMode(pathKey, event.detail as ViraJsonStringMode);
+                        })}
+                    ></${ViraSelect}>
+                </div>
+            `;
+        }
+
         function renderValue(
             path: ViraJsonPath,
             value: JsonValue,
@@ -882,6 +988,23 @@ export const ViraJsonForm = defineViraElement<
                 return renderArrayGroup(path, value, narrowedSchema);
             } else if (check.isObject(value)) {
                 return renderObjectGroup(path, value, narrowedSchema);
+            }
+
+            /**
+             * When a string field constrains values to an enum but also permits free-form strings,
+             * offer both: an options dropdown plus a switcher to toggle to raw text entry.
+             */
+            const isStringOnlyField =
+                allowedTypes.length === 1 && allowedTypes[0] === ViraJsonType.String;
+            const stringEnumValues = isStringOnlyField
+                ? getStringEnumValues(schema, resolveContext)
+                : [];
+            if (
+                check.isString(value) &&
+                stringEnumValues.length > 0 &&
+                allowsFreeformString(schema, resolveContext)
+            ) {
+                return renderStringEnumOrRaw(path, value, stringEnumValues);
             }
 
             const editor = renderPrimitive(path, value, narrowedSchema);

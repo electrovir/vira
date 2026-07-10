@@ -27,6 +27,10 @@ const mockPathTree = new PathTree({
         tab2: {},
         tab3: {},
         tab4: {},
+        tab5: {},
+        tab6: {},
+        tab7: {},
+        tab8: {},
     },
 });
 
@@ -92,7 +96,51 @@ const tabsWithoutIcons: ReadonlyArray<Readonly<ViraTab>> = [
     },
 ];
 
+const tabsWithGroups: ReadonlyArray<Readonly<ViraTab>> = [
+    {
+        label: 'Overview',
+        paths: mockPathTree.paths.children.tab1,
+        group: 'General',
+    },
+    {
+        label: 'Details',
+        paths: mockPathTree.paths.children.tab2,
+        group: 'General',
+    },
+    {
+        label: 'Settings',
+        paths: mockPathTree.paths.children.tab3,
+        group: 'General',
+    },
+    {
+        label: 'Reports',
+        paths: mockPathTree.paths.children.tab4,
+        group: 'Data',
+    },
+    {
+        label: 'Exports',
+        paths: mockPathTree.paths.children.tab5,
+        group: 'Data',
+    },
+    {
+        label: 'Members',
+        paths: mockPathTree.paths.children.tab6,
+        group: 'Team',
+    },
+    {
+        label: 'Roles',
+        paths: mockPathTree.paths.children.tab7,
+        group: 'Team',
+    },
+    {
+        label: 'History',
+        paths: mockPathTree.paths.children.tab8,
+    },
+];
+
 const selectedRoute = createMockRoute(mockPathTree.paths.children.tab2.fullPaths);
+
+const selectedGroupedRoute = createMockRoute(mockPathTree.paths.children.tab6.fullPaths);
 
 const simpleExamples = [
     {
@@ -226,6 +274,12 @@ export const viraTabsBookPage = defineBookPage({
         simpleExamples.forEach(({title, ...extraInputs}) => {
             defineExample({
                 title,
+                styles: css`
+                    :host {
+                        display: block;
+                        width: 640px;
+                    }
+                `,
                 render() {
                     return html`
                         <${ViraTabs.assign({
@@ -260,10 +314,29 @@ export const viraTabsBookPage = defineBookPage({
         });
 
         defineExample({
-            title: 'overflow into menu',
+            title: 'overflow: selected tab collapsed into menu',
             styles: css`
                 :host {
-                    max-width: 200px;
+                    width: 240px;
+                    border: 1px solid red;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithIcons,
+                        router: mockRouter,
+                        currentRoute: selectedRoute,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'overflow: selected tab stays inline',
+            styles: css`
+                :host {
+                    width: 360px;
                     border: 1px solid red;
                 }
             `,
@@ -283,7 +356,7 @@ export const viraTabsBookPage = defineBookPage({
             styles: css`
                 :host {
                     font-size: 32px;
-                    max-width: 200px;
+                    width: 240px;
                     border: 1px solid red;
                 }
             `,
@@ -293,6 +366,47 @@ export const viraTabsBookPage = defineBookPage({
                         tabs: tabsWithIcons,
                         router: mockRouter,
                         currentRoute: selectedRoute,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'grouped tabs',
+            styles: css`
+                :host {
+                    width: 700px;
+                    border: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithGroups,
+                        router: mockRouter,
+                        currentRoute: selectedGroupedRoute,
+                        color: ViraColorVariant.Plain,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'grouped overflow (selected in a collapsed cluster)',
+            styles: css`
+                :host {
+                    width: 420px;
+                    border: 1px solid red;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithGroups,
+                        router: mockRouter,
+                        currentRoute: selectedGroupedRoute,
+                        color: ViraColorVariant.Plain,
                     })}></${ViraTabs}>
                 `;
             },
@@ -321,6 +435,11 @@ export const viraTabsBookPage = defineBookPage({
         defineExample({
             title: 'all combinations',
             styles: css`
+                :host {
+                    display: block;
+                    width: 760px;
+                }
+
                 .grid {
                     display: grid;
                     grid-template-columns: auto 1fr;
@@ -375,6 +494,12 @@ export const viraTabsBookPage = defineBookPage({
 
         defineExample({
             title: 'theme colors',
+            styles: css`
+                :host {
+                    display: block;
+                    width: 640px;
+                }
+            `,
             render() {
                 return html`
                     ${Object.values(ViraThemeColorName).map(

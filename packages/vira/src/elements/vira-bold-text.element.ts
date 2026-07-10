@@ -1,4 +1,5 @@
 import {css, html} from 'element-vir';
+import {viraFontCssVars} from '../styles/font.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
@@ -9,7 +10,7 @@ import {defineViraElement} from '../util/define-vira-element.js';
 export const ViraBoldText = defineViraElement<{bold: boolean; text: string}>()({
     tagName: 'vira-bold',
     cssVars: {
-        'vira-bold-bold-weight': 'bold',
+        'vira-bold-bold-weight': viraFontCssVars['vira-font-weight-bold'].value,
     },
     hostClasses: {
         'vira-bold-bold': ({inputs}) => inputs.bold,

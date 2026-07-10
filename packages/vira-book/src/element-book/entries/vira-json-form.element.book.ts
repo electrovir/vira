@@ -261,6 +261,67 @@ export const viraJsonFormBookPage = defineBookPage({
         });
 
         defineExample({
+            title: 'enum or free-form string',
+            styles: exampleStyles,
+            state() {
+                return {
+                    value: {
+                        color: 'red',
+                        size: 'custom-42',
+                    } as JsonValue,
+                };
+            },
+            render({state, updateState}) {
+                const stringOrEnum = {
+                    anyOf: [
+                        {
+                            enum: [
+                                'small',
+                                'medium',
+                                'large',
+                            ],
+                        },
+                        {
+                            type: 'string',
+                        },
+                    ],
+                } as const satisfies ViraJsonSchema;
+                const schema = {
+                    type: 'object',
+                    properties: {
+                        color: {
+                            anyOf: [
+                                {
+                                    enum: [
+                                        'red',
+                                        'green',
+                                        'blue',
+                                    ],
+                                },
+                                {
+                                    type: 'string',
+                                },
+                            ],
+                        },
+                        size: stringOrEnum,
+                    },
+                    required: [
+                        'color',
+                    ],
+                } as const satisfies ViraJsonSchema;
+
+                return renderExampleLayout({
+                    schema,
+                    value: state.value,
+                    onChange: (value) =>
+                        updateState({
+                            value,
+                        }),
+                });
+            },
+        });
+
+        defineExample({
             title: 'array with single-type items',
             styles: exampleStyles,
             state() {

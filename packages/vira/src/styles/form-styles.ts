@@ -1,6 +1,7 @@
 import {css, unsafeCSS} from 'element-vir';
 import {defineCssVars} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
+import {viraFontCssVars} from './font.js';
 import {viraColorPalette} from './vira-color-palette.js';
 import {viraTheme} from './vira-color-theme.js';
 
@@ -49,7 +50,7 @@ export const viraFormCssVars = defineCssVars({
 
     'vira-form-success-color': viraTheme.colors['vira-green-behind-bg-non-body'].background.value,
 
-    'vira-form-label-font-weight': 'bold',
+    'vira-form-label-font-weight': viraFontCssVars['vira-font-weight-bold'].value,
     'vira-form-small-text-size': '14px',
     'vira-form-medium-text-size': '16px',
     'vira-form-large-text-size': '22px',

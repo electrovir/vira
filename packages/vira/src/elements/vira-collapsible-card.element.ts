@@ -1,6 +1,7 @@
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, testId} from 'element-vir';
 import {ChevronUp16Icon} from '../icons/index.js';
+import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraCollapsibleWrapper} from './vira-collapsible-wrapper.element.js';
@@ -98,7 +99,7 @@ export const ViraCollapsibleCard = defineViraElement<
         }
 
         .card-header {
-            font-weight: bold;
+            font-weight: ${viraFontCssVars['vira-font-weight-bold'].value};
             display: flex;
             align-items: center;
             justify-content: space-between;

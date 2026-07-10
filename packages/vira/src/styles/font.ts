@@ -8,4 +8,8 @@ import {defineCssVars} from 'lit-css-vars';
  */
 export const viraFontCssVars = defineCssVars({
     'vira-monospace': 'monospace',
+
+    'vira-font-weight-normal': 'normal',
+    'vira-font-weight-medium': '500',
+    'vira-font-weight-bold': 'bold',
 });

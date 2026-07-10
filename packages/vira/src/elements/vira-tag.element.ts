@@ -223,7 +223,7 @@ export const ViraTag = defineViraElement<
         'vira-tag-border-radius': '1000px',
         'vira-tag-gap': '6px',
         'vira-tag-horizontal-padding': '12px',
-        'vira-tag-border-width': '2px',
+        'vira-tag-border-width': '1px',
     },
     events: {
         toggle: defineElementEvent<boolean>(),

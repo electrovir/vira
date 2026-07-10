@@ -15,6 +15,7 @@ import {
 import {CloseX24Icon} from '../icons/icon-svgs/24/close-x-24.icon.js';
 import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
+import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
 import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../styles/index.js';
@@ -232,7 +233,7 @@ export const ViraInput = defineViraElement<
             }
 
             .suffix {
-                font-weight: bold;
+                font-weight: ${viraFontCssVars['vira-font-weight-bold'].value};
                 ${noUserSelect};
             }
 

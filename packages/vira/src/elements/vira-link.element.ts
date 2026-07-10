@@ -12,7 +12,7 @@ import {
 import {type SpaRoute, type SpaRouter} from 'spa-router-vir';
 import {type RequireExactlyOne} from 'type-fest';
 import {listenTo} from 'typed-event-target';
-import {viraFormCssVars} from '../styles/form-styles.js';
+import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 
 /**
@@ -88,12 +88,12 @@ export const ViraLink = defineViraElement<
         ${hostClasses['vira-link-link-styles'].selector} {
             &:hover a,
             & a:hover {
-                color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+                color: ${viraTheme.colors['vira-blue-foreground-non-body'].foreground.value};
             }
 
             &:active a,
             & a:active {
-                color: ${viraFormCssVars['vira-form-accent-primary-active-color'].value};
+                color: ${viraTheme.colors['vira-blue-foreground-body'].foreground.value};
             }
         }
     `,

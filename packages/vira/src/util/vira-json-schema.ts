@@ -438,7 +438,7 @@ export function getAdditionalPropertiesSchema(
  *
  * @category Internal
  */
-export function getEnumValues(
+export function getSchemaEnumValues(
     schema: ViraJsonSchema | undefined,
     context: SchemaResolveContext,
 ): ReadonlyArray<JsonValue> | undefined {
@@ -459,6 +459,49 @@ export function getEnumValues(
         }
     }
     return collected.length > 0 ? collected : undefined;
+}
+
+/**
+ * Collects the string `enum`/`const` values declared by any branch of a schema, ignoring branches
+ * that declare no enum/const. Unlike {@link getSchemaEnumValues}, a schema that mixes an enum branch
+ * with a free-form branch still yields the enum values (rather than bailing out). Non-string enum
+ * entries are excluded.
+ *
+ * @category Internal
+ */
+export function getStringEnumValues(
+    schema: ViraJsonSchema | undefined,
+    context: SchemaResolveContext,
+): ReadonlyArray<string> {
+    const branches = expandSchemaBranches(schema, context);
+    const values = branches.flatMap((branch): ReadonlyArray<string> => {
+        if ('enum' in branch && check.isArray(branch.enum)) {
+            return branch.enum.filter(check.isString);
+        } else if ('const' in branch && check.isString(branch.const)) {
+            return [branch.const];
+        }
+        return [];
+    });
+    return removeDuplicates(values);
+}
+
+/**
+ * Returns whether the schema permits an arbitrary (non-enum, non-const) string in any of its
+ * branches. Used alongside {@link getStringEnumValues} to detect fields that accept both a fixed set
+ * of enum options and free-form text.
+ *
+ * @category Internal
+ */
+export function allowsFreeformString(
+    schema: ViraJsonSchema | undefined,
+    context: SchemaResolveContext,
+): boolean {
+    return expandSchemaBranches(schema, context).some((branch) => {
+        if ('enum' in branch || 'const' in branch) {
+            return false;
+        }
+        return getAllowedJsonTypes(branch, context).includes(ViraJsonType.String);
+    });
 }
 
 /**

@@ -7,6 +7,7 @@ import {
     ViraColorVariant,
     viraColorVariants,
     viraEmphasisVariants,
+    viraFontCssVars,
     viraSizeVariants,
     ViraThemeColorName,
 } from 'vira';
@@ -72,7 +73,7 @@ const tableStyles = css`
     }
 
     th {
-        font-weight: normal;
+        font-weight: ${viraFontCssVars['vira-font-weight-normal'].value};
     }
 `;
 

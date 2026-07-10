@@ -4,6 +4,7 @@ import {classMap, css, html, listen} from 'element-vir';
 import {
     viraColorVariants,
     viraEmphasisVariants,
+    viraFontCssVars,
     viraSizeVariants,
     ViraTag,
     ViraThemeColorName,
@@ -60,7 +61,7 @@ export const viraTagBookPage = defineBookPage({
                     }
 
                     th {
-                        font-weight: normal;
+                        font-weight: ${viraFontCssVars['vira-font-weight-normal'].value};
                     }
 
                     .cancelled {

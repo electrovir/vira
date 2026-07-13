@@ -1,3 +1,4 @@
+import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {
     type FullDate,
@@ -20,12 +21,10 @@ export const ViraAbsoluteTime = defineViraElement<
     {
         time: Readonly<FullDate>;
     } & PartialWithUndefined<{
-        /**
-         * Show only the date part (`Jun 3, 2026`), omitting the time of day and timezone. Use this
-         * for values that are conceptually dates (e.g. captured via a date-only input), where the
-         * time of day would be meaningless noise.
-         */
-        dateOnly: boolean;
+        /** Show only the date part (`Jun 3, 2026`), omitting the time of day and timezone. */
+        showDateOnly: boolean;
+        /** Show only the time part (`14:30 PDT`), omitting the date. */
+        showTimeOnly: boolean;
         /**
          * Timezone the value is displayed in. Defaults to the user's timezone. Set this for values
          * that are conceptually anchored to a specific timezone (e.g. a date-only value stored at
@@ -43,7 +42,8 @@ export const ViraAbsoluteTime = defineViraElement<
     `,
     render({inputs}) {
         return formatAbsoluteTime(inputs.time, {
-            dateOnly: inputs.dateOnly,
+            showDateOnly: inputs.showDateOnly,
+            showTimeOnly: inputs.showTimeOnly,
             timezone: inputs.timezone,
         });
     },
@@ -58,15 +58,23 @@ export function formatAbsoluteTime(
     time: Readonly<FullDate>,
     options?: Readonly<
         PartialWithUndefined<{
-            dateOnly: boolean;
+            showDateOnly: boolean;
+            showTimeOnly: boolean;
             timezone: string;
         }>
     >,
 ) {
+    const dateFormat = [
+        !options?.showTimeOnly && 'MMM d, yyyy',
+        !options?.showDateOnly && 'HH:mm ZZZZ',
+    ]
+        .filter(check.isTruthy)
+        .join(' ');
+
     return toFormattedString(
         options?.timezone
             ? createFullDate(time, options.timezone)
             : createFullDateInUserTimezone(time),
-        options?.dateOnly ? 'MMM d, yyyy' : 'MMM d, yyyy HH:mm ZZZZ',
+        dateFormat,
     );
 }

@@ -38,7 +38,19 @@ export const viraAbsoluteTimeBookPage = defineBookPage({
                 return html`
                     <${ViraAbsoluteTime.assign({
                         time: getNowInUtcTimezone(),
-                        dateOnly: true,
+                        showDateOnly: true,
+                    })}></${ViraAbsoluteTime}>
+                `;
+            },
+        });
+
+        defineExample({
+            title: 'Time only',
+            render() {
+                return html`
+                    <${ViraAbsoluteTime.assign({
+                        time: getNowInUtcTimezone(),
+                        showTimeOnly: true,
                     })}></${ViraAbsoluteTime}>
                 `;
             },
@@ -50,7 +62,7 @@ export const viraAbsoluteTimeBookPage = defineBookPage({
                 return html`
                     <${ViraAbsoluteTime.assign({
                         time: getNowInUtcTimezone(),
-                        dateOnly: true,
+                        showDateOnly: true,
                         timezone: utcTimezone,
                     })}></${ViraAbsoluteTime}>
                 `;

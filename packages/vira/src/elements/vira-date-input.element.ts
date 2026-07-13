@@ -42,6 +42,10 @@ export const ViraDateInput = defineViraElement<
         isReadonly: boolean;
         /** Timezone used to interpret the selected date. Defaults to the user's timezone. */
         timezone: string;
+        /** Only show the date part of the selected date when in readonly mode. */
+        showDateOnly: boolean;
+        /** Only show the time part of the selected date when in readonly mode. */
+        showTimeOnly: boolean;
     }>
 >()({
     tagName: 'vira-date-input',
@@ -107,7 +111,8 @@ export const ViraDateInput = defineViraElement<
                 ? html`
                       <${ViraAbsoluteTime.assign({
                           time: inputs.value,
-                          dateOnly: true,
+                          showDateOnly: inputs.showDateOnly,
+                          showTimeOnly: inputs.showTimeOnly,
                           timezone: inputs.timezone,
                       })}></${ViraAbsoluteTime}>
                   `

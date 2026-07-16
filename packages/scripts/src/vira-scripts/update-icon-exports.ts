@@ -23,7 +23,10 @@ function generateIconNameFromFilePath(filePath: string): string {
     })}Icon`;
 }
 
-function generateTsImport(iconFilePath: string, iconName: string): string {
+function generateTsImport({
+    iconFilePath,
+    iconName,
+}: Readonly<{iconFilePath: string; iconName: string}>): string {
     const relativePath = relative(dirname(iconIndexPath), iconFilePath).replace(/\.ts$/, '');
     return `import {${iconName}} from './${toPosixPath(relativePath)}';`;
 }
@@ -39,7 +42,10 @@ function generateIconImportsAndExports(iconPaths: ReadonlyArray<string>): string
 
             return {
                 iconName,
-                importString: generateTsImport(iconPath, iconName),
+                importString: generateTsImport({
+                    iconFilePath: iconPath,
+                    iconName,
+                }),
             };
         })
         .sort();
@@ -85,12 +91,12 @@ export const updateIconExports: UpdateExportsConfig = {
             .filter((relativePath) => relativePath.endsWith('.icon.ts'))
             .map((relativePath) => join(iconsDir, relativePath));
 
-        await writeOrCheckGeneratedFile(
-            iconIndexPath,
-            generateIconImportsAndExports(allIconPaths),
-            inputs,
-            import.meta,
-        );
+        await writeOrCheckGeneratedFile({
+            fileToWriteTo: iconIndexPath,
+            codeToWrite: generateIconImportsAndExports(allIconPaths),
+            args: inputs,
+            importMeta: import.meta,
+        });
     },
 };
 

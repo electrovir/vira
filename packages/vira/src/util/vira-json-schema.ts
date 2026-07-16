@@ -583,17 +583,29 @@ export function validateAgainstSchema(
     }
     const context = createResolveContext(schema);
     const errors: string[] = [];
-    validateRecursive(value, schema, [], context, errors);
+    validateRecursive({
+        value,
+        schema,
+        path: [],
+        context,
+        errors,
+    });
     return errors;
 }
 
-function validateRecursive(
-    value: JsonValue,
-    schema: ViraJsonSchema | undefined,
-    path: ViraJsonPath,
-    context: SchemaResolveContext,
-    errors: string[],
-): void {
+function validateRecursive({
+    value,
+    schema,
+    path,
+    context,
+    errors,
+}: Readonly<{
+    value: JsonValue;
+    schema: ViraJsonSchema | undefined;
+    path: ViraJsonPath;
+    context: SchemaResolveContext;
+    errors: string[];
+}>): void {
     const branches = expandSchemaBranches(schema, context);
     if (branches.length === 0) {
         return;
@@ -601,7 +613,13 @@ function validateRecursive(
     const branchErrorSets: string[][] = [];
     for (const branch of branches) {
         const branchErrors: string[] = [];
-        validateBranch(value, branch, path, context, branchErrors);
+        validateBranch({
+            value,
+            branch,
+            path,
+            context,
+            errors: branchErrors,
+        });
         if (branchErrors.length === 0) {
             return;
         }
@@ -616,13 +634,19 @@ function validateRecursive(
     }
 }
 
-function validateBranch(
-    value: JsonValue,
-    branch: ViraJsonSchemaObject,
-    path: ViraJsonPath,
-    context: SchemaResolveContext,
-    errors: string[],
-): void {
+function validateBranch({
+    value,
+    branch,
+    path,
+    context,
+    errors,
+}: Readonly<{
+    value: JsonValue;
+    branch: ViraJsonSchemaObject;
+    path: ViraJsonPath;
+    context: SchemaResolveContext;
+    errors: string[];
+}>): void {
     const allowedTypes = getAllowedJsonTypes(branch, context);
     const concreteType = getJsonType(value);
     if (allowedTypes.length > 0) {
@@ -639,12 +663,23 @@ function validateBranch(
             return;
         }
     }
-    if ('const' in branch && !deepEqualsJson(value, branch.const as JsonValue)) {
+    if (
+        'const' in branch &&
+        !deepEqualsJson({
+            a: value,
+            b: branch.const as JsonValue,
+        })
+    ) {
         errors.push(`${formatPathLabel(path)} must equal const value.`);
         return;
     }
     if ('enum' in branch && check.isArray(branch.enum)) {
-        const matched = branch.enum.some((entry) => deepEqualsJson(value, entry as JsonValue));
+        const matched = branch.enum.some((entry) =>
+            deepEqualsJson({
+                a: value,
+                b: entry as JsonValue,
+            }),
+        );
         if (!matched) {
             errors.push(`${formatPathLabel(path)} must be one of the enum values.`);
             return;
@@ -669,13 +704,25 @@ function validateBranch(
             ];
             const propSchema = branch.properties?.[propKey];
             if (propSchema !== undefined) {
-                validateRecursive(propValue, propSchema, propPath, context, errors);
+                validateRecursive({
+                    value: propValue,
+                    schema: propSchema,
+                    path: propPath,
+                    context,
+                    errors,
+                });
             } else if (additional === false) {
                 errors.push(
                     `${formatPathLabel(propPath)} is not allowed (additionalProperties is false).`,
                 );
             } else if (check.isObject(additional)) {
-                validateRecursive(propValue, additional, propPath, context, errors);
+                validateRecursive({
+                    value: propValue,
+                    schema: additional,
+                    path: propPath,
+                    context,
+                    errors,
+                });
             } else if (additional === undefined && definedKeys.size > 0) {
                 continue;
             }
@@ -690,27 +737,52 @@ function validateBranch(
             if (check.isArray(items)) {
                 const tupleSchema = items[index] ?? branch.additionalItems;
                 if (tupleSchema !== undefined) {
-                    validateRecursive(item, tupleSchema, itemPath, context, errors);
+                    validateRecursive({
+                        value: item,
+                        schema: tupleSchema,
+                        path: itemPath,
+                        context,
+                        errors,
+                    });
                 }
             } else if (items !== undefined) {
-                validateRecursive(item, items, itemPath, context, errors);
+                validateRecursive({
+                    value: item,
+                    schema: items,
+                    path: itemPath,
+                    context,
+                    errors,
+                });
             }
         });
     }
 }
 
-function deepEqualsJson(a: JsonValue, b: JsonValue): boolean {
+function deepEqualsJson({a, b}: Readonly<{a: JsonValue; b: JsonValue}>): boolean {
     if (a === b) {
         return true;
     } else if (check.isArray(a) && check.isArray(b)) {
-        return a.length === b.length && a.every((entry, i) => deepEqualsJson(entry, b[i] ?? null));
+        return (
+            a.length === b.length &&
+            a.every((entry, i) =>
+                deepEqualsJson({
+                    a: entry,
+                    b: b[i] ?? null,
+                }),
+            )
+        );
     } else if (check.isObject(a) && check.isObject(b)) {
         const aKeys = Object.keys(a);
         const bKeys = Object.keys(b);
         if (aKeys.length !== bKeys.length) {
             return false;
         }
-        return aKeys.every((key) => deepEqualsJson(a[key] ?? null, b[key] ?? null));
+        return aKeys.every((key) =>
+            deepEqualsJson({
+                a: a[key] ?? null,
+                b: b[key] ?? null,
+            }),
+        );
     }
     return false;
 }
@@ -732,11 +804,11 @@ export function pathToKey(path: ViraJsonPath): string {
  *
  * @category Internal
  */
-export function setValueAtPath(
-    root: JsonValue,
-    path: ViraJsonPath,
-    newValue: JsonValue,
-): JsonValue {
+export function setValueAtPath({
+    root,
+    path,
+    newValue,
+}: Readonly<{root: JsonValue; path: ViraJsonPath; newValue: JsonValue}>): JsonValue {
     if (path.length === 0) {
         return newValue;
     }
@@ -745,7 +817,11 @@ export function setValueAtPath(
     if (typeof head === 'number') {
         const array = check.isArray(root) ? root : [];
         const existing = array[head] ?? null;
-        const replaced = setValueAtPath(existing, rest, newValue);
+        const replaced = setValueAtPath({
+            root: existing,
+            path: rest,
+            newValue,
+        });
         if (head >= array.length) {
             const extended: JsonValue[] = [...array];
             while (extended.length < head) {
@@ -760,7 +836,11 @@ export function setValueAtPath(
         const existing = object[head] ?? null;
         return {
             ...object,
-            [head]: setValueAtPath(existing, rest, newValue),
+            [head]: setValueAtPath({
+                root: existing,
+                path: rest,
+                newValue,
+            }),
         };
     }
 }

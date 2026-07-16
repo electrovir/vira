@@ -84,7 +84,7 @@ describe(ViraAbsoluteTime.tagName, () => {
             timezone: utcTimezone,
         });
 
-        assert.strictEquals(instance.shadowRoot.textContent?.trim(), 'Jun 3, 2026 14:30 UTC');
+        assert.strictEquals(instance.shadowRoot.textContent.trim(), 'Jun 3, 2026 14:30 UTC');
     });
 
     it('renders the date only', async () => {
@@ -94,7 +94,7 @@ describe(ViraAbsoluteTime.tagName, () => {
             timezone: utcTimezone,
         });
 
-        assert.strictEquals(instance.shadowRoot.textContent?.trim(), 'Jun 3, 2026');
+        assert.strictEquals(instance.shadowRoot.textContent.trim(), 'Jun 3, 2026');
     });
 
     it('renders the time only', async () => {
@@ -104,6 +104,6 @@ describe(ViraAbsoluteTime.tagName, () => {
             timezone: utcTimezone,
         });
 
-        assert.strictEquals(instance.shadowRoot.textContent?.trim(), '14:30 UTC');
+        assert.strictEquals(instance.shadowRoot.textContent.trim(), '14:30 UTC');
     });
 });

@@ -251,7 +251,13 @@ export const ViraJsonForm = defineViraElement<
         }
 
         function emitReplaceAt(path: ViraJsonPath, newValue: JsonValue) {
-            emitRoot(setValueAtPath(inputs.value, path, newValue));
+            emitRoot(
+                setValueAtPath({
+                    root: inputs.value,
+                    path,
+                    newValue,
+                }),
+            );
         }
 
         function emitDeleteAt(path: ViraJsonPath) {
@@ -278,7 +284,7 @@ export const ViraJsonForm = defineViraElement<
             });
         }
 
-        function setPendingKey(pathKey: string, key: string) {
+        function setPendingKey({pathKey, key}: Readonly<{pathKey: string; key: string}>) {
             updateState({
                 pendingKeys: {
                     ...state.pendingKeys,
@@ -301,11 +307,15 @@ export const ViraJsonForm = defineViraElement<
             });
         }
 
-        function getStringMode(
-            pathKey: string,
-            value: string,
-            enumValues: ReadonlyArray<string>,
-        ): ViraJsonStringMode {
+        function getStringMode({
+            pathKey,
+            value,
+            enumValues,
+        }: Readonly<{
+            pathKey: string;
+            value: string;
+            enumValues: ReadonlyArray<string>;
+        }>): ViraJsonStringMode {
             const stored = state.stringModes[pathKey];
             if (stored) {
                 return stored;
@@ -752,7 +762,10 @@ export const ViraJsonForm = defineViraElement<
                                           placeholder: 'new field name',
                                       })}
                                           ${listen(ViraInput.events.valueChange, (event) => {
-                                              setPendingKey(pathKey, event.detail);
+                                              setPendingKey({
+                                                  pathKey,
+                                                  key: event.detail,
+                                              });
                                           })}
                                       ></${ViraInput}>
                                       ${renderObjectAddControl({
@@ -913,7 +926,11 @@ export const ViraJsonForm = defineViraElement<
             enumValues: ReadonlyArray<string>,
         ): HTMLTemplateResult {
             const pathKey = pathToKey(path);
-            const mode = getStringMode(pathKey, value, enumValues);
+            const mode = getStringMode({
+                pathKey,
+                value,
+                enumValues,
+            });
 
             const editor =
                 mode === ViraJsonStringMode.Options

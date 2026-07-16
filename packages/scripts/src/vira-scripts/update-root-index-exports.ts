@@ -21,15 +21,15 @@ export const updateRootIndexExports: UpdateExportsConfig = {
             return tsFilePath.endsWith('index.ts');
         });
 
-        await writeOrCheckGeneratedFile(
-            rootIndexFilePath,
-            generateExportsFromFilePaths({
+        await writeOrCheckGeneratedFile({
+            fileToWriteTo: rootIndexFilePath,
+            codeToWrite: generateExportsFromFilePaths({
                 filePaths: indexTsFilePaths.map((indexTsFile) => dirname(indexTsFile)),
                 relativeDir: viraSrcDir,
             }),
             args,
-            import.meta,
-        );
+            importMeta: import.meta,
+        });
     },
 };
 

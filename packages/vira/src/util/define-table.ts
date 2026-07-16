@@ -142,13 +142,20 @@ export function defineTable<
     const Orientation extends ViraTableOrientation = ViraTableOrientation.Vertical,
 >(
     /** The order of these keys determines the order that they render in. */
-    headers: Readonly<Headers>,
-    originalData: OriginalData,
-    dataMap: (
-        entry: ArrayElement<OriginalData>,
-        entryIndex: number,
-    ) => ViraTableEntry<Headers> | undefined,
-    options: ViraTableOptions<Orientation> = {},
+    {
+        headers,
+        originalData,
+        dataMap,
+        options = {},
+    }: Readonly<{
+        headers: Readonly<Headers>;
+        originalData: OriginalData;
+        dataMap: (
+            entry: ArrayElement<OriginalData>,
+            entryIndex: number,
+        ) => ViraTableEntry<Headers> | undefined;
+        options?: ViraTableOptions<Orientation>;
+    }>,
 ): ViraTable<Headers, Orientation, OriginalData> {
     const mappedData = originalData.map((dataRow, rowIndex) => {
         return {

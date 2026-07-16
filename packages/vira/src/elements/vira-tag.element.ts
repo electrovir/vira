@@ -298,11 +298,15 @@ export const ViraTag = defineViraElement<
         ),
     },
     styles: ({cssVars, hostClasses}) => {
-        function buildVariantCssRule(
-            variantSelector: CSSResult,
-            emphasisSelector: CSSResult,
-            colors: TagColorStateColors,
-        ): CSSResult {
+        function buildVariantCssRule({
+            variantSelector,
+            emphasisSelector,
+            colors,
+        }: Readonly<{
+            variantSelector: CSSResult;
+            emphasisSelector: CSSResult;
+            colors: TagColorStateColors;
+        }>): CSSResult {
             return css`
                 ${variantSelector}${emphasisSelector} {
                     ${cssVars['vira-tag-background-color'].name}: ${colors.idle.backgroundColor
@@ -333,23 +337,31 @@ export const ViraTag = defineViraElement<
                         const colorKey = viraColorVariantToHostClassKey[colorVariant];
                         const colors = buildThemedTagColors(colorKey)[emphasis];
                         const variantSelector = hostClasses[`vira-tag-color-${colorKey}`].selector;
-                        return buildVariantCssRule(variantSelector, emphasisSelector, colors);
+                        return buildVariantCssRule({
+                            variantSelector,
+                            emphasisSelector,
+                            colors,
+                        });
                     },
                 );
-                const plainStyle = buildVariantCssRule(
-                    hostClasses['vira-tag-color-plain'].selector,
+                const plainStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-tag-color-plain'].selector,
                     emphasisSelector,
-                    plainTagColors[emphasis],
-                );
-                const neutralStyle = buildVariantCssRule(
-                    hostClasses['vira-tag-color-neutral'].selector,
+                    colors: plainTagColors[emphasis],
+                });
+                const neutralStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-tag-color-neutral'].selector,
                     emphasisSelector,
-                    buildThemedTagColors(ViraThemeColorName.grey)[emphasis],
-                );
+                    colors: buildThemedTagColors(ViraThemeColorName.grey)[emphasis],
+                });
                 const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                     const colors = buildThemedTagColors(colorName)[emphasis];
                     const variantSelector = hostClasses[`vira-tag-color-${colorName}`].selector;
-                    return buildVariantCssRule(variantSelector, emphasisSelector, colors);
+                    return buildVariantCssRule({
+                        variantSelector,
+                        emphasisSelector,
+                        colors,
+                    });
                 });
                 return [
                     ...themedStyles,

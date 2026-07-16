@@ -16,7 +16,11 @@ const defaultLucideAttributes: Readonly<Record<string, string>> = {
     'stroke-width': String(viraIconCssVars['vira-icon-stroke-width'].value),
 };
 
-function setSvgAttribute(svgString: string, attributeName: string, value: string): string {
+function setSvgAttribute({
+    svgString,
+    attributeName,
+    value,
+}: Readonly<{svgString: string; attributeName: string; value: string}>): string {
     const escapedName = attributeName.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
     const regex = new RegExp(String.raw`(\s)${escapedName}="[^"]*"`);
 
@@ -36,7 +40,12 @@ function applySvgAttributes(
                 key,
                 value,
             ],
-        ) => setSvgAttribute(result, key, value),
+        ) =>
+            setSvgAttribute({
+                svgString: result,
+                attributeName: key,
+                value,
+            }),
         svgString,
     );
 }

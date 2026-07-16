@@ -63,12 +63,12 @@ export const updateIndexExports: UpdateExportsConfig = {
                     .flat()
                     .filter(check.isTruthy);
 
-                await writeOrCheckGeneratedFile(
-                    indexFilePath,
-                    exportLines.join('\n'),
+                await writeOrCheckGeneratedFile({
+                    fileToWriteTo: indexFilePath,
+                    codeToWrite: exportLines.join('\n'),
                     args,
-                    import.meta,
-                );
+                    importMeta: import.meta,
+                });
             }),
         );
 

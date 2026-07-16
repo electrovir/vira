@@ -50,8 +50,8 @@ describe('ViraTable', () => {
 
 describe(defineTable.name, () => {
     it('allows normal header keys', () => {
-        defineTable(
-            [
+        const {rows} = defineTable({
+            headers: [
                 {
                     key: 'a',
                 },
@@ -59,22 +59,24 @@ describe(defineTable.name, () => {
                     key: 'b',
                 },
             ],
-            [
+            originalData: [
                 1,
                 2,
                 3,
             ],
-            (entry) => {
+            dataMap: (entry) => {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
                 };
             },
-        );
+        });
+
+        assert.isLengthExactly(rows, 3);
     });
     it('has proper types', () => {
-        const {headerRow, orientation, rows} = defineTable(
-            [
+        const {headerRow, orientation, rows} = defineTable({
+            headers: [
                 {
                     key: 'a',
                 },
@@ -82,18 +84,18 @@ describe(defineTable.name, () => {
                     key: 'b',
                 },
             ],
-            [
+            originalData: [
                 1,
                 2,
                 3,
             ],
-            (entry) => {
+            dataMap: (entry) => {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
                 };
             },
-        );
+        });
 
         assert.tsType(orientation).equals<ViraTableOrientation.Vertical>();
         assert.strictEquals(orientation, ViraTableOrientation.Vertical);
@@ -128,8 +130,8 @@ describe(defineTable.name, () => {
         });
     });
     it('requires all header keys', () => {
-        defineTable(
-            [
+        defineTable({
+            headers: [
                 {
                     key: 'a',
                 },
@@ -137,22 +139,22 @@ describe(defineTable.name, () => {
                     key: 'b',
                 },
             ],
-            [
+            originalData: [
                 1,
                 2,
                 3,
             ],
             // @ts-expect-error: missing property in return object
-            (entry) => {
+            dataMap: (entry) => {
                 return {
                     a: `a${entry}`,
                 };
             },
-        );
+        });
     });
     it('allows extra header keys', () => {
-        defineTable(
-            [
+        const {rows} = defineTable({
+            headers: [
                 {
                     key: 'a',
                 },
@@ -160,26 +162,28 @@ describe(defineTable.name, () => {
                     key: 'b',
                 },
             ],
-            [
+            originalData: [
                 1,
                 2,
                 3,
             ],
-            (entry) => {
+            dataMap: (entry) => {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
                     c: `c${entry}`,
                 };
             },
-        );
+        });
+
+        assert.isLengthExactly(rows, 3);
     });
 
     itCases(defineTable, [
         {
             it: 'creates a vertical table',
-            inputs: [
-                [
+            input: {
+                headers: [
                     {
                         key: 'a',
                     },
@@ -188,17 +192,17 @@ describe(defineTable.name, () => {
                         content: 'b-content',
                     },
                 ],
-                [
+                originalData: [
                     1,
                     2,
                 ],
-                (entry) => {
+                dataMap: (entry) => {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
                     };
                 },
-            ],
+            },
             expect: {
                 orientation: ViraTableOrientation.Vertical,
                 headerRow: [
@@ -249,8 +253,8 @@ describe(defineTable.name, () => {
         },
         {
             it: 'hides vertical headers',
-            inputs: [
-                [
+            input: {
+                headers: [
                     {
                         key: 'a',
                     },
@@ -259,20 +263,20 @@ describe(defineTable.name, () => {
                         content: 'b-content',
                     },
                 ],
-                [
+                originalData: [
                     1,
                     2,
                 ],
-                (entry) => {
+                dataMap: (entry) => {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
                     };
                 },
-                {
+                options: {
                     hideHeaders: true,
                 },
-            ],
+            },
             expect: {
                 orientation: ViraTableOrientation.Vertical,
                 headerRow: [],
@@ -312,8 +316,8 @@ describe(defineTable.name, () => {
         },
         {
             it: 'creates a horizontal table',
-            inputs: [
-                [
+            input: {
+                headers: [
                     {
                         key: 'a',
                     },
@@ -322,20 +326,20 @@ describe(defineTable.name, () => {
                         content: 'b-content',
                     },
                 ],
-                [
+                originalData: [
                     1,
                     2,
                 ],
-                (entry) => {
+                dataMap: (entry) => {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
                     };
                 },
-                {
+                options: {
                     orientation: ViraTableOrientation.Horizontal,
                 },
-            ],
+            },
             expect: {
                 orientation: ViraTableOrientation.Horizontal,
                 headerRow: undefined,
@@ -385,8 +389,8 @@ describe(defineTable.name, () => {
         },
         {
             it: 'hides horizontal headers',
-            inputs: [
-                [
+            input: {
+                headers: [
                     {
                         key: 'a',
                     },
@@ -395,21 +399,21 @@ describe(defineTable.name, () => {
                         content: 'b-content',
                     },
                 ],
-                [
+                originalData: [
                     1,
                     2,
                 ],
-                (entry) => {
+                dataMap: (entry) => {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
                     };
                 },
-                {
+                options: {
                     orientation: ViraTableOrientation.Horizontal,
                     hideHeaders: true,
                 },
-            ],
+            },
             expect: {
                 orientation: ViraTableOrientation.Horizontal,
                 headerRow: undefined,

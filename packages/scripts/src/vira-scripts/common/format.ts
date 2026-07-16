@@ -5,7 +5,10 @@ import * as importedRepoConfig from '../../../../../prettier.config.mjs';
 
 const repoConfig: PrettierOptions = importedRepoConfig as PrettierOptions;
 
-export async function formatCode(text: string, filePath: string): Promise<string> {
+export async function formatCode({
+    text,
+    filePath,
+}: Readonly<{text: string; filePath: string}>): Promise<string> {
     return await prettierFormat(text, {
         ...repoConfig,
         filepath: filePath,

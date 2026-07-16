@@ -175,7 +175,7 @@ export type PopUpManagerEvents = HidePopUpEvent | NavSelectEvent;
  * @category PopUp
  */
 export class PopUpManager {
-    private listenTarget = new ListenTarget<PopUpManagerEvents>();
+    protected listenTarget = new ListenTarget<PopUpManagerEvents>();
     public options: PopUpManagerOptions = {
         minDownSpace: 200,
         minRightSpace: 400,
@@ -183,8 +183,9 @@ export class PopUpManager {
         horizontalDiffThreshold: 100,
         supportNavigation: true,
     };
-    private cleanupCallbacks: (() => void)[] = [];
-    private lastRootElement: HTMLElement | undefined;
+    /** Callbacks that remove the global listeners attached while a pop up is shown. */
+    protected cleanupCallbacks: (() => void)[] = [];
+    protected lastRootElement: HTMLElement | undefined;
 
     constructor(
         public readonly navController: NavController,
@@ -196,7 +197,11 @@ export class PopUpManager {
         };
     }
 
-    private attachGlobalListeners() {
+    /**
+     * Attaches the global listeners (page activation, navigation, mousedown, and keydown) that
+     * control the currently shown pop up.
+     */
+    protected attachGlobalListeners() {
         this.cleanupCallbacks = [
             listenToPageActivation(false, (isPageActive) => {
                 if (!isPageActive) {

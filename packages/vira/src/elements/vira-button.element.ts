@@ -283,11 +283,15 @@ export const ViraButton = defineViraElement<
         'vira-button-border-radius': viraFormCssVars['vira-form-radius'].value,
     },
     styles: ({hostClasses, cssVars}) => {
-        function buildVariantCssRule(
-            variantSelector: CSSResult,
-            emphasisSelector: CSSResult,
-            colors: ButtonColorStateColors,
-        ): CSSResult {
+        function buildVariantCssRule({
+            variantSelector,
+            emphasisSelector,
+            colors,
+        }: Readonly<{
+            variantSelector: CSSResult;
+            emphasisSelector: CSSResult;
+            colors: ButtonColorStateColors;
+        }>): CSSResult {
             return css`
                 ${variantSelector}${emphasisSelector} {
                     ${cssVars['vira-button-background-color'].name}: ${colors.idle.backgroundColor
@@ -321,23 +325,31 @@ export const ViraButton = defineViraElement<
                         const colors = buildThemedButtonColors(colorKey)[emphasis];
                         const variantSelector =
                             hostClasses[`vira-button-color-${colorKey}`].selector;
-                        return buildVariantCssRule(variantSelector, emphasisSelector, colors);
+                        return buildVariantCssRule({
+                            variantSelector,
+                            emphasisSelector,
+                            colors,
+                        });
                     },
                 );
-                const plainStyle = buildVariantCssRule(
-                    hostClasses['vira-button-color-plain'].selector,
+                const plainStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-button-color-plain'].selector,
                     emphasisSelector,
-                    plainButtonColors[emphasis],
-                );
-                const neutralStyle = buildVariantCssRule(
-                    hostClasses['vira-button-color-neutral'].selector,
+                    colors: plainButtonColors[emphasis],
+                });
+                const neutralStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-button-color-neutral'].selector,
                     emphasisSelector,
-                    neutralButtonColors[emphasis],
-                );
+                    colors: neutralButtonColors[emphasis],
+                });
                 const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                     const colors = buildThemedButtonColors(colorName)[emphasis];
                     const variantSelector = hostClasses[`vira-button-color-${colorName}`].selector;
-                    return buildVariantCssRule(variantSelector, emphasisSelector, colors);
+                    return buildVariantCssRule({
+                        variantSelector,
+                        emphasisSelector,
+                        colors,
+                    });
                 });
                 return [
                     ...themedStyles,

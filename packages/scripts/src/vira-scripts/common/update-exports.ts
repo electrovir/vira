@@ -37,18 +37,26 @@ export type UpdateExportsConfig = {
     executor: (inputs: UpdateExportsArgs) => Promise<void>;
 };
 
-export async function writeOrCheckGeneratedFile(
-    fileToWriteTo: string,
-    codeToWrite: string,
-    args: UpdateExportsArgs,
-    importMeta: ImportMeta,
-): Promise<void> {
+export async function writeOrCheckGeneratedFile({
+    fileToWriteTo,
+    codeToWrite,
+    args,
+    importMeta,
+}: Readonly<{
+    fileToWriteTo: string;
+    codeToWrite: string;
+    args: UpdateExportsArgs;
+    importMeta: ImportMeta;
+}>): Promise<void> {
     const scriptName = importMeta.filename;
 
     const codeWithComment =
         generateAutomaticallyUpdatedByComment(basename(scriptName)) + '\n\n' + codeToWrite;
 
-    const formattedCode = await formatCode(codeWithComment, fileToWriteTo);
+    const formattedCode = await formatCode({
+        text: codeWithComment,
+        filePath: fileToWriteTo,
+    });
     const relativeWriteToFile = relative(monoRepoRootDir, fileToWriteTo);
     const currentOutputContents: string = existsSync(fileToWriteTo)
         ? (await readFile(fileToWriteTo)).toString()

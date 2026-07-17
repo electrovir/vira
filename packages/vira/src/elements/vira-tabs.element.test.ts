@@ -322,6 +322,32 @@ describe(ViraTabs.tagName, () => {
         assert.strictEquals(visibleContainer.querySelector(ViraButton.tagName), null);
     });
 
+    it('keeps the measurement mirror invisible even when it holds a selected tab', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraTabs.assign({
+                tabs: mockTabs,
+                router: mockRouter,
+                currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+            })}></${ViraTabs}>
+        `);
+
+        assert.instanceOf(fixture, ViraTabs);
+
+        const measureMirror = assertWrap.instanceOf(
+            fixture.shadowRoot.querySelector('.tabs-container.tabs-measure'),
+            HTMLElement,
+        );
+
+        /**
+         * The mirror must stay laid out so overflow widths can be measured, but it must never
+         * paint: a selected tab's ViraBoldText re-sets `visibility: visible` on its own label,
+         * which overrides the mirror's inherited `visibility: hidden`. `opacity: 0` (which a
+         * descendant cannot override) is what actually keeps the mirror invisible.
+         */
+        assert.isAbove(measureMirror.getBoundingClientRect().width, 0);
+        assert.strictEquals(globalThis.getComputedStyle(measureMirror).opacity, '0');
+    });
+
     it('never allows tab label text to wrap', async () => {
         const fixture = await testWeb.render(html`
             <${ViraTabs.assign({

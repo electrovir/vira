@@ -36765,7 +36765,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 top: 0;
                 left: 0;
                 overflow: visible;
+                /**
+                 * visibility:hidden keeps the mirror's links out of the tab order, but a selected
+                 * tab's label re-sets visibility:visible on itself (see ViraBoldText), which would
+                 * override the inherited hidden state and paint the label. opacity:0 cannot be
+                 * overridden by a descendant, so it keeps the mirror invisible while still allowing
+                 * width measurement.
+                 */
                 visibility: hidden;
+                opacity: 0;
                 pointer-events: none;
             }
 

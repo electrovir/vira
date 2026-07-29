@@ -1,5 +1,5 @@
 import {assertWrap} from '@augment-vir/assert';
-import {type PartialWithUndefined} from '@augment-vir/common';
+import {type PartialWithUndefined, type RequireExactlyOne} from '@augment-vir/common';
 import {
     attributes,
     css,
@@ -10,7 +10,6 @@ import {
     type CSSResult,
 } from 'element-vir';
 import {type SpaRoute, type SpaRouter} from 'spa-router-vir';
-import {type RequireExactlyOne} from 'type-fest';
 import {listenTo} from 'typed-event-target';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';

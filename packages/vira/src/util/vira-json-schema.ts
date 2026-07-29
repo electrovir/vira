@@ -1,7 +1,6 @@
 import {assertWrap, check} from '@augment-vir/assert';
-import {omitObjectKeys, removeDuplicates, removePrefix} from '@augment-vir/common';
+import {omitObjectKeys, removeDuplicates, removePrefix, type JsonValue} from '@augment-vir/common';
 import {type JSONSchema} from 'json-schema-to-ts';
-import {type JsonValue} from 'type-fest';
 
 /**
  * The JSON Schema type used by `ViraJsonForm`. Re-exported from `json-schema-to-ts` so that callers
@@ -95,8 +94,9 @@ export function normalizeSchema(
         return undefined;
     } else if (schema === true) {
         return {};
+    } else {
+        return schema;
     }
-    return schema;
 }
 
 function jsonTypeFromSchemaType(type: string): ViraJsonType | undefined {
@@ -479,8 +479,9 @@ export function getStringEnumValues(
             return branch.enum.filter(check.isString);
         } else if ('const' in branch && check.isString(branch.const)) {
             return [branch.const];
+        } else {
+            return [];
         }
-        return [];
     });
     return removeDuplicates(values);
 }
@@ -783,8 +784,9 @@ function deepEqualsJson({a, b}: Readonly<{a: JsonValue; b: JsonValue}>): boolean
                 b: b[key] ?? null,
             }),
         );
+    } else {
+        return false;
     }
-    return false;
 }
 
 /**
@@ -862,8 +864,9 @@ export function deleteValueAtPath(root: JsonValue, path: ViraJsonPath): JsonValu
             return root.filter((unusedItem, index) => index !== head);
         } else if (typeof head === 'string' && check.isObject(root)) {
             return omitObjectKeys(root, [head]);
+        } else {
+            return root;
         }
-        return root;
     } else if (typeof head === 'number' && check.isArray(root)) {
         return root.map((item, index) => (index === head ? deleteValueAtPath(item, rest) : item));
     } else if (typeof head === 'string' && check.isObject(root)) {
@@ -871,6 +874,7 @@ export function deleteValueAtPath(root: JsonValue, path: ViraJsonPath): JsonValu
             ...root,
             [head]: deleteValueAtPath(root[head] ?? null, rest),
         };
+    } else {
+        return root;
     }
-    return root;
 }

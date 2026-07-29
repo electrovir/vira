@@ -1,7 +1,7 @@
 import {assertWrap} from '@augment-vir/assert';
+import {type SetOptional} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, type CSSResult, html, listen} from 'element-vir';
-import {type SetOptional} from 'type-fest';
 import {
     defineViraElement,
     Element24Icon,

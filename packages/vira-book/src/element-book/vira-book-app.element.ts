@@ -34,7 +34,7 @@ export const ViraBookApp = defineElement()({
                 pages: viraBookPages,
                 themeColor: '#33ccff',
             })}>
-                <h1 slot=${ElementBookApp.slotNames.navHeader}>Vira</h1>
+                <h1 slot=${ElementBookApp.slotNames['element-book-app-nav-header']}>Vira</h1>
             </${ElementBookApp}>
         `;
     },

@@ -1,6 +1,5 @@
-import {type Values} from '@augment-vir/common';
+import {type RequireExactlyOne, type Values} from '@augment-vir/common';
 import {type AsyncProp, asyncProp, type DeclarativeElementDefinition} from 'element-vir';
-import {type RequireExactlyOne} from 'type-fest';
 
 /**
  * Base type for loaders passed to {@link createDynamicElementLoader}.

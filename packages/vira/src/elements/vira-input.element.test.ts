@@ -1,8 +1,7 @@
 import {assert} from '@augment-vir/assert';
-import {randomString} from '@augment-vir/common';
+import {randomString, type ReadonlyDeep} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html, listen} from 'element-vir';
-import {type ReadonlyDeep} from 'type-fest';
 import {ViraButton} from './vira-button.element.js';
 import {ViraInput} from './vira-input.element.js';
 

@@ -1,7 +1,7 @@
 import {assert, assertWrap} from '@augment-vir/assert';
+import {type JsonValue} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
-import {type JsonValue} from 'type-fest';
 import {type ViraJsonSchema} from '../util/vira-json-schema.js';
 import {ViraInput} from './vira-input.element.js';
 import {ViraJsonForm} from './vira-json-form.element.js';

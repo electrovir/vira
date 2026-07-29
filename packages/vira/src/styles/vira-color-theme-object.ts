@@ -11,10 +11,10 @@ import {
     type RemovePrefix,
     removeSuffix,
     type RemoveSuffix,
+    type UnionToTuple,
 } from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
 import {type ColorThemeColor, type themeDefaultKey} from 'theme-vir';
-import {type UnionToTuple} from 'type-fest';
 import {viraTheme} from './vira-color-theme.js';
 
 const sortedContrastLevelNames = [

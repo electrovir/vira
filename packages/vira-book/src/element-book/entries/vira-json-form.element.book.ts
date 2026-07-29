@@ -1,6 +1,6 @@
+import {type JsonValue} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html, listen, type HTMLTemplateResult} from 'element-vir';
-import {type JsonValue} from 'type-fest';
 import {viraFontCssVars, ViraJsonForm, viraTheme, type ViraJsonSchema} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 

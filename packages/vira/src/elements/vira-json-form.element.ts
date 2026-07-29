@@ -1,7 +1,12 @@
 import {assertWrap, check} from '@augment-vir/assert';
-import {omitObjectKeys, wrapInTry, type PartialWithUndefined} from '@augment-vir/common';
+import {
+    omitObjectKeys,
+    wrapInTry,
+    type JsonObject,
+    type JsonValue,
+    type PartialWithUndefined,
+} from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, type HTMLTemplateResult} from 'element-vir';
-import {type JsonObject, type JsonValue} from 'type-fest';
 import {Plus16Icon, X16Icon} from '../icons/index.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -426,18 +431,18 @@ export const ViraJsonForm = defineViraElement<
                 return html`
                     <span class="json-null-indicator">null</span>
                 `;
-            }
-
-            return html`
-                <${ViraInput.assign({
-                    value: check.isString(value) ? value : '',
-                    disabled: isDisabled,
-                })}
-                    ${listen(ViraInput.events.valueChange, (event) => {
-                        emitReplaceAt(path, event.detail);
+            } else {
+                return html`
+                    <${ViraInput.assign({
+                        value: check.isString(value) ? value : '',
+                        disabled: isDisabled,
                     })}
-                ></${ViraInput}>
-            `;
+                        ${listen(ViraInput.events.valueChange, (event) => {
+                            emitReplaceAt(path, event.detail);
+                        })}
+                    ></${ViraInput}>
+                `;
+            }
         }
 
         function renderInlineValueEditor(
@@ -487,8 +492,9 @@ export const ViraJsonForm = defineViraElement<
                         })}
                     ></${ViraCheckbox}>
                 `;
+            } else {
+                return nothing;
             }
-            return nothing;
         }
 
         function renderPlusButton({
@@ -612,30 +618,30 @@ export const ViraJsonForm = defineViraElement<
                         },
                     })}
                 `;
-            }
-
-            const selectedType = getPendingType(pathKey, allowedTypes);
-            const options: ReadonlyArray<ViraSelectOption> = allowedTypes.map((type) => {
-                return {
-                    value: type,
-                    label: viraJsonTypeLabels[type],
-                };
-            });
-            return html`
-                <${ViraSelect.assign({
-                    options,
-                    value: selectedType,
-                })}
-                    ${listen(ViraSelect.events.valueChange, (event) => {
-                        setPendingType(pathKey, event.detail as ViraJsonType);
+            } else {
+                const selectedType = getPendingType(pathKey, allowedTypes);
+                const options: ReadonlyArray<ViraSelectOption> = allowedTypes.map((type) => {
+                    return {
+                        value: type,
+                        label: viraJsonTypeLabels[type],
+                    };
+                });
+                return html`
+                    <${ViraSelect.assign({
+                        options,
+                        value: selectedType,
                     })}
-                ></${ViraSelect}>
-                ${renderPlusButton({
-                    isAddDisabled: false,
-                    tooltip: `Add ${viraJsonTypeLabels[selectedType]}`,
-                    onClick: () => onAdd(createDefaultForJsonType(selectedType)),
-                })}
-            `;
+                        ${listen(ViraSelect.events.valueChange, (event) => {
+                            setPendingType(pathKey, event.detail as ViraJsonType);
+                        })}
+                    ></${ViraSelect}>
+                    ${renderPlusButton({
+                        isAddDisabled: false,
+                        tooltip: `Add ${viraJsonTypeLabels[selectedType]}`,
+                        onClick: () => onAdd(createDefaultForJsonType(selectedType)),
+                    })}
+                `;
+            }
         }
 
         function getNestedTypeLabel(schema: ViraJsonSchema | undefined, value: JsonValue): string {

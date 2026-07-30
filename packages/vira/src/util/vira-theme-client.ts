@@ -2,7 +2,7 @@ import {assert} from '@augment-vir/assert';
 import {type MaybePromise, type PartialWithUndefined} from '@augment-vir/common';
 import {LocalStorageClient} from '@electrovir/local-storage-client';
 import {defineShape, enumShape} from 'object-shape-tester';
-import {applyColorThemeViaStyleElement} from 'theme-vir';
+import {applyColorThemeViaStyleElement} from 'theme-vir/dist/color-theme/apply-color-theme.js';
 import {listenTo} from 'typed-event-target';
 import {viraTheme, viraThemeDarkOverride} from '../styles/vira-color-theme.js';
 

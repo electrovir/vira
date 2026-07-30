@@ -14,7 +14,10 @@ import {
     type UnionToTuple,
 } from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
-import {type ColorThemeColor, type themeDefaultKey} from 'theme-vir';
+import {
+    type ColorThemeColor,
+    type themeDefaultKey,
+} from 'theme-vir/dist/color-theme/color-theme.js';
 import {viraTheme} from './vira-color-theme.js';
 
 const sortedContrastLevelNames = [

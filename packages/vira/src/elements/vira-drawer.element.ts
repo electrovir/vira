@@ -2,7 +2,7 @@ import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {colorCss} from '@electrovir/color';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
-import {themeDefaultKey} from 'theme-vir';
+import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {listenToGlobal} from 'typed-event-target';
 import {X24Icon} from '../icons/icon-svgs/24/x-24.icon.js';
 import {viraAnimationDurations} from '../styles/durations.js';

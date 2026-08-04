@@ -354,6 +354,8 @@ export const ViraForm = defineViraElement<
                                 min: field.min,
                                 max: field.max,
                                 timezone: field.timezone,
+                                showDateOnly: field.showDateOnly,
+                                showTimeOnly: field.showTimeOnly,
                                 isDisabled,
                                 hasError: field.hasError,
                                 isReadonly: inputs.isReadonly,

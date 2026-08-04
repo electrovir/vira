@@ -35846,7 +35846,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                                 ${P(Q.events.valueChange,e=>{let a=e.detail===``?void 0:Number(e.detail);t(new n.valueChange({key:r,...i,value:a}))})}
                             ></${Q}>
                         `}):i.type===Z.Date?o({label:c,fieldTemplate:T`
-                            <${EY.assign({value:i.value,min:i.min,max:i.max,timezone:i.timezone,isDisabled:a,hasError:i.hasError,isReadonly:e.isReadonly,label:l})}
+                            <${EY.assign({value:i.value,min:i.min,max:i.max,timezone:i.timezone,showDateOnly:i.showDateOnly,showTimeOnly:i.showTimeOnly,isDisabled:a,hasError:i.hasError,isReadonly:e.isReadonly,label:l})}
                                 ${i.testId?vp(i.testId):y}
                                 ${P(EY.events.valueChange,e=>{t(new n.valueChange({key:r,...i,value:e.detail}))})}
                             ></${EY}>

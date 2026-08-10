@@ -49,10 +49,14 @@ export const ViraMenu = defineViraElement<
         'vira-menu-rounded': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllRounded,
         'vira-menu-square': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllSquare,
     },
-    styles: ({hostClasses}) => css`
+    cssVars: {
+        'vira-menu-padding': '4px',
+    },
+    styles: ({hostClasses, cssVars}) => css`
         :host {
             display: flex;
             flex-direction: column;
+            padding: ${cssVars['vira-menu-padding'].value};
             max-width: 100%;
             max-height: 100%;
             overflow-y: auto;

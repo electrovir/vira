@@ -5,7 +5,7 @@ import {viraFontCssVars} from './font.js';
 import {viraColorPalette} from './vira-color-palette.js';
 import {viraTheme} from './vira-color-theme.js';
 
-const defaultViraFormRadius = '8px';
+const defaultViraFormRadius = '6px';
 
 /**
  * CSS vars for vira form elements.
@@ -52,11 +52,11 @@ export const viraFormCssVars = defineCssVars({
 
     'vira-form-label-font-weight': viraFontCssVars['vira-font-weight-bold'].value,
     'vira-form-small-text-size': '14px',
-    'vira-form-medium-text-size': '16px',
+    'vira-form-medium-text-size': '14px',
     'vira-form-large-text-size': '22px',
 
     'vira-form-radius': defaultViraFormRadius,
-    'vira-form-wrapper-radius': '16px',
+    'vira-form-wrapper-radius': '12px',
 
     'vira-form-focus-outline-color':
         viraTheme.colors['vira-brand-foreground-header'].foreground.value,

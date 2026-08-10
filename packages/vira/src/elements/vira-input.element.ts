@@ -66,8 +66,8 @@ export const ViraInput = defineViraElement<
 >()({
     tagName: 'vira-input',
     cssVars: {
-        'vira-input-padding-horizontal': '10px',
-        'vira-input-padding-vertical': '5px',
+        'vira-input-padding-horizontal': '12px',
+        'vira-input-padding-vertical': '4px',
     },
     styles: ({hostClasses, cssVars}) => {
         return css`

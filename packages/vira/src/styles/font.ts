@@ -11,5 +11,5 @@ export const viraFontCssVars = defineCssVars({
 
     'vira-font-weight-normal': 'normal',
     'vira-font-weight-medium': '500',
-    'vira-font-weight-bold': 'bold',
+    'vira-font-weight-bold': '600',
 });

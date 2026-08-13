@@ -1,6 +1,7 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {
+    ChevronDown16Icon,
     Upload16Icon,
     Upload24Icon,
     ViraButton,
@@ -45,6 +46,20 @@ const buttonVariants: {
         extraInputs: {
             icon: Upload16Icon,
             text: '',
+        },
+    },
+    {
+        label: 'icon on right',
+        extraInputs: {
+            icon: Upload24Icon,
+            showIconOnRight: true,
+        },
+    },
+    {
+        label: 'chevron on right',
+        extraInputs: {
+            icon: ChevronDown16Icon,
+            showIconOnRight: true,
         },
     },
     {

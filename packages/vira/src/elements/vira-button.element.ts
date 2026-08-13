@@ -1,6 +1,6 @@
 import {arrayToObject, getObjectTypedKeys, type PartialWithUndefined} from '@augment-vir/common';
 import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.js';
-import {css, html, nothing, unsafeCSS, type CSSResult} from 'element-vir';
+import {css, html, nothing, unsafeCSS, type CSSResult, type HtmlInterpolation} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {ChevronDown16Icon, type ViraIconSvg} from '../icons/index.js';
@@ -184,8 +184,15 @@ export const ViraButton = defineViraElement<
          */
         color: ViraColorVariant | ViraThemeColorName;
         /**
-         * Set to `true`
+         * Set to `true` to render `icon` after `text` instead of before it.
          *
+         * @default false
+         */
+        showIconOnRight: boolean;
+        /**
+         * Set to `true` to append a downwards chevron after the button's text.
+         *
+         * @deprecated Set `icon` to `ChevronDown16Icon` and `showIconOnRight` to `true` instead.
          * @default false
          */
         showMenuCaret: boolean;
@@ -193,6 +200,7 @@ export const ViraButton = defineViraElement<
 >()({
     tagName: 'vira-button',
     hostClasses: {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         'vira-button-with-menu-caret': ({inputs}) => !!inputs.showMenuCaret,
 
         'vira-button-size-large': ({inputs}) => inputs.buttonSize === ViraSize.Large,
@@ -447,7 +455,8 @@ export const ViraButton = defineViraElement<
                 width: 0;
             }
 
-            button ${ViraIcon} + .text-template {
+            button ${ViraIcon} + .text-template,
+            button .text-template + ${ViraIcon} {
                 margin-left: 8px;
             }
 
@@ -507,6 +516,7 @@ export const ViraButton = defineViraElement<
                   <span class="empty-text">&nbsp;</span>
               `;
 
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         const caretIconTemplate = inputs.showMenuCaret
             ? html`
                   <${ViraIcon.assign({
@@ -517,10 +527,19 @@ export const ViraButton = defineViraElement<
               `
             : nothing;
 
+        /* Both templates are interpolated with no whitespace between them so `+` selectors match. */
+        const templates: HtmlInterpolation[] = inputs.showIconOnRight
+            ? [
+                  textTemplate,
+                  iconTemplate,
+              ]
+            : [
+                  iconTemplate,
+                  textTemplate,
+              ];
+
         return html`
-            <button ?disabled=${inputs.isDisabled}>
-                ${iconTemplate}${textTemplate}${caretIconTemplate}
-            </button>
+            <button ?disabled=${inputs.isDisabled}>${templates}${caretIconTemplate}</button>
         `;
     },
 });

@@ -33049,7 +33049,8 @@ import{n as e}from"./rolldown-runtime-QTnfLwEv.js";import{$ as t,A as n,At as r,
                 width: 0;
             }
 
-            button ${H} + .text-template {
+            button ${H} + .text-template,
+            button .text-template + ${H} {
                 margin-left: 8px;
             }
 
@@ -33101,10 +33102,8 @@ import{n as e}from"./rolldown-runtime-QTnfLwEv.js";import{$ as t,A as n,At as r,
                   <${H.assign({icon:Fh})}
                       class="caret-icon"
                   ></${H}>
-              `:y;return T`
-            <button ?disabled=${e.isDisabled}>
-                ${t}${n}${r}
-            </button>
+              `:y,i=e.showIconOnRight?[n,t]:[t,n];return T`
+            <button ?disabled=${e.isDisabled}>${i}${r}</button>
         `}}),SY=function(e){return e.Error=`error`,e.Success=`success`,e}({}),CY=ym()({tagName:`vira-card`,hostClasses:{"vira-card-error":({inputs:e})=>e.cardState===`error`,"vira-card-success":({inputs:e})=>e.cardState===`success`},cssVars:{"vira-card-border":w`1px solid ${B[`vira-form-border-color`].value}`,"vira-card-padding":B[`vira-form-wrapper-radius`].value},styles:({hostClasses:e,cssVars:t})=>w`
         :host {
             display: block;
@@ -33274,7 +33273,7 @@ import{n as e}from"./rolldown-runtime-QTnfLwEv.js";import{$ as t,A as n,At as r,
                     ></${H}>
                 </span>
             </label>
-        `}}),wY=ym()({tagName:`vira-collapsible-wrapper`,state(){return{contentHeight:0}},hostClasses:{"vira-collapsible-wrapper-expand-on-print":({inputs:e})=>!!e.expandOnPrint},slotNames:[`vira-collapsible-wrapper-header`],styles:({hostClasses:e})=>w`
+        `}}),wY=ym()({tagName:`vira-collapsible-wrapper`,state(){return{contentHeight:0,contentWidth:0,isContentHidden:!1,collapsingElement:void 0}},hostClasses:{"vira-collapsible-wrapper-expand-on-print":({inputs:e})=>!!e.expandOnPrint},slotNames:[`vira-collapsible-wrapper-header`],styles:({hostClasses:e})=>w`
         :host {
             display: flex;
             flex-direction: column;
@@ -33303,18 +33302,42 @@ import{n as e}from"./rolldown-runtime-QTnfLwEv.js";import{$ as t,A as n,At as r,
             }
         }
 
+        .content-wrapper.hidden-content {
+            display: none;
+        }
+
         @media print {
             :host(.${e[`vira-collapsible-wrapper-expand-on-print`].name})
                 .collapsing-element {
                 height: auto !important;
                 overflow: visible !important;
                 transition: none !important;
+
+                & .content-wrapper.hidden-content {
+                    display: flex !important;
+                }
             }
         }
-    `,events:{expandChange:C()},render({state:e,slotNames:t,updateState:n,dispatch:r,events:i,inputs:a}){let o=a.expanded?w`
+    `,events:{expandChange:C()},render({state:e,slotNames:t,updateState:n,dispatch:r,events:i,inputs:a}){a.expanded&&e.isContentHidden?n({isContentHidden:!1}):!a.expanded&&!e.isContentHidden&&e.contentHeight&&!e.collapsingElement?.clientHeight&&n({isContentHidden:!0});let o=e.isContentHidden?w`
+                  width: ${e.contentWidth}px;
+                  max-width: 100%;
+              `:w``,s=e.isContentHidden?T`
+                  <div class="content-wrapper hidden-content">
+                      <slot></slot>
+                  </div>
+              `:T`
+                  <div
+                      ${fp(({contentRect:e})=>{n({contentHeight:e.height,contentWidth:e.width})})}
+                      class="content-wrapper"
+                  >
+                      <slot></slot>
+                  </div>
+              `,c=a.expanded?w`
                   height: ${e.contentHeight}px;
+                  ${o}
               `:w`
                   height: 0;
+                  ${o}
               `;return T`
             <button
                 class="header-wrapper"
@@ -33325,15 +33348,12 @@ import{n as e}from"./rolldown-runtime-QTnfLwEv.js";import{$ as t,A as n,At as r,
 
             <div
                 class="collapsing-element ${Jf({collapsed:!a.expanded})}"
-                style=${o}
+                style=${c}
                 disabled="disabled"
+                ${cp(e=>{n({collapsingElement:E.instanceOf(e,HTMLDivElement)})})}
+                ${P(`transitionend`,e=>{e.propertyName===`height`&&e.target===e.currentTarget&&!a.expanded&&n({isContentHidden:!0})})}
             >
-                <div
-                    ${fp(({contentRect:e})=>{n({contentHeight:e.height})})}
-                    class="content-wrapper"
-                >
-                    <slot></slot>
-                </div>
+                ${s}
             </div>
         `}}),TY=ym()({tagName:`vira-collapsible-card`,testIds:[`openCaret`],events:{expandToggle:C()},state({inputs:e}){return{isExpanded:!!e.startExpanded}},hostClasses:{"vira-collapsible-card-expanded":({state:e})=>e.isExpanded,"vira-collapsible-card-expansion-blocked":({inputs:e})=>!!e.blockExpansion,"vira-collapsible-card-card-styles":({inputs:e})=>!e.rawCollapsible},cssVars:{"vira-collapsible-card-content-gap":`16px`},styles:({hostClasses:e,cssVars:t})=>w`
         :host {
@@ -38118,7 +38138,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             `,render(){return T`
                     <${Nh.assign({text:`Not Bolded`,bold:!1})}></${Nh}>
                     <${Nh.assign({text:`Bolded`,bold:!0})}></${Nh}>
-                `}})}}),u6=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:Pg}},{label:`with 16px icon`,extraInputs:{icon:Bh}},{label:`only 24px icon`,extraInputs:{icon:Pg,text:``}},{label:`only 16px icon`,extraInputs:{icon:Bh,text:``}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{showMenuCaret:!0}}],d6=w`
+                `}})}}),u6=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:Pg}},{label:`with 16px icon`,extraInputs:{icon:Bh}},{label:`only 24px icon`,extraInputs:{icon:Pg,text:``}},{label:`only 16px icon`,extraInputs:{icon:Bh,text:``}},{label:`icon on right`,extraInputs:{icon:Pg,showIconOnRight:!0}},{label:`chevron on right`,extraInputs:{icon:Fh,showIconOnRight:!0}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{showMenuCaret:!0}}],d6=w`
     table {
         border-collapse: collapse;
     }

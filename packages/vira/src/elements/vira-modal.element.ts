@@ -74,7 +74,6 @@ export const ViraModal = defineViraElement<
     slotNames: ['vira-modal-modal-title'],
     cssVars: {
         'vira-modal-backdrop-filter': 'blur(3px)',
-        /** The inner `dialog` element inherits this radius from the host. */
         'vira-modal-border-radius': '8px',
     },
     styles: ({hostClasses, cssVars}) => css`

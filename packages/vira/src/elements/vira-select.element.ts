@@ -91,8 +91,8 @@ export const ViraSelect = defineViraElement<
         valueChange: defineElementEvent<string>(),
     },
     cssVars: {
-        'vira-select-padding-horizontal': '10px',
-        'vira-select-padding-vertical': '6px',
+        'vira-select-padding-horizontal': '12px',
+        'vira-select-padding-vertical': '8px',
         'vira-select-icon-padding': '44px',
     },
     hostClasses: {

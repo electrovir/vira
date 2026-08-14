@@ -28,7 +28,7 @@ export const ViraCard = defineViraElement<{
     },
     cssVars: {
         'vira-card-border': css`1px solid ${viraFormCssVars['vira-form-border-color'].value}`,
-        'vira-card-padding': viraFormCssVars['vira-form-wrapper-radius'].value,
+        'vira-card-padding': '24px',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {

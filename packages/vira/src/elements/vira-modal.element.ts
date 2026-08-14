@@ -74,12 +74,13 @@ export const ViraModal = defineViraElement<
     slotNames: ['vira-modal-modal-title'],
     cssVars: {
         'vira-modal-backdrop-filter': 'blur(3px)',
+        'vira-modal-border-radius': '8px',
     },
     styles: ({hostClasses, cssVars}) => css`
         :host {
             display: contents;
             min-width: 280px;
-            border-radius: 16px;
+            border-radius: ${cssVars['vira-modal-border-radius'].value};
         }
 
         h1 {

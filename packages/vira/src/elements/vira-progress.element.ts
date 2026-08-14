@@ -30,13 +30,13 @@ export const ViraProgress = defineViraElement<
          * dimension which creates a perfect pill border radius.
          */
         'vira-progress-border-radius': '99999999px',
+        'vira-progress-height': '8px',
     },
     styles: ({cssVars}) => css`
         :host {
             /* Default width that can easily be overridden because it's applied on the host. */
             width: 100px;
-            /* Default height that can easily be overridden because it's applied on the host. */
-            height: 10px;
+            height: ${cssVars['vira-progress-height'].value};
             display: inline-flex;
             align-items: center;
             border-radius: ${cssVars['vira-progress-border-radius'].value};

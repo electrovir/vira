@@ -38,112 +38,114 @@ export const ViraTextArea = defineViraElement<
         'vira-text-area-padding-horizontal': '12px',
         'vira-text-area-padding-vertical': '8px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            position: relative;
-            display: inline-flex;
-            width: 320px;
-            box-sizing: border-box;
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-        }
-
-        label {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 2px;
-            width: 100%;
-            max-width: 100%;
-            cursor: text;
-
-            & .text-area-label {
-                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-                text-align: left;
-                flex-shrink: 0;
-                flex-wrap: wrap;
-            }
-        }
-
-        .text-area-wrapper {
-            position: relative;
-            display: inline-flex;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            ${noNativeFormStyles};
-            overscroll-behavior: contain;
-            font: inherit;
-            cursor: text;
-            width: 100%;
-            box-sizing: border-box;
-            padding: ${cssVars['vira-text-area-padding-vertical'].value}
-                ${cssVars['vira-text-area-padding-horizontal'].value};
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            color: inherit;
-            resize: vertical;
-            outline: none;
-
-            &::placeholder {
-                color: ${viraFormCssVars['vira-form-placeholder-color'].value};
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                position: relative;
+                display: inline-flex;
+                width: 320px;
+                box-sizing: border-box;
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
             }
 
-            &::selection {
-                background: ${viraFormCssVars['vira-form-text-selection-color'].value};
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 2px;
+                width: 100%;
+                max-width: 100%;
+                cursor: text;
+
+                & .text-area-label {
+                    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                    text-align: left;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                }
             }
 
-            &:focus:focus-visible:not([disabled]) ~ .focus-border {
-                ${createFocusStyles({
-                    elementBorderSize: '1px',
-                    noNesting: true,
-                })}
+            .text-area-wrapper {
+                position: relative;
+                display: inline-flex;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
             }
-        }
 
-        .border-style {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            z-index: 0;
-            pointer-events: none;
-        }
+            textarea {
+                ${noNativeFormStyles};
+                overscroll-behavior: contain;
+                font: inherit;
+                cursor: text;
+                width: 100%;
+                box-sizing: border-box;
+                padding: ${cssVars['vira-text-area-padding-vertical'].value}
+                    ${cssVars['vira-text-area-padding-horizontal'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                color: inherit;
+                resize: vertical;
+                outline: none;
 
-        .readonly-value {
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-        }
+                &::placeholder {
+                    color: ${viraFormCssVars['vira-form-placeholder-color'].value};
+                }
 
-        ${hostClasses['vira-text-area-prevent-resize'].selector} textarea {
-            resize: none;
-        }
+                &::selection {
+                    background: ${viraFormCssVars['vira-form-text-selection-color'].value};
+                }
 
-        ${hostClasses['vira-text-area-error'].selector} textarea {
-            border-color: ${viraFormCssVars['vira-form-error-color'].value};
-        }
+                &:focus:focus-visible:not([disabled]) ~ .focus-border {
+                    ${createFocusStyles({
+                        elementBorderSize: '1px',
+                        noNesting: true,
+                    })}
+                }
+            }
 
-        ${hostClasses['vira-text-area-disabled'].selector} {
-            cursor: not-allowed;
+            .border-style {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                z-index: 0;
+                pointer-events: none;
+            }
 
-            & * {
+            .readonly-value {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere;
+            }
+
+            ${hostClasses['vira-text-area-prevent-resize'].selector} textarea {
+                resize: none;
+            }
+
+            ${hostClasses['vira-text-area-error'].selector} textarea {
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+
+            ${hostClasses['vira-text-area-disabled'].selector} {
                 cursor: not-allowed;
-            }
 
-            & > * {
-                ${viraDisabledStyles};
-            }
+                & * {
+                    cursor: not-allowed;
+                }
 
-            & .focus-border {
-                display: none;
+                & > * {
+                    ${viraDisabledStyles};
+                }
+
+                & .focus-border {
+                    display: none;
+                }
             }
-        }
-    `,
+        `;
+    },
     events: {
         /**
          * Fires whenever a user input created a new value. Does not fire if all input letters are

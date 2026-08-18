@@ -40,12 +40,13 @@ function applySvgAttributes(
                 key,
                 value,
             ],
-        ) =>
-            setSvgAttribute({
+        ) => {
+            return setSvgAttribute({
                 svgString: result,
                 attributeName: key,
                 value,
-            }),
+            });
+        },
         svgString,
     );
 }

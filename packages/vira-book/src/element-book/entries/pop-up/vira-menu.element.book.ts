@@ -90,8 +90,8 @@ export const viraMenuOptionsBookPage = defineBookPage({
                         <${ViraMenu.assign({
                             ...example.menuInputs,
                         })}>
-                            ${example.items.map(
-                                (item) => html`
+                            ${example.items.map((item) => {
+                                return html`
                                     <${ViraMenuItem.assign({
                                         selected: item.selected,
                                         disabled: item.disabled,
@@ -99,8 +99,8 @@ export const viraMenuOptionsBookPage = defineBookPage({
                                     })}>
                                         ${item.content}
                                     </${ViraMenuItem}>
-                                `,
-                            )}
+                                `;
+                            })}
                         </${ViraMenu}>
                     `;
                 },

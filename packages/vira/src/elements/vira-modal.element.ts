@@ -76,105 +76,109 @@ export const ViraModal = defineViraElement<
         'vira-modal-backdrop-filter': 'blur(3px)',
         'vira-modal-border-radius': '8px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            display: contents;
-            min-width: 280px;
-            border-radius: ${cssVars['vira-modal-border-radius'].value};
-        }
-
-        h1 {
-            ${noNativeSpacing};
-        }
-
-        dialog {
-            ${colorCss(viraTheme.colors[themeDefaultKey])}
-            border: none;
-            flex-direction: column;
-            border-radius: inherit;
-            padding: 0;
-            overflow: hidden;
-            min-width: inherit;
-            min-height: inherit;
-            max-width: calc(100dvw - 100px);
-            max-height: calc(100dvh - 100px);
-            ${viraShadows.modal}
-
-            &[open] {
-                display: flex;
-            }
-            &::backdrop {
-                background: ${viraFormCssVars['vira-form-modal-backdrop-color'].value};
-                backdrop-filter: ${cssVars['vira-modal-backdrop-filter'].value};
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                display: contents;
+                min-width: 280px;
+                border-radius: ${cssVars['vira-modal-border-radius'].value};
             }
 
-            & .modal-content-wrapper {
-                overflow: hidden;
-                display: flex;
+            h1 {
+                ${noNativeSpacing};
+            }
+
+            dialog {
+                ${colorCss(viraTheme.colors[themeDefaultKey])}
+                border: none;
                 flex-direction: column;
-
-                & .header {
-                    padding: 16px 24px;
-                    display: flex;
-                    gap: 16px;
-                    align-items: flex-start;
-
-                    & .header-text-wrapper {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 4px;
-                        align-self: center;
-                        margin-right: auto;
-                        overflow: hidden;
-
-                        & h1 {
-                            font-size: 24px;
-                        }
-
-                        & sub {
-                            font-size: 16px;
-                            color: ${viraFormCssVars['vira-form-secondary-body-foreground'].value};
-                        }
-                    }
-
-                    & button.close {
-                        ${noNativeFormStyles};
-                        flex-shrink: 0;
-                        cursor: pointer;
-                        padding: 4px;
-                        border-radius: ${viraFormCssVars['vira-form-radius'].value};
-
-                        &:hover {
-                            background-color: ${viraFormCssVars['vira-form-selection-hover-color']
-                                .value};
-                        }
-
-                        & ${ViraIcon} {
-                            display: flex;
-                        }
-                    }
-                }
-                & .body {
-                    padding: 16px 24px;
-                    overflow: auto;
-                    overscroll-behavior: contain;
-                }
-            }
-        }
-
-        ${hostClasses['vira-modal-no-content-padding'].selector} {
-            & dialog .modal-content-wrapper .body {
+                border-radius: inherit;
                 padding: 0;
-            }
-        }
+                overflow: hidden;
+                min-width: inherit;
+                min-height: inherit;
+                max-width: calc(100dvw - 100px);
+                max-height: calc(100dvh - 100px);
+                ${viraShadows.modal}
 
-        ${hostClasses['vira-modal-phone-size'].selector} {
-            & dialog {
-                width: 100dvw;
-                max-width: 100dvw;
+                &[open] {
+                    display: flex;
+                }
+                &::backdrop {
+                    background: ${viraFormCssVars['vira-form-modal-backdrop-color'].value};
+                    backdrop-filter: ${cssVars['vira-modal-backdrop-filter'].value};
+                }
+
+                & .modal-content-wrapper {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    & .header {
+                        padding: 16px 24px;
+                        display: flex;
+                        gap: 16px;
+                        align-items: flex-start;
+
+                        & .header-text-wrapper {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
+                            align-self: center;
+                            margin-right: auto;
+                            overflow: hidden;
+
+                            & h1 {
+                                font-size: 24px;
+                            }
+
+                            & sub {
+                                font-size: 16px;
+                                color: ${viraFormCssVars['vira-form-secondary-body-foreground']
+                                    .value};
+                            }
+                        }
+
+                        & button.close {
+                            ${noNativeFormStyles};
+                            flex-shrink: 0;
+                            cursor: pointer;
+                            padding: 4px;
+                            border-radius: ${viraFormCssVars['vira-form-radius'].value};
+
+                            &:hover {
+                                background-color: ${viraFormCssVars[
+                                    'vira-form-selection-hover-color'
+                                ].value};
+                            }
+
+                            & ${ViraIcon} {
+                                display: flex;
+                            }
+                        }
+                    }
+                    & .body {
+                        padding: 16px 24px;
+                        overflow: auto;
+                        overscroll-behavior: contain;
+                    }
+                }
             }
-        }
-    `,
+
+            ${hostClasses['vira-modal-no-content-padding'].selector} {
+                & dialog .modal-content-wrapper .body {
+                    padding: 0;
+                }
+            }
+
+            ${hostClasses['vira-modal-phone-size'].selector} {
+                & dialog {
+                    width: 100dvw;
+                    max-width: 100dvw;
+                }
+            }
+        `;
+    },
     render({inputs, state, updateState, events, dispatch, slotNames}) {
         if (state.dialogElement && inputs.open !== state.dialogElement.open) {
             if (inputs.open) {
@@ -190,11 +194,11 @@ export const ViraModal = defineViraElement<
                 previousOpenValue: inputs.open,
             });
             if (inputs.open) {
-                const removers = globalEventsToCloseModalOn.map((eventName) =>
-                    listenToGlobal(eventName, () => {
+                const removers = globalEventsToCloseModalOn.map((eventName) => {
+                    return listenToGlobal(eventName, () => {
                         dispatch(new events.modalClose());
-                    }),
-                );
+                    });
+                });
 
                 updateState({
                     cleanupListeners: () => {

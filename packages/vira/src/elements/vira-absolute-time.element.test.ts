@@ -1,7 +1,7 @@
 import {assert, assertWrap} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {waitForAnimationFrame} from '@augment-vir/web';
-import {createUtcFullDate, Timezone, utcTimezone} from 'date-vir';
+import {createUtcFullDate, TimezoneName, utcTimezone} from 'date-vir';
 import {html} from 'element-vir';
 import {formatAbsoluteTime, ViraAbsoluteTime} from './vira-absolute-time.element.js';
 
@@ -44,7 +44,7 @@ describe(formatAbsoluteTime.name, () => {
          */
         assert.startsWith(
             formatAbsoluteTime(exampleTime, {
-                timezone: Timezone['America/New_York'],
+                timezone: TimezoneName['America/New_York'],
             }),
             'Jun 3, 2026 10:30',
         );

@@ -15,44 +15,46 @@ export const ViraBoldText = defineViraElement<{bold: boolean; text: string}>()({
     hostClasses: {
         'vira-bold-bold': ({inputs}) => inputs.bold,
     },
-    styles: ({hostClasses, cssVars}) => css`
-        span {
-            text-decoration: inherit;
-            white-space: inherit;
-        }
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            span {
+                text-decoration: inherit;
+                white-space: inherit;
+            }
 
-        .bold-wrapper {
-            position: relative;
-        }
+            .bold-wrapper {
+                position: relative;
+            }
 
-        .everything-wrapper {
-            width: 100%;
-        }
+            .everything-wrapper {
+                width: 100%;
+            }
 
-        .bold {
-            font-weight: ${cssVars['vira-bold-bold-weight'].value};
-            visibility: hidden;
-            pointer-events: none;
-            z-index: -1;
-        }
+            .bold {
+                font-weight: ${cssVars['vira-bold-bold-weight'].value};
+                visibility: hidden;
+                pointer-events: none;
+                z-index: -1;
+            }
 
-        .normal {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+            .normal {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
 
-        ${hostClasses['vira-bold-bold'].selector} .normal {
-            visibility: hidden;
-            pointer-events: none;
-            z-index: -1;
-        }
-        ${hostClasses['vira-bold-bold'].selector} .bold {
-            visibility: visible;
-            pointer-events: unset;
-            z-index: unset;
-        }
-    `,
+            ${hostClasses['vira-bold-bold'].selector} .normal {
+                visibility: hidden;
+                pointer-events: none;
+                z-index: -1;
+            }
+            ${hostClasses['vira-bold-bold'].selector} .bold {
+                visibility: visible;
+                pointer-events: unset;
+                z-index: unset;
+            }
+        `;
+    },
     render({inputs}) {
         return html`
             <span class="everything-wrapper">

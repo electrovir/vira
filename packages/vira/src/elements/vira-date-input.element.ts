@@ -7,6 +7,7 @@ import {
     FullDatePart,
     getNowInUtcTimezone,
     parseInputElementValue,
+    type Timezone,
     toHtmlInputString,
     userTimezone,
 } from 'date-vir';
@@ -41,7 +42,7 @@ export const ViraDateInput = defineViraElement<
         /** If true, the current value is rendered as plain text instead of an editable input. */
         isReadonly: boolean;
         /** Timezone used to interpret the selected date. Defaults to the user's timezone. */
-        timezone: string;
+        timezone: Timezone;
         /** Only show the date part of the selected date when in readonly mode. */
         showDateOnly: boolean;
         /** Only show the time part of the selected date when in readonly mode. */
@@ -63,48 +64,50 @@ export const ViraDateInput = defineViraElement<
         'vira-date-input-error': ({inputs}) => !!inputs.hasError,
         'vira-date-input-disabled': ({inputs}) => !!inputs.isDisabled,
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline-block;
-            width: 224px;
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-        }
-
-        label {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            width: 100%;
-        }
-
-        .input-label {
-            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-            text-align: left;
-        }
-
-        input {
-            box-sizing: border-box;
-            width: 100%;
-            padding: 4px 8px;
-            font-size: inherit;
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-        }
-
-        ${hostClasses['vira-date-input-error'].selector} input {
-            border-color: ${viraFormCssVars['vira-form-error-color'].value};
-        }
-
-        ${hostClasses['vira-date-input-disabled'].selector} {
-            cursor: not-allowed;
-
-            & input {
-                ${viraDisabledStyles};
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline-block;
+                width: 224px;
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
             }
-        }
-    `,
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                width: 100%;
+            }
+
+            .input-label {
+                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                text-align: left;
+            }
+
+            input {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 4px 8px;
+                font-size: inherit;
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+            }
+
+            ${hostClasses['vira-date-input-error'].selector} input {
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+
+            ${hostClasses['vira-date-input-disabled'].selector} {
+                cursor: not-allowed;
+
+                & input {
+                    ${viraDisabledStyles};
+                }
+            }
+        `;
+    },
     render({inputs, state, dispatch, events}) {
         if (inputs.isReadonly) {
             const readonlyTemplate = inputs.value

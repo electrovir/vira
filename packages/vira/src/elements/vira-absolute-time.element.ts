@@ -2,6 +2,7 @@ import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {
     type FullDate,
+    type Timezone,
     createFullDate,
     createFullDateInUserTimezone,
     toFormattedString,
@@ -31,7 +32,7 @@ export const ViraAbsoluteTime = defineViraElement<
          * midnight UTC), where converting to the user's timezone would shift the displayed
          * date/time.
          */
-        timezone: string;
+        timezone: Timezone;
     }>
 >()({
     tagName: 'vira-absolute-time',
@@ -60,7 +61,7 @@ export function formatAbsoluteTime(
         PartialWithUndefined<{
             showDateOnly: boolean;
             showTimeOnly: boolean;
-            timezone: string;
+            timezone: Timezone;
         }>
     >,
 ) {

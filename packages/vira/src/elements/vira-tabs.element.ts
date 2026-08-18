@@ -242,8 +242,9 @@ export const ViraTabs = defineViraElement<
     },
     hostClasses: {
         'vira-tabs-bar-top': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Top,
-        'vira-tabs-bar-bottom': ({inputs}) =>
-            !inputs.barDirection || inputs.barDirection === ViraTabsBarDirection.Bottom,
+        'vira-tabs-bar-bottom': ({inputs}) => {
+            return !inputs.barDirection || inputs.barDirection === ViraTabsBarDirection.Bottom;
+        },
         'vira-tabs-bar-left': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Left,
         'vira-tabs-bar-right': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Right,
         ...arrayToObject(
@@ -297,10 +298,12 @@ export const ViraTabs = defineViraElement<
                 useRequired: true,
             },
         ),
-        'vira-tabs-icon-layout-vertical': ({inputs}) =>
-            !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical,
-        'vira-tabs-icon-layout-horizontal': ({inputs}) =>
-            inputs.iconLayout === ViraTabsIconLayout.Horizontal,
+        'vira-tabs-icon-layout-vertical': ({inputs}) => {
+            return !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical;
+        },
+        'vira-tabs-icon-layout-horizontal': ({inputs}) => {
+            return inputs.iconLayout === ViraTabsIconLayout.Horizontal;
+        },
         'vira-tabs-fill-width': ({inputs}) => !!inputs.shouldFillWidth,
     },
     cssVars: {
@@ -836,11 +839,9 @@ export const ViraTabs = defineViraElement<
              */
             function maxInlineForReserve(reservePx: number) {
                 const limit = availableWidth - reservePx;
-                return tabElements.reduce(
-                    (fittingCount, _tabElement, index) =>
-                        inlineWidthForCount(index + 1) <= limit ? index + 1 : fittingCount,
-                    0,
-                );
+                return tabElements.reduce((fittingCount, _tabElement, index) => {
+                    return inlineWidthForCount(index + 1) <= limit ? index + 1 : fittingCount;
+                }, 0);
             }
 
             /** When every tab fits on its own, there is no overflow and no "more" button. */
@@ -933,11 +934,11 @@ export const ViraTabs = defineViraElement<
         const inlineTabs = visibleTabs.slice(0, inlineCount);
         const overflowTabs = visibleTabs.slice(inlineCount);
 
-        const selectedIndex = visibleTabs.findIndex((tab) =>
-            routeHasPaths(inputs.currentRoute, tab.paths, {
+        const selectedIndex = visibleTabs.findIndex((tab) => {
+            return routeHasPaths(inputs.currentRoute, tab.paths, {
                 exactMatch: tab.exactMatch,
-            }),
-        );
+            });
+        });
         const selectedTab = selectedIndex >= 0 ? visibleTabs[selectedIndex] : undefined;
         /** Whether the selected tab is currently collapsed into the overflow menu. */
         const selectedIsCollapsed = selectedIndex >= 0 && selectedIndex >= inlineCount;

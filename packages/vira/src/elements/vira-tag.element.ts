@@ -246,8 +246,9 @@ export const ViraTag = defineViraElement<
         'vira-tag-size-medium': ({inputs}) => !inputs.size || inputs.size === ViraSize.Medium,
         'vira-tag-size-small': ({inputs}) => inputs.size === ViraSize.Small,
 
-        'vira-tag-emphasis-standard': ({inputs}) =>
-            !inputs.emphasis || inputs.emphasis === ViraEmphasis.Standard,
+        'vira-tag-emphasis-standard': ({inputs}) => {
+            return !inputs.emphasis || inputs.emphasis === ViraEmphasis.Standard;
+        },
         'vira-tag-emphasis-subtle': ({inputs}) => inputs.emphasis === ViraEmphasis.Subtle,
 
         ...arrayToObject(

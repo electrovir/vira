@@ -52,40 +52,42 @@ export const ViraMenu = defineViraElement<
     cssVars: {
         'vira-menu-padding': '4px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            display: flex;
-            flex-direction: column;
-            padding: ${cssVars['vira-menu-padding'].value};
-            max-width: 100%;
-            max-height: 100%;
-            overflow-y: auto;
-            z-index: 99;
-            box-sizing: border-box;
-            overscroll-behavior: contain;
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-            ${viraShadows.menuShadow}
-        }
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                display: flex;
+                flex-direction: column;
+                padding: ${cssVars['vira-menu-padding'].value};
+                max-width: 100%;
+                max-height: 100%;
+                overflow-y: auto;
+                z-index: 99;
+                box-sizing: border-box;
+                overscroll-behavior: contain;
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+                ${viraShadows.menuShadow}
+            }
 
-        ${hostClasses['vira-menu-open-upwards'].selector} {
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
+            ${hostClasses['vira-menu-open-upwards'].selector} {
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
 
-        ${hostClasses['vira-menu-square'].selector} {
-            border-radius: 0;
-        }
+            ${hostClasses['vira-menu-square'].selector} {
+                border-radius: 0;
+            }
 
-        ${hostClasses['vira-menu-rounded'].selector} {
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-        }
-    `,
+            ${hostClasses['vira-menu-rounded'].selector} {
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+            }
+        `;
+    },
     render() {
         return html`
             <slot>&nbsp;</slot>

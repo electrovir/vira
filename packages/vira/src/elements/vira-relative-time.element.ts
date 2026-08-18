@@ -5,6 +5,7 @@ import {
     convertDuration,
     type FullDate,
     getNowInUtcTimezone,
+    type Timezone,
     toRelativeString,
 } from 'date-vir';
 import {css, html, nothing} from 'element-vir';
@@ -39,7 +40,7 @@ export const ViraRelativeTime = defineViraElement<
          * stored at midnight UTC), where converting to the user's timezone would shift the
          * displayed date/time.
          */
-        timezone: string;
+        timezone: Timezone;
     }>
 >()({
     tagName: 'vira-relative-time',

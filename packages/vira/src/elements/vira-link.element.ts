@@ -68,34 +68,36 @@ export const ViraLink = defineViraElement<
     hostClasses: {
         'vira-link-link-styles': ({inputs}) => !inputs.disableLinkStyles,
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline;
-            text-decoration: underline;
-        }
-
-        a,
-        a:visited,
-        a:active,
-        a:link,
-        a:hover {
-            color: inherit;
-            text-decoration: inherit;
-            white-space: inherit;
-        }
-
-        ${hostClasses['vira-link-link-styles'].selector} {
-            &:hover a,
-            & a:hover {
-                color: ${viraTheme.colors['vira-blue-foreground-non-body'].foreground.value};
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline;
+                text-decoration: underline;
             }
 
-            &:active a,
-            & a:active {
-                color: ${viraTheme.colors['vira-blue-foreground-body'].foreground.value};
+            a,
+            a:visited,
+            a:active,
+            a:link,
+            a:hover {
+                color: inherit;
+                text-decoration: inherit;
+                white-space: inherit;
             }
-        }
-    `,
+
+            ${hostClasses['vira-link-link-styles'].selector} {
+                &:hover a,
+                & a:hover {
+                    color: ${viraTheme.colors['vira-blue-foreground-non-body'].foreground.value};
+                }
+
+                &:active a,
+                & a:active {
+                    color: ${viraTheme.colors['vira-blue-foreground-body'].foreground.value};
+                }
+            }
+        `;
+    },
     init({state, updateState, host}) {
         state.cleanupListeners?.();
 

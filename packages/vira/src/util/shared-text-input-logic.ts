@@ -38,12 +38,12 @@ function doesMatch({input, matcher}: {input: string; matcher: string | RegExp}):
     if (!input || !matcher) {
         return true;
     } else if (input.length > 1) {
-        return input.split('').every((singleInput) =>
-            doesMatch({
+        return input.split('').every((singleInput) => {
+            return doesMatch({
                 input: singleInput,
                 matcher,
-            }),
-        );
+            });
+        });
     } else if (matcher instanceof RegExp) {
         return !!input.match(matcher);
     } else {

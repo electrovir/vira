@@ -14,12 +14,14 @@ export const ViraError = defineViraElement()({
     cssVars: {
         'vira-error-font-weight': viraFontCssVars['vira-font-weight-bold'].value,
     },
-    styles: ({cssVars}) => css`
-        :host {
-            color: ${viraFormCssVars['vira-form-error-color'].value};
-            font-weight: ${cssVars['vira-error-font-weight'].value};
-        }
-    `,
+    styles: ({cssVars}) => {
+        return css`
+            :host {
+                color: ${viraFormCssVars['vira-form-error-color'].value};
+                font-weight: ${cssVars['vira-error-font-weight'].value};
+            }
+        `;
+    },
     render() {
         return html`
             <slot></slot>

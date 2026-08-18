@@ -28,15 +28,15 @@ const ignoredFileNameEndings = [
 ];
 
 export async function getExportableTsFilePaths(dirPath: string): Promise<string[]> {
-    const allFilePaths = (await readDirRecursive(dirPath)).map((relativePath) =>
-        join(dirPath, relativePath),
-    );
+    const allFilePaths = (await readDirRecursive(dirPath)).map((relativePath) => {
+        return join(dirPath, relativePath);
+    });
 
     const allNonIndexFilePaths = allFilePaths.filter((filePath) => {
         const isTsFile = filePath.endsWith('.ts');
-        const hasEndingToIgnore = ignoredFileNameEndings.some((ignoredEnding) =>
-            filePath.endsWith(ignoredEnding),
-        );
+        const hasEndingToIgnore = ignoredFileNameEndings.some((ignoredEnding) => {
+            return filePath.endsWith(ignoredEnding);
+        });
         return isTsFile && !hasEndingToIgnore;
     });
     await verifyTsFilePaths(allNonIndexFilePaths);

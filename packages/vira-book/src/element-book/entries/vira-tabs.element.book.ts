@@ -215,14 +215,16 @@ const ViraDynamicWidthTabsExample = defineViraElement()({
             increment: 2,
         };
     },
-    styles: ({cssVars}) => css`
-        :host {
-            display: block;
-            border: 1px solid
-                ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
-            width: ${cssVars['vira-dynamic-width-tabs-example-width'].value};
-        }
-    `,
+    styles: ({cssVars}) => {
+        return css`
+            :host {
+                display: block;
+                border: 1px solid
+                    ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                width: ${cssVars['vira-dynamic-width-tabs-example-width'].value};
+            }
+        `;
+    },
     init({state, updateState, host, cssVars}) {
         globalThis.clearInterval(state.intervalId);
         updateState({
@@ -469,12 +471,12 @@ export const viraTabsBookPage = defineBookPage({
                 ];
 
                 return html`
-                    ${colorVariants.map(
-                        (colorVariant) => html`
+                    ${colorVariants.map((colorVariant) => {
+                        return html`
                             <h4>${colorVariant} variant</h4>
                             <div class="grid">
-                                ${barDirections.map(
-                                    (barDirection) => html`
+                                ${barDirections.map((barDirection) => {
+                                    return html`
                                         <span>${barDirection}</span>
                                         <${ViraTabs.assign({
                                             tabs: tabsWithIcons,
@@ -483,11 +485,11 @@ export const viraTabsBookPage = defineBookPage({
                                             barDirection,
                                             color: colorVariant,
                                         })}></${ViraTabs}>
-                                    `,
-                                )}
+                                    `;
+                                })}
                             </div>
-                        `,
-                    )}
+                        `;
+                    })}
                 `;
             },
         });
@@ -502,8 +504,8 @@ export const viraTabsBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    ${Object.values(ViraThemeColorName).map(
-                        (color) => html`
+                    ${Object.values(ViraThemeColorName).map((color) => {
+                        return html`
                             <h4>${color}</h4>
                             <${ViraTabs.assign({
                                 tabs: tabsWithoutIcons,
@@ -511,8 +513,8 @@ export const viraTabsBookPage = defineBookPage({
                                 currentRoute: selectedRoute,
                                 color,
                             })}></${ViraTabs}>
-                        `,
-                    )}
+                        `;
+                    })}
                 `;
             },
         });

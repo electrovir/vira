@@ -83,10 +83,11 @@ export const viraJsonFormBookPage = defineBookPage({
             render({state, updateState}) {
                 return renderExampleLayout({
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -132,10 +133,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -171,10 +173,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -204,10 +207,11 @@ export const viraJsonFormBookPage = defineBookPage({
             render({state, updateState}) {
                 return renderExampleLayout({
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -252,10 +256,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -313,10 +318,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -343,10 +349,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -392,10 +399,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -444,10 +452,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -487,10 +496,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });
@@ -513,10 +523,11 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     value: state.value,
                     isDisabled: true,
-                    onChange: (value) =>
-                        updateState({
+                    onChange: (value) => {
+                        return updateState({
                             value,
-                        }),
+                        });
+                    },
                 });
             },
         });

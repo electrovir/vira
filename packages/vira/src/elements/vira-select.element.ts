@@ -100,158 +100,163 @@ export const ViraSelect = defineViraElement<
         'vira-select-error': ({inputs}) => !!inputs.hasError,
         'vira-select-not-raw': ({inputs}) => !inputs.rawSelect,
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            position: relative;
-            display: inline-flex;
-            width: 223px;
-            box-sizing: border-box;
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-        }
-
-        .select-wrapper {
-            ${noNativeFormStyles};
-            max-width: 100%;
-            flex-grow: 1;
-            display: inline-flex;
-            box-sizing: border-box;
-            align-items: center;
-            position: relative;
-            cursor: pointer;
-
-            & select {
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                color: inherit;
-                font: inherit;
-                outline: none;
-                width: 100%;
-                border: none;
-                background: none;
-                border-radius: inherit;
-                cursor: pointer;
-                /* Prevent the left pixel of text getting cut off. */
-                padding-left: 0.5px;
-                padding-right: 28px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                &.placeholder {
-                    color: ${viraFormCssVars['vira-form-placeholder-color'].value};
-                }
-
-                &.with-icon {
-                    padding-left: ${cssVars['vira-select-icon-padding'].value};
-                }
-            }
-
-            & ${ViraIcon} {
-                position: absolute;
-                pointer-events: none;
-
-                &.trigger-icon {
-                    transform: rotate(180deg);
-                    right: 3px;
-                }
-
-                &.input-icon {
-                    left: 10px;
-                }
-            }
-        }
-
-        .trigger-icon {
-            width: 24px;
-            aspect-ratio: 1;
-        }
-
-        ${hostClasses['vira-select-not-raw'].selector} {
-            .select-wrapper {
-                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                position: relative;
+                display: inline-flex;
+                width: 223px;
+                box-sizing: border-box;
                 color: ${viraFormCssVars['vira-form-foreground-color'].value};
-                background-color: ${viraFormCssVars['vira-form-background-color'].value};
-                /*
-                    Border colors are actually applied via the .wrapper-border class. However, we must
-                    apply a border here still so that it takes up space.
-                */
-                border: 1px solid transparent;
+            }
+
+            .select-wrapper {
+                ${noNativeFormStyles};
+                max-width: 100%;
+                flex-grow: 1;
+                display: inline-flex;
+                box-sizing: border-box;
+                align-items: center;
+                position: relative;
                 cursor: pointer;
 
                 & select {
-                    padding: ${cssVars['vira-select-padding-vertical'].value} 31px
-                        ${cssVars['vira-select-padding-vertical'].value}
-                        ${cssVars['vira-select-padding-horizontal'].value};
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    color: inherit;
+                    font: inherit;
+                    outline: none;
+                    width: 100%;
+                    border: none;
+                    background: none;
+                    border-radius: inherit;
+                    cursor: pointer;
+                    /* Prevent the left pixel of text getting cut off. */
+                    padding-left: 0.5px;
+                    padding-right: 28px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
 
-                    &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
-                        ${createFocusStyles({
-                            elementBorderSize: '1px',
-                            noNesting: true,
-                        })}
+                    &.placeholder {
+                        color: ${viraFormCssVars['vira-form-placeholder-color'].value};
+                    }
+
+                    &.with-icon {
+                        padding-left: ${cssVars['vira-select-icon-padding'].value};
                     }
                 }
 
-                & .border-style {
+                & ${ViraIcon} {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: ${viraFormCssVars['vira-form-radius'].value};
-                    z-index: 0;
                     pointer-events: none;
+
+                    &.trigger-icon {
+                        transform: rotate(180deg);
+                        right: 3px;
+                    }
+
+                    &.input-icon {
+                        left: 10px;
+                    }
                 }
+            }
 
-                & .wrapper-border {
-                    top: -1px;
-                    left: -1px;
-                    border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-                    transition: border
-                        ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+            .trigger-icon {
+                width: 24px;
+                aspect-ratio: 1;
+            }
+
+            ${hostClasses['vira-select-not-raw'].selector} {
+                .select-wrapper {
+                    border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                    color: ${viraFormCssVars['vira-form-foreground-color'].value};
+                    background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                    /*
+                    Border colors are actually applied via the .wrapper-border class. However, we must
+                    apply a border here still so that it takes up space.
+                */
+                    border: 1px solid transparent;
+                    cursor: pointer;
+
+                    & select {
+                        padding: ${cssVars['vira-select-padding-vertical'].value} 31px
+                            ${cssVars['vira-select-padding-vertical'].value}
+                            ${cssVars['vira-select-padding-horizontal'].value};
+
+                        &:focus:focus-visible:not([aria-disabled='true']) ~ .focus-border {
+                            ${createFocusStyles({
+                                elementBorderSize: '1px',
+                                noNesting: true,
+                            })}
+                        }
+                    }
+
+                    & .border-style {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                        z-index: 0;
+                        pointer-events: none;
+                    }
+
+                    & .wrapper-border {
+                        top: -1px;
+                        left: -1px;
+                        border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                        transition: border
+                            ${viraAnimationDurations['vira-interaction-animation-duration'].value};
+                    }
                 }
             }
-        }
 
-        label {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 2px;
-            width: 100%;
-            max-width: 100%;
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 2px;
+                width: 100%;
+                max-width: 100%;
 
-            & .select-label {
-                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-                text-align: left;
-                flex-shrink: 0;
-                flex-wrap: wrap;
+                & .select-label {
+                    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                    text-align: left;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                }
             }
-        }
 
-        .readonly-value {
-            overflow-wrap: anywhere;
-        }
-
-        ${hostClasses['vira-select-disabled'].selector} {
-            cursor: not-allowed;
-
-            & select,
-            & .wrapper-border {
-                ${viraDisabledStyles}
+            .readonly-value {
+                overflow-wrap: anywhere;
             }
-            ${ViraIcon} {
-                ${viraDisabledStyles}
-            }
-            & * {
+
+            ${hostClasses['vira-select-disabled'].selector} {
                 cursor: not-allowed;
-            }
-        }
 
-        :host(.${hostClasses['vira-select-not-raw'].name}.${hostClasses['vira-select-error'].name})
-            .wrapper-border {
-            border-color: ${viraFormCssVars['vira-form-error-color'].value};
-        }
-    `,
+                & select,
+                & .wrapper-border {
+                    ${viraDisabledStyles}
+                }
+                ${ViraIcon} {
+                    ${viraDisabledStyles}
+                }
+                & * {
+                    cursor: not-allowed;
+                }
+            }
+
+            :host(
+                    .${hostClasses['vira-select-not-raw'].name}.${hostClasses['vira-select-error']
+                            .name}
+                )
+                .wrapper-border {
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+        `;
+    },
     init({state, updateState, host}) {
         state.cleanupListeners?.();
 

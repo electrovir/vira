@@ -56,53 +56,55 @@ export const ViraImage = defineViraElement<{
         imageLoad: defineElementEvent<void>(),
         imageError: defineElementEvent<unknown>(),
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline-flex;
-            overflow: hidden;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            border-radius: inherit;
-            min-height: 100px;
-            min-width: 100px;
-        }
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline-flex;
+                overflow: hidden;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                border-radius: inherit;
+                min-height: 100px;
+                min-width: 100px;
+            }
 
-        img {
-            width: 100%;
-            height: auto;
-            flex-shrink: 0;
-        }
-        ${hostClasses['vira-image-height-constrained'].selector} {
-            flex-direction: row;
-        }
+            img {
+                width: 100%;
+                height: auto;
+                flex-shrink: 0;
+            }
+            ${hostClasses['vira-image-height-constrained'].selector} {
+                flex-direction: row;
+            }
 
-        ${hostClasses['vira-image-height-constrained'].selector} img {
-            width: auto;
-            height: 100%;
-        }
+            ${hostClasses['vira-image-height-constrained'].selector} img {
+                width: auto;
+                height: 100%;
+            }
 
-        .status-wrapper {
-            overflow: hidden;
-            border-radius: inherit;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            .status-wrapper {
+                overflow: hidden;
+                border-radius: inherit;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        .error {
-            color: red;
-        }
+            .error {
+                color: red;
+            }
 
-        .hidden {
-            display: none;
-        }
-    `,
+            .hidden {
+                display: none;
+            }
+        `;
+    },
     render({inputs, state, updateState, dispatch, events, slotNames}) {
         /**
          * Saved off for use in the image listeners. This is used to eliminate race conditions

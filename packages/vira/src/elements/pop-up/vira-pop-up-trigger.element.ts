@@ -135,72 +135,74 @@ export const ViraPopUpTrigger = defineViraElement<
         'vira-pop-up-trigger-inside-focus': ({inputs}) => !!inputs.useInsideFocus,
         'vira-pop-up-trigger-outside-focus': ({inputs}) => !inputs.useInsideFocus,
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline-flex;
-            box-sizing: border-box;
-            vertical-align: middle;
-            position: relative;
-            max-width: 100%;
-        }
-
-        .dropdown-wrapper {
-            ${noNativeFormStyles};
-            cursor: pointer;
-            max-width: 100%;
-            position: relative;
-            flex-grow: 1;
-            box-sizing: border-box;
-        }
-
-        ${hostClasses['vira-pop-up-trigger-inside-focus'].selector} .dropdown-wrapper {
-            ${createFocusStyles({
-                renderInside: true,
-            })}
-        }
-        ${hostClasses['vira-pop-up-trigger-outside-focus'].selector} .dropdown-wrapper {
-            ${createFocusStyles()}
-        }
-
-        .dropdown-trigger {
-            box-sizing: border-box;
-            ${noUserSelect};
-        }
-
-        ${hostClasses['vira-pop-up-trigger-disabled'].selector} {
-            ${viraDisabledStyles}
-            pointer-events: auto;
-        }
-
-        ${hostClasses['vira-pop-up-trigger-disabled'].selector} .dropdown-wrapper {
-            pointer-events: none;
-        }
-
-        .pop-up-positioner {
-            position: absolute;
-            pointer-events: none;
-            display: flex;
-            box-sizing: border-box;
-            flex-direction: column;
-            align-items: flex-start;
-
-            /* highest possible z-index */
-            z-index: 2147483647;
-
-            & > * {
-                pointer-events: auto;
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline-flex;
+                box-sizing: border-box;
+                vertical-align: middle;
+                position: relative;
                 max-width: 100%;
             }
 
-            &.right-aligned {
-                align-items: flex-end;
+            .dropdown-wrapper {
+                ${noNativeFormStyles};
+                cursor: pointer;
+                max-width: 100%;
+                position: relative;
+                flex-grow: 1;
+                box-sizing: border-box;
             }
-        }
 
-        .open-upwards .pop-up-positioner {
-            flex-direction: column-reverse;
-        }
-    `,
+            ${hostClasses['vira-pop-up-trigger-inside-focus'].selector} .dropdown-wrapper {
+                ${createFocusStyles({
+                    renderInside: true,
+                })}
+            }
+            ${hostClasses['vira-pop-up-trigger-outside-focus'].selector} .dropdown-wrapper {
+                ${createFocusStyles()}
+            }
+
+            .dropdown-trigger {
+                box-sizing: border-box;
+                ${noUserSelect};
+            }
+
+            ${hostClasses['vira-pop-up-trigger-disabled'].selector} {
+                ${viraDisabledStyles}
+                pointer-events: auto;
+            }
+
+            ${hostClasses['vira-pop-up-trigger-disabled'].selector} .dropdown-wrapper {
+                pointer-events: none;
+            }
+
+            .pop-up-positioner {
+                position: absolute;
+                pointer-events: none;
+                display: flex;
+                box-sizing: border-box;
+                flex-direction: column;
+                align-items: flex-start;
+
+                /* highest possible z-index */
+                z-index: 2147483647;
+
+                & > * {
+                    pointer-events: auto;
+                    max-width: 100%;
+                }
+
+                &.right-aligned {
+                    align-items: flex-end;
+                }
+            }
+
+            .open-upwards .pop-up-positioner {
+                flex-direction: column-reverse;
+            }
+        `;
+    },
     events: {
         navSelect: defineElementEvent<Coords>(),
         /**

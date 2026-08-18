@@ -604,9 +604,9 @@ export const ViraJsonForm = defineViraElement<
 
                 const fallback = createDefaultForJsonType(onlyType);
                 const pendingValue = getPendingArrayValue(pathKey, fallback);
-                const inlineEditor = renderInlineValueEditor(onlyType, pendingValue, (value) =>
-                    setPendingArrayValue(pathKey, value),
-                );
+                const inlineEditor = renderInlineValueEditor(onlyType, pendingValue, (value) => {
+                    return setPendingArrayValue(pathKey, value);
+                });
                 return html`
                     ${inlineEditor}
                     ${renderPlusButton({
@@ -1133,11 +1133,11 @@ export const ViraJsonForm = defineViraElement<
                     <div class="json-validation-errors">
                         <div>Value does not match schema:</div>
                         <ul>
-                            ${validationErrors.map(
-                                (errorMessage) => html`
+                            ${validationErrors.map((errorMessage) => {
+                                return html`
                                     <li>${errorMessage}</li>
-                                `,
-                            )}
+                                `;
+                            })}
                         </ul>
                     </div>
                 </${ViraError}>

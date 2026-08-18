@@ -32,29 +32,31 @@ export const ViraProgress = defineViraElement<
         'vira-progress-border-radius': '99999999px',
         'vira-progress-height': '8px',
     },
-    styles: ({cssVars}) => css`
-        :host {
-            /* Default width that can easily be overridden because it's applied on the host. */
-            width: 100px;
-            height: ${cssVars['vira-progress-height'].value};
-            display: inline-flex;
-            align-items: center;
-            border-radius: ${cssVars['vira-progress-border-radius'].value};
-            color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
-            overflow: hidden;
-        }
+    styles: ({cssVars}) => {
+        return css`
+            :host {
+                /* Default width that can easily be overridden because it's applied on the host. */
+                width: 100px;
+                height: ${cssVars['vira-progress-height'].value};
+                display: inline-flex;
+                align-items: center;
+                border-radius: ${cssVars['vira-progress-border-radius'].value};
+                color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+                overflow: hidden;
+            }
 
-        .progress-bar {
-            background-color: currentColor;
-            height: 100%;
-        }
+            .progress-bar {
+                background-color: currentColor;
+                height: 100%;
+            }
 
-        .background-bar {
-            background-color: ${viraFormCssVars['vira-form-filled-background-color'].value};
-            height: 100%;
-            flex-grow: 1;
-        }
-    `,
+            .background-bar {
+                background-color: ${viraFormCssVars['vira-form-filled-background-color'].value};
+                height: 100%;
+                flex-grow: 1;
+            }
+        `;
+    },
     render({inputs, host}) {
         const min = inputs.min || 0;
         const max = inputs.max || 100;

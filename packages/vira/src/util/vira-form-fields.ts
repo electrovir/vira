@@ -1,6 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augment-vir/common';
-import {type FullDate} from 'date-vir';
+import {type FullDate, type Timezone} from 'date-vir';
 import {type HtmlInterpolation} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {type ViraSelectOption} from './vira-select-option.js';
@@ -135,7 +135,7 @@ export type ViraFormField =
           /** Upper bound for selectable dates. Defaults to 10 years from now when omitted. */
           max: FullDate;
           /** Timezone used to interpret the selected date. Defaults to the user's timezone. */
-          timezone: string;
+          timezone: Timezone;
           /** Only show the date part of the selected date when in readonly mode. */
           showDateOnly: boolean;
           /** Only show the time part of the selected date when in readonly mode. */

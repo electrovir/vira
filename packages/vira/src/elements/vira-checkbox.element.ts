@@ -76,126 +76,128 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         'vira-checkbox-filled-checked': ({inputs}) => !!inputs.fillWhenChecked,
         'vira-checkbox-filled-unchecked': ({inputs}) => !!inputs.fillWhenUnchecked,
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline-flex;
-        }
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline-flex;
+            }
 
-        .custom-checkbox {
-            height: 24px;
-            aspect-ratio: 1;
-            box-sizing: border-box;
-        }
+            .custom-checkbox {
+                height: 24px;
+                aspect-ratio: 1;
+                box-sizing: border-box;
+            }
 
-        ${ViraIcon} {
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            ${viraIconCssVars['vira-icon-stroke-width'].name}: 3px;
-            opacity: 0;
-        }
+            ${ViraIcon} {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                ${viraIconCssVars['vira-icon-stroke-width'].name}: 3px;
+                opacity: 0;
+            }
 
-        ${hostClasses['vira-checkbox-filled-checked'].selector} {
-            & .custom-checkbox.checked {
-                color: ${viraFormCssVars['vira-form-background-color'].value};
-                background-color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+            ${hostClasses['vira-checkbox-filled-checked'].selector} {
+                & .custom-checkbox.checked {
+                    color: ${viraFormCssVars['vira-form-background-color'].value};
+                    background-color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
+                }
+
+                label {
+                    &:not(.disabled):hover .custom-checkbox.checked {
+                        background-color: ${viraFormCssVars['vira-form-accent-primary-hover-color']
+                            .value};
+                    }
+
+                    &:not(.disabled):active .custom-checkbox.checked {
+                        background-color: ${viraFormCssVars['vira-form-accent-primary-active-color']
+                            .value};
+                    }
+                }
+            }
+            ${hostClasses['vira-checkbox-filled-unchecked'].selector} {
+                & .custom-checkbox:not(.checked) {
+                    color: ${viraFormCssVars['vira-form-background-color'].value};
+                    background-color: ${viraFormCssVars['vira-form-error-color'].value};
+                }
+
+                label {
+                    &:not(.disabled):hover .custom-checkbox:not(.checked) {
+                        background-color: ${viraFormCssVars['vira-form-error-hover-color'].value};
+                    }
+
+                    &:not(.disabled):active .custom-checkbox:not(.checked) {
+                        background-color: ${viraFormCssVars['vira-form-error-active-color'].value};
+                    }
+                }
             }
 
             label {
-                &:not(.disabled):hover .custom-checkbox.checked {
-                    background-color: ${viraFormCssVars['vira-form-accent-primary-hover-color']
-                        .value};
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+
+                &.disabled {
+                    cursor: not-allowed;
                 }
 
-                &:not(.disabled):active .custom-checkbox.checked {
-                    background-color: ${viraFormCssVars['vira-form-accent-primary-active-color']
-                        .value};
-                }
-            }
-        }
-        ${hostClasses['vira-checkbox-filled-unchecked'].selector} {
-            & .custom-checkbox:not(.checked) {
-                color: ${viraFormCssVars['vira-form-background-color'].value};
-                background-color: ${viraFormCssVars['vira-form-error-color'].value};
-            }
+                & .label-text {
+                    cursor: pointer;
+                    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
 
-            label {
-                &:not(.disabled):hover .custom-checkbox:not(.checked) {
-                    background-color: ${viraFormCssVars['vira-form-error-hover-color'].value};
+                    &.empty {
+                        display: none;
+                    }
                 }
 
-                &:not(.disabled):active .custom-checkbox:not(.checked) {
-                    background-color: ${viraFormCssVars['vira-form-error-active-color'].value};
+                &:not(.disabled):hover .custom-checkbox {
+                    background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+                }
+                &:not(.disabled):active .custom-checkbox {
+                    background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
                 }
             }
-        }
 
-        label {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-
-            &.disabled {
-                cursor: not-allowed;
-            }
-
-            & .label-text {
+            /* The visible custom box */
+            .custom-checkbox {
+                flex-shrink: 0;
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                display: inline-block;
+                position: relative;
                 cursor: pointer;
-                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
 
-                &.empty {
-                    display: none;
+                ${createFocusStyles({
+                    elementBorderSize: '1px',
+                })}
+
+                &.checked {
+                    & ${ViraIcon} {
+                        opacity: 1;
+                    }
+                }
+
+                &.error {
+                    border-color: ${viraFormCssVars['vira-form-error-color'].value};
+                }
+
+                &.disabled {
+                    ${viraDisabledStyles};
                 }
             }
 
-            &:not(.disabled):hover .custom-checkbox {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
-            }
-            &:not(.disabled):active .custom-checkbox {
-                background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
-            }
-        }
+            ${hostClasses['vira-checkbox-horizontal'].selector} label {
+                flex-direction: row-reverse;
+                align-items: center;
+                gap: 8px;
 
-        /* The visible custom box */
-        .custom-checkbox {
-            flex-shrink: 0;
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            display: inline-block;
-            position: relative;
-            cursor: pointer;
-
-            ${createFocusStyles({
-                elementBorderSize: '1px',
-            })}
-
-            &.checked {
-                & ${ViraIcon} {
-                    opacity: 1;
+                & .label-text {
+                    padding-block: calc((24px - 1em) / 2);
                 }
             }
-
-            &.error {
-                border-color: ${viraFormCssVars['vira-form-error-color'].value};
-            }
-
-            &.disabled {
-                ${viraDisabledStyles};
-            }
-        }
-
-        ${hostClasses['vira-checkbox-horizontal'].selector} label {
-            flex-direction: row-reverse;
-            align-items: center;
-            gap: 8px;
-
-            & .label-text {
-                padding-block: calc((24px - 1em) / 2);
-            }
-        }
-    `,
+        `;
+    },
     events: {
         valueChange: defineElementEvent<boolean>(),
     },

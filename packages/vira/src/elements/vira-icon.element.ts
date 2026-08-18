@@ -20,34 +20,36 @@ export const ViraIcon = defineViraElement<{
         /** Ignores the given icon's embedded size and causes the <svg> element to fill its parent. */
         'vira-icon-fit-container': ({inputs}) => !!inputs.fitContainer || !!inputs.icon?.size,
     },
-    styles: ({hostClasses}) => css`
-        :host {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-        }
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+            }
 
-        svg {
-            /*
+            svg {
+                /*
                 svg is set to inline by default which causes weird padding under the image.
                 See: https://stackoverflow.com/a/34952703
             */
-            display: block;
-        }
-
-        svg * {
-            vector-effect: non-scaling-stroke;
-        }
-
-        ${hostClasses['vira-icon-fit-container'].selector} {
-            > *,
-            svg {
-                height: 100%;
-                width: 100%;
+                display: block;
             }
-        }
-    `,
+
+            svg * {
+                vector-effect: non-scaling-stroke;
+            }
+
+            ${hostClasses['vira-icon-fit-container'].selector} {
+                > *,
+                svg {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        `;
+    },
     render({inputs, host}) {
         if (!inputs.icon) {
             return '';

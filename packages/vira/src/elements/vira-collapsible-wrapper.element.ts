@@ -39,52 +39,54 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
     },
     slotNames: ['vira-collapsible-wrapper-header'],
-    styles: ({hostClasses}) => css`
-        :host {
-            display: flex;
-            flex-direction: column;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .header-wrapper {
-            ${noNativeFormStyles};
-            cursor: pointer;
-        }
-
-        .content-wrapper,
-        .collapsing-element {
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-        }
-
-        .collapsing-element {
-            transition: height ${viraAnimationDurations['vira-pretty-animation-duration'].value};
-            overflow: hidden;
-
-            &.collapsed {
-                ${noUserSelect}
+    styles: ({hostClasses}) => {
+        return css`
+            :host {
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+                box-sizing: border-box;
             }
-        }
 
-        .content-wrapper.hidden-content {
-            display: none;
-        }
+            .header-wrapper {
+                ${noNativeFormStyles};
+                cursor: pointer;
+            }
 
-        @media print {
-            :host(.${hostClasses['vira-collapsible-wrapper-expand-on-print'].name})
-                .collapsing-element {
-                height: auto !important;
-                overflow: visible !important;
-                transition: none !important;
+            .content-wrapper,
+            .collapsing-element {
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+            }
 
-                & .content-wrapper.hidden-content {
-                    display: flex !important;
+            .collapsing-element {
+                transition: height ${viraAnimationDurations['vira-pretty-animation-duration'].value};
+                overflow: hidden;
+
+                &.collapsed {
+                    ${noUserSelect}
                 }
             }
-        }
-    `,
+
+            .content-wrapper.hidden-content {
+                display: none;
+            }
+
+            @media print {
+                :host(.${hostClasses['vira-collapsible-wrapper-expand-on-print'].name})
+                    .collapsing-element {
+                    height: auto !important;
+                    overflow: visible !important;
+                    transition: none !important;
+
+                    & .content-wrapper.hidden-content {
+                        display: flex !important;
+                    }
+                }
+            }
+        `;
+    },
     events: {
         expandChange: defineElementEvent<boolean>(),
     },

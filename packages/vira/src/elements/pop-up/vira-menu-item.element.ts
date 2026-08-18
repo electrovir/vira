@@ -65,78 +65,80 @@ export const ViraMenuItem = defineViraElement<
         'vira-menu-item-padding': '6px 8px',
         'vira-menu-item-border-radius': '4px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            display: flex;
-            flex-shrink: 0;
-            ${noUserSelect};
-            box-sizing: border-box;
-            max-width: 100%;
-            gap: ${cssVars['vira-menu-item-icon-gap'].value};
-            overflow: hidden;
-            padding: ${cssVars['vira-menu-item-padding'].value};
-            border-radius: ${cssVars['vira-menu-item-border-radius'].value};
-            align-items: center;
-            text-align: left;
-        }
-
-        ${hostClasses['vira-menu-item-disabled'].selector}${hostClasses[
-            'vira-menu-item-default-styles'
-        ].selector} {
-            cursor: not-allowed;
-
-            & .slot-wrapper,
-            & ${ViraIcon} {
-                opacity: 0.3;
-                pointer-events: none;
-            }
-        }
-
-        :host(:focus),
-        :host(:active) {
-            outline: none;
-        }
-
-        ${hostClasses['vira-menu-item-enabled'].selector}${hostClasses[
-            'vira-menu-item-default-styles'
-        ].selector} {
-            cursor: pointer;
-
-            &:host(:focus) {
-                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                display: flex;
+                flex-shrink: 0;
+                ${noUserSelect};
+                box-sizing: border-box;
+                max-width: 100%;
+                gap: ${cssVars['vira-menu-item-icon-gap'].value};
+                overflow: hidden;
+                padding: ${cssVars['vira-menu-item-padding'].value};
+                border-radius: ${cssVars['vira-menu-item-border-radius'].value};
+                align-items: center;
+                text-align: left;
             }
 
-            &:host(:active) {
-                background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
+            ${hostClasses['vira-menu-item-disabled'].selector}${hostClasses[
+                'vira-menu-item-default-styles'
+            ].selector} {
+                cursor: not-allowed;
+
+                & .slot-wrapper,
+                & ${ViraIcon} {
+                    opacity: 0.3;
+                    pointer-events: none;
+                }
             }
-        }
 
-        ${ViraIcon} {
-            width: 24px;
-            aspect-ratio: 1;
-            align-items: center;
-            justify-content: center;
-        }
+            :host(:focus),
+            :host(:active) {
+                outline: none;
+            }
 
-        ${hostClasses['vira-menu-item-default-icon'].selector} {
+            ${hostClasses['vira-menu-item-enabled'].selector}${hostClasses[
+                'vira-menu-item-default-styles'
+            ].selector} {
+                cursor: pointer;
+
+                &:host(:focus) {
+                    background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+                }
+
+                &:host(:active) {
+                    background-color: ${viraFormCssVars['vira-form-selection-active-color'].value};
+                }
+            }
+
             ${ViraIcon} {
-                visibility: hidden;
+                width: 24px;
+                aspect-ratio: 1;
+                align-items: center;
+                justify-content: center;
             }
-        }
 
-        ${hostClasses['vira-menu-item-selected'].selector} ${ViraIcon} {
-            visibility: visible;
-        }
+            ${hostClasses['vira-menu-item-default-icon'].selector} {
+                ${ViraIcon} {
+                    visibility: hidden;
+                }
+            }
 
-        .slot-wrapper {
-            display: flex;
-            flex-grow: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            min-width: 0;
-        }
-    `,
+            ${hostClasses['vira-menu-item-selected'].selector} ${ViraIcon} {
+                visibility: visible;
+            }
+
+            .slot-wrapper {
+                display: flex;
+                flex-grow: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                min-width: 0;
+            }
+        `;
+    },
     init({state, updateState, host, inputs, dispatch, events}) {
         host.setAttribute('role', 'menuitem');
         host.setAttribute('tabindex', inputs.disabled ? '-1' : '0');

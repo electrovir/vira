@@ -204,12 +204,14 @@ export const ViraButton = defineViraElement<
         'vira-button-with-menu-caret': ({inputs}) => !!inputs.showMenuCaret,
 
         'vira-button-size-large': ({inputs}) => inputs.buttonSize === ViraSize.Large,
-        'vira-button-size-medium': ({inputs}) =>
-            !inputs.buttonSize || inputs.buttonSize === ViraSize.Medium,
+        'vira-button-size-medium': ({inputs}) => {
+            return !inputs.buttonSize || inputs.buttonSize === ViraSize.Medium;
+        },
         'vira-button-size-small': ({inputs}) => inputs.buttonSize === ViraSize.Small,
 
-        'vira-button-emphasis-standard': ({inputs}) =>
-            !inputs.buttonEmphasis || inputs.buttonEmphasis === ViraEmphasis.Standard,
+        'vira-button-emphasis-standard': ({inputs}) => {
+            return !inputs.buttonEmphasis || inputs.buttonEmphasis === ViraEmphasis.Standard;
+        },
         'vira-button-emphasis-subtle': ({inputs}) => inputs.buttonEmphasis === ViraEmphasis.Subtle,
 
         ...arrayToObject(

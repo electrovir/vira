@@ -58,86 +58,88 @@ export const ViraCollapsibleCard = defineViraElement<
     cssVars: {
         'vira-collapsible-card-content-gap': '16px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            display: inline-flex;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        ${hostClasses['vira-collapsible-card-expanded'].selector} .open-caret {
-            transform: rotate(180deg);
-        }
-
-        ${ViraCollapsibleWrapper} {
-            flex-grow: 1;
-            max-width: 100%;
-        }
-
-        ${hostClasses['vira-collapsible-card-card-styles'].selector} {
-            border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
-
-            & ${ViraCollapsibleWrapper} {
-                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-                border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                display: inline-flex;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
             }
 
-            & .card-header {
-                padding: 8px 16px;
+            ${hostClasses['vira-collapsible-card-expanded'].selector} .open-caret {
+                transform: rotate(180deg);
             }
 
-            & .card-content {
-                padding: 8px 16px 8px 16px;
-            }
-        }
-
-        ${hostClasses['vira-collapsible-card-expansion-blocked'].selector} {
-            & .header-wrapper {
-                cursor: default;
-            }
-        }
-
-        .card-header {
-            font-weight: ${viraFontCssVars['vira-font-weight-bold'].value};
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-
-            & .header-filler {
-                flex-grow: 1;
-            }
-        }
-
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: ${cssVars['vira-collapsible-card-content-gap'].value};
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-
-        @media print {
             ${ViraCollapsibleWrapper} {
-                border: none !important;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+
+            ${hostClasses['vira-collapsible-card-card-styles'].selector} {
+                border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
+
+                & ${ViraCollapsibleWrapper} {
+                    border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                    border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
+                }
+
+                & .card-header {
+                    padding: 8px 16px;
+                }
+
+                & .card-content {
+                    padding: 8px 16px 8px 16px;
+                }
+            }
+
+            ${hostClasses['vira-collapsible-card-expansion-blocked'].selector} {
+                & .header-wrapper {
+                    cursor: default;
+                }
             }
 
             .card-header {
-                padding: 8px 0 !important;
+                font-weight: ${viraFontCssVars['vira-font-weight-bold'].value};
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+
+                & .header-filler {
+                    flex-grow: 1;
+                }
             }
 
             .card-content {
-                overflow: visible !important;
-                padding: 8px 0 16px 0 !important;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: ${cssVars['vira-collapsible-card-content-gap'].value};
+                overflow-x: auto;
+                overflow-y: hidden;
             }
 
-            .open-caret {
-                display: none;
+            @media print {
+                ${ViraCollapsibleWrapper} {
+                    border: none !important;
+                }
+
+                .card-header {
+                    padding: 8px 0 !important;
+                }
+
+                .card-content {
+                    overflow: visible !important;
+                    padding: 8px 0 16px 0 !important;
+                }
+
+                .open-caret {
+                    display: none;
+                }
             }
-        }
-    `,
+        `;
+    },
     slotNames: [
         'vira-collapsible-card-header',
     ],

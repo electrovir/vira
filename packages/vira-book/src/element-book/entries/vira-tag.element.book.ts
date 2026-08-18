@@ -81,16 +81,16 @@ export const viraTagBookPage = defineBookPage({
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        ${viraColorVariants.map(
-                                            (color) => html`
+                                        ${viraColorVariants.map((color) => {
+                                            return html`
                                                 <th>${color}</th>
-                                            `,
-                                        )}
+                                            `;
+                                        })}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${viraEmphasisVariants.map(
-                                        (emphasis) => html`
+                                    ${viraEmphasisVariants.map((emphasis) => {
+                                        return html`
                                             <tr>
                                                 <th>${emphasis}</th>
                                                 ${viraColorVariants.map((color) => {
@@ -150,8 +150,8 @@ export const viraTagBookPage = defineBookPage({
                                                     `;
                                                 })}
                                             </tr>
-                                        `,
-                                    )}
+                                        `;
+                                    })}
                                 </tbody>
                             </table>
                         `;
@@ -172,14 +172,14 @@ export const viraTagBookPage = defineBookPage({
             render() {
                 return html`
                     <div class="row">
-                        ${Object.values(ViraThemeColorName).map(
-                            (color) => html`
+                        ${Object.values(ViraThemeColorName).map((color) => {
+                            return html`
                                 <${ViraTag.assign({
                                     text: color,
                                     color,
                                 })}></${ViraTag}>
-                            `,
-                        )}
+                            `;
+                        })}
                     </div>
                 `;
             },

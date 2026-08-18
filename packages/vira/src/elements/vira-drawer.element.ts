@@ -65,122 +65,126 @@ export const ViraDrawer = defineViraElement<
         'vira-drawer-backdrop-filter': 'blur(3px)',
         'vira-drawer-max-height': '80dvh',
     },
-    styles: ({cssVars, hostClasses}) => css`
-        :host {
-            display: contents;
-        }
-
-        ${hostClasses['vira-drawer-dragging'].selector} {
-            ${noUserSelect};
-        }
-
-        h1 {
-            ${noNativeSpacing};
-        }
-
-        dialog {
-            ${colorCss(viraTheme.colors[themeDefaultKey])}
-            border: none;
-            padding: 0;
-            overflow: hidden;
-            position: fixed;
-            inset: auto 0 0 0;
-            margin: 0;
-            width: 100%;
-            max-width: 100%;
-            max-height: ${cssVars['vira-drawer-max-height'].value};
-            border-radius: 16px 16px 0 0;
-            ${viraShadows.modal}
-            transition: transform ${viraAnimationDurations['vira-pretty-animation-duration']
-                .value} ease;
-
-            &[open] {
-                display: flex;
-                flex-direction: column;
+    styles: ({cssVars, hostClasses}) => {
+        return css`
+            :host {
+                display: contents;
             }
 
-            &::backdrop {
-                background: ${viraFormCssVars['vira-form-modal-backdrop-color'].value};
-                backdrop-filter: ${cssVars['vira-drawer-backdrop-filter'].value};
+            ${hostClasses['vira-drawer-dragging'].selector} {
+                ${noUserSelect};
             }
 
-            & .drawer-content-wrapper {
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-
-                & .drag-handle-wrapper {
-                    display: flex;
-                    justify-content: center;
-                    padding: 8px 0 0;
-                    cursor: grab;
-                    touch-action: none;
-
-                    &:active {
-                        cursor: grabbing;
-                    }
-
-                    & .drag-handle {
-                        width: 36px;
-                        height: 4px;
-                        border-radius: 2px;
-                        background-color: ${viraFormCssVars['vira-form-secondary-body-foreground']
-                            .value};
-                        opacity: 0.5;
-                    }
-                }
-
-                & .header {
-                    padding: 8px 24px 16px;
-                    display: flex;
-                    gap: 16px;
-                    align-items: flex-start;
-
-                    & .header-text-wrapper {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 4px;
-                        align-self: center;
-                        flex-grow: 1;
-                        overflow: hidden;
-
-                        & h1 {
-                            font-size: 20px;
-                        }
-                    }
-
-                    & button.close {
-                        ${noNativeFormStyles};
-                        flex-shrink: 0;
-                        cursor: pointer;
-                        padding: 4px;
-                        border-radius: ${viraFormCssVars['vira-form-radius'].value};
-
-                        &:hover {
-                            background-color: ${viraFormCssVars['vira-form-selection-hover-color']
-                                .value};
-                        }
-
-                        & ${ViraIcon} {
-                            display: flex;
-                        }
-                    }
-                }
-
-                & .body {
-                    padding: 0 24px 24px;
-                    overflow: auto;
-                    overscroll-behavior: contain;
-                }
+            h1 {
+                ${noNativeSpacing};
             }
-        }
 
-        ${hostClasses['vira-drawer-no-content-padding'].selector} {
-            & dialog .drawer-content-wrapper .body {
+            dialog {
+                ${colorCss(viraTheme.colors[themeDefaultKey])}
+                border: none;
                 padding: 0;
+                overflow: hidden;
+                position: fixed;
+                inset: auto 0 0 0;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+                max-height: ${cssVars['vira-drawer-max-height'].value};
+                border-radius: 16px 16px 0 0;
+                ${viraShadows.modal}
+                transition: transform ${viraAnimationDurations['vira-pretty-animation-duration']
+                    .value} ease;
+
+                &[open] {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                &::backdrop {
+                    background: ${viraFormCssVars['vira-form-modal-backdrop-color'].value};
+                    backdrop-filter: ${cssVars['vira-drawer-backdrop-filter'].value};
+                }
+
+                & .drawer-content-wrapper {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    & .drag-handle-wrapper {
+                        display: flex;
+                        justify-content: center;
+                        padding: 8px 0 0;
+                        cursor: grab;
+                        touch-action: none;
+
+                        &:active {
+                            cursor: grabbing;
+                        }
+
+                        & .drag-handle {
+                            width: 36px;
+                            height: 4px;
+                            border-radius: 2px;
+                            background-color: ${viraFormCssVars[
+                                'vira-form-secondary-body-foreground'
+                            ].value};
+                            opacity: 0.5;
+                        }
+                    }
+
+                    & .header {
+                        padding: 8px 24px 16px;
+                        display: flex;
+                        gap: 16px;
+                        align-items: flex-start;
+
+                        & .header-text-wrapper {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
+                            align-self: center;
+                            flex-grow: 1;
+                            overflow: hidden;
+
+                            & h1 {
+                                font-size: 20px;
+                            }
+                        }
+
+                        & button.close {
+                            ${noNativeFormStyles};
+                            flex-shrink: 0;
+                            cursor: pointer;
+                            padding: 4px;
+                            border-radius: ${viraFormCssVars['vira-form-radius'].value};
+
+                            &:hover {
+                                background-color: ${viraFormCssVars[
+                                    'vira-form-selection-hover-color'
+                                ].value};
+                            }
+
+                            & ${ViraIcon} {
+                                display: flex;
+                            }
+                        }
+                    }
+
+                    & .body {
+                        padding: 0 24px 24px;
+                        overflow: auto;
+                        overscroll-behavior: contain;
+                    }
+                }
             }
-        }
-    `,
+
+            ${hostClasses['vira-drawer-no-content-padding'].selector} {
+                & dialog .drawer-content-wrapper .body {
+                    padding: 0;
+                }
+            }
+        `;
+    },
     render({inputs, state, updateState, events, dispatch, slotNames}) {
         if (state.dialogElement && inputs.open !== state.dialogElement.open) {
             if (inputs.open) {
@@ -196,11 +200,11 @@ export const ViraDrawer = defineViraElement<
                 previousOpenValue: inputs.open,
             });
             if (inputs.open) {
-                const removers = globalEventsToCloseDrawerOn.map((eventName) =>
-                    listenToGlobal(eventName, () => {
+                const removers = globalEventsToCloseDrawerOn.map((eventName) => {
+                    return listenToGlobal(eventName, () => {
                         dispatch(new events.drawerClose());
-                    }),
-                );
+                    });
+                });
 
                 updateState({
                     cleanupListeners: () => {

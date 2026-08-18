@@ -30,21 +30,23 @@ export const ViraCard = defineViraElement<{
         'vira-card-border': css`1px solid ${viraFormCssVars['vira-form-border-color'].value}`,
         'vira-card-padding': '24px',
     },
-    styles: ({hostClasses, cssVars}) => css`
-        :host {
-            display: block;
-            border: ${cssVars['vira-card-border'].value};
-            border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
-            padding: ${cssVars['vira-card-padding'].value};
-        }
+    styles: ({hostClasses, cssVars}) => {
+        return css`
+            :host {
+                display: block;
+                border: ${cssVars['vira-card-border'].value};
+                border-radius: ${viraFormCssVars['vira-form-wrapper-radius'].value};
+                padding: ${cssVars['vira-card-padding'].value};
+            }
 
-        ${hostClasses['vira-card-error'].selector} {
-            border-color: ${viraFormCssVars['vira-form-error-color'].value};
-        }
-        ${hostClasses['vira-card-success'].selector} {
-            border-color: ${viraFormCssVars['vira-form-success-color'].value};
-        }
-    `,
+            ${hostClasses['vira-card-error'].selector} {
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+            ${hostClasses['vira-card-success'].selector} {
+                border-color: ${viraFormCssVars['vira-form-success-color'].value};
+            }
+        `;
+    },
     render() {
         return html`
             <slot></slot>

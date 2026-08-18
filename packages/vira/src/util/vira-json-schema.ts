@@ -220,12 +220,12 @@ export function expandSchemaBranches(
     if (branches.length === 0) {
         return [resolved];
     }
-    return branches.flatMap((branch) =>
-        expandSchemaBranches(branch, {
+    return branches.flatMap((branch) => {
+        return expandSchemaBranches(branch, {
             root: context.root,
             seenRefs: context.seenRefs,
-        }),
-    );
+        });
+    });
 }
 
 /**
@@ -675,12 +675,12 @@ function validateBranch({
         return;
     }
     if ('enum' in branch && check.isArray(branch.enum)) {
-        const matched = branch.enum.some((entry) =>
-            deepEqualsJson({
+        const matched = branch.enum.some((entry) => {
+            return deepEqualsJson({
                 a: value,
                 b: entry as JsonValue,
-            }),
-        );
+            });
+        });
         if (!matched) {
             errors.push(`${formatPathLabel(path)} must be one of the enum values.`);
             return;
@@ -765,12 +765,12 @@ function deepEqualsJson({a, b}: Readonly<{a: JsonValue; b: JsonValue}>): boolean
     } else if (check.isArray(a) && check.isArray(b)) {
         return (
             a.length === b.length &&
-            a.every((entry, i) =>
-                deepEqualsJson({
+            a.every((entry, i) => {
+                return deepEqualsJson({
                     a: entry,
                     b: b[i] ?? null,
-                }),
-            )
+                });
+            })
         );
     } else if (check.isObject(a) && check.isObject(b)) {
         const aKeys = Object.keys(a);
@@ -778,12 +778,12 @@ function deepEqualsJson({a, b}: Readonly<{a: JsonValue; b: JsonValue}>): boolean
         if (aKeys.length !== bKeys.length) {
             return false;
         }
-        return aKeys.every((key) =>
-            deepEqualsJson({
+        return aKeys.every((key) => {
+            return deepEqualsJson({
                 a: a[key] ?? null,
                 b: b[key] ?? null,
-            }),
-        );
+            });
+        });
     } else {
         return false;
     }

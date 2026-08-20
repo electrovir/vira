@@ -36819,16 +36819,27 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                 }
             }
 
-            ${e[`vira-modal-no-content-padding`].selector} {
-                & dialog .modal-content-wrapper .body {
-                    padding: 0;
-                }
-            }
-
             ${e[`vira-modal-phone-size`].selector} {
                 & dialog {
                     width: 100dvw;
                     max-width: 100dvw;
+                    /* Phones have little vertical space to spare, so nearly all of it goes to the
+                       modal instead of the desktop-sized gap above and below it. */
+                    max-height: calc(100dvh - 24px);
+
+                    & .modal-content-wrapper {
+                        & .header,
+                        & .body {
+                            padding: 12px 16px;
+                        }
+                    }
+                }
+            }
+
+            /* Placed last so it also overrides the phone-size body padding above. */
+            ${e[`vira-modal-no-content-padding`].selector} {
+                & dialog .modal-content-wrapper .body {
+                    padding: 0;
                 }
             }
         `,render({inputs:e,state:t,updateState:n,events:r,dispatch:i,slotNames:a}){if(t.dialogElement&&e.open!==t.dialogElement.open&&(e.open?t.dialogElement.showModal():t.dialogElement.close()),t.previousOpenValue!==e.open&&(t.cleanupListeners?.(),n({previousOpenValue:e.open}),e.open)){let e=w2.map(e=>lr(e,()=>{i(new r.modalClose)}));n({cleanupListeners:()=>{e.forEach(e=>e())}})}function o(){e.open&&(t.cleanupListeners?.(),i(new r.modalClose))}return w`

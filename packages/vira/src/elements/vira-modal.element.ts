@@ -165,16 +165,27 @@ export const ViraModal = defineViraElement<
                 }
             }
 
-            ${hostClasses['vira-modal-no-content-padding'].selector} {
-                & dialog .modal-content-wrapper .body {
-                    padding: 0;
-                }
-            }
-
             ${hostClasses['vira-modal-phone-size'].selector} {
                 & dialog {
                     width: 100dvw;
                     max-width: 100dvw;
+                    /* Phones have little vertical space to spare, so nearly all of it goes to the
+                       modal instead of the desktop-sized gap above and below it. */
+                    max-height: calc(100dvh - 24px);
+
+                    & .modal-content-wrapper {
+                        & .header,
+                        & .body {
+                            padding: 12px 16px;
+                        }
+                    }
+                }
+            }
+
+            /* Placed last so it also overrides the phone-size body padding above. */
+            ${hostClasses['vira-modal-no-content-padding'].selector} {
+                & dialog .modal-content-wrapper .body {
+                    padding: 0;
                 }
             }
         `;

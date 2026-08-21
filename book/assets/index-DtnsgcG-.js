@@ -34869,17 +34869,23 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             ${e.label}
         </option>
-    `}var b0=Y1()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`8px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
+    `}var b0=Y1()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
             :host {
                 position: relative;
                 display: inline-flex;
                 width: 223px;
+                height: 32px;
                 box-sizing: border-box;
                 color: ${M1[`vira-form-foreground-color`].value};
             }
 
+            ${e[`vira-select-has-label`].selector} {
+                height: auto;
+            }
+
             .select-wrapper {
                 ${y1};
+                height: inherit;
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
@@ -34900,6 +34906,8 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     background: none;
                     border-radius: inherit;
                     cursor: pointer;
+                    height: 100%;
+                    box-sizing: border-box;
                     /* Prevent the left pixel of text getting cut off. */
                     padding-left: 0.5px;
                     padding-right: 28px;
@@ -34991,6 +34999,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     text-align: left;
                     flex-shrink: 0;
                     flex-wrap: wrap;
+                }
+
+                & .select-wrapper {
+                    height: 32px;
                 }
             }
 
@@ -35811,17 +35823,23 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             ${e.label}
         </option>
-    `}var $=Ep()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`8px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
+    `}var $=Ep()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
             :host {
                 position: relative;
                 display: inline-flex;
                 width: 223px;
+                height: 32px;
                 box-sizing: border-box;
                 color: ${B[`vira-form-foreground-color`].value};
             }
 
+            ${e[`vira-select-has-label`].selector} {
+                height: auto;
+            }
+
             .select-wrapper {
                 ${xp};
+                height: inherit;
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
@@ -35842,6 +35860,8 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     background: none;
                     border-radius: inherit;
                     cursor: pointer;
+                    height: 100%;
+                    box-sizing: border-box;
                     /* Prevent the left pixel of text getting cut off. */
                     padding-left: 0.5px;
                     padding-right: 28px;
@@ -35933,6 +35953,10 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
                     text-align: left;
                     flex-shrink: 0;
                     flex-wrap: wrap;
+                }
+
+                & .select-wrapper {
+                    height: 32px;
                 }
             }
 

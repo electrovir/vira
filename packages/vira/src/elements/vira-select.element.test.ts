@@ -1,7 +1,7 @@
 import {assert, assertWrap} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {waitForAnimationFrame} from '@augment-vir/web';
-import {html} from 'element-vir';
+import {css, html} from 'element-vir';
 import {type ViraSelectOption} from '../util/vira-select-option.js';
 import {ViraSelect} from './vira-select.element.js';
 
@@ -17,6 +17,32 @@ const mockOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
 ];
 
 describe(ViraSelect.tagName, () => {
+    it('is 32px high by default', async () => {
+        const instance = await testWeb.render(html`
+            <${ViraSelect.assign({
+                options: mockOptions,
+                value: undefined,
+            })}></${ViraSelect}>
+        `);
+
+        assert.strictEquals(instance.getBoundingClientRect().height, 32);
+    });
+
+    it('allows consumers to set its height', async () => {
+        const instance = await testWeb.render(html`
+            <${ViraSelect.assign({
+                options: mockOptions,
+                value: undefined,
+            })}
+                style=${css`
+                    height: 26px;
+                `}
+            ></${ViraSelect}>
+        `);
+
+        assert.strictEquals(instance.getBoundingClientRect().height, 26);
+    });
+
     it('does not surface showPicker errors when clicked without user activation', async () => {
         const fixture = await testWeb.render(html`
             <div>

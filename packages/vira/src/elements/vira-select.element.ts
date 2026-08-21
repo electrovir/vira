@@ -92,12 +92,13 @@ export const ViraSelect = defineViraElement<
     },
     cssVars: {
         'vira-select-padding-horizontal': '12px',
-        'vira-select-padding-vertical': '8px',
+        'vira-select-padding-vertical': '4px',
         'vira-select-icon-padding': '44px',
     },
     hostClasses: {
         'vira-select-disabled': ({inputs}) => !!inputs.disabled,
         'vira-select-error': ({inputs}) => !!inputs.hasError,
+        'vira-select-has-label': ({inputs}) => !!inputs.label,
         'vira-select-not-raw': ({inputs}) => !inputs.rawSelect,
     },
     styles: ({hostClasses, cssVars}) => {
@@ -106,12 +107,18 @@ export const ViraSelect = defineViraElement<
                 position: relative;
                 display: inline-flex;
                 width: 223px;
+                height: 32px;
                 box-sizing: border-box;
                 color: ${viraFormCssVars['vira-form-foreground-color'].value};
             }
 
+            ${hostClasses['vira-select-has-label'].selector} {
+                height: auto;
+            }
+
             .select-wrapper {
                 ${noNativeFormStyles};
+                height: inherit;
                 max-width: 100%;
                 flex-grow: 1;
                 display: inline-flex;
@@ -132,6 +139,8 @@ export const ViraSelect = defineViraElement<
                     background: none;
                     border-radius: inherit;
                     cursor: pointer;
+                    height: 100%;
+                    box-sizing: border-box;
                     /* Prevent the left pixel of text getting cut off. */
                     padding-left: 0.5px;
                     padding-right: 28px;
@@ -226,6 +235,10 @@ export const ViraSelect = defineViraElement<
                     text-align: left;
                     flex-shrink: 0;
                     flex-wrap: wrap;
+                }
+
+                & .select-wrapper {
+                    height: 32px;
                 }
             }
 

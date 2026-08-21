@@ -10,6 +10,7 @@ import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
+import {isMouseEventOnScrollbar} from '../util/pop-up-manager.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 const globalEventsToCloseModalOn = [
@@ -240,7 +241,8 @@ export const ViraModal = defineViraElement<
                     if (
                         state.contentElement &&
                         !event.composedPath().includes(state.contentElement) &&
-                        !inputs.blockLightDismissal
+                        !inputs.blockLightDismissal &&
+                        !isMouseEventOnScrollbar(event)
                     ) {
                         /** Background click. */
                         close();

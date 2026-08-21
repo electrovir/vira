@@ -10,6 +10,7 @@ import {triggerPopUpState} from '../../util/pop-up-helpers.js';
 import {
     HidePopUpEvent,
     isInputLikeElement,
+    isMouseEventOnScrollbar,
     NavSelectEvent,
     PopUpManager,
     type ShowPopUpResult,
@@ -447,7 +448,11 @@ export const ViraPopUpTrigger = defineViraElement<
                         }
 
                         respondToClick(event);
-                    } else if (event.button === 0 && state.showPopUpResult) {
+                    } else if (
+                        event.button === 0 &&
+                        state.showPopUpResult &&
+                        !isMouseEventOnScrollbar(event)
+                    ) {
                         const dropdownTrigger = host.shadowRoot.querySelector('.dropdown-trigger');
 
                         /**

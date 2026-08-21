@@ -35,6 +35,40 @@ export function isInputLikeElement(element: Element): boolean {
 }
 
 /**
+ * Determines if a mouse event landed on a scrollbar rather than on element content. Scrollbar
+ * interactions fire mouse events on the scrolling element itself (or on `<html>` for the page
+ * scrollbar), so an outside-click check would otherwise treat dragging a scrollbar as a click away
+ * from the pop-up and dismiss it mid-drag.
+ *
+ * @category Internal
+ */
+export function isMouseEventOnScrollbar(event: Readonly<MouseEvent>): boolean {
+    const target = event.composedPath()[0];
+
+    if (!(target instanceof Element)) {
+        return false;
+    }
+
+    const rect = target.getBoundingClientRect();
+    /**
+     * `clientLeft` and `clientTop` are the border widths, which also include the scrollbar itself
+     * when it's rendered on the leading edge (RTL layouts).
+     */
+    const clientLeft = rect.left + target.clientLeft;
+    const clientTop = rect.top + target.clientTop;
+
+    const outsideHorizontally =
+        event.clientX < clientLeft || event.clientX >= clientLeft + target.clientWidth;
+    const outsideVertically =
+        event.clientY < clientTop || event.clientY >= clientTop + target.clientHeight;
+
+    return (
+        (outsideHorizontally && target.scrollHeight > target.clientHeight) ||
+        (outsideVertically && target.scrollWidth > target.clientWidth)
+    );
+}
+
+/**
  * A type used for representing a rectangle's position.
  *
  * @category Internal
@@ -230,10 +264,11 @@ export class PopUpManager {
                 'mousedown',
                 (event) => {
                     if (
-                        this.lastRootElement &&
-                        event.composedPath().includes(this.lastRootElement)
-                    ) {
                         /** Ignore clicks that came from the pop up host itself. */
+                        (this.lastRootElement &&
+                            event.composedPath().includes(this.lastRootElement)) ||
+                        isMouseEventOnScrollbar(event)
+                    ) {
                         return;
                     }
                     this.removePopUp();

@@ -100,6 +100,7 @@ export const ViraSelect = defineViraElement<
         'vira-select-error': ({inputs}) => !!inputs.hasError,
         'vira-select-has-label': ({inputs}) => !!inputs.label,
         'vira-select-not-raw': ({inputs}) => !inputs.rawSelect,
+        'vira-select-readonly': ({inputs}) => !!inputs.isReadonly,
     },
     styles: ({hostClasses, cssVars}) => {
         return css`
@@ -113,6 +114,15 @@ export const ViraSelect = defineViraElement<
             }
 
             ${hostClasses['vira-select-has-label'].selector} {
+                height: auto;
+            }
+
+            /*
+                Readonly renders plain text with no select chrome, so the input height would leave
+                the text sitting above the middle of an over-tall box. That mis-aligns it against a
+                sibling label and makes readonly select rows taller than readonly text rows.
+            */
+            ${hostClasses['vira-select-readonly'].selector} {
                 height: auto;
             }
 

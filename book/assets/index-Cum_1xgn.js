@@ -34869,7 +34869,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             ${e.label}
         </option>
-    `}var S0=X1()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
+    `}var S0=X1()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect,"vira-select-readonly":({inputs:e})=>!!e.isReadonly},styles:({hostClasses:e,cssVars:t})=>C`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -34880,6 +34880,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e[`vira-select-has-label`].selector} {
+                height: auto;
+            }
+
+            /*
+                Readonly renders plain text with no select chrome, so the input height would leave
+                the text sitting above the middle of an over-tall box. That mis-aligns it against a
+                sibling label and makes readonly select rows taller than readonly text rows.
+            */
+            ${e[`vira-select-readonly`].selector} {
                 height: auto;
             }
 
@@ -35823,7 +35832,7 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
         >
             ${e.label}
         </option>
-    `}var $=Ep()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect},styles:({hostClasses:e,cssVars:t})=>C`
+    `}var $=Ep()({tagName:`vira-select`,state(){return{randomId:Nt(32),cleanupListeners:void 0}},events:{valueChange:S()},cssVars:{"vira-select-padding-horizontal":`12px`,"vira-select-padding-vertical":`4px`,"vira-select-icon-padding":`44px`},hostClasses:{"vira-select-disabled":({inputs:e})=>!!e.disabled,"vira-select-error":({inputs:e})=>!!e.hasError,"vira-select-has-label":({inputs:e})=>!!e.label,"vira-select-not-raw":({inputs:e})=>!e.rawSelect,"vira-select-readonly":({inputs:e})=>!!e.isReadonly},styles:({hostClasses:e,cssVars:t})=>C`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -35834,6 +35843,15 @@ Font weights to font sizes:`,JSON.stringify(e.contrast.fontSizes,null,4)].join(`
             }
 
             ${e[`vira-select-has-label`].selector} {
+                height: auto;
+            }
+
+            /*
+                Readonly renders plain text with no select chrome, so the input height would leave
+                the text sitting above the middle of an over-tall box. That mis-aligns it against a
+                sibling label and makes readonly select rows taller than readonly text rows.
+            */
+            ${e[`vira-select-readonly`].selector} {
                 height: auto;
             }
 

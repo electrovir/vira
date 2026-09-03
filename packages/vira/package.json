@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "31.31.6",
+    "version": "31.31.7",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -38,23 +38,23 @@
         "test:docs": "virmator docs check"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.2.2",
-        "@augment-vir/common": "^32.2.2",
-        "@augment-vir/web": "^32.2.2",
-        "@electrovir/color": "^1.7.11",
+        "@augment-vir/assert": "^32.2.4",
+        "@augment-vir/common": "^32.2.4",
+        "@augment-vir/web": "^32.2.4",
+        "@electrovir/color": "^1.7.12",
         "@electrovir/local-storage-client": "^0.1.1",
-        "date-vir": "^9.1.0",
-        "device-navigation": "^4.7.3",
+        "date-vir": "^9.1.1",
+        "device-navigation": "^4.9.1",
         "json-schema-to-ts": "^3.1.1",
         "lit-css-vars": "^3.6.3",
         "object-shape-tester": "^6.15.0",
         "observavir": "^2.3.3",
         "page-active": "^1.0.4",
-        "spa-router-vir": "^6.6.1",
+        "spa-router-vir": "^6.8.0",
         "typed-event-target": "^4.3.3"
     },
     "devDependencies": {
-        "@augment-vir/test": "^32.2.2",
+        "@augment-vir/test": "^32.2.4",
         "@web/dev-server-esbuild": "^2.0.0",
         "@web/test-runner": "^1.0.0",
         "@web/test-runner-commands": "^1.0.1",
@@ -62,12 +62,12 @@
         "@web/test-runner-visual-regression": "^1.0.1",
         "esbuild": "^0.28.2",
         "istanbul-smart-text-reporter": "^1.1.5",
-        "lucide-static": "^1.31.0",
+        "lucide-static": "^1.37.0",
         "markdown-code-example-inserter": "^3.0.6",
-        "theme-vir": "^28.25.1",
+        "theme-vir": "^28.25.2",
         "typedoc": "^0.28.20",
         "typescript": "^6.0.3",
-        "vite": "^8.2.1",
+        "vite": "^8.2.2",
         "vite-tsconfig-paths": "^6.1.1"
     },
     "peerDependencies": {

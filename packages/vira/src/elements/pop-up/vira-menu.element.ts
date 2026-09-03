@@ -63,7 +63,6 @@ export const ViraMenu = defineViraElement<
                 overflow-y: auto;
                 z-index: 99;
                 box-sizing: border-box;
-                overscroll-behavior: contain;
                 border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;

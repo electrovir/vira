@@ -1,3 +1,7 @@
+import {viraAllSpacesColorPickerBookPage} from './entries/color/vira-all-spaces-color-picker.element.book.js';
+import {viraColorPairContrastSummaryBookPage} from './entries/color/vira-color-pair-contrast-summary.element.book.js';
+import {viraColorPairBookPage} from './entries/color/vira-color-pair.element.book.js';
+import {viraColorPickerBookPage} from './entries/color/vira-color-picker.element.book.js';
 import {viraPalettePages, viraThemePages} from './entries/colors.book.js';
 import {createColoredIconBookPage} from './entries/create-colored-icon.book.js';
 import {createSizedIconBookPage} from './entries/create-sized-icon.book.js';
@@ -43,6 +47,10 @@ const topLevelPages = [
 ];
 
 const elementPages = [
+    viraAllSpacesColorPickerBookPage,
+    viraColorPairContrastSummaryBookPage,
+    viraColorPairBookPage,
+    viraColorPickerBookPage,
     viraAbsoluteTimeBookPage,
     viraBoldTextPage,
     viraButtonBookPage,

@@ -139,7 +139,11 @@ export const ViraColorSlider = defineElement<{
                         return;
                     }
 
-                    dispatch(new events.valueChange(newValue));
+                    dispatch(
+                        new events.valueChange({
+                            detail: newValue,
+                        }),
+                    );
                 })}
             />
             <${ViraInput.assign({
@@ -153,7 +157,11 @@ export const ViraColorSlider = defineElement<{
                         return;
                     }
 
-                    dispatch(new events.valueChange(newValue));
+                    dispatch(
+                        new events.valueChange({
+                            detail: newValue,
+                        }),
+                    );
                 })}
             ></${ViraInput}>
         `;

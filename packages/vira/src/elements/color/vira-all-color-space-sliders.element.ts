@@ -42,7 +42,11 @@ export const ViraAllColorSpaceSliders = defineElement<{color: Readonly<Color>}>(
                                 showFormatName: true,
                             })}
                                 ${listen(ViraColorFormatSliders.events.colorChange, (event) => {
-                                    dispatch(new events.colorChange(event.detail));
+                                    dispatch(
+                                        new events.colorChange({
+                                            detail: event.detail,
+                                        }),
+                                    );
                                 })}
                             ></${ViraColorFormatSliders}>
                         `;

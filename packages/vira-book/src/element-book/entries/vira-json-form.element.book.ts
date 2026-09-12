@@ -46,7 +46,7 @@ function renderExampleLayout({
     return html`
         <div class="example-stack">
             <pre class="json-pre">
-${schema === undefined ? '(no schema)' : JSON.stringify(schema, undefined, 4)}</pre
+${schema == undefined ? '(no schema)' : JSON.stringify(schema, undefined, 4)}</pre
             >
             <${ViraJsonForm.assign({
                 value,
@@ -83,7 +83,7 @@ export const viraJsonFormBookPage = defineBookPage({
             render({state, updateState}) {
                 return renderExampleLayout({
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -133,7 +133,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -173,7 +173,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -207,7 +207,7 @@ export const viraJsonFormBookPage = defineBookPage({
             render({state, updateState}) {
                 return renderExampleLayout({
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -256,7 +256,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -318,7 +318,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -349,7 +349,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -399,7 +399,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -452,7 +452,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -496,7 +496,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     schema,
                     value: state.value,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });
@@ -523,7 +523,7 @@ export const viraJsonFormBookPage = defineBookPage({
                 return renderExampleLayout({
                     value: state.value,
                     isDisabled: true,
-                    onChange: (value) => {
+                    onChange(value) {
                         return updateState({
                             value,
                         });

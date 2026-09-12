@@ -185,7 +185,11 @@ export const ViraColorPicker = defineElement<
                             rawInput,
                         });
                         if (Color.isValidColorString(rawInput)) {
-                            dispatch(new events.colorChange(rawInput));
+                            dispatch(
+                                new events.colorChange({
+                                    detail: rawInput,
+                                }),
+                            );
                         }
                     })}
                 ></${ViraInput}>
@@ -250,7 +254,11 @@ export const ViraColorPicker = defineElement<
                     showFormatName: false,
                 })}
                     ${listen(ViraColorFormatSliders.events.colorChange, (event) => {
-                        dispatch(new events.colorChange(event.detail));
+                        dispatch(
+                            new events.colorChange({
+                                detail: event.detail,
+                            }),
+                        );
                         updateState({
                             rawInput: undefined,
                         });

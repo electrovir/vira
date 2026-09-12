@@ -224,7 +224,11 @@ export const ViraMenuItem = defineViraElement<
                     ) {
                         return;
                     }
-                    dispatch(new events.activate(undefined));
+                    dispatch(
+                        new events.activate({
+                            detail: undefined,
+                        }),
+                    );
                 },
                 {
                     capture: true,

@@ -203,7 +203,11 @@ export const ViraDrawer = defineViraElement<
             if (inputs.open) {
                 const removers = globalEventsToCloseDrawerOn.map((eventName) => {
                     return listenToGlobal(eventName, () => {
-                        dispatch(new events.drawerClose());
+                        dispatch(
+                            new events.drawerClose({
+                                detail: undefined,
+                            }),
+                        );
                     });
                 });
 
@@ -218,7 +222,11 @@ export const ViraDrawer = defineViraElement<
         function close() {
             if (inputs.open) {
                 state.cleanupListeners?.();
-                dispatch(new events.drawerClose());
+                dispatch(
+                    new events.drawerClose({
+                        detail: undefined,
+                    }),
+                );
             }
         }
 

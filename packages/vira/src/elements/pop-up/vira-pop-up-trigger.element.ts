@@ -228,7 +228,11 @@ export const ViraPopUpTrigger = defineViraElement<
             updateState({
                 showPopUpResult: undefined,
             });
-            dispatch(new events.openChange(undefined));
+            dispatch(
+                new events.openChange({
+                    detail: undefined,
+                }),
+            );
             if (inputs.focusOnClose && !inputs.isDisabled) {
                 const dropdownWrapper = host.shadowRoot.querySelector('.dropdown-wrapper');
 
@@ -254,13 +258,19 @@ export const ViraPopUpTrigger = defineViraElement<
                     popUpManager: state.popUpManager,
                 });
             }
-            dispatch(new events.navSelect(event.detail));
+            dispatch(
+                new events.navSelect({
+                    detail: event.detail,
+                }),
+            );
         });
 
         dispatch(
             new events.init({
-                navController: state.popUpManager.navController,
-                popUpManager: state.popUpManager,
+                detail: {
+                    navController: state.popUpManager.navController,
+                    popUpManager: state.popUpManager,
+                },
             }),
         );
     },
@@ -286,7 +296,11 @@ export const ViraPopUpTrigger = defineViraElement<
                         showPopUpResult,
                     });
                     if (emitEvent) {
-                        dispatch(new events.openChange(showPopUpResult));
+                        dispatch(
+                            new events.openChange({
+                                detail: showPopUpResult,
+                            }),
+                        );
                     }
                 },
                 host,

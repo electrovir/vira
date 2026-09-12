@@ -204,7 +204,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
     render({inputs, dispatch, events, slotNames, state, updateState}) {
         function updateValue(this: void) {
             if (!inputs.isDisabled) {
-                dispatch(new events.valueChange(!inputs.value));
+                dispatch(
+                    new events.valueChange({
+                        detail: !inputs.value,
+                    }),
+                );
             }
         }
 

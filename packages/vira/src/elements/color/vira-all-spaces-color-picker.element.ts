@@ -58,7 +58,11 @@ export const ViraAllSpacesColorPicker = defineElement<{color: string}>()({
                         inputColorString: event.detail,
                         overrideInputColor: undefined,
                     });
-                    dispatch(new events.colorChange(event.detail));
+                    dispatch(
+                        new events.colorChange({
+                            detail: event.detail,
+                        }),
+                    );
                 })}
             ></${ViraColorDetails}>
             <${ViraAllColorSpaceSliders.assign({
@@ -69,7 +73,11 @@ export const ViraAllSpacesColorPicker = defineElement<{color: string}>()({
                     updateState({
                         overrideInputColor: colorSyntax,
                     });
-                    dispatch(new events.colorChange(event.detail));
+                    dispatch(
+                        new events.colorChange({
+                            detail: event.detail,
+                        }),
+                    );
                 })}
             ></${ViraAllColorSpaceSliders}>
         `;

@@ -409,7 +409,11 @@ export const ViraSelect = defineViraElement<
                                 .findIndex((option) => option.value === value);
                         }
 
-                        dispatch(new events.valueChange(newValue));
+                        dispatch(
+                            new events.valueChange({
+                                detail: newValue,
+                            }),
+                        );
                     })}
                     ${attributes(inputs.attributePassthrough?.select)}
                 >

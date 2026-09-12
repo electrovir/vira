@@ -9,7 +9,7 @@ import {
 } from './common/update-exports.js';
 
 export const updateRootIndexExports: UpdateExportsConfig = {
-    executor: async (args: UpdateExportsArgs): Promise<void> => {
+    async executor(args: UpdateExportsArgs): Promise<void> {
         const rootIndexFilePath = join(viraSrcDir, 'index.ts');
 
         const allTsFilePaths = await getExportableTsFilePaths(viraSrcDir);

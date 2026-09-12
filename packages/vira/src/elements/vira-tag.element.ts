@@ -567,9 +567,17 @@ export const ViraTag = defineViraElement<
                     if (disabled) {
                         return;
                     } else if (inputs.isClickable?.selected != undefined) {
-                        dispatch(new events.toggle(!inputs.isClickable.selected));
+                        dispatch(
+                            new events.toggle({
+                                detail: !inputs.isClickable.selected,
+                            }),
+                        );
                     } else if (inputs.isClickable?.cancellable) {
-                        dispatch(new events.cancel());
+                        dispatch(
+                            new events.cancel({
+                                detail: undefined,
+                            }),
+                        );
                     }
                 })}
             >

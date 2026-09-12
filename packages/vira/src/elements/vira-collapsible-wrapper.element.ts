@@ -166,7 +166,11 @@ export const ViraCollapsibleWrapper = defineViraElement<{
             <button
                 class="header-wrapper"
                 ${listen('click', () => {
-                    dispatch(new events.expandChange(!inputs.expanded));
+                    dispatch(
+                        new events.expandChange({
+                            detail: !inputs.expanded,
+                        }),
+                    );
                 })}
             >
                 <slot name=${slotNames['vira-collapsible-wrapper-header']}>Header</slot>

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
-
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
@@ -29,11 +27,9 @@ const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
     const events: {
         openChange: boolean[];
-        selectedChange: string[][];
         selectedValuesChange: string[][];
     } = {
         openChange: [],
-        selectedChange: [],
         selectedValuesChange: [],
     };
     const fixture = await testWeb.render(html`
@@ -49,9 +45,6 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
             })}
                 ${listen(ViraDropdown.events.openChange, (event) => {
                     events.openChange.push(!!event.detail);
-                })}
-                ${listen(ViraDropdown.events.selectedChange, (event) => {
-                    events.selectedChange.push(event.detail);
                 })}
                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                     events.selectedValuesChange.push(event.detail);
@@ -76,7 +69,6 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
 
     assert.isNullish(findMenu());
     assert.isEmpty(events.openChange);
-    assert.isEmpty(events.selectedChange);
     assert.isEmpty(events.selectedValuesChange);
 
     return {
@@ -154,9 +146,6 @@ describe(ViraDropdown.tagName, () => {
             true,
             false,
         ]);
-        assert.deepEquals(events.selectedChange, [
-            ['1'],
-        ]);
         assert.deepEquals(events.selectedValuesChange, [
             ['1'],
         ]);
@@ -186,9 +175,6 @@ describe(ViraDropdown.tagName, () => {
                 '2',
             ],
         ]);
-        assert.deepEquals(events.selectedChange, [
-            ['2'],
-        ]);
     });
 
     it('removes a value from selectedValuesChange when toggled off in multi select', async () => {
@@ -213,9 +199,6 @@ describe(ViraDropdown.tagName, () => {
         });
         assert.deepEquals(events.selectedValuesChange, [
             ['2'],
-        ]);
-        assert.deepEquals(events.selectedChange, [
-            ['0'],
         ]);
     });
 

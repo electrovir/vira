@@ -150,12 +150,6 @@ export const ViraDropdown = defineViraElement<
         }
     `,
     events: {
-        /**
-         * @deprecated Use `selectedValuesChange` instead. `selectedChange` is broken for
-         *   multi-select (it doesn't emit all the currently selected values) but is temporarily
-         *   left for backwards compatibility purposes. It will be removed entirely soon.
-         */
-        selectedChange: defineElementEvent<string[]>(),
         /** Emits all currently selected values. */
         selectedValuesChange: defineElementEvent<string[]>(),
         openChange: defineElementEvent<ShowPopUpResult | undefined>(),
@@ -232,9 +226,11 @@ export const ViraDropdown = defineViraElement<
                                               option.value,
                                           ]
                                     : [option.value];
-                                // eslint-disable-next-line @typescript-eslint/no-deprecated
-                                dispatch(new events.selectedChange([option.value]));
-                                dispatch(new events.selectedValuesChange(newSelectedValues));
+                                dispatch(
+                                    new events.selectedValuesChange({
+                                        detail: newSelectedValues,
+                                    }),
+                                );
                             },
                             disabled: option.disabled,
                             selected: selectedOptions.includes(option),
@@ -257,7 +253,11 @@ export const ViraDropdown = defineViraElement<
             })}
                 ${listen(ViraPopUpTrigger.events.openChange, (event) => {
                     if (!!state.showPopUpResult !== !!event.detail) {
-                        dispatch(new events.openChange(event.detail));
+                        dispatch(
+                            new events.openChange({
+                                detail: event.detail,
+                            }),
+                        );
                     }
                     updateState({
                         showPopUpResult: event.detail,

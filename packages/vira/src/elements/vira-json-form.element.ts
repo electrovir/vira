@@ -252,7 +252,11 @@ export const ViraJsonForm = defineViraElement<
         }
 
         function emitRoot(newRoot: JsonValue) {
-            dispatch(new events.valueChange(newRoot));
+            dispatch(
+                new events.valueChange({
+                    detail: newRoot,
+                }),
+            );
         }
 
         function emitReplaceAt(path: ViraJsonPath, newValue: JsonValue) {

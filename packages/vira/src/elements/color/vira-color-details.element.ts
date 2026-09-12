@@ -130,7 +130,11 @@ export const ViraColorDetails = defineElement<{
                           updateState({
                               inputColorString: event.detail,
                           });
-                          dispatch(new events.colorChange(event.detail));
+                          dispatch(
+                              new events.colorChange({
+                                  detail: event.detail,
+                              }),
+                          );
                       })}
                   ></${ViraInput}>
               `

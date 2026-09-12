@@ -160,9 +160,12 @@ export const ViraDateInput = defineViraElement<
                 ${listen('input', (event) => {
                     const element = extractEventTarget(event, HTMLInputElement);
                     dispatch(
-                        new events.valueChange(
-                            parseInputElementValue(element, inputs.timezone || userTimezone),
-                        ),
+                        new events.valueChange({
+                            detail: parseInputElementValue(
+                                element,
+                                inputs.timezone || userTimezone,
+                            ),
+                        }),
                     );
                 })}
             />

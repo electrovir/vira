@@ -96,7 +96,11 @@ export const ViraMenuTrigger = defineViraElement<
                 })}
                 ${listen(ViraPopUpTrigger.events.openChange, (event) => {
                     if (!!state.showPopUpResult !== !!event.detail) {
-                        dispatch(new events.openChange(event.detail));
+                        dispatch(
+                            new events.openChange({
+                                detail: event.detail,
+                            }),
+                        );
                     }
                     updateState({
                         showPopUpResult: event.detail,

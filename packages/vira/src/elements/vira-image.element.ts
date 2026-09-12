@@ -150,7 +150,11 @@ export const ViraImage = defineViraElement<{
                         },
                     });
 
-                    dispatch(new events.imageLoad());
+                    dispatch(
+                        new events.imageLoad({
+                            detail: undefined,
+                        }),
+                    );
                 })}
                 ${listen('error', async (event) => {
                     if (inputs._debugLoadDelay) {

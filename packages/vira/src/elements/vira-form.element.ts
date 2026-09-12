@@ -149,7 +149,9 @@ export const ViraForm = defineViraElement<
             });
             dispatch(
                 new events.validChange({
-                    allFieldsAreValid: currentIsValid,
+                    detail: {
+                        allFieldsAreValid: currentIsValid,
+                    },
                 }),
             );
         }
@@ -204,9 +206,11 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraCheckbox.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: event.detail,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: event.detail,
+                                            },
                                         }),
                                     );
                                 })}
@@ -259,9 +263,11 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraSelect.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: event.detail,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: event.detail,
+                                            },
                                         }),
                                     );
                                 })}
@@ -287,9 +293,11 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraTextArea.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: event.detail,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: event.detail,
+                                            },
                                         }),
                                     );
                                 })}
@@ -336,9 +344,11 @@ export const ViraForm = defineViraElement<
                                         event.detail === '' ? undefined : Number(event.detail);
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: numericValue,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: numericValue,
+                                            },
                                         }),
                                     );
                                 })}
@@ -365,9 +375,11 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraDateInput.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: event.detail,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: event.detail,
+                                            },
                                         }),
                                     );
                                 })}
@@ -421,9 +433,11 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraInput.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            key,
-                                            ...field,
-                                            value: event.detail,
+                                            detail: {
+                                                key,
+                                                ...field,
+                                                value: event.detail,
+                                            },
                                         }),
                                     );
                                 })}

@@ -217,10 +217,18 @@ export const ViraTextArea = defineViraElement<
                             event,
                             elementConstructor: HTMLTextAreaElement,
                             inputBlockedCallback(blockedInput) {
-                                dispatch(new events.inputBlocked(blockedInput));
+                                dispatch(
+                                    new events.inputBlocked({
+                                        detail: blockedInput,
+                                    }),
+                                );
                             },
                             newValueCallback(newValue) {
-                                dispatch(new events.valueChange(newValue));
+                                dispatch(
+                                    new events.valueChange({
+                                        detail: newValue,
+                                    }),
+                                );
                             },
                         });
                     })}

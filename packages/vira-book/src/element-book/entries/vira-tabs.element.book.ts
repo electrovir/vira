@@ -215,7 +215,7 @@ const ViraDynamicWidthTabsExample = defineViraElement()({
             increment: 2,
         };
     },
-    styles: ({cssVars}) => {
+    styles({cssVars}) {
         return css`
             :host {
                 display: block;

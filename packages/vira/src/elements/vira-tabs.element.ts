@@ -668,7 +668,11 @@ export const ViraTabs = defineViraElement<
 
         function handleTabClick(tab: Readonly<ViraTab>) {
             if (!tab.isDisabled) {
-                dispatch(new events.tabSelect(tab));
+                dispatch(
+                    new events.tabSelect({
+                        detail: tab,
+                    }),
+                );
             }
         }
 

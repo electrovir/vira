@@ -1,4 +1,4 @@
-import {createColorPaletteBookPages, createColorThemeBookPages} from 'theme-vir';
+import {createColorPaletteBookPages, createColorThemeBookPages} from '@theme-vir/element-book';
 import {viraColorPalette, viraTheme, viraThemeDarkOverride} from 'vira';
 import {stylesBookPage} from '../top-level-pages.js';
 

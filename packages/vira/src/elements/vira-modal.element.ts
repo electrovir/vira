@@ -208,7 +208,11 @@ export const ViraModal = defineViraElement<
             if (inputs.open) {
                 const removers = globalEventsToCloseModalOn.map((eventName) => {
                     return listenToGlobal(eventName, () => {
-                        dispatch(new events.modalClose());
+                        dispatch(
+                            new events.modalClose({
+                                detail: undefined,
+                            }),
+                        );
                     });
                 });
 
@@ -223,7 +227,11 @@ export const ViraModal = defineViraElement<
         function close() {
             if (inputs.open) {
                 state.cleanupListeners?.();
-                dispatch(new events.modalClose());
+                dispatch(
+                    new events.modalClose({
+                        detail: undefined,
+                    }),
+                );
             }
         }
 

@@ -32,7 +32,7 @@ const indexDirs: ReadonlyArray<{
 ];
 
 export const updateIndexExports: UpdateExportsConfig = {
-    executor: async (args: UpdateExportsArgs): Promise<void> => {
+    async executor(args: UpdateExportsArgs): Promise<void> {
         const results = await Promise.allSettled(
             indexDirs.map(async (dirDetails) => {
                 const dirPath = join(viraSrcDir, dirDetails.dirName);

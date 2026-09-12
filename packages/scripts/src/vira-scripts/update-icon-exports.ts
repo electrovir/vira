@@ -86,7 +86,7 @@ function generateIconImportsAndExports(iconPaths: ReadonlyArray<string>): string
 }
 
 export const updateIconExports: UpdateExportsConfig = {
-    executor: async (inputs: UpdateExportsArgs): Promise<void> => {
+    async executor(inputs: UpdateExportsArgs): Promise<void> {
         const allIconPaths: string[] = (await readDirRecursive(iconsDir))
             .filter((relativePath) => relativePath.endsWith('.icon.ts'))
             .map((relativePath) => join(iconsDir, relativePath));

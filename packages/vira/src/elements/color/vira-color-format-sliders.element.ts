@@ -55,7 +55,11 @@ export const ViraColorFormatSliders = defineElement<{
                                 },
                             } as ColorUpdate);
                             const newValue = newColor.toCss()[colorFormat.conversionFormat];
-                            dispatch(new events.colorChange(newValue));
+                            dispatch(
+                                new events.colorChange({
+                                    detail: newValue,
+                                }),
+                            );
                         })}
                     ></${ViraColorSlider}>
                 `;

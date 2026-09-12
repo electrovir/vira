@@ -423,10 +423,18 @@ export const ViraInput = defineViraElement<
                             previousValue: filteredValue,
                             event,
                             inputBlockedCallback(blockedInput) {
-                                dispatch(new events.inputBlocked(blockedInput));
+                                dispatch(
+                                    new events.inputBlocked({
+                                        detail: blockedInput,
+                                    }),
+                                );
                             },
                             newValueCallback(newValue) {
-                                dispatch(new events.valueChange(newValue));
+                                dispatch(
+                                    new events.valueChange({
+                                        detail: newValue,
+                                    }),
+                                );
                             },
                         });
                     })}
@@ -448,7 +456,11 @@ export const ViraInput = defineViraElement<
                                 if (inputs.disabled) {
                                     return;
                                 }
-                                dispatch(new events.valueChange(''));
+                                dispatch(
+                                    new events.valueChange({
+                                        detail: '',
+                                    }),
+                                );
                             })}
                         >
                             <${ViraIcon.assign({

@@ -191,7 +191,11 @@ export const ViraCollapsibleCard = defineViraElement<
                     updateState({
                         isExpanded: event.detail,
                     });
-                    dispatch(new events.expandToggle(event.detail));
+                    dispatch(
+                        new events.expandToggle({
+                            detail: event.detail,
+                        }),
+                    );
                 })}
             >
                 <div

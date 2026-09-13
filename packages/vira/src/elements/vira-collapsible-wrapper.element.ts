@@ -36,10 +36,12 @@ export const ViraCollapsibleWrapper = defineViraElement<{
         };
     },
     hostClasses: {
-        'vira-collapsible-wrapper-expand-on-print': ({inputs}) => !!inputs.expandOnPrint,
+        'vira-collapsible-wrapper-expand-on-print'({inputs}) {
+            return !!inputs.expandOnPrint;
+        },
     },
     slotNames: ['vira-collapsible-wrapper-header'],
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: flex;

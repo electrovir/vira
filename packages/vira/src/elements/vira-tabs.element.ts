@@ -26,7 +26,7 @@ import {
 } from 'spa-router-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {Check24Icon} from '../icons/icon-svgs/24/check-24.icon.js';
+import {ChevronDown16Icon} from '../icons/icon-svgs/16/chevron-down-16.icon.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -241,25 +241,31 @@ export const ViraTabs = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-tabs-bar-top': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Top,
-        'vira-tabs-bar-bottom': ({inputs}) => {
+        'vira-tabs-bar-top'({inputs}) {
+            return inputs.barDirection === ViraTabsBarDirection.Top;
+        },
+        'vira-tabs-bar-bottom'({inputs}) {
             return !inputs.barDirection || inputs.barDirection === ViraTabsBarDirection.Bottom;
         },
-        'vira-tabs-bar-left': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Left,
-        'vira-tabs-bar-right': ({inputs}) => inputs.barDirection === ViraTabsBarDirection.Right,
+        'vira-tabs-bar-left'({inputs}) {
+            return inputs.barDirection === ViraTabsBarDirection.Left;
+        },
+        'vira-tabs-bar-right'({inputs}) {
+            return inputs.barDirection === ViraTabsBarDirection.Right;
+        },
         ...arrayToObject(
             getObjectTypedKeys(viraColorVariantToHostClassKey),
             (colorVariant) => {
                 const colorKey = viraColorVariantToHostClassKey[colorVariant];
                 return {
                     key: `vira-tabs-color-${colorKey}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorVariant || inputs.color === colorKey;
                     },
                 };
@@ -268,28 +274,32 @@ export const ViraTabs = defineViraElement<
                 useRequired: true,
             },
         ),
-        'vira-tabs-color-plain': ({
+        'vira-tabs-color-plain'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => !inputs.color || inputs.color === ViraColorVariant.Plain,
-        'vira-tabs-color-neutral': ({
+        }) {
+            return !inputs.color || inputs.color === ViraColorVariant.Plain;
+        },
+        'vira-tabs-color-neutral'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => inputs.color === ViraColorVariant.Neutral,
+        }) {
+            return inputs.color === ViraColorVariant.Neutral;
+        },
         ...arrayToObject(
             standaloneThemeColorNames,
             (colorName) => {
                 return {
                     key: `vira-tabs-color-${colorName}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorName;
                     },
                 };
@@ -298,13 +308,15 @@ export const ViraTabs = defineViraElement<
                 useRequired: true,
             },
         ),
-        'vira-tabs-icon-layout-vertical': ({inputs}) => {
+        'vira-tabs-icon-layout-vertical'({inputs}) {
             return !inputs.iconLayout || inputs.iconLayout === ViraTabsIconLayout.Vertical;
         },
-        'vira-tabs-icon-layout-horizontal': ({inputs}) => {
+        'vira-tabs-icon-layout-horizontal'({inputs}) {
             return inputs.iconLayout === ViraTabsIconLayout.Horizontal;
         },
-        'vira-tabs-fill-width': ({inputs}) => !!inputs.shouldFillWidth,
+        'vira-tabs-fill-width'({inputs}) {
+            return !!inputs.shouldFillWidth;
+        },
     },
     cssVars: {
         'vira-tabs-active-color':
@@ -320,7 +332,7 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-bar-thickness': '2px',
     },
 
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         function buildThemedTabsColors(colorName: ViraThemeColorName) {
             return {
                 active: viraThemeByKeys[colorName]['behind-bg'][ContrastLevelName.NonBodyText]
@@ -959,13 +971,13 @@ export const ViraTabs = defineViraElement<
         /**
          * Hidden copies of the "more" button in each of its possible shapes, rendered inside the
          * measurement mirror so their true widths can be measured before choosing which one fits:
-         * the default overflow label, and the collapsed selected tab's own label (with a
-         * checkmark).
+         * the default overflow label, and the collapsed selected tab's own label, with a caret.
          */
         const measureMoreButtons = html`
             <${ViraButton.assign({
                 text: overflowLabel,
-                showMenuCaret: true,
+                icon: ChevronDown16Icon,
+                showIconOnRight: true,
                 color: ViraColorVariant.Neutral,
             })}
                 class="measure-more-default"
@@ -974,8 +986,8 @@ export const ViraTabs = defineViraElement<
                 ? html`
                       <${ViraButton.assign({
                           text: selectedTab.label,
-                          icon: Check24Icon,
-                          showMenuCaret: true,
+                          icon: ChevronDown16Icon,
+                          showIconOnRight: true,
                           color: ViraColorVariant.Neutral,
                       })}
                           class="measure-more-labeled"
@@ -995,8 +1007,8 @@ export const ViraTabs = defineViraElement<
                       })}>
                           <${ViraButton.assign({
                               text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
-                              icon: selectedIsCollapsed ? Check24Icon : undefined,
-                              showMenuCaret: true,
+                              icon: ChevronDown16Icon,
+                              showIconOnRight: true,
                               color: ViraColorVariant.Neutral,
                           })}
                               slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}

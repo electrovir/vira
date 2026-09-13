@@ -550,7 +550,9 @@ export const ViraJsonForm = defineViraElement<
                 return renderPlusButton({
                     isAddDisabled,
                     tooltip: isAddDisabled ? disabledReason : `Add ${viraJsonTypeLabels[onlyType]}`,
-                    onClick: () => onAdd(onlyType),
+                    onClick() {
+                        return onAdd(onlyType);
+                    },
                 });
             }
             const selectedType = getPendingType(pathKey, allowedTypes);
@@ -574,7 +576,9 @@ export const ViraJsonForm = defineViraElement<
                     tooltip: isAddDisabled
                         ? disabledReason
                         : `Add ${viraJsonTypeLabels[selectedType]}`,
-                    onClick: () => onAdd(selectedType),
+                    onClick() {
+                        return onAdd(selectedType);
+                    },
                 })}
             `;
         }
@@ -602,7 +606,9 @@ export const ViraJsonForm = defineViraElement<
                     return renderPlusButton({
                         isAddDisabled: false,
                         tooltip: `Add ${viraJsonTypeLabels[onlyType]}`,
-                        onClick: () => onAdd(createDefaultForJsonType(onlyType)),
+                        onClick() {
+                            return onAdd(createDefaultForJsonType(onlyType));
+                        },
                     });
                 }
 
@@ -616,7 +622,7 @@ export const ViraJsonForm = defineViraElement<
                     ${renderPlusButton({
                         isAddDisabled: false,
                         tooltip: `Add ${viraJsonTypeLabels[onlyType]}`,
-                        onClick: () => {
+                        onClick() {
                             onAdd(pendingValue);
                             clearPending(pathKey);
                         },
@@ -642,7 +648,9 @@ export const ViraJsonForm = defineViraElement<
                     ${renderPlusButton({
                         isAddDisabled: false,
                         tooltip: `Add ${viraJsonTypeLabels[selectedType]}`,
-                        onClick: () => onAdd(createDefaultForJsonType(selectedType)),
+                        onClick() {
+                            return onAdd(createDefaultForJsonType(selectedType));
+                        },
                     })}
                 `;
             }
@@ -783,7 +791,7 @@ export const ViraJsonForm = defineViraElement<
                                           allowedTypes: additionalAllowedTypes,
                                           canAdd: canAddArbitraryField,
                                           disabledReason: arbitraryAddDisabledReason,
-                                          onAdd: (type) => {
+                                          onAdd(type) {
                                               if (!canAddArbitraryField) {
                                                   return;
                                               }
@@ -897,7 +905,7 @@ export const ViraJsonForm = defineViraElement<
                                   ${renderArrayAddControl({
                                       pathKey,
                                       allowedTypes: allowedItemTypes,
-                                      onAdd: (newValue) => {
+                                      onAdd(newValue) {
                                           emitReplaceAt(
                                               [
                                                   ...path,

@@ -32,7 +32,7 @@ export const ViraProgress = defineViraElement<
         'vira-progress-border-radius': '99999999px',
         'vira-progress-height': '8px',
     },
-    styles: ({cssVars}) => {
+    styles({cssVars}) {
         return css`
             :host {
                 /* Default width that can easily be overridden because it's applied on the host. */

@@ -72,11 +72,17 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         };
     },
     hostClasses: {
-        'vira-checkbox-horizontal': ({inputs}) => !!inputs.useHorizontalLabel,
-        'vira-checkbox-filled-checked': ({inputs}) => !!inputs.fillWhenChecked,
-        'vira-checkbox-filled-unchecked': ({inputs}) => !!inputs.fillWhenUnchecked,
+        'vira-checkbox-horizontal'({inputs}) {
+            return !!inputs.useHorizontalLabel;
+        },
+        'vira-checkbox-filled-checked'({inputs}) {
+            return !!inputs.fillWhenChecked;
+        },
+        'vira-checkbox-filled-unchecked'({inputs}) {
+            return !!inputs.fillWhenUnchecked;
+        },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline-flex;

@@ -19,7 +19,7 @@ export type ViraTagName = `${typeof ViraTagNamePrefix}${string}`;
  * @category Internal
  */
 export const defineViraElement = wrapDefineElement<ViraTagName>({
-    assertInputs: (inputs) => {
+    assertInputs(inputs) {
         if (!inputs.tagName.startsWith(ViraTagNamePrefix)) {
             throw new Error(
                 `Tag name should start with '${ViraTagNamePrefix}' but got '${inputs.tagName}'`,

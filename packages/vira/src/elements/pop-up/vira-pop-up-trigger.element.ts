@@ -132,11 +132,17 @@ export const ViraPopUpTrigger = defineViraElement<
         'vira-pop-up-trigger-pop-up',
     ],
     hostClasses: {
-        'vira-pop-up-trigger-disabled': ({inputs}) => !!inputs.isDisabled,
-        'vira-pop-up-trigger-inside-focus': ({inputs}) => !!inputs.useInsideFocus,
-        'vira-pop-up-trigger-outside-focus': ({inputs}) => !inputs.useInsideFocus,
+        'vira-pop-up-trigger-disabled'({inputs}) {
+            return !!inputs.isDisabled;
+        },
+        'vira-pop-up-trigger-inside-focus'({inputs}) {
+            return !!inputs.useInsideFocus;
+        },
+        'vira-pop-up-trigger-outside-focus'({inputs}) {
+            return !inputs.useInsideFocus;
+        },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline-flex;
@@ -342,7 +348,7 @@ export const ViraPopUpTrigger = defineViraElement<
          */
         const effectiveHorizontalAnchor: HorizontalAnchor =
             inputs.horizontalAnchor === HorizontalAnchor.Auto ||
-            inputs.horizontalAnchor === undefined
+            inputs.horizontalAnchor == undefined
                 ? state.showPopUpResult?.popRight
                     ? HorizontalAnchor.Left
                     : HorizontalAnchor.Right

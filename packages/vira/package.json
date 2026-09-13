@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "32.0.0-beta.0",
+    "version": "32.0.0",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -38,13 +38,13 @@
         "test:docs": "virmator docs check"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.3.0-beta.0",
-        "@augment-vir/common": "^32.3.0-beta.0",
-        "@augment-vir/web": "^32.3.0-beta.0",
-        "@electrovir/color": "^2.0.0-beta.0",
+        "@augment-vir/assert": "^32.3.0",
+        "@augment-vir/common": "^32.3.0",
+        "@augment-vir/web": "^32.3.0",
+        "@electrovir/color": "^2.0.0",
         "@electrovir/local-storage-client": "^0.1.1",
         "date-vir": "^9.1.1",
-        "device-navigation": "^5.0.0-beta.0",
+        "device-navigation": "^5.0.0",
         "json-schema-to-ts": "^3.1.1",
         "lit-css-vars": "^3.6.3",
         "object-shape-tester": "^6.15.0",
@@ -54,7 +54,7 @@
         "typed-event-target": "^4.3.3"
     },
     "devDependencies": {
-        "@augment-vir/test": "^32.3.0-beta.0",
+        "@augment-vir/test": "^32.3.0",
         "@web/dev-server-esbuild": "^2.0.0",
         "@web/test-runner": "^1.0.0",
         "@web/test-runner-commands": "^1.0.1",
@@ -64,16 +64,16 @@
         "istanbul-smart-text-reporter": "^1.1.5",
         "lucide-static": "^1.42.0",
         "markdown-code-example-inserter": "^3.0.6",
-        "theme-vir": "^29.0.0-beta.0",
+        "theme-vir": "^29.0.0",
         "typedoc": "^0.28.20",
         "typescript": "^6.0.3",
         "vite": "^8.2.2",
         "vite-tsconfig-paths": "^6.1.1"
     },
     "peerDependencies": {
-        "element-vir": "^27.0.0-beta.3",
+        "element-vir": "^27.0.0",
         "lucide-static": ">=0.460",
-        "theme-vir": "^29.0.0-beta.0"
+        "theme-vir": "^29.0.0"
     },
     "engines": {
         "node": ">=22"

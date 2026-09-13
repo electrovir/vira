@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/scripts",
-    "version": "32.0.0-beta.0",
+    "version": "32.0.0",
     "private": true,
     "license": "(MIT OR CC0-1.0)",
     "author": {
@@ -18,9 +18,9 @@
         "update:exports": "tsx src/vira-scripts/update-all-exports.ts"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.3.0-beta.0",
-        "@augment-vir/common": "^32.3.0-beta.0",
-        "@augment-vir/node": "^32.3.0-beta.0",
+        "@augment-vir/assert": "^32.3.0",
+        "@augment-vir/common": "^32.3.0",
+        "@augment-vir/node": "^32.3.0",
         "prettier": "^3.4.2",
         "tsx": "^4.23.13"
     },

@@ -90,7 +90,7 @@ export function getJsonType(value: JsonValue | undefined): ViraJsonType {
 export function normalizeSchema(
     schema: ViraJsonSchema | undefined,
 ): ViraJsonSchemaObject | undefined {
-    if (schema === undefined || schema === false) {
+    if (schema == undefined || schema === false) {
         return undefined;
     } else if (schema === true) {
         return {};
@@ -336,7 +336,7 @@ export function getPropertySchema(
         return undefined;
     }
     const propertySchema = branch.properties?.[key];
-    if (propertySchema !== undefined) {
+    if (propertySchema != undefined) {
         return propertySchema;
     }
     const patternProperties = branch.patternProperties;
@@ -406,7 +406,7 @@ export function getAdditionalPropertiesSchema(
     parentSchema: ViraJsonSchema | undefined,
     context: SchemaResolveContext,
 ): {allowed: boolean; schema: ViraJsonSchema | undefined} {
-    if (parentSchema === undefined) {
+    if (parentSchema == undefined) {
         return {
             allowed: true,
             schema: undefined,
@@ -420,7 +420,7 @@ export function getAdditionalPropertiesSchema(
         };
     }
     const additional = branch.additionalProperties;
-    if (additional === undefined || additional === false) {
+    if (additional == undefined || additional === false) {
         return {
             allowed: false,
             schema: undefined,
@@ -579,7 +579,7 @@ export function validateAgainstSchema(
     value: JsonValue,
     schema: ViraJsonSchema | undefined,
 ): ReadonlyArray<string> {
-    if (schema === undefined) {
+    if (schema == undefined) {
         return [];
     }
     const context = createResolveContext(schema);
@@ -704,7 +704,7 @@ function validateBranch({
                 propKey,
             ];
             const propSchema = branch.properties?.[propKey];
-            if (propSchema !== undefined) {
+            if (propSchema != undefined) {
                 validateRecursive({
                     value: propValue,
                     schema: propSchema,
@@ -724,7 +724,7 @@ function validateBranch({
                     context,
                     errors,
                 });
-            } else if (additional === undefined && definedKeys.size > 0) {
+            } else if (additional == undefined && definedKeys.size > 0) {
                 continue;
             }
         }
@@ -737,7 +737,7 @@ function validateBranch({
             ];
             if (check.isArray(items)) {
                 const tupleSchema = items[index] ?? branch.additionalItems;
-                if (tupleSchema !== undefined) {
+                if (tupleSchema != undefined) {
                     validateRecursive({
                         value: item,
                         schema: tupleSchema,
@@ -746,7 +746,7 @@ function validateBranch({
                         errors,
                     });
                 }
-            } else if (items !== undefined) {
+            } else if (items != undefined) {
                 validateRecursive({
                     value: item,
                     schema: items,

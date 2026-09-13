@@ -36,7 +36,7 @@ export const ViraColorSlider = defineElement<{
     cssVars: {
         'vira-color-slider-gradient': 'black',
     },
-    styles: ({cssVars}) => {
+    styles({cssVars}) {
         return css`
             :host {
                 display: flex;

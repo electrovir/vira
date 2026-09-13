@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-book",
-    "version": "32.0.0-beta.0",
+    "version": "32.0.0",
     "private": true,
     "license": "(MIT OR CC0-1.0)",
     "author": {
@@ -16,18 +16,18 @@
         "test": "exit 0"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.3.0-beta.0",
-        "@augment-vir/common": "^32.3.0-beta.0",
-        "@electrovir/color": "^2.0.0-beta.0",
-        "@theme-vir/element-book": "^29.0.0-beta.0",
+        "@augment-vir/assert": "^32.3.0",
+        "@augment-vir/common": "^32.3.0",
+        "@electrovir/color": "^2.0.0",
+        "@theme-vir/element-book": "^29.0.0",
         "date-vir": "^9.1.1",
-        "element-book": "^27.0.0-beta.1",
-        "element-vir": "^27.0.0-beta.3",
+        "element-book": "^27.0.0-beta.3",
+        "element-vir": "^27.0.0",
         "lit-css-vars": "^3.6.3",
         "spa-router-vir": "^6.8.0",
-        "theme-vir": "^29.0.0-beta.0",
+        "theme-vir": "^29.0.0",
         "url-vir": "^2.2.2",
-        "vira": "^32.0.0-beta.0"
+        "vira": "^32.0.0"
     },
     "devDependencies": {
         "esbuild": "^0.28.2",

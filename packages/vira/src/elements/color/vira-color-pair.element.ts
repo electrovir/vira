@@ -28,11 +28,11 @@ export const ViraColorPair = defineElement<{
         };
     },
     hostClasses: {
-        'vira-color-pair-no-contrast-tips': ({inputs, state}) => {
+        'vira-color-pair-no-contrast-tips'({inputs, state}) {
             return !inputs.showContrast && !state.forceShowEverything;
         },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: flex;

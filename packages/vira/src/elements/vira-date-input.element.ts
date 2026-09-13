@@ -61,10 +61,14 @@ export const ViraDateInput = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-date-input-error': ({inputs}) => !!inputs.hasError,
-        'vira-date-input-disabled': ({inputs}) => !!inputs.isDisabled,
+        'vira-date-input-error'({inputs}) {
+            return !!inputs.hasError;
+        },
+        'vira-date-input-disabled'({inputs}) {
+            return !!inputs.isDisabled;
+        },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline-block;

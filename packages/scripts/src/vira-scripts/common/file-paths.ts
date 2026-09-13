@@ -24,7 +24,7 @@ export function generateExportsFromFilePaths({
 const ignoredFileNameEndings = [
     '.test.ts',
     '.book.ts',
-    '.test-helper.ts',
+    '.mock.ts',
 ];
 
 export async function getExportableTsFilePaths(dirPath: string): Promise<string[]> {

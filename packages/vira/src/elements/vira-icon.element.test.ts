@@ -2,7 +2,7 @@ import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
-import {ColorType, extractIconColor} from '../icons/icon-color.test-helper.js';
+import {ColorType, extractIconColor} from '../icons/icon-color.mock.js';
 import {viraIconCssVars} from '../icons/icon-css-vars.js';
 import {StatusSuccess24Icon} from '../icons/index.js';
 import {ViraIcon} from './vira-icon.element.js';

@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "32.0.0-beta.0",
+    "version": "32.0.0",
     "private": true,
     "repository": {
         "type": "git",
@@ -43,8 +43,8 @@
         "@eslint/js": "^10.0.1",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@stylistic/eslint-plugin-ts": "^4.4.1",
-        "@typescript-eslint/eslint-plugin": "^8.69.0",
-        "cspell": "^10.2.2",
+        "@typescript-eslint/eslint-plugin": "^8.70.0",
+        "cspell": "^10.3.0",
         "dependency-cruiser": "^18.2.0",
         "esbuild": "^0.28.2",
         "eslint": "^10.10.0",
@@ -68,8 +68,8 @@
         "prettier-plugin-sort-json": "^4.2.0",
         "prettier-plugin-toml": "^2.0.6",
         "runstorm": "^1.1.0",
-        "typescript-eslint": "8.69.0",
-        "virmator": "^14.36.1"
+        "typescript-eslint": "8.70.0",
+        "virmator": "^14.36.2"
     },
     "engines": {
         "node": ">=22"

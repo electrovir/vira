@@ -151,10 +151,10 @@ export const ViraColorPairContrastSummary = defineElement<{
                 'Background:': new Color(inputs.backgroundColor).toFormattedStrings().hexString,
                 'Contrast:': `${contrast.contrast} Lc`.padEnd(9, ' '),
             }),
-            dataMap: ([
+            dataMap([
                 colorLayer,
                 value,
-            ]) => {
+            ]) {
                 return {
                     colorLayer,
                     colorValue: html`
@@ -184,7 +184,7 @@ export const ViraColorPairContrastSummary = defineElement<{
                     };
                 },
             ),
-            dataMap: ({size, weight}) => {
+            dataMap({size, weight}) {
                 return {
                     size: `${round(size, {
                         digits: 1,
@@ -212,7 +212,7 @@ export const ViraColorPairContrastSummary = defineElement<{
                 },
             ],
             originalData: contrastLevels,
-            dataMap: (contrastLevel) => {
+            dataMap(contrastLevel) {
                 return {
                     boundaryLc: `${contrastLevel.min} Lc`,
                     levelName: contrastLevelLabel[contrastLevel.name],

@@ -71,7 +71,8 @@ const buttonVariants: {
     {
         label: 'menu caret',
         extraInputs: {
-            showMenuCaret: true,
+            icon: ChevronDown16Icon,
+            showIconOnRight: true,
         },
     },
 ];

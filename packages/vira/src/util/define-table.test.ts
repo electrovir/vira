@@ -64,7 +64,7 @@ describe(defineTable.name, () => {
                 2,
                 3,
             ],
-            dataMap: (entry) => {
+            dataMap(entry) {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
@@ -89,7 +89,7 @@ describe(defineTable.name, () => {
                 2,
                 3,
             ],
-            dataMap: (entry) => {
+            dataMap(entry) {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
@@ -145,7 +145,7 @@ describe(defineTable.name, () => {
                 3,
             ],
             // @ts-expect-error: missing property in return object
-            dataMap: (entry) => {
+            dataMap(entry) {
                 return {
                     a: `a${entry}`,
                 };
@@ -167,7 +167,7 @@ describe(defineTable.name, () => {
                 2,
                 3,
             ],
-            dataMap: (entry) => {
+            dataMap(entry) {
                 return {
                     a: `a${entry}`,
                     b: `b${entry}`,
@@ -196,7 +196,7 @@ describe(defineTable.name, () => {
                     1,
                     2,
                 ],
-                dataMap: (entry) => {
+                dataMap(entry) {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
@@ -267,7 +267,7 @@ describe(defineTable.name, () => {
                     1,
                     2,
                 ],
-                dataMap: (entry) => {
+                dataMap(entry) {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
@@ -330,7 +330,7 @@ describe(defineTable.name, () => {
                     1,
                     2,
                 ],
-                dataMap: (entry) => {
+                dataMap(entry) {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,
@@ -403,7 +403,7 @@ describe(defineTable.name, () => {
                     1,
                     2,
                 ],
-                dataMap: (entry) => {
+                dataMap(entry) {
                     return {
                         a: `a${entry}`,
                         b: `b${entry}`,

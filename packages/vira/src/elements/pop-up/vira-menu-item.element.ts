@@ -53,11 +53,21 @@ export const ViraMenuItem = defineViraElement<
         activate: defineElementEvent<undefined>(),
     },
     hostClasses: {
-        'vira-menu-item-selected': ({inputs}) => !!inputs.selected || !!inputs.iconOverride,
-        'vira-menu-item-disabled': ({inputs}) => !!inputs.disabled,
-        'vira-menu-item-enabled': ({inputs}) => !inputs.disabled,
-        'vira-menu-item-default-icon': ({inputs}) => !inputs.iconOverride,
-        'vira-menu-item-default-styles': ({inputs}) => !inputs.disablePointerStyles,
+        'vira-menu-item-selected'({inputs}) {
+            return !!inputs.selected || !!inputs.iconOverride;
+        },
+        'vira-menu-item-disabled'({inputs}) {
+            return !!inputs.disabled;
+        },
+        'vira-menu-item-enabled'({inputs}) {
+            return !inputs.disabled;
+        },
+        'vira-menu-item-default-icon'({inputs}) {
+            return !inputs.iconOverride;
+        },
+        'vira-menu-item-default-styles'({inputs}) {
+            return !inputs.disablePointerStyles;
+        },
     },
     cssVars: {
         /** Horizontal gap between a menu item's icon and its label. */
@@ -65,7 +75,7 @@ export const ViraMenuItem = defineViraElement<
         'vira-menu-item-padding': '6px 8px',
         'vira-menu-item-border-radius': '4px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: flex;
@@ -247,7 +257,7 @@ export const ViraMenuItem = defineViraElement<
         ];
 
         updateState({
-            cleanupListeners: () => {
+            cleanupListeners() {
                 listenerRemovers.forEach((remover) => remover());
             },
         });

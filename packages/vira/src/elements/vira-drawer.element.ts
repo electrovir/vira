@@ -58,15 +58,19 @@ export const ViraDrawer = defineViraElement<
         state.cleanupListeners?.();
     },
     hostClasses: {
-        'vira-drawer-dragging': ({state}) => state.isDragging,
-        'vira-drawer-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
+        'vira-drawer-dragging'({state}) {
+            return state.isDragging;
+        },
+        'vira-drawer-no-content-padding'({inputs}) {
+            return !!inputs.noContentPadding;
+        },
     },
     slotNames: ['vira-drawer-drawer-title'],
     cssVars: {
         'vira-drawer-backdrop-filter': 'blur(3px)',
         'vira-drawer-max-height': '80dvh',
     },
-    styles: ({cssVars, hostClasses}) => {
+    styles({cssVars, hostClasses}) {
         return css`
             :host {
                 display: contents;
@@ -212,7 +216,7 @@ export const ViraDrawer = defineViraElement<
                 });
 
                 updateState({
-                    cleanupListeners: () => {
+                    cleanupListeners() {
                         removers.forEach((remover) => remover());
                     },
                 });

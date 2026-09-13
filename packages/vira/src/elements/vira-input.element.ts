@@ -69,7 +69,7 @@ export const ViraInput = defineViraElement<
         'vira-input-padding-horizontal': '12px',
         'vira-input-padding-vertical': '4px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 position: relative;
@@ -318,12 +318,20 @@ export const ViraInput = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-input-disabled': ({inputs}) => !!inputs.disabled,
-        'vira-input-fit-text': ({inputs}) => !!inputs.fitText,
-        'vira-input-clear-button-shown': ({inputs}) => !!inputs.showClearButton,
-        'vira-input-error': ({inputs}) => !!inputs.hasError,
+        'vira-input-disabled'({inputs}) {
+            return !!inputs.disabled;
+        },
+        'vira-input-fit-text'({inputs}) {
+            return !!inputs.fitText;
+        },
+        'vira-input-clear-button-shown'({inputs}) {
+            return !!inputs.showClearButton;
+        },
+        'vira-input-error'({inputs}) {
+            return !!inputs.hasError;
+        },
     },
-    render: ({inputs, dispatch, state, updateState, events, host}) => {
+    render({inputs, dispatch, state, updateState, events, host}) {
         const {filtered: filteredValue} = filterTextInputValue({
             value: inputs.value,
             allowed: inputs.allowedInputs,

@@ -38,7 +38,7 @@ export const ViraTextArea = defineViraElement<
         'vira-text-area-padding-horizontal': '12px',
         'vira-text-area-padding-vertical': '8px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 position: relative;
@@ -169,9 +169,15 @@ export const ViraTextArea = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-text-area-disabled': ({inputs}) => !!inputs.disabled,
-        'vira-text-area-error': ({inputs}) => !!inputs.hasError,
-        'vira-text-area-prevent-resize': ({inputs}) => !!inputs.preventResize || !!inputs.disabled,
+        'vira-text-area-disabled'({inputs}) {
+            return !!inputs.disabled;
+        },
+        'vira-text-area-error'({inputs}) {
+            return !!inputs.hasError;
+        },
+        'vira-text-area-prevent-resize'({inputs}) {
+            return !!inputs.preventResize || !!inputs.disabled;
+        },
     },
     render({inputs, dispatch, state, events}) {
         const {filtered: filteredValue} = filterTextInputValue({

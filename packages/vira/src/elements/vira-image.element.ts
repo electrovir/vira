@@ -46,7 +46,9 @@ export const ViraImage = defineViraElement<{
         };
     },
     hostClasses: {
-        'vira-image-height-constrained': ({inputs}) => inputs.dominantDimension === 'height',
+        'vira-image-height-constrained'({inputs}) {
+            return inputs.dominantDimension === 'height';
+        },
     },
     slotNames: [
         'vira-image-loading',
@@ -56,7 +58,7 @@ export const ViraImage = defineViraElement<{
         imageLoad: defineElementEvent<void>(),
         imageError: defineElementEvent<unknown>(),
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline-flex;

@@ -13,9 +13,11 @@ export const ViraBoldText = defineViraElement<{bold: boolean; text: string}>()({
         'vira-bold-bold-weight': viraFontCssVars['vira-font-weight-bold'].value,
     },
     hostClasses: {
-        'vira-bold-bold': ({inputs}) => inputs.bold,
+        'vira-bold-bold'({inputs}) {
+            return inputs.bold;
+        },
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             span {
                 text-decoration: inherit;

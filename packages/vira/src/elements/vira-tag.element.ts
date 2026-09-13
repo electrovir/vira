@@ -235,21 +235,41 @@ export const ViraTag = defineViraElement<
         cancel: defineElementEvent<void>(),
     },
     hostClasses: {
-        'vira-tag-selectable': ({inputs}) => check.isBoolean(inputs.isClickable?.selected),
-        'vira-tag-checked': ({inputs}) => !!inputs.isClickable?.selected,
-        'vira-tag-not-checked': ({inputs}) => inputs.isClickable?.selected === false,
-        'vira-tag-cancellable': ({inputs}) => !!inputs.isClickable?.cancellable,
-        'vira-tag-not-clickable': ({inputs}) => !inputs.isClickable,
-        'vira-tag-disabled': ({inputs}) => !!inputs.disabled,
+        'vira-tag-selectable'({inputs}) {
+            return check.isBoolean(inputs.isClickable?.selected);
+        },
+        'vira-tag-checked'({inputs}) {
+            return !!inputs.isClickable?.selected;
+        },
+        'vira-tag-not-checked'({inputs}) {
+            return inputs.isClickable?.selected === false;
+        },
+        'vira-tag-cancellable'({inputs}) {
+            return !!inputs.isClickable?.cancellable;
+        },
+        'vira-tag-not-clickable'({inputs}) {
+            return !inputs.isClickable;
+        },
+        'vira-tag-disabled'({inputs}) {
+            return !!inputs.disabled;
+        },
 
-        'vira-tag-size-large': ({inputs}) => inputs.size === ViraSize.Large,
-        'vira-tag-size-medium': ({inputs}) => !inputs.size || inputs.size === ViraSize.Medium,
-        'vira-tag-size-small': ({inputs}) => inputs.size === ViraSize.Small,
+        'vira-tag-size-large'({inputs}) {
+            return inputs.size === ViraSize.Large;
+        },
+        'vira-tag-size-medium'({inputs}) {
+            return !inputs.size || inputs.size === ViraSize.Medium;
+        },
+        'vira-tag-size-small'({inputs}) {
+            return inputs.size === ViraSize.Small;
+        },
 
-        'vira-tag-emphasis-standard': ({inputs}) => {
+        'vira-tag-emphasis-standard'({inputs}) {
             return !inputs.emphasis || inputs.emphasis === ViraEmphasis.Standard;
         },
-        'vira-tag-emphasis-subtle': ({inputs}) => inputs.emphasis === ViraEmphasis.Subtle,
+        'vira-tag-emphasis-subtle'({inputs}) {
+            return inputs.emphasis === ViraEmphasis.Subtle;
+        },
 
         ...arrayToObject(
             getObjectTypedKeys(viraColorVariantToHostClassKey),
@@ -257,13 +277,13 @@ export const ViraTag = defineViraElement<
                 const colorKey = viraColorVariantToHostClassKey[colorVariant];
                 return {
                     key: `vira-tag-color-${colorKey}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorVariant || inputs.color === colorKey;
                     },
                 };
@@ -272,28 +292,32 @@ export const ViraTag = defineViraElement<
                 useRequired: true,
             },
         ),
-        'vira-tag-color-plain': ({
+        'vira-tag-color-plain'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => !inputs.color || inputs.color === ViraColorVariant.Plain,
-        'vira-tag-color-neutral': ({
+        }) {
+            return !inputs.color || inputs.color === ViraColorVariant.Plain;
+        },
+        'vira-tag-color-neutral'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => inputs.color === ViraColorVariant.Neutral,
+        }) {
+            return inputs.color === ViraColorVariant.Neutral;
+        },
         ...arrayToObject(
             standaloneThemeColorNames,
             (colorName) => {
                 return {
                     key: `vira-tag-color-${colorName}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorName;
                     },
                 };
@@ -303,7 +327,7 @@ export const ViraTag = defineViraElement<
             },
         ),
     },
-    styles: ({cssVars, hostClasses}) => {
+    styles({cssVars, hostClasses}) {
         function buildVariantCssRule({
             variantSelector,
             emphasisSelector,

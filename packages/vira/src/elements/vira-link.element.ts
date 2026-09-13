@@ -66,9 +66,11 @@ export const ViraLink = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-link-link-styles': ({inputs}) => !inputs.disableLinkStyles,
+        'vira-link-link-styles'({inputs}) {
+            return !inputs.disableLinkStyles;
+        },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline;
@@ -127,7 +129,7 @@ export const ViraLink = defineViraElement<
         ];
 
         updateState({
-            cleanupListeners: () => {
+            cleanupListeners() {
                 listenerRemovers.forEach((remover) => remover());
             },
         });

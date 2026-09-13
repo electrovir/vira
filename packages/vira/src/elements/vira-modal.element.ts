@@ -69,15 +69,19 @@ export const ViraModal = defineViraElement<
         state.cleanupListeners?.();
     },
     hostClasses: {
-        'vira-modal-phone-size': ({inputs}) => !!inputs.isMobileSize,
-        'vira-modal-no-content-padding': ({inputs}) => !!inputs.noContentPadding,
+        'vira-modal-phone-size'({inputs}) {
+            return !!inputs.isMobileSize;
+        },
+        'vira-modal-no-content-padding'({inputs}) {
+            return !!inputs.noContentPadding;
+        },
     },
     slotNames: ['vira-modal-modal-title'],
     cssVars: {
         'vira-modal-backdrop-filter': 'blur(3px)',
         'vira-modal-border-radius': '8px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: contents;
@@ -217,7 +221,7 @@ export const ViraModal = defineViraElement<
                 });
 
                 updateState({
-                    cleanupListeners: () => {
+                    cleanupListeners() {
                         removers.forEach((remover) => remover());
                     },
                 });

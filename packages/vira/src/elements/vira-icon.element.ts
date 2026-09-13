@@ -18,9 +18,11 @@ export const ViraIcon = defineViraElement<{
     tagName: 'vira-icon',
     hostClasses: {
         /** Ignores the given icon's embedded size and causes the <svg> element to fill its parent. */
-        'vira-icon-fit-container': ({inputs}) => !!inputs.fitContainer || !!inputs.icon?.size,
+        'vira-icon-fit-container'({inputs}) {
+            return !!inputs.fitContainer || !!inputs.icon?.size;
+        },
     },
-    styles: ({hostClasses}) => {
+    styles({hostClasses}) {
         return css`
             :host {
                 display: inline-flex;

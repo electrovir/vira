@@ -51,14 +51,20 @@ export const ViraCollapsibleCard = defineViraElement<
         };
     },
     hostClasses: {
-        'vira-collapsible-card-expanded': ({state}) => state.isExpanded,
-        'vira-collapsible-card-expansion-blocked': ({inputs}) => !!inputs.blockExpansion,
-        'vira-collapsible-card-card-styles': ({inputs}) => !inputs.rawCollapsible,
+        'vira-collapsible-card-expanded'({state}) {
+            return state.isExpanded;
+        },
+        'vira-collapsible-card-expansion-blocked'({inputs}) {
+            return !!inputs.blockExpansion;
+        },
+        'vira-collapsible-card-card-styles'({inputs}) {
+            return !inputs.rawCollapsible;
+        },
     },
     cssVars: {
         'vira-collapsible-card-content-gap': '16px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: inline-flex;

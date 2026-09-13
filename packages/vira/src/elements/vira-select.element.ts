@@ -96,13 +96,23 @@ export const ViraSelect = defineViraElement<
         'vira-select-icon-padding': '44px',
     },
     hostClasses: {
-        'vira-select-disabled': ({inputs}) => !!inputs.disabled,
-        'vira-select-error': ({inputs}) => !!inputs.hasError,
-        'vira-select-has-label': ({inputs}) => !!inputs.label,
-        'vira-select-not-raw': ({inputs}) => !inputs.rawSelect,
-        'vira-select-readonly': ({inputs}) => !!inputs.isReadonly,
+        'vira-select-disabled'({inputs}) {
+            return !!inputs.disabled;
+        },
+        'vira-select-error'({inputs}) {
+            return !!inputs.hasError;
+        },
+        'vira-select-has-label'({inputs}) {
+            return !!inputs.label;
+        },
+        'vira-select-not-raw'({inputs}) {
+            return !inputs.rawSelect;
+        },
+        'vira-select-readonly'({inputs}) {
+            return !!inputs.isReadonly;
+        },
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 position: relative;
@@ -338,7 +348,7 @@ export const ViraSelect = defineViraElement<
         ];
 
         updateState({
-            cleanupListeners: () => {
+            cleanupListeners() {
                 listenerRemovers.forEach((remover) => remover());
             },
         });

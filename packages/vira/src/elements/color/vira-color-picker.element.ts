@@ -67,9 +67,11 @@ export const ViraColorPicker = defineElement<
         };
     },
     hostClasses: {
-        'vira-color-picker-always-show': ({inputs}) => !!inputs.alwaysShowPicker,
+        'vira-color-picker-always-show'({inputs}) {
+            return !!inputs.alwaysShowPicker;
+        },
     },
-    styles: ({cssVars, hostClasses}) => {
+    styles({cssVars, hostClasses}) {
         return css`
             :host {
                 display: inline-flex;

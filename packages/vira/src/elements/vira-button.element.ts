@@ -3,7 +3,7 @@ import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.j
 import {css, html, nothing, unsafeCSS, type CSSResult, type HtmlInterpolation} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
-import {ChevronDown16Icon, type ViraIconSvg} from '../icons/index.js';
+import {type ViraIconSvg} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
@@ -189,30 +189,26 @@ export const ViraButton = defineViraElement<
          * @default false
          */
         showIconOnRight: boolean;
-        /**
-         * Set to `true` to append a downwards chevron after the button's text.
-         *
-         * @deprecated Set `icon` to `ChevronDown16Icon` and `showIconOnRight` to `true` instead.
-         * @default false
-         */
-        showMenuCaret: boolean;
     }>
 >()({
     tagName: 'vira-button',
     hostClasses: {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated
-        'vira-button-with-menu-caret': ({inputs}) => !!inputs.showMenuCaret,
-
-        'vira-button-size-large': ({inputs}) => inputs.buttonSize === ViraSize.Large,
-        'vira-button-size-medium': ({inputs}) => {
+        'vira-button-size-large'({inputs}) {
+            return inputs.buttonSize === ViraSize.Large;
+        },
+        'vira-button-size-medium'({inputs}) {
             return !inputs.buttonSize || inputs.buttonSize === ViraSize.Medium;
         },
-        'vira-button-size-small': ({inputs}) => inputs.buttonSize === ViraSize.Small,
+        'vira-button-size-small'({inputs}) {
+            return inputs.buttonSize === ViraSize.Small;
+        },
 
-        'vira-button-emphasis-standard': ({inputs}) => {
+        'vira-button-emphasis-standard'({inputs}) {
             return !inputs.buttonEmphasis || inputs.buttonEmphasis === ViraEmphasis.Standard;
         },
-        'vira-button-emphasis-subtle': ({inputs}) => inputs.buttonEmphasis === ViraEmphasis.Subtle,
+        'vira-button-emphasis-subtle'({inputs}) {
+            return inputs.buttonEmphasis === ViraEmphasis.Subtle;
+        },
 
         ...arrayToObject(
             getObjectTypedKeys(viraColorVariantToHostClassKey),
@@ -220,13 +216,13 @@ export const ViraButton = defineViraElement<
                 const colorKey = viraColorVariantToHostClassKey[colorVariant];
                 return {
                     key: `vira-button-color-${colorKey}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorVariant || inputs.color === colorKey;
                     },
                 };
@@ -235,28 +231,32 @@ export const ViraButton = defineViraElement<
                 useRequired: true,
             },
         ),
-        'vira-button-color-plain': ({
+        'vira-button-color-plain'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => !inputs.color || inputs.color === ViraColorVariant.Plain,
-        'vira-button-color-neutral': ({
+        }) {
+            return !inputs.color || inputs.color === ViraColorVariant.Plain;
+        },
+        'vira-button-color-neutral'({
             inputs,
         }: {
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
-        }) => inputs.color === ViraColorVariant.Neutral,
+        }) {
+            return inputs.color === ViraColorVariant.Neutral;
+        },
         ...arrayToObject(
             standaloneThemeColorNames,
             (colorName) => {
                 return {
                     key: `vira-button-color-${colorName}` as const,
-                    value: ({
+                    value({
                         inputs,
                     }: {
                         inputs: Readonly<
                             PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>
                         >;
-                    }) => {
+                    }) {
                         return inputs.color === colorName;
                     },
                 };
@@ -266,8 +266,12 @@ export const ViraButton = defineViraElement<
             },
         ),
 
-        'vira-button-disabled': ({inputs}) => !!inputs.isDisabled,
-        'vira-button-icon-only': ({inputs}) => !inputs.text && !!inputs.icon,
+        'vira-button-disabled'({inputs}) {
+            return !!inputs.isDisabled;
+        },
+        'vira-button-icon-only'({inputs}) {
+            return !inputs.text && !!inputs.icon;
+        },
     },
     cssVars: {
         'vira-button-text-color': 'transparent',
@@ -292,7 +296,7 @@ export const ViraButton = defineViraElement<
         'vira-button-border-width': '1px',
         'vira-button-border-radius': viraFormCssVars['vira-form-radius'].value,
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         function buildVariantCssRule({
             variantSelector,
             emphasisSelector,
@@ -468,16 +472,6 @@ export const ViraButton = defineViraElement<
                 align-items: center;
             }
 
-            .caret-icon {
-                margin-left: 8px;
-            }
-
-            ${hostClasses['vira-button-with-menu-caret'].selector} {
-                button {
-                    padding-right: 6px;
-                }
-            }
-
             ${hostClasses['vira-button-disabled'].selector} {
                 cursor: not-allowed;
 
@@ -502,7 +496,7 @@ export const ViraButton = defineViraElement<
             }
         `;
     },
-    render: ({inputs}) => {
+    render({inputs}) {
         const iconTemplate = inputs.icon
             ? html`
                   <${ViraIcon.assign({
@@ -518,17 +512,6 @@ export const ViraButton = defineViraElement<
                   <span class="empty-text">&nbsp;</span>
               `;
 
-        // eslint-disable-next-line @typescript-eslint/no-deprecated
-        const caretIconTemplate = inputs.showMenuCaret
-            ? html`
-                  <${ViraIcon.assign({
-                      icon: ChevronDown16Icon,
-                  })}
-                      class="caret-icon"
-                  ></${ViraIcon}>
-              `
-            : nothing;
-
         /* Both templates are interpolated with no whitespace between them so `+` selectors match. */
         const templates: HtmlInterpolation[] = inputs.showIconOnRight
             ? [
@@ -541,7 +524,7 @@ export const ViraButton = defineViraElement<
               ];
 
         return html`
-            <button ?disabled=${inputs.isDisabled}>${templates}${caretIconTemplate}</button>
+            <button ?disabled=${inputs.isDisabled}>${templates}</button>
         `;
     },
 });

@@ -107,10 +107,10 @@ export const ViraColorDetails = defineElement<{
                 },
             ],
             originalData: getObjectTypedEntries(colorStrings),
-            dataMap: ([
+            dataMap([
                 colorFormat,
                 value,
-            ]) => {
+            ]) {
                 return {
                     colorFormat: `${colorFormat}:`,
                     formattedString: html`

@@ -23,14 +23,18 @@ export const ViraCard = defineViraElement<{
 }>()({
     tagName: 'vira-card',
     hostClasses: {
-        'vira-card-error': ({inputs}) => inputs.cardState === ViraCardState.Error,
-        'vira-card-success': ({inputs}) => inputs.cardState === ViraCardState.Success,
+        'vira-card-error'({inputs}) {
+            return inputs.cardState === ViraCardState.Error;
+        },
+        'vira-card-success'({inputs}) {
+            return inputs.cardState === ViraCardState.Success;
+        },
     },
     cssVars: {
         'vira-card-border': css`1px solid ${viraFormCssVars['vira-form-border-color'].value}`,
         'vira-card-padding': '24px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: block;

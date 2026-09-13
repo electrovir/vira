@@ -321,17 +321,17 @@ export const ViraForm = defineViraElement<
                                 type: ViraInputType.Number,
                                 attributePassthrough: {
                                     ...horizontalLabelAttributes,
-                                    ...(field.min === undefined
+                                    ...(field.min == undefined
                                         ? {}
                                         : {
                                               min: String(field.min),
                                           }),
-                                    ...(field.max === undefined
+                                    ...(field.max == undefined
                                         ? {}
                                         : {
                                               max: String(field.max),
                                           }),
-                                    ...(field.step === undefined
+                                    ...(field.step == undefined
                                         ? {}
                                         : {
                                               step: String(field.step),

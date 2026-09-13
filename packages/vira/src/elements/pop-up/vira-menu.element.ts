@@ -45,14 +45,20 @@ export const ViraMenu = defineViraElement<
 >()({
     tagName: 'vira-menu',
     hostClasses: {
-        'vira-menu-open-upwards': ({inputs}) => inputs.direction === ViraMenuPopUpDirection.Upwards,
-        'vira-menu-rounded': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllRounded,
-        'vira-menu-square': ({inputs}) => inputs.cornerStyle === ViraMenuCornerStyle.AllSquare,
+        'vira-menu-open-upwards'({inputs}) {
+            return inputs.direction === ViraMenuPopUpDirection.Upwards;
+        },
+        'vira-menu-rounded'({inputs}) {
+            return inputs.cornerStyle === ViraMenuCornerStyle.AllRounded;
+        },
+        'vira-menu-square'({inputs}) {
+            return inputs.cornerStyle === ViraMenuCornerStyle.AllSquare;
+        },
     },
     cssVars: {
         'vira-menu-padding': '4px',
     },
-    styles: ({hostClasses, cssVars}) => {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: flex;

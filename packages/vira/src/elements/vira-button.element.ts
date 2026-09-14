@@ -160,6 +160,8 @@ export const ViraButton = defineViraElement<
     PartialWithUndefined<{
         text: string;
         icon: Readonly<ViraIconSvg>;
+        /** An optional icon rendered after the button text. */
+        rightSideIcon: Readonly<ViraIconSvg>;
         /** @default false */
         isDisabled: boolean;
         /**
@@ -183,12 +185,6 @@ export const ViraButton = defineViraElement<
          * @default ViraColorVariant.Plain
          */
         color: ViraColorVariant | ViraThemeColorName;
-        /**
-         * Set to `true` to render `icon` after `text` instead of before it.
-         *
-         * @default false
-         */
-        showIconOnRight: boolean;
     }>
 >()({
     tagName: 'vira-button',
@@ -270,7 +266,7 @@ export const ViraButton = defineViraElement<
             return !!inputs.isDisabled;
         },
         'vira-button-icon-only'({inputs}) {
-            return !inputs.text && !!inputs.icon;
+            return !inputs.text && (!!inputs.icon || !!inputs.rightSideIcon);
         },
     },
     cssVars: {
@@ -497,13 +493,6 @@ export const ViraButton = defineViraElement<
         `;
     },
     render({inputs}) {
-        const iconTemplate = inputs.icon
-            ? html`
-                  <${ViraIcon.assign({
-                      icon: inputs.icon,
-                  })}></${ViraIcon}>
-              `
-            : nothing;
         const textTemplate = inputs.text
             ? html`
                   <span class="text-template">${inputs.text}</span>
@@ -513,15 +502,23 @@ export const ViraButton = defineViraElement<
               `;
 
         /* Both templates are interpolated with no whitespace between them so `+` selectors match. */
-        const templates: HtmlInterpolation[] = inputs.showIconOnRight
-            ? [
-                  textTemplate,
-                  iconTemplate,
-              ]
-            : [
-                  iconTemplate,
-                  textTemplate,
-              ];
+        const templates: HtmlInterpolation[] = [
+            inputs.icon
+                ? html`
+                      <${ViraIcon.assign({
+                          icon: inputs.icon,
+                      })}></${ViraIcon}>
+                  `
+                : nothing,
+            textTemplate,
+            inputs.rightSideIcon
+                ? html`
+                      <${ViraIcon.assign({
+                          icon: inputs.rightSideIcon,
+                      })}></${ViraIcon}>
+                  `
+                : nothing,
+        ];
 
         return html`
             <button ?disabled=${inputs.isDisabled}>${templates}</button>

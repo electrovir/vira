@@ -27,6 +27,7 @@ import {
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {ChevronDown16Icon} from '../icons/icon-svgs/16/chevron-down-16.icon.js';
+import {Check24Icon} from '../icons/icon-svgs/24/check-24.icon.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -971,13 +972,13 @@ export const ViraTabs = defineViraElement<
         /**
          * Hidden copies of the "more" button in each of its possible shapes, rendered inside the
          * measurement mirror so their true widths can be measured before choosing which one fits:
-         * the default overflow label, and the collapsed selected tab's own label, with a caret.
+         * the default overflow label, and the collapsed selected tab's own label (with a checkmark
+         * and caret).
          */
         const measureMoreButtons = html`
             <${ViraButton.assign({
                 text: overflowLabel,
-                icon: ChevronDown16Icon,
-                showIconOnRight: true,
+                rightSideIcon: ChevronDown16Icon,
                 color: ViraColorVariant.Neutral,
             })}
                 class="measure-more-default"
@@ -986,8 +987,8 @@ export const ViraTabs = defineViraElement<
                 ? html`
                       <${ViraButton.assign({
                           text: selectedTab.label,
-                          icon: ChevronDown16Icon,
-                          showIconOnRight: true,
+                          icon: Check24Icon,
+                          rightSideIcon: ChevronDown16Icon,
                           color: ViraColorVariant.Neutral,
                       })}
                           class="measure-more-labeled"
@@ -1007,8 +1008,8 @@ export const ViraTabs = defineViraElement<
                       })}>
                           <${ViraButton.assign({
                               text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
-                              icon: ChevronDown16Icon,
-                              showIconOnRight: true,
+                              icon: selectedIsCollapsed ? Check24Icon : undefined,
+                              rightSideIcon: ChevronDown16Icon,
                               color: ViraColorVariant.Neutral,
                           })}
                               slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}

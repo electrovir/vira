@@ -51,15 +51,13 @@ const buttonVariants: {
     {
         label: 'icon on right',
         extraInputs: {
-            icon: Upload24Icon,
-            showIconOnRight: true,
+            rightSideIcon: Upload24Icon,
         },
     },
     {
         label: 'chevron on right',
         extraInputs: {
-            icon: ChevronDown16Icon,
-            showIconOnRight: true,
+            rightSideIcon: ChevronDown16Icon,
         },
     },
     {
@@ -71,8 +69,7 @@ const buttonVariants: {
     {
         label: 'menu caret',
         extraInputs: {
-            icon: ChevronDown16Icon,
-            showIconOnRight: true,
+            rightSideIcon: ChevronDown16Icon,
         },
     },
 ];

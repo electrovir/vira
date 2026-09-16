@@ -34238,7 +34238,6 @@ import{n as e}from"./rolldown-runtime-hePW80VL.js";import{$ as t,A as n,At as r,
                 <input
                     id=${Qd(e.label?n.randomId:void 0)}
                     aria-label=${Qd(e.label||void 0)}
-                    autofocus=${!1}
                     type=${f$(e.type,n.showPassword)}
                     style=${c}
                     autocomplete=${Qd(u?`off`:void 0)}

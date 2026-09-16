@@ -416,7 +416,6 @@ export const ViraInput = defineViraElement<
                 <input
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
                     aria-label=${ifDefined(inputs.label || undefined)}
-                    autofocus=${false}
                     type=${calculateEffectiveInputType(inputs.type, state.showPassword)}
                     style=${forcedInputWidthStyles}
                     autocomplete=${ifDefined(shouldBlockBrowserHelps ? 'off' : undefined)}

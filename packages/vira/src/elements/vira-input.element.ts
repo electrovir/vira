@@ -305,6 +305,8 @@ export const ViraInput = defineViraElement<
          * that was blocked out of programmatic "value" property assignments.
          */
         inputBlocked: defineElementEvent<string>(),
+        /** Triggered if the clear button is activated. */
+        clear: defineElementEvent<void>(),
     },
     state() {
         return {
@@ -466,6 +468,11 @@ export const ViraInput = defineViraElement<
                                 dispatch(
                                     new events.valueChange({
                                         detail: '',
+                                    }),
+                                );
+                                dispatch(
+                                    new events.clear({
+                                        detail: undefined,
                                     }),
                                 );
                             })}

@@ -42,6 +42,41 @@ describe(ViraInput.tagName, () => {
         assert.strictEquals(lastEvent?.detail, textToType);
     });
 
+    it('fires clear from the clear button but not from typing', async () => {
+        const firedEvents: string[] = [];
+
+        const fixture = await testWeb.render(html`
+            <${ViraInput.assign({
+                value: 'a',
+                showClearButton: true,
+            })}
+                ${listen(ViraInput.events.valueChange, () => {
+                    firedEvents.push('valueChange');
+                })}
+                ${listen(ViraInput.events.clear, () => {
+                    firedEvents.push('clear');
+                })}
+            ></${ViraInput}>
+        `);
+
+        assert.instanceOf(fixture, ViraInput);
+
+        await testWeb.click(fixture);
+        await testWeb.typeText('b');
+
+        assert.deepEquals(firedEvents, ['valueChange']);
+
+        const clearButton = fixture.shadowRoot.querySelector('.clear-x-button');
+        assert.instanceOf(clearButton, HTMLButtonElement);
+        await testWeb.click(clearButton);
+
+        assert.deepEquals(firedEvents, [
+            'valueChange',
+            'valueChange',
+            'clear',
+        ]);
+    });
+
     it('matches the default button height', async () => {
         const fixture = await testWeb.render(html`
             <div>

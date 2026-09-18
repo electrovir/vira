@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "32.1.2",
+    "version": "32.2.0",
     "private": true,
     "repository": {
         "type": "git",

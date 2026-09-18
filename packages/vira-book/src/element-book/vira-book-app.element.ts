@@ -1,6 +1,7 @@
 import {ElementBookApp} from 'element-book';
 import {css, defineElement, html} from 'element-vir';
 import {joinUrlPaths} from 'url-vir';
+import {viraFormCssVars} from 'vira';
 import {viraBookPages} from './book-pages.js';
 
 export const ViraBookApp = defineElement()({
@@ -10,6 +11,7 @@ export const ViraBookApp = defineElement()({
             display: block;
             height: 100%;
             width: 100%;
+            font-size: ${viraFormCssVars['vira-form-medium-text-size'].value};
         }
 
         ${ElementBookApp} {

@@ -71,9 +71,8 @@ export const ViraMenuItem = defineViraElement<
     },
     cssVars: {
         /** Horizontal gap between a menu item's icon and its label. */
-        'vira-menu-item-icon-gap': '8px',
-        'vira-menu-item-padding': '4px 6px',
-        'vira-menu-item-border-radius': '4px',
+        'vira-menu-item-icon-gap': '0',
+        'vira-menu-item-padding': '4px 8px 4px 1px',
     },
     styles({hostClasses, cssVars}) {
         return css`
@@ -86,7 +85,6 @@ export const ViraMenuItem = defineViraElement<
                 gap: ${cssVars['vira-menu-item-icon-gap'].value};
                 overflow: hidden;
                 padding: ${cssVars['vira-menu-item-padding'].value};
-                border-radius: ${cssVars['vira-menu-item-border-radius'].value};
                 align-items: center;
                 text-align: left;
             }

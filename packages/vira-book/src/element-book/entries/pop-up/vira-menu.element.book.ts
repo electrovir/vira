@@ -1,6 +1,16 @@
 import {defineBookPage} from 'element-book';
 import {html, type HtmlInterpolation} from 'element-vir';
-import {ViraMenu, ViraMenuItem, type ViraMenuCornerStyle, type ViraMenuPopUpDirection} from 'vira';
+import {
+    Copy24Icon,
+    createSizedIcon,
+    Pencil24Icon,
+    ViraMenu,
+    ViraMenuItem,
+    X24Icon,
+    type ViraIconSvg,
+    type ViraMenuCornerStyle,
+    type ViraMenuPopUpDirection,
+} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
@@ -14,6 +24,7 @@ const examples: ReadonlyArray<{
         selected?: boolean;
         disabled?: boolean;
         disablePointerStyles?: boolean;
+        iconOverride?: ViraIconSvg;
     }>;
 }> = [
     {
@@ -62,6 +73,23 @@ const examples: ReadonlyArray<{
         ],
     },
     {
+        title: 'with action icons',
+        items: [
+            {
+                content: 'copy',
+                iconOverride: createSizedIcon(Copy24Icon, 16),
+            },
+            {
+                content: 'rename',
+                iconOverride: createSizedIcon(Pencil24Icon, 16),
+            },
+            {
+                content: 'delete',
+                iconOverride: createSizedIcon(X24Icon, 16),
+            },
+        ],
+    },
+    {
         title: 'with disabled item',
         items: [
             {
@@ -96,6 +124,7 @@ export const viraMenuOptionsBookPage = defineBookPage({
                                         selected: item.selected,
                                         disabled: item.disabled,
                                         disablePointerStyles: item.disablePointerStyles,
+                                        iconOverride: item.iconOverride,
                                     })}>
                                         ${item.content}
                                     </${ViraMenuItem}>

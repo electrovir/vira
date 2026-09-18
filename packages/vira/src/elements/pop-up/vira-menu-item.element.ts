@@ -3,11 +3,14 @@ import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
-import {Check24Icon} from '../../icons/icon-svgs/24/check-24.icon.js';
+import {lucideIcons} from '../../icons/lucide-icons.js';
+import {createSizedIcon} from '../../icons/sized-icon.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noUserSelect} from '../../styles/index.js';
 import {defineViraElement} from '../../util/define-vira-element.js';
 import {ViraIcon} from '../vira-icon.element.js';
+
+const selectedCheckIcon = createSizedIcon(lucideIcons.Check, 16);
 
 /**
  * An element for an individual menu item.
@@ -71,8 +74,8 @@ export const ViraMenuItem = defineViraElement<
     },
     cssVars: {
         /** Horizontal gap between a menu item's icon and its label. */
-        'vira-menu-item-icon-gap': '0',
-        'vira-menu-item-padding': '4px 8px 4px 1px',
+        'vira-menu-item-icon-gap': '3px',
+        'vira-menu-item-padding': '8px 12px 8px 0',
     },
     styles({hostClasses, cssVars}) {
         return css`
@@ -82,9 +85,9 @@ export const ViraMenuItem = defineViraElement<
                 ${noUserSelect};
                 box-sizing: border-box;
                 max-width: 100%;
+                padding-left: calc(${cssVars['vira-menu-item-icon-gap'].value} * 2);
                 gap: ${cssVars['vira-menu-item-icon-gap'].value};
                 overflow: hidden;
-                padding: ${cssVars['vira-menu-item-padding'].value};
                 align-items: center;
                 text-align: left;
             }
@@ -121,7 +124,7 @@ export const ViraMenuItem = defineViraElement<
             }
 
             ${ViraIcon} {
-                width: 24px;
+                width: 16px;
                 aspect-ratio: 1;
                 align-items: center;
                 justify-content: center;
@@ -138,6 +141,7 @@ export const ViraMenuItem = defineViraElement<
             }
 
             .slot-wrapper {
+                padding: ${cssVars['vira-menu-item-padding'].value};
                 display: flex;
                 flex-grow: 1;
                 overflow: hidden;
@@ -269,7 +273,7 @@ export const ViraMenuItem = defineViraElement<
     render({inputs}) {
         return html`
             <${ViraIcon.assign({
-                icon: inputs.iconOverride || Check24Icon,
+                icon: inputs.iconOverride || selectedCheckIcon,
             })}></${ViraIcon}>
             <div class="slot-wrapper">
                 <slot>&nbsp;</slot>

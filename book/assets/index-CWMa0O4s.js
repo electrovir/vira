@@ -34210,7 +34210,7 @@ import{n as e}from"./rolldown-runtime-hePW80VL.js";import{$ as t,A as n,At as r,
                     display: none;
                 }
             }
-        `},events:{valueChange:S(),inputBlocked:S()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:Mt(32)}},hostClasses:{"vira-input-disabled"({inputs:e}){return!!e.disabled},"vira-input-fit-text"({inputs:e}){return!!e.fitText},"vira-input-clear-button-shown"({inputs:e}){return!!e.showClearButton},"vira-input-error"({inputs:e}){return!!e.hasError}},render({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a}){let{filtered:o}=l$({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
+        `},events:{valueChange:S(),inputBlocked:S(),clear:S()},state(){return{forcedInputWidth:0,showPassword:!1,randomId:Mt(32)}},hostClasses:{"vira-input-disabled"({inputs:e}){return!!e.disabled},"vira-input-fit-text"({inputs:e}){return!!e.fitText},"vira-input-clear-button-shown"({inputs:e}){return!!e.showClearButton},"vira-input-error"({inputs:e}){return!!e.hasError}},render({inputs:e,dispatch:t,state:n,updateState:r,events:i,host:a}){let{filtered:o}=l$({value:e.value,allowed:e.allowedInputs,blocked:e.blockedInputs});if(e.isReadonly){let t=w`
                 <span class="readonly-value">${o}</span>
             `;return e.label?w`
                     <label>
@@ -34256,7 +34256,7 @@ import{n as e}from"./rolldown-runtime-hePW80VL.js";import{$ as t,A as n,At as r,
                             class="clear-x-button"
                             title="clear"
                             ${N(`mousedown`,e=>{e.stopImmediatePropagation(),e.preventDefault()})}
-                            ${N(`click`,()=>{e.disabled||t(new i.valueChange({detail:``}))})}
+                            ${N(`click`,()=>{e.disabled||(t(new i.valueChange({detail:``})),t(new i.clear({detail:void 0})))})}
                         >
                             <${G.assign({icon:m_})}></${G}>
                         </button>

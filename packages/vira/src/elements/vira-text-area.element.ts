@@ -35,8 +35,8 @@ export const ViraTextArea = defineViraElement<
 >()({
     tagName: 'vira-text-area',
     cssVars: {
-        'vira-text-area-padding-horizontal': '12px',
-        'vira-text-area-padding-vertical': '8px',
+        'vira-text-area-padding-horizontal': '10px',
+        'vira-text-area-padding-vertical': '6px',
     },
     styles({hostClasses, cssVars}) {
         return css`

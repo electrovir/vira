@@ -85,15 +85,15 @@ export const standaloneThemeColorNames = getObjectTypedValues(ViraThemeColorName
  * @category Internal
  */
 export enum ViraSize {
-    /** @default 40px tall */
+    /** @default 36px tall */
     Large = 'large',
     /**
      * This is the default.
      *
-     * @default 32px tall
+     * @default 28px tall
      */
     Medium = 'medium',
-    /** @default 24px tall */
+    /** @default 20px tall */
     Small = 'small',
     /**
      * No size styles will be applied at all. All related CSS vars are free to customize to your
@@ -145,7 +145,7 @@ export const viraEmphasisVariants = [
  * @category Internal
  */
 export const viraSizeHeights: Record<Exclude<ViraSize, ViraSize.None>, number> = {
-    [ViraSize.Large]: 40,
-    [ViraSize.Medium]: 32,
-    [ViraSize.Small]: 24,
+    [ViraSize.Large]: 36,
+    [ViraSize.Medium]: 28,
+    [ViraSize.Small]: 20,
 };

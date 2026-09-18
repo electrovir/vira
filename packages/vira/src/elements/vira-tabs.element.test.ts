@@ -79,7 +79,7 @@ const manyTabs = [
  */
 async function renderOverflowFixture(
     currentRoute: FullSpaRoute,
-    {width = 260, overflowLabel}: {width?: number; overflowLabel?: string} = {},
+    {width = 200, overflowLabel}: {width?: number; overflowLabel?: string} = {},
 ) {
     const fixture = await testWeb.render(html`
         <div

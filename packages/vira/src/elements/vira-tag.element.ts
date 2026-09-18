@@ -227,7 +227,7 @@ export const ViraTag = defineViraElement<
 
         'vira-tag-border-radius': '1000px',
         'vira-tag-gap': '6px',
-        'vira-tag-horizontal-padding': '12px',
+        'vira-tag-horizontal-padding': '10px',
         'vira-tag-border-width': '1px',
     },
     events: {
@@ -563,11 +563,11 @@ export const ViraTag = defineViraElement<
 
             ${hostClasses['vira-tag-size-small'].selector} {
                 ${cssVars['vira-tag-gap'].name}: 4px;
-                ${cssVars['vira-tag-horizontal-padding'].name}: 8px;
+                ${cssVars['vira-tag-horizontal-padding'].name}: 6px;
             }
 
             ${hostClasses['vira-tag-size-large'].selector} {
-                ${cssVars['vira-tag-horizontal-padding'].name}: 16px;
+                ${cssVars['vira-tag-horizontal-padding'].name}: 12px;
             }
 
             ${hostClasses['vira-tag-disabled'].selector} {

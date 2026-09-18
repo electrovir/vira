@@ -101,8 +101,8 @@ describe(ViraInput.tagName, () => {
                 inputHeight: input.getBoundingClientRect().height,
             },
             {
-                buttonHeight: 32,
-                inputHeight: 32,
+                buttonHeight: 28,
+                inputHeight: 28,
             },
         );
     });

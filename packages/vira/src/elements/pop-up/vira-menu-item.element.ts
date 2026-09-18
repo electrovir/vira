@@ -72,7 +72,7 @@ export const ViraMenuItem = defineViraElement<
     cssVars: {
         /** Horizontal gap between a menu item's icon and its label. */
         'vira-menu-item-icon-gap': '8px',
-        'vira-menu-item-padding': '6px 8px',
+        'vira-menu-item-padding': '4px 6px',
         'vira-menu-item-border-radius': '4px',
     },
     styles({hostClasses, cssVars}) {

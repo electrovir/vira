@@ -91,9 +91,9 @@ export const ViraSelect = defineViraElement<
         valueChange: defineElementEvent<string>(),
     },
     cssVars: {
-        'vira-select-padding-horizontal': '12px',
-        'vira-select-padding-vertical': '4px',
-        'vira-select-icon-padding': '44px',
+        'vira-select-padding-horizontal': '10px',
+        'vira-select-padding-vertical': '3px',
+        'vira-select-icon-padding': '40px',
     },
     hostClasses: {
         'vira-select-disabled'({inputs}) {
@@ -118,7 +118,7 @@ export const ViraSelect = defineViraElement<
                 position: relative;
                 display: inline-flex;
                 width: 223px;
-                height: 32px;
+                height: 28px;
                 box-sizing: border-box;
                 color: ${viraFormCssVars['vira-form-foreground-color'].value};
             }
@@ -163,7 +163,7 @@ export const ViraSelect = defineViraElement<
                     box-sizing: border-box;
                     /* Prevent the left pixel of text getting cut off. */
                     padding-left: 0.5px;
-                    padding-right: 28px;
+                    padding-right: 24px;
                     overflow: hidden;
                     text-overflow: ellipsis;
 
@@ -192,7 +192,7 @@ export const ViraSelect = defineViraElement<
             }
 
             .trigger-icon {
-                width: 24px;
+                width: 20px;
                 aspect-ratio: 1;
             }
 
@@ -209,7 +209,7 @@ export const ViraSelect = defineViraElement<
                     cursor: pointer;
 
                     & select {
-                        padding: ${cssVars['vira-select-padding-vertical'].value} 31px
+                        padding: ${cssVars['vira-select-padding-vertical'].value} 27px
                             ${cssVars['vira-select-padding-vertical'].value}
                             ${cssVars['vira-select-padding-horizontal'].value};
 

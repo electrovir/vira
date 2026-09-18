@@ -89,7 +89,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             .custom-checkbox {
-                height: 24px;
+                height: 20px;
                 aspect-ratio: 1;
                 box-sizing: border-box;
             }
@@ -98,7 +98,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 width: 100%;
                 height: 100%;
                 box-sizing: border-box;
-                ${viraIconCssVars['vira-icon-stroke-width'].name}: 3px;
+                ${viraIconCssVars['vira-icon-stroke-width'].name}: 2px;
                 opacity: 0;
             }
 
@@ -199,7 +199,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 gap: 8px;
 
                 & .label-text {
-                    padding-block: calc((24px - 1em) / 2);
+                    padding-block: calc((20px - 1em) / 2);
                 }
             }
         `;

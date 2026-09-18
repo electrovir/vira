@@ -91,7 +91,7 @@ export const ViraDateInput = defineViraElement<
             input {
                 box-sizing: border-box;
                 width: 100%;
-                padding: 4px 8px;
+                padding: 3px 6px;
                 font-size: inherit;
                 border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
                 border-radius: ${viraFormCssVars['vira-form-radius'].value};

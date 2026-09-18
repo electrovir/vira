@@ -578,7 +578,7 @@ export const ViraTabs = defineViraElement<
 
             .tab-item ${ViraLink} {
                 display: flex;
-                padding: 8px 16px;
+                padding: 6px 12px;
             }
 
             .tab-more {
@@ -607,9 +607,9 @@ export const ViraTabs = defineViraElement<
             }
 
             .tab-group-label {
-                font-size: 11px;
+                font-size: 10px;
                 font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
-                padding: 8px 16px 4px;
+                padding: 6px 12px 4px;
                 color: ${viraTheme.colors['vira-grey-foreground-header'].foreground.value};
             }
 

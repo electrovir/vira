@@ -91,11 +91,11 @@ export const ViraCollapsibleCard = defineViraElement<
                 }
 
                 & .card-header {
-                    padding: 8px 16px;
+                    padding: 6px 12px;
                 }
 
                 & .card-content {
-                    padding: 8px 16px 8px 16px;
+                    padding: 6px 12px 6px 12px;
                 }
             }
 
@@ -132,12 +132,12 @@ export const ViraCollapsibleCard = defineViraElement<
                 }
 
                 .card-header {
-                    padding: 8px 0 !important;
+                    padding: 6px 0 !important;
                 }
 
                 .card-content {
                     overflow: visible !important;
-                    padding: 8px 0 16px 0 !important;
+                    padding: 6px 0 12px 0 !important;
                 }
 
                 .open-caret {

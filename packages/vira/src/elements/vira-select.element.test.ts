@@ -17,7 +17,7 @@ const mockOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
 ];
 
 describe(ViraSelect.tagName, () => {
-    it('is 32px high by default', async () => {
+    it('is 28px high by default', async () => {
         const instance = await testWeb.render(html`
             <${ViraSelect.assign({
                 options: mockOptions,
@@ -25,7 +25,7 @@ describe(ViraSelect.tagName, () => {
             })}></${ViraSelect}>
         `);
 
-        assert.strictEquals(instance.getBoundingClientRect().height, 32);
+        assert.strictEquals(instance.getBoundingClientRect().height, 28);
     });
 
     it('allows consumers to set its height', async () => {

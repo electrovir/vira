@@ -120,7 +120,7 @@ export const ViraModal = defineViraElement<
                     flex-direction: column;
 
                     & .header {
-                        padding: 16px 24px;
+                        padding: 12px 20px;
                         display: flex;
                         gap: 16px;
                         align-items: flex-start;
@@ -134,11 +134,11 @@ export const ViraModal = defineViraElement<
                             overflow: hidden;
 
                             & h1 {
-                                font-size: 24px;
+                                font-size: 20px;
                             }
 
                             & sub {
-                                font-size: 16px;
+                                font-size: 14px;
                                 color: ${viraFormCssVars['vira-form-secondary-body-foreground']
                                     .value};
                             }
@@ -163,7 +163,7 @@ export const ViraModal = defineViraElement<
                         }
                     }
                     & .body {
-                        padding: 16px 24px;
+                        padding: 12px 20px;
                         overflow: auto;
                         overscroll-behavior: contain;
                     }
@@ -181,7 +181,7 @@ export const ViraModal = defineViraElement<
                     & .modal-content-wrapper {
                         & .header,
                         & .body {
-                            padding: 12px 16px;
+                            padding: 10px 12px;
                         }
                     }
                 }

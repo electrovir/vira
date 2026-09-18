@@ -138,7 +138,7 @@ export const ViraDrawer = defineViraElement<
                     }
 
                     & .header {
-                        padding: 8px 24px 16px;
+                        padding: 6px 20px 12px;
                         display: flex;
                         gap: 16px;
                         align-items: flex-start;
@@ -152,7 +152,7 @@ export const ViraDrawer = defineViraElement<
                             overflow: hidden;
 
                             & h1 {
-                                font-size: 20px;
+                                font-size: 18px;
                             }
                         }
 
@@ -176,7 +176,7 @@ export const ViraDrawer = defineViraElement<
                     }
 
                     & .body {
-                        padding: 0 24px 24px;
+                        padding: 0 20px 20px;
                         overflow: auto;
                         overscroll-behavior: contain;
                     }

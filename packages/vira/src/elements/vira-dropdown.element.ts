@@ -1,5 +1,6 @@
 import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined, randomString} from '@augment-vir/common';
+import {extractEventTarget} from '@augment-vir/web';
 import {
     classMap,
     css,
@@ -19,6 +20,7 @@ import {defineViraElement} from '../util/define-vira-element.js';
 import {renderMenuItemEntries} from '../util/pop-up-helpers.js';
 import {type ShowPopUpResult} from '../util/pop-up-manager.js';
 import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
 import {ViraMenu, ViraMenuPopUpDirection} from './pop-up/vira-menu.element.js';
 import {
     HorizontalAnchor,
@@ -158,6 +160,7 @@ export const ViraDropdown = defineViraElement<
         return {
             /** `undefined` means the pop up is not currently showing. */
             showPopUpResult: undefined as ShowPopUpResult | undefined,
+            shouldSelectOnMouseUp: false,
             /**
              * Used to couple the label and trigger together. This is not applied if no label is
              * provided.
@@ -199,6 +202,26 @@ export const ViraDropdown = defineViraElement<
               ? `${selectedOptions.length} Selected`
               : selectedOptions[0]?.label || '';
 
+        function selectOption(option: Readonly<ViraSelectOption>) {
+            const newSelectedValues = inputs.isMultiSelect
+                ? selectedOptions.includes(option)
+                    ? filterMap(
+                          selectedOptions,
+                          (selectedOption) => selectedOption.value,
+                          (value, selectedOption) => selectedOption !== option,
+                      )
+                    : [
+                          ...selectedOptions.map((selectedOption) => selectedOption.value),
+                          option.value,
+                      ]
+                : [option.value];
+            dispatch(
+                new events.selectedValuesChange({
+                    detail: newSelectedValues,
+                }),
+            );
+        }
+
         const menuTemplate = html`
             <${ViraMenu.assign({
                 direction: state.showPopUpResult?.popDown
@@ -206,31 +229,37 @@ export const ViraDropdown = defineViraElement<
                     : ViraMenuPopUpDirection.Upwards,
             })}
                 slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                ${listen('mouseup', (event) => {
+                    if (state.shouldSelectOnMouseUp) {
+                        const menuItem = event
+                            .composedPath()
+                            .find(
+                                (eventTarget): eventTarget is InstanceType<typeof ViraMenuItem> => {
+                                    return eventTarget instanceof ViraMenuItem;
+                                },
+                            );
+                        const option = menuItem
+                            ? inputs.options[
+                                  Array.from(
+                                      extractEventTarget(event, ViraMenu).querySelectorAll(
+                                          ViraMenuItem.tagName,
+                                      ),
+                                  ).indexOf(menuItem)
+                              ]
+                            : undefined;
+
+                        if (check.isDefined(option) && !option.disabled) {
+                            selectOption(option);
+                        }
+                    }
+                })}
             >
                 ${renderMenuItemEntries(
                     inputs.options.map((option) => {
                         return {
                             content: option.label,
                             onClick() {
-                                const newSelectedValues = inputs.isMultiSelect
-                                    ? selectedOptions.includes(option)
-                                        ? filterMap(
-                                              selectedOptions,
-                                              (selectedOption) => selectedOption.value,
-                                              (value, selectedOption) => selectedOption !== option,
-                                          )
-                                        : [
-                                              ...selectedOptions.map(
-                                                  (selectedOption) => selectedOption.value,
-                                              ),
-                                              option.value,
-                                          ]
-                                    : [option.value];
-                                dispatch(
-                                    new events.selectedValuesChange({
-                                        detail: newSelectedValues,
-                                    }),
-                                );
+                                selectOption(option);
                             },
                             disabled: option.disabled,
                             selected: selectedOptions.includes(option),
@@ -263,6 +292,13 @@ export const ViraDropdown = defineViraElement<
                         showPopUpResult: event.detail,
                     });
                 })}
+                ${listen('mouseup', () => {
+                    if (state.shouldSelectOnMouseUp) {
+                        updateState({
+                            shouldSelectOnMouseUp: false,
+                        });
+                    }
+                })}
             >
                 <div
                     class="dropdown-trigger ${classMap({
@@ -273,6 +309,13 @@ export const ViraDropdown = defineViraElement<
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
                     aria-label=${ifDefined(inputs.label || undefined)}
                     ${testId(testIds.trigger)}
+                    ${listen('mousedown', () => {
+                        if (!state.showPopUpResult) {
+                            updateState({
+                                shouldSelectOnMouseUp: true,
+                            });
+                        }
+                    })}
                 >
                     ${leadingIconTemplate}
                     <span

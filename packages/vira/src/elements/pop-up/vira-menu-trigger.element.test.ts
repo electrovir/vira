@@ -1,8 +1,11 @@
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
+import {randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {css, html, listen} from 'element-vir';
 import {renderMenuItemEntries} from '../../util/pop-up-helpers.js';
+import {ViraThemeClient, ViraThemeSelection} from '../../util/vira-theme-client.js';
+import {ViraThemeSwitcher} from '../vira-theme-switcher.element.js';
 import {ViraMenuItem} from './vira-menu-item.element.js';
 import {ViraMenuTrigger} from './vira-menu-trigger.element.js';
 import {ViraMenu} from './vira-menu.element.js';
@@ -188,6 +191,78 @@ describe(ViraMenuTrigger.tagName, () => {
             1,
             'the consumer onClick should still fire for a kept-open item',
         );
+    });
+
+    it('keeps an overridden theme picker open', async () => {
+        const themeClient = new ViraThemeClient({
+            applyTheme() {},
+            storeName: randomString(),
+        });
+
+        try {
+            const events = {
+                openChange: [] as boolean[],
+            };
+            const fixture = await testWeb.render(html`
+                <div
+                    style=${css`
+                        height: 1000px;
+                    `}
+                >
+                    <${ViraMenuTrigger.assign({})}
+                        ${listen(ViraMenuTrigger.events.openChange, (event) => {
+                            events.openChange.push(!!event.detail);
+                        })}
+                    >
+                        <button slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}>
+                            Open
+                        </button>
+                        ${renderMenuItemEntries([
+                            {
+                                content: html`
+                                    <${ViraThemeSwitcher.assign({
+                                        themeClient,
+                                    })}></${ViraThemeSwitcher}>
+                                `,
+                                disablePointerStyles: true,
+                                keepOpenAfterInteraction: true,
+                            },
+                        ])}
+                    </${ViraMenuTrigger}>
+                </div>
+            `);
+            const trigger = assertWrap.instanceOf(
+                fixture.querySelector('button'),
+                HTMLButtonElement,
+            );
+            const instance = assertWrap.instanceOf(
+                fixture.querySelector(ViraMenuTrigger.tagName),
+                ViraMenuTrigger,
+            );
+
+            await testWeb.click(trigger);
+            await waitUntil.isTruthy(() => {
+                return queryThroughShadow(instance, ViraMenu.tagName);
+            });
+
+            const themeSwitcher = assertWrap.instanceOf(
+                instance.querySelector(ViraThemeSwitcher.tagName),
+                ViraThemeSwitcher,
+            );
+            const darkThemeButton = assertWrap.instanceOf(
+                themeSwitcher.shadowRoot.querySelectorAll('button')[1],
+                HTMLButtonElement,
+            );
+
+            await testWeb.click(darkThemeButton);
+            await waitForAnimationFrame(5);
+
+            assert.deepEquals(events.openChange, [true]);
+            assert.strictEquals(themeClient.currentTheme, ViraThemeSelection.Dark);
+            assert.isTruthy(queryThroughShadow(instance, ViraMenu.tagName));
+        } finally {
+            themeClient.destroy();
+        }
     });
 
     it('still closes for sibling items when only one item keeps the pop-up open', async () => {

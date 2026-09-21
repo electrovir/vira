@@ -148,6 +148,14 @@ export const ViraMenuItem = defineViraElement<
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 min-width: 0;
+
+                & > slot {
+                    display: block;
+                    flex-grow: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    min-width: 0;
+                }
             }
         `;
     },

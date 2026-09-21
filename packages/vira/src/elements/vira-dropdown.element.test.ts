@@ -2,6 +2,7 @@ import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
+import {resetMouse, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {Element24Icon} from '../icons/index.js';
 import {type ViraSelectOption} from '../util/vira-select-option.js';
@@ -149,6 +150,43 @@ describe(ViraDropdown.tagName, () => {
         assert.deepEquals(events.selectedValuesChange, [
             ['1'],
         ]);
+    });
+
+    it('selects an option when dragging from the trigger', async () => {
+        const {instance, triggerElement, events, findMenu} = await setupDropdownTest();
+
+        try {
+            await testWeb.moveMouseTo(triggerElement);
+            await sendMouse({
+                type: 'down',
+                button: 'left',
+            });
+
+            const option = await waitUntil.isTruthy(() => {
+                return queryThroughShadow(instance, ViraMenuItem.tagName, {
+                    all: true,
+                })[1];
+            });
+
+            await testWeb.moveMouseTo(option);
+            await sendMouse({
+                type: 'up',
+                button: 'left',
+            });
+
+            await waitUntil(() => {
+                return !findMenu();
+            });
+            assert.deepEquals(events.openChange, [
+                true,
+                false,
+            ]);
+            assert.deepEquals(events.selectedValuesChange, [
+                ['1'],
+            ]);
+        } finally {
+            await resetMouse();
+        }
     });
 
     it('emits the full selection from selectedValuesChange in multi select', async () => {

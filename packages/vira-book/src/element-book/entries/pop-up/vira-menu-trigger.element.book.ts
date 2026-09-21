@@ -8,6 +8,8 @@ import {
     ViraMenuCornerStyle,
     ViraMenuTrigger,
     ViraSelect,
+    ViraThemeClient,
+    ViraThemeSwitcher,
     type ViraMenuItemEntry,
     type ViraSelectOption,
 } from 'vira';
@@ -241,6 +243,57 @@ export const viraMenuTriggerBookPage = defineBookPage({
                     `;
                 },
             });
+        });
+        defineExample({
+            title: 'theme picker item',
+            styles: css`
+                .trigger {
+                    cursor: pointer;
+                    border: 4px solid #ccc;
+                    padding: 8px 16px;
+                }
+
+                .theme-picker {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 12px;
+                }
+            `,
+            state() {
+                return {
+                    themeClient: new ViraThemeClient(),
+                };
+            },
+            render({state}) {
+                return html`
+                    <${ViraMenuTrigger.assign({})}>
+                        <div
+                            class="trigger"
+                            slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
+                        >
+                            User
+                        </div>
+                        ${renderMenuItemEntries([
+                            {
+                                content: html`
+                                    <div class="theme-picker">
+                                        <span>Theme</span>
+                                        <${ViraThemeSwitcher.assign({
+                                            themeClient: state.themeClient,
+                                        })}></${ViraThemeSwitcher}>
+                                    </div>
+                                `,
+                                disablePointerStyles: true,
+                                keepOpenAfterInteraction: true,
+                            },
+                            {
+                                content: 'Sign out',
+                            },
+                        ])}
+                    </${ViraMenuTrigger}>
+                `;
+            },
         });
     },
 });

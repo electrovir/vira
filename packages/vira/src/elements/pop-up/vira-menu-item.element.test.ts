@@ -1,6 +1,7 @@
 import {assert, assertWrap} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
-import {html, listen} from 'element-vir';
+import {css, html, listen} from 'element-vir';
+import {viraFormCssVars} from '../../styles/form-styles.js';
 import {ViraMenuItem} from './vira-menu-item.element.js';
 
 describe(ViraMenuItem.tagName, () => {
@@ -73,5 +74,58 @@ describe(ViraMenuItem.tagName, () => {
             click: 1,
             mousedown: 0,
         });
+    });
+
+    it('truncates long slotted text with an ellipsis', async () => {
+        const fixture = await testWeb.render(html`
+            <div
+                style=${css`
+                    width: 100px;
+                `}
+            >
+                <${ViraMenuItem.assign({})}>
+                    A very long menu item label that must not expand the menu.
+                </${ViraMenuItem}>
+            </div>
+        `);
+        const item = assertWrap.instanceOf(
+            fixture.querySelector(ViraMenuItem.tagName),
+            ViraMenuItem,
+        );
+        const slot = assertWrap.instanceOf(item.shadowRoot.querySelector('slot'), HTMLSlotElement);
+
+        assert.isBelow(slot.clientWidth, slot.scrollWidth);
+    });
+
+    it('omits default pointer styles when overridden', async () => {
+        const fixture = await testWeb.render(html`
+            <div
+                style=${css`
+                    ${viraFormCssVars['vira-form-selection-hover-color'].name}: red;
+                `}
+            >
+                <${ViraMenuItem.assign({})}>Default styles</${ViraMenuItem}>
+                <${ViraMenuItem.assign({
+                    disablePointerStyles: true,
+                })}>
+                    Overridden styles
+                </${ViraMenuItem}>
+            </div>
+        `);
+        const items = Array.from(fixture.querySelectorAll(ViraMenuItem.tagName));
+        assert.isLengthExactly(items, 2);
+        assert.isDefined(items[0]);
+        assert.isDefined(items[1]);
+
+        const overriddenBackground = globalThis.getComputedStyle(items[1]).backgroundColor;
+        await testWeb.moveMouseTo(items[0]);
+        const defaultHoverBackground = globalThis.getComputedStyle(items[0]).backgroundColor;
+        await testWeb.moveMouseTo(items[1]);
+
+        assert.notStrictEquals(defaultHoverBackground, overriddenBackground);
+        assert.strictEquals(
+            globalThis.getComputedStyle(items[1]).backgroundColor,
+            overriddenBackground,
+        );
     });
 });

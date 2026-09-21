@@ -6,7 +6,7 @@ import {
     css,
     html,
 } from 'element-vir';
-import {Options24Icon, ViraLink, ViraMenuItem, createColoredIcon} from 'vira';
+import {Options24Icon, ViraLink, ViraMenuItem, ViraThemeSwitcher, createColoredIcon} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
@@ -78,6 +78,27 @@ const examples: ReadonlyArray<{
         inputs: {
             selected: true,
             disablePointerStyles: true,
+        },
+    },
+    {
+        title: 'theme picker content',
+        content: html`
+            <div class="theme-picker">
+                <span>Theme</span>
+                <${ViraThemeSwitcher}></${ViraThemeSwitcher}>
+            </div>
+        `,
+        customStyle: css`
+            .theme-picker {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+            }
+        `,
+        inputs: {
+            disablePointerStyles: true,
+            keepOpenAfterInteraction: true,
         },
     },
     {

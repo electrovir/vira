@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "32.2.0",
+    "version": "32.2.1",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -38,9 +38,9 @@
         "test:docs": "virmator docs check"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.3.0",
-        "@augment-vir/common": "^32.3.0",
-        "@augment-vir/web": "^32.3.0",
+        "@augment-vir/assert": "^32.3.1",
+        "@augment-vir/common": "^32.3.1",
+        "@augment-vir/web": "^32.3.1",
         "@electrovir/color": "^2.0.0",
         "@electrovir/local-storage-client": "^0.1.1",
         "date-vir": "^9.1.1",
@@ -51,10 +51,10 @@
         "observavir": "^2.3.3",
         "page-active": "^1.0.4",
         "spa-router-vir": "^6.8.0",
-        "typed-event-target": "^4.3.3"
+        "typed-event-target": "^4.3.4"
     },
     "devDependencies": {
-        "@augment-vir/test": "^32.3.0",
+        "@augment-vir/test": "^32.3.1",
         "@web/dev-server-esbuild": "^2.0.0",
         "@web/test-runner": "^1.0.0",
         "@web/test-runner-commands": "^1.0.1",
@@ -62,12 +62,12 @@
         "@web/test-runner-visual-regression": "^1.0.1",
         "esbuild": "^0.28.2",
         "istanbul-smart-text-reporter": "^1.1.5",
-        "lucide-static": "^1.42.0",
+        "lucide-static": "^1.46.0",
         "markdown-code-example-inserter": "^3.0.6",
         "theme-vir": "^29.0.0",
         "typedoc": "^0.28.20",
         "typescript": "^6.0.3",
-        "vite": "^8.2.2",
+        "vite": "^8.3.0",
         "vite-tsconfig-paths": "^6.1.1"
     },
     "peerDependencies": {

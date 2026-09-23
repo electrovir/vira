@@ -88,7 +88,7 @@ export const ViraThemeSwitcher = defineViraElement<
             inputs.themeClient || state.internalThemeClient || new ViraThemeClient();
         updateState({
             internalThemeClient: themeClient,
-            currentTheme: themeClient.currentTheme,
+            currentTheme: themeClient.getCurrentTheme(),
         });
 
         const labels = inputs.labels || defaultThemeLabels;
@@ -97,14 +97,14 @@ export const ViraThemeSwitcher = defineViraElement<
             return html`
                 <button
                     class=${classMap({
-                        selected: themeClient.currentTheme === theme,
+                        selected: themeClient.getCurrentTheme() === theme,
                     })}
                     title=${labels[theme]}
                     ${listen('click', (event) => {
                         event.stopPropagation();
                         themeClient.setSelectedTheme(theme);
                         updateState({
-                            currentTheme: themeClient.currentTheme,
+                            currentTheme: themeClient.getCurrentTheme(),
                         });
                     })}
                 >

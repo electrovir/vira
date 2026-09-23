@@ -1,4 +1,5 @@
 import {check} from '@augment-vir/assert';
+import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
 import {Element24Icon, ViraDropdown, type ViraDropdownOption, allIconsByName} from 'vira';
@@ -39,10 +40,19 @@ const exampleDropdownOptions = [
     },
 ] satisfies ReadonlyArray<Readonly<ViraDropdownOption>>;
 
+const manyDropdownOptions = createArray(100, (index) => {
+    return {
+        label: `Option ${index + 1}`,
+        value: String(index + 1),
+    };
+});
+
 const examples: ReadonlyArray<{
     title: string;
     inputs?: Partial<typeof ViraDropdown.InputsType>;
     customStyle?: CSSResult;
+    /** Wraps the dropdown in a `.container` div so `customStyle` can style an ancestor. */
+    isInContainer?: boolean;
 }> = [
     {
         title: 'default',
@@ -229,6 +239,51 @@ const examples: ReadonlyArray<{
             ],
         },
     },
+    {
+        title: 'no options',
+        inputs: {
+            options: [],
+        },
+    },
+    {
+        title: 'no options with text',
+        inputs: {
+            options: [],
+            noOptionsText: 'No options available',
+        },
+    },
+    {
+        title: 'many options',
+        inputs: {
+            options: manyDropdownOptions,
+        },
+    },
+    {
+        title: 'inside a clipping container',
+        isInContainer: true,
+        customStyle: css`
+            .container {
+                height: 40px;
+                overflow: hidden;
+            }
+        `,
+    },
+    {
+        title: 'inside a scrolling container',
+        isInContainer: true,
+        customStyle: css`
+            .container {
+                height: 80px;
+                overflow-y: auto;
+
+                &::after {
+                    content: '';
+                    display: block;
+                    height: 300px;
+                }
+            }
+        `,
+    },
 ];
 
 export const viraDropdownPage = defineBookPage({
@@ -245,15 +300,6 @@ export const viraDropdownPage = defineBookPage({
         }),
         Prefix: definePageControl({
             controlType: BookPageControlType.Text,
-            initValue: '',
-        }),
-        'Force State': definePageControl({
-            controlType: BookPageControlType.Dropdown,
-            options: [
-                '',
-                'force open',
-                'force closed',
-            ],
             initValue: '',
         }),
         'Multi Select': definePageControl({
@@ -322,12 +368,9 @@ export const viraDropdownPage = defineBookPage({
                         isMultiSelect: controls['Multi Select']
                             ? controls['Multi Select'] === 'all'
                             : example.inputs?.isMultiSelect,
-                        z_debug_forceOpenState: controls['Force State']
-                            ? controls['Force State'] === 'force open'
-                            : example.inputs?.z_debug_forceOpenState,
                     };
 
-                    return html`
+                    const dropdownTemplate = html`
                         <${ViraDropdown.assign(finalInputs)}
                             ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                 updateState({
@@ -336,6 +379,12 @@ export const viraDropdownPage = defineBookPage({
                             })}
                         ></${ViraDropdown}>
                     `;
+
+                    return example.isInContainer
+                        ? html`
+                              <div class="container">${dropdownTemplate}</div>
+                          `
+                        : dropdownTemplate;
                 },
             });
         });

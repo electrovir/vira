@@ -85,7 +85,7 @@ export class ViraThemeClient {
         (event) => {
             assert.instanceOf(event, MediaQueryListEvent);
 
-            if (this.currentTheme === ViraThemeSelection.Auto) {
+            if (this.getCurrentTheme() === ViraThemeSelection.Auto) {
                 void this.applyThemeCallback({
                     useDarkTheme: event.matches,
                 });
@@ -101,14 +101,14 @@ export class ViraThemeClient {
             storeName: params.storeName || 'vira-theme',
         });
 
-        this.applySelection(this.currentTheme);
+        this.applySelection(this.getCurrentTheme());
     }
 
     /**
      * The currently selected theme. If you use multiple clients to set the same theme, this might
      * get out of sync.
      */
-    public get currentTheme(): ViraThemeSelection {
+    public getCurrentTheme(): ViraThemeSelection {
         return this.localStorageClient.get.selectedTheme()?.theme || ViraThemeSelection.Auto;
     }
 

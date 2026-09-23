@@ -9,14 +9,12 @@ import {
     X24Icon,
     type ViraIconSvg,
     type ViraMenuCornerStyle,
-    type ViraMenuPopUpDirection,
 } from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
     title: string;
     menuInputs?: Partial<{
-        direction: ViraMenuPopUpDirection;
         cornerStyle: ViraMenuCornerStyle;
     }>;
     items: ReadonlyArray<{

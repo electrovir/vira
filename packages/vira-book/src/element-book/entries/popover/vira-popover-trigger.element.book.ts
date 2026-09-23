@@ -1,16 +1,16 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {HorizontalAnchor, viraFormCssVars, ViraPopUpTrigger} from 'vira';
+import {viraFormCssVars, ViraPopoverTrigger} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
-export const viraPopUpTriggerBookPage = defineBookPage({
+export const viraPopoverTriggerBookPage = defineBookPage({
     parent: elementsBookPage,
-    title: ViraPopUpTrigger.tagName,
+    title: ViraPopoverTrigger.tagName,
     defineExamples({defineExample}) {
         defineExample({
             title: 'basic',
             styles: css`
-                ${ViraPopUpTrigger} {
+                ${ViraPopoverTrigger} {
                     ${viraFormCssVars['vira-form-focus-outline-border-radius'].name}: 0;
                 }
 
@@ -20,7 +20,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     padding: 8px 16px;
                 }
 
-                .pop-up {
+                .popover {
                     border: 4px solid #eee;
                     border-top: none;
                     padding: 8px 16px;
@@ -29,22 +29,22 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <${ViraPopUpTrigger.assign({
+                    <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
                     })}>
                         <div
                             class="trigger"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                            slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
                         >
-                            Trigger Pop Up
+                            Trigger Popover
                         </div>
                         <div
-                            class="pop-up"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                            class="popover"
+                            slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                         >
-                            Pop up!
+                            Popover!
                         </div>
-                    </${ViraPopUpTrigger}>
+                    </${ViraPopoverTrigger}>
                 `;
             },
         });
@@ -57,7 +57,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     padding: 8px 16px;
                 }
 
-                .pop-up {
+                .popover {
                     box-sizing: border-box;
                     max-width: 100%;
                     overflow: hidden;
@@ -71,25 +71,25 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <${ViraPopUpTrigger.assign({
+                    <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
-                            Trigger Long Clipped Pop Up
+                        <div slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}>
+                            Trigger Long Clipped Popover
                         </div>
                         <div
-                            class="pop-up"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                            class="popover"
+                            slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                         >
                             really long content in here really long content in here really long
                             content in here really long content in here really long content in here
                         </div>
-                    </${ViraPopUpTrigger}>
+                    </${ViraPopoverTrigger}>
                 `;
             },
         });
         defineExample({
-            title: 'long right anchored content',
+            title: 'long content',
             styles: css`
                 .trigger {
                     cursor: pointer;
@@ -97,7 +97,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     padding: 8px 16px;
                 }
 
-                .pop-up {
+                .popover {
                     box-sizing: border-box;
                     max-width: 100%;
                     overflow: hidden;
@@ -111,26 +111,25 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <${ViraPopUpTrigger.assign({
+                    <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Right,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
-                            Trigger Long Right Anchored Pop Up
+                        <div slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}>
+                            Trigger Long Popover
                         </div>
                         <div
-                            class="pop-up"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                            class="popover"
+                            slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                         >
                             really long content in here really long content in here really long
                             content in here really long content in here really long content in here
                         </div>
-                    </${ViraPopUpTrigger}>
+                    </${ViraPopoverTrigger}>
                 `;
             },
         });
         defineExample({
-            title: 'long left anchored content',
+            title: 'short content',
             styles: css`
                 .trigger {
                     cursor: pointer;
@@ -138,7 +137,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     padding: 8px 16px;
                 }
 
-                .pop-up {
+                .popover {
                     box-sizing: border-box;
                     max-width: 100%;
                     overflow: hidden;
@@ -152,66 +151,24 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             `,
             render() {
                 return html`
-                    <${ViraPopUpTrigger.assign({
+                    <${ViraPopoverTrigger.assign({
                         keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Left,
                     })}>
-                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
-                            Trigger Long Left Anchored Pop Up
+                        <div slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}>
+                            Trigger Short Popover
                         </div>
                         <div
-                            class="pop-up"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
-                        >
-                            really long content in here really long content in here really long
-                            content in here really long content in here really long content in here
-                        </div>
-                    </${ViraPopUpTrigger}>
-                `;
-            },
-        });
-        defineExample({
-            title: 'short right anchored content',
-            styles: css`
-                .trigger {
-                    cursor: pointer;
-                    border: 4px solid #ccc;
-                    padding: 8px 16px;
-                }
-
-                .pop-up {
-                    box-sizing: border-box;
-                    max-width: 100%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    border: 4px solid #eee;
-                    border-top: none;
-                    padding: 8px 16px;
-                    white-space: nowrap;
-                    background-color: white;
-                }
-            `,
-            render() {
-                return html`
-                    <${ViraPopUpTrigger.assign({
-                        keepOpenAfterInteraction: true,
-                        horizontalAnchor: HorizontalAnchor.Right,
-                    })}>
-                        <div slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}>
-                            Trigger Long Left Anchored Pop Up
-                        </div>
-                        <div
-                            class="pop-up"
-                            slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                            class="popover"
+                            slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                         >
                             not long
                         </div>
-                    </${ViraPopUpTrigger}>
+                    </${ViraPopoverTrigger}>
                 `;
             },
         });
         defineExample({
-            title: 'ignoreMaxWidth wide content',
+            title: 'wide content',
             styles: css`
                 .container {
                     width: 300px;
@@ -226,7 +183,7 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                     padding: 8px 16px;
                 }
 
-                .pop-up {
+                .popover {
                     box-sizing: border-box;
                     border: 4px solid #eee;
                     border-top: none;
@@ -238,20 +195,18 @@ export const viraPopUpTriggerBookPage = defineBookPage({
             render() {
                 return html`
                     <div class="container">
-                        <${ViraPopUpTrigger.assign({
+                        <${ViraPopoverTrigger.assign({
                             keepOpenAfterInteraction: true,
-                            // z_debug_forceOpenState: true,
-                            // ignoreMaxWidth: true,
                         })}>
                             <div
                                 class="trigger"
-                                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
                             >
                                 Trigger
                             </div>
                             <div
-                                class="pop-up"
-                                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                                class="popover"
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                             >
                                 This content is much wider than the container and should overflow
                                 <div>Item 1</div>
@@ -265,7 +220,71 @@ export const viraPopUpTriggerBookPage = defineBookPage({
                                 <div>Item 9</div>
                                 <div>Item 10</div>
                             </div>
-                        </${ViraPopUpTrigger}>
+                        </${ViraPopoverTrigger}>
+                    </div>
+                `;
+            },
+        });
+        defineExample({
+            title: 'styled by parent inside clipped container',
+            styles: css`
+                .clipping-container {
+                    height: 48px;
+                    overflow: hidden;
+                    border: 2px dashed #ccc;
+                    padding: 4px;
+                }
+
+                .trigger {
+                    cursor: pointer;
+                    border: 4px solid #ccc;
+                    padding: 8px 16px;
+                }
+
+                .popover {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    border: 4px solid #eee;
+                    padding: 8px 16px;
+                    background-color: white;
+
+                    & .parent-styled {
+                        color: white;
+                        background-color: #663399;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                    }
+
+                    & b {
+                        color: crimson;
+                    }
+                }
+            `,
+            render() {
+                return html`
+                    <div class="clipping-container">
+                        <${ViraPopoverTrigger.assign({
+                            keepOpenAfterInteraction: true,
+                        })}>
+                            <div
+                                class="trigger"
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
+                            >
+                                Trigger
+                            </div>
+                            <div
+                                class="popover"
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
+                            >
+                                <div class="parent-styled">Purple from the parent's styles</div>
+                                <div>
+                                    <b>Crimson</b>
+                                    from the parent's styles
+                                </div>
+                                <div>Escapes the dashed container's overflow: hidden</div>
+                            </div>
+                        </${ViraPopoverTrigger}>
                     </div>
                 `;
             },

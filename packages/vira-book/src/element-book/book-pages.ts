@@ -6,10 +6,11 @@ import {viraPalettePages, viraThemePages} from './entries/colors.book.js';
 import {createColoredIconBookPage} from './entries/create-colored-icon.book.js';
 import {createSizedIconBookPage} from './entries/create-sized-icon.book.js';
 import {dynamicElementsBookPage} from './entries/dynamic-elements.book.js';
-import {viraMenuItemBookPage} from './entries/pop-up/vira-menu-item.element.book.js';
-import {viraMenuTriggerBookPage} from './entries/pop-up/vira-menu-trigger.element.book.js';
-import {viraMenuOptionsBookPage} from './entries/pop-up/vira-menu.element.book.js';
-import {viraPopUpTriggerBookPage} from './entries/pop-up/vira-pop-up-trigger.element.book.js';
+import {viraMenuItemBookPage} from './entries/popover/vira-menu-item.element.book.js';
+import {viraMenuTriggerBookPage} from './entries/popover/vira-menu-trigger.element.book.js';
+import {viraMenuOptionsBookPage} from './entries/popover/vira-menu.element.book.js';
+import {viraPopoverTriggerBookPage} from './entries/popover/vira-popover-trigger.element.book.js';
+import {viraTooltipBookPage} from './entries/popover/vira-tooltip.element.book.js';
 import {shadowBookPage} from './entries/shadow.book.js';
 import {viraAbsoluteTimeBookPage} from './entries/vira-absolute-time.element.book.js';
 import {viraBoldTextPage} from './entries/vira-bold-text.element.book.js';
@@ -71,13 +72,14 @@ const elementPages = [
     viraMenuOptionsBookPage,
     viraMenuTriggerBookPage,
     viraModalBookPage,
-    viraPopUpTriggerBookPage,
+    viraPopoverTriggerBookPage,
     viraProgressBookPage,
     viraRelativeTimeBookPage,
     viraTabsBookPage,
     viraTagBookPage,
     viraTextAreaBookPage,
     viraThemeSwitcherBookPage,
+    viraTooltipBookPage,
 ].sort((a, b) => a.title.localeCompare(b.title));
 
 const allPages = [

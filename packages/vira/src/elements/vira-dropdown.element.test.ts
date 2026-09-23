@@ -9,8 +9,9 @@ import {
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
 } from '../util/vira-dropdown-option.js';
-import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
-import {ViraMenu} from './pop-up/vira-menu.element.js';
+import {ViraMenuItem} from './popover/vira-menu-item.element.js';
+import {ViraMenu} from './popover/vira-menu.element.js';
+import {ViraPopoverTrigger} from './popover/vira-popover-trigger.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraInput} from './vira-input.element.js';
 
@@ -67,7 +68,7 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
                 ...inputs,
             })}
                 ${listen(ViraDropdown.events.openChange, (event) => {
-                    events.openChange.push(!!event.detail);
+                    events.openChange.push(event.detail);
                 })}
                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                     events.selectedValuesChange.push(event.detail);
@@ -323,6 +324,59 @@ describe(ViraDropdown.tagName, () => {
         assert.strictEquals(extractElementText(triggerElement), placeholder);
     });
 
+    it('rotates the arrow without a popover when there are no options', async () => {
+        const {triggerElement, events, findMenu} = await setupDropdownTest({
+            options: [],
+        });
+
+        await testWeb.click(triggerElement);
+        await waitUntil.deepEquals([true], () => events.openChange);
+
+        assert.isNullish(findMenu());
+        assert.deepEquals(
+            {
+                isOpen: triggerElement.classList.contains('open'),
+                isMenuOpen: triggerElement.classList.contains('menu-open'),
+            },
+            {
+                isOpen: true,
+                isMenuOpen: false,
+            },
+        );
+    });
+
+    it('shows noOptionsText when there are no options', async () => {
+        const {toggle, findMenu} = await setupDropdownTest({
+            options: [],
+            noOptionsText: 'Nothing here',
+        });
+
+        await toggle();
+
+        assert.strictEquals(
+            extractElementText(assertWrap.instanceOf(findMenu(), HTMLElement)),
+            'Nothing here',
+        );
+    });
+
+    it('contains menu overscroll so the page does not scroll', async () => {
+        const {toggle, findMenu} = await setupDropdownTest();
+
+        await toggle();
+
+        assert.strictEquals(
+            getComputedStyle(
+                assertWrap.instanceOf(
+                    assertWrap
+                        .instanceOf(findMenu(), ViraMenu)
+                        .shadowRoot.querySelector('.scroll-area'),
+                    HTMLElement,
+                ),
+            ).overscrollBehaviorY,
+            'contain',
+        );
+    });
+
     it('has the same default size as ViraInput', async () => {
         const fixture = await testWeb.render(html`
             <div>
@@ -367,6 +421,72 @@ describe(ViraDropdown.tagName, () => {
             instance.getBoundingClientRect().width,
             1,
         );
+    });
+
+    it('renders the menu outside of a clipping ancestor', async () => {
+        const fixture = await testWeb.render(html`
+            <div
+                style=${css`
+                    overflow: hidden;
+                    height: 40px;
+                `}
+            >
+                <${ViraDropdown.assign({
+                    options: mockMenuItems,
+                    selected: [],
+                })}></${ViraDropdown}>
+            </div>
+        `);
+        const instance = assertWrap.instanceOf(
+            fixture.querySelector(ViraDropdown.tagName),
+            ViraDropdown,
+        );
+
+        await testWeb.click(
+            assertWrap.instanceOf(
+                instance.shadowRoot.querySelector(testIdSelector(ViraDropdown.testIds.trigger)),
+                HTMLElement,
+            ),
+        );
+        const lastMenuItem = await waitUntil.isTruthy(() => {
+            return queryThroughShadow(instance, ViraMenuItem.tagName, {
+                all: true,
+            }).at(-1);
+        });
+        const itemRect = lastMenuItem.getBoundingClientRect();
+
+        assert.isAbove(itemRect.top, fixture.getBoundingClientRect().bottom);
+        assert.strictEquals(
+            document.elementFromPoint(
+                itemRect.left + itemRect.width / 2,
+                itemRect.top + itemRect.height / 2,
+            ),
+            instance,
+        );
+    });
+
+    it('keeps the menu attached to the trigger when the page scrolls', async () => {
+        const {toggle, triggerElement, findMenu} = await setupDropdownTest();
+
+        await toggle();
+        const menu = assertWrap.instanceOf(findMenu(), HTMLElement);
+
+        function getGap() {
+            return menu.getBoundingClientRect().top - triggerElement.getBoundingClientRect().bottom;
+        }
+
+        const gapBeforeScroll = getGap();
+        const triggerTopBeforeScroll = triggerElement.getBoundingClientRect().top;
+
+        try {
+            window.scrollBy(0, 50);
+            await waitForAnimationFrame(2);
+
+            assert.isBelow(triggerElement.getBoundingClientRect().top, triggerTopBeforeScroll);
+            assert.strictEquals(getGap(), gapBeforeScroll);
+        } finally {
+            window.scrollTo(0, 0);
+        }
     });
 
     it('renders only the selected label when readonly', async () => {
@@ -500,6 +620,69 @@ describe(ViraDropdown.tagName, () => {
                     ['2'],
                 ],
                 () => events.selectedValuesChange,
+            );
+        } finally {
+            await resetMouse();
+        }
+    });
+
+    it('does not scroll its scroll container while dragging to an option', async () => {
+        const fixture = await testWeb.render(html`
+            <div
+                style=${css`
+                    height: 60px;
+                    overflow: auto;
+                `}
+            >
+                <${ViraDropdown.assign({
+                    options: mockMenuItems,
+                    selected: [],
+                })}></${ViraDropdown}>
+                <div
+                    style=${css`
+                        height: 1000px;
+                    `}
+                ></div>
+            </div>
+        `);
+        const scrollContainer = assertWrap.instanceOf(fixture, HTMLElement);
+        const instance = assertWrap.instanceOf(
+            fixture.querySelector(ViraDropdown.tagName),
+            ViraDropdown,
+        );
+
+        try {
+            await testWeb.moveMouseTo(
+                assertWrap.isDefined(
+                    instance.shadowRoot.querySelector(testIdSelector(ViraDropdown.testIds.trigger)),
+                ),
+            );
+            await sendMouse({
+                type: 'down',
+                button: 'left',
+            });
+            const isTriggerButtonFocused =
+                assertWrap.instanceOf(instance.shadowRoot.activeElement, ViraPopoverTrigger)
+                    .shadowRoot.activeElement instanceof HTMLButtonElement;
+
+            const lastOption = await waitUntil.isTruthy(() => {
+                return queryThroughShadow(instance, ViraMenuItem.tagName, {
+                    all: true,
+                }).at(-1);
+            });
+
+            await testWeb.moveMouseTo(lastOption);
+            await waitForAnimationFrame(20);
+
+            assert.deepEquals(
+                {
+                    isTriggerButtonFocused,
+                    scrollTop: scrollContainer.scrollTop,
+                },
+                {
+                    isTriggerButtonFocused: true,
+                    scrollTop: 0,
+                },
             );
         } finally {
             await resetMouse();

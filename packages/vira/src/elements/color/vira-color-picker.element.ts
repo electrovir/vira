@@ -16,7 +16,7 @@ import {noNativeFormStyles} from '../../styles/native-styles.js';
 import {viraShadows} from '../../styles/shadows.js';
 import {colorLocalStorageClient} from '../../util/color-local-storage.client.js';
 import {type ViraDropdownOption} from '../../util/vira-dropdown-option.js';
-import {ViraPopUpTrigger} from '../pop-up/vira-pop-up-trigger.element.js';
+import {ViraPopoverTrigger} from '../popover/vira-popover-trigger.element.js';
 import {ViraDropdown} from '../vira-dropdown.element.js';
 import {ViraIcon} from '../vira-icon.element.js';
 import {ViraInput} from '../vira-input.element.js';
@@ -33,7 +33,7 @@ const colorFormatOptions: ReadonlyArray<Readonly<ViraDropdownOption>> = getObjec
 });
 
 /**
- * A color picker element with a swatch that opens a popup with color format sliders.
+ * A color picker element with a swatch that opens a popover with color format sliders.
  *
  * Set the width and height of the swatch using the provided CSS variables.
  *
@@ -89,7 +89,7 @@ export const ViraColorPicker = defineElement<
                 display: flex;
             }
 
-            ${ViraPopUpTrigger} {
+            ${ViraPopoverTrigger} {
                 width: 100%;
                 height: 100%;
                 box-sizing: border-box;
@@ -141,7 +141,7 @@ export const ViraColorPicker = defineElement<
                 border-radius: 8px;
             }
 
-            .pop-up .picker {
+            .popover .picker {
                 ${viraShadows.menuShadow}
             }
 
@@ -280,12 +280,12 @@ export const ViraColorPicker = defineElement<
             `;
         } else {
             return html`
-                <${ViraPopUpTrigger.assign({
+                <${ViraPopoverTrigger.assign({
                     keepOpenAfterInteraction: true,
                 })}>
                     <button
                         class="trigger"
-                        slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                        slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
                         ${listen('mousedown', () => {
                             const storedFormat = colorLocalStorageClient.get.lastFormat();
                             if (storedFormat) {
@@ -298,12 +298,12 @@ export const ViraColorPicker = defineElement<
                         ${swatchTemplate}
                     </button>
                     <div
-                        class="pop-up"
-                        slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                        class="popover"
+                        slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                     >
                         ${pickerTemplate}
                     </div>
-                </${ViraPopUpTrigger}>
+                </${ViraPopoverTrigger}>
             `;
         }
     },

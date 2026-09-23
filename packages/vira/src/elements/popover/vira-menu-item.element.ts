@@ -15,7 +15,7 @@ const selectedCheckIcon = createSizedIcon(lucideIcons.Check, 16);
 /**
  * An element for an individual menu item.
  *
- * @category PopUp
+ * @category Popover
  * @category Elements
  */
 export const ViraMenuItem = defineViraElement<
@@ -33,7 +33,7 @@ export const ViraMenuItem = defineViraElement<
          */
         iconOverride: ViraIconSvg;
         /**
-         * When `true`, activating this item will _not_ close the containing pop-up.
+         * When `true`, activating this item will _not_ close the containing popover.
          *
          * @default false
          */
@@ -49,8 +49,8 @@ export const ViraMenuItem = defineViraElement<
     },
     events: {
         /**
-         * Fired when this menu item is activated by the user (a non-disabled click). Pop-up
-         * containers (e.g. `ViraPopUpTrigger`) listen to this to close the pop-up on selection,
+         * Fired when this menu item is activated by the user (a non-disabled click). Popover
+         * containers (e.g. `ViraPopoverTrigger`) listen to this to close the popover on selection,
          * gated by `keepOpenAfterInteraction`.
          */
         activate: defineElementEvent<undefined>(),

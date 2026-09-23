@@ -21,24 +21,19 @@ import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {renderMenuItemEntries} from '../util/pop-up-helpers.js';
-import {type ShowPopUpResult} from '../util/pop-up-manager.js';
+import {renderMenuItemEntries} from '../util/menu-helpers.js';
 import {
     isViraDropdownOptionGroup,
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
 } from '../util/vira-dropdown-option.js';
-import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
-import {ViraMenu, ViraMenuPopUpDirection} from './pop-up/vira-menu.element.js';
-import {
-    HorizontalAnchor,
-    type PopUpTriggerPosition,
-    ViraPopUpTrigger,
-} from './pop-up/vira-pop-up-trigger.element.js';
+import {ViraMenuItem} from './popover/vira-menu-item.element.js';
+import {ViraMenu, ViraMenuCornerStyle} from './popover/vira-menu.element.js';
+import {ViraPopoverTrigger} from './popover/vira-popover-trigger.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 /**
- * A dropdown element that uses pop-up menus.
+ * A dropdown element that uses popover menus.
  *
  * @category Dropdown
  * @category Elements
@@ -49,31 +44,39 @@ export const ViraDropdown = defineViraElement<
         options: ReadonlyArray<Readonly<ViraDropdownOption> | Readonly<ViraDropdownOptionGroup>>;
         /** The selected id from the given options. */
         selected: ReadonlyArray<PropertyKey>;
-    } & PartialWithUndefined<
-        {
-            /** Text to show if nothing is selected. */
-            placeholder: string;
-            /**
-             * If false, this will behave like a single select dropdown, otherwise you can select
-             * multiple.
-             */
-            isMultiSelect: boolean;
-            icon: ViraIconSvg;
-            selectionPrefix: string;
-            isDisabled: boolean;
-            /**
-             * When `true`, the currently selected options' labels are rendered as plain text with
-             * no trigger or menu.
-             */
-            isReadonly: boolean;
-            hasError: boolean;
-            label: string | HtmlInterpolation;
-            /** Attributes applied to the trigger element. */
-            attributePassthrough: Readonly<AttributeValues>;
-            /** For debugging purposes only. Very bad for actual production code use. */
-            z_debug_forceOpenState: boolean;
-        } & PopUpTriggerPosition
-    >
+    } & PartialWithUndefined<{
+        /** Text to show if nothing is selected. */
+        placeholder: string;
+        /**
+         * Text shown in the opened popover when `options` has no options. When omitted, opening a
+         * dropdown with no options shows no popover at all.
+         */
+        noOptionsText: string;
+        /**
+         * If false, this will behave like a single select dropdown, otherwise you can select
+         * multiple.
+         */
+        isMultiSelect: boolean;
+        icon: ViraIconSvg;
+        selectionPrefix: string;
+        isDisabled: boolean;
+        /**
+         * When `true`, the currently selected options' labels are rendered as plain text with no
+         * trigger or menu.
+         */
+        isReadonly: boolean;
+        hasError: boolean;
+        label: string | HtmlInterpolation;
+        /** Attributes applied to the trigger element. */
+        attributePassthrough: Readonly<AttributeValues>;
+        /**
+         * Passed to {@link ViraMenu}'s `hoverScrollSpeed` input. How many menu items per second
+         * hovering a scroll arrow scrolls through.
+         *
+         * @default 24
+         */
+        menuHoverScrollSpeed: number;
+    }>
 >()({
     tagName: 'vira-dropdown',
     testIds: [
@@ -90,7 +93,7 @@ export const ViraDropdown = defineViraElement<
             max-width: 100%;
         }
 
-        ${ViraPopUpTrigger} {
+        ${ViraPopoverTrigger} {
             width: 100%;
         }
 
@@ -116,18 +119,8 @@ export const ViraDropdown = defineViraElement<
             justify-content: flex-end;
         }
 
-        .open {
-            & .trigger-icon {
-                transform: rotate(0);
-            }
-
-            &:not(.open-upwards).dropdown-trigger {
-                border-bottom-left-radius: 0;
-            }
-
-            &.open-upwards.dropdown-trigger {
-                border-top-left-radius: 0;
-            }
+        .open .trigger-icon {
+            transform: rotate(0);
         }
 
         .dropdown-trigger {
@@ -156,7 +149,8 @@ export const ViraDropdown = defineViraElement<
             border-color: ${viraFormCssVars['vira-form-error-color'].value};
         }
 
-        .option-group-label {
+        .option-group-label,
+        .no-options {
             ${noUserSelect};
             /* Aligns with the label text of each ViraMenuItem, past its check icon. */
             padding: 8px 12px 4px
@@ -167,6 +161,11 @@ export const ViraDropdown = defineViraElement<
 
         .option-group-label {
             font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+        }
+
+        .no-options {
+            cursor: default;
+            padding-bottom: 8px;
         }
 
         ${ViraMenuItem}.option-group-label {
@@ -201,12 +200,12 @@ export const ViraDropdown = defineViraElement<
     events: {
         /** Emits all currently selected values. */
         selectedValuesChange: defineElementEvent<string[]>(),
-        openChange: defineElementEvent<ShowPopUpResult | undefined>(),
+        /** `true` when the popover just opened, `false` when it just closed. */
+        openChange: defineElementEvent<boolean>(),
     },
     state() {
         return {
-            /** `undefined` means the pop up is not currently showing. */
-            showPopUpResult: undefined as ShowPopUpResult | undefined,
+            isOpen: false,
             shouldSelectOnMouseUp: false,
             /**
              * Used to couple the label and trigger together. This is not applied if no label is
@@ -348,13 +347,14 @@ export const ViraDropdown = defineViraElement<
             );
         }
 
+        const isMenuShown = state.isOpen && (!!flatOptions.length || !!inputs.noOptionsText);
+
         const menuTemplate = html`
             <${ViraMenu.assign({
-                direction: state.showPopUpResult?.popDown
-                    ? ViraMenuPopUpDirection.Downwards
-                    : ViraMenuPopUpDirection.Upwards,
+                cornerStyle: ViraMenuCornerStyle.Round,
+                hoverScrollSpeed: inputs.menuHoverScrollSpeed,
             })}
-                slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-pop-up']}
+                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
                 ${listen('mouseup', (event) => {
                     if (state.shouldSelectOnMouseUp) {
                         const menuItem = event
@@ -378,29 +378,32 @@ export const ViraDropdown = defineViraElement<
                     }
                 })}
             >
-                ${inputs.options.map((entry) => {
-                    return isViraDropdownOptionGroup(entry)
-                        ? html`
-                              ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
-                          `
-                        : renderOptionEntries([entry]);
-                })}
+                ${flatOptions.length
+                    ? inputs.options.map((entry) => {
+                          return isViraDropdownOptionGroup(entry)
+                              ? html`
+                                    ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
+                                `
+                              : renderOptionEntries([entry]);
+                      })
+                    : html`
+                          <div class="no-options">${inputs.noOptionsText}</div>
+                      `}
             </${ViraMenu}>
         `;
 
         const triggerTemplate = html`
-            <${ViraPopUpTrigger.assign({
+            <${ViraPopoverTrigger.assign({
                 ...inputs,
                 keepOpenAfterInteraction: inputs.isMultiSelect,
                 focusOnClose: true,
-                popUpOffset: {
+                popoverOffset: {
                     vertical: -1,
                     right: 24,
                 },
-                horizontalAnchor: inputs.horizontalAnchor || HorizontalAnchor.Both,
             })}
-                ${listen(ViraPopUpTrigger.events.openChange, (event) => {
-                    if (!!state.showPopUpResult !== !!event.detail) {
+                ${listen(ViraPopoverTrigger.events.openChange, (event) => {
+                    if (state.isOpen !== event.detail) {
                         dispatch(
                             new events.openChange({
                                 detail: event.detail,
@@ -408,7 +411,7 @@ export const ViraDropdown = defineViraElement<
                         );
                     }
                     updateState({
-                        showPopUpResult: event.detail,
+                        isOpen: event.detail,
                     });
                 })}
                 ${listen('mouseup', () => {
@@ -421,10 +424,9 @@ export const ViraDropdown = defineViraElement<
             >
                 <div
                     class="dropdown-trigger ${classMap({
-                        open: !!state.showPopUpResult,
-                        'open-upwards': !state.showPopUpResult?.popDown,
+                        open: state.isOpen,
                     })}"
-                    slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
+                    slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
                     aria-label=${ifDefined(
                         (check.isString(inputs.label) && inputs.label) || undefined,
@@ -432,7 +434,7 @@ export const ViraDropdown = defineViraElement<
                     ${attributes(inputs.attributePassthrough)}
                     ${testId(testIds.trigger)}
                     ${listen('mousedown', () => {
-                        if (!state.showPopUpResult) {
+                        if (!state.isOpen) {
                             updateState({
                                 shouldSelectOnMouseUp: true,
                             });
@@ -457,8 +459,8 @@ export const ViraDropdown = defineViraElement<
                         ></${ViraIcon}>
                     </span>
                 </div>
-                ${state.showPopUpResult ? menuTemplate : nothing}
-            </${ViraPopUpTrigger}>
+                ${isMenuShown ? menuTemplate : nothing}
+            </${ViraPopoverTrigger}>
         `;
 
         const contentTemplate = inputs.isReadonly

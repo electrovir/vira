@@ -5,12 +5,7 @@ import {
     type PartialWithUndefined,
 } from '@augment-vir/common';
 import {html, listen, type HtmlInterpolation} from 'element-vir';
-import {ViraMenuItem} from '../elements/pop-up/vira-menu-item.element.js';
-import {
-    type PopUpManager,
-    type PopUpManagerOptions,
-    type ShowPopUpResult,
-} from './pop-up-manager.js';
+import {ViraMenuItem} from '../elements/popover/vira-menu-item.element.js';
 
 /**
  * Verifies that all items have unique ids.
@@ -36,39 +31,9 @@ export function assertUniqueIdProps(items: ReadonlyArray<Readonly<{id: PropertyK
 }
 
 /**
- * Handles toggling pop up state for `ViraDropdown`.
- *
- * @category Internal
- */
-export function triggerPopUpState({
-    open,
-    callback,
-    popUpManager,
-    host,
-    options,
-}: Readonly<
-    {
-        open: boolean;
-        popUpManager: PopUpManager;
-        host: HTMLElement;
-    } & PartialWithUndefined<{
-        callback?: ((showPopUpResult: ShowPopUpResult | undefined) => void) | undefined;
-        options?: Partial<PopUpManagerOptions> | undefined;
-    }>
->) {
-    if (open) {
-        const showPopUpResult = popUpManager.showPopUp(host, options);
-        callback?.(showPopUpResult);
-    } else {
-        popUpManager.removePopUp();
-        callback?.(undefined);
-    }
-}
-
-/**
  * A helper type to be used with {@link renderMenuItemEntries}.
  *
- * @category PopUp
+ * @category Popover
  */
 export type ViraMenuItemEntry = {
     content: HtmlInterpolation;
@@ -88,7 +53,7 @@ export type ViraMenuItemEntry = {
 /**
  * A callback for menu items getting activated, to be used with {@link renderMenuItemEntries}.
  *
- * @category PopUp
+ * @category Popover
  */
 export type MenuItemClickCallback = (
     params: Readonly<{
@@ -101,7 +66,7 @@ export type MenuItemClickCallback = (
 /**
  * A helper for rendering a bunch of menu items.
  *
- * @category PopUp
+ * @category Popover
  */
 export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItemEntry>>) {
     return filterMap(

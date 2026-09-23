@@ -21,7 +21,7 @@
         "@electrovir/color": "^2.0.0",
         "@theme-vir/element-book": "^29.0.0",
         "date-vir": "^9.1.1",
-        "element-book": "^27.0.0",
+        "element-book": "^27.0.1",
         "element-vir": "^27.0.1",
         "lit-css-vars": "^3.6.3",
         "spa-router-vir": "^6.8.0",

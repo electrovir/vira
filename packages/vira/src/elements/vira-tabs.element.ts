@@ -39,10 +39,10 @@ import {
 import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
 import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/pop-up-helpers.js';
-import {ViraMenuTrigger} from './pop-up/vira-menu-trigger.element.js';
-import {ViraMenuCornerStyle} from './pop-up/vira-menu.element.js';
-import {type HorizontalAnchor, type PopUpOffset} from './pop-up/vira-pop-up-trigger.element.js';
+import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/menu-helpers.js';
+import {ViraMenuTrigger} from './popover/vira-menu-trigger.element.js';
+import {ViraMenuCornerStyle} from './popover/vira-menu.element.js';
+import {type PopoverOffset} from './popover/vira-popover-trigger.element.js';
 import {ViraBoldText} from './vira-bold-text.element.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
@@ -206,16 +206,10 @@ export const ViraTabs = defineViraElement<
          * @default ViraTabsIconLayout.Vertical
          */
         iconLayout: ViraTabsIconLayout;
-        /**
-         * Horizontal anchor for the dropdown menu. Only used when tabs overflow into a dropdown.
-         *
-         * @default HorizontalAnchor.Left
-         */
-        menuHorizontalAnchor: HorizontalAnchor;
         /** Whether the dropdown trigger is disabled. Only used when tabs overflow into a dropdown. */
         menuIsDisabled: boolean;
-        /** Offset for the dropdown pop-up. Only used when tabs overflow into a dropdown. */
-        menuPopUpOffset: Readonly<PopUpOffset>;
+        /** Offset for the dropdown popover. Only used when tabs overflow into a dropdown. */
+        menuPopoverOffset: Readonly<PopoverOffset>;
         /**
          * Text shown on the overflow "more" trigger when the selected tab is _not_ collapsed into
          * the menu. When the selected tab _is_ collapsed, the trigger shows that tab's label (with
@@ -1001,10 +995,9 @@ export const ViraTabs = defineViraElement<
             ? html`
                   <div class="tab-more">
                       <${ViraMenuTrigger.assign({
-                          horizontalAnchor: inputs.menuHorizontalAnchor,
                           isDisabled: inputs.menuIsDisabled,
-                          popUpOffset: inputs.menuPopUpOffset,
-                          menuCornerStyle: ViraMenuCornerStyle.AllRounded,
+                          popoverOffset: inputs.menuPopoverOffset,
+                          menuCornerStyle: ViraMenuCornerStyle.Round,
                       })}>
                           <${ViraButton.assign({
                               text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,

@@ -2,7 +2,6 @@ import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
 import {type FullSpaRoute} from 'spa-router-vir';
 import {
-    HorizontalAnchor,
     renderMenuItemEntries,
     ViraDropdown,
     ViraLink,
@@ -76,7 +75,7 @@ const examples: {
     {
         title: 'rounded',
         inputs: {
-            menuCornerStyle: ViraMenuCornerStyle.AllRounded,
+            menuCornerStyle: ViraMenuCornerStyle.Round,
         },
     },
     {
@@ -93,16 +92,6 @@ const examples: {
     },
     {
         title: 'long item',
-        menuItems: [
-            ...mockMenuItems,
-            longMenuItem,
-        ],
-    },
-    {
-        title: 'restricted long item',
-        inputs: {
-            horizontalAnchor: HorizontalAnchor.Both,
-        },
         menuItems: [
             ...mockMenuItems,
             longMenuItem,
@@ -230,7 +219,7 @@ export const viraMenuTriggerBookPage = defineBookPage({
 
                     return html`
                         <${ViraMenuTrigger.assign({
-                            popUpOffset: {
+                            popoverOffset: {
                                 vertical: -1,
                             },
                             ...example.inputs,

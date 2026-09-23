@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it} from '@augment-vir/test';
 import {html} from 'element-vir';
-import {renderMenuItemEntries, type ViraMenuItemEntry} from './pop-up-helpers.js';
+import {renderMenuItemEntries, type ViraMenuItemEntry} from './menu-helpers.js';
 
 describe(renderMenuItemEntries.name, () => {
     function createEntry(overrides: Partial<ViraMenuItemEntry> = {}): Readonly<ViraMenuItemEntry> {

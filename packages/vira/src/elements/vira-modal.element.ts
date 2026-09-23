@@ -10,7 +10,7 @@ import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {isMouseEventOnScrollbar} from '../util/pop-up-manager.js';
+import {isMouseEventOnScrollbar} from '../util/popover-manager.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 const globalEventsToCloseModalOn = [

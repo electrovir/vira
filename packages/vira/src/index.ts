@@ -1,3 +1,4 @@
+export * from './directives/index.js';
 export * from './elements/index.js';
 export * from './icons/index.js';
 export * from './styles/index.js';

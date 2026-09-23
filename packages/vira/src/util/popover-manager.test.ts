@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
-import {isMouseEventOnScrollbar} from './pop-up-manager.js';
+import {isMouseEventOnScrollbar} from './popover-manager.js';
 
 /**
  * Scrollbar clicks cannot be synthesized (a `MouseEvent` at scrollbar coordinates still reports the

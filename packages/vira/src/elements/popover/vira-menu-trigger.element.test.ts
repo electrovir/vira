@@ -3,7 +3,7 @@ import {randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {css, html, listen} from 'element-vir';
-import {renderMenuItemEntries} from '../../util/pop-up-helpers.js';
+import {renderMenuItemEntries} from '../../util/menu-helpers.js';
 import {ViraThemeClient, ViraThemeSelection} from '../../util/vira-theme-client.js';
 import {ViraThemeSwitcher} from '../vira-theme-switcher.element.js';
 import {ViraMenuItem} from './vira-menu-item.element.js';
@@ -12,8 +12,8 @@ import {ViraMenu} from './vira-menu.element.js';
 
 /**
  * Mimics interactive menu-item content (e.g. a `ViraLink`) that handles the click itself and
- * prevents it from bubbling up to the pop-up's own close handler. A direct click on such content
- * used to leave the pop-up open because the only close path was the bubbled click.
+ * prevents it from bubbling up to the popover's own close handler. A direct click on such content
+ * used to leave the popover open because the only close path was the bubbled click.
  */
 const interactiveContentClass = 'interactive-content';
 const interactiveTextClass = 'interactive-text';
@@ -40,7 +40,7 @@ async function setupMenuTest(
                 ...inputs,
             })}
                 ${listen(ViraMenuTrigger.events.openChange, (event) => {
-                    events.openChange.push(!!event.detail);
+                    events.openChange.push(event.detail);
                 })}
             >
                 <button
@@ -143,7 +143,7 @@ describe(ViraMenuTrigger.tagName, () => {
 
         /**
          * Click the text _inside_ the interactive content. The content stops the click from
-         * bubbling to the pop-up, so the close must be driven by the menu item's `select` event.
+         * bubbling to the popover, so the close must be driven by the menu item's `select` event.
          */
         const interactiveText = assertWrap.instanceOf(
             instance.querySelector(`.${interactiveTextClass}`),
@@ -166,7 +166,7 @@ describe(ViraMenuTrigger.tagName, () => {
         ]);
     });
 
-    it('keeps the pop-up open when a menu item sets keepOpenAfterInteraction', async () => {
+    it('keeps the popover open when a menu item sets keepOpenAfterInteraction', async () => {
         const {open, findMenu, instance, events} = await setupMenuTest(undefined, true);
 
         await open();
@@ -176,7 +176,7 @@ describe(ViraMenuTrigger.tagName, () => {
         assert.isDefined(items[1]);
         await testWeb.click(items[1]);
 
-        /** Give the pop-up a chance to (incorrectly) close before asserting it stayed open. */
+        /** Give the popover a chance to (incorrectly) close before asserting it stayed open. */
         await waitForAnimationFrame(5);
 
         assert.isTruthy(
@@ -211,7 +211,7 @@ describe(ViraMenuTrigger.tagName, () => {
                 >
                     <${ViraMenuTrigger.assign({})}
                         ${listen(ViraMenuTrigger.events.openChange, (event) => {
-                            events.openChange.push(!!event.detail);
+                            events.openChange.push(event.detail);
                         })}
                     >
                         <button slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}>
@@ -258,14 +258,14 @@ describe(ViraMenuTrigger.tagName, () => {
             await waitForAnimationFrame(5);
 
             assert.deepEquals(events.openChange, [true]);
-            assert.strictEquals(themeClient.currentTheme, ViraThemeSelection.Dark);
+            assert.strictEquals(themeClient.getCurrentTheme(), ViraThemeSelection.Dark);
             assert.isTruthy(queryThroughShadow(instance, ViraMenu.tagName));
         } finally {
             themeClient.destroy();
         }
     });
 
-    it('still closes for sibling items when only one item keeps the pop-up open', async () => {
+    it('still closes for sibling items when only one item keeps the popover open', async () => {
         const {open, findMenu, instance, events} = await setupMenuTest(undefined, true);
 
         await open();
@@ -291,7 +291,7 @@ describe(ViraMenuTrigger.tagName, () => {
         ]);
     });
 
-    it('keeps the pop-up open when keepOpenAfterInteraction is set', async () => {
+    it('keeps the popover open when keepOpenAfterInteraction is set', async () => {
         const {open, findMenu, instance, events} = await setupMenuTest({
             keepOpenAfterInteraction: true,
         });
@@ -304,7 +304,7 @@ describe(ViraMenuTrigger.tagName, () => {
         );
         await testWeb.click(interactiveText);
 
-        /** Give the pop-up a chance to (incorrectly) close before asserting it stayed open. */
+        /** Give the popover a chance to (incorrectly) close before asserting it stayed open. */
         await waitForAnimationFrame(5);
 
         assert.isTruthy(findMenu(), 'the menu should stay open with keepOpenAfterInteraction');

@@ -2,6 +2,8 @@ import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
+    attributes,
+    type AttributeValues,
     classMap,
     css,
     defineElementEvent,
@@ -16,11 +18,16 @@ import {
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {ChevronUp16Icon} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
+import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
 import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {renderMenuItemEntries} from '../util/pop-up-helpers.js';
 import {type ShowPopUpResult} from '../util/pop-up-manager.js';
-import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {
+    isViraDropdownOptionGroup,
+    type ViraDropdownOption,
+    type ViraDropdownOptionGroup,
+} from '../util/vira-dropdown-option.js';
 import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
 import {ViraMenu, ViraMenuPopUpDirection} from './pop-up/vira-menu.element.js';
 import {
@@ -39,7 +46,7 @@ import {ViraIcon} from './vira-icon.element.js';
  */
 export const ViraDropdown = defineViraElement<
     {
-        options: ReadonlyArray<Readonly<ViraSelectOption>>;
+        options: ReadonlyArray<Readonly<ViraDropdownOption> | Readonly<ViraDropdownOptionGroup>>;
         /** The selected id from the given options. */
         selected: ReadonlyArray<PropertyKey>;
     } & PartialWithUndefined<
@@ -54,7 +61,15 @@ export const ViraDropdown = defineViraElement<
             icon: ViraIconSvg;
             selectionPrefix: string;
             isDisabled: boolean;
+            /**
+             * When `true`, the currently selected options' labels are rendered as plain text with
+             * no trigger or menu.
+             */
+            isReadonly: boolean;
+            hasError: boolean;
             label: string | HtmlInterpolation;
+            /** Attributes applied to the trigger element. */
+            attributePassthrough: Readonly<AttributeValues>;
             /** For debugging purposes only. Very bad for actual production code use. */
             z_debug_forceOpenState: boolean;
         } & PopUpTriggerPosition
@@ -70,7 +85,7 @@ export const ViraDropdown = defineViraElement<
         :host {
             display: inline-flex;
             vertical-align: middle;
-            width: 256px;
+            width: 224px;
             position: relative;
             max-width: 100%;
         }
@@ -125,11 +140,42 @@ export const ViraDropdown = defineViraElement<
             gap: 8px;
             text-align: left;
             align-items: center;
-            padding: 3px;
-            padding-left: 10px;
+            min-height: ${viraSizeHeights[ViraSize.Medium]}px;
+            padding: 0 3px 0 10px;
             border-radius: ${viraFormCssVars['vira-form-radius'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
+        }
+
+        .dropdown-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        .has-error .dropdown-trigger {
+            border-color: ${viraFormCssVars['vira-form-error-color'].value};
+        }
+
+        .option-group-label {
+            ${noUserSelect};
+            /* Aligns with the label text of each ViraMenuItem, past its check icon. */
+            padding: 8px 12px 4px
+                calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
+            opacity: 0.6;
+            text-align: left;
+        }
+
+        .option-group-label {
+            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+        }
+
+        ${ViraMenuItem}.option-group-label {
+            padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
+            ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
+        }
+
+        .readonly-value {
+            overflow-wrap: anywhere;
         }
 
         .using-placeholder {
@@ -170,9 +216,12 @@ export const ViraDropdown = defineViraElement<
         };
     },
     render({state, inputs, dispatch, events, updateState, testIds}) {
+        const flatOptions = inputs.options.flatMap((entry) => {
+            return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
+        });
         const selectedOptions = filterMap(
             inputs.selected,
-            (selectedValue) => inputs.options.find((option) => option.value === selectedValue),
+            (selectedValue) => flatOptions.find((option) => option.value === selectedValue),
             check.isTruthy,
         );
 
@@ -203,7 +252,7 @@ export const ViraDropdown = defineViraElement<
               ? `${selectedOptions.length} Selected`
               : selectedOptions[0]?.label || '';
 
-        function selectOption(option: Readonly<ViraSelectOption>) {
+        function selectOption(option: Readonly<ViraDropdownOption>) {
             const newSelectedValues = inputs.isMultiSelect
                 ? selectedOptions.includes(option)
                     ? filterMap(
@@ -219,6 +268,82 @@ export const ViraDropdown = defineViraElement<
             dispatch(
                 new events.selectedValuesChange({
                     detail: newSelectedValues,
+                }),
+            );
+        }
+
+        function toggleGroup(group: Readonly<ViraDropdownOptionGroup>) {
+            const enabledGroupOptions = group.options.filter((option) => !option.disabled);
+            const isGroupSelected = enabledGroupOptions.every((option) => {
+                return selectedOptions.includes(option);
+            });
+
+            dispatch(
+                new events.selectedValuesChange({
+                    detail: (isGroupSelected
+                        ? selectedOptions.filter((option) => !enabledGroupOptions.includes(option))
+                        : [
+                              ...selectedOptions,
+                              ...enabledGroupOptions.filter((option) => {
+                                  return !selectedOptions.includes(option);
+                              }),
+                          ]
+                    ).map((option) => option.value),
+                }),
+            );
+        }
+
+        function renderGroupLabel(group: Readonly<ViraDropdownOptionGroup>) {
+            return inputs.isMultiSelect
+                ? html`
+                      <${ViraMenuItem.assign({
+                          disablePointerStyles: true,
+                      })}
+                          class="option-group-label"
+                          ${listen('click', () => {
+                              toggleGroup(group);
+                          })}
+                      >
+                          ${group.groupName}
+                      </${ViraMenuItem}>
+                  `
+                : html`
+                      <div class="option-group-label">${group.groupName}</div>
+                  `;
+        }
+
+        /** Drag-select actions in the same order as the rendered menu items. */
+        const menuItemActions = inputs.options.flatMap((entry) => {
+            const options = isViraDropdownOptionGroup(entry) ? entry.options : [entry];
+            const optionActions = options.map((option) => {
+                return option.disabled
+                    ? undefined
+                    : () => {
+                          selectOption(option);
+                      };
+            });
+
+            return isViraDropdownOptionGroup(entry) && inputs.isMultiSelect
+                ? [
+                      () => {
+                          toggleGroup(entry);
+                      },
+                      ...optionActions,
+                  ]
+                : optionActions;
+        });
+
+        function renderOptionEntries(options: ReadonlyArray<Readonly<ViraDropdownOption>>) {
+            return renderMenuItemEntries(
+                options.map((option) => {
+                    return {
+                        content: option.label,
+                        onClick() {
+                            selectOption(option);
+                        },
+                        disabled: option.disabled,
+                        selected: selectedOptions.includes(option),
+                    };
                 }),
             );
         }
@@ -239,8 +364,8 @@ export const ViraDropdown = defineViraElement<
                                     return eventTarget instanceof ViraMenuItem;
                                 },
                             );
-                        const option = menuItem
-                            ? inputs.options[
+                        const menuItemAction = menuItem
+                            ? menuItemActions[
                                   Array.from(
                                       extractEventTarget(event, ViraMenu).querySelectorAll(
                                           ViraMenuItem.tagName,
@@ -249,24 +374,17 @@ export const ViraDropdown = defineViraElement<
                               ]
                             : undefined;
 
-                        if (check.isDefined(option) && !option.disabled) {
-                            selectOption(option);
-                        }
+                        menuItemAction?.();
                     }
                 })}
             >
-                ${renderMenuItemEntries(
-                    inputs.options.map((option) => {
-                        return {
-                            content: option.label,
-                            onClick() {
-                                selectOption(option);
-                            },
-                            disabled: option.disabled,
-                            selected: selectedOptions.includes(option),
-                        };
-                    }),
-                )}
+                ${inputs.options.map((entry) => {
+                    return isViraDropdownOptionGroup(entry)
+                        ? html`
+                              ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
+                          `
+                        : renderOptionEntries([entry]);
+                })}
             </${ViraMenu}>
         `;
 
@@ -311,6 +429,7 @@ export const ViraDropdown = defineViraElement<
                     aria-label=${ifDefined(
                         (check.isString(inputs.label) && inputs.label) || undefined,
                     )}
+                    ${attributes(inputs.attributePassthrough)}
                     ${testId(testIds.trigger)}
                     ${listen('mousedown', () => {
                         if (!state.showPopUpResult) {
@@ -342,15 +461,34 @@ export const ViraDropdown = defineViraElement<
             </${ViraPopUpTrigger}>
         `;
 
+        const contentTemplate = inputs.isReadonly
+            ? html`
+                  <span class="readonly-value">${selectionDisplay}</span>
+              `
+            : triggerTemplate;
+
         if (inputs.label) {
             return html`
-                <label for=${state.randomId}>
+                <label
+                    for=${ifDefined(inputs.isReadonly ? undefined : state.randomId)}
+                    class=${classMap({
+                        'has-error': !!inputs.hasError,
+                    })}
+                >
                     <span class="dropdown-label">${inputs.label}</span>
-                    ${triggerTemplate}
+                    ${contentTemplate}
                 </label>
             `;
         } else {
-            return triggerTemplate;
+            return html`
+                <span
+                    class="dropdown-wrapper ${classMap({
+                        'has-error': !!inputs.hasError,
+                    })}"
+                >
+                    ${contentTemplate}
+                </span>
+            `;
         }
     },
 });

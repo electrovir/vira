@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, ViraDropdown, type ViraSelectOption, allIconsByName} from 'vira';
+import {Element24Icon, ViraDropdown, type ViraDropdownOption, allIconsByName} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const exampleDropdownOptions = [
@@ -37,7 +37,7 @@ const exampleDropdownOptions = [
         label: "Really really super duper long it just keeps going because it's so long option",
         value: '8',
     },
-] satisfies ReadonlyArray<Readonly<ViraSelectOption>>;
+] satisfies ReadonlyArray<Readonly<ViraDropdownOption>>;
 
 const examples: ReadonlyArray<{
     title: string;
@@ -75,9 +75,21 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'multi select with multiple selected',
+        inputs: {
+            isMultiSelect: true,
+            selected: [
+                '1',
+                '3',
+            ],
+        },
+    },
+    {
         title: 'long selection',
         inputs: {
-            selected: [8],
+            selected: [
+                '8',
+            ],
         },
     },
     {
@@ -120,7 +132,9 @@ const examples: ReadonlyArray<{
         title: 'with a prefix',
         inputs: {
             selectionPrefix: 'Pre:',
-            selected: [1],
+            selected: [
+                '1',
+            ],
         },
     },
     {
@@ -133,6 +147,86 @@ const examples: ReadonlyArray<{
         title: 'with a label',
         inputs: {
             label: 'My Label',
+        },
+    },
+    {
+        title: 'with an error',
+        inputs: {
+            hasError: true,
+        },
+    },
+    {
+        title: 'readonly',
+        inputs: {
+            isReadonly: true,
+            label: 'My Label',
+            selected: [
+                '2',
+            ],
+        },
+    },
+    {
+        title: 'option groups',
+        inputs: {
+            options: [
+                {
+                    groupName: 'First Group',
+                    options: exampleDropdownOptions.slice(0, 2),
+                },
+                {
+                    groupName: 'Second Group',
+                    options: exampleDropdownOptions.slice(2, 4),
+                },
+            ],
+        },
+    },
+    {
+        title: 'readonly without a selection',
+        inputs: {
+            isReadonly: true,
+            label: 'My Label',
+        },
+    },
+    {
+        title: 'readonly multi select',
+        inputs: {
+            isReadonly: true,
+            isMultiSelect: true,
+            label: 'My Label',
+            selected: [
+                '1',
+                '2',
+            ],
+        },
+    },
+    {
+        title: 'with a label and an error',
+        inputs: {
+            label: 'My Label',
+            hasError: true,
+        },
+    },
+    {
+        title: 'option groups with multi select and a disabled item',
+        inputs: {
+            isMultiSelect: true,
+            options: [
+                {
+                    groupName: 'First Group',
+                    options: exampleDropdownOptions.slice(0, 2),
+                },
+                {
+                    groupName: 'Second Group',
+                    options: [
+                        ...exampleDropdownOptions.slice(2, 4),
+                        {
+                            value: '42',
+                            label: 'this is disabled',
+                            disabled: true,
+                        },
+                    ],
+                },
+            ],
         },
     },
 ];

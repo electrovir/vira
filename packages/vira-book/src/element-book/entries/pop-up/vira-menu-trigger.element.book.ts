@@ -4,14 +4,14 @@ import {type FullSpaRoute} from 'spa-router-vir';
 import {
     HorizontalAnchor,
     renderMenuItemEntries,
+    ViraDropdown,
     ViraLink,
     ViraMenuCornerStyle,
     ViraMenuTrigger,
-    ViraSelect,
     ViraThemeClient,
     ViraThemeSwitcher,
+    type ViraDropdownOption,
     type ViraMenuItemEntry,
-    type ViraSelectOption,
 } from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
@@ -36,7 +36,7 @@ const mockMenuItems: ReadonlyArray<ViraMenuItemEntry> = [
     },
 ];
 
-const mockSelectOptions: ReadonlyArray<Readonly<ViraSelectOption>> = [
+const mockDropdownOptions: ReadonlyArray<Readonly<ViraDropdownOption>> = [
     {
         value: '1',
         label: 'Option one',
@@ -194,13 +194,16 @@ export const viraMenuTriggerBookPage = defineBookPage({
                     };
                 },
                 render({state, updateState}) {
-                    const rawSelectItem: ViraMenuItemEntry = {
+                    const dropdownItem: ViraMenuItemEntry = {
                         keepOpenAfterInteraction: true,
                         content: html`
-                            <${ViraSelect.assign({
-                                options: mockSelectOptions,
-                                value: state.selectedValue,
-                                rawSelect: true,
+                            <${ViraDropdown.assign({
+                                options: mockDropdownOptions,
+                                selected: state.selectedValue
+                                    ? [
+                                          state.selectedValue,
+                                      ]
+                                    : [],
                             })}
                                 style=${css`
                                     width: 100%;
@@ -211,17 +214,17 @@ export const viraMenuTriggerBookPage = defineBookPage({
                                 ${listen('mousedown', (event) => {
                                     event.stopPropagation();
                                 })}
-                                ${listen(ViraSelect.events.valueChange, (event) => {
+                                ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                     updateState({
-                                        selectedValue: event.detail,
+                                        selectedValue: event.detail[0],
                                     });
                                 })}
-                            ></${ViraSelect}>
+                            ></${ViraDropdown}>
                         `,
                     };
 
                     const items = [
-                        rawSelectItem,
+                        dropdownItem,
                         ...(example.menuItems || mockMenuItems),
                     ];
 

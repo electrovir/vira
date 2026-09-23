@@ -21,8 +21,8 @@ import {
 } from '../util/vira-form-fields.js';
 import {ViraCheckbox} from './vira-checkbox.element.js';
 import {ViraDateInput} from './vira-date-input.element.js';
+import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
-import {ViraSelect} from './vira-select.element.js';
 import {ViraTextArea} from './vira-text-area.element.js';
 
 /**
@@ -132,9 +132,9 @@ export const ViraForm = defineViraElement<
                     &
                     > ${ViraDateInput},
                     &
-                    > ${ViraInput},
+                    > ${ViraDropdown},
                     &
-                    > ${ViraSelect},
+                    > ${ViraInput},
                     &
                     > ${ViraTextArea} {
                     width: 100%;
@@ -239,36 +239,30 @@ export const ViraForm = defineViraElement<
                     return wrapFormField({
                         label,
                         fieldTemplate: html`
-                            <${ViraSelect.assign({
+                            <${ViraDropdown.assign({
                                 options: field.options,
-                                value: field.value,
+                                selected: field.value ? [field.value] : [],
                                 placeholder: field.placeholder,
-                                disabled: isDisabled,
+                                isDisabled,
                                 isReadonly: inputs.isReadonly,
                                 label: childLabel,
                                 hasError: field.hasError,
                                 icon: field.icon,
-                                ...(inputs.useHorizontalLabels && label
-                                    ? {
-                                          attributePassthrough: {
-                                              select: horizontalLabelAttributes,
-                                          },
-                                      }
-                                    : {}),
+                                attributePassthrough: horizontalLabelAttributes,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
-                                ${listen(ViraSelect.events.valueChange, (event) => {
+                                ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
                                             detail: {
                                                 key,
                                                 ...field,
-                                                value: event.detail,
+                                                value: event.detail[0],
                                             },
                                         }),
                                     );
                                 })}
-                            ></${ViraSelect}>
+                            ></${ViraDropdown}>
                         `,
                     });
                 } else if (field.type === ViraFormFieldType.TextArea) {

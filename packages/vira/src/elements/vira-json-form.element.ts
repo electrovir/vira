@@ -12,6 +12,7 @@ import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraColorVariant, ViraEmphasis, ViraSize} from '../styles/form-variants.js';
 import {defineViraElement} from '../util/define-vira-element.js';
+import {type ViraDropdownOption} from '../util/vira-dropdown-option.js';
 import {
     allowsFreeformString,
     createDefaultForJsonType,
@@ -38,12 +39,11 @@ import {
     type ViraJsonPath,
     type ViraJsonSchema,
 } from '../util/vira-json-schema.js';
-import {type ViraSelectOption} from '../util/vira-select-option.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraCheckbox} from './vira-checkbox.element.js';
+import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraError} from './vira-error.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
-import {ViraSelect} from './vira-select.element.js';
 import {ViraTextArea} from './vira-text-area.element.js';
 
 /**
@@ -56,6 +56,10 @@ export enum ViraJsonStringMode {
     Options = 'options',
     /** Enter an arbitrary string via a text input. */
     Custom = 'custom',
+}
+
+function toSelectedValues(value: string | undefined) {
+    return value == undefined ? [] : [value];
 }
 
 /**
@@ -203,7 +207,7 @@ export const ViraJsonForm = defineViraElement<
             min-width: 0;
         }
 
-        .json-value-with-switcher > ${ViraSelect} {
+        .json-value-with-switcher > ${ViraDropdown} {
             flex-shrink: 0;
             width: 130px;
         }
@@ -217,7 +221,7 @@ export const ViraJsonForm = defineViraElement<
             padding: 8px 0;
         }
 
-        .json-add-row ${ViraInput}, .json-add-row ${ViraSelect} {
+        .json-add-row ${ViraInput}, .json-add-row ${ViraDropdown} {
             width: 160px;
         }
 
@@ -374,7 +378,7 @@ export const ViraJsonForm = defineViraElement<
             const enumValues = getSchemaEnumValues(schema, resolveContext);
 
             if (enumValues && enumValues.length > 0) {
-                const options: ReadonlyArray<ViraSelectOption> = enumValues.map((entry) => {
+                const options: ReadonlyArray<ViraDropdownOption> = enumValues.map((entry) => {
                     const asString = jsonPrimitiveToString(entry as never);
                     return {
                         value: asString,
@@ -387,18 +391,21 @@ export const ViraJsonForm = defineViraElement<
                     check.isNumber(value) ||
                     check.isBoolean(value);
                 return html`
-                    <${ViraSelect.assign({
+                    <${ViraDropdown.assign({
                         options,
-                        value: isPrimitive ? jsonPrimitiveToString(value as never) : undefined,
-                        disabled: isDisabled,
+                        selected: toSelectedValues(
+                            isPrimitive ? jsonPrimitiveToString(value as never) : undefined,
+                        ),
+                        isDisabled,
                     })}
-                        ${listen(ViraSelect.events.valueChange, (event) => {
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            const selectedValue = assertWrap.isDefined(event.detail[0]);
                             const selected = enumValues.find(
-                                (entry) => jsonPrimitiveToString(entry as never) === event.detail,
+                                (entry) => jsonPrimitiveToString(entry as never) === selectedValue,
                             );
-                            emitReplaceAt(path, selected ?? event.detail);
+                            emitReplaceAt(path, selected ?? selectedValue);
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                 `;
             } else if (type === ViraJsonType.Boolean) {
                 return html`
@@ -556,21 +563,24 @@ export const ViraJsonForm = defineViraElement<
                 });
             }
             const selectedType = getPendingType(pathKey, allowedTypes);
-            const options: ReadonlyArray<ViraSelectOption> = allowedTypes.map((type) => {
+            const options: ReadonlyArray<ViraDropdownOption> = allowedTypes.map((type) => {
                 return {
                     value: type,
                     label: viraJsonTypeLabels[type],
                 };
             });
             return html`
-                <${ViraSelect.assign({
+                <${ViraDropdown.assign({
                     options,
-                    value: selectedType,
+                    selected: toSelectedValues(selectedType),
                 })}
-                    ${listen(ViraSelect.events.valueChange, (event) => {
-                        setPendingType(pathKey, event.detail as ViraJsonType);
+                    ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                        setPendingType(
+                            pathKey,
+                            assertWrap.isDefined(event.detail[0]) as ViraJsonType,
+                        );
                     })}
-                ></${ViraSelect}>
+                ></${ViraDropdown}>
                 ${renderPlusButton({
                     isAddDisabled,
                     tooltip: isAddDisabled
@@ -630,21 +640,24 @@ export const ViraJsonForm = defineViraElement<
                 `;
             } else {
                 const selectedType = getPendingType(pathKey, allowedTypes);
-                const options: ReadonlyArray<ViraSelectOption> = allowedTypes.map((type) => {
+                const options: ReadonlyArray<ViraDropdownOption> = allowedTypes.map((type) => {
                     return {
                         value: type,
                         label: viraJsonTypeLabels[type],
                     };
                 });
                 return html`
-                    <${ViraSelect.assign({
+                    <${ViraDropdown.assign({
                         options,
-                        value: selectedType,
+                        selected: toSelectedValues(selectedType),
                     })}
-                        ${listen(ViraSelect.events.valueChange, (event) => {
-                            setPendingType(pathKey, event.detail as ViraJsonType);
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            setPendingType(
+                                pathKey,
+                                assertWrap.isDefined(event.detail[0]) as ViraJsonType,
+                            );
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                     ${renderPlusButton({
                         isAddDisabled: false,
                         tooltip: `Add ${viraJsonTypeLabels[selectedType]}`,
@@ -953,20 +966,22 @@ export const ViraJsonForm = defineViraElement<
             const editor =
                 mode === ViraJsonStringMode.Options
                     ? html`
-                          <${ViraSelect.assign({
+                          <${ViraDropdown.assign({
                               options: enumValues.map((entry) => {
                                   return {
                                       value: entry,
                                       label: entry,
                                   };
                               }),
-                              value: enumValues.includes(value) ? value : undefined,
-                              disabled: isDisabled,
+                              selected: toSelectedValues(
+                                  enumValues.includes(value) ? value : undefined,
+                              ),
+                              isDisabled,
                           })}
-                              ${listen(ViraSelect.events.valueChange, (event) => {
-                                  emitReplaceAt(path, event.detail);
+                              ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                                  emitReplaceAt(path, assertWrap.isDefined(event.detail[0]));
                               })}
-                          ></${ViraSelect}>
+                          ></${ViraDropdown}>
                       `
                     : html`
                           <${ViraInput.assign({
@@ -983,7 +998,7 @@ export const ViraJsonForm = defineViraElement<
                 return editor;
             }
 
-            const modeOptions: ReadonlyArray<ViraSelectOption> = [
+            const modeOptions: ReadonlyArray<ViraDropdownOption> = [
                 {
                     value: ViraJsonStringMode.Options,
                     label: 'Options',
@@ -997,15 +1012,18 @@ export const ViraJsonForm = defineViraElement<
             return html`
                 <div class="json-value-with-switcher">
                     <span class="json-value-editor-slot">${editor}</span>
-                    <${ViraSelect.assign({
+                    <${ViraDropdown.assign({
                         options: modeOptions,
-                        value: mode,
+                        selected: toSelectedValues(mode),
                     })}
                         title="Choose from options or enter a custom value"
-                        ${listen(ViraSelect.events.valueChange, (event) => {
-                            setStringMode(pathKey, event.detail as ViraJsonStringMode);
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            setStringMode(
+                                pathKey,
+                                assertWrap.isDefined(event.detail[0]) as ViraJsonStringMode,
+                            );
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                 </div>
             `;
         }
@@ -1056,7 +1074,7 @@ export const ViraJsonForm = defineViraElement<
             const switcherSelected = allowedTypes.includes(concreteType)
                 ? concreteType
                 : (allowedTypes[0] ?? concreteType);
-            const switcherOptions: ReadonlyArray<ViraSelectOption> = allowedTypes.map((type) => {
+            const switcherOptions: ReadonlyArray<ViraDropdownOption> = allowedTypes.map((type) => {
                 return {
                     value: type,
                     label: viraJsonTypeLabels[type],
@@ -1065,16 +1083,16 @@ export const ViraJsonForm = defineViraElement<
             return html`
                 <div class="json-value-with-switcher">
                     <span class="json-value-editor-slot">${editor}</span>
-                    <${ViraSelect.assign({
+                    <${ViraDropdown.assign({
                         options: switcherOptions,
-                        value: switcherSelected,
+                        selected: toSelectedValues(switcherSelected),
                     })}
                         title="Change type"
-                        ${listen(ViraSelect.events.valueChange, (event) => {
-                            const newType = event.detail as ViraJsonType;
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            const newType = assertWrap.isDefined(event.detail[0]) as ViraJsonType;
                             emitReplaceAt(path, createDefaultForJsonType(newType));
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                 </div>
             `;
         }

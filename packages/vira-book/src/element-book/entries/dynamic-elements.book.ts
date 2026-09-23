@@ -7,9 +7,9 @@ import {
     createDynamicElementLoader,
     LoaderAnimated24Icon,
     renderDynamicElement,
+    ViraDropdown,
     ViraError,
     ViraIcon,
-    ViraSelect,
 } from 'vira';
 import {utilBookPage} from '../top-level-pages.js';
 
@@ -138,7 +138,7 @@ const ExampleAsyncUpdateKeyDynamicElements = defineElement<{numberValue: 1 | 2 |
     },
 });
 
-const selectOptions = [
+const dropdownOptions = [
     {
         label: '1',
         value: '1',
@@ -173,12 +173,14 @@ export const dynamicElementsBookPage = defineBookPage({
             `,
             render({state, updateState}) {
                 return html`
-                    <${ViraSelect.assign({
-                        value: String(state.value),
-                        options: selectOptions,
+                    <${ViraDropdown.assign({
+                        selected: [
+                            String(state.value),
+                        ],
+                        options: dropdownOptions,
                     })}
-                        ${listen(ViraSelect.events.valueChange, (event) => {
-                            const numericValue = Number(event.detail);
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            const numericValue = Number(event.detail[0]);
 
                             if (numericValue !== 1 && numericValue !== 2 && numericValue !== 3) {
                                 throw new Error(`Invalid selection: ${numericValue}`);
@@ -187,7 +189,7 @@ export const dynamicElementsBookPage = defineBookPage({
                                 value: numericValue,
                             });
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                     <${ExampleDirectSetKeyDynamicElements.assign({
                         numberValue: state.value,
                     })}></${ExampleDirectSetKeyDynamicElements}>
@@ -210,12 +212,14 @@ export const dynamicElementsBookPage = defineBookPage({
             `,
             render({state, updateState}) {
                 return html`
-                    <${ViraSelect.assign({
-                        value: String(state.value),
-                        options: selectOptions,
+                    <${ViraDropdown.assign({
+                        selected: [
+                            String(state.value),
+                        ],
+                        options: dropdownOptions,
                     })}
-                        ${listen(ViraSelect.events.valueChange, (event) => {
-                            const numericValue = Number(event.detail);
+                        ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                            const numericValue = Number(event.detail[0]);
 
                             if (numericValue !== 1 && numericValue !== 2 && numericValue !== 3) {
                                 throw new Error(`Invalid selection: ${numericValue}`);
@@ -224,7 +228,7 @@ export const dynamicElementsBookPage = defineBookPage({
                                 value: numericValue,
                             });
                         })}
-                    ></${ViraSelect}>
+                    ></${ViraDropdown}>
                     <${ExampleAsyncUpdateKeyDynamicElements.assign({
                         numberValue: state.value,
                     })}></${ExampleAsyncUpdateKeyDynamicElements}>

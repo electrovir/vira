@@ -15,15 +15,15 @@ import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noNativeFormStyles} from '../../styles/native-styles.js';
 import {viraShadows} from '../../styles/shadows.js';
 import {colorLocalStorageClient} from '../../util/color-local-storage.client.js';
-import {type ViraSelectOption} from '../../util/vira-select-option.js';
+import {type ViraDropdownOption} from '../../util/vira-dropdown-option.js';
 import {ViraPopUpTrigger} from '../pop-up/vira-pop-up-trigger.element.js';
+import {ViraDropdown} from '../vira-dropdown.element.js';
 import {ViraIcon} from '../vira-icon.element.js';
 import {ViraInput} from '../vira-input.element.js';
-import {ViraSelect} from '../vira-select.element.js';
 import {ViraColorFormatSliders} from './vira-color-format-sliders.element.js';
 import {ViraColorSwatch} from './vira-color-swatch.element.js';
 
-const colorFormatOptions: ReadonlyArray<Readonly<ViraSelectOption>> = getObjectTypedValues(
+const colorFormatOptions: ReadonlyArray<Readonly<ViraDropdownOption>> = getObjectTypedValues(
     ColorFormatName,
 ).map((formatName) => {
     return {
@@ -235,12 +235,17 @@ export const ViraColorPicker = defineElement<
 
         const pickerTemplate = html`
             <div class="picker">
-                <${ViraSelect.assign({
+                <${ViraDropdown.assign({
                     options: colorFormatOptions,
-                    value: state.selectedFormatName,
+                    selected: [
+                        state.selectedFormatName,
+                    ],
                 })}
-                    ${listen(ViraSelect.events.valueChange, (event) => {
-                        const selectedFormat = checkWrap.isEnumValue(event.detail, ColorFormatName);
+                    ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
+                        const selectedFormat = checkWrap.isEnumValue(
+                            event.detail[0],
+                            ColorFormatName,
+                        );
                         if (selectedFormat) {
                             updateState({
                                 selectedFormatName: selectedFormat,
@@ -248,7 +253,7 @@ export const ViraColorPicker = defineElement<
                             colorLocalStorageClient.set.lastFormat(selectedFormat);
                         }
                     })}
-                ></${ViraSelect}>
+                ></${ViraDropdown}>
                 ${rawInputTemplate}
                 <${ViraColorFormatSliders.assign({
                     color,

@@ -65,7 +65,7 @@ export const viraJsonFormBookPage = defineBookPage({
     title: ViraJsonForm.tagName,
     descriptionParagraphs: [
         'An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.',
-        'When the schema allows multiple types for a new field, a ViraSelect is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.',
+        'When the schema allows multiple types for a new field, a ViraDropdown is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.',
         'Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.',
     ],
     defineExamples({defineExample}) {

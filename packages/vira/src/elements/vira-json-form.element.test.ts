@@ -3,9 +3,9 @@ import {type JsonValue} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
 import {type ViraJsonSchema} from '../util/vira-json-schema.js';
+import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraInput} from './vira-input.element.js';
 import {ViraJsonForm} from './vira-json-form.element.js';
-import {ViraSelect} from './vira-select.element.js';
 
 const stringOrEnumSchema = {
     type: 'object',
@@ -73,7 +73,7 @@ describe(ViraJsonForm.tagName, () => {
         const form = await renderForm({
             color: 'red',
         });
-        assert.strictEquals(editorSlotChildTag(form), ViraSelect.tagName);
+        assert.strictEquals(editorSlotChildTag(form), ViraDropdown.tagName);
     });
 
     it('defaults to a text input when the value is not an enum member', async () => {
@@ -88,7 +88,7 @@ describe(ViraJsonForm.tagName, () => {
             color: 'red',
         });
         assert.instanceOf(
-            form.shadowRoot.querySelector(`.json-value-with-switcher > ${ViraSelect.tagName}`),
+            form.shadowRoot.querySelector(`.json-value-with-switcher > ${ViraDropdown.tagName}`),
             HTMLElement,
         );
     });
@@ -104,7 +104,7 @@ describe(ViraJsonForm.tagName, () => {
         );
         assert.isNull(form.shadowRoot.querySelector('.json-value-with-switcher'));
         assert.instanceOf(
-            form.shadowRoot.querySelector(`.json-row-editor > ${ViraSelect.tagName}`),
+            form.shadowRoot.querySelector(`.json-row-editor > ${ViraDropdown.tagName}`),
             HTMLElement,
         );
     });
@@ -120,7 +120,7 @@ describe(ViraJsonForm.tagName, () => {
         );
         assert.isNull(optionsForm.shadowRoot.querySelector('.json-value-with-switcher'));
         assert.instanceOf(
-            optionsForm.shadowRoot.querySelector(`.json-row-editor > ${ViraSelect.tagName}`),
+            optionsForm.shadowRoot.querySelector(`.json-row-editor > ${ViraDropdown.tagName}`),
             HTMLElement,
         );
 

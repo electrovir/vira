@@ -3,7 +3,7 @@ import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augme
 import {type FullDate, type Timezone} from 'date-vir';
 import {html, type HtmlInterpolation} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {type ViraSelectOption} from './vira-select-option.js';
+import {type ViraDropdownOption} from './vira-dropdown-option.js';
 
 /**
  * Form field types for {@link ViraFormField}.
@@ -85,7 +85,7 @@ export type ViraFormField =
     | ({
           type: ViraFormFieldType.Select;
           value: string | undefined;
-          options: ReadonlyArray<Readonly<ViraSelectOption>>;
+          options: ReadonlyArray<Readonly<ViraDropdownOption>>;
       } & PartialWithUndefined<{
           placeholder: string;
           icon: ViraIconSvg;

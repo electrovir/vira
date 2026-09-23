@@ -6,14 +6,14 @@ import {
     ViraColorVariant,
     ViraEmphasis,
     ViraForm,
-    type ViraFormFields,
     ViraFormFieldType,
     ViraInput,
-    type ViraSelectOption,
+    type ViraDropdownOption,
+    type ViraFormFields,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
-const mockRoleOptions: ViraSelectOption[] = [
+const mockRoleOptions: ViraDropdownOption[] = [
     {
         label: 'Admin',
         value: 'admin',

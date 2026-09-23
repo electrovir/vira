@@ -5,12 +5,16 @@ import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@au
 import {resetMouse, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {Element24Icon} from '../icons/index.js';
-import {type ViraSelectOption} from '../util/vira-select-option.js';
+import {
+    type ViraDropdownOption,
+    type ViraDropdownOptionGroup,
+} from '../util/vira-dropdown-option.js';
 import {ViraMenuItem} from './pop-up/vira-menu-item.element.js';
 import {ViraMenu} from './pop-up/vira-menu.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
+import {ViraInput} from './vira-input.element.js';
 
-const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
+const mockMenuItems: ReadonlyArray<Readonly<ViraDropdownOption>> = [
     {
         value: '0',
         label: 'Option A',
@@ -22,6 +26,24 @@ const mockMenuItems: ReadonlyArray<Readonly<ViraSelectOption>> = [
     {
         value: '2',
         label: 'Option C',
+    },
+];
+
+const mockGroupedOptions: ReadonlyArray<Readonly<ViraDropdownOptionGroup>> = [
+    {
+        groupName: 'First',
+        options: mockMenuItems.slice(0, 1),
+    },
+    {
+        groupName: 'Second',
+        options: [
+            ...mockMenuItems.slice(1),
+            {
+                value: 'disabled',
+                label: 'Disabled',
+                disabled: true,
+            },
+        ],
     },
 ];
 
@@ -299,5 +321,188 @@ describe(ViraDropdown.tagName, () => {
         });
 
         assert.strictEquals(extractElementText(triggerElement), placeholder);
+    });
+
+    it('has the same default size as ViraInput', async () => {
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraDropdown.assign({
+                    options: mockMenuItems,
+                    selected: [],
+                })}></${ViraDropdown}>
+                <${ViraInput.assign({
+                    value: '',
+                })}></${ViraInput}>
+            </div>
+        `);
+
+        function getSize(element: Element | null) {
+            const rect = assertWrap.isDefined(element).getBoundingClientRect();
+
+            return {
+                width: rect.width,
+                height: rect.height,
+            };
+        }
+
+        assert.deepEquals(
+            getSize(fixture.querySelector(ViraDropdown.tagName)),
+            getSize(fixture.querySelector(ViraInput.tagName)),
+        );
+    });
+
+    it('truncates a long selection to the dropdown width', async () => {
+        const {instance, triggerElement} = await setupDropdownTest({
+            options: [
+                {
+                    value: 'long',
+                    label: 'Really really super duper long it just keeps going because it is so long',
+                },
+            ],
+            selected: ['long'],
+        });
+
+        assert.isApproximately(
+            triggerElement.getBoundingClientRect().width,
+            instance.getBoundingClientRect().width,
+            1,
+        );
+    });
+
+    it('renders only the selected label when readonly', async () => {
+        const instance = await testWeb.render(html`
+            <${ViraDropdown.assign({
+                options: mockMenuItems,
+                selected: ['2'],
+                isReadonly: true,
+            })}></${ViraDropdown}>
+        `);
+        assert.instanceOf(instance, ViraDropdown);
+
+        assert.isNull(
+            instance.shadowRoot.querySelector(testIdSelector(ViraDropdown.testIds.trigger)),
+        );
+        assert.strictEquals(
+            extractElementText(
+                assertWrap.instanceOf(instance.shadowRoot.firstElementChild, HTMLElement),
+            ),
+            'Option C',
+        );
+    });
+
+    it('selects every enabled item in a group when its header is clicked', async () => {
+        const {instance, toggle, events} = await setupDropdownTest({
+            isMultiSelect: true,
+            selected: ['0'],
+            options: mockGroupedOptions,
+        });
+
+        await toggle();
+        const groupHeaders = queryThroughShadow(instance, '.option-group-label', {
+            all: true,
+        });
+        assert.isLengthExactly(groupHeaders, 2);
+        await testWeb.click(groupHeaders[1]);
+
+        await waitUntil.deepEquals(
+            [
+                [
+                    '0',
+                    '1',
+                    '2',
+                ],
+            ],
+            () => events.selectedValuesChange,
+        );
+    });
+
+    it('deselects a group when its header is clicked and the group is fully selected', async () => {
+        const {instance, toggle, events} = await setupDropdownTest({
+            isMultiSelect: true,
+            selected: [
+                '0',
+                '1',
+                '2',
+            ],
+            options: mockGroupedOptions,
+        });
+
+        await toggle();
+        const groupHeaders = queryThroughShadow(instance, '.option-group-label', {
+            all: true,
+        });
+        assert.isLengthExactly(groupHeaders, 2);
+        await testWeb.click(groupHeaders[1]);
+
+        await waitUntil.deepEquals(
+            [
+                ['0'],
+            ],
+            () => events.selectedValuesChange,
+        );
+    });
+
+    it('does not make group headers selectable in single select', async () => {
+        const {instance, toggle} = await setupDropdownTest({
+            options: [
+                {
+                    groupName: 'First',
+                    options: mockMenuItems,
+                },
+            ],
+        });
+
+        await toggle();
+
+        assert.isLengthExactly(
+            queryThroughShadow(instance, ViraMenuItem.tagName, {
+                all: true,
+            }),
+            mockMenuItems.length,
+        );
+    });
+
+    it('drag selects an option from a later group', async () => {
+        const {instance, triggerElement, events} = await setupDropdownTest({
+            options: [
+                {
+                    groupName: 'First',
+                    options: mockMenuItems.slice(0, 2),
+                },
+                {
+                    groupName: 'Second',
+                    options: mockMenuItems.slice(2),
+                },
+            ],
+        });
+
+        try {
+            await testWeb.moveMouseTo(triggerElement);
+            await sendMouse({
+                type: 'down',
+                button: 'left',
+            });
+
+            const option = await waitUntil.isTruthy(() => {
+                return queryThroughShadow(instance, ViraMenuItem.tagName, {
+                    all: true,
+                })[2];
+            });
+
+            await testWeb.moveMouseTo(option);
+            await sendMouse({
+                type: 'up',
+                button: 'left',
+            });
+
+            await waitUntil.deepEquals(
+                [
+                    ['2'],
+                ],
+                () => events.selectedValuesChange,
+            );
+        } finally {
+            await resetMouse();
+        }
     });
 });

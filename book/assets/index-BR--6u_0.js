@@ -37560,7 +37560,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                 >
                     <slot></slot>
                 </a>
-            `}}}),e4=[`pagehide`,`pageshow`,`popstate`],t4=k$()({tagName:`vira-modal`,events:{modalClose:S()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size"({inputs:e}){return!!e.isMobileSize},"vira-modal-no-content-padding"({inputs:e}){return!!e.noContentPadding}},slotNames:[`vira-modal-modal-title`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`,"vira-modal-border-radius":`8px`},styles({hostClasses:e,cssVars:t}){return C`
+            `}}}),e4=[`pagehide`,`pageshow`,`popstate`],t4=k$()({tagName:`vira-modal`,events:{modalClose:S()},state(){return{dialogElement:void 0,contentElement:void 0,previousOpenValue:void 0,cleanupListeners:void 0}},cleanup({state:e}){e.cleanupListeners?.()},hostClasses:{"vira-modal-phone-size"({inputs:e}){return!!e.isMobileSize},"vira-modal-no-content-padding"({inputs:e}){return!!e.noContentPadding}},slotNames:[`vira-modal-modal-title`],cssVars:{"vira-modal-backdrop-filter":`blur(3px)`,"vira-modal-border-radius":`8px`,"vira-modal-max-width":`calc(100dvw - 100px)`},styles({hostClasses:e,cssVars:t}){return C`
             :host {
                 display: contents;
                 min-width: 280px;
@@ -37580,7 +37580,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                 overflow: hidden;
                 min-width: inherit;
                 min-height: inherit;
-                max-width: calc(100dvw - 100px);
+                max-width: min(${t[`vira-modal-max-width`].value}, 100dvw);
                 max-height: calc(100dvh - 100px);
                 ${E$.modal}
 
@@ -40238,6 +40238,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                 ${t4} {
                     min-width: 500px;
                     border-radius: 4px;
+                    ${t4.cssVars[`vira-modal-max-width`].name}: 500px;
                     ${U[`vira-form-modal-backdrop-color`].name}: rgba(255, 255, 255, 0.4);
                 }
             `,render({state:e,updateState:t}){return w`
@@ -40246,7 +40247,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     >
                         Show Modal
                     </button>
-                    <${t4.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`Modal subtitle`})}
+                    <${t4.assign({open:e.modalOpen,modalTitle:`Modal title`,modalSubtitle:`This long subtitle wraps because the modal max width css var caps the modal width.`})}
                         ${N(t4.events.modalClose,()=>{t({modalOpen:!1})})}
                     >
                         Modal Content

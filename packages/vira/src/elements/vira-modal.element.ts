@@ -80,6 +80,8 @@ export const ViraModal = defineViraElement<
     cssVars: {
         'vira-modal-backdrop-filter': 'blur(3px)',
         'vira-modal-border-radius': '8px',
+        /** Can go no wider than the viewport. */
+        'vira-modal-max-width': 'calc(100dvw - 100px)',
     },
     styles({hostClasses, cssVars}) {
         return css`
@@ -102,7 +104,7 @@ export const ViraModal = defineViraElement<
                 overflow: hidden;
                 min-width: inherit;
                 min-height: inherit;
-                max-width: calc(100dvw - 100px);
+                max-width: min(${cssVars['vira-modal-max-width'].value}, 100dvw);
                 max-height: calc(100dvh - 100px);
                 ${viraShadows.modal}
 

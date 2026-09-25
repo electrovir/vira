@@ -1,3 +1,4 @@
+import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
@@ -11,7 +12,14 @@ import {
     toHtmlInputString,
     userTimezone,
 } from 'date-vir';
-import {css, defineElementEvent, html, ifDefined, listen} from 'element-vir';
+import {
+    css,
+    defineElementEvent,
+    html,
+    type HtmlInterpolation,
+    ifDefined,
+    listen,
+} from 'element-vir';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
@@ -36,7 +44,7 @@ export const ViraDateInput = defineViraElement<
         /** If true, applies error styling. */
         hasError: boolean;
         /** A label that is shown above the input, if provided. */
-        label: string;
+        label: string | HtmlInterpolation;
         /** If true, the input is disabled and cannot be edited. */
         isDisabled: boolean;
         /** If true, the current value is rendered as plain text instead of an editable input. */
@@ -155,7 +163,7 @@ export const ViraDateInput = defineViraElement<
         const inputTemplate = html`
             <input
                 id=${ifDefined(inputs.label ? state.randomId : undefined)}
-                aria-label=${ifDefined(inputs.label || undefined)}
+                aria-label=${ifDefined((check.isString(inputs.label) && inputs.label) || undefined)}
                 type="date"
                 min=${minDate}
                 max=${maxDate}

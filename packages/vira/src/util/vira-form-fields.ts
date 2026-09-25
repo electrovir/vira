@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {addSuffix, getObjectTypedValues, type PartialWithUndefined} from '@augment-vir/common';
 import {type FullDate, type Timezone} from 'date-vir';
-import {type HtmlInterpolation} from 'element-vir';
+import {html, type HtmlInterpolation} from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {type ViraSelectOption} from './vira-select-option.js';
 
@@ -32,7 +32,7 @@ export enum ViraFormFieldType {
  * @category Internal
  */
 export type CommonViraFormFields = {
-    label: string;
+    label: string | HtmlInterpolation;
 } & PartialWithUndefined<{
     /** Applies a test id to the form field element. */
     testId: string;
@@ -94,18 +94,13 @@ export type ViraFormField =
     | ({
           type: ViraFormFieldType.Checkbox;
           value: boolean | undefined;
-          /**
-           * Label for the checkbox. Unlike other field types, this accepts arbitrary HTML so the
-           * checkbox's label slot can be filled with rich content.
-           */
-          label: HtmlInterpolation;
       } & PartialWithUndefined<{
           /** The checkbox will be filled with a form selection color when it is checked. */
           fillWhenChecked: boolean;
           /** The checkbox will be filled with a form error color when it is unchecked. */
           fillWhenUnchecked: boolean;
       }> &
-          Omit<CommonViraFormFields, 'label'>)
+          CommonViraFormFields)
     | ({
           type: ViraFormFieldType.Number;
           value: number | undefined;
@@ -156,20 +151,22 @@ export type ViraFormFields = Record<string, ViraFormField>;
  * @category Internal
  */
 export function applyRequiredLabel(
-    label: string | undefined,
+    label: string | HtmlInterpolation | undefined,
     isRequired: boolean,
-): string | undefined {
-    if (label) {
-        if (isRequired) {
-            return addSuffix({
-                value: label,
-                suffix: '*',
-            });
-        } else {
-            return label;
-        }
-    } else {
+): string | HtmlInterpolation | undefined {
+    if (!label) {
         return undefined;
+    } else if (!isRequired) {
+        return label;
+    } else if (check.isString(label)) {
+        return addSuffix({
+            value: label,
+            suffix: '*',
+        });
+    } else {
+        return html`
+            ${label}*
+        `;
     }
 }
 

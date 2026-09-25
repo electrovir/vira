@@ -1,3 +1,4 @@
+import {check} from '@augment-vir/assert';
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
 import {
     css,
@@ -186,11 +187,7 @@ export const ViraForm = defineViraElement<
                 if (field.isHidden) {
                     return nothing;
                 } else if (field.type === ViraFormFieldType.Checkbox) {
-                    const checkboxLabel: HtmlInterpolation = showRequiredMarker
-                        ? html`
-                              ${field.label}*
-                          `
-                        : field.label;
+                    const checkboxLabel = applyRequiredLabel(field.label, showRequiredMarker);
                     return wrapFormField({
                         label: checkboxLabel,
                         fieldTemplate: html`
@@ -232,7 +229,7 @@ export const ViraForm = defineViraElement<
                 const label = applyRequiredLabel(field.label, showRequiredMarker);
                 const childLabel = inputs.useHorizontalLabels ? undefined : label;
                 const horizontalLabelAttributes =
-                    inputs.useHorizontalLabels && label
+                    inputs.useHorizontalLabels && check.isString(label) && label
                         ? {
                               'aria-label': label,
                           }

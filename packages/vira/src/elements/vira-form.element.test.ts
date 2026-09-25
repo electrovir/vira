@@ -1,4 +1,5 @@
 import {assert, assertWrap, check} from '@augment-vir/assert';
+import {getObjectTypedValues} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {createUtcFullDate, utcTimezone} from 'date-vir';
@@ -159,6 +160,110 @@ describe(ViraForm.tagName, () => {
                 isCentered: true,
             },
         ]);
+    });
+
+    function createTemplateLabel(type: ViraFormFieldType) {
+        return html`
+            <b class="rich-label">${type}</b>
+        `;
+    }
+
+    const templateLabelFields: Record<ViraFormFieldType, ViraFormField> = {
+        [ViraFormFieldType.Text]: {
+            type: ViraFormFieldType.Text,
+            label: createTemplateLabel(ViraFormFieldType.Text),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.ExistingPassword]: {
+            type: ViraFormFieldType.ExistingPassword,
+            label: createTemplateLabel(ViraFormFieldType.ExistingPassword),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.NewPassword]: {
+            type: ViraFormFieldType.NewPassword,
+            label: createTemplateLabel(ViraFormFieldType.NewPassword),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.PlainPassword]: {
+            type: ViraFormFieldType.PlainPassword,
+            label: createTemplateLabel(ViraFormFieldType.PlainPassword),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.Email]: {
+            type: ViraFormFieldType.Email,
+            label: createTemplateLabel(ViraFormFieldType.Email),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.Number]: {
+            type: ViraFormFieldType.Number,
+            label: createTemplateLabel(ViraFormFieldType.Number),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.Select]: {
+            type: ViraFormFieldType.Select,
+            label: createTemplateLabel(ViraFormFieldType.Select),
+            isRequired: true,
+            value: undefined,
+            options: [],
+        },
+        [ViraFormFieldType.Checkbox]: {
+            type: ViraFormFieldType.Checkbox,
+            label: createTemplateLabel(ViraFormFieldType.Checkbox),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.TextArea]: {
+            type: ViraFormFieldType.TextArea,
+            label: createTemplateLabel(ViraFormFieldType.TextArea),
+            isRequired: true,
+            value: undefined,
+        },
+        [ViraFormFieldType.Date]: {
+            type: ViraFormFieldType.Date,
+            label: createTemplateLabel(ViraFormFieldType.Date),
+            isRequired: true,
+            value: undefined,
+        },
+    };
+
+    async function renderTemplateLabels(useHorizontalLabels: boolean) {
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraForm.assign({
+                    fields: templateLabelFields,
+                    useHorizontalLabels,
+                })}></${ViraForm}>
+            </div>
+        `);
+        await waitForAnimationFrame();
+
+        return queryThroughShadow(fixture, '.rich-label', {
+            all: true,
+        })
+            .map((richLabel) => {
+                return assertWrap
+                    .isDefined(richLabel.parentElement)
+                    .textContent.replaceAll(/\s/g, '');
+            })
+            .toSorted();
+    }
+
+    const expectedTemplateLabels = getObjectTypedValues(ViraFormFieldType)
+        .map((type) => `${type}*`)
+        .toSorted();
+
+    it('renders a template label for every field type', async () => {
+        assert.deepEquals(await renderTemplateLabels(false), expectedTemplateLabels);
+    });
+
+    it('renders a template label for every field type with horizontal labels', async () => {
+        assert.deepEquals(await renderTemplateLabels(true), expectedTemplateLabels);
     });
 
     it('shows the time and timezone on a readonly date field by default', async () => {

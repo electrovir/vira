@@ -1,3 +1,4 @@
+import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
@@ -11,6 +12,7 @@ import {
     listenToActivate,
     type AttributeValues,
     type CSSResult,
+    type HtmlInterpolation,
 } from 'element-vir';
 import {Check24Icon, viraIconCssVars} from '../icons/index.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
@@ -42,10 +44,10 @@ export type ViraCheckboxInputs = {
     attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
     isDisabled: boolean;
     /**
-     * Text label for the checkbox. Used as the fallback when the `vira-checkbox-label` slot is not
+     * Label for the checkbox. Used as the fallback when the `vira-checkbox-label` slot is not
      * filled.
      */
-    label: string;
+    label: string | HtmlInterpolation;
     hasError: boolean;
     useHorizontalLabel: boolean;
     /** The checkbox will be filled with a form selection color when it is checked. */
@@ -220,7 +222,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
 
         const hasLabel = !!inputs.label || state.hasSlottedLabel;
 
-        const textLabel = html`
+        const labelTemplate = html`
             <span
                 class="label-text ${classMap({
                     empty: !hasLabel,
@@ -251,7 +253,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 style=${ifDefined(inputs.stylePassthrough?.label)}
                 ${listen('mousedown', updateValue)}
             >
-                ${textLabel}
+                ${labelTemplate}
                 <span
                     class="custom-checkbox ${classMap({
                         checked: inputs.value,
@@ -259,7 +261,9 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                         error: !!inputs.hasError,
                     })}"
                     role="checkbox"
-                    aria-label=${ifDefined(inputs.label || undefined)}
+                    aria-label=${ifDefined(
+                        (check.isString(inputs.label) && inputs.label) || undefined,
+                    )}
                     aria-checked=${inputs.value ? 'true' : 'false'}
                     aria-disabled=${inputs.isDisabled ? 'true' : 'false'}
                     tabindex=${inputs.isDisabled ? '-1' : '0'}

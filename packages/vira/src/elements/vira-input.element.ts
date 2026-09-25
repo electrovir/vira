@@ -1,7 +1,8 @@
-import {assertWrap} from '@augment-vir/assert';
+import {assertWrap, check} from '@augment-vir/assert';
 import {type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
+    type HtmlInterpolation,
     attributes,
     css,
     defineElementEvent,
@@ -56,7 +57,7 @@ export const ViraInput = defineViraElement<
         /** A suffix that, if provided, is shown following the input field. */
         suffix: string;
         /** A label that is shown above the input, if provided. */
-        label: string;
+        label: string | HtmlInterpolation;
         /** If true, applies error styling. */
         hasError: boolean;
         showClearButton: boolean;
@@ -417,7 +418,9 @@ export const ViraInput = defineViraElement<
 
                 <input
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
-                    aria-label=${ifDefined(inputs.label || undefined)}
+                    aria-label=${ifDefined(
+                        (check.isString(inputs.label) && inputs.label) || undefined,
+                    )}
                     type=${calculateEffectiveInputType(inputs.type, state.showPassword)}
                     style=${forcedInputWidthStyles}
                     autocomplete=${ifDefined(shouldBlockBrowserHelps ? 'off' : undefined)}

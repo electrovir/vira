@@ -1,5 +1,14 @@
+import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined, randomString} from '@augment-vir/common';
-import {attributes, css, defineElementEvent, html, ifDefined, listen} from 'element-vir';
+import {
+    type HtmlInterpolation,
+    attributes,
+    css,
+    defineElementEvent,
+    html,
+    ifDefined,
+    listen,
+} from 'element-vir';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {viraDisabledStyles} from '../styles/index.js';
@@ -23,7 +32,7 @@ import {type ViraInput} from './vira-input.element.js';
 export const ViraTextArea = defineViraElement<
     PartialWithUndefined<{
         /** A label that is shown above the text area, if provided. */
-        label: string;
+        label: string | HtmlInterpolation;
         /** If true, applies error styling. */
         hasError: boolean;
         /** Number of visible text rows. Defaults to 4. */
@@ -207,7 +216,9 @@ export const ViraTextArea = defineViraElement<
             <span class="text-area-wrapper">
                 <textarea
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
-                    aria-label=${ifDefined(inputs.label || undefined)}
+                    aria-label=${ifDefined(
+                        (check.isString(inputs.label) && inputs.label) || undefined,
+                    )}
                     rows=${inputs.rows ?? 4}
                     ?disabled=${inputs.disabled}
                     autocomplete=${ifDefined(inputs.disableBrowserHelps ? 'off' : undefined)}

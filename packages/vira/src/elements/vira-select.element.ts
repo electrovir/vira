@@ -1,4 +1,4 @@
-import {assertWrap} from '@augment-vir/assert';
+import {assertWrap, check} from '@augment-vir/assert';
 import {randomString, type PartialWithUndefined} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
 import {
@@ -11,6 +11,7 @@ import {
     listen,
     nothing,
     type AttributeValues,
+    type HtmlInterpolation,
 } from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {ChevronUp16Icon, type ViraIconSvg} from '../icons/index.js';
@@ -56,7 +57,7 @@ export const ViraSelect = defineViraElement<
     } & PartialWithUndefined<{
         icon: Readonly<ViraIconSvg>;
         placeholder: string;
-        label: string;
+        label: string | HtmlInterpolation;
         /** If set to `true`, only minimal styles are applied. */
         rawSelect: boolean;
         disabled: boolean;
@@ -403,7 +404,9 @@ export const ViraSelect = defineViraElement<
                     })}
                     tabindex=${inputs.disabled ? -1 : 0}
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
-                    aria-label=${ifDefined(inputs.label || undefined)}
+                    aria-label=${ifDefined(
+                        (check.isString(inputs.label) && inputs.label) || undefined,
+                    )}
                     aria-disabled=${ifDefined(inputs.disabled ? 'true' : undefined)}
                     ${listen('input', (event) => {
                         const selectElement = extractEventTarget(event, HTMLSelectElement);

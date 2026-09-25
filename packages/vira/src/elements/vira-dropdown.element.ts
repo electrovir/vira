@@ -6,6 +6,7 @@ import {
     css,
     defineElementEvent,
     html,
+    type HtmlInterpolation,
     type HTMLTemplateResult,
     ifDefined,
     listen,
@@ -53,7 +54,7 @@ export const ViraDropdown = defineViraElement<
             icon: ViraIconSvg;
             selectionPrefix: string;
             isDisabled: boolean;
-            label: string;
+            label: string | HtmlInterpolation;
             /** For debugging purposes only. Very bad for actual production code use. */
             z_debug_forceOpenState: boolean;
         } & PopUpTriggerPosition
@@ -307,7 +308,9 @@ export const ViraDropdown = defineViraElement<
                     })}"
                     slot=${ViraPopUpTrigger.slotNames['vira-pop-up-trigger-trigger']}
                     id=${ifDefined(inputs.label ? state.randomId : undefined)}
-                    aria-label=${ifDefined(inputs.label || undefined)}
+                    aria-label=${ifDefined(
+                        (check.isString(inputs.label) && inputs.label) || undefined,
+                    )}
                     ${testId(testIds.trigger)}
                     ${listen('mousedown', () => {
                         if (!state.showPopUpResult) {

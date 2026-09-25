@@ -34682,7 +34682,7 @@ import{n as e}from"./rolldown-runtime-hePW80VL.js";import{$ as t,A as n,At as r,
 
                 <input
                     id=${Qd(e.label?n.randomId:void 0)}
-                    aria-label=${Qd(e.label||void 0)}
+                    aria-label=${Qd(x.isString(e.label)&&e.label||void 0)}
                     type=${F$(e.type,n.showPassword)}
                     style=${c}
                     autocomplete=${Qd(u?`off`:void 0)}
@@ -35739,7 +35739,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                     class=${Zd({placeholder:!i&&!!e.placeholder,"with-icon":!!e.icon})}
                     tabindex=${e.disabled?-1:0}
                     id=${Qd(e.label?t.randomId:void 0)}
-                    aria-label=${Qd(e.label||void 0)}
+                    aria-label=${Qd(x.isString(e.label)&&e.label||void 0)}
                     aria-disabled=${Qd(e.disabled?`true`:void 0)}
                     ${N(`input`,t=>{let a=Hf(t,HTMLSelectElement),o=a.value;a.value!==i&&(a.selectedIndex=e.options.flatMap(e=>Z1(e)?[...e.options]:[e]).findIndex(e=>e.value===i)),n(new r.valueChange({detail:o}))})}
                     ${cf(e.attributePassthrough?.select)}
@@ -36274,7 +36274,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                 <span
                     class="custom-checkbox ${Zd({checked:e.value,disabled:!!e.isDisabled,error:!!e.hasError})}"
                     role="checkbox"
-                    aria-label=${Qd(e.label||void 0)}
+                    aria-label=${Qd(x.isString(e.label)&&e.label||void 0)}
                     aria-checked=${e.value?`true`:`false`}
                     aria-disabled=${e.isDisabled?`true`:`false`}
                     tabindex=${e.isDisabled?`-1`:`0`}
@@ -36531,7 +36531,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                 `:t}let i=e.value?U0(e.value,I0.Date):``,a=U0(e.min||E0(`1800-01-01`),I0.Date),o=U0(e.max||s0(P0(),{years:10}),I0.Date),s=w`
             <input
                 id=${Qd(e.label?t.randomId:void 0)}
-                aria-label=${Qd(e.label||void 0)}
+                aria-label=${Qd(x.isString(e.label)&&e.label||void 0)}
                 type="date"
                 min=${a}
                 max=${o}
@@ -36808,7 +36808,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                     class="dropdown-trigger ${Zd({open:!!e.showPopUpResult,"open-upwards":!e.showPopUpResult?.popDown})}"
                     slot=${J.slotNames[`vira-pop-up-trigger-trigger`]}
                     id=${Qd(t.label?e.randomId:void 0)}
-                    aria-label=${Qd(t.label||void 0)}
+                    aria-label=${Qd(x.isString(t.label)&&t.label||void 0)}
                     ${Cf(a.trigger)}
                     ${N(`mousedown`,()=>{e.showPopUpResult||i({shouldSelectOnMouseUp:!0})})}
                 >
@@ -36840,7 +36840,9 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
             }
         `},render(){return w`
             <slot></slot>
-        `}}),Q=function(e){return e.Text=`text`,e.ExistingPassword=`existing-password`,e.NewPassword=`new-password`,e.PlainPassword=`plain-password`,e.Email=`email`,e.Number=`number`,e.Select=`select`,e.Checkbox=`checkbox`,e.TextArea=`text-area`,e.Date=`date`,e}({});function h2(e,t){if(e)return t?Qt({value:e,suffix:`*`}):e}function g2(e){return $n(e).every(e=>e.isHidden||!e.isRequired?!0:x.isString(e.value)?!!e.value:e.value!=null)}var _2=k$()({tagName:`vira-text-area`,cssVars:{"vira-text-area-padding-horizontal":`10px`,"vira-text-area-padding-vertical":`6px`},styles({hostClasses:e,cssVars:t}){return C`
+        `}}),Q=function(e){return e.Text=`text`,e.ExistingPassword=`existing-password`,e.NewPassword=`new-password`,e.PlainPassword=`plain-password`,e.Email=`email`,e.Number=`number`,e.Select=`select`,e.Checkbox=`checkbox`,e.TextArea=`text-area`,e.Date=`date`,e}({});function h2(e,t){if(e)return t?x.isString(e)?Qt({value:e,suffix:`*`}):w`
+            ${e}*
+        `:e}function g2(e){return $n(e).every(e=>e.isHidden||!e.isRequired?!0:x.isString(e.value)?!!e.value:e.value!=null)}var _2=k$()({tagName:`vira-text-area`,cssVars:{"vira-text-area-padding-horizontal":`10px`,"vira-text-area-padding-vertical":`6px`},styles({hostClasses:e,cssVars:t}){return C`
             :host {
                 position: relative;
                 display: inline-flex;
@@ -36953,7 +36955,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
             <span class="text-area-wrapper">
                 <textarea
                     id=${Qd(e.label?n.randomId:void 0)}
-                    aria-label=${Qd(e.label||void 0)}
+                    aria-label=${Qd(x.isString(e.label)&&e.label||void 0)}
                     rows=${e.rows??4}
                     ?disabled=${e.disabled}
                     autocomplete=${Qd(e.disableBrowserHelps?`off`:void 0)}
@@ -37031,9 +37033,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                         <th scope="row">${n}</th>
                         <td>${t}</td>
                     </tr>
-                `:t}let s=_(e.fields).map(([r,i])=>{let a=!!(e.isDisabled||i.isDisabled),s=!!i.isRequired&&!e.hideRequiredMarkers;if(i.isHidden)return y;if(i.type===Q.Checkbox){let c=s?w`
-                              ${i.label}*
-                          `:i.label;return o({label:c,fieldTemplate:w`
+                `:t}let s=_(e.fields).map(([r,i])=>{let a=!!(e.isDisabled||i.isDisabled),s=!!i.isRequired&&!e.hideRequiredMarkers;if(i.isHidden)return y;if(i.type===Q.Checkbox){let c=h2(i.label,s);return o({label:c,fieldTemplate:w`
                             <${Z.assign({value:i.value||!1,isDisabled:!!(a||e.isReadonly),hasError:i.hasError,useHorizontalLabel:e.horizontalCheckboxes,fillWhenChecked:i.fillWhenChecked,fillWhenUnchecked:i.fillWhenUnchecked})}
                                 ${i.testId?Cf(i.testId):y}
                                 ${N(Z.events.valueChange,e=>{t(new n.valueChange({detail:{key:r,...i,value:e.detail}}))})}
@@ -37046,7 +37046,7 @@ Font weights to font sizes:`,JSON.stringify(i$(e.data.min),null,4)].join(`
                                           </span>
                                       `}
                             </${Z}>
-                        `})}let c=h2(i.label,s),l=e.useHorizontalLabels?void 0:c,u=e.useHorizontalLabels&&c?{"aria-label":c}:{};return i.type===Q.Select?o({label:c,fieldTemplate:w`
+                        `})}let c=h2(i.label,s),l=e.useHorizontalLabels?void 0:c,u=e.useHorizontalLabels&&x.isString(c)&&c?{"aria-label":c}:{};return i.type===Q.Select?o({label:c,fieldTemplate:w`
                             <${Y.assign({options:i.options,value:i.value,placeholder:i.placeholder,disabled:a,isReadonly:e.isReadonly,label:l,hasError:i.hasError,icon:i.icon,...e.useHorizontalLabels&&c?{attributePassthrough:{select:u}}:{}})}
                                 ${i.testId?Cf(i.testId):y}
                                 ${N(Y.events.valueChange,e=>{t(new n.valueChange({detail:{key:r,...i,value:e.detail}}))})}

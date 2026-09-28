@@ -124,6 +124,10 @@ export const ViraTooltip = defineViraElement<{
             use anchor() to reach the anchor element from inside the tooltip's top-layer box.
         */
         .caret {
+            /*
+                position-anchor is set explicitly because its initial value differs between browsers.
+            */
+            position-anchor: auto;
             position: fixed;
             inset: auto;
             margin: 0;

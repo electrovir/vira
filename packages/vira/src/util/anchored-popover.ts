@@ -55,10 +55,13 @@ export function createAnchoredPopoverStyles({
 
     return css`
         /*
-            Anchored through showPopover({source}) rather than position-anchor, whose initial value
-            differs between browsers.
+            Anchored through showPopover({source}).
         */
         ${selector ? unsafeCSS(selector) : unsafeCSS(':host')} {
+            /*
+                position-anchor is set explicitly because its initial value differs between browsers.
+            */
+            position-anchor: auto;
             /* Override the browser's default popover styles. */
             position: fixed;
             inset: auto;

@@ -203,8 +203,13 @@ export const ViraPopoverTrigger = defineViraElement<
                     it flip upwards when there is not much room below the trigger.
                 */
                 min-height: 200px;
-                /* Margins are not included in the percentage. */
-                max-height: calc(100% - ${cssVars['vira-popover-trigger-offset-vertical'].value});
+                /*
+                    Margins are not included in the percentage. The extra 4px keeps the popover off
+                    the window's top or bottom edge.
+                */
+                max-height: calc(
+                    100% - ${cssVars['vira-popover-trigger-offset-vertical'].value} - 4px
+                );
                 width: max-content;
                 min-width: calc(
                     anchor-size(width) - ${cssVars['vira-popover-trigger-offset-left'].value} -
@@ -235,6 +240,7 @@ export const ViraPopoverTrigger = defineViraElement<
         openChange: defineElementEvent<boolean>(),
         init: defineElementEvent<{
             navController: NavController;
+            popoverManager: PopoverManager;
         }>(),
     },
     cleanup({state, updateState}) {
@@ -270,6 +276,7 @@ export const ViraPopoverTrigger = defineViraElement<
             new events.init({
                 detail: {
                     navController: state.navController,
+                    popoverManager: state.popoverManager,
                 },
             }),
         );

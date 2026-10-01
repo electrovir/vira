@@ -211,7 +211,7 @@ describe(ViraPopoverTrigger.tagName, () => {
         );
     });
 
-    it('limits the popover height to the viewport by default', async () => {
+    it('limits the popover height to 4px short of the viewport by default', async () => {
         const {open, positioner} = await setupPopoverTest({
             popoverHeight: 5000,
         });
@@ -220,7 +220,7 @@ describe(ViraPopoverTrigger.tagName, () => {
 
         assert.isApproximately(
             positioner.getBoundingClientRect().bottom,
-            document.documentElement.clientHeight,
+            document.documentElement.clientHeight - 4,
             1,
         );
     });
@@ -243,7 +243,7 @@ describe(ViraPopoverTrigger.tagName, () => {
                 bottom: Math.round(positioner.getBoundingClientRect().bottom),
             },
             {
-                top: 0,
+                top: 4,
                 bottom: Math.round(trigger.getBoundingClientRect().top),
             },
         );

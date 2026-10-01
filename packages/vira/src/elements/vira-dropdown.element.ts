@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
-import {type NavController, NavDirection} from 'device-navigation';
+import {nav, type NavController, NavDirection} from 'device-navigation';
 import {
     attributes,
     type AttributeValues,
@@ -388,6 +388,7 @@ export const ViraDropdown = defineViraElement<
                           disablePointerStyles: true,
                       })}
                           class="option-group-label"
+                          ${state.navController ? nav(state.navController) : nothing}
                           ${listen('click', () => {
                               toggleGroup(group);
                           })}
@@ -433,6 +434,7 @@ export const ViraDropdown = defineViraElement<
                         selected: selectedOptions.includes(option),
                     };
                 }),
+                state.navController,
             );
         }
 
@@ -626,6 +628,21 @@ export const ViraDropdown = defineViraElement<
                                                       : NavDirection.Up,
                                               allowWrapping: false,
                                           });
+                                      } else if (event.key === 'Tab' && !event.shiftKey) {
+                                          /**
+                                           * Without this, browsers move focus from this input past
+                                           * the menu items (sometimes closing the menu).
+                                           */
+                                          const firstMenuItem = Array.from(
+                                              host.shadowRoot.querySelectorAll<HTMLElement>(
+                                                  ViraMenuItem.tagName,
+                                              ),
+                                          ).find((menuItem) => menuItem.tabIndex >= 0);
+
+                                          if (firstMenuItem) {
+                                              event.preventDefault();
+                                              firstMenuItem.focus();
+                                          }
                                       } else if (event.key === 'Enter') {
                                           const firstOption = filteredFlatOptions.find(
                                               (option) => !option.disabled,

@@ -128,6 +128,12 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
     };
 }
 
+function findFocusedMenuItem(instance: Readonly<Element>) {
+    return queryThroughShadow(instance, ViraMenuItem.tagName, {
+        all: true,
+    }).find((menuItem) => menuItem.matches(':focus'));
+}
+
 describe(ViraDropdown.tagName, () => {
     it('opens on a click', async () => {
         const {toggle, events} = await setupDropdownTest();
@@ -210,6 +216,39 @@ describe(ViraDropdown.tagName, () => {
         } finally {
             await resetMouse();
         }
+    });
+
+    it('navigates and selects options with arrow keys', async () => {
+        const {instance, events, findMenu} = await setupDropdownTest();
+
+        await sendKeys({
+            press: 'Tab',
+        });
+        await sendKeys({
+            press: 'ArrowDown',
+        });
+        await waitUntil.isTruthy(findMenu);
+        await sendKeys({
+            press: 'ArrowDown',
+        });
+        await sendKeys({
+            press: 'ArrowDown',
+        });
+        await waitForAnimationFrame();
+
+        assert.strictEquals(
+            extractElementText(assertWrap.isDefined(findFocusedMenuItem(instance))),
+            'Option B',
+        );
+
+        await sendKeys({
+            press: 'Enter',
+        });
+
+        await waitUntil.isFalsy(findMenu);
+        assert.deepEquals(events.selectedValuesChange, [
+            ['1'],
+        ]);
     });
 
     it('emits the full selection from selectedValuesChange in multi select', async () => {
@@ -803,6 +842,32 @@ describe(ViraDropdown.tagName, () => {
                 readOptionLabels,
             );
             assert.strictEquals(searchInput.value, 'b');
+        });
+
+        it('tabs from the input into the options one at a time', async () => {
+            const {instance, searchInput, findMenu} = await setupSearchTest();
+
+            await testWeb.click(searchInput);
+            await waitUntil.isTruthy(findMenu);
+            await sendKeys({
+                press: 'Tab',
+            });
+            await waitForAnimationFrame();
+
+            assert.strictEquals(
+                extractElementText(assertWrap.isDefined(findFocusedMenuItem(instance))),
+                'Option A',
+            );
+
+            await sendKeys({
+                press: 'Tab',
+            });
+            await waitForAnimationFrame();
+
+            assert.strictEquals(
+                extractElementText(assertWrap.isDefined(findFocusedMenuItem(instance))),
+                'Option B',
+            );
         });
 
         it('selects the first match on Enter', async () => {

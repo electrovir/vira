@@ -254,6 +254,17 @@ export const ViraMenuItem = defineViraElement<
                     capture: true,
                 },
             ),
+            listenTo(host, 'keydown', (event) => {
+                if (
+                    event instanceof KeyboardEvent &&
+                    event.target === host &&
+                    (event.key === 'Enter' || event.key === ' ')
+                ) {
+                    /** Prevents Space from scrolling the menu. */
+                    event.preventDefault();
+                    host.click();
+                }
+            }),
             listenTo(host, 'mouseenter', () => {
                 if (!inputs.disabled) {
                     host.focus();

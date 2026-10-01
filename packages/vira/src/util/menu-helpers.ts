@@ -4,7 +4,8 @@ import {
     type MaybePromise,
     type PartialWithUndefined,
 } from '@augment-vir/common';
-import {html, listen, type HtmlInterpolation} from 'element-vir';
+import {nav, type NavController} from 'device-navigation';
+import {html, listen, nothing, type HtmlInterpolation} from 'element-vir';
 import {ViraMenuItem} from '../elements/popover/vira-menu-item.element.js';
 
 /**
@@ -68,7 +69,11 @@ export type MenuItemClickCallback = (
  *
  * @category Popover
  */
-export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItemEntry>>) {
+export function renderMenuItemEntries(
+    items: ReadonlyArray<Readonly<ViraMenuItemEntry>>,
+    /** Enables arrow key navigation between the menu items. */
+    navController?: NavController | undefined,
+) {
     return filterMap(
         items,
         (item, index) => {
@@ -76,6 +81,11 @@ export function renderMenuItemEntries(items: ReadonlyArray<Readonly<ViraMenuItem
                 <${ViraMenuItem.assign({
                     ...item,
                 })}
+                    ${navController
+                        ? nav(navController, {
+                              disabled: item.disabled,
+                          })
+                        : nothing}
                     ${listen('click', async (event) => {
                         if (item.disabled) {
                             event.stopImmediatePropagation();

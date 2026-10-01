@@ -259,6 +259,31 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'searchable',
+        inputs: {
+            isSearchable: true,
+            options: manyDropdownOptions,
+            noOptionsText: 'No matches',
+        },
+    },
+    {
+        title: 'searchable multi select with option groups',
+        inputs: {
+            isSearchable: true,
+            isMultiSelect: true,
+            options: [
+                {
+                    groupName: 'First',
+                    options: exampleDropdownOptions.slice(0, 3),
+                },
+                {
+                    groupName: 'Second',
+                    options: exampleDropdownOptions.slice(3),
+                },
+            ],
+        },
+    },
+    {
         title: 'inside a clipping container',
         isInContainer: true,
         customStyle: css`

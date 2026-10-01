@@ -1,6 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {filterMap, type PartialWithUndefined, randomString} from '@augment-vir/common';
 import {extractEventTarget} from '@augment-vir/web';
+import {type NavController, NavDirection} from 'device-navigation';
 import {
     attributes,
     type AttributeValues,
@@ -9,7 +10,6 @@ import {
     defineElementEvent,
     html,
     type HtmlInterpolation,
-    type HTMLTemplateResult,
     ifDefined,
     listen,
     nothing,
@@ -17,11 +17,14 @@ import {
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {ChevronUp16Icon} from '../icons/index.js';
+import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
-import {noUserSelect, viraAnimationDurations} from '../styles/index.js';
+import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
+import {fuzzyMatch} from '../util/fuzzy-match.js';
 import {renderMenuItemEntries} from '../util/menu-helpers.js';
+import {type PopoverManager} from '../util/popover-manager.js';
 import {
     isViraDropdownOptionGroup,
     type ViraDropdownOption,
@@ -57,6 +60,11 @@ export const ViraDropdown = defineViraElement<
          * multiple.
          */
         isMultiSelect: boolean;
+        /**
+         * Replaces the selection text with a text input. Opening the dropdown focuses it and typing
+         * into it filters the options to those whose labels fuzzy match the typed text.
+         */
+        isSearchable: boolean;
         icon: ViraIconSvg;
         selectionPrefix: string;
         isDisabled: boolean;
@@ -82,6 +90,7 @@ export const ViraDropdown = defineViraElement<
     testIds: [
         'leadingIcon',
         'prefixText',
+        'searchInput',
         'trigger',
     ],
     styles: css`
@@ -101,6 +110,38 @@ export const ViraDropdown = defineViraElement<
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+
+        .search-input {
+            ${noNativeFormStyles};
+            flex-grow: 1;
+            min-width: 0;
+            align-self: stretch;
+            text-overflow: ellipsis;
+            cursor: inherit;
+            user-select: text;
+            -webkit-user-select: text;
+            outline: none;
+
+            &::placeholder {
+                color: inherit;
+                opacity: 0.4;
+            }
+        }
+
+        .open .search-input {
+            cursor: text;
+        }
+
+        .dropdown-trigger:has(.search-input:focus-visible:not([disabled])) {
+            position: relative;
+
+            &::after {
+                ${createFocusStyles({
+                    elementBorderSize: '1px',
+                    noNesting: true,
+                })}
+            }
         }
 
         .trigger-icon {
@@ -212,9 +253,13 @@ export const ViraDropdown = defineViraElement<
              * provided.
              */
             randomId: randomString(32),
+            /** The text typed into the search input while the dropdown is open. */
+            searchText: '',
+            navController: undefined as undefined | NavController,
+            popoverManager: undefined as undefined | PopoverManager,
         };
     },
-    render({state, inputs, dispatch, events, updateState, testIds}) {
+    render({state, inputs, dispatch, events, updateState, testIds, host}) {
         const flatOptions = inputs.options.flatMap((entry) => {
             return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
         });
@@ -245,7 +290,7 @@ export const ViraDropdown = defineViraElement<
                   `
                 : nothing;
 
-        const selectionDisplay: string | HTMLTemplateResult = shouldUsePlaceholder
+        const selectionDisplay = shouldUsePlaceholder
             ? inputs.placeholder || ''
             : inputs.isMultiSelect && selectedOptions.length > 1
               ? `${selectedOptions.length} Selected`
@@ -269,6 +314,50 @@ export const ViraDropdown = defineViraElement<
                     detail: newSelectedValues,
                 }),
             );
+        }
+
+        const filteredOptions = state.searchText
+            ? filterMap(
+                  inputs.options,
+                  (entry) => {
+                      return isViraDropdownOptionGroup(entry)
+                          ? {
+                                ...entry,
+                                options: entry.options.filter((option) => {
+                                    return fuzzyMatch({
+                                        search: state.searchText,
+                                        text: option.label,
+                                    });
+                                }),
+                            }
+                          : entry;
+                  },
+                  (entry) => {
+                      return isViraDropdownOptionGroup(entry)
+                          ? !!entry.options.length
+                          : fuzzyMatch({
+                                search: state.searchText,
+                                text: entry.label,
+                            });
+                  },
+              )
+            : inputs.options;
+        const filteredFlatOptions = filteredOptions.flatMap((entry) => {
+            return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
+        });
+
+        function findSearchInput() {
+            const searchInput = host.shadowRoot.querySelector('.search-input');
+
+            return searchInput instanceof HTMLInputElement ? searchInput : undefined;
+        }
+
+        function clearSearch(searchInput: HTMLInputElement) {
+            /** Set directly because the `.value` binding skips values it has already committed. */
+            searchInput.value = '';
+            updateState({
+                searchText: '',
+            });
         }
 
         function toggleGroup(group: Readonly<ViraDropdownOptionGroup>) {
@@ -312,7 +401,7 @@ export const ViraDropdown = defineViraElement<
         }
 
         /** Drag-select actions in the same order as the rendered menu items. */
-        const menuItemActions = inputs.options.flatMap((entry) => {
+        const menuItemActions = filteredOptions.flatMap((entry) => {
             const options = isViraDropdownOptionGroup(entry) ? entry.options : [entry];
             const optionActions = options.map((option) => {
                 return option.disabled
@@ -347,7 +436,8 @@ export const ViraDropdown = defineViraElement<
             );
         }
 
-        const isMenuShown = state.isOpen && (!!flatOptions.length || !!inputs.noOptionsText);
+        const isMenuShown =
+            state.isOpen && (!!filteredFlatOptions.length || !!inputs.noOptionsText);
 
         const menuTemplate = html`
             <${ViraMenu.assign({
@@ -378,8 +468,8 @@ export const ViraDropdown = defineViraElement<
                     }
                 })}
             >
-                ${flatOptions.length
-                    ? inputs.options.map((entry) => {
+                ${filteredFlatOptions.length
+                    ? filteredOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)
                               ? html`
                                     ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
@@ -402,6 +492,12 @@ export const ViraDropdown = defineViraElement<
                     right: 24,
                 },
             })}
+                ${listen(ViraPopoverTrigger.events.init, (event) => {
+                    updateState({
+                        navController: event.detail.navController,
+                        popoverManager: event.detail.popoverManager,
+                    });
+                })}
                 ${listen(ViraPopoverTrigger.events.openChange, (event) => {
                     if (state.isOpen !== event.detail) {
                         dispatch(
@@ -413,6 +509,40 @@ export const ViraDropdown = defineViraElement<
                     updateState({
                         isOpen: event.detail,
                     });
+
+                    const searchInput = findSearchInput();
+
+                    if (!searchInput) {
+                        return;
+                    } else if (event.detail) {
+                        searchInput.focus();
+                    } else {
+                        clearSearch(searchInput);
+                    }
+                })}
+                ${listen('keydown', (event) => {
+                    const searchInput = findSearchInput();
+                    const isSearchKey =
+                        event.key === 'Backspace' ||
+                        (event.key.length === 1 &&
+                            event.key !== ' ' &&
+                            !event.ctrlKey &&
+                            !event.metaKey &&
+                            !event.altKey);
+
+                    if (!searchInput || !isSearchKey) {
+                        return;
+                    }
+
+                    if (!state.isOpen) {
+                        clearSearch(searchInput);
+                    }
+                    /**
+                     * Focusing during keydown makes the browser type the pressed key into the
+                     * search input, even when the key was pressed on the trigger or a menu item.
+                     */
+                    searchInput.focus();
+                    state.popoverManager?.show();
                 })}
                 ${listen('mouseup', () => {
                     if (state.shouldSelectOnMouseUp) {
@@ -442,14 +572,95 @@ export const ViraDropdown = defineViraElement<
                     })}
                 >
                     ${leadingIconTemplate}
-                    <span
-                        class="selection-display ${classMap({
-                            'using-placeholder': shouldUsePlaceholder,
-                        })}"
-                        title=${ifDefined(shouldUsePlaceholder ? undefined : selectionDisplay)}
-                    >
-                        ${prefixTemplate} ${selectionDisplay}
-                    </span>
+                    ${inputs.isSearchable
+                        ? html`
+                              ${state.isOpen ? nothing : prefixTemplate}
+                              <input
+                                  class="search-input"
+                                  ${testId(testIds.searchInput)}
+                                  tabindex="-1"
+                                  autocomplete="off"
+                                  spellcheck="false"
+                                  aria-label=${ifDefined(
+                                      (check.isString(inputs.label) && inputs.label) || undefined,
+                                  )}
+                                  ?disabled=${!!inputs.isDisabled}
+                                  title=${ifDefined(
+                                      shouldUsePlaceholder || state.isOpen
+                                          ? undefined
+                                          : selectionDisplay,
+                                  )}
+                                  placeholder=${state.isOpen && !shouldUsePlaceholder
+                                      ? selectionDisplay
+                                      : inputs.placeholder || ''}
+                                  .value=${state.isOpen
+                                      ? state.searchText
+                                      : shouldUsePlaceholder
+                                        ? ''
+                                        : selectionDisplay}
+                                  ${listen('mousedown', (event) => {
+                                      /** Keeps the popover open when clicking into the input. */
+                                      if (state.isOpen) {
+                                          event.stopPropagation();
+                                      }
+                                  })}
+                                  ${listen('input', (event) => {
+                                      updateState({
+                                          searchText: extractEventTarget(event, HTMLInputElement)
+                                              .value,
+                                      });
+                                      state.popoverManager?.show();
+                                  })}
+                                  ${listen('keydown', (event) => {
+                                      if (!state.isOpen) {
+                                          return;
+                                      } else if (
+                                          event.key === 'ArrowDown' ||
+                                          event.key === 'ArrowUp'
+                                      ) {
+                                          event.preventDefault();
+                                          state.navController?.navigate({
+                                              direction:
+                                                  event.key === 'ArrowDown'
+                                                      ? NavDirection.Down
+                                                      : NavDirection.Up,
+                                              allowWrapping: false,
+                                          });
+                                      } else if (event.key === 'Enter') {
+                                          const firstOption = filteredFlatOptions.find(
+                                              (option) => !option.disabled,
+                                          );
+
+                                          if (!firstOption) {
+                                              return;
+                                          }
+
+                                          event.preventDefault();
+                                          selectOption(firstOption);
+
+                                          if (inputs.isMultiSelect) {
+                                              clearSearch(
+                                                  extractEventTarget(event, HTMLInputElement),
+                                              );
+                                          } else {
+                                              state.popoverManager?.hide();
+                                          }
+                                      }
+                                  })}
+                              />
+                          `
+                        : html`
+                              <span
+                                  class="selection-display ${classMap({
+                                      'using-placeholder': shouldUsePlaceholder,
+                                  })}"
+                                  title=${ifDefined(
+                                      shouldUsePlaceholder ? undefined : selectionDisplay,
+                                  )}
+                              >
+                                  ${prefixTemplate} ${selectionDisplay}
+                              </span>
+                          `}
 
                     <span class="trigger-icon-wrapper">
                         <${ViraIcon.assign({

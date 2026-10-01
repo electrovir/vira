@@ -2,7 +2,7 @@ import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
-import {resetMouse, sendMouse} from '@web/test-runner-commands';
+import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {Element24Icon} from '../icons/index.js';
 import {
@@ -687,5 +687,138 @@ describe(ViraDropdown.tagName, () => {
         } finally {
             await resetMouse();
         }
+    });
+
+    describe('isSearchable', () => {
+        async function setupSearchTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
+            const dropdownTest = await setupDropdownTest({
+                isSearchable: true,
+                ...inputs,
+            });
+
+            return {
+                ...dropdownTest,
+                searchInput: assertWrap.instanceOf(
+                    dropdownTest.queryByTestId.searchInput(),
+                    HTMLInputElement,
+                ),
+                readOptionLabels(this: void) {
+                    return queryThroughShadow(dropdownTest.instance, ViraMenuItem.tagName, {
+                        all: true,
+                    }).map((option) => extractElementText(option));
+                },
+            };
+        }
+
+        it('clears the selection from the input when clicked into', async () => {
+            const {searchInput, findMenu} = await setupSearchTest({
+                selected: ['1'],
+            });
+
+            assert.strictEquals(searchInput.value as string, 'Option B');
+            await testWeb.click(searchInput);
+            await waitUntil.isTruthy(findMenu);
+
+            assert.deepEquals(
+                {
+                    value: searchInput.value,
+                    placeholder: searchInput.placeholder,
+                    isFocused: searchInput.matches(':focus'),
+                },
+                {
+                    value: '',
+                    placeholder: 'Option B',
+                    isFocused: true,
+                },
+            );
+        });
+
+        it('draws the focus ring around the whole trigger instead of the input', async () => {
+            const {searchInput, triggerElement, findMenu} = await setupSearchTest();
+
+            await testWeb.click(searchInput);
+            await waitUntil.isTruthy(findMenu);
+
+            assert.deepEquals(
+                {
+                    inputOutline: getComputedStyle(searchInput).outlineStyle,
+                    triggerRing: getComputedStyle(triggerElement, '::after').borderTopStyle,
+                },
+                {
+                    inputOutline: 'none',
+                    triggerRing: 'solid',
+                },
+            );
+        });
+
+        it('focuses the input when opened from the chevron', async () => {
+            const {instance, searchInput, findMenu} = await setupSearchTest();
+
+            await testWeb.click(
+                assertWrap.instanceOf(
+                    instance.shadowRoot.querySelector('.trigger-icon'),
+                    HTMLElement,
+                ),
+            );
+            await waitUntil.isTruthy(findMenu);
+            await waitUntil.isTrue(() => searchInput.matches(':focus'));
+        });
+
+        it('filters options by fuzzy matching the typed text', async () => {
+            const {searchInput, findMenu, readOptionLabels} = await setupSearchTest({
+                options: [
+                    ...mockMenuItems,
+                    {
+                        value: 'other',
+                        label: 'Something else',
+                    },
+                ],
+            });
+
+            await testWeb.click(searchInput);
+            await waitUntil.isTruthy(findMenu);
+            await testWeb.typeText('opc');
+
+            await waitUntil.deepEquals(
+                [
+                    'Option C',
+                ],
+                readOptionLabels,
+            );
+        });
+
+        it('opens and types into the input when typing on the focused trigger', async () => {
+            const {instance, searchInput, findMenu, readOptionLabels} = await setupSearchTest();
+
+            assertWrap
+                .instanceOf(queryThroughShadow(instance, 'button'), HTMLButtonElement)
+                .focus();
+            await testWeb.typeText('b');
+
+            await waitUntil.isTruthy(findMenu);
+            await waitUntil.deepEquals(
+                [
+                    'Option B',
+                ],
+                readOptionLabels,
+            );
+            assert.strictEquals(searchInput.value, 'b');
+        });
+
+        it('selects the first match on Enter', async () => {
+            const {searchInput, findMenu, events} = await setupSearchTest();
+
+            await testWeb.click(searchInput);
+            await waitUntil.isTruthy(findMenu);
+            await testWeb.typeText('c');
+            await sendKeys({
+                press: 'Enter',
+            });
+
+            await waitUntil.isFalsy(findMenu);
+            assert.deepEquals(events.selectedValuesChange, [
+                ['2'],
+            ]);
+        });
     });
 });

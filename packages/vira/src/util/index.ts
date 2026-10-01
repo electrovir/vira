@@ -2,6 +2,7 @@ export * from './anchored-popover.js';
 export * from './define-table.js';
 export * from './define-vira-element.js';
 export * from './dynamic-element.js';
+export * from './fuzzy-match.js';
 export * from './menu-helpers.js';
 export * from './overflow-observer.js';
 export * from './popover-manager.js';

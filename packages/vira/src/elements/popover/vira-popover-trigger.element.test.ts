@@ -124,6 +124,18 @@ describe(ViraPopoverTrigger.tagName, () => {
         await waitUntil.isFalse(isPopoverOpen);
     });
 
+    it('focuses the trigger without a focus ring on a mouse click', async () => {
+        const {wrapper, open} = await setupPopoverTest();
+        const instance = assertWrap.instanceOf(
+            wrapper.querySelector(ViraPopoverTrigger.tagName),
+            ViraPopoverTrigger,
+        );
+
+        await open();
+        const focusedElement = assertWrap.isDefined(instance.shadowRoot.activeElement);
+        assert.isFalse(focusedElement.matches(':focus-visible'));
+    });
+
     it('forces the popover open or closed with a boolean trigger', async () => {
         const {wrapper, isPopoverOpen} = await setupPopoverTest({
             inputs: {

@@ -195,6 +195,8 @@ const anchorListeners: Record<
                             })
                             ?.focus({
                                 preventScroll: true,
+                                /** Otherwise a mouse click shows the keyboard focus ring. */
+                                focusVisible: false,
                             });
                     }
                     popoverManager.toggle();

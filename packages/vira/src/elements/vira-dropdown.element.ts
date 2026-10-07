@@ -112,6 +112,24 @@ export const ViraDropdown = defineViraElement<
             white-space: nowrap;
         }
 
+        .option-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 100%;
+            vertical-align: bottom;
+        }
+
+        .option-icon {
+            flex-shrink: 0;
+        }
+
+        .option-label-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .search-input {
             ${noNativeFormStyles};
             flex-grow: 1;
@@ -296,6 +314,31 @@ export const ViraDropdown = defineViraElement<
               ? `${selectedOptions.length} Selected`
               : selectedOptions[0]?.label || '';
 
+        function renderOptionLabel(option: Readonly<ViraDropdownOption>) {
+            return option.icon || option.labelTemplate
+                ? html`
+                      <span class="option-label">
+                          ${option.icon
+                              ? html`
+                                    <${ViraIcon.assign({
+                                        icon: option.icon,
+                                    })}
+                                        class="option-icon"
+                                    ></${ViraIcon}>
+                                `
+                              : nothing}
+                          <span class="option-label-text">
+                              ${option.labelTemplate ?? option.label}
+                          </span>
+                      </span>
+                  `
+                : option.label;
+        }
+
+        const selectionTemplate = check.isLengthExactly(selectedOptions, 1)
+            ? renderOptionLabel(selectedOptions[0])
+            : selectionDisplay;
+
         function selectOption(option: Readonly<ViraDropdownOption>) {
             const newSelectedValues = inputs.isMultiSelect
                 ? selectedOptions.includes(option)
@@ -426,7 +469,7 @@ export const ViraDropdown = defineViraElement<
             return renderMenuItemEntries(
                 options.map((option) => {
                     return {
-                        content: option.label,
+                        content: renderOptionLabel(option),
                         onClick() {
                             selectOption(option);
                         },
@@ -675,7 +718,7 @@ export const ViraDropdown = defineViraElement<
                                       shouldUsePlaceholder ? undefined : selectionDisplay,
                                   )}
                               >
-                                  ${prefixTemplate} ${selectionDisplay}
+                                  ${prefixTemplate} ${selectionTemplate}
                               </span>
                           `}
 
@@ -693,7 +736,7 @@ export const ViraDropdown = defineViraElement<
 
         const contentTemplate = inputs.isReadonly
             ? html`
-                  <span class="readonly-value">${selectionDisplay}</span>
+                  <span class="readonly-value">${selectionTemplate}</span>
               `
             : triggerTemplate;
 

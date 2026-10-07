@@ -2,7 +2,17 @@ import {check} from '@augment-vir/assert';
 import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, ViraDropdown, type ViraDropdownOption, allIconsByName} from 'vira';
+import {
+    Element16Icon,
+    Element24Icon,
+    Plus16Icon,
+    Upload16Icon,
+    ViraDropdown,
+    type ViraDropdownOption,
+    X16Icon,
+    allIconsByName,
+    viraColorPalette,
+} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 const exampleDropdownOptions = [
@@ -39,6 +49,73 @@ const exampleDropdownOptions = [
         value: '8',
     },
 ] satisfies ReadonlyArray<Readonly<ViraDropdownOption>>;
+
+const iconDropdownOptions = [
+    {
+        label: 'Element',
+        value: '1',
+        icon: Element16Icon,
+    },
+    {
+        label: 'Add',
+        value: '2',
+        icon: Plus16Icon,
+    },
+    {
+        label: 'Upload',
+        value: '3',
+        icon: Upload16Icon,
+    },
+    {
+        label: 'Remove',
+        value: '4',
+        icon: X16Icon,
+    },
+] satisfies ReadonlyArray<Readonly<ViraDropdownOption>>;
+
+const colorDropdownOptions = (
+    [
+        [
+            'Blue',
+            viraColorPalette['vira-blue-600'],
+        ],
+        [
+            'Green',
+            viraColorPalette['vira-green-600'],
+        ],
+        [
+            'Purple',
+            viraColorPalette['vira-purple-600'],
+        ],
+        [
+            'Red',
+            viraColorPalette['vira-red-600'],
+        ],
+    ] as const
+).map(
+    ([
+        label,
+        color,
+    ]): ViraDropdownOption => {
+        return {
+            label,
+            value: label.toLowerCase(),
+            labelTemplate: html`
+                <span
+                    style=${css`
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        margin-right: 6px;
+                        border-radius: 50%;
+                        background-color: ${color.value};
+                    `}
+                ></span>
+                ${label}
+            `,
+        };
+    },
+);
 
 const manyDropdownOptions = createArray(100, (index) => {
     return {
@@ -151,6 +228,41 @@ const examples: ReadonlyArray<{
         title: 'with an icon',
         inputs: {
             icon: Element24Icon,
+        },
+    },
+    {
+        title: 'options with icons',
+        inputs: {
+            options: iconDropdownOptions,
+            selected: [
+                '1',
+            ],
+        },
+    },
+    {
+        title: 'options with label templates',
+        inputs: {
+            options: colorDropdownOptions,
+            selected: [
+                'blue',
+            ],
+        },
+    },
+    {
+        title: 'readonly option with an icon',
+        inputs: {
+            isReadonly: true,
+            options: iconDropdownOptions,
+            selected: [
+                '2',
+            ],
+        },
+    },
+    {
+        title: 'searchable options with label templates',
+        inputs: {
+            isSearchable: true,
+            options: colorDropdownOptions,
         },
     },
     {

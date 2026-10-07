@@ -354,6 +354,47 @@ describe(ViraDropdown.tagName, () => {
         assert.isNull(queryByTestId.leadingIcon());
     });
 
+    it('renders option icons and label templates in the menu and trigger', async () => {
+        const {instance, triggerElement, toggle} = await setupDropdownTest({
+            options: [
+                {
+                    value: 'templated',
+                    label: 'Plain label',
+                    icon: Element24Icon,
+                    labelTemplate: html`
+                        <b>Bold label</b>
+                    `,
+                },
+                ...mockMenuItems,
+            ],
+            selected: ['templated'],
+        });
+
+        assert.isTruthy(triggerElement.querySelector('.option-icon'));
+        assert.strictEquals(
+            extractElementText(assertWrap.isTruthy(triggerElement.querySelector('b'))),
+            'Bold label',
+        );
+        assert.strictEquals(
+            assertWrap
+                .isTruthy(triggerElement.querySelector('.selection-display'))
+                .getAttribute('title'),
+            'Plain label',
+        );
+
+        await toggle();
+        const menuItems = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+
+        assert.isLengthExactly(menuItems, mockMenuItems.length + 1);
+        assert.isDefined(menuItems[0]);
+        assert.isDefined(menuItems[1]);
+        assert.isTruthy(menuItems[0].querySelector('.option-icon'));
+        assert.strictEquals(extractElementText(menuItems[0]), 'Bold label');
+        assert.isNull(menuItems[1].querySelector('.option-icon'));
+    });
+
     it('renders a placeholder', async () => {
         const placeholder = randomString();
         const {triggerElement} = await setupDropdownTest({

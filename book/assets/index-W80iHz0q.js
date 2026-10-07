@@ -35769,6 +35769,24 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
             white-space: nowrap;
         }
 
+        .option-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 100%;
+            vertical-align: bottom;
+        }
+
+        .option-icon {
+            flex-shrink: 0;
+        }
+
+        .option-label-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .search-input {
             ${Gy};
             flex-grow: 1;
@@ -35899,32 +35917,43 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                       <span class="selected-label-prefix" ${wf(a.prefixText)}>
                           ${t.selectionPrefix}
                       </span>
-                  `:b,f=u?t.placeholder||``:t.isMultiSelect&&c.length>1?`${c.length} Selected`:c[0]?.label||``;function p(e){let i=t.isMultiSelect?c.includes(e)?v(c,e=>e.value,(t,n)=>n!==e):[...c.map(e=>e.value),e.value]:[e.value];n(new r.selectedValuesChange({detail:i}))}let m=e.searchText?v(t.options,t=>a2(t)?{...t,options:t.options.filter(t=>r2({search:e.searchText,text:t.label}))}:t,t=>a2(t)?!!t.options.length:r2({search:e.searchText,text:t.label})):t.options,h=m.flatMap(e=>a2(e)?e.options:[e]);function g(){let e=o.shadowRoot.querySelector(`.search-input`);return e instanceof HTMLInputElement?e:void 0}function _(e){e.value=``,i({searchText:``})}function y(e){let t=e.options.filter(e=>!e.disabled),i=t.every(e=>c.includes(e));n(new r.selectedValuesChange({detail:(i?c.filter(e=>!t.includes(e)):[...c,...t.filter(e=>!c.includes(e))]).map(e=>e.value)}))}function ee(n){return t.isMultiSelect?w`
+                  `:b,f=u?t.placeholder||``:t.isMultiSelect&&c.length>1?`${c.length} Selected`:c[0]?.label||``;function p(e){return e.icon||e.labelTemplate?w`
+                      <span class="option-label">
+                          ${e.icon?w`
+                                    <${K.assign({icon:e.icon})}
+                                        class="option-icon"
+                                    ></${K}>
+                                `:b}
+                          <span class="option-label-text">
+                              ${e.labelTemplate??e.label}
+                          </span>
+                      </span>
+                  `:e.label}let m=x.isLengthExactly(c,1)?p(c[0]):f;function h(e){let i=t.isMultiSelect?c.includes(e)?v(c,e=>e.value,(t,n)=>n!==e):[...c.map(e=>e.value),e.value]:[e.value];n(new r.selectedValuesChange({detail:i}))}let g=e.searchText?v(t.options,t=>a2(t)?{...t,options:t.options.filter(t=>r2({search:e.searchText,text:t.label}))}:t,t=>a2(t)?!!t.options.length:r2({search:e.searchText,text:t.label})):t.options,_=g.flatMap(e=>a2(e)?e.options:[e]);function y(){let e=o.shadowRoot.querySelector(`.search-input`);return e instanceof HTMLInputElement?e:void 0}function ee(e){e.value=``,i({searchText:``})}function te(e){let t=e.options.filter(e=>!e.disabled),i=t.every(e=>c.includes(e));n(new r.selectedValuesChange({detail:(i?c.filter(e=>!t.includes(e)):[...c,...t.filter(e=>!c.includes(e))]).map(e=>e.value)}))}function ne(n){return t.isMultiSelect?w`
                       <${n2.assign({disablePointerStyles:!0})}
                           class="option-group-label"
                           ${e.navController?fy(e.navController):b}
-                          ${N(`click`,()=>{y(n)})}
+                          ${N(`click`,()=>{te(n)})}
                       >
                           ${n.groupName}
                       </${n2}>
                   `:w`
                       <div class="option-group-label">${n.groupName}</div>
-                  `}let te=m.flatMap(e=>{let n=(a2(e)?e.options:[e]).map(e=>e.disabled?void 0:()=>{p(e)});return a2(e)&&t.isMultiSelect?[()=>{y(e)},...n]:n});function ne(t){return i2(t.map(e=>({content:e.label,onClick(){p(e)},disabled:e.disabled,selected:c.includes(e)})),e.navController)}let re=e.isOpen&&(!!h.length||!!t.noOptionsText),ie=w`
+                  `}let re=g.flatMap(e=>{let n=(a2(e)?e.options:[e]).map(e=>e.disabled?void 0:()=>{h(e)});return a2(e)&&t.isMultiSelect?[()=>{te(e)},...n]:n});function ie(t){return i2(t.map(e=>({content:p(e),onClick(){h(e)},disabled:e.disabled,selected:c.includes(e)})),e.navController)}let ae=e.isOpen&&(!!_.length||!!t.noOptionsText),oe=w`
             <${p2.assign({cornerStyle:o2.Round,hoverScrollSpeed:t.menuHoverScrollSpeed})}
                 slot=${J.slotNames[`vira-popover-trigger-popover`]}
-                ${N(`mouseup`,t=>{if(e.shouldSelectOnMouseUp){let e=t.composedPath().find(e=>e instanceof n2);(e?te[Array.from(K_(t,p2).querySelectorAll(n2.tagName)).indexOf(e)]:void 0)?.()}})}
+                ${N(`mouseup`,t=>{if(e.shouldSelectOnMouseUp){let e=t.composedPath().find(e=>e instanceof n2);(e?re[Array.from(K_(t,p2).querySelectorAll(n2.tagName)).indexOf(e)]:void 0)?.()}})}
             >
-                ${h.length?m.map(e=>a2(e)?w`
-                                    ${ee(e)} ${ne(e.options)}
-                                `:ne([e])):w`
+                ${_.length?g.map(e=>a2(e)?w`
+                                    ${ne(e)} ${ie(e.options)}
+                                `:ie([e])):w`
                           <div class="no-options">${t.noOptionsText}</div>
                       `}
             </${p2}>
-        `,ae=w`
+        `,se=w`
             <${J.assign({...t,keepOpenAfterInteraction:t.isMultiSelect,focusOnClose:!0,popoverOffset:{vertical:-1,right:24}})}
                 ${N(J.events.init,e=>{i({navController:e.detail.navController,popoverManager:e.detail.popoverManager})})}
-                ${N(J.events.openChange,t=>{e.isOpen!==t.detail&&n(new r.openChange({detail:t.detail})),i({isOpen:t.detail});let a=g();if(a)t.detail?a.focus():_(a);else return})}
-                ${N(`keydown`,t=>{let n=g(),r=t.key===`Backspace`||t.key.length===1&&t.key!==` `&&!t.ctrlKey&&!t.metaKey&&!t.altKey;n&&r&&(e.isOpen||_(n),n.focus(),e.popoverManager?.show())})}
+                ${N(J.events.openChange,t=>{e.isOpen!==t.detail&&n(new r.openChange({detail:t.detail})),i({isOpen:t.detail});let a=y();if(a)t.detail?a.focus():ee(a);else return})}
+                ${N(`keydown`,t=>{let n=y(),r=t.key===`Backspace`||t.key.length===1&&t.key!==` `&&!t.ctrlKey&&!t.metaKey&&!t.altKey;n&&r&&(e.isOpen||ee(n),n.focus(),e.popoverManager?.show())})}
                 ${N(`mouseup`,()=>{e.shouldSelectOnMouseUp&&i({shouldSelectOnMouseUp:!1})})}
             >
                 <div
@@ -35952,14 +35981,14 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                                   .value=${e.isOpen?e.searchText:u?``:f}
                                   ${N(`mousedown`,t=>{e.isOpen&&t.stopPropagation()})}
                                   ${N(`input`,t=>{i({searchText:K_(t,HTMLInputElement).value}),e.popoverManager?.show()})}
-                                  ${N(`keydown`,n=>{if(e.isOpen){if(n.key===`ArrowDown`||n.key===`ArrowUp`)n.preventDefault(),e.navController?.navigate({direction:n.key===`ArrowDown`?Gv.Down:Gv.Up,allowWrapping:!1});else if(n.key===`Tab`&&!n.shiftKey){let e=Array.from(o.shadowRoot.querySelectorAll(n2.tagName)).find(e=>e.tabIndex>=0);e&&(n.preventDefault(),e.focus())}else if(n.key===`Enter`){let r=h.find(e=>!e.disabled);if(!r)return;n.preventDefault(),p(r),t.isMultiSelect?_(K_(n,HTMLInputElement)):e.popoverManager?.hide()}}})}
+                                  ${N(`keydown`,n=>{if(e.isOpen){if(n.key===`ArrowDown`||n.key===`ArrowUp`)n.preventDefault(),e.navController?.navigate({direction:n.key===`ArrowDown`?Gv.Down:Gv.Up,allowWrapping:!1});else if(n.key===`Tab`&&!n.shiftKey){let e=Array.from(o.shadowRoot.querySelectorAll(n2.tagName)).find(e=>e.tabIndex>=0);e&&(n.preventDefault(),e.focus())}else if(n.key===`Enter`){let r=_.find(e=>!e.disabled);if(!r)return;n.preventDefault(),h(r),t.isMultiSelect?ee(K_(n,HTMLInputElement)):e.popoverManager?.hide()}}})}
                               />
                           `:w`
                               <span
                                   class="selection-display ${Qd({"using-placeholder":u})}"
                                   title=${$d(u?void 0:f)}
                               >
-                                  ${d} ${f}
+                                  ${d} ${m}
                               </span>
                           `}
 
@@ -35969,23 +35998,23 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                         ></${K}>
                     </span>
                 </div>
-                ${re?ie:b}
+                ${ae?oe:b}
             </${J}>
-        `,oe=t.isReadonly?w`
-                  <span class="readonly-value">${f}</span>
-              `:ae;return t.label?w`
+        `,ce=t.isReadonly?w`
+                  <span class="readonly-value">${m}</span>
+              `:se;return t.label?w`
                 <label
                     for=${$d(t.isReadonly?void 0:e.randomId)}
                     class=${Qd({"has-error":!!t.hasError})}
                 >
                     <span class="dropdown-label">${t.label}</span>
-                    ${oe}
+                    ${ce}
                 </label>
             `:w`
                 <span
                     class="dropdown-wrapper ${Qd({"has-error":!!t.hasError})}"
                 >
-                    ${oe}
+                    ${ce}
                 </span>
             `}}),m2=er(Mf).map(e=>({value:e,label:e.toUpperCase()})),h2=Pe()({tagName:`vira-color-picker`,cssVars:{"vira-color-picker-swatch-width":{default:`100px`,syntax:re.Length},"vira-color-picker-swatch-height":{default:`100px`,syntax:re.Length}},state(){return{selectedFormatName:e2.get.lastFormat()||Mf.rgb,rawInput:void 0}},hostClasses:{"vira-color-picker-always-show"({inputs:e}){return!!e.alwaysShowPicker}},styles({cssVars:e,hostClasses:t}){return C`
             :host {
@@ -39960,7 +39989,19 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                     >
                         Drawer Content
                     </${A2}>
-                `}})}}),V8=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],H8=Ot(100,e=>({label:`Option ${e+1}`,value:String(e+1)})),U8=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`multi select with multiple selected`,inputs:{isMultiSelect:!0,selected:[`1`,`3`]}},{title:`long selection`,inputs:{selected:[`8`]}},{title:`with disabled item`,inputs:{selected:[],options:[...V8,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:C`
+                `}})}}),V8=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],H8=[{label:`Element`,value:`1`,icon:Zy},{label:`Add`,value:`2`,icon:Qy},{label:`Upload`,value:`3`,icon:$y},{label:`Remove`,value:`4`,icon:eb}],U8=[[`Blue`,B[`vira-blue-600`]],[`Green`,B[`vira-green-600`]],[`Purple`,B[`vira-purple-600`]],[`Red`,B[`vira-red-600`]]].map(([e,t])=>({label:e,value:e.toLowerCase(),labelTemplate:w`
+                <span
+                    style=${C`
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        margin-right: 6px;
+                        border-radius: 50%;
+                        background-color: ${t.value};
+                    `}
+                ></span>
+                ${e}
+            `})),W8=Ot(100,e=>({label:`Option ${e+1}`,value:String(e+1)})),G8=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`multi select with multiple selected`,inputs:{isMultiSelect:!0,selected:[`1`,`3`]}},{title:`long selection`,inputs:{selected:[`8`]}},{title:`with disabled item`,inputs:{selected:[],options:[...V8,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:C`
             :host {
                 max-width: 150px;
             }
@@ -39968,7 +40009,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
             ${Y} {
                 width: 400px;
             }
-        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[`1`]}},{title:`with an icon`,inputs:{icon:gb}},{title:`with a label`,inputs:{label:`My Label`}},{title:`with an error`,inputs:{hasError:!0}},{title:`readonly`,inputs:{isReadonly:!0,label:`My Label`,selected:[`2`]}},{title:`option groups`,inputs:{options:[{groupName:`First Group`,options:V8.slice(0,2)},{groupName:`Second Group`,options:V8.slice(2,4)}]}},{title:`readonly without a selection`,inputs:{isReadonly:!0,label:`My Label`}},{title:`readonly multi select`,inputs:{isReadonly:!0,isMultiSelect:!0,label:`My Label`,selected:[`1`,`2`]}},{title:`with a label and an error`,inputs:{label:`My Label`,hasError:!0}},{title:`option groups with multi select and a disabled item`,inputs:{isMultiSelect:!0,options:[{groupName:`First Group`,options:V8.slice(0,2)},{groupName:`Second Group`,options:[...V8.slice(2,4),{value:`42`,label:`this is disabled`,disabled:!0}]}]}},{title:`no options`,inputs:{options:[]}},{title:`no options with text`,inputs:{options:[],noOptionsText:`No options available`}},{title:`many options`,inputs:{options:H8}},{title:`searchable`,inputs:{isSearchable:!0,options:H8,noOptionsText:`No matches`}},{title:`searchable multi select with option groups`,inputs:{isSearchable:!0,isMultiSelect:!0,options:[{groupName:`First`,options:V8.slice(0,3)},{groupName:`Second`,options:V8.slice(3)}]}},{title:`inside a clipping container`,isInContainer:!0,customStyle:C`
+        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[`1`]}},{title:`with an icon`,inputs:{icon:gb}},{title:`options with icons`,inputs:{options:H8,selected:[`1`]}},{title:`options with label templates`,inputs:{options:U8,selected:[`blue`]}},{title:`readonly option with an icon`,inputs:{isReadonly:!0,options:H8,selected:[`2`]}},{title:`searchable options with label templates`,inputs:{isSearchable:!0,options:U8}},{title:`with a label`,inputs:{label:`My Label`}},{title:`with an error`,inputs:{hasError:!0}},{title:`readonly`,inputs:{isReadonly:!0,label:`My Label`,selected:[`2`]}},{title:`option groups`,inputs:{options:[{groupName:`First Group`,options:V8.slice(0,2)},{groupName:`Second Group`,options:V8.slice(2,4)}]}},{title:`readonly without a selection`,inputs:{isReadonly:!0,label:`My Label`}},{title:`readonly multi select`,inputs:{isReadonly:!0,isMultiSelect:!0,label:`My Label`,selected:[`1`,`2`]}},{title:`with a label and an error`,inputs:{label:`My Label`,hasError:!0}},{title:`option groups with multi select and a disabled item`,inputs:{isMultiSelect:!0,options:[{groupName:`First Group`,options:V8.slice(0,2)},{groupName:`Second Group`,options:[...V8.slice(2,4),{value:`42`,label:`this is disabled`,disabled:!0}]}]}},{title:`no options`,inputs:{options:[]}},{title:`no options with text`,inputs:{options:[],noOptionsText:`No options available`}},{title:`many options`,inputs:{options:W8}},{title:`searchable`,inputs:{isSearchable:!0,options:W8,noOptionsText:`No matches`}},{title:`searchable multi select with option groups`,inputs:{isSearchable:!0,isMultiSelect:!0,options:[{groupName:`First`,options:V8.slice(0,3)},{groupName:`Second`,options:V8.slice(3)}]}},{title:`inside a clipping container`,isInContainer:!0,customStyle:C`
             .container {
                 height: 40px;
                 overflow: hidden;
@@ -39984,15 +40025,15 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                     height: 300px;
                 }
             }
-        `}],W8=O({title:Y.tagName,parent:$,controls:{Selected:wt({controlType:E.Dropdown,initValue:``,options:[``,...V8.map(e=>e.label)]}),Prefix:wt({controlType:E.Text,initValue:``}),"Multi Select":wt({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:wt({controlType:E.Dropdown,initValue:``,options:[``,...Object.keys(d0)]}),Disabled:wt({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:wt({controlType:E.Text,initValue:`Select something`})},defineExamples({defineExample:e}){U8.forEach(t=>{e({title:t.title,state(){return{selected:t.inputs?.selected||[]}},styles:t.customStyle,render({state:e,updateState:n,controls:r}){let i={...t.inputs,placeholder:t.inputs&&`placeholder`in t.inputs?t.inputs.placeholder:r.Placeholder,options:t.inputs?.options||V8,selected:r.Selected?[V8.find(e=>e.label===r.Selected)?.value].filter(x.isTruthy):e.selected,selectionPrefix:r.Prefix||t.inputs?.selectionPrefix,isDisabled:r.Disabled?r.Disabled===`all`:t.inputs?.isDisabled,icon:r.Icon?d0[r.Icon]:t.inputs?.icon,isMultiSelect:r[`Multi Select`]?r[`Multi Select`]===`all`:t.inputs?.isMultiSelect},a=w`
+        `}],K8=O({title:Y.tagName,parent:$,controls:{Selected:wt({controlType:E.Dropdown,initValue:``,options:[``,...V8.map(e=>e.label)]}),Prefix:wt({controlType:E.Text,initValue:``}),"Multi Select":wt({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:wt({controlType:E.Dropdown,initValue:``,options:[``,...Object.keys(d0)]}),Disabled:wt({controlType:E.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:wt({controlType:E.Text,initValue:`Select something`})},defineExamples({defineExample:e}){G8.forEach(t=>{e({title:t.title,state(){return{selected:t.inputs?.selected||[]}},styles:t.customStyle,render({state:e,updateState:n,controls:r}){let i={...t.inputs,placeholder:t.inputs&&`placeholder`in t.inputs?t.inputs.placeholder:r.Placeholder,options:t.inputs?.options||V8,selected:r.Selected?[V8.find(e=>e.label===r.Selected)?.value].filter(x.isTruthy):e.selected,selectionPrefix:r.Prefix||t.inputs?.selectionPrefix,isDisabled:r.Disabled?r.Disabled===`all`:t.inputs?.isDisabled,icon:r.Icon?d0[r.Icon]:t.inputs?.icon,isMultiSelect:r[`Multi Select`]?r[`Multi Select`]===`all`:t.inputs?.isMultiSelect},a=w`
                         <${Y.assign(i)}
                             ${N(Y.events.selectedValuesChange,e=>{n({selected:e.detail})})}
                         ></${Y}>
                     `;return t.isInContainer?w`
                               <div class="container">${a}</div>
-                          `:a}})})}}),G8=O({parent:$,title:j2.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
+                          `:a}})})}}),q8=O({parent:$,title:j2.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
                     <${j2}>Error Content</${j2}>
-                `}})}}),K8=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],q8=O({parent:$,title:F2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0,birthDate:void 0}},styles:C`
+                `}})}}),J8=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],Y8=O({parent:$,title:F2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0,birthDate:void 0}},styles:C`
                 .buttons {
                     display: flex;
                     gap: 8px;
@@ -40001,7 +40042,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
             `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:Q.Checkbox,label:w`
                             Subscribe to
                             <strong>updates</strong>
-                        `,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole,placeholder:`placeholder`},quantity:{type:Q.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:Q.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:Q.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Q.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return w`
+                        `,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole,placeholder:`placeholder`},quantity:{type:Q.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:Q.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:Q.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:Q.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return w`
                     <${F2.assign({fields:n})}
                         ${N(F2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -40036,7 +40077,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                 ${F2} {
                     width: 400px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole}};return w`
+            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole}};return w`
                     <${F2.assign({fields:n})}
                         ${N(F2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -40049,7 +40090,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                 ${F2} {
                     width: 520px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
+            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
                     <${F2.assign({fields:n,useHorizontalLabels:!0})}
                         ${N(F2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     ></${F2}>
@@ -40064,7 +40105,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                 ${F2} {
                     width: 400px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
                     <div class="readonly-example">
                         <${X.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
@@ -40084,7 +40125,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                 ${F2} {
                     width: 520px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole},notes:{type:Q.TextArea,label:`Notes`,value:e.notes}};return w`
                     <div class="readonly-example">
                         <${X.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${N(`click`,()=>{t({isReadonly:!e.isReadonly})})}
@@ -40099,7 +40140,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                     gap: 8px;
                     justify-content: flex-end;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:K8,value:e.userRole}};return w`
+            `,render({state:e,updateState:t}){let n={firstName:{type:Q.Text,label:`First Name`,value:e.firstName},lastName:{type:Q.Text,label:`Last Name`,value:e.lastName},subscribe:{type:Q.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:Q.Email,label:`Email Address`,value:e.email},password:{type:Q.NewPassword,label:`Password`,value:e.password},userRole:{type:Q.Select,label:`Role`,options:J8,value:e.userRole}};return w`
                     <${F2.assign({fields:n,isDisabled:!0})}
                         ${N(F2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -40108,7 +40149,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                             <${X.assign({text:`Submit`})}></${X}>
                         </div>
                     </${F2}>
-                `}})}}),J8=O({title:K.tagName,parent:$,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
+                `}})}}),X8=O({title:K.tagName,parent:$,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return w`
                     <${K.assign({icon:gb})}></${K}>
                 `}}),e({title:`using createColoredIcon`,render(){return w`
                     <${K.assign({icon:Qb(gb,{"vira-icon-stroke-color":`red`})})}></${K}>
@@ -40150,7 +40191,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                 }
             `,render(){return w`
                     <${K.assign({icon:Qb(l0.Anchor,{"vira-icon-stroke-color":`red`}),fitContainer:!0})}></${K}>
-                `}})}}),Y8=O({title:I2.tagName,parent:$,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:C`
+                `}})}}),Z8=O({title:I2.tagName,parent:$,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:C`
                     border-radius: 32px;
                 `,loadingSlot:w`
                     <div
@@ -40283,7 +40324,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                                       </div>
                                   `:b}
                         </${I2}>
-                    `}})})}}),X8=O({title:q.tagName,parent:$,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:E.Color,initValue:H[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:H[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:H[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:H[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:H[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:C`
+                    `}})})}}),Q8=O({title:q.tagName,parent:$,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:E.Color,initValue:H[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:H[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:H[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:H[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:H[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:C`
                     ${t||C``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let a={[String(H[`vira-form-foreground-color`].name)]:n[`Text color`],[String(H[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(H[`vira-form-border-color`].name)]:n[`Border color`],[String(H[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(H[`vira-form-text-selection-color`].name)]:n[`Selection color`]},o=i(a,(e,t)=>t||`inherit`),s=Object.entries(o).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return w`
@@ -40319,7 +40360,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
                     ${q} {
                         width: unset;
                     }
-                `}].forEach(t)}}),Z8=C`
+                `}].forEach(t)}}),$8=C`
     .json-pre {
         width: 480px;
         max-width: 100%;
@@ -40344,7 +40385,7 @@ Font weights to font sizes:`,JSON.stringify(g_(e.data.min),null,4)].join(`
     ${g4} {
         width: 480px;
     }
-`;function Q8({schema:e,value:t,isDisabled:n,onChange:r}){return w`
+`;function e5({schema:e,value:t,isDisabled:n,onChange:r}){return w`
         <div class="example-stack">
             <pre class="json-pre">
 ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
@@ -40354,13 +40395,13 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             ></${g4}>
             <pre class="json-pre">${JSON.stringify(t,void 0,4)}</pre>
         </div>
-    `}var $8=O({parent:$,title:g4.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraDropdown is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:Z8,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return Q8({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema with required fields`,styles:Z8,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return Q8({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema allowing additional properties`,styles:Z8,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return Q8({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`nested objects and arrays`,styles:Z8,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return Q8({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum values`,styles:Z8,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return Q8({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum or free-form string`,styles:Z8,state(){return{value:{color:`red`,size:`custom-42`}}},render({state:e,updateState:t}){return Q8({schema:{type:`object`,properties:{color:{anyOf:[{enum:[`red`,`green`,`blue`]},{type:`string`}]},size:{anyOf:[{enum:[`small`,`medium`,`large`]},{type:`string`}]}},required:[`color`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`array with single-type items`,styles:Z8,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return Q8({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`union of types (anyOf)`,styles:Z8,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return Q8({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`recursive schema with $ref`,styles:Z8,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return Q8({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema mismatch shows ViraError`,styles:Z8,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return Q8({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`disabled`,styles:Z8,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return Q8({value:e.value,isDisabled:!0,onChange(e){return t({value:e})}})}})}}),e5=O({title:_4.tagName,parent:$,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":wt({controlType:E.Color,initValue:``}),"Hover color":wt({controlType:E.Color,initValue:``}),"Active color":wt({controlType:E.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=C`
+    `}var t5=O({parent:$,title:g4.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraDropdown is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:$8,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return e5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema with required fields`,styles:$8,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return e5({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema allowing additional properties`,styles:$8,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return e5({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`nested objects and arrays`,styles:$8,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return e5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum values`,styles:$8,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return e5({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum or free-form string`,styles:$8,state(){return{value:{color:`red`,size:`custom-42`}}},render({state:e,updateState:t}){return e5({schema:{type:`object`,properties:{color:{anyOf:[{enum:[`red`,`green`,`blue`]},{type:`string`}]},size:{anyOf:[{enum:[`small`,`medium`,`large`]},{type:`string`}]}},required:[`color`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`array with single-type items`,styles:$8,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return e5({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`union of types (anyOf)`,styles:$8,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return e5({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`recursive schema with $ref`,styles:$8,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return e5({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema mismatch shows ViraError`,styles:$8,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return e5({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`disabled`,styles:$8,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return e5({value:e.value,isDisabled:!0,onChange(e){return t({value:e})}})}})}}),n5=O({title:_4.tagName,parent:$,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":wt({controlType:E.Color,initValue:``}),"Hover color":wt({controlType:E.Color,initValue:``}),"Active color":wt({controlType:E.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=C`
                         ${H[`vira-form-accent-primary-color`].name}: ${h(e[`Hover color`]||`inherit`)};
                         ${H[`vira-form-accent-primary-active-color`].name}: ${h(e[`Active color`]||`inherit`)};
                         color: ${h(e[`CSS Color`]||`inherit`)};
                     `;return w`
                         <${_4.assign(n)} style=${t}>My Link</${_4}>
-                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),t5=O({title:y4.tagName,parent:$,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
+                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),r5=O({title:y4.tagName,parent:$,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return w`
                     <button
                         ${N(`click`,()=>{t({modalOpen:!0})})}
                     >
@@ -40411,7 +40452,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     >
                         Modal Content
                     </${y4}>
-                `}})}}),n5=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:C`
+                `}})}}),i5=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:C`
             :host {
                 ${H[`vira-form-filled-background-color`].name}: red;
                 ${H[`vira-form-accent-primary-color`].name}: black;
@@ -40444,11 +40485,11 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                 height: 50px;
                 width: 200px;
             }
-        `,inputs:{value:100}}],r5=O({parent:$,title:b4.tagName,defineExamples({defineExample:e}){n5.forEach(t=>{e({title:t.title,styles:C`
+        `,inputs:{value:100}}],a5=O({parent:$,title:b4.tagName,defineExamples({defineExample:e}){i5.forEach(t=>{e({title:t.title,styles:C`
                     ${t.styles||C``}
                 `,render(){return w`
                         <${b4.assign({value:50,...t.inputs})}></${b4}>
-                    `}})})}}),i5=O({parent:$,title:x4.tagName,defineExamples({defineExample:e}){e({title:`5 minutes ago`,render(){return w`
+                    `}})})}}),o5=O({parent:$,title:x4.tagName,defineExamples({defineExample:e}){e({title:`5 minutes ago`,render(){return w`
                     <${x4.assign({time:Z_(wv(),{minutes:-5})})}></${x4}>
                 `}}),e({title:`2 hours ago`,render(){return w`
                     <${x4.assign({time:Z_(wv(),{hours:-2})})}></${x4}>
@@ -40460,22 +40501,22 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     <${x4.assign({time:Z_(wv(),{hours:-2}),showAbsoluteTime:!0})}></${x4}>
                 `}}),e({title:`With absolute time in a specific timezone`,render(){return w`
                     <${x4.assign({time:Z_(wv(),{hours:-2}),showAbsoluteTime:!0,timezone:ov})}></${x4}>
-                `}})}}),a5=new j4({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{},tab5:{},tab6:{},tab7:{},tab8:{}}}),o5={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function s5(e){return{paths:e,search:{},hash:``}}var c5=[{label:`Dashboard`,paths:a5.paths.children.tab1,icon:gb},{label:`Notifications`,paths:a5.paths.children.tab2,icon:ob},{label:`Messages`,paths:a5.paths.children.tab3,icon:sb},{label:`Favorites`,paths:a5.paths.children.tab4,icon:Hb}],l5=[{label:`Dashboard`,paths:a5.paths.children.tab1},{label:`Notifications`,paths:a5.paths.children.tab2},{label:`Messages`,paths:a5.paths.children.tab3},{label:`Favorites`,paths:a5.paths.children.tab4}],u5=[{label:`Overview`,paths:a5.paths.children.tab1,group:`General`},{label:`Details`,paths:a5.paths.children.tab2,group:`General`},{label:`Settings`,paths:a5.paths.children.tab3,group:`General`},{label:`Reports`,paths:a5.paths.children.tab4,group:`Data`},{label:`Exports`,paths:a5.paths.children.tab5,group:`Data`},{label:`Members`,paths:a5.paths.children.tab6,group:`Team`},{label:`Roles`,paths:a5.paths.children.tab7,group:`Team`},{label:`History`,paths:a5.paths.children.tab8}],d5=s5(a5.paths.children.tab2.fullPaths),f5=s5(a5.paths.children.tab6.fullPaths),p5=[{title:`basic`,tabs:l5},{title:`with icons (vertical layout)`,tabs:c5},{title:`with icons (horizontal layout)`,tabs:c5,iconLayout:h3.Horizontal},{title:`plain color variant`,tabs:c5,color:x0.Plain},{title:`neutral color variant`,tabs:c5,color:x0.Neutral},{title:`danger color variant`,tabs:c5,color:x0.Danger},{title:`warning color variant`,tabs:c5,color:x0.Warning},{title:`positive color variant`,tabs:c5,color:x0.Positive},{title:`bar direction: top`,tabs:c5,barDirection:m3.Top},{title:`bar direction: left`,tabs:c5,barDirection:m3.Left},{title:`bar direction: right`,tabs:c5,barDirection:m3.Right}],m5={max:600,min:150,default:600},h5=F_()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Zt(m5.default)},state(){return{intervalId:void 0,increment:2}},styles({cssVars:e}){return C`
+                `}})}}),s5=new j4({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{},tab5:{},tab6:{},tab7:{},tab8:{}}}),c5={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function l5(e){return{paths:e,search:{},hash:``}}var u5=[{label:`Dashboard`,paths:s5.paths.children.tab1,icon:gb},{label:`Notifications`,paths:s5.paths.children.tab2,icon:ob},{label:`Messages`,paths:s5.paths.children.tab3,icon:sb},{label:`Favorites`,paths:s5.paths.children.tab4,icon:Hb}],d5=[{label:`Dashboard`,paths:s5.paths.children.tab1},{label:`Notifications`,paths:s5.paths.children.tab2},{label:`Messages`,paths:s5.paths.children.tab3},{label:`Favorites`,paths:s5.paths.children.tab4}],f5=[{label:`Overview`,paths:s5.paths.children.tab1,group:`General`},{label:`Details`,paths:s5.paths.children.tab2,group:`General`},{label:`Settings`,paths:s5.paths.children.tab3,group:`General`},{label:`Reports`,paths:s5.paths.children.tab4,group:`Data`},{label:`Exports`,paths:s5.paths.children.tab5,group:`Data`},{label:`Members`,paths:s5.paths.children.tab6,group:`Team`},{label:`Roles`,paths:s5.paths.children.tab7,group:`Team`},{label:`History`,paths:s5.paths.children.tab8}],p5=l5(s5.paths.children.tab2.fullPaths),m5=l5(s5.paths.children.tab6.fullPaths),h5=[{title:`basic`,tabs:d5},{title:`with icons (vertical layout)`,tabs:u5},{title:`with icons (horizontal layout)`,tabs:u5,iconLayout:h3.Horizontal},{title:`plain color variant`,tabs:u5,color:x0.Plain},{title:`neutral color variant`,tabs:u5,color:x0.Neutral},{title:`danger color variant`,tabs:u5,color:x0.Danger},{title:`warning color variant`,tabs:u5,color:x0.Warning},{title:`positive color variant`,tabs:u5,color:x0.Positive},{title:`bar direction: top`,tabs:u5,barDirection:m3.Top},{title:`bar direction: left`,tabs:u5,barDirection:m3.Left},{title:`bar direction: right`,tabs:u5,barDirection:m3.Right}],g5={max:600,min:150,default:600},_5=F_()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Zt(g5.default)},state(){return{intervalId:void 0,increment:2}},styles({cssVars:e}){return C`
             :host {
                 display: block;
                 border: 1px solid
                     ${V.colors[`vira-grey-foreground-decoration`].foreground.value};
                 width: ${e[`vira-dynamic-width-tabs-example-width`].value};
             }
-        `},init({state:e,updateState:t,host:r,cssVars:i}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let a=xt.isNumber(Qt(n({onElement:r,forCssVar:i[`vira-dynamic-width-tabs-example-width`]})))||m5.default;(a>=m5.max||a<=m5.min)&&t({increment:e.increment*-1}),Ie({onElement:r,forCssVar:i[`vira-dynamic-width-tabs-example-width`],toValue:Zt(a+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return w`
+        `},init({state:e,updateState:t,host:r,cssVars:i}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let a=xt.isNumber(Qt(n({onElement:r,forCssVar:i[`vira-dynamic-width-tabs-example-width`]})))||g5.default;(a>=g5.max||a<=g5.min)&&t({increment:e.increment*-1}),Ie({onElement:r,forCssVar:i[`vira-dynamic-width-tabs-example-width`],toValue:Zt(a+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return w`
             <slot></slot>
-        `}}),g5=O({parent:$,title:y3.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){p5.forEach(({title:t,...n})=>{e({title:t,styles:C`
+        `}}),v5=O({parent:$,title:y3.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){h5.forEach(({title:t,...n})=>{e({title:t,styles:C`
                     :host {
                         display: block;
                         width: 640px;
                     }
                 `,render(){return w`
-                        <${y3.assign({router:o5,currentRoute:d5,...n})}></${y3}>
+                        <${y3.assign({router:c5,currentRoute:p5,...n})}></${y3}>
                     `}})}),e({title:`fill width`,styles:C`
                 :host {
                     width: 600px;
@@ -40483,21 +40524,21 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                         ${V.colors[`vira-grey-foreground-decoration`].foreground.value};
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:c5,router:o5,currentRoute:d5,shouldFillWidth:!0})}></${y3}>
+                    <${y3.assign({tabs:u5,router:c5,currentRoute:p5,shouldFillWidth:!0})}></${y3}>
                 `}}),e({title:`overflow: selected tab collapsed into menu`,styles:C`
                 :host {
                     width: 240px;
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:c5,router:o5,currentRoute:d5})}></${y3}>
+                    <${y3.assign({tabs:u5,router:c5,currentRoute:p5})}></${y3}>
                 `}}),e({title:`overflow: selected tab stays inline`,styles:C`
                 :host {
                     width: 360px;
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:c5,router:o5,currentRoute:d5})}></${y3}>
+                    <${y3.assign({tabs:u5,router:c5,currentRoute:p5})}></${y3}>
                 `}}),e({title:`big font`,styles:C`
                 :host {
                     font-size: 32px;
@@ -40505,7 +40546,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:c5,router:o5,currentRoute:d5})}></${y3}>
+                    <${y3.assign({tabs:u5,router:c5,currentRoute:p5})}></${y3}>
                 `}}),e({title:`grouped tabs`,styles:C`
                 :host {
                     width: 700px;
@@ -40513,22 +40554,22 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                         ${V.colors[`vira-grey-foreground-decoration`].foreground.value};
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:u5,router:o5,currentRoute:f5,color:x0.Plain})}></${y3}>
+                    <${y3.assign({tabs:f5,router:c5,currentRoute:m5,color:x0.Plain})}></${y3}>
                 `}}),e({title:`grouped overflow (selected in a collapsed cluster)`,styles:C`
                 :host {
                     width: 420px;
                     border: 1px solid red;
                 }
             `,render(){return w`
-                    <${y3.assign({tabs:u5,router:o5,currentRoute:f5,color:x0.Plain})}></${y3}>
+                    <${y3.assign({tabs:f5,router:c5,currentRoute:m5,color:x0.Plain})}></${y3}>
                 `}}),e({title:`dynamic overflow`,styles:C`
                 :host {
-                    width: ${m5.max+20}px;
+                    width: ${g5.max+20}px;
                 }
             `,render(){return w`
-                    <${h5}>
-                        <${y3.assign({tabs:c5,router:o5,currentRoute:d5})}></${y3}>
-                    </${h5}>
+                    <${_5}>
+                        <${y3.assign({tabs:u5,router:c5,currentRoute:p5})}></${y3}>
+                    </${_5}>
                 `}}),e({title:`all combinations`,styles:C`
                 :host {
                     display: block;
@@ -40551,7 +40592,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                             <div class="grid">
                                 ${e.map(e=>w`
                                         <span>${e}</span>
-                                        <${y3.assign({tabs:c5,router:o5,currentRoute:d5,barDirection:e,color:t})}></${y3}>
+                                        <${y3.assign({tabs:u5,router:c5,currentRoute:p5,barDirection:e,color:t})}></${y3}>
                                     `)}
                             </div>
                         `)}
@@ -40563,9 +40604,9 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             `,render(){return w`
                     ${Object.values(v0).map(e=>w`
                             <h4>${e}</h4>
-                            <${y3.assign({tabs:l5,router:o5,currentRoute:d5,color:e})}></${y3}>
+                            <${y3.assign({tabs:d5,router:c5,currentRoute:p5,color:e})}></${y3}>
                         `)}
-                `}})}}),_5=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],v5=O({parent:$,title:T3.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){E0.forEach(t=>{e({title:t,styles:C`
+                `}})}}),y5=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],b5=O({parent:$,title:T3.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){E0.forEach(t=>{e({title:t,styles:C`
                     table {
                         border-collapse: collapse;
                     }
@@ -40583,7 +40624,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     .cancelled {
                         visibility: hidden;
                     }
-                `,state(){return{clicked:{}}},render({state:e,updateState:n}){return _5.map(({label:r,...i})=>w`
+                `,state(){return{clicked:{}}},render({state:e,updateState:n}){return y5.map(({label:r,...i})=>w`
                             <h3>${r}</h3>
                             <table>
                                 <thead>
@@ -40623,7 +40664,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                                 <${T3.assign({text:e,color:e})}></${T3}>
                             `)}
                     </div>
-                `}})}}),y5=O({title:P2.tagName,parent:$,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:E.Color,initValue:H[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:H[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:H[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:H[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:H[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:C`
+                `}})}}),x5=O({title:P2.tagName,parent:$,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:E.Color,initValue:H[`vira-form-foreground-color`].default},"Placeholder color":{controlType:E.Color,initValue:H[`vira-form-placeholder-color`].default},"Border color":{controlType:E.Color,initValue:H[`vira-form-border-color`].default},"Focus color":{controlType:E.Color,initValue:H[`vira-form-focus-outline-color`].default},"Selection color":{controlType:E.Color,initValue:H[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:C`
                     ${t||C``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let a={[String(H[`vira-form-foreground-color`].name)]:n[`Text color`],[String(H[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(H[`vira-form-border-color`].name)]:n[`Border color`],[String(H[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(H[`vira-form-text-selection-color`].name)]:n[`Selection color`]},o=i(a,(e,t)=>t||`inherit`),s=Object.entries(o).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return w`
@@ -40636,11 +40677,11 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
                     ${P2} {
                         width: 480px;
                     }
-                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),b5=O({parent:$,title:I3.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new N3}},render({state:e}){return w`
+                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),S5=O({parent:$,title:I3.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new N3}},render({state:e}){return w`
                     <${I3.assign({themeClient:e.themeClient})}></${I3}>
                 `}}),e({title:`default (creates its own client)`,render(){return w`
                     <${I3}></${I3}>
-                `}})}});function x5(e,t){er(e).forEach(e=>{t({title:e.name,styles:C`
+                `}})}});function C5(e,t){er(e).forEach(e=>{t({title:e.name,styles:C`
                 button {
                     ${Gy}
                     display: flex;
@@ -40678,7 +40719,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
                             style=${n}
                         ></${K}>
                     </button>
-                `}})})}var S5=O({title:`16px Icons`,parent:q6,defineExamples({defineExample:e}){x5(p0,e)}}),C5=O({title:`24px Icons`,parent:q6,defineExamples({defineExample:e}){x5(f0,e)}}),w5=O({title:`Lucide Icons`,parent:q6,defineExamples({defineExample:e}){x5(l0,e)}}),T5=[$,q6,G6,K6],E5=[...[J6,Y6,e8,t8,k8,A8,N8,F8,I8,L8,R8,z8,B8,W8,G8,q8,J8,Y8,X8,$8,e5,_8,w8,S8,t5,T8,r5,i5,g5,v5,y5,b5,E8].sort((e,t)=>e.title.localeCompare(t.title)),c8,u8,h8,w5,S5,C5,O8,...s8,...o8],D5=[...T5,...E5];Pe()({tagName:`vira-book-app`,styles:C`
+                `}})})}var w5=O({title:`16px Icons`,parent:q6,defineExamples({defineExample:e}){C5(p0,e)}}),T5=O({title:`24px Icons`,parent:q6,defineExamples({defineExample:e}){C5(f0,e)}}),E5=O({title:`Lucide Icons`,parent:q6,defineExamples({defineExample:e}){C5(l0,e)}}),D5=[$,q6,G6,K6],O5=[...[J6,Y6,e8,t8,k8,A8,N8,F8,I8,L8,R8,z8,B8,K8,q8,Y8,X8,Z8,Q8,t5,n5,_8,w8,S8,r5,T8,a5,o5,v5,b5,x5,S5,E8].sort((e,t)=>e.title.localeCompare(t.title)),c8,u8,h8,E5,w5,T5,O8,...s8,...o8],k5=[...D5,...O5];Pe()({tagName:`vira-book-app`,styles:C`
         :host {
             display: block;
             height: 100%;
@@ -40698,7 +40739,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
             margin-left: 16px;
         }
     `,render(){return w`
-            <${W6.assign({internalRouterConfig:{basePath:L4(`vira`),useInternalRouter:!0},pages:D5,themeColor:`#33ccff`})}>
+            <${W6.assign({internalRouterConfig:{basePath:L4(`vira`),useInternalRouter:!0},pages:k5,themeColor:`#33ccff`})}>
                 <h1 slot=${W6.slotNames[`element-book-app-nav-header`]}>Vira</h1>
             </${W6}>
         `}});

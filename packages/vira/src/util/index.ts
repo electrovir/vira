@@ -1,6 +1,7 @@
 export * from './anchored-popover.js';
 export * from './define-table.js';
 export * from './define-vira-element.js';
+export * from './drag-reorder-manager.js';
 export * from './dynamic-element.js';
 export * from './fuzzy-match.js';
 export * from './menu-helpers.js';

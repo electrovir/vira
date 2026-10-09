@@ -3,7 +3,7 @@ import {getObjectTypedValues} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {createUtcFullDate, utcTimezone} from 'date-vir';
-import {html} from 'element-vir';
+import {html, listen, testIdSelector} from 'element-vir';
 import {ViraFormFieldType, type ViraFormField} from '../util/vira-form-fields.js';
 import {ViraAbsoluteTime} from './vira-absolute-time.element.js';
 import {ViraForm} from './vira-form.element.js';
@@ -274,5 +274,81 @@ describe(ViraForm.tagName, () => {
         });
 
         assert.strictEquals(absoluteTime.shadowRoot.textContent.trim(), 'Jun 15, 1942 00:00 UTC');
+    });
+
+    [
+        false,
+        true,
+    ].forEach((useHorizontalLabels) => {
+        it(`emits the new field order after a drag with useHorizontalLabels ${useHorizontalLabels}`, async () => {
+            const emittedOrders: string[][] = [];
+            const fixture = await testWeb.render(html`
+                <div>
+                    <${ViraForm.assign({
+                        isReorderable: true,
+                        useHorizontalLabels,
+                        fields: {
+                            first: {
+                                type: ViraFormFieldType.Text,
+                                label: 'First',
+                                value: '',
+                            },
+                            hidden: {
+                                type: ViraFormFieldType.Text,
+                                label: 'Hidden',
+                                value: '',
+                                isHidden: true,
+                            },
+                            second: {
+                                type: ViraFormFieldType.Text,
+                                label: 'Second',
+                                value: '',
+                            },
+                        },
+                    })}
+                        ${listen(ViraForm.events.fieldOrderChange, (event) => {
+                            emittedOrders.push(event.detail);
+                        })}
+                    ></${ViraForm}>
+                </div>
+            `);
+            await waitForAnimationFrame();
+
+            const handles = queryThroughShadow(
+                fixture,
+                testIdSelector(ViraForm.testIds.dragHandle),
+                {
+                    all: true,
+                },
+            );
+            assert.isLengthExactly(handles, 2);
+            const rowsWrapper = assertWrap.isDefined(handles[1].closest('tbody, .reorder-rows'));
+            const firstRowTop = assertWrap
+                .isDefined(rowsWrapper.firstElementChild)
+                .getBoundingClientRect().top;
+
+            handles[1].dispatchEvent(
+                new DragEvent('dragstart', {
+                    bubbles: true,
+                    composed: true,
+                }),
+            );
+            await waitForAnimationFrame();
+            rowsWrapper.dispatchEvent(
+                new DragEvent('drop', {
+                    bubbles: true,
+                    cancelable: true,
+                    clientY: firstRowTop,
+                }),
+            );
+
+            assert.deepEquals(emittedOrders, [
+                [
+                    'second',
+                    'first',
+                    'hidden',
+                ],
+            ]);
+        });
     });
 });

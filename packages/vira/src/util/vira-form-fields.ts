@@ -190,3 +190,30 @@ export function areFormFieldsValid(formFields: Readonly<ViraFormFields>) {
         }
     });
 }
+
+/**
+ * Moves one field key in front of another, keeping every other key (including hidden fields) in
+ * place. Used by `ViraForm` when its fields are reordered.
+ *
+ * @category Internal
+ */
+export function moveFormFieldKey({
+    keys,
+    movedKey,
+    beforeKey,
+}: Readonly<{
+    keys: ReadonlyArray<string>;
+    movedKey: string;
+    /** The key that `movedKey` lands in front of. `undefined` moves it to the end. */
+    beforeKey: string | undefined;
+}>): string[] {
+    const remainingKeys = keys.filter((key) => key !== movedKey);
+    const insertIndex = beforeKey == undefined ? -1 : remainingKeys.indexOf(beforeKey);
+
+    return insertIndex === -1
+        ? [
+              ...remainingKeys,
+              movedKey,
+          ]
+        : remainingKeys.toSpliced(insertIndex, 0, movedKey);
+}

@@ -1,6 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {getObjectTypedEntries, type PartialWithUndefined} from '@augment-vir/common';
 import {
+    classMap,
     css,
     defineElementEvent,
     html,
@@ -10,11 +11,19 @@ import {
     type HtmlInterpolation,
     type HTMLTemplateResult,
 } from 'element-vir';
+import {
+    dragReorderGhost,
+    dragReorderHandle,
+    dragReorderRows,
+} from '../directives/drag-reorder.directive.js';
+import {lucideIcons} from '../icons/lucide-icons.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
+import {DragReorderManager, type DragReorderMove} from '../util/drag-reorder-manager.js';
 import {
     applyRequiredLabel,
     areFormFieldsValid,
+    moveFormFieldKey,
     ViraFormFieldType,
     type ViraFormField,
     type ViraFormFields,
@@ -22,6 +31,7 @@ import {
 import {ViraCheckbox} from './vira-checkbox.element.js';
 import {ViraDateInput} from './vira-date-input.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
+import {ViraIcon} from './vira-icon.element.js';
 import {ViraInput, ViraInputType} from './vira-input.element.js';
 import {ViraTextArea} from './vira-text-area.element.js';
 
@@ -70,12 +80,21 @@ export const ViraForm = defineViraElement<
          * @default false
          */
         isReadonly: boolean;
+        /**
+         * When `true`, each visible field gets a drag handle. Dropping a field emits
+         * `fieldOrderChange` with every field key in its new order. The form does not reorder
+         * `fields` itself: pass them back in the emitted order.
+         *
+         * @default false
+         */
+        isReorderable: boolean;
     }>
 >()({
     tagName: 'vira-form',
     state() {
         return {
             lastIsValid: false,
+            dragReorder: new DragReorderManager(),
         };
     },
     events: {
@@ -87,7 +106,12 @@ export const ViraForm = defineViraElement<
         validChange: defineElementEvent<{
             allFieldsAreValid: boolean;
         }>(),
+        /** Every field key, hidden ones included, in the order the user dropped them. */
+        fieldOrderChange: defineElementEvent<string[]>(),
     },
+    testIds: [
+        'dragHandle',
+    ],
     styles: css`
         :host {
             display: flex;
@@ -105,6 +129,58 @@ export const ViraForm = defineViraElement<
             }
         }
 
+        .drag-ghost {
+            opacity: 0.6;
+
+            & .drop-above,
+            & .drop-above > *,
+            & .drop-below,
+            & .drop-below > * {
+                box-shadow: none;
+            }
+
+            & .horizontal-fields {
+                border-spacing: 0;
+                table-layout: fixed;
+            }
+        }
+
+        .reorder-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .reorder-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            & > :last-child {
+                flex-grow: 1;
+            }
+        }
+
+        .drag-handle {
+            display: flex;
+            cursor: grab;
+            color: ${viraFormCssVars['vira-form-placeholder-color'].value};
+
+            &:active {
+                cursor: grabbing;
+            }
+        }
+
+        div.drop-above,
+        tr.drop-above > * {
+            box-shadow: 0 -5px 0 0 ${viraFormCssVars['vira-form-focus-outline-color'].value};
+        }
+
+        div.drop-below,
+        tr.drop-below > * {
+            box-shadow: 0 5px 0 0 ${viraFormCssVars['vira-form-focus-outline-color'].value};
+        }
+
         .horizontal-fields {
             width: 100%;
             border-collapse: separate;
@@ -113,6 +189,11 @@ export const ViraForm = defineViraElement<
             & th,
             & td {
                 padding: 0;
+            }
+
+            & .handle-cell {
+                width: 0;
+                vertical-align: middle;
             }
 
             & th {
@@ -142,7 +223,7 @@ export const ViraForm = defineViraElement<
             }
         }
     `,
-    render({inputs, dispatch, events, state, updateState}) {
+    render({inputs, dispatch, events, state, updateState, testIds}) {
         const currentIsValid = areFormFieldsValid(inputs.fields);
         if (currentIsValid !== state.lastIsValid) {
             updateState({
@@ -157,19 +238,77 @@ export const ViraForm = defineViraElement<
             );
         }
 
+        const visibleKeys = getObjectTypedEntries(inputs.fields)
+            .filter(
+                ([
+                    ,
+                    field,
+                ]) => !field.isHidden,
+            )
+            .map(([key]) => key);
+
+        function dropField({fromIndex, toIndex}: Readonly<DragReorderMove>) {
+            const movedKey = visibleKeys[fromIndex];
+            if (movedKey == undefined) {
+                return;
+            }
+
+            dispatch(
+                new events.fieldOrderChange({
+                    detail: moveFormFieldKey({
+                        keys: Object.keys(inputs.fields),
+                        movedKey,
+                        beforeKey: visibleKeys[toIndex],
+                    }),
+                }),
+            );
+        }
+
         function wrapFormField({
             fieldTemplate,
             label,
+            key,
         }: Readonly<{
             fieldTemplate: HTMLTemplateResult;
             label: HtmlInterpolation;
+            key: string;
         }>) {
+            const dropLine = state.dragReorder.readDropLine(visibleKeys.indexOf(key));
+            const rowClasses = classMap({
+                'reorder-row': !inputs.useHorizontalLabels,
+                'drop-above': dropLine.isAbove,
+                'drop-below': dropLine.isBelow,
+            });
+            const dragHandle = inputs.isReorderable
+                ? html`
+                      <div
+                          class="drag-handle"
+                          title="drag to reorder"
+                          ${testId(testIds.dragHandle)}
+                          ${dragReorderHandle(state.dragReorder)}
+                      >
+                          <${ViraIcon.assign({
+                              icon: lucideIcons.GripVertical,
+                          })}></${ViraIcon}>
+                      </div>
+                  `
+                : nothing;
+
             if (inputs.useHorizontalLabels) {
                 return html`
-                    <tr>
+                    <tr class=${rowClasses}>
+                        ${inputs.isReorderable
+                            ? html`
+                                  <td class="handle-cell">${dragHandle}</td>
+                              `
+                            : nothing}
                         <th scope="row">${label}</th>
                         <td>${fieldTemplate}</td>
                     </tr>
+                `;
+            } else if (inputs.isReorderable) {
+                return html`
+                    <div class=${rowClasses}>${dragHandle} ${fieldTemplate}</div>
                 `;
             } else {
                 return fieldTemplate;
@@ -189,6 +328,7 @@ export const ViraForm = defineViraElement<
                 } else if (field.type === ViraFormFieldType.Checkbox) {
                     const checkboxLabel = applyRequiredLabel(field.label, showRequiredMarker);
                     return wrapFormField({
+                        key,
                         label: checkboxLabel,
                         fieldTemplate: html`
                             <${ViraCheckbox.assign({
@@ -237,6 +377,7 @@ export const ViraForm = defineViraElement<
 
                 if (field.type === ViraFormFieldType.Select) {
                     return wrapFormField({
+                        key,
                         label,
                         fieldTemplate: html`
                             <${ViraDropdown.assign({
@@ -267,6 +408,7 @@ export const ViraForm = defineViraElement<
                     });
                 } else if (field.type === ViraFormFieldType.TextArea) {
                     return wrapFormField({
+                        key,
                         label,
                         fieldTemplate: html`
                             <${ViraTextArea.assign({
@@ -297,6 +439,7 @@ export const ViraForm = defineViraElement<
                     });
                 } else if (field.type === ViraFormFieldType.Number) {
                     return wrapFormField({
+                        key,
                         label,
                         fieldTemplate: html`
                             <${ViraInput.assign({
@@ -348,6 +491,7 @@ export const ViraForm = defineViraElement<
                     });
                 } else if (field.type === ViraFormFieldType.Date) {
                     return wrapFormField({
+                        key,
                         label,
                         fieldTemplate: html`
                             <${ViraDateInput.assign({
@@ -379,6 +523,7 @@ export const ViraForm = defineViraElement<
                     });
                 } else {
                     return wrapFormField({
+                        key,
                         label,
                         fieldTemplate: html`
                             <${ViraInput.assign({
@@ -442,15 +587,59 @@ export const ViraForm = defineViraElement<
         const formFieldsWrapper = inputs.useHorizontalLabels
             ? html`
                   <table class="horizontal-fields">
-                      <tbody>${formFieldTemplates}</tbody>
+                      <tbody ${dragReorderRows(state.dragReorder, dropField)}>
+                          ${formFieldTemplates}
+                      </tbody>
                   </table>
               `
-            : formFieldTemplates;
+            : inputs.isReorderable
+              ? html`
+                    <div class="reorder-rows" ${dragReorderRows(state.dragReorder, dropField)}>
+                        ${formFieldTemplates}
+                    </div>
+                `
+              : formFieldTemplates;
+
+        const draggedKey =
+            state.dragReorder.value.draggedIndex == undefined
+                ? undefined
+                : visibleKeys[state.dragReorder.value.draggedIndex];
+        const draggedRow =
+            draggedKey == undefined
+                ? undefined
+                : formFieldTemplates[Object.keys(inputs.fields).indexOf(draggedKey)];
+        const dragGhost = draggedRow
+            ? html`
+                  <div class="drag-ghost" ${dragReorderGhost(state.dragReorder)}>
+                      ${inputs.useHorizontalLabels
+                          ? html`
+                                <table class="horizontal-fields">
+                                    <colgroup>
+                                        ${state.dragReorder.value.draggedCellWidths.map(
+                                            (cellWidth) => {
+                                                return html`
+                                                    <col
+                                                        style=${css`
+                                                            width: ${cellWidth}px;
+                                                        `}
+                                                    />
+                                                `;
+                                            },
+                                        )}
+                                    </colgroup>
+                                    <tbody>${draggedRow}</tbody>
+                                </table>
+                            `
+                          : draggedRow}
+                  </div>
+              `
+            : nothing;
 
         return html`
             <form ${listen('submit', (event) => event.preventDefault())}>
                 ${formFieldsWrapper}
                 <slot></slot>
+                ${dragGhost}
             </form>
         `;
     },

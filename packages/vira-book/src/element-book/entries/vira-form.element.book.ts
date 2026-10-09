@@ -1,3 +1,4 @@
+import {arrayToObject} from '@augment-vir/common';
 import {type FullDate} from 'date-vir';
 import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
@@ -9,6 +10,7 @@ import {
     ViraFormFieldType,
     ViraInput,
     type ViraDropdownOption,
+    type ViraFormField,
     type ViraFormFields,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
@@ -353,6 +355,71 @@ export const viraFormBookPage = defineBookPage({
                             updateState({
                                 ...state,
                                 [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    ></${ViraForm}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'reorderable',
+            state() {
+                return {
+                    emailOrder: [
+                        'work',
+                        'personal',
+                        'backup',
+                    ],
+                    emails: {} as Partial<Record<string, string>>,
+                };
+            },
+            styles: css`
+                ${ViraForm} {
+                    width: 520px;
+                }
+            `,
+            render({state, updateState}) {
+                const labels: Readonly<Record<string, string>> = {
+                    work: 'Work Email',
+                    personal: 'Personal Email',
+                    backup: 'Backup Email',
+                };
+
+                return html`
+                    <${ViraForm.assign({
+                        isReorderable: true,
+                        useHorizontalLabels: true,
+                        fields: arrayToObject(
+                            state.emailOrder,
+                            (key, index) => {
+                                return {
+                                    key,
+                                    value: {
+                                        type: ViraFormFieldType.Email,
+                                        label: `${index + 1}. ${labels[key]}`,
+                                        value: state.emails[key],
+                                    } satisfies ViraFormField,
+                                };
+                            },
+                            {
+                                useRequired: true,
+                            },
+                        ),
+                    })}
+                        ${listen(ViraForm.events.fieldOrderChange, (event) => {
+                            updateState({
+                                emailOrder: event.detail,
+                            });
+                        })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            if (event.detail.type !== ViraFormFieldType.Email) {
+                                return;
+                            }
+                            updateState({
+                                emails: {
+                                    ...state.emails,
+                                    [event.detail.key]: event.detail.value,
+                                },
                             });
                         })}
                     ></${ViraForm}>

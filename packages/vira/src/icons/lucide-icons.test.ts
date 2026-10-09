@@ -24,5 +24,6 @@ describe('lucideIcons', () => {
 
         const internalSvg = fixture.shadowRoot.querySelector('svg');
         assert.instanceOf(internalSvg, SVGSVGElement);
+        assert.strictEquals(internalSvg.getBoundingClientRect().width, 16);
     });
 });

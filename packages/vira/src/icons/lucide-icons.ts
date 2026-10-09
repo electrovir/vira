@@ -14,6 +14,8 @@ const defaultLucideAttributes: Readonly<Record<string, string>> = {
     fill: String(viraIconCssVars['vira-icon-fill-color'].value),
     stroke: String(viraIconCssVars['vira-icon-stroke-color'].value),
     'stroke-width': String(viraIconCssVars['vira-icon-stroke-width'].value),
+    width: '16',
+    height: '16',
 };
 
 function setSvgAttribute({
@@ -78,7 +80,8 @@ const lucideIconCache = new Map<LucideIconKey, ViraIconSvg>();
 
 /**
  * All [Lucide icons](https://lucide.dev) in a format compatible with `ViraIcon`. Each icon entry
- * can be accessed directly as a {@link ViraIconSvg}.
+ * can be accessed directly as a {@link ViraIconSvg}. Icons render at 16px instead of Lucide's
+ * default 24px; use `createSizedIcon` for other sizes.
  *
  * @category Icon
  */

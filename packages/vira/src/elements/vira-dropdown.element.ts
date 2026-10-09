@@ -20,7 +20,12 @@ import {ChevronUp16Icon} from '../icons/index.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
-import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
+import {
+    noNativeFormStyles,
+    noUserSelect,
+    viraAnimationDurations,
+    viraTheme,
+} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {fuzzyMatch} from '../util/fuzzy-match.js';
 import {renderMenuItemEntries} from '../util/menu-helpers.js';
@@ -211,20 +216,21 @@ export const ViraDropdown = defineViraElement<
         .option-group-label,
         .no-options {
             ${noUserSelect};
-            /* Aligns with the label text of each ViraMenuItem, past its check icon. */
-            padding: 8px 12px 4px
-                calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
-            opacity: 0.6;
             text-align: left;
         }
 
         .option-group-label {
+            color: ${viraTheme.colors['vira-grey-foreground-placeholder'].foreground.value};
+            padding: 8px 12px 4px calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
             font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
         }
 
         .no-options {
             cursor: default;
-            padding-bottom: 8px;
+            opacity: 0.6;
+            /* Aligns with the label text of each ViraMenuItem, past its check icon. */
+            padding: 8px 12px 8px
+                calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
         }
 
         ${ViraMenuItem}.option-group-label {
@@ -429,6 +435,7 @@ export const ViraDropdown = defineViraElement<
                 ? html`
                       <${ViraMenuItem.assign({
                           disablePointerStyles: true,
+                          hideIcon: true,
                       })}
                           class="option-group-label"
                           ${state.navController ? nav(state.navController) : nothing}

@@ -1,6 +1,6 @@
 import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
-import {css, defineElementEvent, html} from 'element-vir';
+import {css, defineElementEvent, html, nothing} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
 import {lucideIcons} from '../../icons/lucide-icons.js';
@@ -32,6 +32,8 @@ export const ViraMenuItem = defineViraElement<
          * _always_ be shown, even if `selected` is set to `false`.
          */
         iconOverride: ViraIconSvg;
+        /** Removes the icon entirely, including the space it reserves when not shown. */
+        hideIcon: boolean;
         /**
          * When `true`, activating this item will _not_ close the containing popover.
          *
@@ -291,9 +293,13 @@ export const ViraMenuItem = defineViraElement<
     },
     render({inputs}) {
         return html`
-            <${ViraIcon.assign({
-                icon: inputs.iconOverride || selectedCheckIcon,
-            })}></${ViraIcon}>
+            ${inputs.hideIcon
+                ? nothing
+                : html`
+                      <${ViraIcon.assign({
+                          icon: inputs.iconOverride || selectedCheckIcon,
+                      })}></${ViraIcon}>
+                  `}
             <div class="slot-wrapper">
                 <slot>&nbsp;</slot>
             </div>

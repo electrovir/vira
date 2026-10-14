@@ -65,12 +65,12 @@ export type IsAllowedInputs = {
 function isAllowed({value: rawValue, allowed, blocked}: IsAllowedInputs) {
     const value = String(rawValue);
 
-    const isAllowedCharacter = allowed
-        ? doesMatch({
-              input: value,
-              matcher: allowed,
-          })
-        : true;
+    const isAllowedCharacter =
+        !allowed ||
+        doesMatch({
+            input: value,
+            matcher: allowed,
+        });
     const isBlockedCharacter = blocked
         ? doesMatch({
               input: value,

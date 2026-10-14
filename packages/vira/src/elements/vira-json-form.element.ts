@@ -577,7 +577,7 @@ export const ViraJsonForm = defineViraElement<
                     ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                         setPendingType(
                             pathKey,
-                            assertWrap.isDefined(event.detail[0]) as ViraJsonType,
+                            assertWrap.isEnumValue(event.detail[0], ViraJsonType),
                         );
                     })}
                 ></${ViraDropdown}>
@@ -654,7 +654,7 @@ export const ViraJsonForm = defineViraElement<
                         ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                             setPendingType(
                                 pathKey,
-                                assertWrap.isDefined(event.detail[0]) as ViraJsonType,
+                                assertWrap.isEnumValue(event.detail[0], ViraJsonType),
                             );
                         })}
                     ></${ViraDropdown}>
@@ -1020,7 +1020,7 @@ export const ViraJsonForm = defineViraElement<
                         ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                             setStringMode(
                                 pathKey,
-                                assertWrap.isDefined(event.detail[0]) as ViraJsonStringMode,
+                                assertWrap.isEnumValue(event.detail[0], ViraJsonStringMode),
                             );
                         })}
                     ></${ViraDropdown}>
@@ -1089,7 +1089,7 @@ export const ViraJsonForm = defineViraElement<
                     })}
                         title="Change type"
                         ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
-                            const newType = assertWrap.isDefined(event.detail[0]) as ViraJsonType;
+                            const newType = assertWrap.isEnumValue(event.detail[0], ViraJsonType);
                             emitReplaceAt(path, createDefaultForJsonType(newType));
                         })}
                     ></${ViraDropdown}>

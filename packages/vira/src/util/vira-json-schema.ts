@@ -100,10 +100,7 @@ export function normalizeSchema(
 }
 
 function jsonTypeFromSchemaType(type: string): ViraJsonType | undefined {
-    if (allJsonTypes.includes(type as ViraJsonType)) {
-        return type as ViraJsonType;
-    }
-    return undefined;
+    return check.isEnumValue(type, ViraJsonType) ? type : undefined;
 }
 
 /**

@@ -351,4 +351,49 @@ describe(ViraForm.tagName, () => {
             ]);
         });
     });
+
+    it('emits fieldBlur only when focus leaves a field', async () => {
+        const blurredKeys: string[] = [];
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraForm.assign({
+                    showClearButtons: true,
+                    fields: {
+                        first: {
+                            type: ViraFormFieldType.Text,
+                            label: 'First',
+                            value: 'some text',
+                        },
+                        second: {
+                            type: ViraFormFieldType.Text,
+                            label: 'Second',
+                            value: '',
+                        },
+                    },
+                })}
+                    ${listen(ViraForm.events.fieldBlur, (event) => {
+                        blurredKeys.push(event.detail.key);
+                    })}
+                ></${ViraForm}>
+            </div>
+        `);
+        await waitForAnimationFrame();
+
+        const inputs = queryThroughShadow(fixture, 'input', {
+            all: true,
+        }).map((input) => assertWrap.instanceOf(input, HTMLInputElement));
+        assert.isLengthExactly(inputs, 2);
+        const firstClearButton = assertWrap.instanceOf(
+            queryThroughShadow(fixture, '.clear-x-button'),
+            HTMLButtonElement,
+        );
+
+        inputs[0].focus();
+        firstClearButton.focus();
+        inputs[1].focus();
+
+        assert.deepEquals(blurredKeys, [
+            'first',
+        ]);
+    });
 });

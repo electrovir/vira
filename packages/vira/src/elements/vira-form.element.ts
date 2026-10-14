@@ -106,6 +106,12 @@ export const ViraForm = defineViraElement<
         validChange: defineElementEvent<{
             allFieldsAreValid: boolean;
         }>(),
+        /** Emitted when focus leaves a field entirely, not when it moves within the field. */
+        fieldBlur: defineElementEvent<
+            {
+                key: string;
+            } & ViraFormField
+        >(),
         /** Every field key, hidden ones included, in the order the user dropped them. */
         fieldOrderChange: defineElementEvent<string[]>(),
     },
@@ -264,6 +270,23 @@ export const ViraForm = defineViraElement<
             );
         }
 
+        function listenToFieldBlur(key: string, field: Readonly<ViraFormField>) {
+            /**
+             * `blur` doesn't bubble out of the field's shadow root, but `focusout` does, and the
+             * browser skips it on the field's host when focus moves between elements inside it.
+             */
+            return listen('focusout', () => {
+                dispatch(
+                    new events.fieldBlur({
+                        detail: {
+                            key,
+                            ...field,
+                        },
+                    }),
+                );
+            });
+        }
+
         function wrapFormField({
             fieldTemplate,
             label,
@@ -340,6 +363,7 @@ export const ViraForm = defineViraElement<
                                 fillWhenUnchecked: field.fillWhenUnchecked,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraCheckbox.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
@@ -392,6 +416,7 @@ export const ViraForm = defineViraElement<
                                 attributePassthrough: horizontalLabelAttributes,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
@@ -423,6 +448,7 @@ export const ViraForm = defineViraElement<
                                 attributePassthrough: horizontalLabelAttributes,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraTextArea.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
@@ -473,6 +499,7 @@ export const ViraForm = defineViraElement<
                                 },
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraInput.events.valueChange, (event) => {
                                     const numericValue =
                                         event.detail === '' ? undefined : Number(event.detail);
@@ -507,6 +534,7 @@ export const ViraForm = defineViraElement<
                                 label: childLabel,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraDateInput.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
@@ -566,6 +594,7 @@ export const ViraForm = defineViraElement<
                                       : ViraInputType.Default,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
                                 ${listen(ViraInput.events.valueChange, (event) => {
                                     dispatch(
                                         new events.valueChange({

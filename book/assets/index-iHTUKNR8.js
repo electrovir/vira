@@ -37746,6 +37746,10 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                 text-align: right;
             }
 
+            &.reorderable th {
+                text-align: left;
+            }
+
             & td {
                 width: 100%;
                 vertical-align: top;
@@ -37827,8 +37831,8 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                                 ${u(i,a)}
                                 ${P(J.events.valueChange,e=>{n(new r.valueChange({detail:{key:i,...a,value:e.detail}}))})}
                             ></${J}>
-                        `})}),p=e.useHorizontalLabels?T`
-                  <table class="horizontal-fields">
+                        `})}),p=Jf({"horizontal-fields":!0,reorderable:!!e.isReorderable}),m=e.useHorizontalLabels?T`
+                  <table class=${p}>
                       <tbody ${wp(i.dragReorder,l)}>
                           ${f}
                       </tbody>
@@ -37837,10 +37841,10 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                     <div class="reorder-rows" ${wp(i.dragReorder,l)}>
                         ${f}
                     </div>
-                `:f,m=i.dragReorder.value.draggedIndex==null?void 0:c[i.dragReorder.value.draggedIndex],h=m==null?void 0:f[Object.keys(e.fields).indexOf(m)],g=h?T`
+                `:f,h=i.dragReorder.value.draggedIndex==null?void 0:c[i.dragReorder.value.draggedIndex],g=h==null?void 0:f[Object.keys(e.fields).indexOf(h)],v=g?T`
                   <div class="drag-ghost" ${Tp(i.dragReorder)}>
                       ${e.useHorizontalLabels?T`
-                                <table class="horizontal-fields">
+                                <table class=${p}>
                                     <colgroup>
                                         ${i.dragReorder.value.draggedCellWidths.map(e=>T`
                                                     <col
@@ -37850,15 +37854,15 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                                                     />
                                                 `)}
                                     </colgroup>
-                                    <tbody>${h}</tbody>
+                                    <tbody>${g}</tbody>
                                 </table>
-                            `:h}
+                            `:g}
                   </div>
               `:S;return T`
             <form ${P(`submit`,e=>e.preventDefault())}>
-                ${p}
+                ${m}
                 <slot></slot>
-                ${g}
+                ${v}
             </form>
         `}}),C4=Nv()({tagName:`vira-image`,state(){return{loadedUrls:{},erroredUrls:{}}},hostClasses:{"vira-image-height-constrained"({inputs:e}){return e.dominantDimension===`height`}},slotNames:[`vira-image-loading`,`vira-image-error`],events:{imageLoad:C(),imageError:C()},styles({hostClasses:e}){return w`
             :host {

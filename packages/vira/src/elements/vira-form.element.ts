@@ -210,6 +210,10 @@ export const ViraForm = defineViraElement<
                 text-align: right;
             }
 
+            &.reorderable th {
+                text-align: left;
+            }
+
             & td {
                 width: 100%;
                 vertical-align: top;
@@ -613,9 +617,14 @@ export const ViraForm = defineViraElement<
             },
         );
 
+        const horizontalTableClasses = classMap({
+            'horizontal-fields': true,
+            reorderable: !!inputs.isReorderable,
+        });
+
         const formFieldsWrapper = inputs.useHorizontalLabels
             ? html`
-                  <table class="horizontal-fields">
+                  <table class=${horizontalTableClasses}>
                       <tbody ${dragReorderRows(state.dragReorder, dropField)}>
                           ${formFieldTemplates}
                       </tbody>
@@ -642,7 +651,7 @@ export const ViraForm = defineViraElement<
                   <div class="drag-ghost" ${dragReorderGhost(state.dragReorder)}>
                       ${inputs.useHorizontalLabels
                           ? html`
-                                <table class="horizontal-fields">
+                                <table class=${horizontalTableClasses}>
                                     <colgroup>
                                         ${state.dragReorder.value.draggedCellWidths.map(
                                             (cellWidth) => {

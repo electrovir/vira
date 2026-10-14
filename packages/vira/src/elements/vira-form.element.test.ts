@@ -352,6 +352,42 @@ describe(ViraForm.tagName, () => {
         });
     });
 
+    it('left aligns horizontal labels only when reorderable', async () => {
+        async function readLabelAlignment(isReorderable: boolean) {
+            const fixture = await testWeb.render(html`
+                <div>
+                    <${ViraForm.assign({
+                        isReorderable,
+                        useHorizontalLabels: true,
+                        fields: {
+                            city: {
+                                type: ViraFormFieldType.Text,
+                                label: 'City',
+                                value: '',
+                            },
+                        },
+                    })}></${ViraForm}>
+                </div>
+            `);
+            await waitForAnimationFrame();
+
+            return globalThis.getComputedStyle(
+                assertWrap.isDefined(queryThroughShadow(fixture, 'th')),
+            ).textAlign;
+        }
+
+        assert.deepEquals(
+            {
+                reorderable: await readLabelAlignment(true),
+                static: await readLabelAlignment(false),
+            },
+            {
+                reorderable: 'left',
+                static: 'right',
+            },
+        );
+    });
+
     it('emits fieldBlur only when focus leaves a field', async () => {
         const blurredKeys: string[] = [];
         const fixture = await testWeb.render(html`

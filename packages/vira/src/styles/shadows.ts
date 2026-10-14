@@ -7,8 +7,8 @@ import {defineCssVars} from 'lit-css-vars';
  * @category Styles
  */
 export const shadowCssVars = defineCssVars({
-    'menu-shadow-color': '#e2e2e2',
-    'modal-shadow-color': '#4f4f4f',
+    'menu-shadow-color': 'rgba(0, 0, 0, 0.11)',
+    'modal-shadow-color': 'rgba(0, 0, 0, 0.69)',
 });
 
 /**

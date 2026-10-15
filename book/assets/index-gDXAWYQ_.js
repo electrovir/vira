@@ -151,7 +151,7 @@ import{n as e}from"./rolldown-runtime-hePW80VL.js";import{$ as t,A as n,At as r,
     text-transform: inherit;
     text-decoration: inherit;
     -webkit-tap-highlight-color: transparent;
-`,G=ne({"vira-icon-stroke-color":`currentColor`,"vira-icon-fill-color":`none`,"vira-icon-stroke-width":`1px`});function K({name:e,svgTemplate:t}){return{name:e,svgTemplate:t}}var Zy=K({name:`CloseX24Icon`,svgTemplate:T`
+`,G=ne({"vira-icon-stroke-color":`currentColor`,"vira-icon-fill-color":`none`,"vira-icon-stroke-width":`1.5px`});function K({name:e,svgTemplate:t}){return{name:e,svgTemplate:t}}var Zy=K({name:`CloseX24Icon`,svgTemplate:T`
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <circle
                 cx="12"
@@ -39556,7 +39556,7 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                     <${m4}>Failed to generate page controls.</${m4}>
                 `}catch(e){return console.error(e),T`
                 <${m4}>${r(e)}</${m4}>
-            `}}}),N8=k({title:`Elements`,parent:void 0}),P8=k({title:`Styles`,parent:void 0}),F8=k({title:`Util`,parent:void 0}),I8=k({title:`Icons`,controls:{"Stroke Color":wt({controlType:D.Color,initValue:``}),"Fill Color":wt({controlType:D.Color,initValue:``}),"Stroke Width":wt({controlType:D.Number,initValue:1})},parent:void 0}),L8=k({parent:N8,title:A2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:`#3498db`}},render({state:e,updateState:t}){return T`
+            `}}}),N8=k({title:`Elements`,parent:void 0}),P8=k({title:`Styles`,parent:void 0}),F8=k({title:`Util`,parent:void 0}),I8=k({title:`Icons`,controls:{"Stroke Color":wt({controlType:D.Color,initValue:``}),"Fill Color":wt({controlType:D.Color,initValue:``}),"Stroke Width":wt({controlType:D.Number,initValue:1.5})},parent:void 0}),L8=k({parent:N8,title:A2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:`#3498db`}},render({state:e,updateState:t}){return T`
                     <${A2.assign({color:e.currentColor})}
                         ${P(A2.events.colorChange,e=>{t({currentColor:e.detail})})}
                     ></${A2}>

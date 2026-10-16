@@ -4,7 +4,7 @@ import {colorCss} from '@electrovir/color';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {listenToGlobal} from 'typed-event-target';
-import {X24Icon} from '../icons/icon-svgs/24/x-24.icon.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraAnimationDurations} from '../styles/durations.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
@@ -331,7 +331,7 @@ export const ViraDrawer = defineViraElement<
                             })}
                         >
                             <${ViraIcon.assign({
-                                icon: X24Icon,
+                                icon: internalLucideIcons.X24,
                             })}></${ViraIcon}>
                         </button>
                     </div>

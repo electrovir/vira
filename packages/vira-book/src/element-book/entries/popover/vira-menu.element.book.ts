@@ -1,12 +1,12 @@
 import {defineBookPage} from 'element-book';
 import {html, type HtmlInterpolation} from 'element-vir';
 import {
-    Copy24Icon,
     createSizedIcon,
-    Pencil24Icon,
+    LucideCopyIcon,
+    LucidePencilIcon,
+    LucideXIcon,
     ViraMenu,
     ViraMenuItem,
-    X24Icon,
     type ViraIconSvg,
     type ViraMenuCornerStyle,
 } from 'vira';
@@ -75,15 +75,15 @@ const examples: ReadonlyArray<{
         items: [
             {
                 content: 'copy',
-                iconOverride: createSizedIcon(Copy24Icon, 16),
+                iconOverride: createSizedIcon(LucideCopyIcon, 16),
             },
             {
                 content: 'rename',
-                iconOverride: createSizedIcon(Pencil24Icon, 16),
+                iconOverride: createSizedIcon(LucidePencilIcon, 16),
             },
             {
                 content: 'delete',
-                iconOverride: createSizedIcon(X24Icon, 16),
+                iconOverride: createSizedIcon(LucideXIcon, 16),
             },
         ],
     },

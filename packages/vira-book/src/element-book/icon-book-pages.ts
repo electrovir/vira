@@ -4,7 +4,6 @@ import {css, html, unsafeCSS} from 'element-vir';
 import {
     type ViraIconSvg,
     ViraIcon,
-    all16IconsByName,
     all24IconsByName,
     lucideIcons,
     noNativeFormStyles,
@@ -78,14 +77,6 @@ function defineIconExamples(
     });
 }
 
-export const icons16BookPage = defineBookPage({
-    title: '16px Icons',
-    parent: iconsBookPage,
-    defineExamples({defineExample}) {
-        defineIconExamples(all16IconsByName, defineExample);
-    },
-});
-
 export const icons24BookPage = defineBookPage({
     title: '24px Icons',
     parent: iconsBookPage,
@@ -98,6 +89,7 @@ export const lucideIconsBookPage = defineBookPage({
     title: 'Lucide Icons',
     parent: iconsBookPage,
     defineExamples({defineExample}) {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         defineIconExamples(lucideIcons, defineExample);
     },
 });

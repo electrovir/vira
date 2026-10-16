@@ -13,8 +13,8 @@ import {
     onResize,
     renderIf,
 } from 'element-vir';
-import {CloseX24Icon} from '../icons/icon-svgs/24/close-x-24.icon.js';
-import {EyeClosed24Icon, EyeOpen24Icon, type ViraIconSvg} from '../icons/index.js';
+import {type ViraIconSvg} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -481,7 +481,7 @@ export const ViraInput = defineViraElement<
                             })}
                         >
                             <${ViraIcon.assign({
-                                icon: CloseX24Icon,
+                                icon: internalLucideIcons.CircleX16,
                             })}></${ViraIcon}>
                         </button>
                     `,
@@ -504,7 +504,9 @@ export const ViraInput = defineViraElement<
                             })}
                         >
                             <${ViraIcon.assign({
-                                icon: state.showPassword ? EyeOpen24Icon : EyeClosed24Icon,
+                                icon: state.showPassword
+                                    ? internalLucideIcons.Eye16
+                                    : internalLucideIcons.EyeOff16,
                             })}></${ViraIcon}>
                         </button>
                     `,

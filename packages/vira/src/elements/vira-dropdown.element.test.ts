@@ -4,7 +4,7 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
-import {Element24Icon} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
@@ -333,7 +333,7 @@ describe(ViraDropdown.tagName, () => {
 
     it('renders an icon', async () => {
         const {queryByTestId} = await setupDropdownTest({
-            icon: Element24Icon,
+            icon: internalLucideIcons.CodeXml24,
         });
         await waitUntil.isTruthy(
             () => {
@@ -360,7 +360,7 @@ describe(ViraDropdown.tagName, () => {
                 {
                     value: 'templated',
                     label: 'Plain label',
-                    icon: Element24Icon,
+                    icon: internalLucideIcons.CodeXml24,
                     labelTemplate: html`
                         <b>Bold label</b>
                     `,

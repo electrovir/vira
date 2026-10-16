@@ -16,7 +16,7 @@ import {
     testId,
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {ChevronUp16Icon} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
@@ -731,7 +731,7 @@ export const ViraDropdown = defineViraElement<
 
                     <span class="trigger-icon-wrapper">
                         <${ViraIcon.assign({
-                            icon: ChevronUp16Icon,
+                            icon: internalLucideIcons.ChevronUp16,
                         })}
                             class="trigger-icon"
                         ></${ViraIcon}>

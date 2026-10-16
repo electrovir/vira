@@ -4,6 +4,7 @@ module.exports = {
     ...baseConfig,
     ignorePaths: [
         ...baseConfig.ignorePaths,
+        'packages/vira/src/icons/lucide/',
     ],
     words: [
         ...baseConfig.words,

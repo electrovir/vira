@@ -1,7 +1,7 @@
 import {randomString} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {type CSSResult, type TemplateResult, css, html, listen, nothing} from 'element-vir';
-import {LoaderAnimated24Icon, StatusFailure24Icon, ViraIcon, ViraImage} from 'vira';
+import {LoaderAnimated24Icon, LucideCircleXIcon, ViraIcon, ViraImage} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraImageBookPage = defineBookPage({
@@ -97,7 +97,7 @@ export const viraImageBookPage = defineBookPage({
                         `}
                     >
                         <${ViraIcon.assign({
-                            icon: StatusFailure24Icon,
+                            icon: LucideCircleXIcon,
                             fitContainer: true,
                         })}
                             style=${css`
@@ -177,7 +177,7 @@ export const viraImageBookPage = defineBookPage({
                         `}
                     >
                         <${ViraIcon.assign({
-                            icon: StatusFailure24Icon,
+                            icon: LucideCircleXIcon,
                             fitContainer: true,
                         })}
                             style=${css`

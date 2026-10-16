@@ -1,6 +1,6 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {createSizedIcon, Element24Icon, Star24Icon, ViraIcon, type ViraIconSvg} from 'vira';
+import {createSizedIcon, LucideCodeXmlIcon, LucideStarIcon, ViraIcon, type ViraIconSvg} from 'vira';
 import {utilBookPage} from '../top-level-pages.js';
 
 const examples: {
@@ -11,12 +11,12 @@ const examples: {
     {
         title: 'smaller',
         size: 16,
-        icon: Element24Icon,
+        icon: createSizedIcon(LucideCodeXmlIcon, 24),
     },
     {
         title: 'larger',
         size: 48,
-        icon: Star24Icon,
+        icon: createSizedIcon(LucideStarIcon, 24),
     },
 ];
 

@@ -1,7 +1,6 @@
-import {html, unsafeHTML} from 'element-vir';
 import * as lucideStaticImport from 'lucide-static';
-import {viraIconCssVars} from './icon-css-vars.js';
 import {type ViraIconSvg} from './icon-svg.js';
+import {createLucideIcon} from './lucide-icon.js';
 
 /**
  * All supported Lucide icon names.
@@ -9,49 +8,6 @@ import {type ViraIconSvg} from './icon-svg.js';
  * @category Internal
  */
 export type LucideIconKey = keyof typeof lucideStaticImport;
-
-const defaultLucideAttributes: Readonly<Record<string, string>> = {
-    fill: String(viraIconCssVars['vira-icon-fill-color'].value),
-    stroke: String(viraIconCssVars['vira-icon-stroke-color'].value),
-    'stroke-width': String(viraIconCssVars['vira-icon-stroke-width'].value),
-    width: '16',
-    height: '16',
-};
-
-function setSvgAttribute({
-    svgString,
-    attributeName,
-    value,
-}: Readonly<{svgString: string; attributeName: string; value: string}>): string {
-    const escapedName = attributeName.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
-    const regex = new RegExp(String.raw`(\s)${escapedName}="[^"]*"`);
-
-    return regex.test(svgString)
-        ? svgString.replace(regex, `$1${attributeName}="${value}"`)
-        : svgString.replace(/<svg\b/, `<svg ${attributeName}="${value}"`);
-}
-
-function applySvgAttributes(
-    svgString: string,
-    attributes: Readonly<Record<string, string>>,
-): string {
-    return Object.entries(attributes).reduce(
-        (
-            result,
-            [
-                key,
-                value,
-            ],
-        ) => {
-            return setSvgAttribute({
-                svgString: result,
-                attributeName: key,
-                value,
-            });
-        },
-        svgString,
-    );
-}
 
 function isLucideIconKey(key: string): key is LucideIconKey {
     return key in lucideStaticImport;
@@ -67,22 +23,15 @@ function getLucideIconSvg(key: LucideIconKey): string {
     return svg;
 }
 
-function createLucideIconEntry(iconKey: LucideIconKey): ViraIconSvg {
-    return {
-        name: iconKey,
-        svgTemplate: html`
-            ${unsafeHTML(applySvgAttributes(getLucideIconSvg(iconKey), defaultLucideAttributes))}
-        `,
-    };
-}
-
 const lucideIconCache = new Map<LucideIconKey, ViraIconSvg>();
 
 /**
  * All [Lucide icons](https://lucide.dev) in a format compatible with `ViraIcon`. Each icon entry
  * can be accessed directly as a {@link ViraIconSvg}. Icons render at 16px instead of Lucide's
- * default 24px; use `createSizedIcon` for other sizes.
+ * default 24px; use `createSizedIcon` for other sizes. Using this bundles every Lucide icon; to
+ * bundle only the icons you use, import them individually instead (such as `LucideCircleXIcon`).
  *
+ * @deprecated Use direct icon imports
  * @category Icon
  */
 export const lucideIcons: Readonly<Record<LucideIconKey, ViraIconSvg>> = new Proxy(
@@ -99,7 +48,10 @@ export const lucideIcons: Readonly<Record<LucideIconKey, ViraIconSvg>> = new Pro
                 return cached;
             }
 
-            const entry = createLucideIconEntry(property);
+            const entry = createLucideIcon({
+                name: property,
+                svg: getLucideIconSvg(property),
+            });
             lucideIconCache.set(property, entry);
             return entry;
         },

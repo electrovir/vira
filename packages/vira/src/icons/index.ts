@@ -1,124 +1,22 @@
-import {Check16Icon} from './icon-svgs/16/check-16.icon.js';
-import {ChevronDown16Icon} from './icon-svgs/16/chevron-down-16.icon.js';
-import {ChevronUp16Icon} from './icon-svgs/16/chevron-up-16.icon.js';
-import {Dash16Icon} from './icon-svgs/16/dash-16.icon.js';
-import {Element16Icon} from './icon-svgs/16/element-16.icon.js';
-import {Plus16Icon} from './icon-svgs/16/plus-16.icon.js';
-import {Upload16Icon} from './icon-svgs/16/upload-16.icon.js';
-import {X16Icon} from './icon-svgs/16/x-16.icon.js';
-import {ArrowDown24Icon} from './icon-svgs/24/arrow-down-24.icon.js';
-import {ArrowLeft24Icon} from './icon-svgs/24/arrow-left-24.icon.js';
-import {ArrowRight24Icon} from './icon-svgs/24/arrow-right-24.icon.js';
-import {ArrowUp24Icon} from './icon-svgs/24/arrow-up-24.icon.js';
 import {AutoTheme24Icon} from './icon-svgs/24/auto-theme-24.icon.js';
-import {Bell24Icon} from './icon-svgs/24/bell-24.icon.js';
-import {Chat24Icon} from './icon-svgs/24/chat-24.icon.js';
-import {Check24Icon} from './icon-svgs/24/check-24.icon.js';
-import {ChevronDown24Icon} from './icon-svgs/24/chevron-down-24.icon.js';
-import {ChevronUp24Icon} from './icon-svgs/24/chevron-up-24.icon.js';
-import {CloseX24Icon} from './icon-svgs/24/close-x-24.icon.js';
-import {Commit24Icon} from './icon-svgs/24/commit-24.icon.js';
-import {Copy24Icon} from './icon-svgs/24/copy-24.icon.js';
-import {Document24Icon} from './icon-svgs/24/document-24.icon.js';
-import {DocumentSearch24Icon} from './icon-svgs/24/document-search-24.icon.js';
-import {DoubleChevron24Icon} from './icon-svgs/24/double-chevron-24.icon.js';
-import {Element24Icon} from './icon-svgs/24/element-24.icon.js';
-import {ExternalLink24Icon} from './icon-svgs/24/external-link-24.icon.js';
-import {EyeClosed24Icon} from './icon-svgs/24/eye-closed-24.icon.js';
-import {EyeOpen24Icon} from './icon-svgs/24/eye-open-24.icon.js';
-import {Filter24Icon} from './icon-svgs/24/filter-24.icon.js';
-import {Globe24Icon} from './icon-svgs/24/globe-24.icon.js';
-import {Link24Icon} from './icon-svgs/24/link-24.icon.js';
-import {Loader24Icon} from './icon-svgs/24/loader-24.icon.js';
 import {LoaderAnimated24Icon} from './icon-svgs/24/loader-animated-24.icon.js';
-import {Lock24Icon} from './icon-svgs/24/lock-24.icon.js';
-import {MagnifyingGlass24Icon} from './icon-svgs/24/magnifying-glass-24.icon.js';
 import {Moon24Icon} from './icon-svgs/24/moon-24.icon.js';
-import {Options24Icon} from './icon-svgs/24/options-24.icon.js';
-import {Pencil24Icon} from './icon-svgs/24/pencil-24.icon.js';
-import {Plus24Icon} from './icon-svgs/24/plus-24.icon.js';
-import {Printer24Icon} from './icon-svgs/24/printer-24.icon.js';
-import {Shield24Icon} from './icon-svgs/24/shield-24.icon.js';
-import {SortAscending24Icon} from './icon-svgs/24/sort-ascending-24.icon.js';
-import {SortDescending24Icon} from './icon-svgs/24/sort-descending-24.icon.js';
 import {Sparkle24Icon} from './icon-svgs/24/sparkle-24.icon.js';
-import {SpeakerLoud24Icon} from './icon-svgs/24/speaker-loud-24.icon.js';
-import {SpeakerMedium24Icon} from './icon-svgs/24/speaker-medium-24.icon.js';
-import {SpeakerMuted24Icon} from './icon-svgs/24/speaker-muted-24.icon.js';
-import {SpeakerQuiet24Icon} from './icon-svgs/24/speaker-quiet-24.icon.js';
-import {Star24Icon} from './icon-svgs/24/star-24.icon.js';
-import {StatusFailure24Icon} from './icon-svgs/24/status-failure-24.icon.js';
-import {StatusInProgress24Icon} from './icon-svgs/24/status-in-progress-24.icon.js';
-import {StatusSuccess24Icon} from './icon-svgs/24/status-success-24.icon.js';
-import {StatusUnknown24Icon} from './icon-svgs/24/status-unknown-24.icon.js';
-import {StatusWarning24Icon} from './icon-svgs/24/status-warning-24.icon.js';
 import {Sun24Icon} from './icon-svgs/24/sun-24.icon.js';
-import {Upload24Icon} from './icon-svgs/24/upload-24.icon.js';
-import {X24Icon} from './icon-svgs/24/x-24.icon.js';
 
 export * from './colored-icon.js';
 export * from './icon-css-vars.js';
 export * from './icon-svg.js';
+export * from './lucide-icon.js';
 export * from './lucide-icons.js';
+export * from './lucide/index.js';
 export * from './sized-icon.js';
 
-export * from './icon-svgs/16/check-16.icon.js';
-export * from './icon-svgs/16/chevron-down-16.icon.js';
-export * from './icon-svgs/16/chevron-up-16.icon.js';
-export * from './icon-svgs/16/dash-16.icon.js';
-export * from './icon-svgs/16/element-16.icon.js';
-export * from './icon-svgs/16/plus-16.icon.js';
-export * from './icon-svgs/16/upload-16.icon.js';
-export * from './icon-svgs/16/x-16.icon.js';
-export * from './icon-svgs/24/arrow-down-24.icon.js';
-export * from './icon-svgs/24/arrow-left-24.icon.js';
-export * from './icon-svgs/24/arrow-right-24.icon.js';
-export * from './icon-svgs/24/arrow-up-24.icon.js';
 export * from './icon-svgs/24/auto-theme-24.icon.js';
-export * from './icon-svgs/24/bell-24.icon.js';
-export * from './icon-svgs/24/chat-24.icon.js';
-export * from './icon-svgs/24/check-24.icon.js';
-export * from './icon-svgs/24/chevron-down-24.icon.js';
-export * from './icon-svgs/24/chevron-up-24.icon.js';
-export * from './icon-svgs/24/close-x-24.icon.js';
-export * from './icon-svgs/24/commit-24.icon.js';
-export * from './icon-svgs/24/copy-24.icon.js';
-export * from './icon-svgs/24/document-24.icon.js';
-export * from './icon-svgs/24/document-search-24.icon.js';
-export * from './icon-svgs/24/double-chevron-24.icon.js';
-export * from './icon-svgs/24/element-24.icon.js';
-export * from './icon-svgs/24/external-link-24.icon.js';
-export * from './icon-svgs/24/eye-closed-24.icon.js';
-export * from './icon-svgs/24/eye-open-24.icon.js';
-export * from './icon-svgs/24/filter-24.icon.js';
-export * from './icon-svgs/24/globe-24.icon.js';
-export * from './icon-svgs/24/link-24.icon.js';
-export * from './icon-svgs/24/loader-24.icon.js';
 export * from './icon-svgs/24/loader-animated-24.icon.js';
-export * from './icon-svgs/24/lock-24.icon.js';
-export * from './icon-svgs/24/magnifying-glass-24.icon.js';
 export * from './icon-svgs/24/moon-24.icon.js';
-export * from './icon-svgs/24/options-24.icon.js';
-export * from './icon-svgs/24/pencil-24.icon.js';
-export * from './icon-svgs/24/plus-24.icon.js';
-export * from './icon-svgs/24/printer-24.icon.js';
-export * from './icon-svgs/24/shield-24.icon.js';
-export * from './icon-svgs/24/sort-ascending-24.icon.js';
-export * from './icon-svgs/24/sort-descending-24.icon.js';
 export * from './icon-svgs/24/sparkle-24.icon.js';
-export * from './icon-svgs/24/speaker-loud-24.icon.js';
-export * from './icon-svgs/24/speaker-medium-24.icon.js';
-export * from './icon-svgs/24/speaker-muted-24.icon.js';
-export * from './icon-svgs/24/speaker-quiet-24.icon.js';
-export * from './icon-svgs/24/star-24.icon.js';
-export * from './icon-svgs/24/status-failure-24.icon.js';
-export * from './icon-svgs/24/status-in-progress-24.icon.js';
-export * from './icon-svgs/24/status-success-24.icon.js';
-export * from './icon-svgs/24/status-unknown-24.icon.js';
-export * from './icon-svgs/24/status-warning-24.icon.js';
 export * from './icon-svgs/24/sun-24.icon.js';
-export * from './icon-svgs/24/upload-24.icon.js';
-export * from './icon-svgs/24/x-24.icon.js';
 
 /**
  * All icons within vira by name.
@@ -126,63 +24,11 @@ export * from './icon-svgs/24/x-24.icon.js';
  * @category Icon
  */
 export const allIconsByName = {
-    ArrowDown24Icon,
-    ArrowLeft24Icon,
-    ArrowRight24Icon,
-    ArrowUp24Icon,
     AutoTheme24Icon,
-    Bell24Icon,
-    Chat24Icon,
-    Check16Icon,
-    Check24Icon,
-    ChevronDown16Icon,
-    ChevronDown24Icon,
-    ChevronUp16Icon,
-    ChevronUp24Icon,
-    CloseX24Icon,
-    Commit24Icon,
-    Copy24Icon,
-    Dash16Icon,
-    Document24Icon,
-    DocumentSearch24Icon,
-    DoubleChevron24Icon,
-    Element16Icon,
-    Element24Icon,
-    ExternalLink24Icon,
-    EyeClosed24Icon,
-    EyeOpen24Icon,
-    Filter24Icon,
-    Globe24Icon,
-    Link24Icon,
-    Loader24Icon,
     LoaderAnimated24Icon,
-    Lock24Icon,
-    MagnifyingGlass24Icon,
     Moon24Icon,
-    Options24Icon,
-    Pencil24Icon,
-    Plus16Icon,
-    Plus24Icon,
-    Printer24Icon,
-    Shield24Icon,
-    SortAscending24Icon,
-    SortDescending24Icon,
     Sparkle24Icon,
-    SpeakerLoud24Icon,
-    SpeakerMedium24Icon,
-    SpeakerMuted24Icon,
-    SpeakerQuiet24Icon,
-    Star24Icon,
-    StatusFailure24Icon,
-    StatusInProgress24Icon,
-    StatusSuccess24Icon,
-    StatusUnknown24Icon,
-    StatusWarning24Icon,
     Sun24Icon,
-    Upload16Icon,
-    Upload24Icon,
-    X16Icon,
-    X24Icon,
 } as const;
 
 /**
@@ -191,69 +37,9 @@ export const allIconsByName = {
  * @category Icon
  */
 export const all24IconsByName = {
-    ArrowDown24Icon,
-    ArrowLeft24Icon,
-    ArrowRight24Icon,
-    ArrowUp24Icon,
     AutoTheme24Icon,
-    Bell24Icon,
-    Chat24Icon,
-    Check24Icon,
-    ChevronDown24Icon,
-    ChevronUp24Icon,
-    CloseX24Icon,
-    Commit24Icon,
-    Copy24Icon,
-    Document24Icon,
-    DocumentSearch24Icon,
-    DoubleChevron24Icon,
-    Element24Icon,
-    ExternalLink24Icon,
-    EyeClosed24Icon,
-    EyeOpen24Icon,
-    Filter24Icon,
-    Globe24Icon,
-    Link24Icon,
-    Loader24Icon,
     LoaderAnimated24Icon,
-    Lock24Icon,
-    MagnifyingGlass24Icon,
     Moon24Icon,
-    Options24Icon,
-    Pencil24Icon,
-    Plus24Icon,
-    Printer24Icon,
-    Shield24Icon,
-    SortAscending24Icon,
-    SortDescending24Icon,
     Sparkle24Icon,
-    SpeakerLoud24Icon,
-    SpeakerMedium24Icon,
-    SpeakerMuted24Icon,
-    SpeakerQuiet24Icon,
-    Star24Icon,
-    StatusFailure24Icon,
-    StatusInProgress24Icon,
-    StatusSuccess24Icon,
-    StatusUnknown24Icon,
-    StatusWarning24Icon,
     Sun24Icon,
-    Upload24Icon,
-    X24Icon,
-} as const;
-
-/**
- * All 16px icons within vira by name.
- *
- * @category Icon
- */
-export const all16IconsByName = {
-    Check16Icon,
-    ChevronDown16Icon,
-    ChevronUp16Icon,
-    Dash16Icon,
-    Element16Icon,
-    Plus16Icon,
-    Upload16Icon,
-    X16Icon,
 } as const;

@@ -3,14 +3,14 @@ import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
 import {
-    Element16Icon,
-    Element24Icon,
-    Plus16Icon,
-    Upload16Icon,
+    LucideCodeXmlIcon,
+    LucidePlusIcon,
+    LucideUploadIcon,
+    LucideXIcon,
     ViraDropdown,
     type ViraDropdownOption,
-    X16Icon,
     allIconsByName,
+    createSizedIcon,
     viraColorPalette,
 } from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
@@ -54,22 +54,22 @@ const iconDropdownOptions = [
     {
         label: 'Element',
         value: '1',
-        icon: Element16Icon,
+        icon: LucideCodeXmlIcon,
     },
     {
         label: 'Add',
         value: '2',
-        icon: Plus16Icon,
+        icon: LucidePlusIcon,
     },
     {
         label: 'Upload',
         value: '3',
-        icon: Upload16Icon,
+        icon: LucideUploadIcon,
     },
     {
         label: 'Remove',
         value: '4',
-        icon: X16Icon,
+        icon: LucideXIcon,
     },
 ] satisfies ReadonlyArray<Readonly<ViraDropdownOption>>;
 
@@ -227,7 +227,7 @@ const examples: ReadonlyArray<{
     {
         title: 'with an icon',
         inputs: {
-            icon: Element24Icon,
+            icon: createSizedIcon(LucideCodeXmlIcon, 24),
         },
     },
     {

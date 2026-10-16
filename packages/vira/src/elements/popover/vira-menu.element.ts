@@ -1,7 +1,7 @@
 import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {classMap, css, html, listen, onResize} from 'element-vir';
-import {ChevronUp16Icon} from '../../icons/index.js';
+import {internalLucideIcons} from '../../icons/internal-lucide-icons.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noUserSelect} from '../../styles/index.js';
 import {viraShadows} from '../../styles/shadows.js';
@@ -288,7 +288,7 @@ export const ViraMenu = defineViraElement<
                     })}
                 >
                     <${ViraIcon.assign({
-                        icon: ChevronUp16Icon,
+                        icon: internalLucideIcons.ChevronUp16,
                     })}></${ViraIcon}>
                 </div>
             `;

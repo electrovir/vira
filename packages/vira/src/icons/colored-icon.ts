@@ -2,7 +2,7 @@ import {check} from '@augment-vir/assert';
 import {type PartialWithUndefined, getObjectTypedKeys, getOrSetFromMap} from '@augment-vir/common';
 import {type CSSResult, css, html, unsafeCSS} from 'element-vir';
 import {viraIconCssVars} from './icon-css-vars.js';
-import {type ViraIconSvg, defineIcon} from './icon-svg.js';
+import {type ViraIconSvg} from './icon-svg.js';
 
 /**
  * Caches colored icons keyed first by the source icon and then by the generated color styles. The
@@ -13,7 +13,8 @@ const coloredIconCache = new WeakMap<ViraIconSvg, Map<string, ViraIconSvg>>();
 
 /**
  * Wraps an existing icon with a specific color and outputs another icon that can be used anywhere
- * the original icon can be used. Results are cached per source icon and color combination.
+ * the original icon can be used. Keeps the original icon's `size`. Results are cached per source
+ * icon and color combination.
  *
  * @category Icon
  */
@@ -41,11 +42,11 @@ export function createColoredIcon(
             vertical-align: middle;
         `;
 
-        return defineIcon({
-            name: icon.name,
+        return {
+            ...icon,
             svgTemplate: html`
                 <div style=${styles}>${icon.svgTemplate}</div>
             `,
-        });
+        };
     });
 }

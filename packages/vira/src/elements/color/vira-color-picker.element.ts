@@ -9,7 +9,7 @@ import {
 import {Color} from '@electrovir/color/dist/data/color-class/color.js';
 import {css, defineElement, defineElementEvent, html, listen, nothing} from 'element-vir';
 import {CssVarSyntaxName} from 'lit-css-vars';
-import {Copy24Icon} from '../../icons/icon-svgs/24/copy-24.icon.js';
+import {internalLucideIcons} from '../../icons/internal-lucide-icons.js';
 import {viraFontCssVars} from '../../styles/font.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noNativeFormStyles} from '../../styles/native-styles.js';
@@ -159,7 +159,6 @@ export const ViraColorPicker = defineElement<
                     flex-grow: 1;
                     width: unset;
                     color: inherit;
-                    height: 20px;
                     border: none;
                 }
             }
@@ -202,7 +201,7 @@ export const ViraColorPicker = defineElement<
                     })}
                 >
                     <${ViraIcon.assign({
-                        icon: Copy24Icon,
+                        icon: internalLucideIcons.Copy16,
                         fitContainer: true,
                     })}></${ViraIcon}>
                 </button>
@@ -218,7 +217,7 @@ export const ViraColorPicker = defineElement<
             >
                 <span>${color.hexString}</span>
                 <${ViraIcon.assign({
-                    icon: Copy24Icon,
+                    icon: internalLucideIcons.Copy16,
                     fitContainer: true,
                 })}></${ViraIcon}>
             </button>

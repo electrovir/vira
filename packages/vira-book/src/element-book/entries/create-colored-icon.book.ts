@@ -2,9 +2,10 @@ import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {
     createColoredIcon,
-    Element24Icon,
-    Star24Icon,
-    StatusSuccess24Icon,
+    createSizedIcon,
+    LucideCircleCheckIcon,
+    LucideCodeXmlIcon,
+    LucideStarIcon,
     viraFormCssVars,
     ViraIcon,
 } from 'vira';
@@ -27,13 +28,16 @@ export const createColoredIconBookPage = defineBookPage({
                 }
             `,
             render() {
-                const coloredIcon = createColoredIcon(Element24Icon, {
-                    'vira-icon-stroke-color': 'red',
-                });
+                const coloredIcon = createSizedIcon(
+                    createColoredIcon(LucideCodeXmlIcon, {
+                        'vira-icon-stroke-color': 'red',
+                    }),
+                    24,
+                );
 
                 return html`
                     <${ViraIcon.assign({
-                        icon: Element24Icon,
+                        icon: createSizedIcon(LucideCodeXmlIcon, 24),
                     })}></${ViraIcon}>
                     <span>→</span>
                     <${ViraIcon.assign({
@@ -53,14 +57,17 @@ export const createColoredIconBookPage = defineBookPage({
                 }
             `,
             render() {
-                const coloredIcon = createColoredIcon(Star24Icon, {
-                    'vira-icon-fill-color': 'gold',
-                    'vira-icon-stroke-color': 'orange',
-                });
+                const coloredIcon = createSizedIcon(
+                    createColoredIcon(LucideStarIcon, {
+                        'vira-icon-fill-color': 'gold',
+                        'vira-icon-stroke-color': 'orange',
+                    }),
+                    24,
+                );
 
                 return html`
                     <${ViraIcon.assign({
-                        icon: Star24Icon,
+                        icon: createSizedIcon(LucideStarIcon, 24),
                     })}></${ViraIcon}>
                     <span>→</span>
                     <${ViraIcon.assign({
@@ -80,14 +87,17 @@ export const createColoredIconBookPage = defineBookPage({
                 }
             `,
             render() {
-                const coloredIcon = createColoredIcon(StatusSuccess24Icon, {
-                    'vira-icon-stroke-color': 'green',
-                    'vira-icon-stroke-width': '3px',
-                });
+                const coloredIcon = createSizedIcon(
+                    createColoredIcon(LucideCircleCheckIcon, {
+                        'vira-icon-stroke-color': 'green',
+                        'vira-icon-stroke-width': '3px',
+                    }),
+                    24,
+                );
 
                 return html`
                     <${ViraIcon.assign({
-                        icon: StatusSuccess24Icon,
+                        icon: createSizedIcon(LucideCircleCheckIcon, 24),
                     })}></${ViraIcon}>
                     <span>→</span>
                     <${ViraIcon.assign({
@@ -107,12 +117,18 @@ export const createColoredIconBookPage = defineBookPage({
                 }
             `,
             render() {
-                const errorIcon = createColoredIcon(StatusSuccess24Icon, {
-                    'vira-icon-stroke-color': `${viraFormCssVars['vira-form-error-color'].value}`,
-                });
-                const successIcon = createColoredIcon(StatusSuccess24Icon, {
-                    'vira-icon-stroke-color': `${viraFormCssVars['vira-form-success-color'].value}`,
-                });
+                const errorIcon = createSizedIcon(
+                    createColoredIcon(LucideCircleCheckIcon, {
+                        'vira-icon-stroke-color': `${viraFormCssVars['vira-form-error-color'].value}`,
+                    }),
+                    24,
+                );
+                const successIcon = createSizedIcon(
+                    createColoredIcon(LucideCircleCheckIcon, {
+                        'vira-icon-stroke-color': `${viraFormCssVars['vira-form-success-color'].value}`,
+                    }),
+                    24,
+                );
 
                 return html`
                     <${ViraIcon.assign({
@@ -135,18 +151,30 @@ export const createColoredIconBookPage = defineBookPage({
                 }
             `,
             render() {
-                const redIcon = createColoredIcon(Element24Icon, {
-                    'vira-icon-stroke-color': 'red',
-                });
-                const blueIcon = createColoredIcon(Element24Icon, {
-                    'vira-icon-stroke-color': 'dodgerblue',
-                });
-                const greenIcon = createColoredIcon(Element24Icon, {
-                    'vira-icon-stroke-color': 'green',
-                });
-                const purpleIcon = createColoredIcon(Element24Icon, {
-                    'vira-icon-stroke-color': 'purple',
-                });
+                const redIcon = createSizedIcon(
+                    createColoredIcon(LucideCodeXmlIcon, {
+                        'vira-icon-stroke-color': 'red',
+                    }),
+                    24,
+                );
+                const blueIcon = createSizedIcon(
+                    createColoredIcon(LucideCodeXmlIcon, {
+                        'vira-icon-stroke-color': 'dodgerblue',
+                    }),
+                    24,
+                );
+                const greenIcon = createSizedIcon(
+                    createColoredIcon(LucideCodeXmlIcon, {
+                        'vira-icon-stroke-color': 'green',
+                    }),
+                    24,
+                );
+                const purpleIcon = createSizedIcon(
+                    createColoredIcon(LucideCodeXmlIcon, {
+                        'vira-icon-stroke-color': 'purple',
+                    }),
+                    24,
+                );
 
                 return html`
                     <${ViraIcon.assign({

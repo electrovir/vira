@@ -17,12 +17,13 @@ export const Moon24Icon = defineIcon({
             width="24"
             height="24"
             viewBox="0 0 24 24"
+            fill=${viraIconCssVars['vira-icon-fill-color'].value}
             stroke=${viraIconCssVars['vira-icon-stroke-color'].value}
             stroke-width=${viraIconCssVars['vira-icon-stroke-width'].value}
-            fill=${viraIconCssVars['vira-icon-fill-color'].value}
+            stroke-linecap="round"
             stroke-linejoin="round"
         >
-            <path d="M18.6 17.72A8 8 0 1 1 15 4.26a8 8 0 0 0 3.6 13.46Z" />
+            <path d="M18.6 17.72A8 8 0 1 1 15 4.26a8 8 0 0 0 3.6 13.46z" />
         </svg>
     `,
 });

@@ -1,6 +1,12 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {Element24Icon, ViraIcon, createColoredIcon, createSizedIcon, lucideIcons} from 'vira';
+import {
+    createColoredIcon,
+    createSizedIcon,
+    LucideAnchorIcon,
+    LucideCodeXmlIcon,
+    ViraIcon,
+} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraIconBookPage = defineBookPage({
@@ -15,7 +21,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: Element24Icon,
+                        icon: createSizedIcon(LucideCodeXmlIcon, 24),
                     })}></${ViraIcon}>
                 `;
             },
@@ -25,9 +31,12 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: createColoredIcon(Element24Icon, {
-                            'vira-icon-stroke-color': 'red',
-                        }),
+                        icon: createSizedIcon(
+                            createColoredIcon(LucideCodeXmlIcon, {
+                                'vira-icon-stroke-color': 'red',
+                            }),
+                            24,
+                        ),
                     })}></${ViraIcon}>
                 `;
             },
@@ -37,7 +46,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: createSizedIcon(Element24Icon, 32),
+                        icon: createSizedIcon(LucideCodeXmlIcon, 32),
                     })}></${ViraIcon}>
                 `;
             },
@@ -47,7 +56,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: lucideIcons.Anchor,
+                        icon: LucideAnchorIcon,
                     })}></${ViraIcon}>
                 `;
             },
@@ -57,7 +66,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: createSizedIcon(lucideIcons.Anchor, 64),
+                        icon: createSizedIcon(LucideAnchorIcon, 64),
                     })}></${ViraIcon}>
                 `;
             },
@@ -74,7 +83,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: Element24Icon,
+                        icon: LucideCodeXmlIcon,
                         fitContainer: true,
                     })}></${ViraIcon}>
                 `;
@@ -92,7 +101,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: createColoredIcon(Element24Icon, {
+                        icon: createColoredIcon(LucideCodeXmlIcon, {
                             'vira-icon-stroke-color': 'red',
                         }),
                         fitContainer: true,
@@ -112,7 +121,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: lucideIcons.Anchor,
+                        icon: LucideAnchorIcon,
                         fitContainer: true,
                     })}></${ViraIcon}>
                 `;
@@ -130,7 +139,7 @@ export const viraIconBookPage = defineBookPage({
             render() {
                 return html`
                     <${ViraIcon.assign({
-                        icon: createColoredIcon(lucideIcons.Anchor, {
+                        icon: createColoredIcon(LucideAnchorIcon, {
                             'vira-icon-stroke-color': 'red',
                         }),
                         fitContainer: true,

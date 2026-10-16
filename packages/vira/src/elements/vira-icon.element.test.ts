@@ -4,7 +4,8 @@ import {html} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {ColorType, extractIconColor} from '../icons/icon-color.mock.js';
 import {viraIconCssVars} from '../icons/icon-css-vars.js';
-import {StatusSuccess24Icon} from '../icons/index.js';
+import {LucideCircleCheckIcon} from '../icons/lucide/circle-check.icon.js';
+import {createSizedIcon} from '../icons/sized-icon.js';
 import {ViraIcon} from './vira-icon.element.js';
 
 describe(ViraIcon.tagName, () => {
@@ -12,7 +13,7 @@ describe(ViraIcon.tagName, () => {
         const fixture = await testWeb.render(html`
             <div>
                 <${ViraIcon.assign({
-                    icon: StatusSuccess24Icon,
+                    icon: createSizedIcon(LucideCircleCheckIcon, 24),
                 })}></${ViraIcon}>
             </div>
         `);

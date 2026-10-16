@@ -26,8 +26,7 @@ import {
 } from 'spa-router-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
-import {ChevronDown16Icon} from '../icons/icon-svgs/16/chevron-down-16.icon.js';
-import {Check24Icon} from '../icons/icon-svgs/24/check-24.icon.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -972,7 +971,7 @@ export const ViraTabs = defineViraElement<
         const measureMoreButtons = html`
             <${ViraButton.assign({
                 text: overflowLabel,
-                rightSideIcon: ChevronDown16Icon,
+                rightSideIcon: internalLucideIcons.ChevronDown16,
                 color: ViraColorVariant.Neutral,
             })}
                 class="measure-more-default"
@@ -981,8 +980,8 @@ export const ViraTabs = defineViraElement<
                 ? html`
                       <${ViraButton.assign({
                           text: selectedTab.label,
-                          icon: Check24Icon,
-                          rightSideIcon: ChevronDown16Icon,
+                          icon: internalLucideIcons.Check16,
+                          rightSideIcon: internalLucideIcons.ChevronDown16,
                           color: ViraColorVariant.Neutral,
                       })}
                           class="measure-more-labeled"
@@ -1001,8 +1000,8 @@ export const ViraTabs = defineViraElement<
                       })}>
                           <${ViraButton.assign({
                               text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
-                              icon: selectedIsCollapsed ? Check24Icon : undefined,
-                              rightSideIcon: ChevronDown16Icon,
+                              icon: selectedIsCollapsed ? internalLucideIcons.Check16 : undefined,
+                              rightSideIcon: internalLucideIcons.ChevronDown16,
                               color: ViraColorVariant.Neutral,
                           })}
                               slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}

@@ -4,14 +4,15 @@ import {colorCss} from '@electrovir/color';
 import {css, defineElementEvent, html, listen, nothing, onDomCreated} from 'element-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
 import {listenToGlobal} from 'typed-event-target';
-import {X24Icon} from '../icons/icon-svgs/24/x-24.icon.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {noNativeFormStyles, noNativeSpacing} from '../styles/native-styles.js';
+import {ViraColorVariant, ViraEmphasis} from '../styles/form-variants.js';
+import {noNativeSpacing} from '../styles/native-styles.js';
 import {viraShadows} from '../styles/shadows.js';
 import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {isMouseEventOnScrollbar} from '../util/popover-manager.js';
-import {ViraIcon} from './vira-icon.element.js';
+import {ViraButton} from './vira-button.element.js';
 
 const globalEventsToCloseModalOn = [
     'pagehide',
@@ -101,6 +102,11 @@ export const ViraModal = defineViraElement<
                 flex-direction: column;
                 border-radius: inherit;
                 padding: 0;
+                /**
+                 * Firefox and Safari focus the dialog itself on open because they don't search the
+                 * close button's shadow root for a focus target.
+                 */
+                outline: none;
                 overflow: hidden;
                 min-width: inherit;
                 min-height: inherit;
@@ -146,22 +152,10 @@ export const ViraModal = defineViraElement<
                             }
                         }
 
-                        & button.close {
-                            ${noNativeFormStyles};
+                        & .close {
                             flex-shrink: 0;
-                            cursor: pointer;
-                            padding: 4px;
-                            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-
-                            &:hover {
-                                background-color: ${viraFormCssVars[
-                                    'vira-form-selection-hover-color'
-                                ].value};
-                            }
-
-                            & ${ViraIcon} {
-                                display: flex;
-                            }
+                            margin-top: -8px;
+                            margin-right: -12px;
                         }
                     }
                     & .body {
@@ -284,17 +278,17 @@ export const ViraModal = defineViraElement<
                                   `
                                 : nothing}
                         </div>
-                        <button
+                        <${ViraButton.assign({
+                            icon: internalLucideIcons.X16,
+                            buttonEmphasis: ViraEmphasis.Subtle,
+                            color: ViraColorVariant.Neutral,
+                        })}
                             class="close"
                             aria-label="Close"
                             ${listen('click', () => {
                                 state.dialogElement?.close();
                             })}
-                        >
-                            <${ViraIcon.assign({
-                                icon: X24Icon,
-                            })}></${ViraIcon}>
-                        </button>
+                        ></${ViraButton}>
                     </div>
                     ${inputs.open
                         ? html`

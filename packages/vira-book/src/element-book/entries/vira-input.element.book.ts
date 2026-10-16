@@ -1,7 +1,7 @@
 import {mapObjectValues} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
-import {Element24Icon, viraFormCssVars, ViraInput, ViraInputType} from 'vira';
+import {LucideCodeXmlIcon, ViraInput, ViraInputType, createSizedIcon, viraFormCssVars} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraInputBookPage = defineBookPage({
@@ -117,7 +117,7 @@ export const viraInputBookPage = defineBookPage({
                 title: 'with icon',
                 inputs: {
                     value: '',
-                    icon: Element24Icon,
+                    icon: createSizedIcon(LucideCodeXmlIcon, 24),
                 },
             },
             {
@@ -181,7 +181,7 @@ export const viraInputBookPage = defineBookPage({
                 inputs: {
                     value: '',
                     placeholder: 'width',
-                    icon: Element24Icon,
+                    icon: createSizedIcon(LucideCodeXmlIcon, 24),
                 },
             },
             {
@@ -194,7 +194,7 @@ export const viraInputBookPage = defineBookPage({
                 inputs: {
                     value: '',
                     placeholder: 'taller',
-                    icon: Element24Icon,
+                    icon: createSizedIcon(LucideCodeXmlIcon, 24),
                 },
             },
             {
@@ -208,7 +208,7 @@ export const viraInputBookPage = defineBookPage({
                     value: '',
                     placeholder: 'shorter',
                     showClearButton: true,
-                    icon: Element24Icon,
+                    icon: createSizedIcon(LucideCodeXmlIcon, 24),
                 },
             },
             {

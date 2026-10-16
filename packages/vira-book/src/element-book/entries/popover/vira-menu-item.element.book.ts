@@ -6,7 +6,14 @@ import {
     css,
     html,
 } from 'element-vir';
-import {Options24Icon, ViraLink, ViraMenuItem, ViraThemeSwitcher, createColoredIcon} from 'vira';
+import {
+    LucideSlidersHorizontalIcon,
+    ViraLink,
+    ViraMenuItem,
+    ViraThemeSwitcher,
+    createColoredIcon,
+    createSizedIcon,
+} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 const examples: ReadonlyArray<{
@@ -106,9 +113,12 @@ const examples: ReadonlyArray<{
         content: 'my label',
         inputs: {
             selected: false,
-            iconOverride: createColoredIcon(Options24Icon, {
-                'vira-icon-stroke-color': 'blue',
-            }),
+            iconOverride: createSizedIcon(
+                createColoredIcon(LucideSlidersHorizontalIcon, {
+                    'vira-icon-stroke-color': 'blue',
+                }),
+                24,
+            ),
         },
     },
     {

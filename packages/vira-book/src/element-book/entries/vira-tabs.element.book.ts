@@ -5,11 +5,12 @@ import {css, html} from 'element-vir';
 import {readCssVarValue, setCssVarValue} from 'lit-css-vars';
 import {PathTree, type FullSpaRoute} from 'spa-router-vir';
 import {
-    Bell24Icon,
-    Chat24Icon,
+    createSizedIcon,
     defineViraElement,
-    Element24Icon,
-    Star24Icon,
+    LucideBellIcon,
+    LucideCodeXmlIcon,
+    LucideMessageCircleIcon,
+    LucideStarIcon,
     ViraColorVariant,
     ViraTabs,
     ViraTabsBarDirection,
@@ -58,22 +59,22 @@ const tabsWithIcons: ReadonlyArray<Readonly<ViraTab>> = [
     {
         label: 'Dashboard',
         paths: mockPathTree.paths.children.tab1,
-        icon: Element24Icon,
+        icon: createSizedIcon(LucideCodeXmlIcon, 16),
     },
     {
         label: 'Notifications',
         paths: mockPathTree.paths.children.tab2,
-        icon: Bell24Icon,
+        icon: createSizedIcon(LucideBellIcon, 16),
     },
     {
         label: 'Messages',
         paths: mockPathTree.paths.children.tab3,
-        icon: Chat24Icon,
+        icon: createSizedIcon(LucideMessageCircleIcon, 16),
     },
     {
         label: 'Favorites',
         paths: mockPathTree.paths.children.tab4,
-        icon: Star24Icon,
+        icon: createSizedIcon(LucideStarIcon, 16),
     },
 ];
 

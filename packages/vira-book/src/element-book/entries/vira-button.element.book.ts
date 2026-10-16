@@ -1,9 +1,9 @@
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {
-    ChevronDown16Icon,
-    Upload16Icon,
-    Upload24Icon,
+    createSizedIcon,
+    LucideChevronDownIcon,
+    LucideUploadIcon,
     ViraButton,
     ViraColorVariant,
     viraColorVariants,
@@ -25,39 +25,39 @@ const buttonVariants: {
     {
         label: 'with 24px icon',
         extraInputs: {
-            icon: Upload24Icon,
+            icon: createSizedIcon(LucideUploadIcon, 24),
         },
     },
     {
         label: 'with 16px icon',
         extraInputs: {
-            icon: Upload16Icon,
+            icon: LucideUploadIcon,
         },
     },
     {
         label: 'only 24px icon',
         extraInputs: {
-            icon: Upload24Icon,
+            icon: createSizedIcon(LucideUploadIcon, 24),
             text: '',
         },
     },
     {
         label: 'only 16px icon',
         extraInputs: {
-            icon: Upload16Icon,
+            icon: LucideUploadIcon,
             text: '',
         },
     },
     {
         label: 'icon on right',
         extraInputs: {
-            rightSideIcon: Upload24Icon,
+            rightSideIcon: createSizedIcon(LucideUploadIcon, 24),
         },
     },
     {
         label: 'chevron on right',
         extraInputs: {
-            rightSideIcon: ChevronDown16Icon,
+            rightSideIcon: LucideChevronDownIcon,
         },
     },
     {
@@ -69,7 +69,7 @@ const buttonVariants: {
     {
         label: 'menu caret',
         extraInputs: {
-            rightSideIcon: ChevronDown16Icon,
+            rightSideIcon: LucideChevronDownIcon,
         },
     },
 ];

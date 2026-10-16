@@ -7,7 +7,7 @@ import {
     type PartialWithUndefined,
 } from '@augment-vir/common';
 import {css, defineElementEvent, html, listen, nothing, type HTMLTemplateResult} from 'element-vir';
-import {Plus16Icon, X16Icon} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraColorVariant, ViraEmphasis, ViraSize} from '../styles/form-variants.js';
@@ -358,7 +358,7 @@ export const ViraJsonForm = defineViraElement<
         function renderDeleteButton(onDelete: () => void): HTMLTemplateResult {
             return html`
                 <${ViraButton.assign({
-                    icon: X16Icon,
+                    icon: internalLucideIcons.X16,
                     buttonEmphasis: ViraEmphasis.Subtle,
                     color: ViraColorVariant.Danger,
                     buttonSize: ViraSize.Small,
@@ -519,7 +519,7 @@ export const ViraJsonForm = defineViraElement<
         }): HTMLTemplateResult {
             return html`
                 <${ViraButton.assign({
-                    icon: Plus16Icon,
+                    icon: internalLucideIcons.Plus16,
                     color: ViraColorVariant.Positive,
                     buttonSize: ViraSize.Small,
                     isDisabled: isAddDisabled,
@@ -754,7 +754,7 @@ export const ViraJsonForm = defineViraElement<
                       return html`
                           <${ViraButton.assign({
                               text: `"${key}"`,
-                              icon: Plus16Icon,
+                              icon: internalLucideIcons.Plus16,
                               color: ViraColorVariant.Positive,
                               buttonSize: ViraSize.Small,
                           })}

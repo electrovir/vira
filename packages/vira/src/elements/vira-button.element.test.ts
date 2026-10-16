@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
-import {Check24Icon, ChevronDown16Icon} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
@@ -10,8 +10,8 @@ describe(ViraButton.tagName, () => {
         const fixture = await testWeb.render(html`
             <${ViraButton.assign({
                 text: 'Button',
-                icon: Check24Icon,
-                rightSideIcon: ChevronDown16Icon,
+                icon: internalLucideIcons.Check16,
+                rightSideIcon: internalLucideIcons.ChevronDown16,
             })}></${ViraButton}>
         `);
 

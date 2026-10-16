@@ -14,7 +14,8 @@ import {
     type CSSResult,
     type HtmlInterpolation,
 } from 'element-vir';
-import {Check24Icon, viraIconCssVars} from '../icons/index.js';
+import {viraIconCssVars} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
@@ -272,7 +273,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     ${listenToActivate(updateValue)}
                 >
                     <${ViraIcon.assign({
-                        icon: Check24Icon,
+                        icon: internalLucideIcons.Check16,
                         fitContainer: true,
                     })}
                         ${attributes(inputs.attributePassthrough?.[ViraIcon.tagName])}

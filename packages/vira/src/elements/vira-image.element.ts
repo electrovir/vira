@@ -1,7 +1,8 @@
 import {type Dimensions, wait} from '@augment-vir/common';
 import {type Duration, type DurationUnit} from 'date-vir';
 import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
-import {LoaderAnimated24Icon, StatusFailure24Icon} from '../icons/index.js';
+import {LoaderAnimated24Icon} from '../icons/index.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
@@ -118,7 +119,7 @@ export const ViraImage = defineViraElement<{
             ? html`
                   <slot class="status-wrapper" name=${slotNames['vira-image-error']}>
                       <${ViraIcon.assign({
-                          icon: StatusFailure24Icon,
+                          icon: internalLucideIcons.CircleX24,
                       })}
                           class="error"
                       ></${ViraIcon}>

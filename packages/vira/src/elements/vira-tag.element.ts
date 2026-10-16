@@ -10,8 +10,7 @@ import {ContrastLevelName} from '@electrovir/color/dist/data/contrast/contrast.j
 import {css, type CSSResult, defineElementEvent, html, listen, unsafeCSS} from 'element-vir';
 import {type SingleCssVarDefinition} from 'lit-css-vars';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
-import {Check16Icon} from '../icons/icon-svgs/16/check-16.icon.js';
-import {X16Icon} from '../icons/icon-svgs/16/x-16.icon.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {
     standaloneThemeColorNames,
@@ -606,13 +605,13 @@ export const ViraTag = defineViraElement<
                 })}
             >
                 <${ViraIcon.assign({
-                    icon: Check16Icon,
+                    icon: internalLucideIcons.Check16,
                 })}
                     class="selected-check"
                 ></${ViraIcon}>
                 <span class="text">${String(inputs.text)}</span>
                 <${ViraIcon.assign({
-                    icon: X16Icon,
+                    icon: internalLucideIcons.X16,
                 })}
                     class="cancel-x"
                 ></${ViraIcon}>

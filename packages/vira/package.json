@@ -1,6 +1,6 @@
 {
     "name": "vira",
-    "version": "33.4.3",
+    "version": "33.5.0",
     "description": "A simple and highly versatile design system using element-vir.",
     "keywords": [
         "design",
@@ -48,6 +48,7 @@
         "json-schema-to-ts": "^3.1.1",
         "lit": "^3.3.3",
         "lit-css-vars": "^3.6.3",
+        "lucide-static": "1.55.0",
         "object-shape-tester": "^6.15.1",
         "observavir": "^2.4.2",
         "page-active": "^1.0.4",
@@ -63,7 +64,6 @@
         "@web/test-runner-visual-regression": "^1.0.1",
         "esbuild": "^0.28.2",
         "istanbul-smart-text-reporter": "^1.1.5",
-        "lucide-static": "^1.55.0",
         "markdown-code-example-inserter": "^3.1.1",
         "theme-vir": "^29.0.1",
         "typedoc": "^0.28.20",
@@ -73,7 +73,6 @@
     },
     "peerDependencies": {
         "element-vir": "^27.0.0",
-        "lucide-static": ">=0.460",
         "theme-vir": "^29.0.0"
     },
     "engines": {

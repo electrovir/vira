@@ -1,7 +1,7 @@
 import {css, html} from 'element-vir';
 import {viraAnimationDurations} from '../../../styles/durations.js';
 import {defineIcon} from '../../icon-svg.js';
-import {Loader24Icon} from './loader-24.icon.js';
+import {LucideLoaderIcon} from '../../lucide/loader.icon.js';
 
 const animatedLoaderStyles = css`
     @keyframes loader-animated-spin {
@@ -14,13 +14,15 @@ const animatedLoaderStyles = css`
     }
 
     svg {
+        width: 24px;
+        height: 24px;
         animation: ${viraAnimationDurations['vira-extended-animation-duration'].value} linear
             loader-animated-spin infinite;
     }
 `;
 
 /**
- * A variation of {@link Loader24Icon} that spins on its own.
+ * Lucide's `Loader` icon at 24px, spinning on its own.
  *
  * @category Icon
  * @category SVG
@@ -32,6 +34,6 @@ export const LoaderAnimated24Icon = defineIcon({
         <style>
             ${animatedLoaderStyles}
         </style>
-        ${Loader24Icon.svgTemplate}
+        ${LucideLoaderIcon.svgTemplate}
     `,
 });

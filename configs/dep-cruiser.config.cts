@@ -6,7 +6,7 @@ const baseConfig = defineConfig({
         // enter file exceptions by rule name here
         'no-orphans': {
             from: [
-                'src/index\\.ts',
+                'src/index\\.ts$',
             ],
         },
         'no-non-package-json': {
@@ -17,30 +17,11 @@ const baseConfig = defineConfig({
     },
     omitRules: [
         // enter rule names here to omit
-        'no-duplicate-dep-types',
-        'no-circular',
     ],
 });
 
 const depCruiserConfig: IConfiguration = {
     ...baseConfig,
-    forbidden: [
-        ...baseConfig.forbidden,
-        {
-            name: 'no-circular',
-            severity: 'error',
-            comment: 'This dependency is part of a circular relationship.',
-            from: {},
-            to: {
-                circular: true,
-                // allow circular type imports
-                dependencyTypesNot: [
-                    'type-import',
-                    'type-only',
-                ],
-            },
-        },
-    ],
 };
 
 module.exports = depCruiserConfig;

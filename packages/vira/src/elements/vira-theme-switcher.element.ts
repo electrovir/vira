@@ -1,5 +1,5 @@
 import {mapEnumToObject, type PartialWithUndefined} from '@augment-vir/common';
-import {classMap, css, html, listen} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen} from 'element-vir';
 import {AutoTheme24Icon, Moon24Icon, Sun24Icon, type ViraIconSvg} from '../icons/index.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noNativeFormStyles, noNativeSpacing, viraTheme} from '../styles/index.js';
@@ -26,20 +26,36 @@ const defaultThemeLabels: Readonly<Record<ViraThemeSelection, string>> = {
 };
 
 /**
- * A row of buttons for selecting a {@link ViraThemeSelection} (light, dark, or auto). Fires a
- * `themeSelect` event when the user picks an option; the consumer is responsible for applying the
- * resulting theme.
+ * The part of {@link ViraThemeClient} that {@link ViraThemeSwitcher} uses. Implement this to back the
+ * switcher with your own theme storage instead of a `ViraThemeClient`.
+ *
+ * @category Internal
+ */
+export type ViraThemeSwitcherClient = Pick<ViraThemeClient, 'getCurrentTheme' | 'setSelectedTheme'>;
+
+/**
+ * A row of buttons for selecting a {@link ViraThemeSelection} (light, dark, or auto). Clicking a
+ * button calls `setSelectedTheme` on the `themeClient` input (or on an internal
+ * {@link ViraThemeClient} when none is given), which applies the theme, then fires a `themeSelect`
+ * event with the selection.
  *
  * @category Elements
  */
 export const ViraThemeSwitcher = defineViraElement<
     PartialWithUndefined<{
-        themeClient: Readonly<ViraThemeClient>;
-        /** Override the default English button titles (used as `title` attributes for tooltips). */
+        themeClient: Readonly<ViraThemeSwitcherClient>;
+        /**
+         * Override the default English button labels (used as `title` attributes for tooltips and
+         * as `aria-label` attributes).
+         */
         labels: Readonly<Record<ViraThemeSelection, string>>;
     }>
 >()({
     tagName: 'vira-theme-switcher',
+    events: {
+        /** Fired after the user selects a theme and it has been passed to the theme client. */
+        themeSelect: defineElementEvent<ViraThemeSelection>(),
+    },
     styles: css`
         :host {
             display: inline-flex;
@@ -79,11 +95,11 @@ export const ViraThemeSwitcher = defineViraElement<
     `,
     state() {
         return {
-            internalThemeClient: undefined as undefined | Readonly<ViraThemeClient>,
+            internalThemeClient: undefined as undefined | Readonly<ViraThemeSwitcherClient>,
             currentTheme: ViraThemeSelection.Auto,
         };
     },
-    render({inputs, state, updateState}) {
+    render({inputs, state, updateState, dispatch, events}) {
         const themeClient =
             inputs.themeClient || state.internalThemeClient || new ViraThemeClient();
         updateState({
@@ -100,12 +116,18 @@ export const ViraThemeSwitcher = defineViraElement<
                         selected: themeClient.getCurrentTheme() === theme,
                     })}
                     title=${labels[theme]}
+                    aria-label=${labels[theme]}
                     ${listen('click', (event) => {
                         event.stopPropagation();
                         themeClient.setSelectedTheme(theme);
                         updateState({
                             currentTheme: themeClient.getCurrentTheme(),
                         });
+                        dispatch(
+                            new events.themeSelect({
+                                detail: theme,
+                            }),
+                        );
                     })}
                 >
                     <${ViraIcon.assign({

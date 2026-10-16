@@ -39002,7 +39002,7 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
                     class="cancel-x"
                 ></${q}>
             </button>
-        `}});function m6(e){return[dt(e.prefix),`theme-vir-style`].join(`-`)}function h6(e,t,r){let i=ge(nr(e.colors).flatMap(e=>[g6({layerKey:`background`,themeColor:e,themeOverride:t}),g6({layerKey:`foreground`,themeColor:e,themeOverride:t})]));return n(i,m6(e),r)}function g6({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}var _6=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),v6=({useDarkTheme:e})=>{h6(H,e?Dv:void 0)},y6=`(prefers-color-scheme: dark)`,b6={selectedTheme:lt({theme:Ed(_6)})},x6=class{applyThemeCallback=v6;localStorageClient;removeThemePreferenceListener=lr(globalThis.matchMedia(y6),`change`,e=>{oe.instanceOf(e,MediaQueryListEvent),this.getCurrentTheme()===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new I2(b6,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.getCurrentTheme())}getCurrentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(y6).matches;this.applyThemeCallback({useDarkTheme:t})}},S6=Jt(_6,e=>({[_6.Light]:$b,[_6.Dark]:Pb,[_6.Auto]:ub})[e]),C6={[_6.Light]:`Light`,[_6.Dark]:`Dark`,[_6.Auto]:`Auto`},w6=Nv()({tagName:`vira-theme-switcher`,styles:w`
+        `}});function m6(e){return[dt(e.prefix),`theme-vir-style`].join(`-`)}function h6(e,t,r){let i=ge(nr(e.colors).flatMap(e=>[g6({layerKey:`background`,themeColor:e,themeOverride:t}),g6({layerKey:`foreground`,themeColor:e,themeOverride:t})]));return n(i,m6(e),r)}function g6({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}var _6=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),v6=({useDarkTheme:e})=>{h6(H,e?Dv:void 0)},y6=`(prefers-color-scheme: dark)`,b6={selectedTheme:lt({theme:Ed(_6)})},x6=class{applyThemeCallback=v6;localStorageClient;removeThemePreferenceListener=lr(globalThis.matchMedia(y6),`change`,e=>{oe.instanceOf(e,MediaQueryListEvent),this.getCurrentTheme()===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new I2(b6,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.getCurrentTheme())}getCurrentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(y6).matches;this.applyThemeCallback({useDarkTheme:t})}},S6=Jt(_6,e=>({[_6.Light]:$b,[_6.Dark]:Pb,[_6.Auto]:ub})[e]),C6={[_6.Light]:`Light`,[_6.Dark]:`Dark`,[_6.Auto]:`Auto`},w6=Nv()({tagName:`vira-theme-switcher`,events:{themeSelect:C()},styles:w`
         :host {
             display: inline-flex;
             align-items: center;
@@ -39038,11 +39038,12 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
             width: 20px;
             aspect-ratio: 1;
         }
-    `,state(){return{internalThemeClient:void 0,currentTheme:_6.Auto}},render({inputs:e,state:t,updateState:n}){let r=e.themeClient||t.internalThemeClient||new x6;n({internalThemeClient:r,currentTheme:r.getCurrentTheme()});let i=e.labels||C6;return Object.values(_6).map(e=>T`
+    `,state(){return{internalThemeClient:void 0,currentTheme:_6.Auto}},render({inputs:e,state:t,updateState:n,dispatch:r,events:i}){let a=e.themeClient||t.internalThemeClient||new x6;n({internalThemeClient:a,currentTheme:a.getCurrentTheme()});let o=e.labels||C6;return Object.values(_6).map(e=>T`
                 <button
-                    class=${Jf({selected:r.getCurrentTheme()===e})}
-                    title=${i[e]}
-                    ${P(`click`,t=>{t.stopPropagation(),r.setSelectedTheme(e),n({currentTheme:r.getCurrentTheme()})})}
+                    class=${Jf({selected:a.getCurrentTheme()===e})}
+                    title=${o[e]}
+                    aria-label=${o[e]}
+                    ${P(`click`,t=>{t.stopPropagation(),a.setSelectedTheme(e),n({currentTheme:a.getCurrentTheme()}),r(new i.themeSelect({detail:e}))})}
                 >
                     <${q.assign({icon:S6[e],fitContainer:!0})}></${q}>
                 </button>

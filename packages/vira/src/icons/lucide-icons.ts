@@ -34,8 +34,8 @@ const lucideIconCache = new Map<LucideIconKey, ViraIconSvg>();
  * @deprecated Use direct icon imports
  * @category Icon
  */
-export const lucideIcons: Readonly<Record<LucideIconKey, ViraIconSvg>> = new Proxy(
-    {} as Record<LucideIconKey, ViraIconSvg>,
+export const lucideIcons: Readonly<{[Key in LucideIconKey]: ViraIconSvg<Key>}> = new Proxy(
+    {} as {[Key in LucideIconKey]: ViraIconSvg<Key>},
     {
         get(_target, property: string) {
             if (!isLucideIconKey(property)) {

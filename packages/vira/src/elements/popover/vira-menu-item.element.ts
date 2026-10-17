@@ -3,14 +3,14 @@ import {type PartialWithUndefined} from '@augment-vir/common';
 import {css, defineElementEvent, html, nothing} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {type ViraIconSvg} from '../../icons/icon-svg.js';
-import {lucideIcons} from '../../icons/lucide-icons.js';
+import {internalLucideIcons} from '../../icons/internal-lucide-icons.js';
 import {createSizedIcon} from '../../icons/sized-icon.js';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {noUserSelect} from '../../styles/index.js';
 import {defineViraElement} from '../../util/define-vira-element.js';
 import {ViraIcon} from '../vira-icon.element.js';
 
-const selectedCheckIcon = createSizedIcon(lucideIcons.Check, 16);
+const selectedCheckIcon = createSizedIcon(internalLucideIcons.Check16, 16);
 
 /**
  * An element for an individual menu item.

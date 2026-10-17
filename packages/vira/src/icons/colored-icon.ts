@@ -18,10 +18,10 @@ const coloredIconCache = new WeakMap<ViraIconSvg, Map<string, ViraIconSvg>>();
  *
  * @category Icon
  */
-export function createColoredIcon(
-    icon: ViraIconSvg,
+export function createColoredIcon<const Name extends string>(
+    icon: ViraIconSvg<Name>,
     colors: PartialWithUndefined<Record<keyof typeof viraIconCssVars, string | CSSResult>>,
-): ViraIconSvg {
+): ViraIconSvg<Name> {
     const colorStyles = getObjectTypedKeys(colors)
         .map((cssVarName) => {
             if (colors[cssVarName]) {
@@ -33,7 +33,12 @@ export function createColoredIcon(
         .filter(check.isTruthy)
         .join(' ');
 
-    const iconCache = getOrSetFromMap(coloredIconCache, icon, () => new Map<string, ViraIconSvg>());
+    /** Every entry in this inner cache was created from `icon`, so it has `icon`'s name. */
+    const iconCache = getOrSetFromMap(
+        coloredIconCache,
+        icon,
+        () => new Map<string, ViraIconSvg>(),
+    ) satisfies Map<string, ViraIconSvg> as Map<string, ViraIconSvg<Name>>;
 
     return getOrSetFromMap(iconCache, colorStyles, () => {
         const styles = css`

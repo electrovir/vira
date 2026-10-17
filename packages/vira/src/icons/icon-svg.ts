@@ -5,8 +5,8 @@ import {type TemplateResult} from 'element-vir';
  *
  * @category Icon
  */
-export type ViraIconSvg = {
-    name: string;
+export type ViraIconSvg<Name extends string = string> = {
+    name: Name;
     /** An optionally forced icon size. */
     size?: number;
     svgTemplate: TemplateResult;
@@ -17,14 +17,14 @@ export type ViraIconSvg = {
  *
  * @category Icon
  */
-export function defineIcon({
+export function defineIcon<const Name extends string>({
     name,
     svgTemplate,
 }: {
-    name: string;
+    name: Name;
     svgTemplate: TemplateResult;
-}): ViraIconSvg {
-    const iconSvg: ViraIconSvg = {
+}): ViraIconSvg<Name> {
+    const iconSvg: ViraIconSvg<Name> = {
         name,
         svgTemplate,
     };

@@ -6,7 +6,10 @@ import {type ViraIconSvg} from './icon-svg.js';
  *
  * @category Icon
  */
-export function createSizedIcon(icon: Readonly<ViraIconSvg>, size: number): ViraIconSvg {
+export function createSizedIcon<const Name extends string>(
+    icon: Readonly<ViraIconSvg<Name>>,
+    size: number,
+): ViraIconSvg<Name> {
     return {
         ...icon,
         size,

@@ -16,7 +16,7 @@ import {
     dragReorderHandle,
     dragReorderRows,
 } from '../directives/drag-reorder.directive.js';
-import {lucideIcons} from '../icons/lucide-icons.js';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {DragReorderManager, type DragReorderMove} from '../util/drag-reorder-manager.js';
@@ -315,7 +315,7 @@ export const ViraForm = defineViraElement<
                           ${dragReorderHandle(state.dragReorder)}
                       >
                           <${ViraIcon.assign({
-                              icon: lucideIcons.GripVertical,
+                              icon: internalLucideIcons.GripVertical16,
                           })}></${ViraIcon}>
                       </div>
                   `

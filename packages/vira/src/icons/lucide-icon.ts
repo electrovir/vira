@@ -44,14 +44,14 @@ function applySvgAttributes(
  *
  * @category Internal
  */
-export function createLucideIcon({
+export function createLucideIcon<const Name extends string>({
     name,
     svg,
 }: Readonly<{
-    name: string;
+    name: Name;
     /** The raw SVG string exported by `lucide-static`. */
     svg: string;
-}>): ViraIconSvg {
+}>): ViraIconSvg<Name> {
     return {
         name,
         svgTemplate: html`

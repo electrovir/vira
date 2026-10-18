@@ -37662,7 +37662,123 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             ${t.showAbsoluteTime?E`
                       <${i2.assign({time:t.time,timezone:t.timezone})}></${i2}>
                   `:S}
-        `}}),R4=class extends Error{name=`SpaRouterError`},z4=class extends R4{name=`GlobalUrlEventsConsolidationError`},B4=class extends R4{name=`SanitizationDepthMaxed`};function V4(e,t){return t.fullPaths.every((t,n)=>t.startsWith(`:`)?!!e[n]:e[n]===t)}function H4(e,t){return t.fullPaths.length===e.length&&V4(e,t)}function U4(e,t,n){return n?.exactMatch?H4(e.paths,t):V4(e.paths,t)}function W4(e,n){let r=Object.entries(e.children||{}),i=n.length?` at ${n.join(` -> `)}.`:`.`;if(e.allowBare&&e.anyChildren)throw Error(`Invalid tree: cannot define both allowBare and anyChildren${i}`);if(e.anyChildren&&r.length)throw Error(`Invalid tree: cannot define anyChildren and definite children${i}`);if(!e.allowBare&&!e.anyChildren&&!r.some(([e])=>!e.startsWith(`:`)))throw Error(`Invalid tree: allowBare is false but there are no definite children${i}`);e.anyChildren||r.forEach(([e,r])=>{t.isEmpty(r)||W4(r,[...n,e])})}function G4(e){return Qn(e)}function K4(e,t){let n=e.children,r=t[t.length-1]||``,i=Object.defineProperty({path:r,fullPaths:t,children:n&&Object.keys(n).length?fe(n,(e,n)=>K4(n,[...t,e])):{}},"PathsType",{enumerable:!1,configurable:!1,get(){throw Error(`Do not access PathsType as value, it's only a type.`)}});return r.startsWith(`:`)?{...i,fill:n=>K4(e,[...t.slice(0,-1),n])}:i}var q4=class{tree;paths;pathsWithoutTypes;constructor(e){this.tree=e,W4(this.tree,[]),this.paths=K4(e,[]),this.pathsWithoutTypes=G4(this.paths)}get PathsType(){throw Error(`PathTree.PathsType is a type only, it cannot be accessed as a runtime value.`)}sanitizePaths(e){return X4(e,this.tree)}};function J4({entry:e,pathPart:t,hasMoreSegments:n}){let r=e.endsWith(`/*`),i=r?e.slice(0,-2):e;return(i.startsWith(`/`)?i.slice(1):i)===t?r?n:!n:!1}function Y4(e,t,n){let r=e[t];return r?[t,r]:Object.entries(e).find(([,e])=>`redirectFrom`in e&&e.redirectFrom?.some(e=>J4({entry:e,pathPart:t,hasMoreSegments:n})))||Object.entries(e).find(([e])=>e.startsWith(`:`))}function X4(e,n){if(`anyChildren`in n&&n.anyChildren)return e;if(`allowBare`in n){let r=n.children||{};if(t.isLengthAtLeast(e,1)){let t=e[0],i=Y4(r,t,e.length>1);if(i&&!(`disable`in i[1]&&i[1].disable)){let[a,o]=i;if(`redirectTo`in o&&o.redirectTo){if(!r[o.redirectTo])throw Error(`Invalid redirect from '${t}' to '${o.redirectTo}'.`);return X4([o.redirectTo,...e.slice(1)],n)}return[!a.startsWith(`:`)&&a!==t?a:t,...X4(e.slice(1),o)]}}if(n.allowBare)return[];{let e=_(r).find(([e,t])=>!e.startsWith(`:`)&&!(`disable`in t&&t.disable))?.[0];if(!e)throw Error(`Got blocked bare path but no children exist.`);return[e]}}return[]}var Z4=ct({basePath:Md(``),sanitizeRoute:(e=>e),maxListenerCount:Md(1),disableWarnings:Md(!1),isPaused:Md(!1),isRouteAllowed:Md((()=>!0))}),Q4=`://`;function $4(...e){let t=e.join(`/`),n=t.indexOf(Q4),[r,i]=n===-1?[``,t]:[t.slice(0,n),t.slice(n+3)],a=!1,o=i.replace(/\/{2,}/g,`/`).split(`/`).reduce((e,t,n,r)=>{if(a)return e;let i=r[n+1],o=t,s=i?.startsWith(`?`),c=!t.includes(`?`)&&s,l=i===`?`;if(s||c){a=!0;let e=!1,s=r.slice(n+2).reduce((t,n)=>(n.includes(`#`)&&(e=!0),e?t.concat(n):[t,n].join(`&`)),``);o=[t,i,l?pe({value:s,prefix:`&`}):s].join(``)}return e.concat(o)},[]);return[r,r?Q4:``,o.join(`/`)].join(``)}var e3;(function(e){e.Encode=`encode`,e.Decode=`decode`,e.None=`none`})(e3||={});var t3;(function(e){e.Clear=`clear`,e.Replace=`replace`,e.Append=`append`})(t3||={});var n3=ct({encoding:Ad(jd(void 0,Td(e3))),searchParamStrategy:Ad(jd(void 0,Td(t3)))});function r3(e,t){return e.map(e=>{if(e!=null)return i3(String(e),t)}).filter(e=>e!=null)}function i3(e,t){return t?.encoding===e3.Decode?decodeURIComponent(e):t?.encoding===e3.Encode?encodeURIComponent(e):e}ct(Fd({keys:``,values:[``]}));function a3(e,n,r){let i=r?.searchParamStrategy===t3.Clear?{}:fe(e,(e,t)=>kt(t)),a=fe(n,(e,n)=>{if(r?.searchParamStrategy===t3.Append){let a=i[e],o=t.isArray(a)?a:[a];if(n){let e=t.isArray(n)?n:[n];return r3([...o,...e],r)}return r3(o,r)}if(t.isArray(n))return r3(n,r);if(n)return r3([n],r)});return $n({...i,...a},(e,t)=>!!t)}function o3(e,n){if(t.isString(e)&&!e.includes(`?`))return{};let r=t.isString(e)?e:e instanceof URLSearchParams?e.toString():e.search,i=r.indexOf(`#`);return{...(i===-1?r:r.slice(0,i)).replace(/^[^?]*\?/,``).split(`&`).filter(e=>e!==``).map(e=>{let[t,...n]=pn({value:e,splitter:`=`});return[t,n.length?n.join(`=`):void 0]}).reduce((e,[t,r])=>{let i=l3({options:n,key:t,value:r}),a=me(e,i.key,()=>[]);return r!=null&&a.push(i.value),e},Object.create(null))}}function s3(e){if(e!=null)return t.isArray(e)?[...e]:e===``?[]:[e]}function c3(e,t){let n=Je(Object.entries(e),([e,n])=>{let r=s3(n);return r?.length?r.map(n=>{let r=l3({options:t,key:e,value:n});return[r.key,r.value].join(`=`)}):[e]},(e,[,t])=>t!=null).flat();return n.length?de({value:n.join(`&`),prefix:`?`}):``}function l3({options:e,key:t,value:n}){return{key:i3(t,e),value:i3(String(n),e)}}var u3=[`ftp`,`file`,`http`,`https`,`ws`,`wss`];function d3({hash:e,hostname:t,password:n,pathname:r,port:i,protocol:a,search:o,username:s}){return[a?a+`://`:``,s?encodeURIComponent(s)+`:`:``,n?encodeURIComponent(n)+`@`:``,m3({hostname:t,port:i}),p3({hash:e,pathname:r,search:o})].join(``)}function f3({pathname:e}){let t=pe({value:e,prefix:`/`});return t?t.split(`/`):[]}function p3({hash:e,pathname:t,search:n}){return[de({value:t,prefix:`/`}),n?de({value:n,prefix:`?`}):``,e?de({value:e,prefix:`#`}):``].join(``)}function m3({hostname:e,port:t}){return[e,t?`:`+t:``].join(``)}function h3({hostname:e}){return e?e.split(`.`):[]}function g3({hostname:e,port:n,protocol:r}){return[r,m3({hostname:e,port:n})].filter(t.isTruthy).join(`://`)}function _3(e,n){let r=t.isString(e)?pe({value:e,prefix:`.`}):e.toString(),i=r.replace(/^[^#]*(?:#|$)/,``),a=i?de({value:i3(i,n),prefix:`#`}):``,o=r.indexOf(`#`),s=o===-1?r:r.slice(0,o),c=s.replace(/^[^?]*(?:\?|$)/,``),l=c?de({value:i3(c,n),prefix:`?`}):``,u=s.indexOf(`?`),d=u===-1?s:s.slice(0,u),f=d.includes(`://`)?d.replace(/:\/\/.*$/,``):``,p=(u3.includes(f.toLowerCase())?d.replace(/\\/g,`/`):d).replace(/^.*?:\/\//,``).replace(/\/{2,}/g,`/`),m=p.length-p.replace(/^\/*/,``).length,h=p.slice(m).replace(/\/.*/,``).lastIndexOf(`@`),g=h!==-1,_=g?p.slice(0,m+h):``,v=g?p.slice(m+h+1):p,[y,...b]=g?_.split(`:`).reverse():[],ee=decodeURIComponent(b.toReversed().join(``).replace(/[/:]/g,``)||``),x=decodeURIComponent(y?.replace(/[/:]/g,``)||``),S=v.replace(/\/.*/,``),te=fn(S,`:`,{caseSensitive:!0}).toReversed(),ne=!te[0]?.endsWith(`]`)&&te[1]===`:`,re=ne&&te[0]||``,ie=ne?S.slice(0,S.length-re.length-1):S,ae=ie.endsWith(`]`)?void 0:ie.match(/^(?<host>.*):(?<port>\d+)$/),C=ae?.groups?.host??ie,oe=h3({hostname:C}),se=ae?.groups?.port??re,ce=i3(v.replace(/^[^/]*(\/|$)/,`$1`).replace(/^[^/]*(?:\/|$)/,`/`),n),le=m3({hostname:C,port:se}),ue=g3({hostname:C,port:se,protocol:f}),fe=d3({hash:a,hostname:C,password:x,pathname:ce,port:se,protocol:f,search:l,username:ee}),me=o3(l),he=f3({pathname:ce});return{fullPath:p3({hash:a,pathname:ce,search:l}),hash:a,host:le,hostname:C,domains:oe,href:fe,origin:ue,password:x,pathname:ce,paths:he,port:se,protocol:f,search:l,searchParams:me,username:ee}}ct({hash:Ad(jd(void 0,``)),search:Ad(jd(void 0,``,Fd({keys:``,values:jd(null,void 0,``,-1,!1,0n,[null,void 0,``,-1,!1,0n])}))),hostname:Ad(jd(void 0,``)),domains:Ad(jd(void 0,[``])),pathname:Ad(jd(void 0,``)),paths:Ad(jd(void 0,[``])),protocol:Ad(jd(void 0,``)),username:Ad(jd(void 0,``)),password:Ad(jd(void 0,``)),port:Ad(jd(void 0,``,-1))});function v3(e,n,r){let i=!!r,a=n==null||nt(n,n3,{allowExtraKeys:!1}),o=a?_3(``):t.instanceOf(e,URL)||t.isString(e)?_3(e):e,s=a?e:n,c=t.isString(s)&&s.startsWith(`.`),l=t.isString(s)||t.instanceOf(s,URL)?$n(_3(s),(e,n)=>t.isTruthy(n)&&(e!==`domains`||t.isArray(n)&&n.length!==0)):s,u=i?r:a?n:void 0,d=fe(o,(e,n)=>{if(!t.hasKey(l,e))return n;let r=l[e];return t.isArray(r)?r:t.isNumber(r)?String(r):t.isString(r)?e===`hash`&&r?de({value:r,prefix:`#`}):e===`pathname`?de({value:r,prefix:`/`}):r:n});t.hasKey(l,`domains`)&&t.isArray(l.domains)&&(d.hostname=l.domains.join(`.`)),d.domains=h3(d),t.hasKey(l,`paths`)&&l.paths&&(d.pathname=$4(c?o.pathname:``,...l.paths));let f=t.isString(l.search)?o3(de({value:l.search,prefix:`?`})):Ft(l.search||{}),p=a3(d.searchParams,f,{...u,encoding:e3.None}),m=c3(p,u);return{...d,searchParams:p,search:m,paths:f3(d),fullPath:p3(d),host:m3(d),origin:g3(d),href:d3({...d,search:m})}}var y3=0;function b3(e){return!(e.type!==`click`&&e.type!==`mousedown`||e.metaKey||e.altKey||e.ctrlKey||e.shiftKey||e.button!==y3)}var x3=`locationchange`,S3=globalThis.history;globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!1;var C3=S3?.pushState;function w3(...e){if(!C3)return;let t=C3.apply(S3,e);return globalThis.dispatchEvent(new Event(x3)),t}var T3=S3?.replaceState;function E3(...e){if(!T3)return;let t=T3.apply(S3,e);return globalThis.dispatchEvent(new Event(x3)),t}function D3(){if(!globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY&&S3){if(S3.pushState===w3)throw new z4(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.pushState has already been overridden. Does this module have two copies in your repo?`);if(S3.replaceState===E3)throw new z4(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.replaceState has already been overridden. Does this module have two copies in your repo?`);globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!0,S3.pushState=w3,S3.replaceState=E3,globalThis.addEventListener(`popstate`,()=>{globalThis.dispatchEvent(new Event(x3))})}}function O3(e,t){let n=_3(e),r=pe({value:pe({value:n.pathname,prefix:de({value:t||``,prefix:`/`})}),prefix:`/`});return{paths:r?r.split(`/`):[],search:Object.keys(n.searchParams).length?n.searchParams:void 0,hash:n.hash?pe({value:n.hash,prefix:`#`}):void 0}}var k3=class{innerObservable;removeGlobalListener;sanitizationDepth=0;params;constructor(e){_e(e,Z4),this.params={...e};let n=this.readCurrentRoute();this.innerObservable=new Kf({defaultValue:n,equalityCheck:()=>!1}),D3(),this.removeGlobalListener=cr(globalThis,x3,()=>{if(this.params.isPaused)return;if(this.sanitizationDepth>2)throw new B4(`Looping route sanitization detected; aborting window URL change listener.`);let n=O3(globalThis.location.href,this.params.basePath),r=e.sanitizeRoute(n);t.jsonEquals(n,r)?(this.sanitizationDepth=0,this.innerObservable.setValue(r)):(this.sanitizationDepth++,this.setRoute(r,{replace:!0}),e.disableWarnings||console.warn(`Route sanitized.`,{from:n,to:r}))}),this.setRoute(n,{replace:!0})}routeIncludesBasePath(e){return!e.paths||!this.params.basePath?!1:$4(...e.paths).startsWith(this.params.basePath)}readCurrentRoute(){return this.sanitizeRoute(O3(globalThis.location.href,this.params.basePath))}sanitizeRoute(e){return this.params.sanitizeRoute(e)}createRouteUrl(e){let t={...O3(globalThis.location.href,this.params.basePath),...e},n=this.sanitizeRoute(t),r=this.routeIncludesBasePath(O3(globalThis.location.href,void 0))&&!this.routeIncludesBasePath(n)&&this.params.basePath?{...n,paths:[this.params.basePath,...n.paths]}:n;return{url:v3(globalThis.location.href,{paths:r.paths,search:r.search,hash:r.hash?de({value:r.hash,prefix:`#`}):``},{searchParamStrategy:t3.Clear}).href,route:n}}setRoute(e,n={}){let{route:r,url:i}=this.createRouteUrl(e),{fullPath:a}=_3(i);return this.params.isPaused||!n.force&&t.jsonEquals(_3(globalThis.location.href).fullPath,a)||this.params.isRouteAllowed&&!this.params.isRouteAllowed(r)?!1:n.replace?(globalThis.history.replaceState(void 0,``,a),!0):(globalThis.history.pushState(void 0,``,a),!0)}setRouteOnDirectNavigation(e,t){return b3(t)?(t.preventDefault(),this.setRoute(e)):!1}listen(e,t){let n=this.params.maxListenerCount??1;if(n&&this.innerObservable.getListenerCount()>=n)throw new R4(`Attempting to attach more route listeners than the \`maxListenerCount\` of '${n}'.`);return this.innerObservable.listen(e,t),()=>this.removeListener(t)}removeListener(e){return this.innerObservable.removeListener(e)}getListenerCount(){return this.innerObservable.getListenerCount()}destroy(){this.params.isPaused=!0,this.removeGlobalListener(),this.innerObservable.destroy()}},A3=function(e){return e.Top=`top`,e.Bottom=`bottom`,e.Left=`left`,e.Right=`right`,e}({}),j3=function(e){return e.Vertical=`vertical`,e.Horizontal=`horizontal`,e}({});function M3(e,t){let n=e.querySelector(t);return n?n.getBoundingClientRect().width:0}function N3(e){return e.reduce((e,t)=>{let n=e[e.length-1];return t.group!=null&&n&&n.group===t.group?[...e.slice(0,-1),{group:n.group,tabs:[...n.tabs,t]}]:[...e,{group:t.group,tabs:[t]}]},[])}function P3(e,t){let n=N3(e);return n.map((e,r)=>{let i=n[r-1],a=i&&i.group!=null&&e.group!=null?E`
+        `}}),R4=Mv()({tagName:`vira-slider`,cssVars:{"vira-slider-track-height":`4px`,"vira-slider-thumb-size":`16px`,"vira-slider-track-color":W[`vira-form-border-color`].value,"vira-slider-fill-color":W[`vira-form-accent-primary-color`].value,"vira-slider-thumb-color":W[`vira-form-accent-primary-color`].value,"vira-slider-thumb-hover-color":W[`vira-form-accent-primary-hover-color`].value,"vira-slider-thumb-active-color":W[`vira-form-accent-primary-active-color`].value},styles({cssVars:e}){return T`
+            :host {
+                display: inline-flex;
+                width: 160px;
+                vertical-align: middle;
+            }
+
+            .slider {
+                position: relative;
+                flex-grow: 1;
+                height: ${e[`vira-slider-thumb-size`].value};
+
+                &.disabled {
+                    ${g0};
+                }
+            }
+
+            .track,
+            .fill {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                height: ${e[`vira-slider-track-height`].value};
+                transform: translateY(-50%);
+                border-radius: ${e[`vira-slider-track-height`].value};
+                pointer-events: none;
+            }
+
+            .track {
+                width: 100%;
+                background-color: ${e[`vira-slider-track-color`].value};
+            }
+
+            .fill {
+                background-color: ${e[`vira-slider-fill-color`].value};
+            }
+
+            .thumb {
+                position: absolute;
+                top: 0;
+                width: ${e[`vira-slider-thumb-size`].value};
+                height: ${e[`vira-slider-thumb-size`].value};
+                box-sizing: border-box;
+                border-radius: 50%;
+                border: 2px solid ${W[`vira-form-background-color`].value};
+                background-color: ${e[`vira-slider-thumb-color`].value};
+                pointer-events: none;
+            }
+
+            input {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                appearance: none;
+                background: transparent;
+                opacity: 0;
+                cursor: pointer;
+
+                /*
+                    The invisible native thumb must match the drawn thumb's width so the browser
+                    maps pointer positions to the same values the drawn thumb shows.
+                */
+                &::-webkit-slider-thumb {
+                    appearance: none;
+                    width: ${e[`vira-slider-thumb-size`].value};
+                    height: ${e[`vira-slider-thumb-size`].value};
+                }
+                &::-moz-range-thumb {
+                    width: ${e[`vira-slider-thumb-size`].value};
+                    height: ${e[`vira-slider-thumb-size`].value};
+                    border: none;
+                }
+
+                &:hover ~ .thumb {
+                    background-color: ${e[`vira-slider-thumb-hover-color`].value};
+                }
+                &:active ~ .thumb {
+                    background-color: ${e[`vira-slider-thumb-active-color`].value};
+                }
+                &:focus-visible:not(:active) ~ .thumb::after {
+                    ${t0({elementBorderSize:`2px`,borderRadius:`50%`,noNesting:!0})}
+                }
+            }
+        `},events:{valueChange:w()},render({inputs:e,dispatch:t,events:n,cssVars:r}){let i=e.min??0,a=e.max??100,o=a>i?Math.min(1,Math.max(0,(e.value-i)/(a-i))):0,s=T`calc((100% - ${r[`vira-slider-thumb-size`].value}) * ${o})`;return E`
+            <div
+                class="slider ${qf({disabled:!!e.isDisabled})}"
+            >
+                <div class="track"></div>
+                <div
+                    class="fill"
+                    style=${T`
+                        width: calc(
+                            ${s} + ${r[`vira-slider-thumb-size`].value} / 2
+                        );
+                    `}
+                ></div>
+                <input
+                    type="range"
+                    min=${i}
+                    max=${a}
+                    step=${e.step??1}
+                    aria-label=${Jf(e.label||void 0)}
+                    ?disabled=${e.isDisabled}
+                    .value=${String(e.value)}
+                    ${F(`input`,r=>{let i=Uv(r,HTMLInputElement),a=Number(i.value);i.value=String(e.value),a!==e.value&&t(new n.valueChange({detail:a}))})}
+                />
+                <div
+                    class="thumb"
+                    style=${T`
+                        left: ${s};
+                    `}
+                ></div>
+            </div>
+        `}}),z4=class extends Error{name=`SpaRouterError`},B4=class extends z4{name=`GlobalUrlEventsConsolidationError`},V4=class extends z4{name=`SanitizationDepthMaxed`};function H4(e,t){return t.fullPaths.every((t,n)=>t.startsWith(`:`)?!!e[n]:e[n]===t)}function U4(e,t){return t.fullPaths.length===e.length&&H4(e,t)}function W4(e,t,n){return n?.exactMatch?U4(e.paths,t):H4(e.paths,t)}function G4(e,n){let r=Object.entries(e.children||{}),i=n.length?` at ${n.join(` -> `)}.`:`.`;if(e.allowBare&&e.anyChildren)throw Error(`Invalid tree: cannot define both allowBare and anyChildren${i}`);if(e.anyChildren&&r.length)throw Error(`Invalid tree: cannot define anyChildren and definite children${i}`);if(!e.allowBare&&!e.anyChildren&&!r.some(([e])=>!e.startsWith(`:`)))throw Error(`Invalid tree: allowBare is false but there are no definite children${i}`);e.anyChildren||r.forEach(([e,r])=>{t.isEmpty(r)||G4(r,[...n,e])})}function K4(e){return Qn(e)}function q4(e,t){let n=e.children,r=t[t.length-1]||``,i=Object.defineProperty({path:r,fullPaths:t,children:n&&Object.keys(n).length?fe(n,(e,n)=>q4(n,[...t,e])):{}},"PathsType",{enumerable:!1,configurable:!1,get(){throw Error(`Do not access PathsType as value, it's only a type.`)}});return r.startsWith(`:`)?{...i,fill:n=>q4(e,[...t.slice(0,-1),n])}:i}var J4=class{tree;paths;pathsWithoutTypes;constructor(e){this.tree=e,G4(this.tree,[]),this.paths=q4(e,[]),this.pathsWithoutTypes=K4(this.paths)}get PathsType(){throw Error(`PathTree.PathsType is a type only, it cannot be accessed as a runtime value.`)}sanitizePaths(e){return Z4(e,this.tree)}};function Y4({entry:e,pathPart:t,hasMoreSegments:n}){let r=e.endsWith(`/*`),i=r?e.slice(0,-2):e;return(i.startsWith(`/`)?i.slice(1):i)===t?r?n:!n:!1}function X4(e,t,n){let r=e[t];return r?[t,r]:Object.entries(e).find(([,e])=>`redirectFrom`in e&&e.redirectFrom?.some(e=>Y4({entry:e,pathPart:t,hasMoreSegments:n})))||Object.entries(e).find(([e])=>e.startsWith(`:`))}function Z4(e,n){if(`anyChildren`in n&&n.anyChildren)return e;if(`allowBare`in n){let r=n.children||{};if(t.isLengthAtLeast(e,1)){let t=e[0],i=X4(r,t,e.length>1);if(i&&!(`disable`in i[1]&&i[1].disable)){let[a,o]=i;if(`redirectTo`in o&&o.redirectTo){if(!r[o.redirectTo])throw Error(`Invalid redirect from '${t}' to '${o.redirectTo}'.`);return Z4([o.redirectTo,...e.slice(1)],n)}return[!a.startsWith(`:`)&&a!==t?a:t,...Z4(e.slice(1),o)]}}if(n.allowBare)return[];{let e=_(r).find(([e,t])=>!e.startsWith(`:`)&&!(`disable`in t&&t.disable))?.[0];if(!e)throw Error(`Got blocked bare path but no children exist.`);return[e]}}return[]}var Q4=ct({basePath:Md(``),sanitizeRoute:(e=>e),maxListenerCount:Md(1),disableWarnings:Md(!1),isPaused:Md(!1),isRouteAllowed:Md((()=>!0))}),$4=`://`;function e3(...e){let t=e.join(`/`),n=t.indexOf($4),[r,i]=n===-1?[``,t]:[t.slice(0,n),t.slice(n+3)],a=!1,o=i.replace(/\/{2,}/g,`/`).split(`/`).reduce((e,t,n,r)=>{if(a)return e;let i=r[n+1],o=t,s=i?.startsWith(`?`),c=!t.includes(`?`)&&s,l=i===`?`;if(s||c){a=!0;let e=!1,s=r.slice(n+2).reduce((t,n)=>(n.includes(`#`)&&(e=!0),e?t.concat(n):[t,n].join(`&`)),``);o=[t,i,l?pe({value:s,prefix:`&`}):s].join(``)}return e.concat(o)},[]);return[r,r?$4:``,o.join(`/`)].join(``)}var t3;(function(e){e.Encode=`encode`,e.Decode=`decode`,e.None=`none`})(t3||={});var n3;(function(e){e.Clear=`clear`,e.Replace=`replace`,e.Append=`append`})(n3||={});var r3=ct({encoding:Ad(jd(void 0,Td(t3))),searchParamStrategy:Ad(jd(void 0,Td(n3)))});function i3(e,t){return e.map(e=>{if(e!=null)return a3(String(e),t)}).filter(e=>e!=null)}function a3(e,t){return t?.encoding===t3.Decode?decodeURIComponent(e):t?.encoding===t3.Encode?encodeURIComponent(e):e}ct(Fd({keys:``,values:[``]}));function o3(e,n,r){let i=r?.searchParamStrategy===n3.Clear?{}:fe(e,(e,t)=>kt(t)),a=fe(n,(e,n)=>{if(r?.searchParamStrategy===n3.Append){let a=i[e],o=t.isArray(a)?a:[a];if(n){let e=t.isArray(n)?n:[n];return i3([...o,...e],r)}return i3(o,r)}if(t.isArray(n))return i3(n,r);if(n)return i3([n],r)});return $n({...i,...a},(e,t)=>!!t)}function s3(e,n){if(t.isString(e)&&!e.includes(`?`))return{};let r=t.isString(e)?e:e instanceof URLSearchParams?e.toString():e.search,i=r.indexOf(`#`);return{...(i===-1?r:r.slice(0,i)).replace(/^[^?]*\?/,``).split(`&`).filter(e=>e!==``).map(e=>{let[t,...n]=pn({value:e,splitter:`=`});return[t,n.length?n.join(`=`):void 0]}).reduce((e,[t,r])=>{let i=u3({options:n,key:t,value:r}),a=me(e,i.key,()=>[]);return r!=null&&a.push(i.value),e},Object.create(null))}}function c3(e){if(e!=null)return t.isArray(e)?[...e]:e===``?[]:[e]}function l3(e,t){let n=Je(Object.entries(e),([e,n])=>{let r=c3(n);return r?.length?r.map(n=>{let r=u3({options:t,key:e,value:n});return[r.key,r.value].join(`=`)}):[e]},(e,[,t])=>t!=null).flat();return n.length?de({value:n.join(`&`),prefix:`?`}):``}function u3({options:e,key:t,value:n}){return{key:a3(t,e),value:a3(String(n),e)}}var d3=[`ftp`,`file`,`http`,`https`,`ws`,`wss`];function f3({hash:e,hostname:t,password:n,pathname:r,port:i,protocol:a,search:o,username:s}){return[a?a+`://`:``,s?encodeURIComponent(s)+`:`:``,n?encodeURIComponent(n)+`@`:``,h3({hostname:t,port:i}),m3({hash:e,pathname:r,search:o})].join(``)}function p3({pathname:e}){let t=pe({value:e,prefix:`/`});return t?t.split(`/`):[]}function m3({hash:e,pathname:t,search:n}){return[de({value:t,prefix:`/`}),n?de({value:n,prefix:`?`}):``,e?de({value:e,prefix:`#`}):``].join(``)}function h3({hostname:e,port:t}){return[e,t?`:`+t:``].join(``)}function g3({hostname:e}){return e?e.split(`.`):[]}function _3({hostname:e,port:n,protocol:r}){return[r,h3({hostname:e,port:n})].filter(t.isTruthy).join(`://`)}function v3(e,n){let r=t.isString(e)?pe({value:e,prefix:`.`}):e.toString(),i=r.replace(/^[^#]*(?:#|$)/,``),a=i?de({value:a3(i,n),prefix:`#`}):``,o=r.indexOf(`#`),s=o===-1?r:r.slice(0,o),c=s.replace(/^[^?]*(?:\?|$)/,``),l=c?de({value:a3(c,n),prefix:`?`}):``,u=s.indexOf(`?`),d=u===-1?s:s.slice(0,u),f=d.includes(`://`)?d.replace(/:\/\/.*$/,``):``,p=(d3.includes(f.toLowerCase())?d.replace(/\\/g,`/`):d).replace(/^.*?:\/\//,``).replace(/\/{2,}/g,`/`),m=p.length-p.replace(/^\/*/,``).length,h=p.slice(m).replace(/\/.*/,``).lastIndexOf(`@`),g=h!==-1,_=g?p.slice(0,m+h):``,v=g?p.slice(m+h+1):p,[y,...b]=g?_.split(`:`).reverse():[],ee=decodeURIComponent(b.toReversed().join(``).replace(/[/:]/g,``)||``),x=decodeURIComponent(y?.replace(/[/:]/g,``)||``),S=v.replace(/\/.*/,``),te=fn(S,`:`,{caseSensitive:!0}).toReversed(),ne=!te[0]?.endsWith(`]`)&&te[1]===`:`,re=ne&&te[0]||``,ie=ne?S.slice(0,S.length-re.length-1):S,ae=ie.endsWith(`]`)?void 0:ie.match(/^(?<host>.*):(?<port>\d+)$/),C=ae?.groups?.host??ie,oe=g3({hostname:C}),se=ae?.groups?.port??re,ce=a3(v.replace(/^[^/]*(\/|$)/,`$1`).replace(/^[^/]*(?:\/|$)/,`/`),n),le=h3({hostname:C,port:se}),ue=_3({hostname:C,port:se,protocol:f}),fe=f3({hash:a,hostname:C,password:x,pathname:ce,port:se,protocol:f,search:l,username:ee}),me=s3(l),he=p3({pathname:ce});return{fullPath:m3({hash:a,pathname:ce,search:l}),hash:a,host:le,hostname:C,domains:oe,href:fe,origin:ue,password:x,pathname:ce,paths:he,port:se,protocol:f,search:l,searchParams:me,username:ee}}ct({hash:Ad(jd(void 0,``)),search:Ad(jd(void 0,``,Fd({keys:``,values:jd(null,void 0,``,-1,!1,0n,[null,void 0,``,-1,!1,0n])}))),hostname:Ad(jd(void 0,``)),domains:Ad(jd(void 0,[``])),pathname:Ad(jd(void 0,``)),paths:Ad(jd(void 0,[``])),protocol:Ad(jd(void 0,``)),username:Ad(jd(void 0,``)),password:Ad(jd(void 0,``)),port:Ad(jd(void 0,``,-1))});function y3(e,n,r){let i=!!r,a=n==null||nt(n,r3,{allowExtraKeys:!1}),o=a?v3(``):t.instanceOf(e,URL)||t.isString(e)?v3(e):e,s=a?e:n,c=t.isString(s)&&s.startsWith(`.`),l=t.isString(s)||t.instanceOf(s,URL)?$n(v3(s),(e,n)=>t.isTruthy(n)&&(e!==`domains`||t.isArray(n)&&n.length!==0)):s,u=i?r:a?n:void 0,d=fe(o,(e,n)=>{if(!t.hasKey(l,e))return n;let r=l[e];return t.isArray(r)?r:t.isNumber(r)?String(r):t.isString(r)?e===`hash`&&r?de({value:r,prefix:`#`}):e===`pathname`?de({value:r,prefix:`/`}):r:n});t.hasKey(l,`domains`)&&t.isArray(l.domains)&&(d.hostname=l.domains.join(`.`)),d.domains=g3(d),t.hasKey(l,`paths`)&&l.paths&&(d.pathname=e3(c?o.pathname:``,...l.paths));let f=t.isString(l.search)?s3(de({value:l.search,prefix:`?`})):Ft(l.search||{}),p=o3(d.searchParams,f,{...u,encoding:t3.None}),m=l3(p,u);return{...d,searchParams:p,search:m,paths:p3(d),fullPath:m3(d),host:h3(d),origin:_3(d),href:f3({...d,search:m})}}var b3=0;function x3(e){return!(e.type!==`click`&&e.type!==`mousedown`||e.metaKey||e.altKey||e.ctrlKey||e.shiftKey||e.button!==b3)}var S3=`locationchange`,C3=globalThis.history;globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!1;var w3=C3?.pushState;function T3(...e){if(!w3)return;let t=w3.apply(C3,e);return globalThis.dispatchEvent(new Event(S3)),t}var E3=C3?.replaceState;function D3(...e){if(!E3)return;let t=E3.apply(C3,e);return globalThis.dispatchEvent(new Event(S3)),t}function O3(){if(!globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY&&C3){if(C3.pushState===T3)throw new B4(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.pushState has already been overridden. Does this module have two copies in your repo?`);if(C3.replaceState===D3)throw new B4(`The consolidation module thinks that window events have not been consolidated yet but globalHistory.replaceState has already been overridden. Does this module have two copies in your repo?`);globalThis.SPA_ROUTER_VIR_HISTORY_EVENTS_CONSOLIDATED_ALREADY=!0,C3.pushState=T3,C3.replaceState=D3,globalThis.addEventListener(`popstate`,()=>{globalThis.dispatchEvent(new Event(S3))})}}function k3(e,t){let n=v3(e),r=pe({value:pe({value:n.pathname,prefix:de({value:t||``,prefix:`/`})}),prefix:`/`});return{paths:r?r.split(`/`):[],search:Object.keys(n.searchParams).length?n.searchParams:void 0,hash:n.hash?pe({value:n.hash,prefix:`#`}):void 0}}var A3=class{innerObservable;removeGlobalListener;sanitizationDepth=0;params;constructor(e){_e(e,Q4),this.params={...e};let n=this.readCurrentRoute();this.innerObservable=new Kf({defaultValue:n,equalityCheck:()=>!1}),O3(),this.removeGlobalListener=cr(globalThis,S3,()=>{if(this.params.isPaused)return;if(this.sanitizationDepth>2)throw new V4(`Looping route sanitization detected; aborting window URL change listener.`);let n=k3(globalThis.location.href,this.params.basePath),r=e.sanitizeRoute(n);t.jsonEquals(n,r)?(this.sanitizationDepth=0,this.innerObservable.setValue(r)):(this.sanitizationDepth++,this.setRoute(r,{replace:!0}),e.disableWarnings||console.warn(`Route sanitized.`,{from:n,to:r}))}),this.setRoute(n,{replace:!0})}routeIncludesBasePath(e){return!e.paths||!this.params.basePath?!1:e3(...e.paths).startsWith(this.params.basePath)}readCurrentRoute(){return this.sanitizeRoute(k3(globalThis.location.href,this.params.basePath))}sanitizeRoute(e){return this.params.sanitizeRoute(e)}createRouteUrl(e){let t={...k3(globalThis.location.href,this.params.basePath),...e},n=this.sanitizeRoute(t),r=this.routeIncludesBasePath(k3(globalThis.location.href,void 0))&&!this.routeIncludesBasePath(n)&&this.params.basePath?{...n,paths:[this.params.basePath,...n.paths]}:n;return{url:y3(globalThis.location.href,{paths:r.paths,search:r.search,hash:r.hash?de({value:r.hash,prefix:`#`}):``},{searchParamStrategy:n3.Clear}).href,route:n}}setRoute(e,n={}){let{route:r,url:i}=this.createRouteUrl(e),{fullPath:a}=v3(i);return this.params.isPaused||!n.force&&t.jsonEquals(v3(globalThis.location.href).fullPath,a)||this.params.isRouteAllowed&&!this.params.isRouteAllowed(r)?!1:n.replace?(globalThis.history.replaceState(void 0,``,a),!0):(globalThis.history.pushState(void 0,``,a),!0)}setRouteOnDirectNavigation(e,t){return x3(t)?(t.preventDefault(),this.setRoute(e)):!1}listen(e,t){let n=this.params.maxListenerCount??1;if(n&&this.innerObservable.getListenerCount()>=n)throw new z4(`Attempting to attach more route listeners than the \`maxListenerCount\` of '${n}'.`);return this.innerObservable.listen(e,t),()=>this.removeListener(t)}removeListener(e){return this.innerObservable.removeListener(e)}getListenerCount(){return this.innerObservable.getListenerCount()}destroy(){this.params.isPaused=!0,this.removeGlobalListener(),this.innerObservable.destroy()}},j3=function(e){return e.Top=`top`,e.Bottom=`bottom`,e.Left=`left`,e.Right=`right`,e}({}),M3=function(e){return e.Vertical=`vertical`,e.Horizontal=`horizontal`,e}({});function N3(e,t){let n=e.querySelector(t);return n?n.getBoundingClientRect().width:0}function P3(e){return e.reduce((e,t)=>{let n=e[e.length-1];return t.group!=null&&n&&n.group===t.group?[...e.slice(0,-1),{group:n.group,tabs:[...n.tabs,t]}]:[...e,{group:t.group,tabs:[t]}]},[])}function F3(e,t){let n=P3(e);return n.map((e,r)=>{let i=n[r-1],a=i&&i.group!=null&&e.group!=null?E`
                       <span class="tab-cluster-divider"></span>
                   `:S,o=e.group==null?S:E`
                       <span class="tab-group-label">${e.group}</span>
@@ -37674,7 +37790,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 ${o}
                 <div class="tab-cluster-tabs">${e.tabs.map(t)}</div>
             </div>
-        `})}var F3=Mv()({tagName:`vira-tabs`,events:{tabSelect:w()},state(){return{overflowCount:0,cleanupObserver:void 0}},hostClasses:{"vira-tabs-bar-top"({inputs:e}){return e.barDirection===`top`},"vira-tabs-bar-bottom"({inputs:e}){return!e.barDirection||e.barDirection===`bottom`},"vira-tabs-bar-left"({inputs:e}){return e.barDirection===`left`},"vira-tabs-bar-right"({inputs:e}){return e.barDirection===`right`},...p(x(l0),e=>{let t=l0[e];return{key:`vira-tabs-color-${t}`,value({inputs:n}){return n.color===e||n.color===t}}},{useRequired:!0}),"vira-tabs-color-plain"({inputs:e}){return!e.color||e.color===s0.Plain},"vira-tabs-color-neutral"({inputs:e}){return e.color===s0.Neutral},...p(u0,e=>({key:`vira-tabs-color-${e}`,value({inputs:t}){return t.color===e}}),{useRequired:!0}),"vira-tabs-icon-layout-vertical"({inputs:e}){return!e.iconLayout||e.iconLayout===`vertical`},"vira-tabs-icon-layout-horizontal"({inputs:e}){return e.iconLayout===`horizontal`},"vira-tabs-fill-width"({inputs:e}){return!!e.shouldFillWidth}},cssVars:{"vira-tabs-active-color":o0[l0[s0.Info]][`behind-bg`][B.NonBodyText].background.value,"vira-tabs-active-hover-color":o0[l0[s0.Info]][`behind-bg`][B.Header].background.value,"vira-tabs-inactive-color":U.colors[V].foreground.value,"vira-tabs-inactive-hover-color":U.colors[V].foreground.value,"vira-tabs-bar-thickness":`2px`},styles({hostClasses:e,cssVars:t}){function n(e){return{active:o0[e][`behind-bg`][B.NonBodyText].background,hover:o0[e][`behind-bg`][B.Header].background}}function r(e,n){return T`
+        `})}var I3=Mv()({tagName:`vira-tabs`,events:{tabSelect:w()},state(){return{overflowCount:0,cleanupObserver:void 0}},hostClasses:{"vira-tabs-bar-top"({inputs:e}){return e.barDirection===`top`},"vira-tabs-bar-bottom"({inputs:e}){return!e.barDirection||e.barDirection===`bottom`},"vira-tabs-bar-left"({inputs:e}){return e.barDirection===`left`},"vira-tabs-bar-right"({inputs:e}){return e.barDirection===`right`},...p(x(l0),e=>{let t=l0[e];return{key:`vira-tabs-color-${t}`,value({inputs:n}){return n.color===e||n.color===t}}},{useRequired:!0}),"vira-tabs-color-plain"({inputs:e}){return!e.color||e.color===s0.Plain},"vira-tabs-color-neutral"({inputs:e}){return e.color===s0.Neutral},...p(u0,e=>({key:`vira-tabs-color-${e}`,value({inputs:t}){return t.color===e}}),{useRequired:!0}),"vira-tabs-icon-layout-vertical"({inputs:e}){return!e.iconLayout||e.iconLayout===`vertical`},"vira-tabs-icon-layout-horizontal"({inputs:e}){return e.iconLayout===`horizontal`},"vira-tabs-fill-width"({inputs:e}){return!!e.shouldFillWidth}},cssVars:{"vira-tabs-active-color":o0[l0[s0.Info]][`behind-bg`][B.NonBodyText].background.value,"vira-tabs-active-hover-color":o0[l0[s0.Info]][`behind-bg`][B.Header].background.value,"vira-tabs-inactive-color":U.colors[V].foreground.value,"vira-tabs-inactive-hover-color":U.colors[V].foreground.value,"vira-tabs-bar-thickness":`2px`},styles({hostClasses:e,cssVars:t}){function n(e){return{active:o0[e][`behind-bg`][B.NonBodyText].background,hover:o0[e][`behind-bg`][B.Header].background}}function r(e,n){return T`
                 ${e} {
                     ${t[`vira-tabs-active-color`].name}: ${n.active.value};
                     ${t[`vira-tabs-active-hover-color`].name}: ${n.hover.value};
@@ -37904,7 +38020,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 margin: 8px 0;
                 background-color: ${U.colors[`vira-grey-foreground-decoration`].foreground.value};
             }
-        `},cleanup({state:e}){e.cleanupObserver?.()},render({inputs:e,state:n,updateState:r,host:i,dispatch:a,events:o}){function s(t,n){let r=U4(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),i=t.icon?E`
+        `},cleanup({state:e}){e.cleanupObserver?.()},render({inputs:e,state:n,updateState:r,host:i,dispatch:a,events:o}){function s(t,n){let r=W4(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),i=t.icon?E`
                       <${q.assign({icon:t.icon})}></${q}>
                   `:S,a=r||!!t.isDisabled;return{isSelected:r,content:E`
                     <${N4.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0,attributePassthrough:n?void 0:{a:{role:`tab`,"aria-selected":String(r),"aria-disabled":String(!!t.isDisabled),tabindex:a?`-1`:void 0}}})}>
@@ -37929,7 +38045,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 >
                     ${n}
                 </div>
-            `}function d(n){return G0(Je(n,t=>{let n=U4(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),r=t.icon?E`
+            `}function d(n){return G0(Je(n,t=>{let n=W4(e.currentRoute,t.paths,{exactMatch:t.exactMatch}),r=t.icon?E`
                                   <${q.assign({icon:t.icon})}></${q}>
                               `:S;return{content:E`
                                 <${N4.assign({route:{router:e.router,route:{paths:t.paths.fullPaths},scrollToTop:!0},disableLinkStyles:!0,stylePassthrough:{a:T`
@@ -37939,7 +38055,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                         `}})}>
                                     ${r} ${t.label}
                                 </${N4}>
-                            `,selected:n,disabled:t.isDisabled,onClick(){c(t)}}},t.isTruthy))}function f(e){let t=i.clientWidth;if(!t)return;if(globalThis.getComputedStyle(e).flexDirection.startsWith(`column`)){n.overflowCount!==0&&r({overflowCount:0});return}let a=Array.from(e.querySelectorAll(`.tab-item`)),o=a.length;if(!o)return;let s=a.map(e=>e.getBoundingClientRect().width),c=Array.from(e.querySelectorAll(`.tab-cluster`)),l=e.getBoundingClientRect().left,u=c.flatMap(e=>{let t=e.getBoundingClientRect().left-l,n=e.querySelector(`.tab-group-label`),r=n?n.getBoundingClientRect().width:0;return Array.from(e.querySelectorAll(`.tab-item`)).map((e,n)=>({clusterLeft:t,clusterLabelWidth:r,indexInCluster:n,width:e.getBoundingClientRect().width}))});function d(e){if(e<=0)return 0;if(!c.length)return s.slice(0,e).reduce((e,t)=>e+t,0);let t=u[e-1];if(!t)return 0;let n=u.slice(e-1-t.indexInCluster,e).reduce((e,t)=>e+t.width,0);return t.clusterLeft+Math.max(t.clusterLabelWidth,n)}let f=d(o);function p(e){let n=t-e;return a.reduce((e,t,r)=>d(r+1)<=n?r+1:e,0)}if(f<=t){n.overflowCount!==0&&r({overflowCount:0});return}let m=M3(e,`.measure-more-default`),h=M3(e,`.measure-more-labeled`),g=e.querySelector(`.tab-item.measure-selected`),_=g?a.indexOf(g):-1,v=p(m),y=_>=0&&_>=v?p(h):v,b=Math.max(1,o-y);b!==n.overflowCount&&r({overflowCount:b})}function p(e){n.cleanupObserver?.();let t;function a(){t??=requestAnimationFrame(()=>{t=void 0,f(e)})}let o=new ResizeObserver(a);o.observe(i),o.observe(e);let s=new MutationObserver(a);s.observe(e,{childList:!0,subtree:!0,characterData:!0}),a(),r({cleanupObserver(){t!=null&&cancelAnimationFrame(t),o.disconnect(),s.disconnect()}})}let m=e.tabs.filter(e=>!e.isHidden),h=m.some(e=>e.group!=null),g=Math.min(m.length,Math.max(0,n.overflowCount)),_=m.length-g,v=m.slice(0,_),y=m.slice(_),b=m.findIndex(t=>U4(e.currentRoute,t.paths,{exactMatch:t.exactMatch})),ee=b>=0?m[b]:void 0,x=b>=0&&b>=_,te=h?P3(v,l):v.map(l),ne=h?P3(m,u):m.map(u),re=e.overflowLabel||`More`,ie=E`
+                            `,selected:n,disabled:t.isDisabled,onClick(){c(t)}}},t.isTruthy))}function f(e){let t=i.clientWidth;if(!t)return;if(globalThis.getComputedStyle(e).flexDirection.startsWith(`column`)){n.overflowCount!==0&&r({overflowCount:0});return}let a=Array.from(e.querySelectorAll(`.tab-item`)),o=a.length;if(!o)return;let s=a.map(e=>e.getBoundingClientRect().width),c=Array.from(e.querySelectorAll(`.tab-cluster`)),l=e.getBoundingClientRect().left,u=c.flatMap(e=>{let t=e.getBoundingClientRect().left-l,n=e.querySelector(`.tab-group-label`),r=n?n.getBoundingClientRect().width:0;return Array.from(e.querySelectorAll(`.tab-item`)).map((e,n)=>({clusterLeft:t,clusterLabelWidth:r,indexInCluster:n,width:e.getBoundingClientRect().width}))});function d(e){if(e<=0)return 0;if(!c.length)return s.slice(0,e).reduce((e,t)=>e+t,0);let t=u[e-1];if(!t)return 0;let n=u.slice(e-1-t.indexInCluster,e).reduce((e,t)=>e+t.width,0);return t.clusterLeft+Math.max(t.clusterLabelWidth,n)}let f=d(o);function p(e){let n=t-e;return a.reduce((e,t,r)=>d(r+1)<=n?r+1:e,0)}if(f<=t){n.overflowCount!==0&&r({overflowCount:0});return}let m=N3(e,`.measure-more-default`),h=N3(e,`.measure-more-labeled`),g=e.querySelector(`.tab-item.measure-selected`),_=g?a.indexOf(g):-1,v=p(m),y=_>=0&&_>=v?p(h):v,b=Math.max(1,o-y);b!==n.overflowCount&&r({overflowCount:b})}function p(e){n.cleanupObserver?.();let t;function a(){t??=requestAnimationFrame(()=>{t=void 0,f(e)})}let o=new ResizeObserver(a);o.observe(i),o.observe(e);let s=new MutationObserver(a);s.observe(e,{childList:!0,subtree:!0,characterData:!0}),a(),r({cleanupObserver(){t!=null&&cancelAnimationFrame(t),o.disconnect(),s.disconnect()}})}let m=e.tabs.filter(e=>!e.isHidden),h=m.some(e=>e.group!=null),g=Math.min(m.length,Math.max(0,n.overflowCount)),_=m.length-g,v=m.slice(0,_),y=m.slice(_),b=m.findIndex(t=>W4(e.currentRoute,t.paths,{exactMatch:t.exactMatch})),ee=b>=0?m[b]:void 0,x=b>=0&&b>=_,te=h?F3(v,l):v.map(l),ne=h?F3(m,u):m.map(u),re=e.overflowLabel||`More`,ie=E`
             <${Z.assign({text:re,rightSideIcon:$1.ChevronDown16,color:s0.Neutral})}
                 class="measure-more-default"
             ></${Z}>
@@ -37971,7 +38087,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             >
                 ${te} ${ae}
             </div>
-        `}}),I3={value:T`transparent`};function L3(e){let t=o0[e][`behind-bg`],n=o0[e][`on-self`];return{[p0.Standard]:{idle:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background},hover:{textColor:t[B.Header].foreground,backgroundColor:t[B.Header].background,borderColor:t[B.Header].background},active:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background}},[p0.Subtle]:{idle:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background},hover:{textColor:n[B.NonBodyText].foreground,backgroundColor:n[B.NonBodyText].background,borderColor:n[B.NonBodyText].background},active:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background}}}}function R3(e){let t=o0[e][`on-self`][B.BodyText];return{idle:{textColor:t.foreground,backgroundColor:I3,borderColor:t.background},hover:{textColor:t.foreground,backgroundColor:o0[e][`behind-bg`][B.Invisible].background,borderColor:t.background},active:{textColor:t.foreground,backgroundColor:o0[e][`behind-bg`][B.Decoration].background,borderColor:t.background}}}var z3={[p0.Standard]:{idle:{backgroundColor:U.colors[V].foreground,textColor:U.colors[V].background,borderColor:U.colors[V].foreground},hover:{backgroundColor:U.colors[`vira-grey-behind-bg-body`].background,textColor:U.colors[`vira-grey-behind-bg-body`].foreground,borderColor:U.colors[`vira-grey-behind-bg-body`].background},active:{backgroundColor:U.colors[V].foreground,textColor:U.colors[V].background,borderColor:U.colors[V].foreground}},[p0.Subtle]:{idle:{backgroundColor:I3,textColor:U.colors[V].foreground,borderColor:I3},hover:{backgroundColor:U.colors[`vira-grey-behind-fg-small-body`].background,textColor:U.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:U.colors[`vira-grey-behind-fg-small-body`].background},active:{backgroundColor:U.colors[`vira-grey-behind-fg-body`].background,textColor:U.colors[`vira-grey-behind-fg-body`].foreground,borderColor:U.colors[`vira-grey-behind-fg-body`].background}}},B3={idle:{textColor:U.colors[V].foreground,backgroundColor:I3,borderColor:U.colors[`vira-grey-on-self-body`].background},hover:{backgroundColor:U.colors[`vira-grey-behind-fg-small-body`].background,textColor:U.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:U.colors[`vira-grey-on-self-body`].background},active:{backgroundColor:U.colors[`vira-grey-behind-fg-body`].background,textColor:U.colors[`vira-grey-behind-fg-body`].foreground,borderColor:U.colors[`vira-grey-on-self-body`].background}},V3=Mv()({tagName:`vira-tag`,cssVars:{"vira-tag-text-color":`transparent`,"vira-tag-background-color":`transparent`,"vira-tag-border-color":`transparent`,"vira-tag-hover-text-color":`transparent`,"vira-tag-hover-background-color":`transparent`,"vira-tag-hover-border-color":`transparent`,"vira-tag-active-text-color":`transparent`,"vira-tag-active-background-color":`transparent`,"vira-tag-active-border-color":`transparent`,"vira-tag-disabled-text-color":U.colors[`vira-grey-behind-bg-decoration`].foreground.value,"vira-tag-disabled-background-color":U.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-disabled-border-color":U.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-border-radius":`1000px`,"vira-tag-gap":`6px`,"vira-tag-horizontal-padding":`10px`,"vira-tag-border-width":`1px`},events:{toggle:w(),cancel:w()},hostClasses:{"vira-tag-selectable"({inputs:e}){return t.isBoolean(e.isClickable?.selected)},"vira-tag-checked"({inputs:e}){return!!e.isClickable?.selected},"vira-tag-not-checked"({inputs:e}){return e.isClickable?.selected===!1},"vira-tag-cancellable"({inputs:e}){return!!e.isClickable?.cancellable},"vira-tag-not-clickable"({inputs:e}){return!e.isClickable},"vira-tag-disabled"({inputs:e}){return!!e.disabled},"vira-tag-size-large"({inputs:e}){return e.size===d0.Large},"vira-tag-size-medium"({inputs:e}){return!e.size||e.size===d0.Medium},"vira-tag-size-small"({inputs:e}){return e.size===d0.Small},"vira-tag-emphasis-standard"({inputs:e}){return!e.emphasis||e.emphasis===p0.Standard},"vira-tag-emphasis-subtle"({inputs:e}){return e.emphasis===p0.Subtle},...p(x(l0),e=>{let t=l0[e];return{key:`vira-tag-color-${t}`,value({inputs:n}){return n.color===e||n.color===t}}},{useRequired:!0}),"vira-tag-color-plain"({inputs:e}){return!e.color||e.color===s0.Plain},"vira-tag-color-neutral"({inputs:e}){return e.color===s0.Neutral},...p(u0,e=>({key:`vira-tag-color-${e}`,value({inputs:t}){return t.color===e}}),{useRequired:!0})},styles({cssVars:e,hostClasses:t}){function n({variantSelector:t,emphasisSelector:n,colors:r}){return T`
+        `}}),L3={value:T`transparent`};function R3(e){let t=o0[e][`behind-bg`],n=o0[e][`on-self`];return{[p0.Standard]:{idle:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background},hover:{textColor:t[B.Header].foreground,backgroundColor:t[B.Header].background,borderColor:t[B.Header].background},active:{textColor:t[B.NonBodyText].foreground,backgroundColor:t[B.NonBodyText].background,borderColor:t[B.NonBodyText].background}},[p0.Subtle]:{idle:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background},hover:{textColor:n[B.NonBodyText].foreground,backgroundColor:n[B.NonBodyText].background,borderColor:n[B.NonBodyText].background},active:{textColor:n[B.BodyText].foreground,backgroundColor:n[B.BodyText].background,borderColor:n[B.BodyText].background}}}}function z3(e){let t=o0[e][`on-self`][B.BodyText];return{idle:{textColor:t.foreground,backgroundColor:L3,borderColor:t.background},hover:{textColor:t.foreground,backgroundColor:o0[e][`behind-bg`][B.Invisible].background,borderColor:t.background},active:{textColor:t.foreground,backgroundColor:o0[e][`behind-bg`][B.Decoration].background,borderColor:t.background}}}var B3={[p0.Standard]:{idle:{backgroundColor:U.colors[V].foreground,textColor:U.colors[V].background,borderColor:U.colors[V].foreground},hover:{backgroundColor:U.colors[`vira-grey-behind-bg-body`].background,textColor:U.colors[`vira-grey-behind-bg-body`].foreground,borderColor:U.colors[`vira-grey-behind-bg-body`].background},active:{backgroundColor:U.colors[V].foreground,textColor:U.colors[V].background,borderColor:U.colors[V].foreground}},[p0.Subtle]:{idle:{backgroundColor:L3,textColor:U.colors[V].foreground,borderColor:L3},hover:{backgroundColor:U.colors[`vira-grey-behind-fg-small-body`].background,textColor:U.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:U.colors[`vira-grey-behind-fg-small-body`].background},active:{backgroundColor:U.colors[`vira-grey-behind-fg-body`].background,textColor:U.colors[`vira-grey-behind-fg-body`].foreground,borderColor:U.colors[`vira-grey-behind-fg-body`].background}}},V3={idle:{textColor:U.colors[V].foreground,backgroundColor:L3,borderColor:U.colors[`vira-grey-on-self-body`].background},hover:{backgroundColor:U.colors[`vira-grey-behind-fg-small-body`].background,textColor:U.colors[`vira-grey-behind-fg-small-body`].foreground,borderColor:U.colors[`vira-grey-on-self-body`].background},active:{backgroundColor:U.colors[`vira-grey-behind-fg-body`].background,textColor:U.colors[`vira-grey-behind-fg-body`].foreground,borderColor:U.colors[`vira-grey-on-self-body`].background}},H3=Mv()({tagName:`vira-tag`,cssVars:{"vira-tag-text-color":`transparent`,"vira-tag-background-color":`transparent`,"vira-tag-border-color":`transparent`,"vira-tag-hover-text-color":`transparent`,"vira-tag-hover-background-color":`transparent`,"vira-tag-hover-border-color":`transparent`,"vira-tag-active-text-color":`transparent`,"vira-tag-active-background-color":`transparent`,"vira-tag-active-border-color":`transparent`,"vira-tag-disabled-text-color":U.colors[`vira-grey-behind-bg-decoration`].foreground.value,"vira-tag-disabled-background-color":U.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-disabled-border-color":U.colors[`vira-grey-behind-bg-decoration`].background.value,"vira-tag-border-radius":`1000px`,"vira-tag-gap":`6px`,"vira-tag-horizontal-padding":`10px`,"vira-tag-border-width":`1px`},events:{toggle:w(),cancel:w()},hostClasses:{"vira-tag-selectable"({inputs:e}){return t.isBoolean(e.isClickable?.selected)},"vira-tag-checked"({inputs:e}){return!!e.isClickable?.selected},"vira-tag-not-checked"({inputs:e}){return e.isClickable?.selected===!1},"vira-tag-cancellable"({inputs:e}){return!!e.isClickable?.cancellable},"vira-tag-not-clickable"({inputs:e}){return!e.isClickable},"vira-tag-disabled"({inputs:e}){return!!e.disabled},"vira-tag-size-large"({inputs:e}){return e.size===d0.Large},"vira-tag-size-medium"({inputs:e}){return!e.size||e.size===d0.Medium},"vira-tag-size-small"({inputs:e}){return e.size===d0.Small},"vira-tag-emphasis-standard"({inputs:e}){return!e.emphasis||e.emphasis===p0.Standard},"vira-tag-emphasis-subtle"({inputs:e}){return e.emphasis===p0.Subtle},...p(x(l0),e=>{let t=l0[e];return{key:`vira-tag-color-${t}`,value({inputs:n}){return n.color===e||n.color===t}}},{useRequired:!0}),"vira-tag-color-plain"({inputs:e}){return!e.color||e.color===s0.Plain},"vira-tag-color-neutral"({inputs:e}){return e.color===s0.Neutral},...p(u0,e=>({key:`vira-tag-color-${e}`,value({inputs:t}){return t.color===e}}),{useRequired:!0})},styles({cssVars:e,hostClasses:t}){function n({variantSelector:t,emphasisSelector:n,colors:r}){return T`
                 ${t}${n} {
                     ${e[`vira-tag-background-color`].name}: ${r.idle.backgroundColor.value};
                     ${e[`vira-tag-text-color`].name}: ${r.idle.textColor.value};
@@ -37985,7 +38101,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     ${e[`vira-tag-active-text-color`].name}: ${r.active.textColor.value};
                     ${e[`vira-tag-active-border-color`].name}: ${r.active.borderColor.value};
                 }
-            `}function r(){let e=m0.flatMap(e=>{let r=t[`vira-tag-emphasis-${e}`].selector,i=x(l0).map(i=>{let a=l0[i],o=L3(a)[e],s=t[`vira-tag-color-${a}`].selector;return n({variantSelector:s,emphasisSelector:r,colors:o})}),a=n({variantSelector:t[`vira-tag-color-plain`].selector,emphasisSelector:r,colors:z3[e]}),o=n({variantSelector:t[`vira-tag-color-neutral`].selector,emphasisSelector:r,colors:L3(i0.grey)[e]}),s=u0.map(i=>{let a=L3(i)[e],o=t[`vira-tag-color-${i}`].selector;return n({variantSelector:o,emphasisSelector:r,colors:a})});return[...i,a,o,...s]});return y(e.join(`
+            `}function r(){let e=m0.flatMap(e=>{let r=t[`vira-tag-emphasis-${e}`].selector,i=x(l0).map(i=>{let a=l0[i],o=R3(a)[e],s=t[`vira-tag-color-${a}`].selector;return n({variantSelector:s,emphasisSelector:r,colors:o})}),a=n({variantSelector:t[`vira-tag-color-plain`].selector,emphasisSelector:r,colors:B3[e]}),o=n({variantSelector:t[`vira-tag-color-neutral`].selector,emphasisSelector:r,colors:R3(i0.grey)[e]}),s=u0.map(i=>{let a=R3(i)[e],o=t[`vira-tag-color-${i}`].selector;return n({variantSelector:o,emphasisSelector:r,colors:a})});return[...i,a,o,...s]});return y(e.join(`
 `))}function i(n,r){let i=t[`vira-tag-not-checked`].selector;return T`
                 ${n}${i}${i}${i} {
                     ${e[`vira-tag-background-color`].name}: ${r.idle.backgroundColor.value};
@@ -38000,7 +38116,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     ${e[`vira-tag-active-text-color`].name}: ${r.active.textColor.value};
                     ${e[`vira-tag-active-border-color`].name}: ${r.active.borderColor.value};
                 }
-            `}function a(){let e=x(l0).map(e=>{let n=l0[e],r=R3(n),a=t[`vira-tag-color-${n}`].selector;return i(a,r)}),n=i(t[`vira-tag-color-plain`].selector,B3),r=i(t[`vira-tag-color-neutral`].selector,R3(i0.grey)),a=u0.map(e=>{let n=R3(e),r=t[`vira-tag-color-${e}`].selector;return i(r,n)});return y([...e,n,r,...a].join(`
+            `}function a(){let e=x(l0).map(e=>{let n=l0[e],r=z3(n),a=t[`vira-tag-color-${n}`].selector;return i(a,r)}),n=i(t[`vira-tag-color-plain`].selector,V3),r=i(t[`vira-tag-color-neutral`].selector,z3(i0.grey)),a=u0.map(e=>{let n=z3(e),r=t[`vira-tag-color-${e}`].selector;return i(r,n)});return y([...e,n,r,...a].join(`
 `))}function o(){let e=f0.map(e=>T`
                     ${t[`vira-tag-size-${e}`].selector} button {
                         height: ${h0[e]}px;
@@ -38123,7 +38239,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     class="cancel-x"
                 ></${q}>
             </button>
-        `}});function H3(e){return[ut(e.prefix),`theme-vir-style`].join(`-`)}function U3(e,t,r){let i=he(tr(e.colors).flatMap(e=>[W3({layerKey:`background`,themeColor:e,themeOverride:t}),W3({layerKey:`foreground`,themeColor:e,themeOverride:t})]));return n(i,H3(e),r)}function W3({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}var G3=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),K3=({useDarkTheme:e})=>{U3(U,e?Ev:void 0)},q3=`(prefers-color-scheme: dark)`,J3={selectedTheme:ct({theme:Td(G3)})},Y3=class{applyThemeCallback=K3;localStorageClient;removeThemePreferenceListener=cr(globalThis.matchMedia(q3),`change`,e=>{C.instanceOf(e,MediaQueryListEvent),this.getCurrentTheme()===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new B0(J3,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.getCurrentTheme())}getCurrentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(q3).matches;this.applyThemeCallback({useDarkTheme:t})}},X3=qt(G3,e=>({[G3.Light]:y2,[G3.Dark]:_2,[G3.Auto]:p2})[e]),Z3={[G3.Light]:`Light`,[G3.Dark]:`Dark`,[G3.Auto]:`Auto`},Q3=Mv()({tagName:`vira-theme-switcher`,events:{themeSelect:w()},styles:T`
+        `}});function U3(e){return[ut(e.prefix),`theme-vir-style`].join(`-`)}function W3(e,t,r){let i=he(tr(e.colors).flatMap(e=>[G3({layerKey:`background`,themeColor:e,themeOverride:t}),G3({layerKey:`foreground`,themeColor:e,themeOverride:t})]));return n(i,U3(e),r)}function G3({layerKey:e,themeOverride:t,themeColor:n}){let r=String(n[e].name);return[r,t?.overrides[r]||n[e].default]}var K3=function(e){return e.Light=`light`,e.Dark=`dark`,e.Auto=`auto`,e}({}),q3=({useDarkTheme:e})=>{W3(U,e?Ev:void 0)},J3=`(prefers-color-scheme: dark)`,Y3={selectedTheme:ct({theme:Td(K3)})},X3=class{applyThemeCallback=q3;localStorageClient;removeThemePreferenceListener=cr(globalThis.matchMedia(J3),`change`,e=>{C.instanceOf(e,MediaQueryListEvent),this.getCurrentTheme()===`auto`&&this.applyThemeCallback({useDarkTheme:e.matches})});constructor(e={}){e.applyTheme&&(this.applyThemeCallback=e.applyTheme),this.localStorageClient=new B0(Y3,{storeName:e.storeName||`vira-theme`}),this.applySelection(this.getCurrentTheme())}getCurrentTheme(){return this.localStorageClient.get.selectedTheme()?.theme||`auto`}setSelectedTheme(e){this.applySelection(e),this.localStorageClient.set.selectedTheme({theme:e})}destroy(){this.removeThemePreferenceListener(),this.localStorageClient.destroy()}applySelection(e){let t=e===`dark`||e===`auto`&&globalThis.matchMedia(J3).matches;this.applyThemeCallback({useDarkTheme:t})}},Z3=qt(K3,e=>({[K3.Light]:y2,[K3.Dark]:_2,[K3.Auto]:p2})[e]),Q3={[K3.Light]:`Light`,[K3.Dark]:`Dark`,[K3.Auto]:`Auto`},$3=Mv()({tagName:`vira-theme-switcher`,events:{themeSelect:w()},styles:T`
         :host {
             display: inline-flex;
             align-items: center;
@@ -38159,25 +38275,25 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             width: 20px;
             aspect-ratio: 1;
         }
-    `,state(){return{internalThemeClient:void 0,currentTheme:G3.Auto}},render({inputs:e,state:t,updateState:n,dispatch:r,events:i}){let a=e.themeClient||t.internalThemeClient||new Y3;n({internalThemeClient:a,currentTheme:a.getCurrentTheme()});let o=e.labels||Z3;return Object.values(G3).map(e=>E`
+    `,state(){return{internalThemeClient:void 0,currentTheme:K3.Auto}},render({inputs:e,state:t,updateState:n,dispatch:r,events:i}){let a=e.themeClient||t.internalThemeClient||new X3;n({internalThemeClient:a,currentTheme:a.getCurrentTheme()});let o=e.labels||Q3;return Object.values(K3).map(e=>E`
                 <button
                     class=${qf({selected:a.getCurrentTheme()===e})}
                     title=${o[e]}
                     aria-label=${o[e]}
                     ${F(`click`,t=>{t.stopPropagation(),a.setSelectedTheme(e),n({currentTheme:a.getCurrentTheme()}),r(new i.themeSelect({detail:e}))})}
                 >
-                    <${q.assign({icon:X3[e],fitContainer:!0})}></${q}>
+                    <${q.assign({icon:Z3[e],fitContainer:!0})}></${q}>
                 </button>
-            `)}});function $3(e){return $f({async updateCallback(t,n){if(n&&t in n.cache)return{cache:n.cache,element:n.cache[t],key:t};let r=await e[t]();return{cache:{...n?.cache,[t]:r},element:r,key:t}}})}function e6(e,{ready:t,loading:n,error:r,key:i}){return i&&e.update(i),e.value instanceof Error?r(e.value):e.value instanceof Promise?n(e.value.then(e=>({[e.key]:e.element}))):t({[e.value.key]:e.value.element})}function t6(e){return y(e.toString({format:`hex`}))}var n6=H[`vira-brand-500`].default;function r6(e){return Math.abs(e.contrast(`white`,`APCA`))>Math.abs(e.contrast(`black`,`APCA`))?`white`:`black`}function i6({background:e,foreground:t}){let n=e??new xd(r6(t)),r=t??new xd(r6(e));return{background:t6(n),foreground:t6(r)}}var a6;(function(e){e.Dark=`dark`,e.Light=`light`})(a6||={});function o6({themeColor:e=n6}={}){let t=new xd(e);return{nav:{hover:i6({background:t.clone().set({"hsl.l":93})}),active:i6({background:t.clone().set({"hsl.l":90})}),selected:i6({background:t.clone().set({"hsl.l":85})})},accent:{icon:t6(t.clone().set({"hsl.l":40}))}}}var s6=[`#000000`,`#ffffff`,`#000`,`#fff`,`white`,`black`];function c6(e,t=s6){let n={};return Object.values(e).forEach(e=>{if(t.includes(e.default))return;let r=l6(e);me(n,r.colorName,()=>[]).push(r)}),n}function l6(e){let t=String(e.name).replace(/^-+/,``).split(`-`),n=t.length>2?t.at(-1):void 0;return{suffix:n,prefix:D.isTruthy(t[0]),colorName:t.slice(1,n?-1:void 0).join(`-`),definition:e,cssVarName:String(e.name)}}function u6(e,{mapFrom:n,mapTo:r}){return t.isArray(e)?b(e.map(e=>{if(n&&t.isKeyOf(e,n))return e;if(r&&t.isKeyOf(e,r)&&r[e]!=null)return r[e];throw Error(`Unknown font weight: ${String(e)}`)})):u6(Je(Object.entries(e),([e,t])=>{if(t)return e},t.isTruthy),{mapTo:r,mapFrom:n})}var d6=Ie(B),f6;(function(e){e.HighestContrast=`highest-contrast`,e.LowestContrast=`lowest-contrast`})(f6||={});function p6({comparison:e,isHighestContrast:n,lightestColorString:r,darkestColorString:i}){let a=t.isArray(e.background),o=a?e.foreground:e.background,s=a?{foreground:o,background:r}:{foreground:r,background:o},c=a?{foreground:o,background:i}:{foreground:i,background:o},l=Math.abs(dv(s).contrast),u=Math.abs(dv(c).contrast);return n?l>u?r:i:l<u?r:i}function m6({colors:e,desiredContrastLevel:n,preference:r,lightnessProxies:i}){let a=vv[n].min,o=(t.isArray(e.foreground)?e.foreground:t.isArray(e.background)?e.background:[]).filter(n=>{let r=t.isArray(e.foreground)?n:e.foreground,i=t.isArray(e.foreground)?e.background:n;return Math.abs(dv({foreground:r,background:i}).contrast)>=a});if(o.length!==0)return o.reduce((e,t)=>{let n=i[e]??0,a=i[t]??0;return r===`lightest`?a<n?t:e:a>n?t:e})}function h6(e,{omittedColorValues:n=s6,crossContrastLevels:r=d6,prefix:i=`vir`}={}){let a=u6(r,{mapFrom:hv}),o=c6(e,n),s={background:`white`,foreground:`black`,prefix:i},c={},l={},u=Ot({crossWith:[`color-in-foreground-light-mode`,`color-in-foreground-dark-mode`,`color-behind-bg-light-mode`,`color-behind-bg-dark-mode`,`color-behind-fg-light-mode`,`color-behind-fg-dark-mode`,`color-on-self-light-mode`,`color-on-self-dark-mode`],contrast:[f6.HighestContrast,...a,f6.LowestContrast]}),d=yv(s.foreground),f=yv(s.background);Object.entries(o).forEach(([e,n])=>{C.isLengthAtLeast(n,1);let r=n.map(e=>e.definition.default),a=n[0],o=p(n,e=>({key:e.definition.default,value:e})),s=p(r,e=>({key:e,value:Math.abs(dv({foreground:e,background:`#ffffff`}).contrast)})),m=r.reduce((e,t)=>(s[t]??0)<(s[e]??0)?t:e),h=r.reduce((e,t)=>(s[t]??0)>(s[e]??0)?t:e),_=D.isTruthy(m6({colors:{foreground:r,background:m},desiredContrastLevel:B.SmallBodyText,preference:`lightest`,lightnessProxies:s}),`Failed to find light mode on-self foreground color for ${a.colorName}`),v=D.isTruthy(m6({colors:{foreground:r,background:h},desiredContrastLevel:B.SmallBodyText,preference:`darkest`,lightnessProxies:s}),`Failed to find dark mode on-self foreground color for ${a.colorName}`),y=r.toReversed(),b=[i,a.colorName];u.forEach(n=>{let i=n.crossWith===`color-in-foreground-light-mode`?{foreground:r,background:f}:n.crossWith===`color-in-foreground-dark-mode`?{foreground:r,background:d}:n.crossWith===`color-on-self-dark-mode`?{foreground:v,background:y}:n.crossWith===`color-on-self-light-mode`?{foreground:_,background:r}:n.crossWith===`color-behind-bg-light-mode`?{foreground:f,background:r}:n.crossWith===`color-behind-bg-dark-mode`||n.crossWith===`color-behind-fg-light-mode`?{foreground:d,background:r}:n.crossWith===`color-behind-fg-dark-mode`?{foreground:f,background:r}:void 0,a=n.crossWith===`color-in-foreground-light-mode`||n.crossWith===`color-in-foreground-dark-mode`?{background:{refDefaultBackground:!0}}:n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-bg-dark-mode`?{foreground:{refDefaultBackground:!0}}:n.crossWith===`color-behind-fg-light-mode`||n.crossWith===`color-behind-fg-dark-mode`?{foreground:{refDefaultForeground:!0}}:void 0;if(!i)throw Error(`Forgot to handle crossWith: '${n.crossWith}'`);let s=n.contrast===f6.HighestContrast||n.contrast===f6.LowestContrast?p6({comparison:i,isHighestContrast:n.contrast===f6.HighestContrast,lightestColorString:m,darkestColorString:h}):fv(i,n.contrast),u=s?o[s]:void 0;if(!u){cn.error(`No valid '${e}' color cross found for: ${g(n)} with ${g(r)}`);return}let p=n.crossWith===`color-on-self-light-mode`||n.crossWith===`color-on-self-dark-mode`,ee=n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-bg-dark-mode`,x=n.crossWith===`color-behind-fg-light-mode`||n.crossWith===`color-behind-fg-dark-mode`,S=fe(i,(e,r)=>{if(t.isString(r)){if(p&&e===`foreground`){let e=n.crossWith===`color-on-self-light-mode`?_:v;return(e?o[e]:void 0)?.definition.value||r}return a&&t.isKeyOf(e,a)&&a[e]||r}return u.definition.value}),te=n.crossWith===`color-in-foreground-light-mode`||n.crossWith===`color-on-self-light-mode`||n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-fg-light-mode`,ne=p?[`on`,`self`,n.contrast]:ee?[`behind`,`bg`,n.contrast]:x?[`behind`,`fg`,n.contrast]:[`foreground`,n.contrast],re=[...b,...ne].join(`-`);te?c[re]=S:l[re]=S})});let m=xv(s,c);return{defaultLight:m,darkOverride:Tv(m,`dark`,{defaultOverride:{background:`black`,foreground:`white`},colorOverrides:l})}}function g6(e,t){let n=t?.paletteVarName;return[`export const theme = defineColorTheme(\n${S6({colorInit:e.init.default,indentLevel:1,defaultInit:void 0,paletteVarName:n})},\n${C6({colorsInit:e.init.colors,indentLevel:1,defaultInit:e.init.default,paletteVarName:n})},\n);`,...(t?.overrides||[]).map(e=>_6(e,n))].join(`
+            `)}});function e6(e){return $f({async updateCallback(t,n){if(n&&t in n.cache)return{cache:n.cache,element:n.cache[t],key:t};let r=await e[t]();return{cache:{...n?.cache,[t]:r},element:r,key:t}}})}function t6(e,{ready:t,loading:n,error:r,key:i}){return i&&e.update(i),e.value instanceof Error?r(e.value):e.value instanceof Promise?n(e.value.then(e=>({[e.key]:e.element}))):t({[e.value.key]:e.value.element})}function n6(e){return y(e.toString({format:`hex`}))}var r6=H[`vira-brand-500`].default;function i6(e){return Math.abs(e.contrast(`white`,`APCA`))>Math.abs(e.contrast(`black`,`APCA`))?`white`:`black`}function a6({background:e,foreground:t}){let n=e??new xd(i6(t)),r=t??new xd(i6(e));return{background:n6(n),foreground:n6(r)}}var o6;(function(e){e.Dark=`dark`,e.Light=`light`})(o6||={});function s6({themeColor:e=r6}={}){let t=new xd(e);return{nav:{hover:a6({background:t.clone().set({"hsl.l":93})}),active:a6({background:t.clone().set({"hsl.l":90})}),selected:a6({background:t.clone().set({"hsl.l":85})})},accent:{icon:n6(t.clone().set({"hsl.l":40}))}}}var c6=[`#000000`,`#ffffff`,`#000`,`#fff`,`white`,`black`];function l6(e,t=c6){let n={};return Object.values(e).forEach(e=>{if(t.includes(e.default))return;let r=u6(e);me(n,r.colorName,()=>[]).push(r)}),n}function u6(e){let t=String(e.name).replace(/^-+/,``).split(`-`),n=t.length>2?t.at(-1):void 0;return{suffix:n,prefix:D.isTruthy(t[0]),colorName:t.slice(1,n?-1:void 0).join(`-`),definition:e,cssVarName:String(e.name)}}function d6(e,{mapFrom:n,mapTo:r}){return t.isArray(e)?b(e.map(e=>{if(n&&t.isKeyOf(e,n))return e;if(r&&t.isKeyOf(e,r)&&r[e]!=null)return r[e];throw Error(`Unknown font weight: ${String(e)}`)})):d6(Je(Object.entries(e),([e,t])=>{if(t)return e},t.isTruthy),{mapTo:r,mapFrom:n})}var f6=Ie(B),p6;(function(e){e.HighestContrast=`highest-contrast`,e.LowestContrast=`lowest-contrast`})(p6||={});function m6({comparison:e,isHighestContrast:n,lightestColorString:r,darkestColorString:i}){let a=t.isArray(e.background),o=a?e.foreground:e.background,s=a?{foreground:o,background:r}:{foreground:r,background:o},c=a?{foreground:o,background:i}:{foreground:i,background:o},l=Math.abs(dv(s).contrast),u=Math.abs(dv(c).contrast);return n?l>u?r:i:l<u?r:i}function h6({colors:e,desiredContrastLevel:n,preference:r,lightnessProxies:i}){let a=vv[n].min,o=(t.isArray(e.foreground)?e.foreground:t.isArray(e.background)?e.background:[]).filter(n=>{let r=t.isArray(e.foreground)?n:e.foreground,i=t.isArray(e.foreground)?e.background:n;return Math.abs(dv({foreground:r,background:i}).contrast)>=a});if(o.length!==0)return o.reduce((e,t)=>{let n=i[e]??0,a=i[t]??0;return r===`lightest`?a<n?t:e:a>n?t:e})}function g6(e,{omittedColorValues:n=c6,crossContrastLevels:r=f6,prefix:i=`vir`}={}){let a=d6(r,{mapFrom:hv}),o=l6(e,n),s={background:`white`,foreground:`black`,prefix:i},c={},l={},u=Ot({crossWith:[`color-in-foreground-light-mode`,`color-in-foreground-dark-mode`,`color-behind-bg-light-mode`,`color-behind-bg-dark-mode`,`color-behind-fg-light-mode`,`color-behind-fg-dark-mode`,`color-on-self-light-mode`,`color-on-self-dark-mode`],contrast:[p6.HighestContrast,...a,p6.LowestContrast]}),d=yv(s.foreground),f=yv(s.background);Object.entries(o).forEach(([e,n])=>{C.isLengthAtLeast(n,1);let r=n.map(e=>e.definition.default),a=n[0],o=p(n,e=>({key:e.definition.default,value:e})),s=p(r,e=>({key:e,value:Math.abs(dv({foreground:e,background:`#ffffff`}).contrast)})),m=r.reduce((e,t)=>(s[t]??0)<(s[e]??0)?t:e),h=r.reduce((e,t)=>(s[t]??0)>(s[e]??0)?t:e),_=D.isTruthy(h6({colors:{foreground:r,background:m},desiredContrastLevel:B.SmallBodyText,preference:`lightest`,lightnessProxies:s}),`Failed to find light mode on-self foreground color for ${a.colorName}`),v=D.isTruthy(h6({colors:{foreground:r,background:h},desiredContrastLevel:B.SmallBodyText,preference:`darkest`,lightnessProxies:s}),`Failed to find dark mode on-self foreground color for ${a.colorName}`),y=r.toReversed(),b=[i,a.colorName];u.forEach(n=>{let i=n.crossWith===`color-in-foreground-light-mode`?{foreground:r,background:f}:n.crossWith===`color-in-foreground-dark-mode`?{foreground:r,background:d}:n.crossWith===`color-on-self-dark-mode`?{foreground:v,background:y}:n.crossWith===`color-on-self-light-mode`?{foreground:_,background:r}:n.crossWith===`color-behind-bg-light-mode`?{foreground:f,background:r}:n.crossWith===`color-behind-bg-dark-mode`||n.crossWith===`color-behind-fg-light-mode`?{foreground:d,background:r}:n.crossWith===`color-behind-fg-dark-mode`?{foreground:f,background:r}:void 0,a=n.crossWith===`color-in-foreground-light-mode`||n.crossWith===`color-in-foreground-dark-mode`?{background:{refDefaultBackground:!0}}:n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-bg-dark-mode`?{foreground:{refDefaultBackground:!0}}:n.crossWith===`color-behind-fg-light-mode`||n.crossWith===`color-behind-fg-dark-mode`?{foreground:{refDefaultForeground:!0}}:void 0;if(!i)throw Error(`Forgot to handle crossWith: '${n.crossWith}'`);let s=n.contrast===p6.HighestContrast||n.contrast===p6.LowestContrast?m6({comparison:i,isHighestContrast:n.contrast===p6.HighestContrast,lightestColorString:m,darkestColorString:h}):fv(i,n.contrast),u=s?o[s]:void 0;if(!u){cn.error(`No valid '${e}' color cross found for: ${g(n)} with ${g(r)}`);return}let p=n.crossWith===`color-on-self-light-mode`||n.crossWith===`color-on-self-dark-mode`,ee=n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-bg-dark-mode`,x=n.crossWith===`color-behind-fg-light-mode`||n.crossWith===`color-behind-fg-dark-mode`,S=fe(i,(e,r)=>{if(t.isString(r)){if(p&&e===`foreground`){let e=n.crossWith===`color-on-self-light-mode`?_:v;return(e?o[e]:void 0)?.definition.value||r}return a&&t.isKeyOf(e,a)&&a[e]||r}return u.definition.value}),te=n.crossWith===`color-in-foreground-light-mode`||n.crossWith===`color-on-self-light-mode`||n.crossWith===`color-behind-bg-light-mode`||n.crossWith===`color-behind-fg-light-mode`,ne=p?[`on`,`self`,n.contrast]:ee?[`behind`,`bg`,n.contrast]:x?[`behind`,`fg`,n.contrast]:[`foreground`,n.contrast],re=[...b,...ne].join(`-`);te?c[re]=S:l[re]=S})});let m=xv(s,c);return{defaultLight:m,darkOverride:Tv(m,`dark`,{defaultOverride:{background:`black`,foreground:`white`},colorOverrides:l})}}function _6(e,t){let n=t?.paletteVarName;return[`export const theme = defineColorTheme(\n${C6({colorInit:e.init.default,indentLevel:1,defaultInit:void 0,paletteVarName:n})},\n${w6({colorsInit:e.init.colors,indentLevel:1,defaultInit:e.init.default,paletteVarName:n})},\n);`,...(t?.overrides||[]).map(e=>v6(e,n))].join(`
 
-`)}function _6(e,t){let n=[],r=[];y6(e.asTheme.init.default.foreground,e.originalTheme.init.default.foreground)||r.push(`${v6(3)}foreground: ${x6(e.asTheme.init.default.foreground,3,t)},`),y6(e.asTheme.init.default.background,e.originalTheme.init.default.background)||r.push(`${v6(3)}background: ${x6(e.asTheme.init.default.background,3,t)},`),r.length>0&&n.push(`${v6(2)}defaultOverride: {\n${r.join(`
-`)}\n${v6(2)}},`);let a=[];return _(e.asTheme.init.colors).forEach(([n,r])=>{let i=e.originalTheme.init.colors[n];if(!i)return;let o=[];`foreground`in r&&(!(`foreground`in i)||!y6(r.foreground,i.foreground))&&o.push(`${v6(4)}foreground: ${x6(r.foreground,4,t)},`),`background`in r&&(!(`background`in i)||!y6(r.background,i.background))&&o.push(`${v6(4)}background: ${x6(r.background,4,t)},`),o.length>0&&a.push(`${v6(3)}'${n}': {\n${o.join(`
-`)}\n${v6(3)}},`)}),a.length>0&&n.push(`${v6(2)}colorOverrides: {\n${a.join(`
-`)}\n${v6(2)}},`),`export const ${i(e.name)}Override = defineColorThemeOverride(\n${v6(1)}theme,\n${v6(1)}'${e.name}',\n${v6(1)}{\n${n.join(`
-`)}\n${v6(1)}},\n);`}function v6(e){return`    `.repeat(e)}function y6(e,n){return typeof e==typeof n&&(t.isString(e)||e instanceof h?String(e):JSON.stringify(e))===(t.isString(n)||n instanceof h?String(n):JSON.stringify(n))}function b6(e){let t=e.match(/^var\(--([^,)]+)/);return t?t[1]:void 0}function x6(e,t,n){if(typeof e==`string`)return`'${e}'`;if(typeof e==`number`)return String(e);if(e instanceof h){let t=String(e);if(n){let e=b6(t);if(e)return`${n}['${e}']`}return`css\`${t}\``}if(`refBackground`in e||`refForeground`in e||`refDefaultBackground`in e||`refDefaultForeground`in e){let n=[];return`refForeground`in e&&n.push(`${v6(t+1)}refForeground: '${e.refForeground}',`),`refBackground`in e&&n.push(`${v6(t+1)}refBackground: '${e.refBackground}',`),`refDefaultForeground`in e&&n.push(`${v6(t+1)}refDefaultForeground: true,`),`refDefaultBackground`in e&&n.push(`${v6(t+1)}refDefaultBackground: true,`),`{\n${n.join(`
-`)}\n${v6(t)}}`}return`'${e.default}'`}function S6({colorInit:e,indentLevel:n,defaultInit:r,paletteVarName:i}){let a=[];return`foreground`in e&&(!r||!y6(e.foreground,r.foreground))&&!t.hasKey(e.foreground,`refDefaultForeground`)&&(r&&y6(e.foreground,r.background)?a.push(`${v6(n+1)}foreground: {\n${v6(n+2)}refDefaultBackground: true,\n${v6(n+1)}},`):a.push(`${v6(n+1)}foreground: ${x6(e.foreground,n+1,i)},`)),`background`in e&&(!r||!y6(e.background,r.background))&&!t.hasKey(e.background,`refDefaultBackground`)&&(r&&y6(e.background,r.foreground)?a.push(`${v6(n+1)}background: {\n${v6(n+2)}refDefaultForeground: true,\n${v6(n+1)}},`):a.push(`${v6(n+1)}background: ${x6(e.background,n+1,i)},`)),`${v6(n)}{\n${a.join(`
-`)}\n${v6(n)}}`}function C6({colorsInit:e,indentLevel:t,defaultInit:n,paletteVarName:r}){let i=_(e).map(([e,i])=>`${v6(t+1)}'${e}': ${S6({colorInit:i,indentLevel:t+1,defaultInit:n,paletteVarName:r}).trimStart()},`);return`${v6(t)}{\n${i.join(`
-`)}\n${v6(t)}}`}function w6({searchQuery:e,searchIn:t}){let n=t.length,r=e.length;if(r>n)return!1;if(r===n)return e===t;let i=t.toLowerCase(),a=e.toLowerCase();outer:for(let e=0,t=0;e<r;e++){let r=a.codePointAt(e);for(;t<n;)if(i.codePointAt(t++)===r)continue outer;return!1}return!0}var T6=Mt(32);function E6(e){return e.join(T6)}function D6(e){return e.length?[E6(e),...D6(e.slice(0,-1))]:[]}var O6=[`error`,`errors`];function k6(e){return O6.includes(e)}function A6({flattenedNodes:e,searchQuery:n}){let r={};function i(e){Object.values(e.children).map(e=>(i(e),E6(e.fullUrlBreadcrumbs))).forEach(e=>r[e]=!0)}return e.forEach(e=>{let a=e.entry.errors.length&&k6(n),o=E6(e.fullUrlBreadcrumbs);if(w6({searchIn:[e.entry.title,...e.entry.descriptionParagraphs.map(e=>t.isString(e)?e:bp(e))].join(` `).toLowerCase(),searchQuery:n.toLowerCase()})||a||r[o]){let t=D6(e.fullUrlBreadcrumbs);i(e),t.forEach(e=>r[e]=!0)}else r[o]=!1}),e.filter(e=>{let n=E6(e.fullUrlBreadcrumbs),i=r[n];if(!t.isBoolean(i))throw TypeError(`Failed to find '${e.fullUrlBreadcrumbs.join(` > `)}' in includeInSearchResults.`);return i})}function j6(e){return new k3({basePath:e,sanitizeRoute(e){return{paths:M6(e.paths),hash:void 0,search:void 0}}})}function M6(e){let n=e[0];if(!t.isEnumValue(n,Mr))return Pr.paths;if(n===Mr.Book)return[Mr.Book,...e.slice(1)];if(n===Mr.Search)return e[1]?[n,e[1]]:[Mr.Book,...e.slice(1)];throw Error(`Route path not handled for sanitization: ${e.join(`/`)}`)}var N6=oe()(`element-book-change-route`),P6=yp(),F6=P6()({tagName:`book-route-link`,cssVars:{"book-route-link-anchor-padding":`0px`},styles({cssVars:e}){return T`
+`)}function v6(e,t){let n=[],r=[];b6(e.asTheme.init.default.foreground,e.originalTheme.init.default.foreground)||r.push(`${y6(3)}foreground: ${S6(e.asTheme.init.default.foreground,3,t)},`),b6(e.asTheme.init.default.background,e.originalTheme.init.default.background)||r.push(`${y6(3)}background: ${S6(e.asTheme.init.default.background,3,t)},`),r.length>0&&n.push(`${y6(2)}defaultOverride: {\n${r.join(`
+`)}\n${y6(2)}},`);let a=[];return _(e.asTheme.init.colors).forEach(([n,r])=>{let i=e.originalTheme.init.colors[n];if(!i)return;let o=[];`foreground`in r&&(!(`foreground`in i)||!b6(r.foreground,i.foreground))&&o.push(`${y6(4)}foreground: ${S6(r.foreground,4,t)},`),`background`in r&&(!(`background`in i)||!b6(r.background,i.background))&&o.push(`${y6(4)}background: ${S6(r.background,4,t)},`),o.length>0&&a.push(`${y6(3)}'${n}': {\n${o.join(`
+`)}\n${y6(3)}},`)}),a.length>0&&n.push(`${y6(2)}colorOverrides: {\n${a.join(`
+`)}\n${y6(2)}},`),`export const ${i(e.name)}Override = defineColorThemeOverride(\n${y6(1)}theme,\n${y6(1)}'${e.name}',\n${y6(1)}{\n${n.join(`
+`)}\n${y6(1)}},\n);`}function y6(e){return`    `.repeat(e)}function b6(e,n){return typeof e==typeof n&&(t.isString(e)||e instanceof h?String(e):JSON.stringify(e))===(t.isString(n)||n instanceof h?String(n):JSON.stringify(n))}function x6(e){let t=e.match(/^var\(--([^,)]+)/);return t?t[1]:void 0}function S6(e,t,n){if(typeof e==`string`)return`'${e}'`;if(typeof e==`number`)return String(e);if(e instanceof h){let t=String(e);if(n){let e=x6(t);if(e)return`${n}['${e}']`}return`css\`${t}\``}if(`refBackground`in e||`refForeground`in e||`refDefaultBackground`in e||`refDefaultForeground`in e){let n=[];return`refForeground`in e&&n.push(`${y6(t+1)}refForeground: '${e.refForeground}',`),`refBackground`in e&&n.push(`${y6(t+1)}refBackground: '${e.refBackground}',`),`refDefaultForeground`in e&&n.push(`${y6(t+1)}refDefaultForeground: true,`),`refDefaultBackground`in e&&n.push(`${y6(t+1)}refDefaultBackground: true,`),`{\n${n.join(`
+`)}\n${y6(t)}}`}return`'${e.default}'`}function C6({colorInit:e,indentLevel:n,defaultInit:r,paletteVarName:i}){let a=[];return`foreground`in e&&(!r||!b6(e.foreground,r.foreground))&&!t.hasKey(e.foreground,`refDefaultForeground`)&&(r&&b6(e.foreground,r.background)?a.push(`${y6(n+1)}foreground: {\n${y6(n+2)}refDefaultBackground: true,\n${y6(n+1)}},`):a.push(`${y6(n+1)}foreground: ${S6(e.foreground,n+1,i)},`)),`background`in e&&(!r||!b6(e.background,r.background))&&!t.hasKey(e.background,`refDefaultBackground`)&&(r&&b6(e.background,r.foreground)?a.push(`${y6(n+1)}background: {\n${y6(n+2)}refDefaultForeground: true,\n${y6(n+1)}},`):a.push(`${y6(n+1)}background: ${S6(e.background,n+1,i)},`)),`${y6(n)}{\n${a.join(`
+`)}\n${y6(n)}}`}function w6({colorsInit:e,indentLevel:t,defaultInit:n,paletteVarName:r}){let i=_(e).map(([e,i])=>`${y6(t+1)}'${e}': ${C6({colorInit:i,indentLevel:t+1,defaultInit:n,paletteVarName:r}).trimStart()},`);return`${y6(t)}{\n${i.join(`
+`)}\n${y6(t)}}`}function T6({searchQuery:e,searchIn:t}){let n=t.length,r=e.length;if(r>n)return!1;if(r===n)return e===t;let i=t.toLowerCase(),a=e.toLowerCase();outer:for(let e=0,t=0;e<r;e++){let r=a.codePointAt(e);for(;t<n;)if(i.codePointAt(t++)===r)continue outer;return!1}return!0}var E6=Mt(32);function D6(e){return e.join(E6)}function O6(e){return e.length?[D6(e),...O6(e.slice(0,-1))]:[]}var k6=[`error`,`errors`];function A6(e){return k6.includes(e)}function j6({flattenedNodes:e,searchQuery:n}){let r={};function i(e){Object.values(e.children).map(e=>(i(e),D6(e.fullUrlBreadcrumbs))).forEach(e=>r[e]=!0)}return e.forEach(e=>{let a=e.entry.errors.length&&A6(n),o=D6(e.fullUrlBreadcrumbs);if(T6({searchIn:[e.entry.title,...e.entry.descriptionParagraphs.map(e=>t.isString(e)?e:bp(e))].join(` `).toLowerCase(),searchQuery:n.toLowerCase()})||a||r[o]){let t=O6(e.fullUrlBreadcrumbs);i(e),t.forEach(e=>r[e]=!0)}else r[o]=!1}),e.filter(e=>{let n=D6(e.fullUrlBreadcrumbs),i=r[n];if(!t.isBoolean(i))throw TypeError(`Failed to find '${e.fullUrlBreadcrumbs.join(` > `)}' in includeInSearchResults.`);return i})}function M6(e){return new A3({basePath:e,sanitizeRoute(e){return{paths:N6(e.paths),hash:void 0,search:void 0}}})}function N6(e){let n=e[0];if(!t.isEnumValue(n,Mr))return Pr.paths;if(n===Mr.Book)return[Mr.Book,...e.slice(1)];if(n===Mr.Search)return e[1]?[n,e[1]]:[Mr.Book,...e.slice(1)];throw Error(`Route path not handled for sanitization: ${e.join(`/`)}`)}var P6=oe()(`element-book-change-route`),F6=yp(),I6=F6()({tagName:`book-route-link`,cssVars:{"book-route-link-anchor-padding":`0px`},styles({cssVars:e}){return T`
             a {
                 box-sizing: border-box;
                 display: block;
@@ -38190,11 +38306,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
         `},render({inputs:e,dispatch:t}){let n=e.router?.createRouteUrl({...e.route}).url||`#`;return E`
             <a
                 href=${n}
-                ${F(`click`,n=>{(!e.router||b3(n))&&(n.preventDefault(),window.scrollTo(0,0),t(new N6({detail:e.route})))})}
+                ${F(`click`,n=>{(!e.router||x3(n))&&(n.preventDefault(),window.scrollTo(0,0),t(new P6({detail:e.route})))})}
             >
                 <slot></slot>
             </a>
-        `}});function I6(e,n){return e.entry.entryType===dt.Root?!1:e.entry.entryType===dt.Page||t.jsonEquals(n,e.fullUrlBreadcrumbs.slice(0,-1))?!0:t.jsonEquals(n?.slice(0,-1),e.fullUrlBreadcrumbs.slice(0,-1))}var L6=P6()({tagName:`book-nav`,cssVars:{"book-nav-internal-indent":`0`},styles({cssVars:e}){return T`
+        `}});function L6(e,n){return e.entry.entryType===dt.Root?!1:e.entry.entryType===dt.Page||t.jsonEquals(n,e.fullUrlBreadcrumbs.slice(0,-1))?!0:t.jsonEquals(n?.slice(0,-1),e.fullUrlBreadcrumbs.slice(0,-1))}var R6=F6()({tagName:`book-nav`,cssVars:{"book-nav-internal-indent":`0`},styles({cssVars:e}){return T`
             :host {
                 display: flex;
                 flex-direction: column;
@@ -38215,7 +38331,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
 
             .title-row {
                 display: block;
-                ${F6.cssVars[`book-route-link-anchor-padding`].name}: 1px 24px 1px calc(calc(16px * ${e[`book-nav-internal-indent`].value}) + 8px);
+                ${I6.cssVars[`book-route-link-anchor-padding`].name}: 1px 24px 1px calc(calc(16px * ${e[`book-nav-internal-indent`].value}) + 8px);
             }
 
             ul {
@@ -38245,11 +38361,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 display: inline-flex;
                 color: ${Fr[`element-book-accent-icon-color`].value};
             }
-        `},render({inputs:e}){let n=e.flattenedNodes.map(n=>{if(!I6(n,e.selectedPath))return;let r=T`
+        `},render({inputs:e}){let n=e.flattenedNodes.map(n=>{if(!L6(n,e.selectedPath))return;let r=T`
                 --book-nav-internal-indent: ${n.fullUrlBreadcrumbs.length-1};
             `;return E`
                 <li style=${r}>
-                    <${F6.assign({router:e.router,route:{paths:[Mr.Book,...n.fullUrlBreadcrumbs]}})}
+                    <${I6.assign({router:e.router,route:{paths:[Mr.Book,...n.fullUrlBreadcrumbs]}})}
                         class=${qf({"title-row":!0,selected:e.selectedPath?t.jsonEquals(e.selectedPath,n.fullUrlBreadcrumbs):!1})}
                     >
                         <div class="title-text">
@@ -38258,16 +38374,16 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                 `)}
                             ${n.entry.title}
                         </div>
-                    </${F6}>
+                    </${I6}>
                 </li>
             `});return E`
-            <${F6.assign({route:Pr,router:e.router})}>
+            <${I6.assign({route:Pr,router:e.router})}>
                 <slot>Book</slot>
-            </${F6}>
+            </${I6}>
             <ul>
                 ${n}
             </ul>
-        `}}),R6=P6()({tagName:`book-page-controls`,events:{controlValueChange:w()},hostClasses:{"book-page-controls-has-controls"({inputs:e}){return!!Object.keys(e.config).length}},styles({hostClasses:e}){return T`
+        `}}),z6=F6()({tagName:`book-page-controls`,events:{controlValueChange:w()},hostClasses:{"book-page-controls-has-controls"({inputs:e}){return!!Object.keys(e.config).length}},styles({hostClasses:e}){return T`
             :host {
                 display: flex;
                 flex-wrap: wrap;
@@ -38301,7 +38417,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 bottom: 0;
                 margin-left: -32px;
             }
-        `},render({inputs:e,dispatch:n,events:r}){return Object.entries(e.config).length?Object.entries(e.config).map(([i,a],o)=>{if(a.controlType===O.Hidden)return``;let s=z6(e.currentValues[i],a,a=>{let o=t.isArray(e.fullUrlBreadcrumbs)?e.fullUrlBreadcrumbs:e.fullUrlBreadcrumbs[i];if(!o)throw Error(`Failed to find breadcrumbs from given control name: '${i}'`);n(new r.controlValueChange({detail:{fullUrlBreadcrumbs:o,newValues:{...Object.fromEntries(Object.keys(e.config).map(t=>[t,e.currentValues[t]])),[i]:a}}}))});return E`
+        `},render({inputs:e,dispatch:n,events:r}){return Object.entries(e.config).length?Object.entries(e.config).map(([i,a],o)=>{if(a.controlType===O.Hidden)return``;let s=B6(e.currentValues[i],a,a=>{let o=t.isArray(e.fullUrlBreadcrumbs)?e.fullUrlBreadcrumbs:e.fullUrlBreadcrumbs[i];if(!o)throw Error(`Failed to find breadcrumbs from given control name: '${i}'`);n(new r.controlValueChange({detail:{fullUrlBreadcrumbs:o,newValues:{...Object.fromEntries(Object.keys(e.config).map(t=>[t,e.currentValues[t]])),[i]:a}}}))});return E`
                     <div class="control-wrapper">
                         ${mp(o===0,E`
                                 <${q.assign({icon:K(T2.SlidersHorizontal,24)})}
@@ -38317,7 +38433,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                             ${s}
                         </label>
                     </div>
-                `}):``}});function z6(e,t,n){return St(t,O.Hidden)?``:St(t,O.Checkbox)?E`
+                `}):``}});function B6(e,t,n){return St(t,O.Hidden)?``:St(t,O.Checkbox)?E`
             <${Q.assign({value:!!e})}
                 ${F(Q.events.valueChange,e=>{n(e.detail)})}
             ></${Q}>
@@ -38345,7 +38461,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             <${H2}>
                 ${t.controlType} controls are not implemented yet.
             </${H2}>
-        `}var B6=P6()({tagName:`book-breadcrumbs`,styles:T`
+        `}var V6=F6()({tagName:`book-breadcrumbs`,styles:T`
         :host {
             display: flex;
             color: ${U.colors[`vira-grey-foreground-header`].foreground.value};
@@ -38357,13 +38473,13 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
     `,render({inputs:e}){let t=e.currentRoute.paths.slice(1);return t.length?t.map((t,n,r)=>{let i=n>=r.length-1,a=r.slice(0,n+1),o=i?``:E`
                       <span class="spacer">&gt;</span>
                   `;return E`
-                <${F6.assign({route:{hash:void 0,search:void 0,paths:[Mr.Book,...a]},router:e.router})}>
+                <${I6.assign({route:{hash:void 0,search:void 0,paths:[Mr.Book,...a]},router:e.router})}>
                     ${t}
-                </${F6}>
+                </${I6}>
                 ${o}
             `}):E`
                 &nbsp;
-            `}}),V6=P6()({tagName:`book-breadcrumbs-bar`,styles:T`
+            `}}),H6=F6()({tagName:`book-breadcrumbs-bar`,styles:T`
         :host {
             border-bottom: 1px solid
                 ${U.colors[`vira-grey-foreground-placeholder`].foreground.value};
@@ -38377,14 +38493,14 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             ${mp(!!e.currentSearch,E`
                     &nbsp;
                 `,E`
-                    <${B6.assign({currentRoute:e.currentRoute,router:e.router})}></${B6}>
+                    <${V6.assign({currentRoute:e.currentRoute,router:e.router})}></${V6}>
                 `)}
             <input
                 placeholder="search"
                 .value=${e.currentSearch}
-                ${F(`input`,async e=>{let n=e.currentTarget;if(!(n instanceof HTMLInputElement))throw TypeError(`Failed to find input element for search.`);let r=n.value;await Pe({milliseconds:200}),n.value===r&&(n.value?t(new N6({detail:{paths:[Mr.Search,encodeURIComponent(n.value)]}})):t(new N6({detail:Pr})))})}
+                ${F(`input`,async e=>{let n=e.currentTarget;if(!(n instanceof HTMLInputElement))throw TypeError(`Failed to find input element for search.`);let r=n.value;await Pe({milliseconds:200}),n.value===r&&(n.value?t(new P6({detail:{paths:[Mr.Search,encodeURIComponent(n.value)]}})):t(new P6({detail:Pr})))})}
             />
-        `}}),H6=P6()({tagName:`book-entry-description`,styles:T`
+        `}}),U6=F6()({tagName:`book-entry-description`,styles:T`
         :host {
             color: ${U.colors[`vira-grey-foreground-placeholder`].foreground.value};
             display: inline-flex;
@@ -38410,7 +38526,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
         }
     `,render({inputs:e}){return e.descriptionParagraphs.map(e=>E`
                 <p>${e}</p>
-            `)}}),U6=P6()({tagName:`book-page-wrapper`,styles:T`
+            `)}}),W6=F6()({tagName:`book-page-wrapper`,styles:T`
         :host {
             display: block;
         }
@@ -38431,7 +38547,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             flex-direction: column;
         }
 
-        ${F6} {
+        ${I6} {
             display: inline-block;
         }
     `,render({inputs:e}){let t=e.isTopLevel?E`
@@ -38439,9 +38555,9 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
               `:E`
                   <h3 class="header-with-icon">${e.pageNode.entry.title}</h3>
               `,n=[Mr.Book,...e.pageNode.fullUrlBreadcrumbs],r=e.pageNode.entry.errors.length?Nt(e.pageNode.entry.errors):void 0;r&&console.error(r);let i=e.blockNavigation?t:E`
-                  <${F6.assign({route:{paths:n,hash:void 0,search:void 0},router:e.router})}>
+                  <${I6.assign({route:{paths:n,hash:void 0,search:void 0},router:e.router})}>
                       ${t}
-                  </${F6}>
+                  </${I6}>
               `;return E`
             <div class="page-header block-entry">
                 <div class="title-group">
@@ -38449,12 +38565,12 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     ${r?E`
                               <${H2}>${r.message}</${H2}>
                           `:E`
-                              <${H6.assign({descriptionParagraphs:e.pageNode.entry.descriptionParagraphs})}></${H6}>
-                              <${R6.assign({config:e.pageNode.entry.controls,currentValues:Or(e.controls,e.pageNode.fullUrlBreadcrumbs),fullUrlBreadcrumbs:e.pageNode.fullUrlBreadcrumbs})}></${R6}>
+                              <${U6.assign({descriptionParagraphs:e.pageNode.entry.descriptionParagraphs})}></${U6}>
+                              <${z6.assign({config:e.pageNode.entry.controls,currentValues:Or(e.controls,e.pageNode.fullUrlBreadcrumbs),fullUrlBreadcrumbs:e.pageNode.fullUrlBreadcrumbs})}></${z6}>
                           `}
                 </div>
             </div>
-        `}}),W6=P6()({tagName:`book-element-example-title`,styles:T`
+        `}}),G6=F6()({tagName:`book-element-example-title`,styles:T`
         :host {
             display: flex;
             color: ${U.colors[`vira-grey-foreground-placeholder`].foreground.value};
@@ -38462,10 +38578,10 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             padding: 0 8px 4px;
         }
     `,render({inputs:e}){if(e.blockNavigation)return e.elementExampleNode.entry.title;let t=[Mr.Book,...e.elementExampleNode.fullUrlBreadcrumbs];return E`
-            <${F6.assign({route:{paths:t,hash:void 0,search:void 0},router:e.router})}>
+            <${I6.assign({route:{paths:t,hash:void 0,search:void 0},router:e.router})}>
                 ${e.elementExampleNode.entry.title}
-            </${F6}>
-        `}}),G6=Symbol(`unset-internal-state`),K6=P6()({tagName:`book-element-example-viewer`,state(){return{isUnset:G6}},render({state:e,inputs:t,updateState:n}){try{if(t.elementExampleNode.entry.errors.length)throw Nt(t.elementExampleNode.entry.errors);if(!t.elementExampleNode.entry.render||typeof t.elementExampleNode.entry.render==`string`)throw Error(`Failed to render example '${t.elementExampleNode.entry.title}': render is not a function`);e.isUnset===G6&&n({isUnset:void 0,...t.elementExampleNode.entry.state?.()});let r=t.elementExampleNode.entry.render({state:e,updateState:n,controls:t.currentPageControls});if(r instanceof Promise)throw TypeError(`render output cannot be a promise`);return E`
+            </${I6}>
+        `}}),K6=Symbol(`unset-internal-state`),q6=F6()({tagName:`book-element-example-viewer`,state(){return{isUnset:K6}},render({state:e,inputs:t,updateState:n}){try{if(t.elementExampleNode.entry.errors.length)throw Nt(t.elementExampleNode.entry.errors);if(!t.elementExampleNode.entry.render||typeof t.elementExampleNode.entry.render==`string`)throw Error(`Failed to render example '${t.elementExampleNode.entry.title}': render is not a function`);e.isUnset===K6&&n({isUnset:void 0,...t.elementExampleNode.entry.state?.()});let r=t.elementExampleNode.entry.render({state:e,updateState:n,controls:t.currentPageControls});if(r instanceof Promise)throw TypeError(`render output cannot be a promise`);return E`
                 ${mp(!!t.elementExampleNode.entry.styles,E`
                         <style>
                             ${t.elementExampleNode.entry.styles}
@@ -38476,7 +38592,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 <${H2}>
                     ${t.elementExampleNode.entry.title} failed: ${r(e)}
                 </${H2}>
-            `}},options:{allowPolymorphicState:!0}}),q6=P6()({tagName:`book-element-example-wrapper`,styles:T`
+            `}},options:{allowPolymorphicState:!0}}),J6=F6()({tagName:`book-element-example-wrapper`,styles:T`
         :host {
             display: inline-block;
             max-width: 100%;
@@ -38496,54 +38612,54 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             align-items: flex-start;
         }
 
-        ${W6} {
+        ${G6} {
             color: ${U.colors[`vira-grey-foreground-placeholder`].foreground.value};
         }
 
-        :host(:hover) ${W6} {
+        :host(:hover) ${G6} {
             color: ${Fr[`element-book-accent-icon-color`].value};
         }
     `,render({inputs:e}){return E`
             <div class="individual-example-wrapper">
-                <${W6.assign({blockNavigation:e.blockNavigation,elementExampleNode:e.elementExampleNode,router:e.router})}></${W6}>
-                <${K6.assign(e)}></${K6}>
+                <${G6.assign({blockNavigation:e.blockNavigation,elementExampleNode:e.elementExampleNode,router:e.router})}></${G6}>
+                <${q6.assign(e)}></${q6}>
             </div>
-        `}}),J6={milliseconds:10},Y6,X6=new Map,Z6=new Map;function Q6(){return Y6||=new IntersectionObserver(e=>{for(let t of e){let e=t.target,n=X6.get(e);if(n){if(t.isIntersecting){if(!Z6.has(e)){let t=globalThis.setTimeout(()=>{Z6.delete(e),n(),Y6?.unobserve(e),X6.delete(e)},qe(J6,{milliseconds:!0}).milliseconds);Z6.set(e,t)}}else{let t=Z6.get(e);t&&(clearTimeout(t),Z6.delete(e))}}}},{rootMargin:`100px`}),Y6}function $6(e){let t=Z6.get(e);t&&(clearTimeout(t),Z6.delete(e)),X6.delete(e),Y6?.unobserve(e)}var e8=P6()({tagName:`book-lazy-entry`,state(){return{hasRendered:!1,placeholderElement:void 0}},styles:T`
+        `}}),Y6={milliseconds:10},X6,Z6=new Map,Q6=new Map;function $6(){return X6||=new IntersectionObserver(e=>{for(let t of e){let e=t.target,n=Z6.get(e);if(n){if(t.isIntersecting){if(!Q6.has(e)){let t=globalThis.setTimeout(()=>{Q6.delete(e),n(),X6?.unobserve(e),Z6.delete(e)},qe(Y6,{milliseconds:!0}).milliseconds);Q6.set(e,t)}}else{let t=Q6.get(e);t&&(clearTimeout(t),Q6.delete(e))}}}},{rootMargin:`100px`}),X6}function e8(e){let t=Q6.get(e);t&&(clearTimeout(t),Q6.delete(e)),Z6.delete(e),X6?.unobserve(e)}var t8=F6()({tagName:`book-lazy-entry`,state(){return{hasRendered:!1,placeholderElement:void 0}},styles:T`
         .placeholder {
             /* Minimum height to ensure the placeholder is observable */
             min-height: 50px;
             display: block;
         }
-    `,cleanup({state:e}){e.placeholderElement&&$6(e.placeholderElement)},render({inputs:e,state:t,updateState:n}){return t.hasRendered?e.content:E`
+    `,cleanup({state:e}){e.placeholderElement&&e8(e.placeholderElement)},render({inputs:e,state:t,updateState:n}){return t.hasRendered?e.content:E`
             <div
                 class="placeholder"
-                ${cp(e=>{t.placeholderElement&&$6(t.placeholderElement),n({placeholderElement:e}),X6.set(e,()=>{n({hasRendered:!0})}),Q6().observe(e)})}
+                ${cp(e=>{t.placeholderElement&&e8(t.placeholderElement),n({placeholderElement:e}),Z6.set(e,()=>{n({hasRendered:!0})}),$6().observe(e)})}
             >
                 &nbsp;
             </div>
-        `}});function t8({currentNodes:e,currentControls:t,currentNode:n,originalTree:r}){let i=Er(n,r),a=[];if(i){let n=t8({currentNodes:e,currentControls:t,currentNode:i,originalTree:r});n&&a.push(n)}if(br(n,dt.Page)&&!e.includes(n)){let e=Or(t,n.fullUrlBreadcrumbs);a.push({config:n.entry.controls,current:e,breadcrumbs:fe(e,()=>n.fullUrlBreadcrumbs)})}return a.reduce((e,t)=>({config:{...e.config,...t.config},current:{...e.current,...t.current},breadcrumbs:{...e.breadcrumbs,...t.breadcrumbs}}),{config:{},current:{},breadcrumbs:{}})}function n8({blockNavigation:e,currentNodes:n,isTopLevel:r,router:i,isSearching:a,controls:o,originalTree:s}){if(!n.length&&a)return[E`
+        `}});function n8({currentNodes:e,currentControls:t,currentNode:n,originalTree:r}){let i=Er(n,r),a=[];if(i){let n=n8({currentNodes:e,currentControls:t,currentNode:i,originalTree:r});n&&a.push(n)}if(br(n,dt.Page)&&!e.includes(n)){let e=Or(t,n.fullUrlBreadcrumbs);a.push({config:n.entry.controls,current:e,breadcrumbs:fe(e,()=>n.fullUrlBreadcrumbs)})}return a.reduce((e,t)=>({config:{...e.config,...t.config},current:{...e.current,...t.current},breadcrumbs:{...e.breadcrumbs,...t.breadcrumbs}}),{config:{},current:{},breadcrumbs:{}})}function r8({blockNavigation:e,currentNodes:n,isTopLevel:r,router:i,isSearching:a,controls:o,originalTree:s}){if(!n.length&&a)return[E`
                 No results
-            `];let c=t.isLengthAtLeast(n,1)?t8({currentNodes:n,currentControls:o,currentNode:n[0],originalTree:s}):void 0;return[c&&Object.values(c.config).length&&t.isLengthAtLeast(n,1)?E`
-                  <${R6.assign({config:c.config,currentValues:c.current,fullUrlBreadcrumbs:c.breadcrumbs})}></${R6}>
+            `];let c=t.isLengthAtLeast(n,1)?n8({currentNodes:n,currentControls:o,currentNode:n[0],originalTree:s}):void 0;return[c&&Object.values(c.config).length&&t.isLengthAtLeast(n,1)?E`
+                  <${z6.assign({config:c.config,currentValues:c.current,fullUrlBreadcrumbs:c.breadcrumbs})}></${z6}>
               `:S,tp(n,e=>e.fullUrlBreadcrumbs.join(`>`),t=>{if(br(t,dt.Page))return E`
-                    <${U6.assign({blockNavigation:e,isTopLevel:r,pageNode:t,controls:o,router:i})}
+                    <${W6.assign({blockNavigation:e,isTopLevel:r,pageNode:t,controls:o,router:i})}
                         class="block-entry"
-                    ></${U6}>
+                    ></${W6}>
                 `;if(br(t,dt.ElementExample)){let n=Or(o,t.fullUrlBreadcrumbs.slice(0,-1)),r=E`
-                    <${q6.assign({blockNavigation:e,elementExampleNode:t,currentPageControls:n,router:i})}></${q6}>
+                    <${J6.assign({blockNavigation:e,elementExampleNode:t,currentPageControls:n,router:i})}></${J6}>
                 `;return E`
-                    <${e8.assign({content:r})}
+                    <${t8.assign({content:r})}
                         class="inline-entry ${qf({"block-entry":t.entry.isVertical})}"
-                    ></${e8}>
+                    ></${t8}>
                 `}if(br(t,dt.Root))return S;{let e=E`
                     <${H2}>
                         Unknown entry type for rendering: '${t.entry.entryType}'
                     </${H2}>
                 `;return E`
-                    <${e8.assign({content:e})}
+                    <${t8.assign({content:e})}
                         class="block-entry"
-                    ></${e8}>
-                `}})]}var r8=P6()({tagName:`book-entry-display`,state(){return{lastElement:void 0}},styles:T`
+                    ></${t8}>
+                `}})]}var i8=F6()({tagName:`book-entry-display`,state(){return{lastElement:void 0}},styles:T`
         :host {
             display: flex;
             flex-direction: column;
@@ -38578,7 +38694,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             padding: 0;
         }
 
-        ${V6} {
+        ${H6} {
             top: 0;
         }
 
@@ -38604,8 +38720,8 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 opacity: 1;
             }
         }
-    `,events:{loadingRender:w()},render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=Nr(e.currentRoute.paths),o=n8({blockNavigation:e.blockNavigation,currentNodes:e.currentNodes,isTopLevel:!0,router:e.router,isSearching:!!a,controls:e.controls,originalTree:e.originalTree});return E`
-            <${V6.assign({currentSearch:a,currentRoute:e.currentRoute,router:e.router})}></${V6}>
+    `,events:{loadingRender:w()},render({inputs:e,dispatch:t,events:n,state:r,updateState:i}){let a=Nr(e.currentRoute.paths),o=r8({blockNavigation:e.blockNavigation,currentNodes:e.currentNodes,isTopLevel:!0,router:e.router,isSearching:!!a,controls:e.controls,originalTree:e.originalTree});return E`
+            <${H6.assign({currentSearch:a,currentRoute:e.currentRoute,router:e.router})}></${H6}>
 
             ${mp(e.showLoading,E`
                     <div
@@ -38627,7 +38743,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     </div>
                     <slot></slot>
                 `)}
-        `}});function i8(e,t,n){let r=a8(e,t);return r.length?r:(n(Pr),a8(e,Pr.paths))}function a8(e,t){return e.filter(e=>fr({searchFor:t.slice(1),searchIn:e.fullUrlBreadcrumbs}))}var o8=Ne()({tagName:`element-book-app`,state(){return{currentRoute:Pr,router:void 0,loading:!0,colors:{config:void 0,theme:o6(void 0)},treeBasedControls:void 0,originalWindowTitle:void 0,isDarkMode:globalThis.matchMedia(`(prefers-color-scheme: dark)`).matches,darkModeCleanup:void 0}},events:{pathUpdate:w()},slotNames:[`element-book-app-footer`,`element-book-app-nav-header`],styles:T`
+        `}});function a8(e,t,n){let r=o8(e,t);return r.length?r:(n(Pr),o8(e,Pr.paths))}function o8(e,t){return e.filter(e=>fr({searchFor:t.slice(1),searchIn:e.fullUrlBreadcrumbs}))}var s8=Ne()({tagName:`element-book-app`,state(){return{currentRoute:Pr,router:void 0,loading:!0,colors:{config:void 0,theme:s6(void 0)},treeBasedControls:void 0,originalWindowTitle:void 0,isDarkMode:globalThis.matchMedia(`(prefers-color-scheme: dark)`).matches,darkModeCleanup:void 0}},events:{pathUpdate:w()},slotNames:[`element-book-app-footer`,`element-book-app-nav-header`],styles:T`
         :host {
             display: flex;
             flex-direction: column;
@@ -38644,12 +38760,12 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             position: relative;
         }
 
-        ${r8} {
+        ${i8} {
             flex-grow: 1;
             max-height: 100%;
         }
 
-        ${L6} {
+        ${R6} {
             flex-shrink: 0;
             overflow-x: hidden;
             overflow-y: auto;
@@ -38657,48 +38773,48 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             top: 0;
             max-width: min(400px, 40%);
         }
-    `,cleanup({state:e,updateState:t}){e.router&&e.router.destroy(),e.darkModeCleanup&&e.darkModeCleanup(),t({router:void 0,darkModeCleanup:void 0})},render({state:e,inputs:i,host:a,updateState:o,dispatch:s,events:c,slotNames:l}){i._debug&&console.info(`rendering element-book app`);function u(t){return{...e.currentRoute,...t}}function d(n){let r=u(n);return!t.jsonEquals(e.currentRoute,r)}function f(n){i.preventWindowTitleChange||(e.originalWindowTitle||o({originalWindowTitle:document.title}),document.title=[e.originalWindowTitle,n].filter(t.isTruthy).join(` - `))}function p(n){if(!d(n))return;let r=u(n);e.router?e.router.setRoute(r):o({currentRoute:{...e.currentRoute,...r}}),i.elementBookRoutePaths&&!t.jsonEquals(i.elementBookRoutePaths,e.currentRoute.paths)&&s(new c.pathUpdate({detail:r.paths}))}try{if(i.elementBookRoutePaths&&!t.jsonEquals(i.elementBookRoutePaths,e.currentRoute.paths)&&p({paths:hn(i.elementBookRoutePaths)}),i.internalRouterConfig?.useInternalRouter&&!e.router){let e=j6(i.internalRouterConfig.basePath);o({router:e}),e.listen(!0,e=>{o({currentRoute:e})})}else!i.internalRouterConfig?.useInternalRouter&&e.router&&e.router.destroy();let r={themeColor:i.themeColor};if(!t.jsonEquals(r,e.colors.config)){let e=o6(r);o({colors:{config:r,theme:e}}),Lr(a,e)}if(!e.darkModeCleanup){let e=globalThis.matchMedia(`(prefers-color-scheme: dark)`);function t(e){o({isDarkMode:e.matches})}e.addEventListener(`change`,t),o({isDarkMode:e.matches,darkModeCleanup(){e.removeEventListener(`change`,t)}})}let s=i.darkMode??e.isDarkMode;n(s?Ev.overrides:{},`element-book-dark-mode`);let c=i._debug??!1,u=Cr({entries:i.pages,debug:c});(!e.treeBasedControls||e.treeBasedControls.pages!==i.pages||e.treeBasedControls.lastGlobalInputs!==i.globalValues)&&(i._debug&&console.info(`regenerating global controls`),o({treeBasedControls:{pages:i.pages,lastGlobalInputs:i.globalValues??{},controls:jr(u.tree,{children:e.treeBasedControls?.controls.children,controls:i.globalValues})}}));let m=Nr(e.currentRoute.paths),h=(m?A6({flattenedNodes:u.flattenedNodes,searchQuery:m}):void 0)??i8(u.flattenedNodes,e.currentRoute.paths,p);f(h[0]?.entry.title);let g=e.treeBasedControls?.controls;return g?(i._debug&&console.info({currentControls:g}),E`
+    `,cleanup({state:e,updateState:t}){e.router&&e.router.destroy(),e.darkModeCleanup&&e.darkModeCleanup(),t({router:void 0,darkModeCleanup:void 0})},render({state:e,inputs:i,host:a,updateState:o,dispatch:s,events:c,slotNames:l}){i._debug&&console.info(`rendering element-book app`);function u(t){return{...e.currentRoute,...t}}function d(n){let r=u(n);return!t.jsonEquals(e.currentRoute,r)}function f(n){i.preventWindowTitleChange||(e.originalWindowTitle||o({originalWindowTitle:document.title}),document.title=[e.originalWindowTitle,n].filter(t.isTruthy).join(` - `))}function p(n){if(!d(n))return;let r=u(n);e.router?e.router.setRoute(r):o({currentRoute:{...e.currentRoute,...r}}),i.elementBookRoutePaths&&!t.jsonEquals(i.elementBookRoutePaths,e.currentRoute.paths)&&s(new c.pathUpdate({detail:r.paths}))}try{if(i.elementBookRoutePaths&&!t.jsonEquals(i.elementBookRoutePaths,e.currentRoute.paths)&&p({paths:hn(i.elementBookRoutePaths)}),i.internalRouterConfig?.useInternalRouter&&!e.router){let e=M6(i.internalRouterConfig.basePath);o({router:e}),e.listen(!0,e=>{o({currentRoute:e})})}else!i.internalRouterConfig?.useInternalRouter&&e.router&&e.router.destroy();let r={themeColor:i.themeColor};if(!t.jsonEquals(r,e.colors.config)){let e=s6(r);o({colors:{config:r,theme:e}}),Lr(a,e)}if(!e.darkModeCleanup){let e=globalThis.matchMedia(`(prefers-color-scheme: dark)`);function t(e){o({isDarkMode:e.matches})}e.addEventListener(`change`,t),o({isDarkMode:e.matches,darkModeCleanup(){e.removeEventListener(`change`,t)}})}let s=i.darkMode??e.isDarkMode;n(s?Ev.overrides:{},`element-book-dark-mode`);let c=i._debug??!1,u=Cr({entries:i.pages,debug:c});(!e.treeBasedControls||e.treeBasedControls.pages!==i.pages||e.treeBasedControls.lastGlobalInputs!==i.globalValues)&&(i._debug&&console.info(`regenerating global controls`),o({treeBasedControls:{pages:i.pages,lastGlobalInputs:i.globalValues??{},controls:jr(u.tree,{children:e.treeBasedControls?.controls.children,controls:i.globalValues})}}));let m=Nr(e.currentRoute.paths),h=(m?j6({flattenedNodes:u.flattenedNodes,searchQuery:m}):void 0)??a8(u.flattenedNodes,e.currentRoute.paths,p);f(h[0]?.entry.title);let g=e.treeBasedControls?.controls;return g?(i._debug&&console.info({currentControls:g}),E`
                 <div
                     class="root"
-                    ${F(N6,e=>{let t=e.detail;if(d(t)&&(o({loading:!0}),p(t),!(a.shadowRoot.querySelector(L6.tagName)instanceof L6)))throw TypeError(`Failed to find child '${L6.tagName}'`)})}
-                    ${F(R6.events.controlValueChange,t=>{if(!e.treeBasedControls)return;let n=Ar(g,t.detail.fullUrlBreadcrumbs,t.detail.newValues);o({treeBasedControls:{...e.treeBasedControls,controls:n}})})}
+                    ${F(P6,e=>{let t=e.detail;if(d(t)&&(o({loading:!0}),p(t),!(a.shadowRoot.querySelector(R6.tagName)instanceof R6)))throw TypeError(`Failed to find child '${R6.tagName}'`)})}
+                    ${F(z6.events.controlValueChange,t=>{if(!e.treeBasedControls)return;let n=Ar(g,t.detail.fullUrlBreadcrumbs,t.detail.newValues);o({treeBasedControls:{...e.treeBasedControls,controls:n}})})}
                 >
                     ${i.blockNavigation?S:E`
-                              <${L6.assign({flattenedNodes:u.flattenedNodes,router:e.router,selectedPath:m?void 0:e.currentRoute.paths.slice(1)})}>
+                              <${R6.assign({flattenedNodes:u.flattenedNodes,router:e.router,selectedPath:m?void 0:e.currentRoute.paths.slice(1)})}>
                                   <slot name=${l[`element-book-app-nav-header`]}></slot>
-                              </${L6}>
+                              </${R6}>
                           `}
-                    <${r8.assign({blockNavigation:!!i.blockNavigation,controls:g,currentNodes:h,currentRoute:e.currentRoute,debug:c,originalTree:u.tree,router:e.router,showLoading:e.loading})}
-                        ${F(r8.events.loadingRender,async e=>{await Rv();let t=a.shadowRoot.querySelector(r8.tagName);t?t.scroll({top:0,behavior:`instant`}):console.error(`Failed to find '${r8.tagName}' for scrolling.`),await Rv(),o({loading:!e.detail})})}
+                    <${i8.assign({blockNavigation:!!i.blockNavigation,controls:g,currentNodes:h,currentRoute:e.currentRoute,debug:c,originalTree:u.tree,router:e.router,showLoading:e.loading})}
+                        ${F(i8.events.loadingRender,async e=>{await Rv();let t=a.shadowRoot.querySelector(i8.tagName);t?t.scroll({top:0,behavior:`instant`}):console.error(`Failed to find '${i8.tagName}' for scrolling.`),await Rv(),o({loading:!e.detail})})}
                     >
                         <slot name=${l[`element-book-app-footer`]}></slot>
-                    </${r8}>
+                    </${i8}>
                 </div>
             `):E`
                     <${H2}>Failed to generate page controls.</${H2}>
                 `}catch(e){return console.error(e),E`
                 <${H2}>${r(e)}</${H2}>
-            `}}}),s8=A({title:`Elements`,parent:void 0}),c8=A({title:`Styles`,parent:void 0}),l8=A({title:`Util`,parent:void 0}),u8=A({title:`Icons`,controls:{"Stroke Color":Ct({controlType:O.Color,initValue:``}),"Fill Color":Ct({controlType:O.Color,initValue:``}),"Stroke Width":Ct({controlType:O.Number,initValue:1.5})},parent:void 0}),d8=A({parent:s8,title:P0.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:`#3498db`}},render({state:e,updateState:t}){return E`
+            `}}}),c8=A({title:`Elements`,parent:void 0}),l8=A({title:`Styles`,parent:void 0}),u8=A({title:`Util`,parent:void 0}),d8=A({title:`Icons`,controls:{"Stroke Color":Ct({controlType:O.Color,initValue:``}),"Fill Color":Ct({controlType:O.Color,initValue:``}),"Stroke Width":Ct({controlType:O.Number,initValue:1.5})},parent:void 0}),f8=A({parent:c8,title:P0.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:`#3498db`}},render({state:e,updateState:t}){return E`
                     <${P0.assign({color:e.currentColor})}
                         ${F(P0.events.colorChange,e=>{t({currentColor:e.detail})})}
                     ></${P0}>
-                `}})}}),f8=A({parent:s8,title:L0.tagName,defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
+                `}})}}),p8=A({parent:c8,title:L0.tagName,defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
                     <${L0.assign({foregroundColor:`#1a1a2e`,backgroundColor:`#eaeaea`})}></${L0}>
-                `}})}}),p8=ne({"mock-foreground":`#1a1a2e`,"mock-background":`#eaeaea`}),m8={foreground:p8[`mock-foreground`],background:p8[`mock-background`]},h8=ne({"low-contrast-foreground":`#888888`,"low-contrast-background":`#aaaaaa`}),g8={foreground:h8[`low-contrast-foreground`],background:h8[`low-contrast-background`]},_8=A({parent:s8,title:R0.tagName,defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!1,showVarNames:!1,showContrast:!1,fontWeight:400})}></${R0}>
+                `}})}}),m8=ne({"mock-foreground":`#1a1a2e`,"mock-background":`#eaeaea`}),h8={foreground:m8[`mock-foreground`],background:m8[`mock-background`]},g8=ne({"low-contrast-foreground":`#888888`,"low-contrast-background":`#aaaaaa`}),_8={foreground:g8[`low-contrast-foreground`],background:g8[`low-contrast-background`]},v8=A({parent:c8,title:R0.tagName,defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
+                    <${R0.assign({color:h8,showVarValues:!1,showVarNames:!1,showContrast:!1,fontWeight:400})}></${R0}>
                 `}}),e({title:`with var names`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!1,showVarNames:!0,showContrast:!1,fontWeight:400})}></${R0}>
+                    <${R0.assign({color:h8,showVarValues:!1,showVarNames:!0,showContrast:!1,fontWeight:400})}></${R0}>
                 `}}),e({title:`with var names and values`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!0,showVarNames:!0,showContrast:!1,fontWeight:400})}></${R0}>
+                    <${R0.assign({color:h8,showVarValues:!0,showVarNames:!0,showContrast:!1,fontWeight:400})}></${R0}>
                 `}}),e({title:`with contrast`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:400})}></${R0}>
+                    <${R0.assign({color:h8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:400})}></${R0}>
                 `}}),e({title:`bold font weight`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:700})}></${R0}>
+                    <${R0.assign({color:h8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:700})}></${R0}>
                 `}}),e({title:`low contrast`,render(){return E`
-                    <${R0.assign({color:g8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:400})}></${R0}>
+                    <${R0.assign({color:_8,showVarValues:!1,showVarNames:!1,showContrast:!0,fontWeight:400})}></${R0}>
                 `}}),e({title:`all options enabled`,render(){return E`
-                    <${R0.assign({color:m8,showVarValues:!0,showVarNames:!0,showContrast:!0,fontWeight:400})}></${R0}>
-                `}})}}),v8=A({parent:s8,title:n2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:void 0}},render({state:e,updateState:t}){return E`
+                    <${R0.assign({color:h8,showVarValues:!0,showVarNames:!0,showContrast:!0,fontWeight:400})}></${R0}>
+                `}})}}),y8=A({parent:c8,title:n2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{currentColor:void 0}},render({state:e,updateState:t}){return E`
                     <${n2.assign({color:e.currentColor})}
                         ${F(n2.events.colorChange,e=>{t({currentColor:e.detail})})}
                     ></${n2}>
@@ -38747,7 +38863,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${n2.assign({color:e.currentColor,alwaysShowPicker:!0,showHexValue:!0})}
                         ${F(n2.events.colorChange,e=>{t({currentColor:e.detail})})}
                     ></${n2}>
-                `}})}}),y8=`None`;function b8({parent:e,title:n,theme:r,hideInverseColors:i,overrides:a,useVerticalLayout:o,prefixGroupByCount:s=2,hideCopyCode:c}){let l={"Show Var Names":Ct({controlType:O.Checkbox,initValue:!1}),"Show Contrast Tips":Ct({controlType:O.Checkbox,initValue:!0})},u={"Theme Override":Ct({controlType:O.Dropdown,initValue:y8,options:[y8,...(a||[]).map(e=>{if(e.name===y8)throw Error(`Cannot have theme override named '${y8}'`);return e.name})]})},d=A({parent:e,title:n,controls:l});function f({controls:e,theme:n,themeColorName:r}){let a=t.isKeyOf(r,n.colors)?n.colors[r]:void 0,o=t.isKeyOf(r,n.inverse)?n.inverse[r]:void 0;if(!a||!o)throw Error(`No theme color found by name '${r}'`);let s=E`
+                `}})}}),b8=`None`;function x8({parent:e,title:n,theme:r,hideInverseColors:i,overrides:a,useVerticalLayout:o,prefixGroupByCount:s=2,hideCopyCode:c}){let l={"Show Var Names":Ct({controlType:O.Checkbox,initValue:!1}),"Show Contrast Tips":Ct({controlType:O.Checkbox,initValue:!0})},u={"Theme Override":Ct({controlType:O.Dropdown,initValue:b8,options:[b8,...(a||[]).map(e=>{if(e.name===b8)throw Error(`Cannot have theme override named '${b8}'`);return e.name})]})},d=A({parent:e,title:n,controls:l});function f({controls:e,theme:n,themeColorName:r}){let a=t.isKeyOf(r,n.colors)?n.colors[r]:void 0,o=t.isKeyOf(r,n.inverse)?n.inverse[r]:void 0;if(!a||!o)throw Error(`No theme color found by name '${r}'`);let s=E`
             <${R0.assign({color:a,showVarValues:!0,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${R0}>
         `,c=i?void 0:o,l=c?E`
                   <${R0.assign({color:c,showVarValues:!1,showVarNames:e[`Show Var Names`],showContrast:e[`Show Contrast Tips`],fontWeight:400})}></${R0}>
@@ -38775,11 +38891,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                             </div>
                         `}})})}let m=[`Click a color preview to show CSS var names and values.`];return[d,A({parent:d,title:`Default`,descriptionParagraphs:m,useVerticalExamples:o,controls:{...c?{}:{copy:Ct({controlType:O.Custom,content:E`
                               <button
-                                  ${F(`click`,async()=>{let e=g6(r,{paletteVarName:`viraColorPalette`,overrides:a});await navigator.clipboard.writeText(e)})}
+                                  ${F(`click`,async()=>{let e=_6(r,{paletteVarName:`viraColorPalette`,overrides:a});await navigator.clipboard.writeText(e)})}
                               >
                                   Copy Code
                               </button>
-                          `})},...u},defineExamples({defineExample:e}){p(e,r,a)}}),...(a||[]).map(e=>A({parent:d,title:e.name,useVerticalExamples:o,descriptionParagraphs:m,defineExamples({defineExample:t}){p(t,e.asTheme,void 0)}}))]}var x8=[{title:`Black`,fontWeight:400,foreground:U.colors[V].foreground},{title:`Black`,fontWeight:700,foreground:U.colors[V].foreground},{title:`White`,fontWeight:400,foreground:U.colors[V].background},{title:`White`,fontWeight:700,foreground:U.colors[V].background},{title:`Black`,fontWeight:400,background:U.colors[V].foreground},{title:`Black`,fontWeight:700,background:U.colors[V].foreground},{title:`White`,fontWeight:400,background:U.colors[V].background},{title:`White`,fontWeight:700,background:U.colors[V].background}];function S8({colors:e,parent:n,title:r,includeContrast:i,includeTheme:a,useVerticalTheme:o,options:s}){let c=c6(e),l=A({parent:n,title:r}),u=A({parent:l,title:`Palette`,defineExamples({defineExample:e}){e({title:`All Colors`,styles:T`
+                          `})},...u},defineExamples({defineExample:e}){p(e,r,a)}}),...(a||[]).map(e=>A({parent:d,title:e.name,useVerticalExamples:o,descriptionParagraphs:m,defineExamples({defineExample:t}){p(t,e.asTheme,void 0)}}))]}var S8=[{title:`Black`,fontWeight:400,foreground:U.colors[V].foreground},{title:`Black`,fontWeight:700,foreground:U.colors[V].foreground},{title:`White`,fontWeight:400,foreground:U.colors[V].background},{title:`White`,fontWeight:700,foreground:U.colors[V].background},{title:`Black`,fontWeight:400,background:U.colors[V].foreground},{title:`Black`,fontWeight:700,background:U.colors[V].foreground},{title:`White`,fontWeight:400,background:U.colors[V].background},{title:`White`,fontWeight:700,background:U.colors[V].background}];function C8({colors:e,parent:n,title:r,includeContrast:i,includeTheme:a,useVerticalTheme:o,options:s}){let c=l6(e),l=A({parent:n,title:r}),u=A({parent:l,title:`Palette`,defineExamples({defineExample:e}){e({title:`All Colors`,styles:T`
                     :host {
                         display: flex;
                         flex-direction: row;
@@ -38887,7 +39003,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                         <thead><tr>${t}</tr></thead>
                                         <tbody>${e}</tbody>
                                     </table>
-                                `}})})}})}let p=f(`Contrast Black White`,x8);function m(e){return f(`Contrast Self ${e}`,t=>t.map(t=>({fontWeight:e,title:t.suffix||``,foreground:t.definition})))}function h(){let t=h6(e,s);return b8({parent:l,title:`Theme (auto)`,theme:t.defaultLight,hideInverseColors:!0,useVerticalLayout:o,prefixGroupByCount:2,overrides:[t.darkOverride]})}return[l,u,i?d:void 0,i?p:void 0,i?m(400):void 0,i?m(700):void 0,...a?h():[]].filter(t.isTruthy)}var C8=b8({parent:c8,theme:U,title:`Vira Theme`,hideInverseColors:!0,overrides:[Ev],hideCopyCode:!0}),w8=S8({parent:c8,title:`Vira Palette`,colors:H}),T8=A({title:x2.name,parent:l8,descriptionParagraphs:[`Wraps an existing icon with specific colors to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){e({title:`stroke color`,styles:T`
+                                `}})})}})}let p=f(`Contrast Black White`,S8);function m(e){return f(`Contrast Self ${e}`,t=>t.map(t=>({fontWeight:e,title:t.suffix||``,foreground:t.definition})))}function h(){let t=g6(e,s);return x8({parent:l,title:`Theme (auto)`,theme:t.defaultLight,hideInverseColors:!0,useVerticalLayout:o,prefixGroupByCount:2,overrides:[t.darkOverride]})}return[l,u,i?d:void 0,i?p:void 0,i?m(400):void 0,i?m(700):void 0,...a?h():[]].filter(t.isTruthy)}var w8=x8({parent:l8,theme:U,title:`Vira Theme`,hideInverseColors:!0,overrides:[Ev],hideCopyCode:!0}),T8=C8({parent:l8,title:`Vira Palette`,colors:H}),E8=A({title:x2.name,parent:u8,descriptionParagraphs:[`Wraps an existing icon with specific colors to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){e({title:`stroke color`,styles:T`
                 :host {
                     display: flex;
                     gap: 16px;
@@ -38937,7 +39053,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${q.assign({icon:t})}></${q}>
                     <${q.assign({icon:n})}></${q}>
                     <${q.assign({icon:r})}></${q}>
-                `}})}}),E8=[{title:`smaller`,size:16,icon:K(K1,24)},{title:`larger`,size:48,icon:K(M2,24)}],D8=A({title:K.name,parent:l8,descriptionParagraphs:[`Wraps an existing icon with explicit dimensions to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){E8.forEach(t=>{e({title:t.title,styles:T`
+                `}})}}),D8=[{title:`smaller`,size:16,icon:K(K1,24)},{title:`larger`,size:48,icon:K(M2,24)}],O8=A({title:K.name,parent:u8,descriptionParagraphs:[`Wraps an existing icon with explicit dimensions to create a new icon that can be used anywhere the original icon can be used.`],defineExamples({defineExample:e}){D8.forEach(t=>{e({title:t.title,styles:T`
                     :host {
                         display: flex;
                         gap: 16px;
@@ -38947,7 +39063,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                         <${q.assign({icon:t.icon})}></${q}>
                         <span>→</span>
                         <${q.assign({icon:e})}></${q}>
-                    `}})})}}),O8={async element1(){return await Pe({seconds:2}),(await Vt(async()=>{let{ViraElement1Mock:e}=await import(`./vira-element-1-CTRBFw-e.js`);return{ViraElement1Mock:e}},__vite__mapDeps([0,1,2]))).ViraElement1Mock},async element2(){return await Pe({seconds:2}),(await Vt(async()=>{let{ViraElement2Mock:e}=await import(`./vira-element-2-Cd4PrJu-.js`);return{ViraElement2Mock:e}},__vite__mapDeps([3,1,2]))).ViraElement2Mock},errorElement(){throw Error(`import failure`)}},k8=Ne()({tagName:`example-direct-set-key-dynamic-elements`,state(){return{dynamicElements:$3(O8)}},render({state:e,inputs:t}){return e6(e.dynamicElements,{key:t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`,error(e){return E`
+                    `}})})}}),k8={async element1(){return await Pe({seconds:2}),(await Vt(async()=>{let{ViraElement1Mock:e}=await import(`./vira-element-1-CTRBFw-e.js`);return{ViraElement1Mock:e}},__vite__mapDeps([0,1,2]))).ViraElement1Mock},async element2(){return await Pe({seconds:2}),(await Vt(async()=>{let{ViraElement2Mock:e}=await import(`./vira-element-2-Cd4PrJu-.js`);return{ViraElement2Mock:e}},__vite__mapDeps([3,1,2]))).ViraElement2Mock},errorElement(){throw Error(`import failure`)}},A8=Ne()({tagName:`example-direct-set-key-dynamic-elements`,state(){return{dynamicElements:e6(k8)}},render({state:e,inputs:t}){return t6(e.dynamicElements,{key:t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`,error(e){return E`
                     <${H2}>
                         ${Re(`Failed to import element`,r(e))}
                     </${H2}>
@@ -38957,7 +39073,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                         <${e.element1}></${e.element1}>
                     `;if(e.element2)return E`
                         <${e.element2.assign({userName:`John`})}></${e.element2}>
-                    `;C.never(`The error element will always error`)}})}}),A8=Ne()({tagName:`example-async-update-key-dynamic-elements`,state(){return{dynamicElements:$3(O8)}},render({state:e,inputs:t}){return e.dynamicElements.update(t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`),e6(e.dynamicElements,{error(e){return E`
+                    `;C.never(`The error element will always error`)}})}}),j8=Ne()({tagName:`example-async-update-key-dynamic-elements`,state(){return{dynamicElements:e6(k8)}},render({state:e,inputs:t}){return e.dynamicElements.update(t.numberValue===1?`element1`:t.numberValue===2?`element2`:`errorElement`),t6(e.dynamicElements,{error(e){return E`
                     <${H2}>
                         ${Re(`Failed to import element`,r(e))}
                     </${H2}>
@@ -38967,17 +39083,17 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                         <${e.element1}></${e.element1}>
                     `;if(e.element2)return E`
                         <${e.element2.assign({userName:`John`})}></${e.element2}>
-                    `;C.never(`The error element will always error`)}})}}),j8=[{label:`1`,value:`1`},{label:`2`,value:`2`},{label:`3`,value:`3`}],M8=A({parent:l8,title:`Dynamic Element Loading`,defineExamples({defineExample:e}){e({title:`direct key setting`,state(){return{value:1}},styles:T`
+                    `;C.never(`The error element will always error`)}})}}),M8=[{label:`1`,value:`1`},{label:`2`,value:`2`},{label:`3`,value:`3`}],N8=A({parent:u8,title:`Dynamic Element Loading`,defineExamples({defineExample:e}){e({title:`direct key setting`,state(){return{value:1}},styles:T`
                 :host {
                     display: flex;
                     flex-direction: column;
                     gap: 8px;
                 }
             `,render({state:e,updateState:t}){return E`
-                    <${X.assign({selected:[String(e.value)],options:j8})}
+                    <${X.assign({selected:[String(e.value)],options:M8})}
                         ${F(X.events.selectedValuesChange,e=>{let n=Number(e.detail[0]);if(n!==1&&n!==2&&n!==3)throw Error(`Invalid selection: ${n}`);t({value:n})})}
                     ></${X}>
-                    <${k8.assign({numberValue:e.value})}></${k8}>
+                    <${A8.assign({numberValue:e.value})}></${A8}>
                 `}}),e({title:`async prop update key`,state(){return{value:1}},styles:T`
                 :host {
                     display: flex;
@@ -38985,11 +39101,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     gap: 8px;
                 }
             `,render({state:e,updateState:t}){return E`
-                    <${X.assign({selected:[String(e.value)],options:j8})}
+                    <${X.assign({selected:[String(e.value)],options:M8})}
                         ${F(X.events.selectedValuesChange,e=>{let n=Number(e.detail[0]);if(n!==1&&n!==2&&n!==3)throw Error(`Invalid selection: ${n}`);t({value:n})})}
                     ></${X}>
-                    <${A8.assign({numberValue:e.value})}></${A8}>
-                `}})}}),N8=[{title:`unselected`,content:`my label`,inputs:{selected:!1}},{title:`selected`,content:`my label`,inputs:{selected:!0}},{title:`with custom child`,content:`custom child`,inputs:{selected:!0},customTemplate:E`
+                    <${j8.assign({numberValue:e.value})}></${j8}>
+                `}})}}),P8=[{title:`unselected`,content:`my label`,inputs:{selected:!1}},{title:`selected`,content:`my label`,inputs:{selected:!0}},{title:`with custom child`,content:`custom child`,inputs:{selected:!0},customTemplate:E`
             <b>This is custom</b>
         `},{title:`constrained width`,content:`has more text than is possible to fit`,customStyle:T`
             :host {
@@ -39002,7 +39118,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
         `,inputs:{selected:!0}},{title:`disabled`,content:`my label`,inputs:{selected:!0,disabled:!0}},{title:`no default pointer styles`,content:`my label`,inputs:{selected:!0,disablePointerStyles:!0}},{title:`theme picker content`,content:E`
             <div class="theme-picker">
                 <span>Theme</span>
-                <${Q3}></${Q3}>
+                <${$3}></${$3}>
             </div>
         `,customStyle:T`
             .theme-picker {
@@ -39019,9 +39135,9 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             <${N4.assign({link:{url:`https://example.com`,newTab:!0},disableLinkStyles:!0})}>
                 link label
             </${N4}>
-        `,inputs:{selected:!1}}],P8=A({title:U0.tagName,parent:s8,defineExamples({defineExample:e}){N8.forEach(t=>{e({title:t.title,styles:t.customStyle,render(){return E`
+        `,inputs:{selected:!1}}],F8=A({title:U0.tagName,parent:c8,defineExamples({defineExample:e}){P8.forEach(t=>{e({title:t.title,styles:t.customStyle,render(){return E`
                         <${U0.assign(t.inputs)}>${t.content}</${U0}>
-                    `}})})}}),F8=[{content:`one`},{content:`two`},{content:`three`},{content:`four`},{content:`five`},{content:`six`}],I8=[{value:`1`,label:`Option one`},{value:`2`,label:`Option two`},{value:`3`,label:`Option three`}],L8={content:E`
+                    `}})})}}),I8=[{content:`one`},{content:`two`},{content:`three`},{content:`four`},{content:`five`},{content:`six`}],L8=[{value:`1`,label:`Option one`},{value:`2`,label:`Option two`},{value:`3`,label:`Option three`}],R8={content:E`
         <div
             style=${T`
                 white-space: nowrap;
@@ -39031,22 +39147,22 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
         >
             This menu item is much longer than the others
         </div>
-    `},R8=[{title:`basic`},{title:`rounded`,inputs:{menuCornerStyle:q0.Round}},{title:`disabled`,inputs:{isDisabled:!0}},{title:`inside focus`,inputs:{useInsideFocus:!0}},{title:`long item`,menuItems:[...F8,L8]},{title:`ViraLink URL item`,menuItems:[...F8,{content:E`
+    `},z8=[{title:`basic`},{title:`rounded`,inputs:{menuCornerStyle:q0.Round}},{title:`disabled`,inputs:{isDisabled:!0}},{title:`inside focus`,inputs:{useInsideFocus:!0}},{title:`long item`,menuItems:[...I8,R8]},{title:`ViraLink URL item`,menuItems:[...I8,{content:E`
                     <${N4.assign({link:{url:`https://www.wikipedia.org`,newTab:!0},disableLinkStyles:!0})}>
                         Wikipedia link
                     </${N4}>
-                `}]},{title:`ViraLink route item`,menuItems:[...F8,{content:E`
+                `}]},{title:`ViraLink route item`,menuItems:[...I8,{content:E`
                     <${N4.assign({route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}},disableLinkStyles:!0})}>
                         Route link
                     </${N4}>
-                `}]},{title:`keep open item`,menuItems:[{content:`Keeps the menu open when clicked`,keepOpenAfterInteraction:!0},...F8]}],z8=A({parent:s8,title:r2.tagName,descriptionParagraphs:[`No selection state logic is included in these examples.`],defineExamples({defineExample:e}){R8.forEach(t=>{e({title:t.title,styles:T`
+                `}]},{title:`keep open item`,menuItems:[{content:`Keeps the menu open when clicked`,keepOpenAfterInteraction:!0},...I8]}],B8=A({parent:c8,title:r2.tagName,descriptionParagraphs:[`No selection state logic is included in these examples.`],defineExamples({defineExample:e}){z8.forEach(t=>{e({title:t.title,styles:T`
                     .trigger {
                         cursor: pointer;
                         border: 4px solid #ccc;
                         padding: 8px 16px;
                     }
                 `,state(){return{selectedValue:void 0}},render({state:e,updateState:n}){let r=[{keepOpenAfterInteraction:!0,content:E`
-                            <${X.assign({options:I8,selected:e.selectedValue?[e.selectedValue]:[]})}
+                            <${X.assign({options:L8,selected:e.selectedValue?[e.selectedValue]:[]})}
                                 style=${T`
                                     width: 100%;
                                 `}
@@ -39054,7 +39170,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                 ${F(`mousedown`,e=>{e.stopPropagation()})}
                                 ${F(X.events.selectedValuesChange,e=>{n({selectedValue:e.detail[0]})})}
                             ></${X}>
-                        `},...t.menuItems||F8];return E`
+                        `},...t.menuItems||I8];return E`
                         <${r2.assign({popoverOffset:{vertical:-1},...t.inputs})}>
                             <div
                                 class="trigger"
@@ -39077,7 +39193,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     justify-content: space-between;
                     gap: 12px;
                 }
-            `,state(){return{themeClient:new Y3}},render({state:e}){return E`
+            `,state(){return{themeClient:new X3}},render({state:e}){return E`
                     <${r2.assign({})}>
                         <div
                             class="trigger"
@@ -39088,11 +39204,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                         ${G0([{content:E`
                                     <div class="theme-picker">
                                         <span>Theme</span>
-                                        <${Q3.assign({themeClient:e.themeClient})}></${Q3}>
+                                        <${$3.assign({themeClient:e.themeClient})}></${$3}>
                                     </div>
                                 `,disablePointerStyles:!0,keepOpenAfterInteraction:!0},{content:`Sign out`}])}
                     </${r2}>
-                `}})}}),B8=[{title:`basic`,items:[{content:`one`},{content:`two`},{content:`three`}]},{title:`with selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`}]},{title:`with multi selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`,selected:!0}]},{title:`with action icons`,items:[{content:`copy`,iconOverride:K(q1,16)},{content:`rename`,iconOverride:K(A2,16)},{content:`delete`,iconOverride:K(Q1,16)}]},{title:`with disabled item`,items:[{content:`one`},{content:`two`,disabled:!0},{content:`three`}]}],V8=A({parent:s8,title:e2.tagName,defineExamples({defineExample:e}){B8.forEach(t=>{e({title:t.title,render(){return E`
+                `}})}}),V8=[{title:`basic`,items:[{content:`one`},{content:`two`},{content:`three`}]},{title:`with selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`}]},{title:`with multi selection`,items:[{content:`one`},{content:`two`,selected:!0},{content:`three`,selected:!0}]},{title:`with action icons`,items:[{content:`copy`,iconOverride:K(q1,16)},{content:`rename`,iconOverride:K(A2,16)},{content:`delete`,iconOverride:K(Q1,16)}]},{title:`with disabled item`,items:[{content:`one`},{content:`two`,disabled:!0},{content:`three`}]}],H8=A({parent:c8,title:e2.tagName,defineExamples({defineExample:e}){V8.forEach(t=>{e({title:t.title,render(){return E`
                         <${e2.assign({...t.menuInputs})}>
                             ${t.items.map(e=>E`
                                     <${U0.assign({selected:e.selected,disabled:e.disabled,disablePointerStyles:e.disablePointerStyles,iconOverride:e.iconOverride})}>
@@ -39100,7 +39216,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                     </${U0}>
                                 `)}
                         </${e2}>
-                    `}})})}}),H8=A({parent:s8,title:Y.tagName,defineExamples({defineExample:e}){e({title:`basic`,styles:T`
+                    `}})})}}),U8=A({parent:c8,title:Y.tagName,defineExamples({defineExample:e}){e({title:`basic`,styles:T`
                 ${Y} {
                     ${W[`vira-form-focus-outline-border-radius`].name}: 0;
                 }
@@ -39328,7 +39444,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                             </div>
                         </${Y}>
                     </div>
-                `}})}}),U8=A({parent:s8,title:Lv.tagName,descriptionParagraphs:[`Render tooltips with the tooltip directive rather than this element directly. Hover or focus each button to see its tooltip.`],defineExamples({defineExample:e}){e({title:`string`,render(){return E`
+                `}})}}),W8=A({parent:c8,title:Lv.tagName,descriptionParagraphs:[`Render tooltips with the tooltip directive rather than this element directly. Hover or focus each button to see its tooltip.`],defineExamples({defineExample:e}){e({title:`string`,render(){return E`
                     <${Z.assign({text:`Save`})}
                         ${qy(`Save changes`)}
                     ></${Z}>
@@ -39394,7 +39510,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${Z.assign({text:`Click`})}
                         ${qy(`Hides 2 seconds after clicking.`,{trigger:Vy.Click,timeout:{seconds:2}})}
                     ></${Z}>
-                `}})}}),W8=[{title:`menu shadow`,styles:y0.menuShadow},{title:`modal`,styles:y0.modal}],G8=A({parent:c8,title:`Shadows`,defineExamples({defineExample:e}){W8.forEach(t=>{e({title:t.title,styles:T`
+                `}})}}),G8=[{title:`menu shadow`,styles:y0.menuShadow},{title:`modal`,styles:y0.modal}],K8=A({parent:l8,title:`Shadows`,defineExamples({defineExample:e}){G8.forEach(t=>{e({title:t.title,styles:T`
                     .shadow-block {
                         height: 100px;
                         width: 256px;
@@ -39405,7 +39521,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     }
                 `,render(){return E`
                         <div class="shadow-block"></div>
-                    `}})})}}),K8=A({parent:s8,title:i2.tagName,defineExamples({defineExample:e}){e({title:`Current time`,render(){return E`
+                    `}})})}}),q8=A({parent:c8,title:i2.tagName,defineExamples({defineExample:e}){e({title:`Current time`,render(){return E`
                     <${i2.assign({time:Of()})}></${i2}>
                 `}}),e({title:`5 minutes ago`,render(){return E`
                     <${i2.assign({time:ef(Of(),{minutes:-5})})}></${i2}>
@@ -39417,7 +39533,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${i2.assign({time:Of(),showDateOnly:!0,timezone:uf})}></${i2}>
                 `}}),e({title:`3 days ago`,render(){return E`
                     <${i2.assign({time:ef(Of(),{days:-3})})}></${i2}>
-                `}})}}),q8=A({parent:s8,title:F0.tagName,descriptionParagraphs:[`Reserves space for bolded text, even if the text isn't currently bold.`],controls:{bolded:{controlType:O.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`Not bold`,render(){return E`
+                `}})}}),J8=A({parent:c8,title:F0.tagName,descriptionParagraphs:[`Reserves space for bolded text, even if the text isn't currently bold.`],controls:{bolded:{controlType:O.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`Not bold`,render(){return E`
                     <${F0.assign({text:`Text here`,bold:!1})}></${F0}>
                 `}}),e({title:`Bold`,render(){return E`
                     <${F0.assign({text:`Text here`,bold:!0})}></${F0}>
@@ -39449,7 +39565,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             `,render(){return E`
                     <${F0.assign({text:`Not Bolded`,bold:!1})}></${F0}>
                     <${F0.assign({text:`Bolded`,bold:!0})}></${F0}>
-                `}})}}),J8=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:K(N2,24)}},{label:`with 16px icon`,extraInputs:{icon:N2}},{label:`only 24px icon`,extraInputs:{icon:K(N2,24),text:``}},{label:`only 16px icon`,extraInputs:{icon:N2,text:``}},{label:`icon on right`,extraInputs:{rightSideIcon:K(N2,24)}},{label:`chevron on right`,extraInputs:{rightSideIcon:U1}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{rightSideIcon:U1}}],Y8=T`
+                `}})}}),Y8=[{label:`basic`,extraInputs:{}},{label:`with 24px icon`,extraInputs:{icon:K(N2,24)}},{label:`with 16px icon`,extraInputs:{icon:N2}},{label:`only 24px icon`,extraInputs:{icon:K(N2,24),text:``}},{label:`only 16px icon`,extraInputs:{icon:N2,text:``}},{label:`icon on right`,extraInputs:{rightSideIcon:K(N2,24)}},{label:`chevron on right`,extraInputs:{rightSideIcon:U1}},{label:`disabled`,extraInputs:{isDisabled:!0}},{label:`menu caret`,extraInputs:{rightSideIcon:U1}}],X8=T`
     table {
         border-collapse: collapse;
     }
@@ -39463,7 +39579,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
     th {
         font-weight: ${Cv[`vira-font-weight-normal`].value};
     }
-`,X8=A({parent:s8,title:Z.tagName,descriptionParagraphs:[`Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!`],defineExamples({defineExample:e}){f0.forEach(t=>{e({title:t,styles:Y8,render(){return J8.map(({label:e,extraInputs:n})=>E`
+`,Z8=A({parent:c8,title:Z.tagName,descriptionParagraphs:[`Standard button element. All colors are customizable with CSS vars. Size is flexible. Press tab to see focus outlines!`],defineExamples({defineExample:e}){f0.forEach(t=>{e({title:t,styles:X8,render(){return Y8.map(({label:e,extraInputs:n})=>E`
                             <h3>${e}</h3>
                             <table>
                                 <thead>
@@ -39525,7 +39641,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                 <${Z.assign({text:e,color:e})}></${Z}>
                             `)}
                     </div>
-                `}})}}),Z8=[{title:`basic`},{title:`success`,inputs:{cardState:u2.Success}},{title:`error`,inputs:{cardState:u2.Error}},{title:`long`,content:E`
+                `}})}}),Q8=[{title:`basic`},{title:`success`,inputs:{cardState:u2.Success}},{title:`error`,inputs:{cardState:u2.Error}},{title:`long`,content:E`
             <p
                 style=${T`
                     ${Jy}
@@ -39537,11 +39653,11 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 <br />
                 This is what it looks like.
             </p>
-        `}],Q8=A({parent:s8,title:d2.tagName,descriptionParagraphs:[`A simple wrapper "card" element that is just a <slot> with some styles.`],defineExamples({defineExample:e}){Z8.forEach(t=>{e({title:t.title,render(){return E`
+        `}],$8=A({parent:c8,title:d2.tagName,descriptionParagraphs:[`A simple wrapper "card" element that is just a <slot> with some styles.`],defineExamples({defineExample:e}){Q8.forEach(t=>{e({title:t.title,render(){return E`
                         <${d2.assign(t.inputs||{})}>
                             ${t.content||`Content`}
                         </${d2}>
-                    `}})})}}),$8=A({parent:s8,title:Q.tagName,controls:{Checked:{controlType:O.Checkbox,initValue:!1},Disabled:{controlType:O.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return E`
+                    `}})})}}),e5=A({parent:c8,title:Q.tagName,controls:{Checked:{controlType:O.Checkbox,initValue:!1},Disabled:{controlType:O.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`checked`,state(){return{checked:!0}},render({state:e,updateState:t}){return E`
                     <${Q.assign({value:e.checked})}
                         ${F(Q.events.valueChange,e=>{t({checked:e.detail})})}
                     ></${Q}>
@@ -39610,7 +39726,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${Q.assign({value:!0,isDisabled:!0,fillWhenChecked:!0})}></${Q}>
                 `}}),e({title:`disabled fill when unchecked`,render(){return E`
                     <${Q.assign({value:!1,isDisabled:!0,fillWhenUnchecked:!0})}></${Q}>
-                `}})}}),e5=A({title:L2.tagName,parent:s8,descriptionParagraphs:[`A collapsible card element with built-in header, caret icon, and card styling. Wraps ViraCollapsibleWrapper with opinionated styles.`],defineExamples({defineExample:e}){e({title:`basic`,styles:T`
+                `}})}}),t5=A({title:L2.tagName,parent:c8,descriptionParagraphs:[`A collapsible card element with built-in header, caret icon, and card styling. Wraps ViraCollapsibleWrapper with opinionated styles.`],defineExamples({defineExample:e}){e({title:`basic`,styles:T`
                 p {
                     ${Yy}
                 }
@@ -39697,7 +39813,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                             <p>Content content content content content content content.</p>
                         </${L2}>
                     </div>
-                `}})}}),t5=A({title:I2.tagName,parent:s8,descriptionParagraphs:[`A very basic collapsible wrapper element that expands to fit its content with smooth animations. The animations even adapt to dynamic child sizes!`,`This element does not make any assumptions on styling, all styles are applied by consumers.`],defineExamples({defineExample:e}){e({title:`stacked examples`,styles:T`
+                `}})}}),n5=A({title:I2.tagName,parent:c8,descriptionParagraphs:[`A very basic collapsible wrapper element that expands to fit its content with smooth animations. The animations even adapt to dynamic child sizes!`,`This element does not make any assumptions on styling, all styles are applied by consumers.`],defineExamples({defineExample:e}){e({title:`stacked examples`,styles:T`
                 .section-header {
                     padding: 16px;
                     border: 1px solid dodgerblue;
@@ -39765,7 +39881,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                 contents Variable contents Variable contents
                             </p>
                         </${I2}>
-                    `)}})}}),n5=A({parent:s8,title:R2.tagName,defineExamples({defineExample:e}){e({title:`default`,state(){return{value:void 0}},render({state:e,updateState:t}){return E`
+                    `)}})}}),r5=A({parent:c8,title:R2.tagName,defineExamples({defineExample:e}){e({title:`default`,state(){return{value:void 0}},render({state:e,updateState:t}){return E`
                     <${R2.assign({value:e.value})}
                         ${F(R2.events.valueChange,e=>{t({value:e.detail})})}
                     ></${R2}>
@@ -39793,7 +39909,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     <${R2.assign({value:e.value,label:`UTC Date`,isReadonly:!0,timezone:uf})}
                         ${F(R2.events.valueChange,e=>{t({value:e.detail})})}
                     ></${R2}>
-                `}})}}),r5=A({title:V2.tagName,parent:s8,defineExamples({defineExample:e}){e({title:`basic`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return E`
+                `}})}}),i5=A({title:V2.tagName,parent:c8,defineExamples({defineExample:e}){e({title:`basic`,state(){return{drawerOpen:!1}},render({state:e,updateState:t}){return E`
                     <button
                         ${F(`click`,()=>{t({drawerOpen:!0})})}
                     >
@@ -39826,7 +39942,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     >
                         Drawer Content
                     </${V2}>
-                `}})}}),i5=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],a5=[{label:`Element`,value:`1`,icon:K1},{label:`Add`,value:`2`,icon:Z1},{label:`Upload`,value:`3`,icon:N2},{label:`Remove`,value:`4`,icon:Q1}],o5=[[`Blue`,H[`vira-blue-600`]],[`Green`,H[`vira-green-600`]],[`Purple`,H[`vira-purple-600`]],[`Red`,H[`vira-red-600`]]].map(([e,t])=>({label:e,value:e.toLowerCase(),labelTemplate:E`
+                `}})}}),a5=[{label:`Option 1`,value:`1`},{label:`Option 2`,value:`2`},{label:`Option 3`,value:`3`},{label:`Really really super duper long option`,value:`4`},{label:`Really really super duper long option`,value:`5`},{label:`Really really super duper long option`,value:`6`},{label:`Really really super duper long option`,value:`7`},{label:`Really really super duper long it just keeps going because it's so long option`,value:`8`}],o5=[{label:`Element`,value:`1`,icon:K1},{label:`Add`,value:`2`,icon:Z1},{label:`Upload`,value:`3`,icon:N2},{label:`Remove`,value:`4`,icon:Q1}],s5=[[`Blue`,H[`vira-blue-600`]],[`Green`,H[`vira-green-600`]],[`Purple`,H[`vira-purple-600`]],[`Red`,H[`vira-red-600`]]].map(([e,t])=>({label:e,value:e.toLowerCase(),labelTemplate:E`
                 <span
                     style=${T`
                         display: inline-block;
@@ -39838,7 +39954,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     `}
                 ></span>
                 ${e}
-            `})),s5=Dt(100,e=>({label:`Option ${e+1}`,value:String(e+1)})),c5=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`multi select with multiple selected`,inputs:{isMultiSelect:!0,selected:[`1`,`3`]}},{title:`long selection`,inputs:{selected:[`8`]}},{title:`with disabled item`,inputs:{selected:[],options:[...i5,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:T`
+            `})),c5=Dt(100,e=>({label:`Option ${e+1}`,value:String(e+1)})),l5=[{title:`default`},{title:`disabled`,inputs:{isDisabled:!0}},{title:`short options`,inputs:{options:[{value:`1`,label:`1`},{value:`2`,label:`2`}]}},{title:`multi select`,inputs:{isMultiSelect:!0}},{title:`multi select with multiple selected`,inputs:{isMultiSelect:!0,selected:[`1`,`3`]}},{title:`long selection`,inputs:{selected:[`8`]}},{title:`with disabled item`,inputs:{selected:[],options:[...a5,{value:`42`,label:`this is disabled`,disabled:!0}]}},{title:`constrained width`,customStyle:T`
             :host {
                 max-width: 150px;
             }
@@ -39846,7 +39962,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             ${X} {
                 width: 400px;
             }
-        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[`1`]}},{title:`with an icon`,inputs:{icon:K(K1,24)}},{title:`options with icons`,inputs:{options:a5,selected:[`1`]}},{title:`options with label templates`,inputs:{options:o5,selected:[`blue`]}},{title:`readonly option with an icon`,inputs:{isReadonly:!0,options:a5,selected:[`2`]}},{title:`searchable options with label templates`,inputs:{isSearchable:!0,options:o5}},{title:`with a label`,inputs:{label:`My Label`}},{title:`with an error`,inputs:{hasError:!0}},{title:`readonly`,inputs:{isReadonly:!0,label:`My Label`,selected:[`2`]}},{title:`option groups`,inputs:{options:[{groupName:`First Group`,options:i5.slice(0,2)},{groupName:`Second Group`,options:i5.slice(2,4)}]}},{title:`readonly without a selection`,inputs:{isReadonly:!0,label:`My Label`}},{title:`readonly multi select`,inputs:{isReadonly:!0,isMultiSelect:!0,label:`My Label`,selected:[`1`,`2`]}},{title:`with a label and an error`,inputs:{label:`My Label`,hasError:!0}},{title:`option groups with multi select and a disabled item`,inputs:{isMultiSelect:!0,options:[{groupName:`First Group`,options:i5.slice(0,2)},{groupName:`Second Group`,options:[...i5.slice(2,4),{value:`42`,label:`this is disabled`,disabled:!0}]}]}},{title:`no options`,inputs:{options:[]}},{title:`no options with text`,inputs:{options:[],noOptionsText:`No options available`}},{title:`many options`,inputs:{options:s5}},{title:`searchable`,inputs:{isSearchable:!0,options:s5,noOptionsText:`No matches`}},{title:`searchable multi select with option groups`,inputs:{isSearchable:!0,isMultiSelect:!0,options:[{groupName:`First`,options:i5.slice(0,3)},{groupName:`Second`,options:i5.slice(3)}]}},{title:`inside a clipping container`,isInContainer:!0,customStyle:T`
+        `},{title:`without a placeholder`,inputs:{placeholder:void 0}},{title:`with a prefix`,inputs:{selectionPrefix:`Pre:`,selected:[`1`]}},{title:`with an icon`,inputs:{icon:K(K1,24)}},{title:`options with icons`,inputs:{options:o5,selected:[`1`]}},{title:`options with label templates`,inputs:{options:s5,selected:[`blue`]}},{title:`readonly option with an icon`,inputs:{isReadonly:!0,options:o5,selected:[`2`]}},{title:`searchable options with label templates`,inputs:{isSearchable:!0,options:s5}},{title:`with a label`,inputs:{label:`My Label`}},{title:`with an error`,inputs:{hasError:!0}},{title:`readonly`,inputs:{isReadonly:!0,label:`My Label`,selected:[`2`]}},{title:`option groups`,inputs:{options:[{groupName:`First Group`,options:a5.slice(0,2)},{groupName:`Second Group`,options:a5.slice(2,4)}]}},{title:`readonly without a selection`,inputs:{isReadonly:!0,label:`My Label`}},{title:`readonly multi select`,inputs:{isReadonly:!0,isMultiSelect:!0,label:`My Label`,selected:[`1`,`2`]}},{title:`with a label and an error`,inputs:{label:`My Label`,hasError:!0}},{title:`option groups with multi select and a disabled item`,inputs:{isMultiSelect:!0,options:[{groupName:`First Group`,options:a5.slice(0,2)},{groupName:`Second Group`,options:[...a5.slice(2,4),{value:`42`,label:`this is disabled`,disabled:!0}]}]}},{title:`no options`,inputs:{options:[]}},{title:`no options with text`,inputs:{options:[],noOptionsText:`No options available`}},{title:`many options`,inputs:{options:c5}},{title:`searchable`,inputs:{isSearchable:!0,options:c5,noOptionsText:`No matches`}},{title:`searchable multi select with option groups`,inputs:{isSearchable:!0,isMultiSelect:!0,options:[{groupName:`First`,options:a5.slice(0,3)},{groupName:`Second`,options:a5.slice(3)}]}},{title:`inside a clipping container`,isInContainer:!0,customStyle:T`
             .container {
                 height: 40px;
                 overflow: hidden;
@@ -39862,15 +39978,15 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     height: 300px;
                 }
             }
-        `}],l5=A({title:X.tagName,parent:s8,controls:{Selected:Ct({controlType:O.Dropdown,initValue:``,options:[``,...i5.map(e=>e.label)]}),Prefix:Ct({controlType:O.Text,initValue:``}),"Multi Select":Ct({controlType:O.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:Ct({controlType:O.Dropdown,initValue:``,options:[``,...Object.keys(P2)]}),Disabled:Ct({controlType:O.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:Ct({controlType:O.Text,initValue:`Select something`})},defineExamples({defineExample:e}){c5.forEach(n=>{e({title:n.title,state(){return{selected:n.inputs?.selected||[]}},styles:n.customStyle,render({state:e,updateState:r,controls:i}){let a={...n.inputs,placeholder:n.inputs&&`placeholder`in n.inputs?n.inputs.placeholder:i.Placeholder,options:n.inputs?.options||i5,selected:i.Selected?[i5.find(e=>e.label===i.Selected)?.value].filter(t.isTruthy):e.selected,selectionPrefix:i.Prefix||n.inputs?.selectionPrefix,isDisabled:i.Disabled?i.Disabled===`all`:n.inputs?.isDisabled,icon:i.Icon?P2[i.Icon]:n.inputs?.icon,isMultiSelect:i[`Multi Select`]?i[`Multi Select`]===`all`:n.inputs?.isMultiSelect},o=E`
+        `}],u5=A({title:X.tagName,parent:c8,controls:{Selected:Ct({controlType:O.Dropdown,initValue:``,options:[``,...a5.map(e=>e.label)]}),Prefix:Ct({controlType:O.Text,initValue:``}),"Multi Select":Ct({controlType:O.Dropdown,options:[``,`all`,`none`],initValue:``}),Icon:Ct({controlType:O.Dropdown,initValue:``,options:[``,...Object.keys(P2)]}),Disabled:Ct({controlType:O.Dropdown,options:[``,`all`,`none`],initValue:``}),Placeholder:Ct({controlType:O.Text,initValue:`Select something`})},defineExamples({defineExample:e}){l5.forEach(n=>{e({title:n.title,state(){return{selected:n.inputs?.selected||[]}},styles:n.customStyle,render({state:e,updateState:r,controls:i}){let a={...n.inputs,placeholder:n.inputs&&`placeholder`in n.inputs?n.inputs.placeholder:i.Placeholder,options:n.inputs?.options||a5,selected:i.Selected?[a5.find(e=>e.label===i.Selected)?.value].filter(t.isTruthy):e.selected,selectionPrefix:i.Prefix||n.inputs?.selectionPrefix,isDisabled:i.Disabled?i.Disabled===`all`:n.inputs?.isDisabled,icon:i.Icon?P2[i.Icon]:n.inputs?.icon,isMultiSelect:i[`Multi Select`]?i[`Multi Select`]===`all`:n.inputs?.isMultiSelect},o=E`
                         <${X.assign(a)}
                             ${F(X.events.selectedValuesChange,e=>{r({selected:e.detail})})}
                         ></${X}>
                     `;return n.isInContainer?E`
                               <div class="container">${o}</div>
-                          `:o}})})}}),u5=A({parent:s8,title:H2.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
+                          `:o}})})}}),d5=A({parent:c8,title:H2.tagName,descriptionParagraphs:[`An error wrapper that applies error coloring (red, by default).`],defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
                     <${H2}>Error Content</${H2}>
-                `}})}}),d5=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],f5=A({parent:s8,title:X2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0,birthDate:void 0}},styles:T`
+                `}})}}),f5=[{label:`Admin`,value:`admin`},{label:`User Manager`,value:`user-manager`},{label:`Billing Manager`,value:`billing-manager`},{label:`Member`,value:`member`}],p5=A({parent:c8,title:X2.tagName,defineExamples({defineExample:e}){e({title:`basic`,state(){return{firstName:``,lastName:``,subscribe:!0,email:``,password:``,userRole:void 0,quantity:0,birthDate:void 0}},styles:T`
                 .buttons {
                     display: flex;
                     gap: 8px;
@@ -39879,7 +39995,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
             `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName,isRequired:!0,placeholder:`placeholder`},lastName:{type:$.Text,label:`Last Name`,value:e.lastName,isRequired:!0},subscribe:{type:$.Checkbox,label:E`
                             Subscribe to
                             <strong>updates</strong>
-                        `,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole,placeholder:`placeholder`},quantity:{type:$.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:$.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:$.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:$.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return E`
+                        `,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole,placeholder:`placeholder`},quantity:{type:$.Number,label:`Quantity`,value:e.quantity,min:0,max:100,step:2,placeholder:`Enter quantity`},birthDate:{type:$.Date,label:`Birth Date`,value:e.birthDate},disabledField:{type:$.Text,label:`Disabled Field`,value:`should be disabled`,isDisabled:!0},hidden:{type:$.Text,label:`Should be hidden`,value:`Should be hidden`,isHidden:!0}};return E`
                     <${X2.assign({fields:n})}
                         ${F(X2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -39914,7 +40030,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 ${X2} {
                     width: 400px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole}};return E`
+            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole}};return E`
                     <${X2.assign({fields:n})}
                         ${F(X2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -39927,7 +40043,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 ${X2} {
                     width: 520px;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
+            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
                     <${X2.assign({fields:n,useHorizontalLabels:!0})}
                         ${F(X2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     ></${X2}>
@@ -39951,7 +40067,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 ${X2} {
                     width: 400px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
                     <div class="readonly-example">
                         <${Z.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${F(`click`,()=>{t({isReadonly:!e.isReadonly})})}
@@ -39971,7 +40087,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 ${X2} {
                     width: 520px;
                 }
-            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
+            `,state(){return{isReadonly:!0,firstName:`Readonly`,lastName:`Example`,subscribe:!0,email:`readonly@example.com`,userRole:`member`,notes:`This field cannot be edited.`}},render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole},notes:{type:$.TextArea,label:`Notes`,value:e.notes}};return E`
                     <div class="readonly-example">
                         <${Z.assign({text:e.isReadonly?`Edit`:`Done`})}
                             ${F(`click`,()=>{t({isReadonly:!e.isReadonly})})}
@@ -39986,7 +40102,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     gap: 8px;
                     justify-content: flex-end;
                 }
-            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:d5,value:e.userRole}};return E`
+            `,render({state:e,updateState:t}){let n={firstName:{type:$.Text,label:`First Name`,value:e.firstName},lastName:{type:$.Text,label:`Last Name`,value:e.lastName},subscribe:{type:$.Checkbox,label:`Subscribe to updates`,value:e.subscribe},email:{type:$.Email,label:`Email Address`,value:e.email},password:{type:$.NewPassword,label:`Password`,value:e.password},userRole:{type:$.Select,label:`Role`,options:f5,value:e.userRole}};return E`
                     <${X2.assign({fields:n,isDisabled:!0})}
                         ${F(X2.events.valueChange,n=>{t({...e,[n.detail.key]:n.detail.value})})}
                     >
@@ -39995,7 +40111,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                             <${Z.assign({text:`Submit`})}></${Z}>
                         </div>
                     </${X2}>
-                `}})}}),p5=A({title:q.tagName,parent:s8,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
+                `}})}}),m5=A({title:q.tagName,parent:c8,descriptionParagraphs:[`See the 'Icons' page for a list of all included icons.`],defineExamples({defineExample:e}){e({title:`basic`,render(){return E`
                     <${q.assign({icon:K(K1,24)})}></${q}>
                 `}}),e({title:`using createColoredIcon`,render(){return E`
                     <${q.assign({icon:K(x2(K1,{"vira-icon-stroke-color":`red`}),24)})}></${q}>
@@ -40037,7 +40153,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                 }
             `,render(){return E`
                     <${q.assign({icon:x2(E2,{"vira-icon-stroke-color":`red`}),fitContainer:!0})}></${q}>
-                `}})}}),m5=A({title:Z2.tagName,parent:s8,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:T`
+                `}})}}),h5=A({title:Z2.tagName,parent:c8,descriptionParagraphs:["An `<img>` element wrapper that handles size constraints and includes slots for loading and error indicators.","Use CSS properties to constrain the image. In particular, set `min-height` and `min-width` on this to control the size of the loader and error slots."],defineExamples({defineExample:e}){[{title:`simple image`,inputs:{imageUrl:`/vira/bolt.png`}},{title:`infinite loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}}},{title:`custom loading`,inputs:{imageUrl:`/vira/bolt.png`,_debugLoadDelay:{milliseconds:1/0}},styles:T`
                     border-radius: 32px;
                 `,loadingSlot:E`
                     <div
@@ -40170,7 +40286,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                                       </div>
                                   `:S}
                         </${Z2}>
-                    `}})})}}),h5=A({title:J.tagName,parent:s8,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:O.Color,initValue:W[`vira-form-foreground-color`].default},"Placeholder color":{controlType:O.Color,initValue:W[`vira-form-placeholder-color`].default},"Border color":{controlType:O.Color,initValue:W[`vira-form-border-color`].default},"Focus color":{controlType:O.Color,initValue:W[`vira-form-focus-outline-color`].default},"Selection color":{controlType:O.Color,initValue:W[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:T`
+                    `}})})}}),g5=A({title:J.tagName,parent:c8,descriptionParagraphs:[`Supports placeholders, suffixes, icons, disabling browser helps (like spellchecking), blocking/allowing specific inputs, etc.`,`Has completely customizable sizing and coloring.`],controls:{"Text color":{controlType:O.Color,initValue:W[`vira-form-foreground-color`].default},"Placeholder color":{controlType:O.Color,initValue:W[`vira-form-placeholder-color`].default},"Border color":{controlType:O.Color,initValue:W[`vira-form-border-color`].default},"Focus color":{controlType:O.Color,initValue:W[`vira-form-focus-outline-color`].default},"Selection color":{controlType:O.Color,initValue:W[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:T`
                     ${t||T``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let i={[String(W[`vira-form-foreground-color`].name)]:n[`Text color`],[String(W[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(W[`vira-form-border-color`].name)]:n[`Border color`],[String(W[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(W[`vira-form-text-selection-color`].name)]:n[`Selection color`]},a=fe(i,(e,t)=>t||`inherit`),o=Object.entries(a).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return E`
@@ -40206,7 +40322,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
                     ${J} {
                         width: unset;
                     }
-                `}].forEach(t)}}),g5=T`
+                `}].forEach(t)}}),_5=T`
     .json-pre {
         width: 480px;
         max-width: 100%;
@@ -40231,7 +40347,7 @@ Font weights to font sizes:`,JSON.stringify(pv(e.data.min),null,4)].join(`
     ${M4} {
         width: 480px;
     }
-`;function _5({schema:e,value:t,isDisabled:n,onChange:r}){return E`
+`;function v5({schema:e,value:t,isDisabled:n,onChange:r}){return E`
         <div class="example-stack">
             <pre class="json-pre">
 ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
@@ -40241,13 +40357,13 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             ></${M4}>
             <pre class="json-pre">${JSON.stringify(t,void 0,4)}</pre>
         </div>
-    `}var v5=A({parent:s8,title:M4.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraDropdown is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:g5,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return _5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema with required fields`,styles:g5,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return _5({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema allowing additional properties`,styles:g5,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return _5({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`nested objects and arrays`,styles:g5,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return _5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum values`,styles:g5,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return _5({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum or free-form string`,styles:g5,state(){return{value:{color:`red`,size:`custom-42`}}},render({state:e,updateState:t}){return _5({schema:{type:`object`,properties:{color:{anyOf:[{enum:[`red`,`green`,`blue`]},{type:`string`}]},size:{anyOf:[{enum:[`small`,`medium`,`large`]},{type:`string`}]}},required:[`color`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`array with single-type items`,styles:g5,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return _5({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`union of types (anyOf)`,styles:g5,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return _5({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`recursive schema with $ref`,styles:g5,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return _5({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema mismatch shows ViraError`,styles:g5,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return _5({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`disabled`,styles:g5,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return _5({value:e.value,isDisabled:!0,onChange(e){return t({value:e})}})}})}}),y5=A({title:N4.tagName,parent:s8,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":Ct({controlType:O.Color,initValue:``}),"Hover color":Ct({controlType:O.Color,initValue:``}),"Active color":Ct({controlType:O.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=T`
+    `}var y5=A({parent:c8,title:M4.tagName,descriptionParagraphs:[`An editor for arbitrary JSON values, optionally constrained by a standard JSON Schema.`,`When the schema allows multiple types for a new field, a ViraDropdown is shown for choosing the type. When exactly one type is allowed, a neutral ViraButton is shown instead.`,`Each example below shows the JSON Schema (or "(no schema)") above the editor and the live JSON output below it.`],defineExamples({defineExample:e}){e({title:`no schema`,styles:_5,state(){return{value:{name:`Ada`,admin:!0}}},render({state:e,updateState:t}){return v5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema with required fields`,styles:_5,state(){return{value:{firstName:`Ada`,lastName:`Lovelace`}}},render({state:e,updateState:t}){return v5({schema:{title:`Person`,type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`,title:`First name`},lastName:{type:`string`,title:`Last name`},age:{type:`integer`},subscribed:{type:`boolean`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema allowing additional properties`,styles:_5,state(){return{value:{id:`abc-123`,nickname:`Ada`}}},render({state:e,updateState:t}){return v5({schema:{type:`object`,properties:{id:{type:`string`,title:`ID`}},required:[`id`],additionalProperties:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`nested objects and arrays`,styles:_5,state(){return{value:{title:`My playlist`,tracks:[{name:`First song`,durationSeconds:123}],metadata:{public:!0,tags:[`demo`]}}}},render({state:e,updateState:t}){return v5({value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum values`,styles:_5,state(){return{value:{status:`pending`,priority:2}}},render({state:e,updateState:t}){return v5({schema:{type:`object`,properties:{status:{type:`string`,enum:[`pending`,`active`,`archived`]},priority:{type:`integer`,enum:[1,2,3]}},required:[`status`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`enum or free-form string`,styles:_5,state(){return{value:{color:`red`,size:`custom-42`}}},render({state:e,updateState:t}){return v5({schema:{type:`object`,properties:{color:{anyOf:[{enum:[`red`,`green`,`blue`]},{type:`string`}]},size:{anyOf:[{enum:[`small`,`medium`,`large`]},{type:`string`}]}},required:[`color`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`array with single-type items`,styles:_5,state(){return{value:[`one`,`two`]}},render({state:e,updateState:t}){return v5({schema:{type:`array`,items:{type:`string`}},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`union of types (anyOf)`,styles:_5,state(){return{value:{id:`abc`,payload:42}}},render({state:e,updateState:t}){return v5({schema:{type:`object`,properties:{id:{type:`string`},payload:{anyOf:[{type:`string`},{type:`number`},{type:`boolean`}]}},required:[`id`,`payload`]},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`recursive schema with $ref`,styles:_5,state(){return{value:{name:`root`,children:[{name:`child-a`,children:[]}]}}},render({state:e,updateState:t}){return v5({schema:{definitions:{node:{type:`object`,required:[`name`],properties:{name:{type:`string`},children:{type:`array`,items:{$ref:`#/definitions/node`}}},additionalProperties:!1}},$ref:`#/definitions/node`},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`schema mismatch shows ViraError`,styles:_5,state(){return{value:{firstName:`Ada`,age:`not a number`}}},render({state:e,updateState:t}){return v5({schema:{type:`object`,required:[`firstName`,`lastName`],properties:{firstName:{type:`string`},lastName:{type:`string`},age:{type:`integer`}},additionalProperties:!1},value:e.value,onChange(e){return t({value:e})}})}}),e({title:`disabled`,styles:_5,state(){return{value:{name:`Ada`,tags:[`alpha`,`beta`]}}},render({state:e,updateState:t}){return v5({value:e.value,isDisabled:!0,onChange(e){return t({value:e})}})}})}}),b5=A({title:N4.tagName,parent:c8,descriptionParagraphs:[`Securely handles hyperlinks or route changes without harming right click or modifier+click functionality.`],controls:{"CSS Color":Ct({controlType:O.Color,initValue:``}),"Hover color":Ct({controlType:O.Color,initValue:``}),"Active color":Ct({controlType:O.Color,initValue:``})},defineExamples({defineExample:e}){function t({title:t,inputs:n}){e({title:t,render({controls:e}){let t=T`
                         ${W[`vira-form-accent-primary-color`].name}: ${y(e[`Hover color`]||`inherit`)};
                         ${W[`vira-form-accent-primary-active-color`].name}: ${y(e[`Active color`]||`inherit`)};
                         color: ${y(e[`CSS Color`]||`inherit`)};
                     `;return E`
                         <${N4.assign(n)} style=${t}>My Link</${N4}>
-                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),b5=A({title:F4.tagName,parent:s8,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return E`
+                    `}})}t({title:`with URL`,inputs:{link:{newTab:!0,url:`https://www.wikipedia.org`}}}),t({title:`with route`,inputs:{route:{route:{paths:[]},router:{createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(e,t){return console.info(e,t),!1}}}}}),t({title:`disabled link styles`,inputs:{disableLinkStyles:!0,link:{newTab:!0,url:`https://www.wikipedia.org`}}})}}),x5=A({title:F4.tagName,parent:c8,defineExamples({defineExample:e}){e({title:`basic`,state(){return{modalOpen:!1}},render({state:e,updateState:t}){return E`
                     <button
                         ${F(`click`,()=>{t({modalOpen:!0})})}
                     >
@@ -40298,7 +40414,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     >
                         Modal Content
                     </${F4}>
-                `}})}}),x5=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:T`
+                `}})}}),S5=[{title:`basic`},{title:`adjusted min`,inputs:{min:-100,value:-50}},{title:`out of bounds`,inputs:{value:200}},{title:`tiny progress`,inputs:{value:.5}},{title:`tiny bit more progress`,inputs:{value:2}},{title:`no progress`,inputs:{value:0}},{title:`full progress`,inputs:{value:100}},{title:`custom styles tiny progress`,styles:T`
             :host {
                 ${W[`vira-form-filled-background-color`].name}: red;
                 ${W[`vira-form-accent-primary-color`].name}: black;
@@ -40331,11 +40447,11 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                 height: 50px;
                 width: 200px;
             }
-        `,inputs:{value:100}}],S5=A({parent:s8,title:I4.tagName,defineExamples({defineExample:e}){x5.forEach(t=>{e({title:t.title,styles:T`
+        `,inputs:{value:100}}],C5=A({parent:c8,title:I4.tagName,defineExamples({defineExample:e}){S5.forEach(t=>{e({title:t.title,styles:T`
                     ${t.styles||T``}
                 `,render(){return E`
                         <${I4.assign({value:50,...t.inputs})}></${I4}>
-                    `}})})}}),C5=A({parent:s8,title:L4.tagName,defineExamples({defineExample:e}){e({title:`5 minutes ago`,render(){return E`
+                    `}})})}}),w5=A({parent:c8,title:L4.tagName,defineExamples({defineExample:e}){e({title:`5 minutes ago`,render(){return E`
                     <${L4.assign({time:ef(Of(),{minutes:-5})})}></${L4}>
                 `}}),e({title:`2 hours ago`,render(){return E`
                     <${L4.assign({time:ef(Of(),{hours:-2})})}></${L4}>
@@ -40347,22 +40463,36 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     <${L4.assign({time:ef(Of(),{hours:-2}),showAbsoluteTime:!0})}></${L4}>
                 `}}),e({title:`With absolute time in a specific timezone`,render(){return E`
                     <${L4.assign({time:ef(Of(),{hours:-2}),showAbsoluteTime:!0,timezone:uf})}></${L4}>
-                `}})}}),w5=new q4({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{},tab5:{},tab6:{},tab7:{},tab8:{}}}),T5={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function E5(e){return{paths:e,search:{},hash:``}}var D5=[{label:`Dashboard`,paths:w5.paths.children.tab1,icon:K(K1,16)},{label:`Notifications`,paths:w5.paths.children.tab2,icon:K(D2,16)},{label:`Messages`,paths:w5.paths.children.tab3,icon:K(k2,16)},{label:`Favorites`,paths:w5.paths.children.tab4,icon:K(M2,16)}],O5=[{label:`Dashboard`,paths:w5.paths.children.tab1},{label:`Notifications`,paths:w5.paths.children.tab2},{label:`Messages`,paths:w5.paths.children.tab3},{label:`Favorites`,paths:w5.paths.children.tab4}],k5=[{label:`Overview`,paths:w5.paths.children.tab1,group:`General`},{label:`Details`,paths:w5.paths.children.tab2,group:`General`},{label:`Settings`,paths:w5.paths.children.tab3,group:`General`},{label:`Reports`,paths:w5.paths.children.tab4,group:`Data`},{label:`Exports`,paths:w5.paths.children.tab5,group:`Data`},{label:`Members`,paths:w5.paths.children.tab6,group:`Team`},{label:`Roles`,paths:w5.paths.children.tab7,group:`Team`},{label:`History`,paths:w5.paths.children.tab8}],A5=E5(w5.paths.children.tab2.fullPaths),j5=E5(w5.paths.children.tab6.fullPaths),M5=[{title:`basic`,tabs:O5},{title:`with icons (vertical layout)`,tabs:D5},{title:`with icons (horizontal layout)`,tabs:D5,iconLayout:j3.Horizontal},{title:`plain color variant`,tabs:D5,color:s0.Plain},{title:`neutral color variant`,tabs:D5,color:s0.Neutral},{title:`danger color variant`,tabs:D5,color:s0.Danger},{title:`warning color variant`,tabs:D5,color:s0.Warning},{title:`positive color variant`,tabs:D5,color:s0.Positive},{title:`bar direction: top`,tabs:D5,barDirection:A3.Top},{title:`bar direction: left`,tabs:D5,barDirection:A3.Left},{title:`bar direction: right`,tabs:D5,barDirection:A3.Right}],N5={max:600,min:150,default:600},P5=Mv()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Qt(N5.default)},state(){return{intervalId:void 0,increment:2}},styles({cssVars:e}){return T`
+                `}})}}),T5=A({parent:c8,title:R4.tagName,controls:{Disabled:{controlType:O.Checkbox,initValue:!1}},defineExamples({defineExample:e}){e({title:`default`,state(){return{value:40}},render({state:e,updateState:t,controls:n}){return E`
+                    <${R4.assign({value:e.value,isDisabled:n.Disabled,label:`Example`})}
+                        ${F(R4.events.valueChange,e=>{t({value:e.detail})})}
+                    ></${R4}>
+                    <span>${e.value}</span>
+                `}}),e({title:`custom range and step`,state(){return{value:.5}},render({state:e,updateState:t}){return E`
+                    <${R4.assign({value:e.value,min:-1,max:1,step:.1})}
+                        ${F(R4.events.valueChange,e=>{t({value:e.detail})})}
+                    ></${R4}>
+                    <span>${e.value}</span>
+                `}}),e({title:`disabled`,render(){return E`
+                    <${R4.assign({value:70,isDisabled:!0})}></${R4}>
+                `}}),e({title:`no listener`,descriptionParagraphs:[`Should not move on user input.`],render(){return E`
+                    <${R4.assign({value:30})}></${R4}>
+                `}})}}),E5=new J4({allowBare:!0,children:{tab1:{},tab2:{},tab3:{},tab4:{},tab5:{},tab6:{},tab7:{},tab8:{}}}),D5={createRouteUrl(){return{url:window.location.href,route:{}}},setRouteOnDirectNavigation(){return!1}};function O5(e){return{paths:e,search:{},hash:``}}var k5=[{label:`Dashboard`,paths:E5.paths.children.tab1,icon:K(K1,16)},{label:`Notifications`,paths:E5.paths.children.tab2,icon:K(D2,16)},{label:`Messages`,paths:E5.paths.children.tab3,icon:K(k2,16)},{label:`Favorites`,paths:E5.paths.children.tab4,icon:K(M2,16)}],A5=[{label:`Dashboard`,paths:E5.paths.children.tab1},{label:`Notifications`,paths:E5.paths.children.tab2},{label:`Messages`,paths:E5.paths.children.tab3},{label:`Favorites`,paths:E5.paths.children.tab4}],j5=[{label:`Overview`,paths:E5.paths.children.tab1,group:`General`},{label:`Details`,paths:E5.paths.children.tab2,group:`General`},{label:`Settings`,paths:E5.paths.children.tab3,group:`General`},{label:`Reports`,paths:E5.paths.children.tab4,group:`Data`},{label:`Exports`,paths:E5.paths.children.tab5,group:`Data`},{label:`Members`,paths:E5.paths.children.tab6,group:`Team`},{label:`Roles`,paths:E5.paths.children.tab7,group:`Team`},{label:`History`,paths:E5.paths.children.tab8}],M5=O5(E5.paths.children.tab2.fullPaths),N5=O5(E5.paths.children.tab6.fullPaths),P5=[{title:`basic`,tabs:A5},{title:`with icons (vertical layout)`,tabs:k5},{title:`with icons (horizontal layout)`,tabs:k5,iconLayout:M3.Horizontal},{title:`plain color variant`,tabs:k5,color:s0.Plain},{title:`neutral color variant`,tabs:k5,color:s0.Neutral},{title:`danger color variant`,tabs:k5,color:s0.Danger},{title:`warning color variant`,tabs:k5,color:s0.Warning},{title:`positive color variant`,tabs:k5,color:s0.Positive},{title:`bar direction: top`,tabs:k5,barDirection:j3.Top},{title:`bar direction: left`,tabs:k5,barDirection:j3.Left},{title:`bar direction: right`,tabs:k5,barDirection:j3.Right}],F5={max:600,min:150,default:600},I5=Mv()({tagName:`vira-dynamic-width-tabs-example`,cssVars:{"vira-dynamic-width-tabs-example-width":Qt(F5.default)},state(){return{intervalId:void 0,increment:2}},styles({cssVars:e}){return T`
             :host {
                 display: block;
                 border: 1px solid
                     ${U.colors[`vira-grey-foreground-decoration`].foreground.value};
                 width: ${e[`vira-dynamic-width-tabs-example-width`].value};
             }
-        `},init({state:e,updateState:t,host:n,cssVars:r}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let i=bt.isNumber($t(Fe({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`]})))||N5.default;(i>=N5.max||i<=N5.min)&&t({increment:e.increment*-1}),ee({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`],toValue:Qt(i+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return E`
+        `},init({state:e,updateState:t,host:n,cssVars:r}){globalThis.clearInterval(e.intervalId),t({intervalId:globalThis.setInterval(()=>{let i=bt.isNumber($t(Fe({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`]})))||F5.default;(i>=F5.max||i<=F5.min)&&t({increment:e.increment*-1}),ee({onElement:n,forCssVar:r[`vira-dynamic-width-tabs-example-width`],toValue:Qt(i+e.increment)})},10)})},cleanup({state:e,updateState:t}){globalThis.clearInterval(e.intervalId),t({intervalId:void 0})},render(){return E`
             <slot></slot>
-        `}}),F5=A({parent:s8,title:F3.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){M5.forEach(({title:t,...n})=>{e({title:t,styles:T`
+        `}}),L5=A({parent:c8,title:I3.tagName,descriptionParagraphs:[`A tab bar element with route-based selection. Tabs render as links for proper SPA navigation.`],defineExamples({defineExample:e}){P5.forEach(({title:t,...n})=>{e({title:t,styles:T`
                     :host {
                         display: block;
                         width: 640px;
                     }
                 `,render(){return E`
-                        <${F3.assign({router:T5,currentRoute:A5,...n})}></${F3}>
+                        <${I3.assign({router:D5,currentRoute:M5,...n})}></${I3}>
                     `}})}),e({title:`fill width`,styles:T`
                 :host {
                     width: 600px;
@@ -40370,21 +40500,21 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                         ${U.colors[`vira-grey-foreground-decoration`].foreground.value};
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:D5,router:T5,currentRoute:A5,shouldFillWidth:!0})}></${F3}>
+                    <${I3.assign({tabs:k5,router:D5,currentRoute:M5,shouldFillWidth:!0})}></${I3}>
                 `}}),e({title:`overflow: selected tab collapsed into menu`,styles:T`
                 :host {
                     width: 240px;
                     border: 1px solid red;
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:D5,router:T5,currentRoute:A5})}></${F3}>
+                    <${I3.assign({tabs:k5,router:D5,currentRoute:M5})}></${I3}>
                 `}}),e({title:`overflow: selected tab stays inline`,styles:T`
                 :host {
                     width: 360px;
                     border: 1px solid red;
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:D5,router:T5,currentRoute:A5})}></${F3}>
+                    <${I3.assign({tabs:k5,router:D5,currentRoute:M5})}></${I3}>
                 `}}),e({title:`big font`,styles:T`
                 :host {
                     font-size: 32px;
@@ -40392,7 +40522,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     border: 1px solid red;
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:D5,router:T5,currentRoute:A5})}></${F3}>
+                    <${I3.assign({tabs:k5,router:D5,currentRoute:M5})}></${I3}>
                 `}}),e({title:`grouped tabs`,styles:T`
                 :host {
                     width: 700px;
@@ -40400,22 +40530,22 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                         ${U.colors[`vira-grey-foreground-decoration`].foreground.value};
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:k5,router:T5,currentRoute:j5,color:s0.Plain})}></${F3}>
+                    <${I3.assign({tabs:j5,router:D5,currentRoute:N5,color:s0.Plain})}></${I3}>
                 `}}),e({title:`grouped overflow (selected in a collapsed cluster)`,styles:T`
                 :host {
                     width: 420px;
                     border: 1px solid red;
                 }
             `,render(){return E`
-                    <${F3.assign({tabs:k5,router:T5,currentRoute:j5,color:s0.Plain})}></${F3}>
+                    <${I3.assign({tabs:j5,router:D5,currentRoute:N5,color:s0.Plain})}></${I3}>
                 `}}),e({title:`dynamic overflow`,styles:T`
                 :host {
-                    width: ${N5.max+20}px;
+                    width: ${F5.max+20}px;
                 }
             `,render(){return E`
-                    <${P5}>
-                        <${F3.assign({tabs:D5,router:T5,currentRoute:A5})}></${F3}>
-                    </${P5}>
+                    <${I5}>
+                        <${I3.assign({tabs:k5,router:D5,currentRoute:M5})}></${I3}>
+                    </${I5}>
                 `}}),e({title:`all combinations`,styles:T`
                 :host {
                     display: block;
@@ -40432,13 +40562,13 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                 h4 {
                     margin: 0;
                 }
-            `,render(){let e=[A3.Top,A3.Bottom,A3.Left,A3.Right],t=[s0.Info,s0.Plain,s0.Neutral,s0.Danger,s0.Warning,s0.Positive];return E`
+            `,render(){let e=[j3.Top,j3.Bottom,j3.Left,j3.Right],t=[s0.Info,s0.Plain,s0.Neutral,s0.Danger,s0.Warning,s0.Positive];return E`
                     ${t.map(t=>E`
                             <h4>${t} variant</h4>
                             <div class="grid">
                                 ${e.map(e=>E`
                                         <span>${e}</span>
-                                        <${F3.assign({tabs:D5,router:T5,currentRoute:A5,barDirection:e,color:t})}></${F3}>
+                                        <${I3.assign({tabs:k5,router:D5,currentRoute:M5,barDirection:e,color:t})}></${I3}>
                                     `)}
                             </div>
                         `)}
@@ -40450,9 +40580,9 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             `,render(){return E`
                     ${Object.values(i0).map(e=>E`
                             <h4>${e}</h4>
-                            <${F3.assign({tabs:O5,router:T5,currentRoute:A5,color:e})}></${F3}>
+                            <${I3.assign({tabs:A5,router:D5,currentRoute:M5,color:e})}></${I3}>
                         `)}
-                `}})}}),I5=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],L5=A({parent:s8,title:V3.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){f0.forEach(n=>{e({title:n,styles:T`
+                `}})}}),R5=[{label:`basic`,isClickable:void 0},{label:`selectable`,isClickable:{selected:!0}},{label:`cancellable`,isClickable:{cancellable:!0}},{label:`disabled`,disabled:!0,isClickable:{selected:!0}}],z5=A({parent:c8,title:H3.tagName,descriptionParagraphs:[`A tag element with selectable, cancellable, size, emphasis, and color variants.`],defineExamples({defineExample:e}){f0.forEach(n=>{e({title:n,styles:T`
                     table {
                         border-collapse: collapse;
                     }
@@ -40470,7 +40600,7 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                     .cancelled {
                         visibility: hidden;
                     }
-                `,state(){return{clicked:{}}},render({state:e,updateState:r}){return I5.map(({label:i,...a})=>E`
+                `,state(){return{clicked:{}}},render({state:e,updateState:r}){return R5.map(({label:i,...a})=>E`
                             <h3>${i}</h3>
                             <table>
                                 <thead>
@@ -40486,11 +40616,11 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                                             <tr>
                                                 <th>${o}</th>
                                                 ${c0.map(s=>{let c=[i,o,s].join(`-`),l=t.isBoolean(a.isClickable?.selected)?{selected:!e.clicked[c]}:a.isClickable,u=E`
-                                                        <${V3.assign({text:`Label`,...a,size:n,emphasis:o,color:s,isClickable:l})}
+                                                        <${H3.assign({text:`Label`,...a,size:n,emphasis:o,color:s,isClickable:l})}
                                                             class=${qf({cancelled:!!a.isClickable?.cancellable&&!!e.clicked[c]})}
-                                                            ${F(V3.events.cancel,()=>{r({clicked:{...e.clicked,[c]:!0}})})}
-                                                            ${F(V3.events.toggle,t=>{r({clicked:{...e.clicked,[c]:!t.detail}})})}
-                                                        ></${V3}>
+                                                            ${F(H3.events.cancel,()=>{r({clicked:{...e.clicked,[c]:!0}})})}
+                                                            ${F(H3.events.toggle,t=>{r({clicked:{...e.clicked,[c]:!t.detail}})})}
+                                                        ></${H3}>
                                                     `;return E`
                                                         <td>${u}</td>
                                                     `})}
@@ -40507,10 +40637,10 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
             `,render(){return E`
                     <div class="row">
                         ${Object.values(i0).map(e=>E`
-                                <${V3.assign({text:e,color:e})}></${V3}>
+                                <${H3.assign({text:e,color:e})}></${H3}>
                             `)}
                     </div>
-                `}})}}),R5=A({title:Y2.tagName,parent:s8,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:O.Color,initValue:W[`vira-form-foreground-color`].default},"Placeholder color":{controlType:O.Color,initValue:W[`vira-form-placeholder-color`].default},"Border color":{controlType:O.Color,initValue:W[`vira-form-border-color`].default},"Focus color":{controlType:O.Color,initValue:W[`vira-form-focus-outline-color`].default},"Selection color":{controlType:O.Color,initValue:W[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:T`
+                `}})}}),B5=A({title:Y2.tagName,parent:c8,descriptionParagraphs:[`A multi-line text area that mirrors the styling of vira-input.`,`Supports placeholders, labels, error styling, disabled state, blocking/allowing specific inputs, and resize control.`],controls:{"Text color":{controlType:O.Color,initValue:W[`vira-form-foreground-color`].default},"Placeholder color":{controlType:O.Color,initValue:W[`vira-form-placeholder-color`].default},"Border color":{controlType:O.Color,initValue:W[`vira-form-border-color`].default},"Focus color":{controlType:O.Color,initValue:W[`vira-form-focus-outline-color`].default},"Selection color":{controlType:O.Color,initValue:W[`vira-form-text-selection-color`].default}},defineExamples({defineExample:e}){function t({styles:t,title:n,inputs:r}){e({title:n,styles:T`
                     ${t||T``}
                 `,state(){return{value:r.value}},render({state:e,updateState:t,controls:n}){let i={[String(W[`vira-form-foreground-color`].name)]:n[`Text color`],[String(W[`vira-form-placeholder-color`].name)]:n[`Placeholder color`],[String(W[`vira-form-border-color`].name)]:n[`Border color`],[String(W[`vira-form-focus-outline-color`].name)]:n[`Focus color`],[String(W[`vira-form-text-selection-color`].name)]:n[`Selection color`]},a=fe(i,(e,t)=>t||`inherit`),o=Object.entries(a).map(([e,t])=>[e,t].join(`: `)+`;`).join(`
 `);return E`
@@ -40523,11 +40653,11 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
                     ${Y2} {
                         width: 480px;
                     }
-                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),z5=A({parent:s8,title:Q3.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new Y3}},render({state:e}){return E`
-                    <${Q3.assign({themeClient:e.themeClient})}></${Q3}>
+                `,inputs:{value:``,placeholder:`wider`}}].forEach(t)}}),V5=A({parent:c8,title:$3.tagName,descriptionParagraphs:["A row of buttons for selecting between light, dark, and auto themes. The switcher owns a `ViraThemeClient` (either supplied via the `themeClient` input or created internally) and applies the chosen theme on click."],defineExamples({defineExample:e}){e({title:`live (wired to ViraThemeClient)`,state(){return{themeClient:new X3}},render({state:e}){return E`
+                    <${$3.assign({themeClient:e.themeClient})}></${$3}>
                 `}}),e({title:`default (creates its own client)`,render(){return E`
-                    <${Q3}></${Q3}>
-                `}})}});function B5(e,t){tr(e).forEach(e=>{t({title:e.name,styles:T`
+                    <${$3}></${$3}>
+                `}})}});function H5(e,t){tr(e).forEach(e=>{t({title:e.name,styles:T`
                 button {
                     ${Yy}
                     display: flex;
@@ -40565,7 +40695,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
                             style=${n}
                         ></${q}>
                     </button>
-                `}})})}var V5=A({title:`24px Icons`,parent:u8,defineExamples({defineExample:e}){B5(F2,e)}}),H5=A({title:`Lucide Icons`,parent:u8,defineExamples({defineExample:e}){B5(T2,e)}}),U5=[s8,u8,c8,l8],W5=[...[d8,f8,_8,v8,K8,q8,X8,Q8,$8,e5,t5,n5,r5,l5,u5,f5,p5,m5,h5,v5,y5,P8,V8,z8,b5,H8,S5,C5,F5,L5,R5,z5,U8].sort((e,t)=>e.title.localeCompare(t.title)),T8,D8,M8,H5,V5,G8,...w8,...C8],G5=[...U5,...W5];Ne()({tagName:`vira-book-app`,styles:T`
+                `}})})}var U5=A({title:`24px Icons`,parent:d8,defineExamples({defineExample:e}){H5(F2,e)}}),W5=A({title:`Lucide Icons`,parent:d8,defineExamples({defineExample:e}){H5(T2,e)}}),G5=[c8,d8,l8,u8],K5=[...[f8,p8,v8,y8,q8,J8,Z8,$8,e5,t5,n5,r5,i5,u5,d5,p5,m5,h5,g5,y5,b5,F8,H8,B8,x5,U8,C5,w5,T5,L5,z5,B5,V5,W8].sort((e,t)=>e.title.localeCompare(t.title)),E8,O8,N8,W5,U5,K8,...T8,...w8],q5=[...G5,...K5];Ne()({tagName:`vira-book-app`,styles:T`
         :host {
             display: block;
             height: 100%;
@@ -40573,7 +40703,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
             font-size: ${W[`vira-form-medium-text-size`].value};
         }
 
-        ${o8} {
+        ${s8} {
             height: 100%;
             width: 100%;
         }
@@ -40585,7 +40715,7 @@ with multiple lines`,isReadonly:!0}},{title:`with error`,inputs:{value:`has erro
             margin-left: 16px;
         }
     `,render(){return E`
-            <${o8.assign({internalRouterConfig:{basePath:$4(`vira`),useInternalRouter:!0},pages:G5,themeColor:`#33ccff`})}>
-                <h1 slot=${o8.slotNames[`element-book-app-nav-header`]}>Vira</h1>
-            </${o8}>
+            <${s8.assign({internalRouterConfig:{basePath:e3(`vira`),useInternalRouter:!0},pages:q5,themeColor:`#33ccff`})}>
+                <h1 slot=${s8.slotNames[`element-book-app-nav-header`]}>Vira</h1>
+            </${s8}>
         `}});

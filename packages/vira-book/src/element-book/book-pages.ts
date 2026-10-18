@@ -32,6 +32,7 @@ import {viraLinkBookPage} from './entries/vira-link.element.book.js';
 import {viraModalBookPage} from './entries/vira-modal.element.book.js';
 import {viraProgressBookPage} from './entries/vira-progress.element.book.js';
 import {viraRelativeTimeBookPage} from './entries/vira-relative-time.element.book.js';
+import {viraSliderBookPage} from './entries/vira-slider.element.book.js';
 import {viraTabsBookPage} from './entries/vira-tabs.element.book.js';
 import {viraTagBookPage} from './entries/vira-tag.element.book.js';
 import {viraTextAreaBookPage} from './entries/vira-text-area.element.book.js';
@@ -75,6 +76,7 @@ const elementPages = [
     viraPopoverTriggerBookPage,
     viraProgressBookPage,
     viraRelativeTimeBookPage,
+    viraSliderBookPage,
     viraTabsBookPage,
     viraTagBookPage,
     viraTextAreaBookPage,

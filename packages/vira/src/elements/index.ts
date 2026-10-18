@@ -33,6 +33,7 @@ export * from './vira-link.element.js';
 export * from './vira-modal.element.js';
 export * from './vira-progress.element.js';
 export * from './vira-relative-time.element.js';
+export * from './vira-slider.element.js';
 export * from './vira-tabs.element.js';
 export * from './vira-tag.element.js';
 export * from './vira-text-area.element.js';

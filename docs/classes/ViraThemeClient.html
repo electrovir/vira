@@ -1,5 +1,5 @@
-<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ViraThemeClient | vira - v33.6.0</title><meta name="description" content="Documentation for vira"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css?cache=1792365313391"/><link rel="stylesheet" href="../assets/highlight.css?cache=1792365313391"/><script defer src="../assets/main.js?cache=1792365313391"></script><script async src="../assets/icons.js?cache=1792365313391" id="tsd-icons-script"></script><script async src="../assets/search.js?cache=1792365313391" id="tsd-search-script"></script><script async src="../assets/navigation.js?cache=1792365313391" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
-<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">vira - v33.6.0</a>
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ViraThemeClient | vira - v33.7.0</title><meta name="description" content="Documentation for vira"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css?cache=1792438134575"/><link rel="stylesheet" href="../assets/highlight.css?cache=1792438134575"/><script defer src="../assets/main.js?cache=1792438134575"></script><script async src="../assets/icons.js?cache=1792438134575" id="tsd-icons-script"></script><script async src="../assets/search.js?cache=1792438134575" id="tsd-search-script"></script><script async src="../assets/navigation.js?cache=1792438134575" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">vira - v33.7.0</a>
 <div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
 <ul role="listbox" id="tsd-search-results"></ul>
 <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
@@ -12,12 +12,19 @@
 <h1>Class ViraThemeClient</h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Tracks the user's <a href="../enums/ViraThemeSelection.html" class="tsd-kind-enum">ViraThemeSelection</a> and bridges it to a consumer-supplied <code>applyTheme</code>
-callback. Persists the selection in LocalStorage via an internal <code>LocalStorageClient</code>, and
-listens for system color-scheme changes to re-apply the theme in auto mode without persisting.</p>
+callback. Persists the selection through <code>storage</code> (LocalStorage by default), and listens for
+system color-scheme changes to re-apply the theme in auto mode without persisting. Listen for
+<a href="ViraThemeAppliedEvent.html" class="tsd-kind-class">ViraThemeAppliedEvent</a> to react to the displayed theme changing.</p>
 <p>The initial theme is applied during construction.</p>
-</div></section><aside class="tsd-sources">
+</div></section>
+<section class="tsd-panel tsd-hierarchy" data-refl="6105">
+<h4>Hierarchy</h4>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><span class="tsd-signature-type">ListenTarget</span><span class="tsd-signature-symbol">&lt;</span><a href="ViraThemeAppliedEvent.html" class="tsd-signature-type tsd-kind-class">ViraThemeAppliedEvent</a><span class="tsd-signature-symbol">&gt;</span>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">ViraThemeClient</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L76">util/vira-theme-client.ts:76</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L111">packages/vira/src/util/vira-theme-client.ts:111</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -29,14 +36,18 @@ listens for system color-scheme changes to re-apply the theme in auto mode witho
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-index-list"><a href="#applythemecallback" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>apply<wbr/>Theme<wbr/>Callback</span></a>
+<div class="tsd-index-list"><a href="#appliedtheme" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>applied<wbr/>Theme</span></a>
+<a href="#applythemecallback" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>apply<wbr/>Theme<wbr/>Callback</span></a>
 <a href="#localstorageclient" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>local<wbr/>Storage<wbr/>Client</span></a>
 <a href="#removethemepreferencelistener" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>remove<wbr/>Theme<wbr/>Preference<wbr/>Listener</span></a>
+<a href="#selectedtheme" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>selected<wbr/>Theme</span></a>
+<a href="#storage" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>storage</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#applyselection" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Selection</span></a>
 <a href="#destroy" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>destroy</span></a>
+<a href="#getappliedtheme" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Applied<wbr/>Theme</span></a>
 <a href="#getcurrenttheme" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Current<wbr/>Theme</span></a>
 <a href="#setselectedtheme" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Selected<wbr/>Theme</span></a>
 </div></section></div></details></section></section>
@@ -54,32 +65,54 @@ listens for system color-scheme changes to re-apply the theme in auto mode witho
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">params</span>: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/ViraThemeClientParams.html" class="tsd-signature-type tsd-kind-type-alias">ViraThemeClientParams</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ViraThemeClient</a></h4><aside class="tsd-sources">
+<p>Overrides ListenTarget&lt;ViraThemeAppliedEvent&gt;.constructor</p>
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L96">util/vira-theme-client.ts:96</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L137">packages/vira/src/util/vira-theme-client.ts:137</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="appliedtheme"><code class="tsd-tag">Protected</code><span>applied<wbr/>Theme</span><a href="#appliedtheme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">appliedTheme</span><span class="tsd-signature-symbol">:</span> <a href="../enums/ViraThemeSelection.html#light" class="tsd-signature-type tsd-kind-enum-member">Light</a> <span class="tsd-signature-symbol">|</span> <a href="../enums/ViraThemeSelection.html#dark" class="tsd-signature-type tsd-kind-enum-member">Dark</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></div>
+<div class="tsd-comment tsd-typography"><p>The theme that is currently displayed.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L123">packages/vira/src/util/vira-theme-client.ts:123</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="applythemecallback"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>apply<wbr/>Theme<wbr/>Callback</span><a href="#applythemecallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">applyThemeCallback</span><span class="tsd-signature-symbol">:</span> <a href="../types/ApplyThemeCallback.html" class="tsd-signature-type tsd-kind-type-alias">ApplyThemeCallback</a><span class="tsd-signature-symbol"> = defaultApplyThemeCallback</span></div>
 <div class="tsd-comment tsd-typography"><p>The callback that will be called to apply a new theme.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L78">util/vira-theme-client.ts:78</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L113">packages/vira/src/util/vira-theme-client.ts:113</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="localstorageclient"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>local<wbr/>Storage<wbr/>Client</span><a href="#localstorageclient" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">localStorageClient</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LocalStorageClient</span><span class="tsd-signature-symbol">&lt;</span><br/>    <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">selectedTheme</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Shape</span><span class="tsd-signature-symbol">&lt;</span><br/>            <span class="tsd-signature-symbol">{</span><br/>                <span class="tsd-kind-property">theme</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Shape</span><span class="tsd-signature-symbol">&lt;</span><br/>                    <span class="tsd-signature-type">TUnion</span><span class="tsd-signature-symbol">&lt;</span>(<span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#light" class="tsd-signature-type tsd-kind-enum-member">Light</a><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#dark" class="tsd-signature-type tsd-kind-enum-member">Dark</a><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#auto" class="tsd-signature-type tsd-kind-enum-member">Auto</a><span class="tsd-signature-symbol">&gt;</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/>                <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/>        <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">&gt;</span></div>
-<div class="tsd-comment tsd-typography"><p>Contains the user's last selected theme, saving and loading it to disk for persistence.</p>
+<div class="tsd-signature"><span class="tsd-kind-property">localStorageClient</span><span class="tsd-signature-symbol">:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">LocalStorageClient</span><span class="tsd-signature-symbol">&lt;</span><br/>        <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">selectedTheme</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Shape</span><span class="tsd-signature-symbol">&lt;</span><br/>                <span class="tsd-signature-symbol">{</span><br/>                    <span class="tsd-kind-property">theme</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Shape</span><span class="tsd-signature-symbol">&lt;</span><br/>                        <span class="tsd-signature-type">TUnion</span><span class="tsd-signature-symbol">&lt;</span>(<span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#light" class="tsd-signature-type tsd-kind-enum-member">Light</a><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#dark" class="tsd-signature-type tsd-kind-enum-member">Dark</a><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">TLiteral</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/ViraThemeSelection.html#auto" class="tsd-signature-type tsd-kind-enum-member">Auto</a><span class="tsd-signature-symbol">&gt;</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/>                    <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>                <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/>            <span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-signature-symbol">&gt;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></div>
+<div class="tsd-comment tsd-typography"><p>The default storage, only created when no <code>storage</code> param is given.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L80">util/vira-theme-client.ts:80</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L115">packages/vira/src/util/vira-theme-client.ts:115</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="removethemepreferencelistener"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>remove<wbr/>Theme<wbr/>Preference<wbr/>Listener</span><a href="#removethemepreferencelistener" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">removeThemePreferenceListener</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> = ...</span></div>
 <div class="tsd-comment tsd-typography"><p>A callback to remove the global theme preference listener.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L82">util/vira-theme-client.ts:82</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L125">packages/vira/src/util/vira-theme-client.ts:125</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="selectedtheme"><code class="tsd-tag">Protected</code><span>selected<wbr/>Theme</span><a href="#selectedtheme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">selectedTheme</span><span class="tsd-signature-symbol">:</span> <a href="../enums/ViraThemeSelection.html" class="tsd-signature-type tsd-kind-enum">ViraThemeSelection</a></div>
+<div class="tsd-comment tsd-typography"><p>The user's selected theme.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L121">packages/vira/src/util/vira-theme-client.ts:121</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="storage"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>storage</span><a href="#storage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">storage</span><span class="tsd-signature-symbol">:</span> <a href="../types/ViraThemeStorage.html" class="tsd-signature-type tsd-kind-type-alias">ViraThemeStorage</a></div>
+<div class="tsd-comment tsd-typography"><p>Persists the user's selected theme.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L119">packages/vira/src/util/vira-theme-client.ts:119</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -89,7 +122,7 @@ listens for system color-scheme changes to re-apply the theme in auto mode witho
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="applyselection-1"><span class="tsd-kind-call-signature">applySelection</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selection</span><span class="tsd-signature-symbol">:</span> <a href="../enums/ViraThemeSelection.html" class="tsd-signature-type tsd-kind-enum">ViraThemeSelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#applyselection-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Apply the currently selected theme.</p>
+<div class="tsd-comment tsd-typography"><p>Apply the given selection and fire <a href="ViraThemeAppliedEvent.html" class="tsd-kind-class">ViraThemeAppliedEvent</a> if the result changed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -97,7 +130,7 @@ listens for system color-scheme changes to re-apply the theme in auto mode witho
 <li><span><span class="tsd-kind-parameter">selection</span>: <a href="../enums/ViraThemeSelection.html" class="tsd-signature-type tsd-kind-enum">ViraThemeSelection</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L130">util/vira-theme-client.ts:130</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L192">packages/vira/src/util/vira-theme-client.ts:192</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="destroy"><span>destroy</span><a href="#destroy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -107,8 +140,20 @@ listens for system color-scheme changes to re-apply the theme in auto mode witho
 <div class="tsd-comment tsd-typography"><p>Cleanup internal state and listeners.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Overrides ListenTarget.destroy</p>
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L124">util/vira-theme-client.ts:124</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L185">packages/vira/src/util/vira-theme-client.ts:185</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getappliedtheme"><span>get<wbr/>Applied<wbr/>Theme</span><a href="#getappliedtheme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="getappliedtheme-1"><span class="tsd-kind-call-signature">getAppliedTheme</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../enums/ViraThemeSelection.html#light" class="tsd-signature-type tsd-kind-enum-member">Light</a> <span class="tsd-signature-symbol">|</span> <a href="../enums/ViraThemeSelection.html#dark" class="tsd-signature-type tsd-kind-enum-member">Dark</a><a href="#getappliedtheme-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>The theme that is currently displayed, with <code>Auto</code> resolved from the system color scheme.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="../enums/ViraThemeSelection.html#light" class="tsd-signature-type tsd-kind-enum-member">Light</a> <span class="tsd-signature-symbol">|</span> <a href="../enums/ViraThemeSelection.html#dark" class="tsd-signature-type tsd-kind-enum-member">Dark</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L173">packages/vira/src/util/vira-theme-client.ts:173</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getcurrenttheme"><span>get<wbr/>Current<wbr/>Theme</span><a href="#getcurrenttheme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -120,7 +165,7 @@ get out of sync.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="../enums/ViraThemeSelection.html" class="tsd-signature-type tsd-kind-enum">ViraThemeSelection</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L111">util/vira-theme-client.ts:111</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L168">packages/vira/src/util/vira-theme-client.ts:168</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setselectedtheme"><span>set<wbr/>Selected<wbr/>Theme</span><a href="#setselectedtheme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -135,7 +180,7 @@ get out of sync.</p>
 <li><span><span class="tsd-kind-parameter">selection</span>: <a href="../enums/ViraThemeSelection.html" class="tsd-signature-type tsd-kind-enum">ViraThemeSelection</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/electrovir/vira/blob/ba7398ead1d08e8dddc5bbb6f0b0c3ef2d3cd434/packages/vira/src/util/vira-theme-client.ts#L116">util/vira-theme-client.ts:116</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/electrovir/vira/blob/3e2df4da45060b4d95c4c773ae4a7d535bca8856/packages/vira/src/util/vira-theme-client.ts#L178">packages/vira/src/util/vira-theme-client.ts:178</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -153,11 +198,11 @@ get out of sync.</p>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#applythemecallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>apply<wbr/>Theme<wbr/>Callback</span></a><a href="#localstorageclient" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>local<wbr/>Storage<wbr/>Client</span></a><a href="#removethemepreferencelistener" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>remove<wbr/>Theme<wbr/>Preference<wbr/>Listener</span></a></div></details>
+<div><a href="#appliedtheme" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>applied<wbr/>Theme</span></a><a href="#applythemecallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>apply<wbr/>Theme<wbr/>Callback</span></a><a href="#localstorageclient" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>local<wbr/>Storage<wbr/>Client</span></a><a href="#removethemepreferencelistener" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>remove<wbr/>Theme<wbr/>Preference<wbr/>Listener</span></a><a href="#selectedtheme" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>selected<wbr/>Theme</span></a><a href="#storage" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>storage</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#applyselection" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Selection</span></a><a href="#destroy"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>destroy</span></a><a href="#getcurrenttheme"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Current<wbr/>Theme</span></a><a href="#setselectedtheme"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Selected<wbr/>Theme</span></a></div></details></div></details></div>
+<div><a href="#applyselection" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Selection</span></a><a href="#destroy"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>destroy</span></a><a href="#getappliedtheme"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Applied<wbr/>Theme</span></a><a href="#getcurrenttheme"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Current<wbr/>Theme</span></a><a href="#setselectedtheme"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Selected<wbr/>Theme</span></a></div></details></div></details></div>
 <div class="site-menu">
-<nav class="tsd-navigation"><a href="../modules.html">vira - v33.6.0</a>
+<nav class="tsd-navigation"><a href="../modules.html">vira - v33.7.0</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
 <li>Loading...</li></ul></nav></div></div></div><footer>
 <p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer>

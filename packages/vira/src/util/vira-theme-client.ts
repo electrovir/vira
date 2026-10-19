@@ -1,9 +1,13 @@
 import {assert} from '@augment-vir/assert';
-import {type MaybePromise, type PartialWithUndefined} from '@augment-vir/common';
+import {
+    type MaybePromise,
+    type PartialWithUndefined,
+    type RequireOneOrNone,
+} from '@augment-vir/common';
 import {LocalStorageClient} from '@electrovir/local-storage-client';
 import {defineShape, enumShape} from 'object-shape-tester';
 import {applyColorThemeViaStyleElement} from 'theme-vir/dist/color-theme/apply-color-theme.js';
-import {listenTo} from 'typed-event-target';
+import {defineTypedCustomEvent, ListenTarget, listenTo} from 'typed-event-target';
 import {viraTheme, viraThemeDarkOverride} from '../styles/vira-color-theme.js';
 
 /**
@@ -17,6 +21,29 @@ export enum ViraThemeSelection {
     Dark = 'dark',
     Auto = 'auto',
 }
+
+/**
+ * Fired by {@link ViraThemeClient} whenever its applied theme changes, including when the system
+ * color scheme flips while the selection is `Auto`. Not fired when a new selection leaves the
+ * applied theme the same (such as switching from `Dark` to `Auto` on a dark system).
+ *
+ * @category Internal
+ */
+export class ViraThemeAppliedEvent extends defineTypedCustomEvent<
+    Exclude<ViraThemeSelection, ViraThemeSelection.Auto>
+>()('vira-theme-applied') {}
+
+/**
+ * Persists the selection of a {@link ViraThemeClient}.
+ *
+ * @category Internal
+ */
+export type ViraThemeStorage = {
+    /** The previously saved selection. `undefined` (nothing saved yet) is treated as `Auto`. */
+    init: ViraThemeSelection | undefined;
+    /** Called after the selection has already been applied, so it can be async. */
+    save(selection: ViraThemeSelection): MaybePromise<void>;
+};
 
 /**
  * Used by {@link ViraThemeClient} to apply themes. By default, vira themes will be applied (via
@@ -47,14 +74,21 @@ export type ViraThemeClientParams = PartialWithUndefined<{
      * will be used.
      */
     applyTheme: ApplyThemeCallback;
-    /**
-     * Override the LocalStorage store name used for theme persistence. Useful if a single page
-     * hosts multiple isolated theme clients.
-     *
-     * @default 'vira-theme'
-     */
-    storeName: string;
-}>;
+}> &
+    RequireOneOrNone<{
+        /**
+         * Override the LocalStorage store name used for theme persistence. Useful if a single page
+         * hosts multiple isolated theme clients.
+         *
+         * @default 'vira-theme'
+         */
+        storeName: string;
+        /**
+         * Where to persist the selected theme. If not provided, the selection is persisted in
+         * LocalStorage under `storeName`.
+         */
+        storage: ViraThemeStorage;
+    }>;
 
 const darkSchemeMediaQuery = '(prefers-color-scheme: dark)';
 
@@ -66,18 +100,27 @@ const themeStorageShapes = {
 
 /**
  * Tracks the user's {@link ViraThemeSelection} and bridges it to a consumer-supplied `applyTheme`
- * callback. Persists the selection in LocalStorage via an internal `LocalStorageClient`, and
- * listens for system color-scheme changes to re-apply the theme in auto mode without persisting.
+ * callback. Persists the selection through `storage` (LocalStorage by default), and listens for
+ * system color-scheme changes to re-apply the theme in auto mode without persisting. Listen for
+ * {@link ViraThemeAppliedEvent} to react to the displayed theme changing.
  *
  * The initial theme is applied during construction.
  *
  * @category Util
  */
-export class ViraThemeClient {
+export class ViraThemeClient extends ListenTarget<ViraThemeAppliedEvent> {
     /** The callback that will be called to apply a new theme. */
     protected readonly applyThemeCallback: ApplyThemeCallback = defaultApplyThemeCallback;
-    /** Contains the user's last selected theme, saving and loading it to disk for persistence. */
-    protected readonly localStorageClient: LocalStorageClient<typeof themeStorageShapes>;
+    /** The default storage, only created when no `storage` param is given. */
+    protected readonly localStorageClient:
+        | LocalStorageClient<typeof themeStorageShapes>
+        | undefined;
+    /** Persists the user's selected theme. */
+    protected readonly storage: ViraThemeStorage;
+    /** The user's selected theme. */
+    protected selectedTheme: ViraThemeSelection;
+    /** The theme that is currently displayed. */
+    protected appliedTheme: Exclude<ViraThemeSelection, ViraThemeSelection.Auto> | undefined;
     /** A callback to remove the global theme preference listener. */
     protected readonly removeThemePreferenceListener = listenTo(
         globalThis.matchMedia(darkSchemeMediaQuery),
@@ -85,23 +128,37 @@ export class ViraThemeClient {
         (event) => {
             assert.instanceOf(event, MediaQueryListEvent);
 
-            if (this.getCurrentTheme() === ViraThemeSelection.Auto) {
-                void this.applyThemeCallback({
-                    useDarkTheme: event.matches,
-                });
+            if (this.selectedTheme === ViraThemeSelection.Auto) {
+                this.applySelection(ViraThemeSelection.Auto);
             }
         },
     );
 
     constructor(params: Readonly<ViraThemeClientParams> = {}) {
+        super();
         if (params.applyTheme) {
             this.applyThemeCallback = params.applyTheme;
         }
-        this.localStorageClient = new LocalStorageClient(themeStorageShapes, {
-            storeName: params.storeName || 'vira-theme',
-        });
 
-        this.applySelection(this.getCurrentTheme());
+        if (params.storage) {
+            this.storage = params.storage;
+        } else {
+            const localStorageClient = new LocalStorageClient(themeStorageShapes, {
+                storeName: params.storeName || 'vira-theme',
+            });
+            this.localStorageClient = localStorageClient;
+            this.storage = {
+                init: localStorageClient.get.selectedTheme()?.theme,
+                save(theme) {
+                    localStorageClient.set.selectedTheme({
+                        theme,
+                    });
+                },
+            };
+        }
+
+        this.selectedTheme = this.storage.init || ViraThemeSelection.Auto;
+        this.applySelection(this.selectedTheme);
     }
 
     /**
@@ -109,32 +166,47 @@ export class ViraThemeClient {
      * get out of sync.
      */
     public getCurrentTheme(): ViraThemeSelection {
-        return this.localStorageClient.get.selectedTheme()?.theme || ViraThemeSelection.Auto;
+        return this.selectedTheme;
+    }
+
+    /** The theme that is currently displayed, with `Auto` resolved from the system color scheme. */
+    public getAppliedTheme(): Exclude<ViraThemeSelection, ViraThemeSelection.Auto> {
+        return this.appliedTheme || ViraThemeSelection.Light;
     }
 
     /** Set the selected theme. */
     public setSelectedTheme(selection: ViraThemeSelection): void {
+        this.selectedTheme = selection;
         this.applySelection(selection);
-        this.localStorageClient.set.selectedTheme({
-            theme: selection,
-        });
+        void this.storage.save(selection);
     }
 
     /** Cleanup internal state and listeners. */
-    public destroy(): void {
+    public override destroy(): void {
         this.removeThemePreferenceListener();
-        this.localStorageClient.destroy();
+        this.localStorageClient?.destroy();
+        super.destroy();
     }
 
-    /** Apply the currently selected theme. */
+    /** Apply the given selection and fire {@link ViraThemeAppliedEvent} if the result changed. */
     protected applySelection(selection: ViraThemeSelection): void {
         const useDarkTheme =
             selection === ViraThemeSelection.Dark ||
             (selection === ViraThemeSelection.Auto &&
                 globalThis.matchMedia(darkSchemeMediaQuery).matches);
+        const appliedTheme = useDarkTheme ? ViraThemeSelection.Dark : ViraThemeSelection.Light;
 
         void this.applyThemeCallback({
             useDarkTheme,
         });
+
+        if (appliedTheme !== this.appliedTheme) {
+            this.appliedTheme = appliedTheme;
+            this.dispatch(
+                new ViraThemeAppliedEvent({
+                    detail: appliedTheme,
+                }),
+            );
+        }
     }
 }

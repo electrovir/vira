@@ -379,6 +379,15 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'searchable with a max shown options cap',
+        inputs: {
+            isSearchable: true,
+            options: manyDropdownOptions,
+            maxShownOptions: 20,
+            noOptionsText: 'No matches',
+        },
+    },
+    {
         title: 'searchable multi select with option groups',
         inputs: {
             isSearchable: true,

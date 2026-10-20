@@ -89,10 +89,24 @@ export const ViraDropdown = defineViraElement<
          * @default 24
          */
         menuHoverScrollSpeed: number;
+        /**
+         * When `isSearchable` is `true`, renders at most this many of the matching options (counted
+         * across groups, in their given order) followed by a hint row stating how many more exist.
+         * When omitted, all matching options are rendered.
+         */
+        maxShownOptions: number;
+        /**
+         * Creates the text of the hint row shown when `maxShownOptions` hides some matching
+         * options.
+         *
+         * @default hiddenCount => `+${hiddenCount} more… type to narrow your search`
+         */
+        hiddenOptionsText: (hiddenCount: number) => string;
     }>
 >()({
     tagName: 'vira-dropdown',
     testIds: [
+        'hiddenOptionsHint',
         'leadingIcon',
         'prefixText',
         'searchInput',
@@ -214,7 +228,8 @@ export const ViraDropdown = defineViraElement<
         }
 
         .option-group-label,
-        .no-options {
+        .no-options,
+        .hidden-options-hint {
             ${noUserSelect};
             text-align: left;
         }
@@ -225,7 +240,8 @@ export const ViraDropdown = defineViraElement<
             font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
         }
 
-        .no-options {
+        .no-options,
+        .hidden-options-hint {
             cursor: default;
             opacity: 0.6;
             /* Aligns with the label text of each ViraMenuItem, past its check icon. */
@@ -395,6 +411,40 @@ export const ViraDropdown = defineViraElement<
             return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
         });
 
+        let remainingShownCount = inputs.isSearchable
+            ? (inputs.maxShownOptions ?? Infinity)
+            : Infinity;
+        /** `filteredOptions` truncated to `maxShownOptions` options, dropping emptied groups. */
+        const shownOptions =
+            remainingShownCount < filteredFlatOptions.length
+                ? filterMap(
+                      filteredOptions,
+                      (entry) => {
+                          const options = (
+                              isViraDropdownOptionGroup(entry) ? entry.options : [entry]
+                          ).slice(0, Math.max(remainingShownCount, 0));
+                          remainingShownCount -= options.length;
+
+                          if (!options.length) {
+                              return undefined;
+                          }
+
+                          return isViraDropdownOptionGroup(entry)
+                              ? {
+                                    ...entry,
+                                    options,
+                                }
+                              : entry;
+                      },
+                      check.isTruthy,
+                  )
+                : filteredOptions;
+        const hiddenOptionsCount =
+            filteredFlatOptions.length -
+            shownOptions.flatMap((entry) => {
+                return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
+            }).length;
+
         function findSearchInput() {
             const searchInput = host.shadowRoot.querySelector('.search-input');
 
@@ -452,7 +502,7 @@ export const ViraDropdown = defineViraElement<
         }
 
         /** Drag-select actions in the same order as the rendered menu items. */
-        const menuItemActions = filteredOptions.flatMap((entry) => {
+        const menuItemActions = shownOptions.flatMap((entry) => {
             const options = isViraDropdownOptionGroup(entry) ? entry.options : [entry];
             const optionActions = options.map((option) => {
                 return option.disabled
@@ -521,7 +571,7 @@ export const ViraDropdown = defineViraElement<
                 })}
             >
                 ${filteredFlatOptions.length
-                    ? filteredOptions.map((entry) => {
+                    ? shownOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)
                               ? html`
                                     ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
@@ -531,6 +581,25 @@ export const ViraDropdown = defineViraElement<
                     : html`
                           <div class="no-options">${inputs.noOptionsText}</div>
                       `}
+                ${hiddenOptionsCount
+                    ? html`
+                          <div
+                              class="hidden-options-hint"
+                              ${testId(testIds.hiddenOptionsHint)}
+                              ${listen('mousedown', (event) => {
+                                  /** Keeps focus in the search input. */
+                                  event.preventDefault();
+                              })}
+                              ${listen('click', (event) => {
+                                  /** Keeps the popover open, as this is not an option. */
+                                  event.stopPropagation();
+                              })}
+                          >
+                              ${inputs.hiddenOptionsText?.(hiddenOptionsCount) ??
+                              `+${hiddenOptionsCount} more… type to narrow your search`}
+                          </div>
+                      `
+                    : nothing}
             </${ViraMenu}>
         `;
 

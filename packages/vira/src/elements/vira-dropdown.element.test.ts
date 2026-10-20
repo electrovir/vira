@@ -1,5 +1,5 @@
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
-import {mapObjectValues, randomString} from '@augment-vir/common';
+import {createArray, mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
@@ -925,6 +925,212 @@ describe(ViraDropdown.tagName, () => {
             assert.deepEquals(events.selectedValuesChange, [
                 ['2'],
             ]);
+        });
+
+        describe('maxShownOptions', () => {
+            const manyOptions: ReadonlyArray<Readonly<ViraDropdownOption>> = createArray(
+                121,
+                (index) => {
+                    return {
+                        value: String(index),
+                        label: `Option ${index}`,
+                    };
+                },
+            );
+
+            it('caps the options and shows how many are hidden', async () => {
+                const {searchInput, findMenu, readOptionLabels, queryByTestId} =
+                    await setupSearchTest({
+                        options: manyOptions,
+                        maxShownOptions: 20,
+                    });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+
+                assert.deepEquals(
+                    {
+                        optionLabels: readOptionLabels(),
+                        hint: extractElementText(
+                            assertWrap.instanceOf(queryByTestId.hiddenOptionsHint(), HTMLElement),
+                        ),
+                    },
+                    {
+                        optionLabels: manyOptions.slice(0, 20).map((option) => option.label),
+                        hint: '+101 more… type to narrow your search',
+                    },
+                );
+            });
+
+            it('caps the matches of a search', async () => {
+                const {searchInput, findMenu, readOptionLabels, queryByTestId} =
+                    await setupSearchTest({
+                        options: manyOptions,
+                        maxShownOptions: 3,
+                        hiddenOptionsText(hiddenCount) {
+                            return `${hiddenCount} hidden`;
+                        },
+                    });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+                /** Matches 21 labels, from "Option 9" through "Option 119". */
+                await testWeb.typeText('9');
+
+                await waitUntil.deepEquals(
+                    {
+                        optionLabels: [
+                            'Option 9',
+                            'Option 19',
+                            'Option 29',
+                        ],
+                        hint: '18 hidden',
+                    },
+                    () => {
+                        const hint = queryByTestId.hiddenOptionsHint();
+
+                        return {
+                            optionLabels: readOptionLabels(),
+                            hint: hint instanceof HTMLElement ? extractElementText(hint) : '',
+                        };
+                    },
+                );
+            });
+
+            it('does not show the hint when every match fits', async () => {
+                const {searchInput, findMenu, readOptionLabels, queryByTestId} =
+                    await setupSearchTest({
+                        options: manyOptions,
+                        maxShownOptions: 20,
+                    });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+                await testWeb.typeText('120');
+
+                await waitUntil.deepEquals(
+                    [
+                        'Option 120',
+                    ],
+                    readOptionLabels,
+                );
+                assert.isNull(queryByTestId.hiddenOptionsHint());
+            });
+
+            it('does not select anything or close when the hint is clicked', async () => {
+                const {searchInput, findMenu, queryByTestId, events} = await setupSearchTest({
+                    options: manyOptions,
+                    maxShownOptions: 5,
+                });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+                await testWeb.click(
+                    assertWrap.instanceOf(queryByTestId.hiddenOptionsHint(), HTMLElement),
+                );
+                await waitForAnimationFrame();
+
+                assert.isTruthy(findMenu());
+                assert.isEmpty(events.selectedValuesChange);
+            });
+
+            it('counts across groups and drops emptied groups', async () => {
+                const {searchInput, findMenu, readOptionLabels, queryByTestId, instance} =
+                    await setupSearchTest({
+                        options: mockGroupedOptions,
+                        maxShownOptions: 2,
+                    });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+
+                assert.deepEquals(
+                    {
+                        groupLabels: Array.from(
+                            instance.shadowRoot.querySelectorAll('.option-group-label'),
+                        ).map((groupLabel) => extractElementText(groupLabel)),
+                        optionLabels: readOptionLabels(),
+                        hint: extractElementText(
+                            assertWrap.instanceOf(queryByTestId.hiddenOptionsHint(), HTMLElement),
+                        ),
+                    },
+                    {
+                        groupLabels: [
+                            'First',
+                            'Second',
+                        ],
+                        optionLabels: [
+                            'Option A',
+                            'Option B',
+                        ],
+                        hint: '+2 more… type to narrow your search',
+                    },
+                );
+            });
+
+            it('drops a group the cap leaves empty', async () => {
+                const {searchInput, findMenu, instance} = await setupSearchTest({
+                    options: mockGroupedOptions,
+                    maxShownOptions: 1,
+                });
+
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+
+                assert.deepEquals(
+                    Array.from(instance.shadowRoot.querySelectorAll('.option-group-label')).map(
+                        (groupLabel) => extractElementText(groupLabel),
+                    ),
+                    [
+                        'First',
+                    ],
+                );
+            });
+
+            it('drag selects the right option after capping', async () => {
+                const {instance, events} = await setupSearchTest({
+                    options: mockGroupedOptions,
+                    isMultiSelect: true,
+                    maxShownOptions: 2,
+                });
+
+                try {
+                    /** Drags from the chevron, as the search input handles its own mouse events. */
+                    await testWeb.moveMouseTo(
+                        assertWrap.instanceOf(
+                            instance.shadowRoot.querySelector('.trigger-icon'),
+                            HTMLElement,
+                        ),
+                    );
+                    await sendMouse({
+                        type: 'down',
+                        button: 'left',
+                    });
+
+                    /** The menu items are: "First", "Option A", "Second", "Option B". */
+                    const option = await waitUntil.isTruthy(() => {
+                        return queryThroughShadow(instance, ViraMenuItem.tagName, {
+                            all: true,
+                        })[3];
+                    });
+                    assert.strictEquals(extractElementText(option), 'Option B');
+
+                    await testWeb.moveMouseTo(option);
+                    await sendMouse({
+                        type: 'up',
+                        button: 'left',
+                    });
+
+                    await waitUntil.deepEquals(
+                        [
+                            ['1'],
+                        ],
+                        () => events.selectedValuesChange,
+                    );
+                } finally {
+                    await resetMouse();
+                }
+            });
         });
     });
 });

@@ -99,7 +99,7 @@ export const ViraDropdown = defineViraElement<
          * Creates the text of the hint row shown when `maxShownOptions` hides some matching
          * options.
          *
-         * @default hiddenCount => `+${hiddenCount} more… type to narrow your search`
+         * @default hiddenCount => `+${hiddenCount}, type to narrow your search`
          */
         hiddenOptionsText: (hiddenCount: number) => string;
     }>
@@ -591,12 +591,12 @@ export const ViraDropdown = defineViraElement<
                                   event.preventDefault();
                               })}
                               ${listen('click', (event) => {
-                                  /** Keeps the popover open, as this is not an option. */
+                                  /** ViraPopoverTrigger closes on any click inside its popover. */
                                   event.stopPropagation();
                               })}
                           >
                               ${inputs.hiddenOptionsText?.(hiddenOptionsCount) ??
-                              `+${hiddenOptionsCount} more… type to narrow your search`}
+                              `+${hiddenOptionsCount}, type to narrow your search`}
                           </div>
                       `
                     : nothing}

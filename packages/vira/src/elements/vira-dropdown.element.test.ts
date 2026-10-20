@@ -957,7 +957,7 @@ describe(ViraDropdown.tagName, () => {
                     },
                     {
                         optionLabels: manyOptions.slice(0, 20).map((option) => option.label),
-                        hint: '+101 more… type to narrow your search',
+                        hint: '+101, type to narrow your search',
                     },
                 );
             });
@@ -1063,7 +1063,7 @@ describe(ViraDropdown.tagName, () => {
                             'Option A',
                             'Option B',
                         ],
-                        hint: '+2 more… type to narrow your search',
+                        hint: '+2, type to narrow your search',
                     },
                 );
             });
@@ -1095,7 +1095,7 @@ describe(ViraDropdown.tagName, () => {
                 });
 
                 try {
-                    /** Drags from the chevron, as the search input handles its own mouse events. */
+                    /** Drag-selecting from the search input fails in Firefox. */
                     await testWeb.moveMouseTo(
                         assertWrap.instanceOf(
                             instance.shadowRoot.querySelector('.trigger-icon'),

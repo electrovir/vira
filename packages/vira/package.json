@@ -38,9 +38,9 @@
         "test:docs": "virmator docs check"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.5.0",
-        "@augment-vir/common": "^32.5.0",
-        "@augment-vir/web": "^32.5.0",
+        "@augment-vir/assert": "^32.6.0",
+        "@augment-vir/common": "^32.6.0",
+        "@augment-vir/web": "^32.6.0",
         "@electrovir/color": "^2.0.0",
         "@electrovir/local-storage-client": "^0.1.1",
         "date-vir": "^9.4.0",
@@ -48,15 +48,15 @@
         "json-schema-to-ts": "^3.1.1",
         "lit": "^3.3.3",
         "lit-css-vars": "^3.6.3",
-        "lucide-static": "1.55.0",
+        "lucide-static": "1.57.0",
         "object-shape-tester": "^6.15.1",
         "observavir": "^2.4.2",
         "page-active": "^1.0.4",
-        "spa-router-vir": "^6.8.0",
+        "spa-router-vir": "^6.9.0",
         "typed-event-target": "^4.3.4"
     },
     "devDependencies": {
-        "@augment-vir/test": "^32.5.0",
+        "@augment-vir/test": "^32.6.0",
         "@web/dev-server-esbuild": "^2.0.0",
         "@web/test-runner": "^1.0.0",
         "@web/test-runner-commands": "^1.0.1",

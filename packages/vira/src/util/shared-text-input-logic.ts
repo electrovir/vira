@@ -71,12 +71,12 @@ function isAllowed({value: rawValue, allowed, blocked}: IsAllowedInputs) {
             input: value,
             matcher: allowed,
         });
-    const isBlockedCharacter = blocked
-        ? doesMatch({
-              input: value,
-              matcher: blocked,
-          })
-        : false;
+    const isBlockedCharacter =
+        !!blocked &&
+        doesMatch({
+            input: value,
+            matcher: blocked,
+        });
 
     return isAllowedCharacter && !isBlockedCharacter;
 }

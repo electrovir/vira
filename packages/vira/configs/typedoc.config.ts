@@ -9,7 +9,7 @@ export const typeDocConfig: Partial<TypeDocOptions> = {
     ...baseTypedocConfig,
     out: outDirPath,
     entryPoints: [
-        indexTsFile,
+        indexTsFile.replaceAll('\\', '/'),
     ],
     intentionallyNotExported: [],
     defaultCategory: 'MISSING CATEGORY',

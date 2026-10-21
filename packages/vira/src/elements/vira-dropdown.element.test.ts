@@ -221,9 +221,12 @@ describe(ViraDropdown.tagName, () => {
     it('navigates and selects options with arrow keys', async () => {
         const {instance, events, findMenu} = await setupDropdownTest();
 
-        await sendKeys({
-            press: 'Tab',
-        });
+        /**
+         * Focus the trigger directly instead of pressing Tab: macOS WebKit does not Tab to buttons
+         * by default, so Tab moves focus out of the page, which marks the page inactive and makes
+         * every later popover in this file close as soon as it opens.
+         */
+        assertWrap.instanceOf(queryThroughShadow(instance, 'button'), HTMLButtonElement).focus();
         await sendKeys({
             press: 'ArrowDown',
         });

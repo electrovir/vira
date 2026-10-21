@@ -103,4 +103,30 @@ describe(isMouseEventOnScrollbar.name, () => {
             ),
         );
     });
+
+    it('ignores a click on inline content', async () => {
+        const fixture = await testWeb.render(html`
+            <div style="overflow: hidden;"><b>Bold label</b></div>
+        `);
+        const inlineElement = fixture.querySelector('b');
+        assert.instanceOf(inlineElement, HTMLElement);
+        const rect = inlineElement.getBoundingClientRect();
+
+        const results: boolean[] = [];
+        inlineElement.addEventListener('mousedown', (event) => {
+            results.push(isMouseEventOnScrollbar(event));
+        });
+        inlineElement.dispatchEvent(
+            new MouseEvent('mousedown', {
+                clientX: rect.left + rect.width / 2,
+                clientY: rect.top + rect.height / 2,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+
+        assert.deepEquals(results, [
+            false,
+        ]);
+    });
 });

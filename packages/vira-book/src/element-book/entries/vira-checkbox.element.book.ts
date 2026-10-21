@@ -60,6 +60,57 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'partly checked',
+            descriptionParagraphs: [
+                'Clicking dispatches the negation of value, so this example becomes fully checked.',
+            ],
+            state() {
+                return {
+                    checked: false,
+                    isPartlyChecked: true,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        isPartlyChecked: state.isPartlyChecked,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                                isPartlyChecked: false,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'partly checked with fill',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        isPartlyChecked: true,
+                        fillWhenChecked: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled partly checked',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        isPartlyChecked: true,
+                        isDisabled: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'error',
             state() {
                 return {

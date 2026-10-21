@@ -443,6 +443,11 @@ describe(ViraDropdown.tagName, () => {
     });
 
     it('contains menu overscroll so the page does not scroll', async () => {
+        /** Playwright's Windows WebKit build does not support `overscroll-behavior` at all. */
+        if (!CSS.supports('overscroll-behavior-y', 'contain')) {
+            return;
+        }
+
         const {toggle, findMenu} = await setupDropdownTest();
 
         await toggle();

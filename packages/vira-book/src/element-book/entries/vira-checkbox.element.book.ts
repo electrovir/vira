@@ -60,26 +60,26 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'partly checked',
+            title: 'indeterminate',
             descriptionParagraphs: [
                 'Clicking dispatches the negation of value, so this example becomes fully checked.',
             ],
             state() {
                 return {
                     checked: false,
-                    isPartlyChecked: true,
+                    isIndeterminate: true,
                 };
             },
             render({state, updateState}) {
                 return html`
                     <${ViraCheckbox.assign({
                         value: state.checked,
-                        isPartlyChecked: state.isPartlyChecked,
+                        isIndeterminate: state.isIndeterminate,
                     })}
                         ${listen(ViraCheckbox.events.valueChange, (event) => {
                             updateState({
                                 checked: event.detail,
-                                isPartlyChecked: false,
+                                isIndeterminate: false,
                             });
                         })}
                     ></${ViraCheckbox}>
@@ -87,24 +87,24 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'partly checked with fill',
+            title: 'indeterminate with fill',
             render() {
                 return html`
                     <${ViraCheckbox.assign({
                         value: false,
-                        isPartlyChecked: true,
+                        isIndeterminate: true,
                         fillWhenChecked: true,
                     })}></${ViraCheckbox}>
                 `;
             },
         });
         defineExample({
-            title: 'disabled partly checked',
+            title: 'disabled indeterminate',
             render() {
                 return html`
                     <${ViraCheckbox.assign({
                         value: false,
-                        isPartlyChecked: true,
+                        isIndeterminate: true,
                         isDisabled: true,
                     })}></${ViraCheckbox}>
                 `;

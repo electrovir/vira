@@ -108,10 +108,10 @@ describe(ViraCheckbox.tagName, () => {
         assert.strictEquals(icon.instanceInputs.icon, internalLucideIcons.Check16);
     });
 
-    it('renders a dash in the checked style when partly checked', async () => {
+    it('renders a dash in the checked style when indeterminate', async () => {
         const {customCheckbox, icon} = await renderTestCheckbox({
             value: false,
-            isPartlyChecked: true,
+            isIndeterminate: true,
         });
 
         assert.isTrue(customCheckbox.classList.contains('checked'));
@@ -119,10 +119,10 @@ describe(ViraCheckbox.tagName, () => {
         assert.strictEquals(icon.instanceInputs.icon, internalLucideIcons.Minus16);
     });
 
-    it('dispatches the negation of value when a partly checked box is clicked', async () => {
+    it('dispatches the negation of value when an indeterminate box is clicked', async () => {
         const {customCheckbox, events} = await renderTestCheckbox({
             value: false,
-            isPartlyChecked: true,
+            isIndeterminate: true,
         });
 
         await testWeb.click(customCheckbox);

@@ -60,7 +60,7 @@ export type ViraCheckboxInputs = {
      * `aria-checked` to `mixed`. Takes precedence over `value` for rendering only: clicking still
      * dispatches the negation of `value`.
      */
-    isPartlyChecked: boolean;
+    isIndeterminate: boolean;
 }>;
 
 /**
@@ -228,7 +228,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         }
 
         const hasLabel = !!inputs.label || state.hasSlottedLabel;
-        const isPartlyChecked = !!inputs.isPartlyChecked;
+        const isIndeterminate = !!inputs.isIndeterminate;
 
         const labelTemplate = html`
             <span
@@ -264,7 +264,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 ${labelTemplate}
                 <span
                     class="custom-checkbox ${classMap({
-                        checked: inputs.value || isPartlyChecked,
+                        checked: inputs.value || isIndeterminate,
                         disabled: !!inputs.isDisabled,
                         error: !!inputs.hasError,
                     })}"
@@ -272,7 +272,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     aria-label=${ifDefined(
                         (check.isString(inputs.label) && inputs.label) || undefined,
                     )}
-                    aria-checked=${isPartlyChecked ? 'mixed' : inputs.value ? 'true' : 'false'}
+                    aria-checked=${isIndeterminate ? 'mixed' : inputs.value ? 'true' : 'false'}
                     aria-disabled=${inputs.isDisabled ? 'true' : 'false'}
                     tabindex=${inputs.isDisabled ? '-1' : '0'}
                     ${attributes(inputs.attributePassthrough?.['custom-checkbox'])}
@@ -280,7 +280,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     ${listenToActivate(updateValue)}
                 >
                     <${ViraIcon.assign({
-                        icon: isPartlyChecked
+                        icon: isIndeterminate
                             ? internalLucideIcons.Minus16
                             : internalLucideIcons.Check16,
                         fitContainer: true,

@@ -221,9 +221,12 @@ describe(ViraDropdown.tagName, () => {
     it('navigates and selects options with arrow keys', async () => {
         const {instance, events, findMenu} = await setupDropdownTest();
 
-        await sendKeys({
-            press: 'Tab',
-        });
+        /**
+         * Focus the trigger directly instead of pressing Tab: macOS WebKit does not Tab to buttons
+         * by default, so Tab moves focus out of the page, which marks the page inactive and makes
+         * every later popover in this file close as soon as it opens.
+         */
+        assertWrap.instanceOf(queryThroughShadow(instance, 'button'), HTMLButtonElement).focus();
         await sendKeys({
             press: 'ArrowDown',
         });
@@ -440,6 +443,11 @@ describe(ViraDropdown.tagName, () => {
     });
 
     it('contains menu overscroll so the page does not scroll', async () => {
+        /** Playwright's Windows WebKit build does not support `overscroll-behavior` at all. */
+        if (!CSS.supports('overscroll-behavior-y', 'contain')) {
+            return;
+        }
+
         const {toggle, findMenu} = await setupDropdownTest();
 
         await toggle();

@@ -1,9 +1,36 @@
 import {assert, check, waitUntil} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
-import {html} from 'element-vir';
+import {html, listen} from 'element-vir';
+import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {ViraCheckbox} from './vira-checkbox.element.js';
+import {ViraIcon} from './vira-icon.element.js';
 
 describe(ViraCheckbox.tagName, () => {
+    async function renderTestCheckbox(inputs: Parameters<typeof ViraCheckbox.assign>[0]) {
+        const valueChangeEvents: InstanceType<typeof ViraCheckbox.events.valueChange>[] = [];
+
+        const fixture = await testWeb.render(html`
+            <${ViraCheckbox.assign(inputs)}
+                ${listen(ViraCheckbox.events.valueChange, (event) => {
+                    valueChangeEvents.push(event);
+                })}
+            ></${ViraCheckbox}>
+        `);
+
+        assert.instanceOf(fixture, ViraCheckbox);
+
+        const customCheckbox = fixture.shadowRoot.querySelector('.custom-checkbox');
+        assert.instanceOf(customCheckbox, HTMLSpanElement);
+        const icon = fixture.shadowRoot.querySelector(ViraIcon.tagName);
+        assert.instanceOf(icon, ViraIcon);
+
+        return {
+            customCheckbox,
+            icon,
+            events: valueChangeEvents,
+        };
+    }
+
     it('falls back to the label input when the slot is not filled', async () => {
         const fixture = await testWeb.render(html`
             <${ViraCheckbox.assign({
@@ -69,5 +96,42 @@ describe(ViraCheckbox.tagName, () => {
             const labelText = fixture.shadowRoot.querySelector('.label-text');
             return check.isDefined(labelText) && !labelText.classList.contains('empty');
         });
+    });
+
+    it('renders a check mark when checked', async () => {
+        const {customCheckbox, icon} = await renderTestCheckbox({
+            value: true,
+        });
+
+        assert.isTrue(customCheckbox.classList.contains('checked'));
+        assert.strictEquals(customCheckbox.getAttribute('aria-checked'), 'true');
+        assert.strictEquals(icon.instanceInputs.icon, internalLucideIcons.Check16);
+    });
+
+    it('renders a dash in the checked style when indeterminate', async () => {
+        const {customCheckbox, icon} = await renderTestCheckbox({
+            value: false,
+            isIndeterminate: true,
+        });
+
+        assert.isTrue(customCheckbox.classList.contains('checked'));
+        assert.strictEquals(customCheckbox.getAttribute('aria-checked'), 'mixed');
+        assert.strictEquals(icon.instanceInputs.icon, internalLucideIcons.Minus16);
+    });
+
+    it('dispatches the negation of value when an indeterminate box is clicked', async () => {
+        const {customCheckbox, events} = await renderTestCheckbox({
+            value: false,
+            isIndeterminate: true,
+        });
+
+        await testWeb.click(customCheckbox);
+
+        assert.deepEquals(
+            events.map((event) => event.detail),
+            [
+                true,
+            ],
+        );
     });
 });

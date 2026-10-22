@@ -60,6 +60,57 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'indeterminate',
+            descriptionParagraphs: [
+                'Clicking dispatches the negation of value, so this example becomes fully checked.',
+            ],
+            state() {
+                return {
+                    checked: false,
+                    isIndeterminate: true,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.checked,
+                        isIndeterminate: state.isIndeterminate,
+                    })}
+                        ${listen(ViraCheckbox.events.valueChange, (event) => {
+                            updateState({
+                                checked: event.detail,
+                                isIndeterminate: false,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'indeterminate with fill',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        isIndeterminate: true,
+                        fillWhenChecked: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled indeterminate',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        isIndeterminate: true,
+                        isDisabled: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'error',
             state() {
                 return {

@@ -55,7 +55,15 @@ export function isTextInputActive() {
 export function isMouseEventOnScrollbar(event: Readonly<MouseEvent>): boolean {
     const target = event.composedPath()[0];
 
-    if (!(target instanceof Element)) {
+    if (
+        !(target instanceof Element) ||
+        /**
+         * Inline boxes cannot have scrollbars. Firefox still reports a nonzero scroll size for them
+         * while their client size is always 0, so without this every click on inline content (such
+         * as a `<b>` in a dropdown label) looks like a scrollbar click.
+         */
+        globalThis.getComputedStyle(target).display === 'inline'
+    ) {
         return false;
     }
 

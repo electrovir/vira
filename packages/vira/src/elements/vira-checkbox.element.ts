@@ -55,6 +55,12 @@ export type ViraCheckboxInputs = {
     fillWhenChecked: boolean;
     /** The checkbox will be filled with a form error color when it is unchecked. */
     fillWhenUnchecked: boolean;
+    /**
+     * Renders the checkbox in its checked colors with a dash instead of a check mark, and sets
+     * `aria-checked` to `mixed`. Takes precedence over `value` for rendering only: clicking still
+     * dispatches the negation of `value`.
+     */
+    isIndeterminate: boolean;
 }>;
 
 /**
@@ -222,6 +228,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         }
 
         const hasLabel = !!inputs.label || state.hasSlottedLabel;
+        const isIndeterminate = !!inputs.isIndeterminate;
 
         const labelTemplate = html`
             <span
@@ -257,7 +264,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 ${labelTemplate}
                 <span
                     class="custom-checkbox ${classMap({
-                        checked: inputs.value,
+                        checked: inputs.value || isIndeterminate,
                         disabled: !!inputs.isDisabled,
                         error: !!inputs.hasError,
                     })}"
@@ -265,7 +272,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     aria-label=${ifDefined(
                         (check.isString(inputs.label) && inputs.label) || undefined,
                     )}
-                    aria-checked=${inputs.value ? 'true' : 'false'}
+                    aria-checked=${isIndeterminate ? 'mixed' : inputs.value ? 'true' : 'false'}
                     aria-disabled=${inputs.isDisabled ? 'true' : 'false'}
                     tabindex=${inputs.isDisabled ? '-1' : '0'}
                     ${attributes(inputs.attributePassthrough?.['custom-checkbox'])}
@@ -273,7 +280,9 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     ${listenToActivate(updateValue)}
                 >
                     <${ViraIcon.assign({
-                        icon: internalLucideIcons.Check16,
+                        icon: isIndeterminate
+                            ? internalLucideIcons.Minus16
+                            : internalLucideIcons.Check16,
                         fitContainer: true,
                     })}
                         ${attributes(inputs.attributePassthrough?.[ViraIcon.tagName])}

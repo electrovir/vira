@@ -7,6 +7,7 @@ import {LucideCopyIcon} from './lucide/copy.icon.js';
 import {LucideEyeOffIcon} from './lucide/eye-off.icon.js';
 import {LucideEyeIcon} from './lucide/eye.icon.js';
 import {LucideGripVerticalIcon} from './lucide/grip-vertical.icon.js';
+import {LucideMinusIcon} from './lucide/minus.icon.js';
 import {LucidePlusIcon} from './lucide/plus.icon.js';
 import {LucideXIcon} from './lucide/x.icon.js';
 import {createSizedIcon} from './sized-icon.js';
@@ -26,6 +27,7 @@ export const internalLucideIcons = {
     Eye16: LucideEyeIcon,
     EyeOff16: LucideEyeOffIcon,
     GripVertical16: LucideGripVerticalIcon,
+    Minus16: LucideMinusIcon,
     Plus16: LucidePlusIcon,
     X16: LucideXIcon,
     X24: createSizedIcon(LucideXIcon, 24),

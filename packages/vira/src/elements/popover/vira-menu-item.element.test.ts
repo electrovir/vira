@@ -64,6 +64,44 @@ describe(ViraMenuItem.tagName, () => {
         });
     });
 
+    it('fires host click listeners once for a padding click', async () => {
+        const received = {
+            hostClick: 0,
+            contentClick: 0,
+        };
+
+        const fixture = await testWeb.render(html`
+            <${ViraMenuItem.assign({})}
+                ${listen('click', () => {
+                    received.hostClick++;
+                })}
+            >
+                <span
+                    ${listen('click', () => {
+                        received.contentClick++;
+                    })}
+                >
+                    content
+                </span>
+            </${ViraMenuItem}>
+        `);
+
+        assert.instanceOf(fixture, ViraMenuItem);
+
+        fixture.dispatchEvent(
+            new MouseEvent('click', {
+                bubbles: true,
+                composed: true,
+                cancelable: true,
+            }),
+        );
+
+        assert.deepEquals(received, {
+            hostClick: 1,
+            contentClick: 1,
+        });
+    });
+
     it('does not forward a click that already landed on the content', async () => {
         const {instance, received} = await renderMenuItemWithRawContent();
 

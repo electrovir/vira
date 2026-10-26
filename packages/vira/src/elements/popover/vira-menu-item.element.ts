@@ -206,8 +206,17 @@ export const ViraMenuItem = defineViraElement<
                 .forEach((element) => {
                     if (element instanceof HTMLElement && !event.composedPath().includes(element)) {
                         event.preventDefault();
-                        event.stopPropagation();
                         propagating[event.type] = true;
+                        /**
+                         * The original click keeps bubbling, so the forwarded click must stop at
+                         * the content. Otherwise listeners on this host or its ancestors see one
+                         * click twice. Stopping the original instead does not work: listeners a
+                         * parent template attaches to this host are registered before `init` runs,
+                         * so they have already handled the original click by now.
+                         */
+                        const removeStopListener = listenTo(element, 'click', (forwardedEvent) => {
+                            forwardedEvent.stopPropagation();
+                        });
                         const hasModifiers =
                             event instanceof MouseEvent &&
                             (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
@@ -227,6 +236,7 @@ export const ViraMenuItem = defineViraElement<
                              */
                             element.click();
                         }
+                        removeStopListener();
                         delete propagating[event.type];
                     }
                 });

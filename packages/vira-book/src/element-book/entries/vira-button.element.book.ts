@@ -51,7 +51,7 @@ const buttonVariants: {
     {
         label: 'icon on right',
         extraInputs: {
-            rightSideIcon: createSizedIcon(LucideUploadIcon, 24),
+            rightSideIcon: LucideUploadIcon,
         },
     },
     {

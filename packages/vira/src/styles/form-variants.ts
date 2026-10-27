@@ -18,6 +18,8 @@ export enum ViraColorVariant {
     Plain = 'plain',
     /** @default grey colored */
     Neutral = 'neutral',
+    /** @default light grey fill with default text color */
+    Muted = 'muted',
     /** @default red colored */
     Danger = 'danger',
     /** @default orange colored */
@@ -44,6 +46,7 @@ export const viraColorVariants = [
     ViraColorVariant.Info,
     ViraColorVariant.Plain,
     ViraColorVariant.Neutral,
+    ViraColorVariant.Muted,
     ViraColorVariant.Danger,
     ViraColorVariant.Warning,
     ViraColorVariant.Positive,
@@ -53,9 +56,9 @@ export const viraColorVariants = [
 
 /**
  * Maps themed {@link ViraColorVariant} members to the {@link ViraThemeColorName} used as their host
- * class suffix on color-aware elements (`vira-*-color-${themeColor}`). `Plain` and `Neutral` are
- * intentionally omitted: they are always special-cased by each element so their host classes stay
- * distinct from any theme color class (including `grey`).
+ * class suffix on color-aware elements (`vira-*-color-${themeColor}`). `Plain`, `Neutral`, and
+ * `Muted` are intentionally omitted: they are always special-cased by each element so their host
+ * classes stay distinct from any theme color class (including `grey`).
  *
  * @category Internal
  */

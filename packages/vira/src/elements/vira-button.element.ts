@@ -149,6 +149,30 @@ const neutralButtonColors: Record<
     [ViraEmphasis.Subtle]: buildThemedButtonColors(ViraThemeColorName.grey)[ViraEmphasis.Subtle],
 };
 
+const mutedButtonColors: Record<
+    Exclude<ViraEmphasis, ViraEmphasis.None>,
+    ButtonColorStateColors
+> = {
+    [ViraEmphasis.Standard]: {
+        idle: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+        },
+        hover: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+        },
+        active: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-non-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-non-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-non-body'].background,
+        },
+    },
+    [ViraEmphasis.Subtle]: buildThemedButtonColors(ViraThemeColorName.grey)[ViraEmphasis.Subtle],
+};
+
 /**
  * A custom button with default styling.
  *
@@ -240,6 +264,13 @@ export const ViraButton = defineViraElement<
             inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
         }) {
             return inputs.color === ViraColorVariant.Neutral;
+        },
+        'vira-button-color-muted'({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) {
+            return inputs.color === ViraColorVariant.Muted;
         },
         ...arrayToObject(
             standaloneThemeColorNames,
@@ -352,6 +383,11 @@ export const ViraButton = defineViraElement<
                     emphasisSelector,
                     colors: neutralButtonColors[emphasis],
                 });
+                const mutedStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-button-color-muted'].selector,
+                    emphasisSelector,
+                    colors: mutedButtonColors[emphasis],
+                });
                 const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                     const colors = buildThemedButtonColors(colorName)[emphasis];
                     const variantSelector = hostClasses[`vira-button-color-${colorName}`].selector;
@@ -365,6 +401,7 @@ export const ViraButton = defineViraElement<
                     ...themedStyles,
                     plainStyle,
                     neutralStyle,
+                    mutedStyle,
                     ...standaloneStyles,
                 ];
             });

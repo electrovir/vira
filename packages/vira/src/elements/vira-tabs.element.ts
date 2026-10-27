@@ -282,6 +282,13 @@ export const ViraTabs = defineViraElement<
         }) {
             return inputs.color === ViraColorVariant.Neutral;
         },
+        'vira-tabs-color-muted'({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) {
+            return inputs.color === ViraColorVariant.Muted;
+        },
         ...arrayToObject(
             standaloneThemeColorNames,
             (colorName) => {
@@ -369,6 +376,10 @@ export const ViraTabs = defineViraElement<
                 hostClasses['vira-tabs-color-neutral'].selector,
                 buildThemedTabsColors(ViraThemeColorName.grey),
             );
+            const mutedStyle = buildVariantCssRule(
+                hostClasses['vira-tabs-color-muted'].selector,
+                buildThemedTabsColors(ViraThemeColorName.grey),
+            );
             const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                 const variantSelector = hostClasses[`vira-tabs-color-${colorName}`].selector;
                 const colors = buildThemedTabsColors(colorName);
@@ -380,6 +391,7 @@ export const ViraTabs = defineViraElement<
                     ...themedStyles,
                     plainStyle,
                     neutralStyle,
+                    mutedStyle,
                     ...standaloneStyles,
                 ].join('\n'),
             );

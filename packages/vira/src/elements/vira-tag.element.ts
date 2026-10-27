@@ -149,6 +149,27 @@ const plainTagColors: Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorS
     },
 };
 
+const mutedTagColors: Record<Exclude<ViraEmphasis, ViraEmphasis.None>, TagColorStateColors> = {
+    [ViraEmphasis.Standard]: {
+        idle: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+        },
+        hover: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-body'].background,
+        },
+        active: {
+            backgroundColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+            textColor: viraTheme.colors['vira-grey-behind-fg-small-body'].foreground,
+            borderColor: viraTheme.colors['vira-grey-behind-fg-small-body'].background,
+        },
+    },
+    [ViraEmphasis.Subtle]: buildThemedTagColors(ViraThemeColorName.grey)[ViraEmphasis.Subtle],
+};
+
 const plainNotCheckedColors: TagColorStateColors = {
     idle: {
         textColor: viraTheme.colors[themeDefaultKey].foreground,
@@ -305,6 +326,13 @@ export const ViraTag = defineViraElement<
         }) {
             return inputs.color === ViraColorVariant.Neutral;
         },
+        'vira-tag-color-muted'({
+            inputs,
+        }: {
+            inputs: Readonly<PartialWithUndefined<{color: ViraColorVariant | ViraThemeColorName}>>;
+        }) {
+            return inputs.color === ViraColorVariant.Muted;
+        },
         ...arrayToObject(
             standaloneThemeColorNames,
             (colorName) => {
@@ -383,6 +411,11 @@ export const ViraTag = defineViraElement<
                     emphasisSelector,
                     colors: buildThemedTagColors(ViraThemeColorName.grey)[emphasis],
                 });
+                const mutedStyle = buildVariantCssRule({
+                    variantSelector: hostClasses['vira-tag-color-muted'].selector,
+                    emphasisSelector,
+                    colors: mutedTagColors[emphasis],
+                });
                 const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                     const colors = buildThemedTagColors(colorName)[emphasis];
                     const variantSelector = hostClasses[`vira-tag-color-${colorName}`].selector;
@@ -396,6 +429,7 @@ export const ViraTag = defineViraElement<
                     ...themedStyles,
                     plainStyle,
                     neutralStyle,
+                    mutedStyle,
                     ...standaloneStyles,
                 ];
             });
@@ -447,6 +481,10 @@ export const ViraTag = defineViraElement<
                 hostClasses['vira-tag-color-neutral'].selector,
                 buildThemedNotCheckedColors(ViraThemeColorName.grey),
             );
+            const mutedStyle = buildNotCheckedCssRule(
+                hostClasses['vira-tag-color-muted'].selector,
+                buildThemedNotCheckedColors(ViraThemeColorName.grey),
+            );
             const standaloneStyles = standaloneThemeColorNames.map((colorName) => {
                 const colors = buildThemedNotCheckedColors(colorName);
                 const variantSelector = hostClasses[`vira-tag-color-${colorName}`].selector;
@@ -458,6 +496,7 @@ export const ViraTag = defineViraElement<
                     ...themedStyles,
                     plainStyle,
                     neutralStyle,
+                    mutedStyle,
                     ...standaloneStyles,
                 ].join('\n'),
             );

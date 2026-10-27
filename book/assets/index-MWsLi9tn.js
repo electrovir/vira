@@ -38422,6 +38422,8 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
 `))}return w`
             :host {
                 display: inline-flex;
+                vertical-align: middle;
+                align-items: center;
             }
 
             ${o()}
@@ -38483,14 +38485,15 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
 
             ${t[`vira-tag-selectable`].selector} {
                 & button {
-                    padding: 0 calc(${e[`vira-tag-horizontal-padding`].value} + 5px);
-                    margin-left: calc(4px + ${e[`vira-tag-gap`].value});
+                    padding: 0 calc(${e[`vira-tag-horizontal-padding`].value} + 7px);
+                    margin-left: calc(${e[`vira-tag-gap`].value} / 2);
+                    margin-right: calc(${e[`vira-tag-gap`].value} / 2);
                 }
             }
             ${t[`vira-tag-checked`].selector} {
                 & button {
                     padding: 0 ${e[`vira-tag-horizontal-padding`].value};
-                    margin-left: 0;
+                    margin: 0;
                 }
 
                 & .selected-check {
@@ -40932,7 +40935,22 @@ ${e==null?`(no schema)`:JSON.stringify(e,void 0,4)}</pre
                                         `)}
                                 </tbody>
                             </table>
-                        `)}})}),e({title:`theme colors`,styles:w`
+                        `)}})}),e({title:`wrapping selectable tags`,styles:w`
+                .wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 4px;
+                    max-width: 300px;
+                }
+            `,state(){return{selected:[]}},render({state:e,updateState:t}){return T`
+                    <div class="wrapper">
+                        ${Ot(12,n=>T`
+                                <${a6.assign({text:`Tag ${n+1}`,size:E0.Small,isClickable:{selected:e.selected.includes(n)}})}
+                                    ${P(a6.events.toggle,r=>{t({selected:r.detail?[...e.selected,n]:e.selected.filter(e=>e!==n)})})}
+                                ></${a6}>
+                            `)}
+                    </div>
+                `}}),e({title:`theme colors`,styles:w`
                 .row {
                     display: flex;
                     flex-wrap: wrap;

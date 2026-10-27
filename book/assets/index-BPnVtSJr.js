@@ -36217,6 +36217,7 @@ Font weights to font sizes:`,JSON.stringify(mv(e.data.min),null,4)].join(`
 
             .empty-text {
                 width: 0;
+                overflow: hidden;
             }
 
             button ${q} + .text-template,

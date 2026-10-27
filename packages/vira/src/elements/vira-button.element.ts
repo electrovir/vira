@@ -492,6 +492,7 @@ export const ViraButton = defineViraElement<
 
             .empty-text {
                 width: 0;
+                overflow: hidden;
             }
 
             button ${ViraIcon} + .text-template,

@@ -518,6 +518,8 @@ export const ViraTag = defineViraElement<
         return css`
             :host {
                 display: inline-flex;
+                vertical-align: middle;
+                align-items: center;
             }
 
             ${generateSizeVariantCss()}
@@ -579,14 +581,15 @@ export const ViraTag = defineViraElement<
 
             ${hostClasses['vira-tag-selectable'].selector} {
                 & button {
-                    padding: 0 calc(${cssVars['vira-tag-horizontal-padding'].value} + 5px);
-                    margin-left: calc(4px + ${cssVars['vira-tag-gap'].value});
+                    padding: 0 calc(${cssVars['vira-tag-horizontal-padding'].value} + 7px);
+                    margin-left: calc(${cssVars['vira-tag-gap'].value} / 2);
+                    margin-right: calc(${cssVars['vira-tag-gap'].value} / 2);
                 }
             }
             ${hostClasses['vira-tag-checked'].selector} {
                 & button {
                     padding: 0 ${cssVars['vira-tag-horizontal-padding'].value};
-                    margin-left: 0;
+                    margin: 0;
                 }
 
                 & .selected-check {

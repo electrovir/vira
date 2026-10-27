@@ -1,10 +1,12 @@
 import {check} from '@augment-vir/assert';
+import {createArray} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {classMap, css, html, listen} from 'element-vir';
 import {
     viraColorVariants,
     viraEmphasisVariants,
     viraFontCssVars,
+    ViraSize,
     viraSizeVariants,
     ViraTag,
     ViraThemeColorName,
@@ -158,6 +160,53 @@ export const viraTagBookPage = defineBookPage({
                     });
                 },
             });
+        });
+
+        defineExample({
+            title: 'wrapping selectable tags',
+            styles: css`
+                .wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 4px;
+                    max-width: 300px;
+                }
+            `,
+            state() {
+                return {
+                    selected: [] as number[],
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <div class="wrapper">
+                        ${createArray(12, (index) => {
+                            return html`
+                                <${ViraTag.assign({
+                                    text: `Tag ${index + 1}`,
+                                    size: ViraSize.Small,
+                                    isClickable: {
+                                        selected: state.selected.includes(index),
+                                    },
+                                })}
+                                    ${listen(ViraTag.events.toggle, (event) => {
+                                        updateState({
+                                            selected: event.detail
+                                                ? [
+                                                      ...state.selected,
+                                                      index,
+                                                  ]
+                                                : state.selected.filter(
+                                                      (selectedIndex) => selectedIndex !== index,
+                                                  ),
+                                        });
+                                    })}
+                                ></${ViraTag}>
+                            `;
+                        })}
+                    </div>
+                `;
+            },
         });
 
         defineExample({

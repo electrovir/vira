@@ -72,6 +72,19 @@ export const ViraDropdown = defineViraElement<
         isSearchable: boolean;
         icon: ViraIconSvg;
         selectionPrefix: string;
+        /**
+         * Shown in the closed trigger instead of the selected option's label (or the "N Selected"
+         * text in multi select) whenever at least one option is selected. The placeholder is still
+         * shown when nothing is selected. When `isSearchable` is `true`, the closed search input
+         * can only show text, so it only uses a string `selectionLabel`.
+         */
+        selectionLabel: string | HtmlInterpolation;
+        /**
+         * Removes the trigger's border, background, padding, and fixed width so the closed dropdown
+         * renders as its selection text (inheriting font and color) followed by the chevron. The
+         * opened menu is unaffected.
+         */
+        isRaw: boolean;
         isDisabled: boolean;
         /**
          * When `true`, the currently selected options' labels are rendered as plain text with no
@@ -105,6 +118,11 @@ export const ViraDropdown = defineViraElement<
     }>
 >()({
     tagName: 'vira-dropdown',
+    hostClasses: {
+        'vira-dropdown-raw'({inputs}) {
+            return !!inputs.isRaw;
+        },
+    },
     testIds: [
         'hiddenOptionsHint',
         'leadingIcon',
@@ -112,172 +130,213 @@ export const ViraDropdown = defineViraElement<
         'searchInput',
         'trigger',
     ],
-    styles: css`
-        :host {
-            display: inline-flex;
-            vertical-align: middle;
-            width: 224px;
-            position: relative;
-            max-width: 100%;
-        }
+    cssVars: {
+        /** Font size of the closed trigger (and readonly value), without affecting the menu. */
+        'vira-dropdown-trigger-font-size': 'inherit',
+        /** Font weight of the closed trigger (and readonly value), without affecting the menu. */
+        'vira-dropdown-trigger-font-weight': 'inherit',
+        /** Size of the closed trigger's chevron. */
+        'vira-dropdown-trigger-icon-size': '24px',
+    },
+    styles({hostClasses, cssVars}) {
+        return css`
+            :host {
+                display: inline-flex;
+                vertical-align: middle;
+                width: 224px;
+                position: relative;
+                max-width: 100%;
+            }
 
-        ${ViraPopoverTrigger} {
-            width: 100%;
-        }
+            ${hostClasses['vira-dropdown-raw'].selector} {
+                width: auto;
+            }
 
-        .selection-display {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+            ${ViraPopoverTrigger} {
+                width: 100%;
+            }
 
-        .option-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            max-width: 100%;
-            vertical-align: bottom;
-        }
+            .selection-display {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
-        .option-icon {
-            flex-shrink: 0;
-        }
+            .option-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                max-width: 100%;
+                vertical-align: bottom;
+            }
 
-        .option-label-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+            .option-icon {
+                flex-shrink: 0;
+            }
 
-        .search-input {
-            ${noNativeFormStyles};
-            flex-grow: 1;
-            min-width: 0;
-            align-self: stretch;
-            text-overflow: ellipsis;
-            cursor: inherit;
-            user-select: text;
-            -webkit-user-select: text;
-            outline: none;
+            .option-label-text {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
-            &::placeholder {
+            .search-input {
+                ${noNativeFormStyles};
+                flex-grow: 1;
+                min-width: 0;
+                align-self: stretch;
+                text-overflow: ellipsis;
+                cursor: inherit;
+                user-select: text;
+                -webkit-user-select: text;
+                outline: none;
+
+                &::placeholder {
+                    color: inherit;
+                    opacity: 0.4;
+                }
+            }
+
+            .open .search-input {
+                cursor: text;
+            }
+
+            .dropdown-trigger:has(.search-input:focus-visible:not([disabled])) {
+                position: relative;
+
+                &::after {
+                    ${createFocusStyles({
+                        elementBorderSize: '1px',
+                        noNesting: true,
+                    })}
+                }
+            }
+
+            .trigger-icon {
+                width: ${cssVars['vira-dropdown-trigger-icon-size'].value};
+                aspect-ratio: 1;
+                align-self: flex-start;
+                will-change: transform;
+                transform: rotate(180deg);
+                transition: transform
+                    ${viraAnimationDurations['vira-interaction-animation-duration'].value} linear;
+            }
+
+            .trigger-icon-wrapper {
+                flex-grow: 1;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .open .trigger-icon {
+                transform: rotate(0);
+            }
+
+            .dropdown-trigger,
+            .readonly-value {
+                font-size: ${cssVars['vira-dropdown-trigger-font-size'].value};
+                font-weight: ${cssVars['vira-dropdown-trigger-font-weight'].value};
+            }
+
+            .dropdown-trigger {
+                ${noUserSelect};
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                display: flex;
+                gap: 8px;
+                text-align: left;
+                align-items: center;
+                min-height: ${viraSizeHeights[ViraSize.Medium]}px;
+                padding: 0 3px 0 10px;
+                border-radius: ${viraFormCssVars['vira-form-radius'].value};
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+            }
+
+            .dropdown-wrapper {
+                display: flex;
+                width: 100%;
+            }
+
+            .has-error .dropdown-trigger {
+                border-color: ${viraFormCssVars['vira-form-error-color'].value};
+            }
+
+            ${hostClasses['vira-dropdown-raw'].selector} {
+                & .dropdown-trigger {
+                    border: none;
+                    background: none;
+                    border-radius: 0;
+                    padding: 0;
+                    min-height: 0;
+                    color: inherit;
+                }
+
+                & .has-error .dropdown-trigger {
+                    color: ${viraFormCssVars['vira-form-error-color'].value};
+                }
+
+                & .trigger-icon-wrapper {
+                    flex-grow: 0;
+                }
+            }
+
+            .option-group-label,
+            .no-options,
+            .hidden-options-hint {
+                ${noUserSelect};
+                text-align: left;
+            }
+
+            .option-group-label {
+                color: ${viraTheme.colors['vira-grey-foreground-placeholder'].foreground.value};
+                padding: 8px 12px 4px
+                    calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
+                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+            }
+
+            .no-options,
+            .hidden-options-hint {
+                cursor: default;
+                opacity: 0.6;
+                /* Aligns with the label text of each ViraMenuItem, past its check icon. */
+                padding: 8px 12px 8px
+                    calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
+            }
+
+            ${ViraMenuItem}.option-group-label {
                 color: inherit;
+                padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
+                ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
+            }
+
+            .readonly-value {
+                overflow-wrap: anywhere;
+            }
+
+            .using-placeholder {
                 opacity: 0.4;
             }
-        }
 
-        .open .search-input {
-            cursor: text;
-        }
+            label {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 2px;
+                width: 100%;
+                max-width: 100%;
 
-        .dropdown-trigger:has(.search-input:focus-visible:not([disabled])) {
-            position: relative;
-
-            &::after {
-                ${createFocusStyles({
-                    elementBorderSize: '1px',
-                    noNesting: true,
-                })}
+                & .dropdown-label {
+                    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+                    text-align: left;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                }
             }
-        }
-
-        .trigger-icon {
-            width: 24px;
-            aspect-ratio: 1;
-            align-self: flex-start;
-            will-change: transform;
-            transform: rotate(180deg);
-            transition: transform
-                ${viraAnimationDurations['vira-interaction-animation-duration'].value} linear;
-        }
-
-        .trigger-icon-wrapper {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .open .trigger-icon {
-            transform: rotate(0);
-        }
-
-        .dropdown-trigger {
-            ${noUserSelect};
-            border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
-            height: 100%;
-            width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            gap: 8px;
-            text-align: left;
-            align-items: center;
-            min-height: ${viraSizeHeights[ViraSize.Medium]}px;
-            padding: 0 3px 0 10px;
-            border-radius: ${viraFormCssVars['vira-form-radius'].value};
-            background-color: ${viraFormCssVars['vira-form-background-color'].value};
-            color: ${viraFormCssVars['vira-form-foreground-color'].value};
-        }
-
-        .dropdown-wrapper {
-            display: flex;
-            width: 100%;
-        }
-
-        .has-error .dropdown-trigger {
-            border-color: ${viraFormCssVars['vira-form-error-color'].value};
-        }
-
-        .option-group-label,
-        .no-options,
-        .hidden-options-hint {
-            ${noUserSelect};
-            text-align: left;
-        }
-
-        .option-group-label {
-            color: ${viraTheme.colors['vira-grey-foreground-placeholder'].foreground.value};
-            padding: 8px 12px 4px calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
-            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-        }
-
-        .no-options,
-        .hidden-options-hint {
-            cursor: default;
-            opacity: 0.6;
-            /* Aligns with the label text of each ViraMenuItem, past its check icon. */
-            padding: 8px 12px 8px
-                calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
-        }
-
-        ${ViraMenuItem}.option-group-label {
-            padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
-            ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
-        }
-
-        .readonly-value {
-            overflow-wrap: anywhere;
-        }
-
-        .using-placeholder {
-            opacity: 0.4;
-        }
-
-        label {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 2px;
-            width: 100%;
-            max-width: 100%;
-
-            & .dropdown-label {
-                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-                text-align: left;
-                flex-shrink: 0;
-                flex-wrap: wrap;
-            }
-        }
-    `,
+        `;
+    },
     events: {
         /** Emits all currently selected values. */
         selectedValuesChange: defineElementEvent<string[]>(),
@@ -332,9 +391,11 @@ export const ViraDropdown = defineViraElement<
 
         const selectionDisplay = shouldUsePlaceholder
             ? inputs.placeholder || ''
-            : inputs.isMultiSelect && selectedOptions.length > 1
-              ? `${selectedOptions.length} Selected`
-              : selectedOptions[0]?.label || '';
+            : inputs.selectionLabel && check.isString(inputs.selectionLabel)
+              ? inputs.selectionLabel
+              : inputs.isMultiSelect && selectedOptions.length > 1
+                ? `${selectedOptions.length} Selected`
+                : selectedOptions[0]?.label || '';
 
         function renderOptionLabel(option: Readonly<ViraDropdownOption>) {
             return option.icon || option.labelTemplate
@@ -357,9 +418,12 @@ export const ViraDropdown = defineViraElement<
                 : option.label;
         }
 
-        const selectionTemplate = check.isLengthExactly(selectedOptions, 1)
-            ? renderOptionLabel(selectedOptions[0])
-            : selectionDisplay;
+        const selectionTemplate =
+            inputs.selectionLabel && !shouldUsePlaceholder
+                ? inputs.selectionLabel
+                : check.isLengthExactly(selectedOptions, 1)
+                  ? renderOptionLabel(selectedOptions[0])
+                  : selectionDisplay;
 
         function selectOption(option: Readonly<ViraDropdownOption>) {
             const newSelectedValues = inputs.isMultiSelect
@@ -459,15 +523,21 @@ export const ViraDropdown = defineViraElement<
             });
         }
 
+        function isGroupSelected(group: Readonly<ViraDropdownOptionGroup>) {
+            const enabledGroupOptions = group.options.filter((option) => !option.disabled);
+
+            return (
+                !!enabledGroupOptions.length &&
+                enabledGroupOptions.every((option) => selectedOptions.includes(option))
+            );
+        }
+
         function toggleGroup(group: Readonly<ViraDropdownOptionGroup>) {
             const enabledGroupOptions = group.options.filter((option) => !option.disabled);
-            const isGroupSelected = enabledGroupOptions.every((option) => {
-                return selectedOptions.includes(option);
-            });
 
             dispatch(
                 new events.selectedValuesChange({
-                    detail: (isGroupSelected
+                    detail: (isGroupSelected(group)
                         ? selectedOptions.filter((option) => !enabledGroupOptions.includes(option))
                         : [
                               ...selectedOptions,
@@ -484,8 +554,7 @@ export const ViraDropdown = defineViraElement<
             return inputs.isMultiSelect
                 ? html`
                       <${ViraMenuItem.assign({
-                          disablePointerStyles: true,
-                          hideIcon: true,
+                          selected: isGroupSelected(group),
                       })}
                           class="option-group-label"
                           ${state.navController ? nav(state.navController) : nothing}

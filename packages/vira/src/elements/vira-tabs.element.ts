@@ -147,6 +147,7 @@ function renderGroupedContent(
     const clusters = buildClusters(tabList);
     return clusters.map((cluster, clusterIndex) => {
         const previousCluster = clusters[clusterIndex - 1];
+        const nextCluster = clusters[clusterIndex + 1];
         const dividerTemplate =
             previousCluster && previousCluster.group != undefined && cluster.group != undefined
                 ? html`
@@ -157,7 +158,14 @@ function renderGroupedContent(
             cluster.group == undefined
                 ? nothing
                 : html`
-                      <span class="tab-group-label">${cluster.group}</span>
+                      <span
+                          class=${classMap({
+                              'tab-group-label': true,
+                              truncated: nextCluster?.group != undefined,
+                          })}
+                      >
+                          ${cluster.group}
+                      </span>
                   `;
         return html`
             ${dividerTemplate}
@@ -612,10 +620,19 @@ export const ViraTabs = defineViraElement<
             }
 
             .tab-group-label {
+                box-sizing: border-box;
+                width: 0;
+                min-width: 100%;
+                white-space: nowrap;
                 font-size: 10px;
                 font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
                 padding: 6px 12px 4px;
                 color: ${viraTheme.colors['vira-grey-foreground-header'].foreground.value};
+
+                &.truncated {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
 
             .tab-cluster-divider {
@@ -807,24 +824,19 @@ export const ViraTabs = defineViraElement<
             const tabWidths = tabElements.map((element) => element.getBoundingClientRect().width);
 
             /**
-             * In grouped mode a partially-shown cluster still renders its group label and its
-             * leading divider, so its inline width is `max(labelWidth, shownTabsWidth)` rather than
-             * a bare sum of tab widths. Capture each tab's cluster geometry (in tab order) so the
-             * inline width for any leading count can be derived from what is actually rendered.
+             * In grouped mode a partially-shown cluster still renders its leading divider, so its
+             * inline width is not a bare sum of tab widths. Capture each tab's cluster geometry (in
+             * tab order) so the inline width for any leading count can be derived from what is
+             * actually rendered.
              */
             const clusterElements = Array.from(mirrorElement.querySelectorAll('.tab-cluster'));
             const containerLeft = mirrorElement.getBoundingClientRect().left;
             const tabClusterInfo = clusterElements.flatMap((clusterElement) => {
                 const clusterLeft = clusterElement.getBoundingClientRect().left - containerLeft;
-                const labelElement = clusterElement.querySelector('.tab-group-label');
-                const clusterLabelWidth = labelElement
-                    ? labelElement.getBoundingClientRect().width
-                    : 0;
                 return Array.from(clusterElement.querySelectorAll('.tab-item')).map(
                     (tabElement, indexInCluster) => {
                         return {
                             clusterLeft,
-                            clusterLabelWidth,
                             indexInCluster,
                             width: tabElement.getBoundingClientRect().width,
                         };
@@ -847,10 +859,7 @@ export const ViraTabs = defineViraElement<
                 const inlineTabsInLastCluster = tabClusterInfo
                     .slice(count - 1 - lastInfo.indexInCluster, count)
                     .reduce((sum, info) => sum + info.width, 0);
-                return (
-                    lastInfo.clusterLeft +
-                    Math.max(lastInfo.clusterLabelWidth, inlineTabsInLastCluster)
-                );
+                return lastInfo.clusterLeft + inlineTabsInLastCluster;
             }
 
             const totalWidth = inlineWidthForCount(tabCount);

@@ -396,6 +396,47 @@ export const viraTabsBookPage = defineBookPage({
         });
 
         defineExample({
+            title: 'grouped tabs with a label wider than its tabs',
+            styles: css`
+                :host {
+                    width: 700px;
+                    border: 1px solid
+                        ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: [
+                            {
+                                label: 'Overview',
+                                paths: mockPathTree.paths.children.tab1,
+                                group: 'General',
+                            },
+                            {
+                                label: 'Details',
+                                paths: mockPathTree.paths.children.tab2,
+                                group: 'General',
+                            },
+                            {
+                                label: 'Chat',
+                                paths: mockPathTree.paths.children.tab3,
+                                group: 'Communications',
+                            },
+                            {
+                                label: 'History',
+                                paths: mockPathTree.paths.children.tab4,
+                            },
+                        ],
+                        router: mockRouter,
+                        currentRoute: selectedRoute,
+                        color: ViraColorVariant.Plain,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
             title: 'grouped overflow (selected in a collapsed cluster)',
             styles: css`
                 :host {

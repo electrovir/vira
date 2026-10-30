@@ -302,6 +302,48 @@ describe(buildClusters.name, () => {
 });
 
 describe(ViraTabs.tagName, () => {
+    it('leaves no gap after a grouped tab whose group label is wider than it', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraTabs.assign({
+                tabs: [
+                    {
+                        label: 'Ask',
+                        paths: mockPathTree.paths.children.ask,
+                        group: 'A much longer group label',
+                    },
+                    {
+                        label: 'Settings',
+                        paths: mockPathTree.paths.children.settings,
+                    },
+                ],
+                router: mockRouter,
+                currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+            })}></${ViraTabs}>
+        `);
+
+        assert.instanceOf(fixture, ViraTabs);
+
+        const [
+            groupedTab,
+            nextTab,
+        ] = assertWrap.isLengthExactly(
+            Array.from(
+                fixture.shadowRoot.querySelectorAll('.tabs-container:not(.tabs-measure) .tab-item'),
+            ),
+            2,
+        );
+        const groupLabel = assertWrap.instanceOf(
+            fixture.shadowRoot.querySelector('.tabs-container:not(.tabs-measure) .tab-group-label'),
+            HTMLElement,
+        );
+
+        assert.isAbove(groupLabel.scrollWidth, groupedTab.getBoundingClientRect().width);
+        assert.isAtMost(
+            nextTab.getBoundingClientRect().left - groupedTab.getBoundingClientRect().right,
+            1,
+        );
+    });
+
     it('renders all tabs inline and shows no overflow menu when they fit', async () => {
         const fixture = await testWeb.render(html`
             <${ViraTabs.assign({

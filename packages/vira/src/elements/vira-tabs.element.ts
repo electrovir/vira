@@ -420,6 +420,12 @@ export const ViraTabs = defineViraElement<
                 position: relative;
                 margin: 0;
                 padding: 0;
+                font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
+                font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
+
+                & ${ViraButton} {
+                    font: inherit;
+                }
             }
 
             .tabs-measure {
@@ -462,8 +468,6 @@ export const ViraTabs = defineViraElement<
                 text-align: center;
                 position: relative;
                 color: ${cssVars['vira-tabs-inactive-color'].value};
-                font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
-                font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
                 text-decoration: none;
                 ${createFocusStyles({
                     renderInside: true,

@@ -1,4 +1,5 @@
 import {assert, check, waitUntil} from '@augment-vir/assert';
+import {awaitedBlockingMap} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html, listen} from 'element-vir';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
@@ -8,11 +9,17 @@ import {ViraIcon} from './vira-icon.element.js';
 describe(ViraCheckbox.tagName, () => {
     async function renderTestCheckbox(inputs: Parameters<typeof ViraCheckbox.assign>[0]) {
         const valueChangeEvents: InstanceType<typeof ViraCheckbox.events.valueChange>[] = [];
+        const nullableValueChangeEvents: InstanceType<
+            typeof ViraCheckbox.events.nullableValueChange
+        >[] = [];
 
         const fixture = await testWeb.render(html`
             <${ViraCheckbox.assign(inputs)}
                 ${listen(ViraCheckbox.events.valueChange, (event) => {
                     valueChangeEvents.push(event);
+                })}
+                ${listen(ViraCheckbox.events.nullableValueChange, (event) => {
+                    nullableValueChangeEvents.push(event);
                 })}
             ></${ViraCheckbox}>
         `);
@@ -28,6 +35,7 @@ describe(ViraCheckbox.tagName, () => {
             customCheckbox,
             icon,
             events: valueChangeEvents,
+            nullableEvents: nullableValueChangeEvents,
         };
     }
 
@@ -127,6 +135,125 @@ describe(ViraCheckbox.tagName, () => {
 
         await testWeb.click(customCheckbox);
 
+        assert.deepEquals(
+            events.map((event) => event.detail),
+            [
+                true,
+            ],
+        );
+    });
+
+    it('renders an X mark in the blocked style when blocked', async () => {
+        const {customCheckbox, icon} = await renderTestCheckbox({
+            value: false,
+            allowBlocked: true,
+        });
+
+        assert.deepEquals(
+            {
+                isBlocked: customCheckbox.classList.contains('blocked'),
+                isChecked: customCheckbox.classList.contains('checked'),
+                ariaChecked: customCheckbox.getAttribute('aria-checked'),
+            },
+            {
+                isBlocked: true,
+                isChecked: false,
+                ariaChecked: 'false',
+            },
+        );
+        assert.strictEquals(icon.instanceInputs.icon, internalLucideIcons.X16);
+    });
+
+    it('marks an unset tri-state box as mixed', async () => {
+        const {customCheckbox} = await renderTestCheckbox({
+            value: null,
+            allowBlocked: true,
+        });
+
+        assert.deepEquals(
+            {
+                isBlocked: customCheckbox.classList.contains('blocked'),
+                isChecked: customCheckbox.classList.contains('checked'),
+                ariaChecked: customCheckbox.getAttribute('aria-checked'),
+            },
+            {
+                isBlocked: false,
+                isChecked: false,
+                ariaChecked: 'mixed',
+            },
+        );
+    });
+
+    it('cycles empty, checked, then blocked when blocking is allowed', async () => {
+        const dispatched = await awaitedBlockingMap(
+            [
+                null,
+                true,
+                false,
+            ],
+            async (value) => {
+                const {customCheckbox, events, nullableEvents} = await renderTestCheckbox({
+                    value,
+                    allowBlocked: true,
+                });
+
+                await testWeb.click(customCheckbox);
+
+                assert.isEmpty(events);
+                return nullableEvents.map((event) => event.detail);
+            },
+        );
+
+        assert.deepEquals(dispatched, [
+            [
+                true,
+            ],
+            [
+                false,
+            ],
+            [
+                null,
+            ],
+        ]);
+    });
+
+    it('cycles a tri-state box from the keyboard', async () => {
+        const {customCheckbox, nullableEvents} = await renderTestCheckbox({
+            value: null,
+            allowBlocked: true,
+        });
+
+        customCheckbox.focus();
+        await testWeb.typeText(' ');
+
+        assert.deepEquals(
+            nullableEvents.map((event) => event.detail),
+            [
+                true,
+            ],
+        );
+    });
+
+    it('does not cycle a disabled tri-state box', async () => {
+        const {customCheckbox, nullableEvents} = await renderTestCheckbox({
+            value: null,
+            allowBlocked: true,
+            isDisabled: true,
+        });
+
+        await testWeb.click(customCheckbox);
+
+        assert.isEmpty(nullableEvents);
+    });
+
+    it('only dispatches valueChange without allowBlocked', async () => {
+        const {customCheckbox, events, nullableEvents} = await renderTestCheckbox({
+            value: false,
+        });
+
+        await testWeb.click(customCheckbox);
+
+        assert.isEmpty(nullableEvents);
         assert.deepEquals(
             events.map((event) => event.detail),
             [

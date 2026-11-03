@@ -38,30 +38,47 @@ export type ViraCheckboxInnerElements =
  *
  * @category Internal
  */
-export type ViraCheckboxInputs = {
-    value: boolean;
-} & PartialWithUndefined<{
-    stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
-    attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
-    isDisabled: boolean;
-    /**
-     * Label for the checkbox. Used as the fallback when the `vira-checkbox-label` slot is not
-     * filled.
-     */
-    label: string | HtmlInterpolation;
-    hasError: boolean;
-    useHorizontalLabel: boolean;
-    /** The checkbox will be filled with a form selection color when it is checked. */
-    fillWhenChecked: boolean;
-    /** The checkbox will be filled with a form error color when it is unchecked. */
-    fillWhenUnchecked: boolean;
-    /**
-     * Renders the checkbox in its checked colors with a dash instead of a check mark, and sets
-     * `aria-checked` to `mixed`. Takes precedence over `value` for rendering only: clicking still
-     * dispatches the negation of `value`.
-     */
-    isIndeterminate: boolean;
-}>;
+export type ViraCheckboxInputs = (
+    | {
+          value: boolean;
+          allowBlocked?: false | undefined;
+      }
+    | {
+          /**
+           * `true` renders a check mark, `false` renders an X mark (blocked), and `null` renders an
+           * empty box.
+           */
+          value: boolean | null;
+          /**
+           * Enables a third "blocked" state. Clicking cycles empty (`null`), checked (`true`), and
+           * blocked (`false`), in that order, and dispatches `nullableValueChange` instead of
+           * `valueChange`.
+           */
+          allowBlocked: true;
+      }
+) &
+    PartialWithUndefined<{
+        stylePassthrough: Partial<Record<ViraCheckboxInnerElements, CSSResult>>;
+        attributePassthrough: Partial<Record<ViraCheckboxInnerElements, AttributeValues>>;
+        isDisabled: boolean;
+        /**
+         * Label for the checkbox. Used as the fallback when the `vira-checkbox-label` slot is not
+         * filled.
+         */
+        label: string | HtmlInterpolation;
+        hasError: boolean;
+        useHorizontalLabel: boolean;
+        /** The checkbox will be filled with a form selection color when it is checked. */
+        fillWhenChecked: boolean;
+        /** The checkbox will be filled with a form error color when it is unchecked. */
+        fillWhenUnchecked: boolean;
+        /**
+         * Renders the checkbox in its checked colors with a dash instead of a check mark, and sets
+         * `aria-checked` to `mixed`. Takes precedence over `value` for rendering only: clicking
+         * still dispatches the negation of `value`.
+         */
+        isIndeterminate: boolean;
+    }>;
 
 /**
  * A custom checkbox.
@@ -187,10 +204,16 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     elementBorderSize: '1px',
                 })}
 
-                &.checked {
+                &.checked,
+                &.blocked {
                     & ${ViraIcon} {
                         opacity: 1;
                     }
+                }
+
+                &.blocked {
+                    color: ${viraFormCssVars['vira-form-error-color'].value};
+                    border-color: ${viraFormCssVars['vira-form-error-color'].value};
                 }
 
                 &.error {
@@ -214,11 +237,24 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
         `;
     },
     events: {
+        /** Not dispatched when `allowBlocked` is set. */
         valueChange: defineElementEvent<boolean>(),
+        /** Only dispatched when `allowBlocked` is set. */
+        nullableValueChange: defineElementEvent<boolean | null>(),
     },
     render({inputs, dispatch, events, slotNames, state, updateState}) {
         function updateValue(this: void) {
-            if (!inputs.isDisabled) {
+            if (inputs.isDisabled) {
+                return;
+            }
+
+            if (inputs.allowBlocked) {
+                dispatch(
+                    new events.nullableValueChange({
+                        detail: inputs.value == undefined ? true : inputs.value ? false : null,
+                    }),
+                );
+            } else {
                 dispatch(
                     new events.valueChange({
                         detail: !inputs.value,
@@ -229,6 +265,13 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
 
         const hasLabel = !!inputs.label || state.hasSlottedLabel;
         const isIndeterminate = !!inputs.isIndeterminate;
+        const isBlocked = !isIndeterminate && !!inputs.allowBlocked && inputs.value === false;
+        const ariaChecked =
+            isIndeterminate || (inputs.allowBlocked && inputs.value == undefined)
+                ? 'mixed'
+                : inputs.value
+                  ? 'true'
+                  : 'false';
 
         const labelTemplate = html`
             <span
@@ -264,7 +307,8 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 ${labelTemplate}
                 <span
                     class="custom-checkbox ${classMap({
-                        checked: inputs.value || isIndeterminate,
+                        checked: !!inputs.value || isIndeterminate,
+                        blocked: isBlocked,
                         disabled: !!inputs.isDisabled,
                         error: !!inputs.hasError,
                     })}"
@@ -272,7 +316,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     aria-label=${ifDefined(
                         (check.isString(inputs.label) && inputs.label) || undefined,
                     )}
-                    aria-checked=${isIndeterminate ? 'mixed' : inputs.value ? 'true' : 'false'}
+                    aria-checked=${ariaChecked}
                     aria-disabled=${inputs.isDisabled ? 'true' : 'false'}
                     tabindex=${inputs.isDisabled ? '-1' : '0'}
                     ${attributes(inputs.attributePassthrough?.['custom-checkbox'])}
@@ -282,7 +326,9 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                     <${ViraIcon.assign({
                         icon: isIndeterminate
                             ? internalLucideIcons.Minus16
-                            : internalLucideIcons.Check16,
+                            : isBlocked
+                              ? internalLucideIcons.X16
+                              : internalLucideIcons.Check16,
                         fitContainer: true,
                     })}
                         ${attributes(inputs.attributePassthrough?.[ViraIcon.tagName])}

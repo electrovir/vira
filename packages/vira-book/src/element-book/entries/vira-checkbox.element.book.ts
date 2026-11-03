@@ -111,6 +111,59 @@ export const viraCheckboxBookPage = defineBookPage({
             },
         });
         defineExample({
+            title: 'allow blocked',
+            descriptionParagraphs: [
+                'Clicking cycles empty (null), checked (true), and blocked (false).',
+            ],
+            state(): {
+                value: boolean | null;
+            } {
+                return {
+                    value: null,
+                };
+            },
+            render({state, updateState}) {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: state.value,
+                        allowBlocked: true,
+                        label: `value: ${String(state.value)}`,
+                        useHorizontalLabel: true,
+                    })}
+                        ${listen(ViraCheckbox.events.nullableValueChange, (event) => {
+                            updateState({
+                                value: event.detail,
+                            });
+                        })}
+                    ></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'blocked with fill',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        allowBlocked: true,
+                        fillWhenUnchecked: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'disabled blocked',
+            render() {
+                return html`
+                    <${ViraCheckbox.assign({
+                        value: false,
+                        allowBlocked: true,
+                        isDisabled: true,
+                    })}></${ViraCheckbox}>
+                `;
+            },
+        });
+        defineExample({
             title: 'error',
             state() {
                 return {

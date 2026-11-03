@@ -126,6 +126,11 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 box-sizing: border-box;
                 ${viraIconCssVars['vira-icon-stroke-width'].name}: 2px;
                 opacity: 0;
+                /*
+                    Each click swaps the icon's svg. When the pressed element is swapped out,
+                    WebKit leaves :active stuck on the checkbox after the mouse leaves.
+                */
+                pointer-events: none;
             }
 
             ${hostClasses['vira-checkbox-filled-checked'].selector} {

@@ -50,9 +50,11 @@ const mockGroupedOptions: ReadonlyArray<Readonly<ViraDropdownOptionGroup>> = [
 
 async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
     const events: {
+        createOption: string[];
         openChange: boolean[];
         selectedValuesChange: string[][];
     } = {
+        createOption: [],
         openChange: [],
         selectedValuesChange: [],
     };
@@ -67,6 +69,9 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
                 selected: [],
                 ...inputs,
             })}
+                ${listen(ViraDropdown.events.createOption, (event) => {
+                    events.createOption.push(event.detail);
+                })}
                 ${listen(ViraDropdown.events.openChange, (event) => {
                     events.openChange.push(event.detail);
                 })}
@@ -933,6 +938,235 @@ describe(ViraDropdown.tagName, () => {
             assert.deepEquals(events.selectedValuesChange, [
                 ['2'],
             ]);
+        });
+
+        describe('isCreatable', () => {
+            async function typeIntoSearch(
+                setup: Awaited<ReturnType<typeof setupSearchTest>>,
+                text: string,
+            ) {
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+                await testWeb.typeText(text);
+            }
+
+            it('does nothing without isCreatable', async () => {
+                const setup = await setupSearchTest();
+
+                await typeIntoSearch(setup, 'zzz');
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('does not show the create option without search text', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('shows the create option first when nothing matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, '  Option D ');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(
+                        assertWrap.instanceOf(setup.queryByTestId.createOption(), HTMLElement),
+                    ),
+                    'Create "Option D"',
+                );
+                assert.strictEquals(setup.readOptionLabels()[0], 'Create "Option D"');
+            });
+
+            it('shows the create option above partial matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'Option');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+
+                assert.deepEquals(setup.readOptionLabels(), [
+                    'Create "Option"',
+                    'Option A',
+                    'Option B',
+                    'Option C',
+                ]);
+            });
+
+            it('hides the create option when a label matches exactly, ignoring case', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'option b');
+                await waitUntil.deepEquals(
+                    [
+                        'Option B',
+                    ],
+                    setup.readOptionLabels,
+                );
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('uses createOptionLabel', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    createOptionLabel(searchText) {
+                        return `Add ${searchText}!`;
+                    },
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(
+                        assertWrap.instanceOf(setup.queryByTestId.createOption(), HTMLElement),
+                    ),
+                    'Add zzz!',
+                );
+            });
+
+            it('replaces noOptionsText', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    noOptionsText: 'Nothing here',
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(assertWrap.isDefined(setup.findMenu())).includes(
+                        'Nothing here',
+                    ),
+                    false,
+                );
+            });
+
+            it('emits createOption on click without changing the selection', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, ' New thing ');
+                await testWeb.click(
+                    assertWrap.instanceOf(
+                        await waitUntil.isTruthy(setup.queryByTestId.createOption),
+                        HTMLElement,
+                    ),
+                );
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'New thing',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('emits createOption on Enter when nothing matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'zzz',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('selects the first match on Enter when there are matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'opt');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.isEmpty(setup.events.createOption);
+                assert.deepEquals(setup.events.selectedValuesChange, [
+                    ['0'],
+                ]);
+            });
+
+            it('can be reached and chosen with the keyboard', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'opt');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Tab',
+                });
+                await waitForAnimationFrame();
+
+                assert.strictEquals(
+                    extractElementText(assertWrap.isDefined(findFocusedMenuItem(setup.instance))),
+                    'Create "opt"',
+                );
+
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'opt',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('closes a multi select menu after creating', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    isMultiSelect: true,
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+                await testWeb.click(
+                    assertWrap.instanceOf(
+                        await waitUntil.isTruthy(setup.queryByTestId.createOption),
+                        HTMLElement,
+                    ),
+                );
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'zzz',
+                ]);
+            });
+
+            it('is ignored when not searchable', async () => {
+                const {toggle, queryByTestId} = await setupDropdownTest({
+                    isCreatable: true,
+                });
+
+                await toggle();
+
+                assert.isNullish(queryByTestId.createOption());
+            });
         });
 
         describe('maxShownOptions', () => {

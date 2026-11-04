@@ -102,10 +102,29 @@ export const ViraDropdown = defineViraElement<
          * @default hiddenCount => `+${hiddenCount}, type to narrow your search`
          */
         hiddenOptionsText: (hiddenCount: number) => string;
+        /**
+         * Only applies when `isSearchable` is `true`. When set, a "create" option is shown at the
+         * top of the menu whenever the trimmed search text is not empty and does not match any
+         * option's label (case insensitive). Choosing it emits the `createOption` event with the
+         * trimmed search text, closes the menu, and does not change the selection: it is up to the
+         * host to add the new option to `options` and select it.
+         *
+         * Pressing Enter in the search input also creates the option, but only when no enabled
+         * option matches the search text; otherwise Enter selects the first match. The create
+         * option is always reachable with the arrow keys or Tab.
+         */
+        isCreatable: boolean;
+        /**
+         * Creates the text of the create option shown by `isCreatable`.
+         *
+         * @default searchText => `Create "${searchText}"`
+         */
+        createOptionLabel: (searchText: string) => string;
     }>
 >()({
     tagName: 'vira-dropdown',
     testIds: [
+        'createOption',
         'hiddenOptionsHint',
         'leadingIcon',
         'prefixText',
@@ -283,6 +302,11 @@ export const ViraDropdown = defineViraElement<
         selectedValuesChange: defineElementEvent<string[]>(),
         /** `true` when the popover just opened, `false` when it just closed. */
         openChange: defineElementEvent<boolean>(),
+        /**
+         * Emits the trimmed search text when the create option (see `isCreatable`) is chosen.
+         * `selected` is not changed.
+         */
+        createOption: defineElementEvent<string>(),
     },
     state() {
         return {
@@ -445,12 +469,31 @@ export const ViraDropdown = defineViraElement<
                 return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
             }).length;
 
+        const trimmedSearchText = state.searchText.trim();
+        const lowercaseSearchText = trimmedSearchText.toLowerCase();
+        const shouldShowCreateOption =
+            !!inputs.isSearchable &&
+            !!inputs.isCreatable &&
+            !!trimmedSearchText &&
+            !flatOptions.some(
+                (option) => option.label.trim().toLowerCase() === lowercaseSearchText,
+            );
+
         function findSearchInput() {
             const searchInput = host.shadowRoot.querySelector('.search-input');
 
             return searchInput instanceof HTMLInputElement ? searchInput : undefined;
         }
 
+        function createOption() {
+            dispatch(
+                new events.createOption({
+                    detail: trimmedSearchText,
+                }),
+            );
+            /** Multi select keeps the popover open after interactions, so close it explicitly. */
+            state.popoverManager?.hide();
+        }
         function clearSearch(searchInput: HTMLInputElement) {
             /** Set directly because the `.value` binding skips values it has already committed. */
             searchInput.value = '';
@@ -502,25 +545,28 @@ export const ViraDropdown = defineViraElement<
         }
 
         /** Drag-select actions in the same order as the rendered menu items. */
-        const menuItemActions = shownOptions.flatMap((entry) => {
-            const options = isViraDropdownOptionGroup(entry) ? entry.options : [entry];
-            const optionActions = options.map((option) => {
-                return option.disabled
-                    ? undefined
-                    : () => {
-                          selectOption(option);
-                      };
-            });
+        const menuItemActions = [
+            ...(shouldShowCreateOption ? [createOption] : []),
+            ...shownOptions.flatMap((entry) => {
+                const options = isViraDropdownOptionGroup(entry) ? entry.options : [entry];
+                const optionActions = options.map((option) => {
+                    return option.disabled
+                        ? undefined
+                        : () => {
+                              selectOption(option);
+                          };
+                });
 
-            return isViraDropdownOptionGroup(entry) && inputs.isMultiSelect
-                ? [
-                      () => {
-                          toggleGroup(entry);
-                      },
-                      ...optionActions,
-                  ]
-                : optionActions;
-        });
+                return isViraDropdownOptionGroup(entry) && inputs.isMultiSelect
+                    ? [
+                          () => {
+                              toggleGroup(entry);
+                          },
+                          ...optionActions,
+                      ]
+                    : optionActions;
+            }),
+        ];
 
         function renderOptionEntries(options: ReadonlyArray<Readonly<ViraDropdownOption>>) {
             return renderMenuItemEntries(
@@ -539,7 +585,8 @@ export const ViraDropdown = defineViraElement<
         }
 
         const isMenuShown =
-            state.isOpen && (!!filteredFlatOptions.length || !!inputs.noOptionsText);
+            state.isOpen &&
+            (!!filteredFlatOptions.length || !!inputs.noOptionsText || shouldShowCreateOption);
 
         const menuTemplate = html`
             <${ViraMenu.assign({
@@ -570,6 +617,21 @@ export const ViraDropdown = defineViraElement<
                     }
                 })}
             >
+                ${shouldShowCreateOption
+                    ? html`
+                          <${ViraMenuItem}
+                              class="create-option"
+                              ${testId(testIds.createOption)}
+                              ${state.navController ? nav(state.navController) : nothing}
+                              ${listen('click', () => {
+                                  createOption();
+                              })}
+                          >
+                              ${inputs.createOptionLabel?.(trimmedSearchText) ??
+                              `Create "${trimmedSearchText}"`}
+                          </${ViraMenuItem}>
+                      `
+                    : nothing}
                 ${filteredFlatOptions.length
                     ? shownOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)
@@ -578,9 +640,11 @@ export const ViraDropdown = defineViraElement<
                                 `
                               : renderOptionEntries([entry]);
                       })
-                    : html`
-                          <div class="no-options">${inputs.noOptionsText}</div>
-                      `}
+                    : shouldShowCreateOption || !inputs.noOptionsText
+                      ? nothing
+                      : html`
+                            <div class="no-options">${inputs.noOptionsText}</div>
+                        `}
                 ${hiddenOptionsCount
                     ? html`
                           <div
@@ -768,6 +832,10 @@ export const ViraDropdown = defineViraElement<
                                           );
 
                                           if (!firstOption) {
+                                              if (shouldShowCreateOption) {
+                                                  event.preventDefault();
+                                                  createOption();
+                                              }
                                               return;
                                           }
 

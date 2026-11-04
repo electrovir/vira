@@ -388,6 +388,26 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'searchable and creatable',
+        inputs: {
+            isSearchable: true,
+            isCreatable: true,
+            options: exampleDropdownOptions.slice(0, 3),
+            noOptionsText: 'No matches',
+        },
+    },
+    {
+        title: 'searchable and creatable with a custom label',
+        inputs: {
+            isSearchable: true,
+            isCreatable: true,
+            createOptionLabel(searchText) {
+                return `Add a new option called "${searchText}"`;
+            },
+            options: exampleDropdownOptions.slice(0, 3),
+        },
+    },
+    {
         title: 'searchable multi select with option groups',
         inputs: {
             isSearchable: true,
@@ -486,6 +506,8 @@ export const viraDropdownPage = defineBookPage({
                 state() {
                     return {
                         selected: example.inputs?.selected || [],
+                        /** Options added by the creatable examples. */
+                        createdOptions: [] as ReadonlyArray<Readonly<ViraDropdownOption>>,
                     };
                 },
                 styles: example.customStyle,
@@ -496,7 +518,10 @@ export const viraDropdownPage = defineBookPage({
                             example.inputs && 'placeholder' in example.inputs
                                 ? example.inputs.placeholder
                                 : controls.Placeholder,
-                        options: example.inputs?.options || exampleDropdownOptions,
+                        options: [
+                            ...(example.inputs?.options || exampleDropdownOptions),
+                            ...state.createdOptions,
+                        ],
                         selected: controls.Selected
                             ? [
                                   exampleDropdownOptions.find(
@@ -521,6 +546,25 @@ export const viraDropdownPage = defineBookPage({
                             ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                 updateState({
                                     selected: event.detail,
+                                });
+                            })}
+                            ${listen(ViraDropdown.events.createOption, (event) => {
+                                /** The host decides what creating means: add it and select it. */
+                                const newOption = {
+                                    label: event.detail,
+                                    value: `created-${event.detail}`,
+                                };
+                                updateState({
+                                    createdOptions: [
+                                        ...state.createdOptions,
+                                        newOption,
+                                    ],
+                                    selected: example.inputs?.isMultiSelect
+                                        ? [
+                                              ...state.selected,
+                                              newOption.value,
+                                          ]
+                                        : [newOption.value],
                                 });
                             })}
                         ></${ViraDropdown}>

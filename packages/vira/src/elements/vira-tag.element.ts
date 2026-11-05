@@ -238,12 +238,9 @@ export const ViraTag = defineViraElement<
         'vira-tag-active-background-color': 'transparent',
         'vira-tag-active-border-color': 'transparent',
 
-        'vira-tag-disabled-text-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].foreground.value,
-        'vira-tag-disabled-background-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
-        'vira-tag-disabled-border-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+        'vira-tag-disabled-text-color': viraTheme.colors['vira-disabled'].foreground.value,
+        'vira-tag-disabled-background-color': viraTheme.colors['vira-disabled'].background.value,
+        'vira-tag-disabled-border-color': viraTheme.colors['vira-disabled'].background.value,
 
         'vira-tag-border-radius': '1000px',
         'vira-tag-gap': '6px',

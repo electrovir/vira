@@ -20,8 +20,8 @@ import {
     ifDefined,
     listen,
 } from 'element-vir';
-import {viraDisabledStyles} from '../styles/disabled.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
+import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraAbsoluteTime} from './vira-absolute-time.element.js';
 
@@ -115,7 +115,10 @@ export const ViraDateInput = defineViraElement<
                 cursor: not-allowed;
 
                 & input {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
+                    background-color: ${viraTheme.colors['vira-disabled'].background.value};
+                    border-color: ${viraTheme.colors['vira-disabled'].background.value};
                 }
             }
         `;

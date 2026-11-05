@@ -16,9 +16,9 @@ import {
 } from 'element-vir';
 import {viraIconCssVars} from '../icons/index.js';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
-import {viraDisabledStyles} from '../styles/disabled.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
+import {viraTheme} from '../styles/vira-color-theme.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {ViraIcon} from './vira-icon.element.js';
 
@@ -134,7 +134,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
             }
 
             ${hostClasses['vira-checkbox-filled-checked'].selector} {
-                & .custom-checkbox.checked {
+                & .custom-checkbox.checked:not(.disabled) {
                     color: ${viraFormCssVars['vira-form-background-color'].value};
                     background-color: ${viraFormCssVars['vira-form-accent-primary-color'].value};
                 }
@@ -152,7 +152,7 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 }
             }
             ${hostClasses['vira-checkbox-filled-unchecked'].selector} {
-                & .custom-checkbox:not(.checked) {
+                & .custom-checkbox:not(.checked):not(.disabled) {
                     color: ${viraFormCssVars['vira-form-background-color'].value};
                     background-color: ${viraFormCssVars['vira-form-error-color'].value};
                 }
@@ -226,7 +226,10 @@ export const ViraCheckbox = defineViraElement<Readonly<ViraCheckboxInputs>>()({
                 }
 
                 &.disabled {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
+                    background-color: ${viraTheme.colors['vira-disabled'].background.value};
+                    border-color: ${viraTheme.colors['vira-disabled'].background.value};
                 }
             }
 

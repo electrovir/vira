@@ -19,7 +19,7 @@ import {createFocusStyles} from '../styles/focus.js';
 import {viraFontCssVars} from '../styles/font.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
-import {noUserSelect, viraAnimationDurations, viraDisabledStyles} from '../styles/index.js';
+import {noUserSelect, viraAnimationDurations, viraTheme} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {
@@ -281,7 +281,21 @@ export const ViraInput = defineViraElement<
                 }
 
                 & > * {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                }
+
+                & .input-wrapper {
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
+                    background-color: ${viraTheme.colors['vira-disabled'].background.value};
+                }
+
+                & .wrapper-border {
+                    border-color: ${viraTheme.colors['vira-disabled'].background.value};
+                }
+
+                & input::placeholder,
+                & .show-password-button {
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
                 }
 
                 & .show-password-button {

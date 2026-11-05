@@ -49,7 +49,7 @@ export type SortedContrastLevelName = [
 export type ViraThemeColorName =
     Extract<
         keyof typeof viraTheme.colors,
-        `vira-${string}`
+        `vira-${string}-${string}`
     > extends `vira-${infer ColorPart}-${string}`
         ? ColorPart
         : never;
@@ -58,7 +58,7 @@ const viraThemeColorNames = removeDuplicates(
     filterMap(
         Object.keys(viraTheme.colors),
         (key) => key.split('-')[1],
-        (mappedKey) => mappedKey !== 'default',
+        (mappedKey, key) => mappedKey !== 'default' && key.split('-').length > 2,
     ),
 ).filter(check.isTruthy) as ViraThemeColorName[];
 

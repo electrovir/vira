@@ -35,7 +35,7 @@ import {
     ViraColorVariant,
     viraColorVariantToHostClassKey,
 } from '../styles/form-variants.js';
-import {noNativeFormStyles, noUserSelect, viraDisabledStyles, viraTheme} from '../styles/index.js';
+import {noNativeFormStyles, noUserSelect, viraTheme} from '../styles/index.js';
 import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/menu-helpers.js';
@@ -496,7 +496,9 @@ export const ViraTabs = defineViraElement<
                 }
 
                 &.disabled {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    cursor: not-allowed;
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
                 }
             }
 

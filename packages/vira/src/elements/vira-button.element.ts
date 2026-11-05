@@ -313,12 +313,9 @@ export const ViraButton = defineViraElement<
         'vira-button-active-background-color': 'transparent',
         'vira-button-active-border-color': 'transparent',
 
-        'vira-button-disabled-text-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].foreground.value,
-        'vira-button-disabled-background-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
-        'vira-button-disabled-border-color':
-            viraTheme.colors['vira-grey-behind-bg-decoration'].background.value,
+        'vira-button-disabled-text-color': viraTheme.colors['vira-disabled'].foreground.value,
+        'vira-button-disabled-background-color': viraTheme.colors['vira-disabled'].background.value,
+        'vira-button-disabled-border-color': viraTheme.colors['vira-disabled'].background.value,
 
         'vira-button-border-width': '1px',
         'vira-button-border-radius': viraFormCssVars['vira-form-radius'].value,
@@ -517,7 +514,7 @@ export const ViraButton = defineViraElement<
                 }
 
                 &${hostClasses['vira-button-emphasis-subtle'].selector} button {
-                    color: ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
                     background-color: transparent;
                     border-color: transparent;
                 }

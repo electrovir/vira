@@ -11,7 +11,7 @@ import {
 } from 'element-vir';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
-import {viraDisabledStyles} from '../styles/index.js';
+import {viraTheme} from '../styles/index.js';
 import {noNativeFormStyles} from '../styles/native-styles.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {
@@ -146,7 +146,17 @@ export const ViraTextArea = defineViraElement<
                 }
 
                 & > * {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                }
+
+                & textarea {
+                    color: ${viraTheme.colors['vira-disabled'].foreground.value};
+                    background-color: ${viraTheme.colors['vira-disabled'].background.value};
+                    border-color: ${viraTheme.colors['vira-disabled'].background.value};
+
+                    &::placeholder {
+                        color: ${viraTheme.colors['vira-disabled'].foreground.value};
+                    }
                 }
 
                 & .focus-border {

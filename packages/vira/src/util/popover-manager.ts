@@ -198,8 +198,9 @@ export enum PopoverTrigger {
     /**
      * Toggles the popover the way a native context menu opens: on a right mousedown, a ctrl+left
      * mousedown, or a touch held still on the anchor. The Menu key and Shift+F10 open it. The
-     * browser's own context menu is suppressed, and left clicks and taps are left to the anchor's
-     * contents.
+     * browser's own context menu is suppressed. A left click on the anchor while the popover is
+     * open closes it without reaching the anchor's contents. Otherwise, left clicks and taps are
+     * left to the anchor's contents.
      */
     ContextMenu = 'context-menu',
 }
@@ -405,6 +406,9 @@ const anchorListeners: Record<
                 if (event.button === 2 || (event.button === 0 && event.ctrlKey)) {
                     isClickSuppressed = true;
                     popoverManager.toggle();
+                } else if (event.button === 0 && popoverManager.isOpen()) {
+                    isClickSuppressed = true;
+                    popoverManager.hide();
                 }
             }),
             listenToAnchor(anchor, 'contextmenu', (event) => {

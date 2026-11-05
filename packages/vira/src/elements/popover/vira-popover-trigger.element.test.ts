@@ -222,6 +222,38 @@ describe(ViraPopoverTrigger.tagName, () => {
         await waitUntil.isFalse(isPopoverOpen);
     });
 
+    it('closes on a left click on the anchor with the context menu trigger', async () => {
+        const {trigger, isPopoverOpen} = await setupPopoverTest({
+            inputs: {
+                trigger: PopoverTrigger.ContextMenu,
+            },
+        });
+        const clicks: MouseEvent[] = [];
+        trigger.addEventListener('click', (event) => {
+            clicks.push(event);
+        });
+
+        trigger.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 2,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        await waitUntil.isTrue(isPopoverOpen);
+
+        trigger.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 0,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        trigger.click();
+        await waitUntil.isFalse(isPopoverOpen);
+        assert.isLengthExactly(clicks, 0);
+    });
+
     it('opens on a touch long press and swallows the click after it', async () => {
         const {trigger, isPopoverOpen} = await setupPopoverTest({
             inputs: {

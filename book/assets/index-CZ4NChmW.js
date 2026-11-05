@@ -83535,6 +83535,10 @@ var ViraFormFieldType = /* @__PURE__ */ function(ViraFormFieldType) {
 	ViraFormFieldType["Email"] = "email";
 	ViraFormFieldType["Number"] = "number";
 	ViraFormFieldType["Select"] = "select";
+	/** A dropdown that allows selecting any number of its options. */
+	ViraFormFieldType["MultiSelect"] = "multi-select";
+	/** A vertical list of checkboxes, one per option, that allows selecting any number of them. */
+	ViraFormFieldType["CheckboxGroup"] = "checkbox-group";
 	ViraFormFieldType["Checkbox"] = "checkbox";
 	ViraFormFieldType["TextArea"] = "text-area";
 	ViraFormFieldType["Date"] = "date";
@@ -83560,7 +83564,7 @@ function applyRequiredLabel(label, isRequired) {
 * Checks if all the {@link ViraFormField} entries in a given {@link ViraFormFields} are valid through
 * the following checks:
 *
-* - Checks that required fields are provided (not `undefined`)
+* - Checks that required fields are provided (not `undefined`, an empty string, or an empty array)
 * - Ignores hidden fields
 *
 * @category Internal
@@ -83569,6 +83573,7 @@ function areFormFieldsValid(formFields) {
 	return getObjectTypedValues(formFields).every((formField) => {
 		if (formField.isHidden || !formField.isRequired) return true;
 		else if (check.isString(formField.value)) return !!formField.value;
+		else if (check.isArray(formField.value)) return formField.value.length > 0;
 		else return formField.value != void 0;
 	});
 }
@@ -83855,6 +83860,23 @@ var ViraForm = defineViraElement()({
             }
         }
 
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .checkbox-group-label {
+            font-weight: ${viraFormCssVars["vira-form-label-font-weight"].value};
+        }
+
+        .checkbox-group-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
         .reorder-rows {
             display: flex;
             flex-direction: column;
@@ -84038,13 +84060,59 @@ var ViraForm = defineViraElement()({
 			const label = applyRequiredLabel(field.label, showRequiredMarker);
 			const childLabel = inputs.useHorizontalLabels ? void 0 : label;
 			const horizontalLabelAttributes = inputs.useHorizontalLabels && check.isString(label) && label ? { "aria-label": label } : {};
-			if (field.type === ViraFormFieldType.Select) return wrapFormField({
+			if (field.type === ViraFormFieldType.CheckboxGroup) {
+				const selected = field.value || [];
+				return wrapFormField({
+					key,
+					label,
+					fieldTemplate: html`
+                            <div
+                                class="checkbox-group"
+                                ${field.testId ? testId(field.testId) : A}
+                                ${listenToFieldBlur(key, field)}
+                            >
+                                ${childLabel ? html`
+                                          <span class="checkbox-group-label">${childLabel}</span>
+                                      ` : A}
+                                <div class="checkbox-group-options">
+                                    ${field.options.map((option) => {
+						return html`
+                                            <${ViraCheckbox.assign({
+							value: selected.includes(option.value),
+							isDisabled: !!(isDisabled || inputs.isReadonly),
+							hasError: field.hasError,
+							useHorizontalLabel: true
+						})}
+                                                ${listen(ViraCheckbox.events.valueChange, (event) => {
+							dispatch(new events.valueChange({ detail: {
+								key,
+								...field,
+								value: event.detail ? [...selected, option.value] : selected.filter((value) => {
+									return value !== option.value;
+								})
+							} }));
+						})}
+                                            >
+                                                <span
+                                                    slot=${ViraCheckbox.slotNames["vira-checkbox-label"]}
+                                                >
+                                                    ${option.label}
+                                                </span>
+                                            </${ViraCheckbox}>
+                                        `;
+					})}
+                                </div>
+                            </div>
+                        `
+				});
+			} else if (field.type === ViraFormFieldType.Select || field.type === ViraFormFieldType.MultiSelect) return wrapFormField({
 				key,
 				label,
 				fieldTemplate: html`
                             <${ViraDropdown.assign({
 					options: field.options,
-					selected: field.value ? [field.value] : [],
+					selected: field.type === ViraFormFieldType.MultiSelect ? field.value || [] : field.value ? [field.value] : [],
+					isMultiSelect: field.type === ViraFormFieldType.MultiSelect,
 					placeholder: field.placeholder,
 					isDisabled,
 					isReadonly: inputs.isReadonly,
@@ -84056,7 +84124,11 @@ var ViraForm = defineViraElement()({
                                 ${field.testId ? testId(field.testId) : A}
                                 ${listenToFieldBlur(key, field)}
                                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
-					dispatch(new events.valueChange({ detail: {
+					dispatch(new events.valueChange({ detail: field.type === ViraFormFieldType.MultiSelect ? {
+						key,
+						...field,
+						value: event.detail
+					} : {
 						key,
 						...field,
 						value: event.detail[0]
@@ -94743,6 +94815,20 @@ var mockRoleOptions = [
 		value: "member"
 	}
 ];
+var mockNotificationOptions = [
+	{
+		label: "Email",
+		value: "email"
+	},
+	{
+		label: "Text message",
+		value: "text-message"
+	},
+	{
+		label: "Push notification",
+		value: "push-notification"
+	}
+];
 var viraFormBookPage = defineBookPage({
 	parent: elementsBookPage,
 	title: ViraForm.tagName,
@@ -94984,6 +95070,88 @@ var viraFormBookPage = defineBookPage({
                             <${ViraButton.assign({ text: "Submit" })}></${ViraButton}>
                         </div>
                     </${ViraForm}>
+                `;
+			}
+		});
+		defineExample({
+			title: "multi-select",
+			state() {
+				return {
+					permissions: ["admin"],
+					notifications: []
+				};
+			},
+			styles: css`
+                ${ViraForm} {
+                    width: 400px;
+                }
+            `,
+			render({ state, updateState }) {
+				return html`
+                    <${ViraForm.assign({ fields: {
+					permissions: {
+						type: ViraFormFieldType.MultiSelect,
+						label: "Permissions",
+						options: mockRoleOptions,
+						value: state.permissions,
+						isRequired: true,
+						placeholder: "none"
+					},
+					notifications: {
+						type: ViraFormFieldType.MultiSelect,
+						label: "Notifications",
+						options: mockNotificationOptions,
+						value: state.notifications,
+						placeholder: "none"
+					}
+				} })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+					updateState({
+						...state,
+						[event.detail.key]: event.detail.value
+					});
+				})}
+                    ></${ViraForm}>
+                `;
+			}
+		});
+		defineExample({
+			title: "checkbox group",
+			state() {
+				return {
+					permissions: ["admin"],
+					notifications: []
+				};
+			},
+			styles: css`
+                ${ViraForm} {
+                    width: 400px;
+                }
+            `,
+			render({ state, updateState }) {
+				return html`
+                    <${ViraForm.assign({ fields: {
+					permissions: {
+						type: ViraFormFieldType.CheckboxGroup,
+						label: "Permissions",
+						options: mockRoleOptions,
+						value: state.permissions,
+						isRequired: true
+					},
+					notifications: {
+						type: ViraFormFieldType.CheckboxGroup,
+						label: "Notifications",
+						options: mockNotificationOptions,
+						value: state.notifications
+					}
+				} })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+					updateState({
+						...state,
+						[event.detail.key]: event.detail.value
+					});
+				})}
+                    ></${ViraForm}>
                 `;
 			}
 		});

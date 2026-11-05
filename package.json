@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/vira-mono-repo",
-    "version": "33.12.0",
+    "version": "33.12.1",
     "private": true,
     "repository": {
         "type": "git",
@@ -48,7 +48,7 @@
         "cspell": "^10.4.0",
         "dependency-cruiser": "^18.7.0",
         "esbuild": "^0.28.2",
-        "eslint": "^10.13.0",
+        "eslint": "^10.14.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-jsdoc": "^65.4.2",
         "eslint-plugin-monorepo-cop": "^1.0.2",

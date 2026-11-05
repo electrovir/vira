@@ -544,7 +544,6 @@ export * from './copy-slash.icon.js';
 export * from './copy-x.icon.js';
 export * from './copy.icon.js';
 export * from './copyleft.icon.js';
-export * from './copyright.icon.js';
 export * from './corner-down-left.icon.js';
 export * from './corner-down-right.icon.js';
 export * from './corner-left-down.icon.js';

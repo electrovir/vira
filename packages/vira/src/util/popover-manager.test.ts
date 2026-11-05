@@ -1,7 +1,7 @@
 import {assert} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {html} from 'element-vir';
-import {isMouseEventOnScrollbar} from './popover-manager.js';
+import {isMouseEventOnScrollbar, isPointInPopoverHoverArea} from './popover-manager.js';
 
 /**
  * Scrollbar clicks cannot be synthesized (a `MouseEvent` at scrollbar coordinates still reports the
@@ -128,5 +128,91 @@ describe(isMouseEventOnScrollbar.name, () => {
         assert.deepEquals(results, [
             false,
         ]);
+    });
+});
+
+describe(isPointInPopoverHoverArea.name, () => {
+    /** A small anchor below a wider popover, with a gap between them. */
+    const rects = {
+        anchorRect: {
+            top: 100,
+            bottom: 120,
+            left: 100,
+            right: 120,
+        },
+        popoverRect: {
+            top: 0,
+            bottom: 80,
+            left: 0,
+            right: 220,
+        },
+    };
+
+    it('includes both rects and the cone between their facing edges', () => {
+        assert.deepEquals(
+            [
+                {
+                    x: 110,
+                    y: 110,
+                },
+                {
+                    x: 10,
+                    y: 10,
+                },
+                {
+                    x: 110,
+                    y: 90,
+                },
+                {
+                    x: 60,
+                    y: 85,
+                },
+            ].map((point) => {
+                return isPointInPopoverHoverArea({
+                    ...rects,
+                    point,
+                });
+            }),
+            [
+                true,
+                true,
+                true,
+                true,
+            ],
+        );
+    });
+
+    it('excludes points beside the cone or beside the anchor', () => {
+        assert.deepEquals(
+            [
+                {
+                    x: 20,
+                    y: 100,
+                },
+                {
+                    x: 200,
+                    y: 110,
+                },
+                {
+                    x: 110,
+                    y: 130,
+                },
+                {
+                    x: 90,
+                    y: 110,
+                },
+            ].map((point) => {
+                return isPointInPopoverHoverArea({
+                    ...rects,
+                    point,
+                });
+            }),
+            [
+                false,
+                false,
+                false,
+                false,
+            ],
+        );
     });
 });

@@ -1,4 +1,4 @@
-import {check} from '@augment-vir/assert';
+import {assertWrap, check} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {walkActiveElement} from '@augment-vir/web';
 import {type AnyDuration, convertDuration, type Duration, type DurationUnit} from 'date-vir';
@@ -86,6 +86,93 @@ export function isMouseEventOnScrollbar(event: Readonly<MouseEvent>): boolean {
     );
 }
 
+type Point = {
+    x: number;
+    y: number;
+};
+
+type PopoverHoverAreaParams = Readonly<
+    Record<
+        'anchorRect' | 'popoverRect',
+        Readonly<Pick<DOMRectReadOnly, 'top' | 'right' | 'bottom' | 'left'>>
+    >
+>;
+
+/**
+ * The corners, in winding order, of the area that keeps a hover popover open: the popover, the
+ * anchor, and the cone from the popover's edge facing the anchor to the anchor's edge facing the
+ * popover. Assumes the popover is above or below the anchor.
+ *
+ * @category Internal
+ */
+export function getPopoverHoverArea({anchorRect, popoverRect}: PopoverHoverAreaParams) {
+    const isPopoverAbove =
+        popoverRect.top + popoverRect.bottom < anchorRect.top + anchorRect.bottom;
+    const popoverFarY = isPopoverAbove ? popoverRect.top : popoverRect.bottom;
+    const popoverNearY = isPopoverAbove ? popoverRect.bottom : popoverRect.top;
+    const anchorNearY = isPopoverAbove ? anchorRect.top : anchorRect.bottom;
+    const anchorFarY = isPopoverAbove ? anchorRect.bottom : anchorRect.top;
+
+    return [
+        {
+            x: popoverRect.left,
+            y: popoverFarY,
+        },
+        {
+            x: popoverRect.right,
+            y: popoverFarY,
+        },
+        {
+            x: popoverRect.right,
+            y: popoverNearY,
+        },
+        {
+            x: anchorRect.right,
+            y: anchorNearY,
+        },
+        {
+            x: anchorRect.right,
+            y: anchorFarY,
+        },
+        {
+            x: anchorRect.left,
+            y: anchorFarY,
+        },
+        {
+            x: anchorRect.left,
+            y: anchorNearY,
+        },
+        {
+            x: popoverRect.left,
+            y: popoverNearY,
+        },
+    ];
+}
+
+/**
+ * Whether `point` is inside {@link getPopoverHoverArea}.
+ *
+ * @category Internal
+ */
+export function isPointInPopoverHoverArea({
+    point,
+    ...rects
+}: PopoverHoverAreaParams & Readonly<{point: Readonly<Point>}>) {
+    const corners = getPopoverHoverArea(rects);
+
+    /** Ray casting: count the edges that a ray going right from `point` crosses. */
+    return corners.reduce((isInside, corner, index) => {
+        const previous = assertWrap.isDefined(corners.at(index - 1));
+        const crossesEdge =
+            corner.y > point.y !== previous.y > point.y &&
+            point.x <
+                ((previous.x - corner.x) * (point.y - corner.y)) / (previous.y - corner.y) +
+                    corner.x;
+
+        return crossesEdge ? !isInside : isInside;
+    }, false);
+}
+
 /**
  * The interaction on the anchor element that shows and hides a popover.
  *
@@ -94,7 +181,8 @@ export function isMouseEventOnScrollbar(event: Readonly<MouseEvent>): boolean {
 export enum PopoverTrigger {
     /**
      * Shows the popover shortly after the anchor is hovered or focused and hides it when the anchor
-     * is no longer hovered or focused.
+     * is no longer hovered or focused. An open popover stays open while the pointer moves from the
+     * anchor onto it (through the area between them) and while the pointer is over it.
      */
     Hover = 'hover',
     /** Toggles the popover when the anchor is clicked. An arrow key opens it. */
@@ -162,11 +250,14 @@ const anchorListeners: Record<
             listenToAnchor(anchor, 'focusin', () => {
                 popoverManager.scheduleShow();
             }),
-            listenToAnchor(anchor, 'mouseleave', () => {
-                popoverManager.hide();
+            listenToAnchor(anchor, 'mouseleave', (event) => {
+                popoverManager.hideOnHoverExit(event);
             }),
             listenToAnchor(anchor, 'focusout', () => {
-                popoverManager.hide();
+                /** Clicking text in the popover to select it moves focus off the anchor. */
+                if (!popoverManager.isHovered()) {
+                    popoverManager.hide();
+                }
             }),
         ];
     },
@@ -243,6 +334,8 @@ export class PopoverManager {
     protected removeAnchorListeners: (() => void) | undefined;
     /** Removes the global listeners attached while the popover is open. */
     protected removeOpenListeners: (() => void) | undefined;
+    /** Removes the pointer listener attached by {@link PopoverManager.hideOnHoverExit}. */
+    protected removeHoverListener: (() => void) | undefined;
 
     constructor(
         /**
@@ -328,6 +421,41 @@ export class PopoverManager {
         }
     }
 
+    /**
+     * Whether the pointer is over the anchor, or over the open popover or the area between them
+     * after leaving the anchor.
+     */
+    public isHovered() {
+        return !!this.removeHoverListener || !!this.anchor?.matches(':hover');
+    }
+
+    /**
+     * Call this when the pointer leaves the anchor. Hides the popover once the pointer is outside
+     * of the anchor, the popover, and the area between them, so the pointer can travel to the
+     * popover without closing it.
+     */
+    public hideOnHoverExit(event: Readonly<MouseEvent>) {
+        if (!this.isOpen() || !this.isInHoverArea(event)) {
+            this.hide();
+            return;
+        }
+
+        this.removeHoverListener ||= listenToGlobal(
+            'mousemove',
+            (moveEvent) => {
+                if (!this.isInHoverArea(moveEvent)) {
+                    this.removeHoverListener?.();
+                    this.removeHoverListener = undefined;
+                    this.hide();
+                }
+            },
+            {
+                capture: true,
+                passive: true,
+            },
+        );
+    }
+
     /** Opens the popover after `options.delay`. */
     public scheduleShow() {
         if (this.showTimeout || this.isOpen() || !this.options) {
@@ -385,10 +513,28 @@ export class PopoverManager {
         this.hideTimeout = undefined;
         this.removeOpenListeners?.();
         this.removeOpenListeners = undefined;
+        this.removeHoverListener?.();
+        this.removeHoverListener = undefined;
 
         if (this.isOpen()) {
             this.popover?.hidePopover();
         }
+    }
+
+    /** Whether the pointer is inside {@link getPopoverHoverArea}. */
+    protected isInHoverArea(event: Readonly<MouseEvent>) {
+        if (!this.anchor || !this.popover) {
+            return false;
+        }
+
+        return isPointInPopoverHoverArea({
+            point: {
+                x: event.clientX,
+                y: event.clientY,
+            },
+            anchorRect: this.anchor.getBoundingClientRect(),
+            popoverRect: this.popover.getBoundingClientRect(),
+        });
     }
 
     /** Attaches the global listeners that only matter while the popover is open. */

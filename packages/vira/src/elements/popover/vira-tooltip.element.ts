@@ -116,7 +116,7 @@ export const ViraTooltip = defineViraElement<{
             max-width: min(300px, 100vw);
             font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
             overflow-wrap: break-word;
-            pointer-events: none;
+            user-select: text;
         }
 
         /*

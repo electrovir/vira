@@ -276,4 +276,42 @@ describe('tooltip', () => {
             },
         });
     });
+
+    it('stays open while the pointer moves through the cone onto the tooltip', async () => {
+        const {hover, findOpenTooltip} = await setupTooltipTest(css`
+            top: 200px;
+            left: 200px;
+        `);
+
+        const {popoverRect, anchorRect} = await hover();
+        const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+
+        await sendMouse({
+            type: 'move',
+            position: [
+                Math.round(anchorCenterX),
+                Math.round(anchorRect.top - 3),
+            ],
+        });
+        await sendMouse({
+            type: 'move',
+            position: [
+                Math.round(popoverRect.left + 2),
+                Math.round(popoverRect.top + popoverRect.height / 2),
+            ],
+        });
+        await wait({
+            milliseconds: 100,
+        });
+        assert.isDefined(findOpenTooltip());
+
+        await sendMouse({
+            type: 'move',
+            position: [
+                Math.round(popoverRect.left - 20),
+                Math.round(anchorRect.top - 3),
+            ],
+        });
+        await waitUntil.isUndefined(findOpenTooltip);
+    });
 });

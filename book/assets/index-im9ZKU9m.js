@@ -19329,26 +19329,26 @@ var viraColorPalette = defineCssVars({
 	"vira-green-900": "#024023",
 	"vira-green-950": "#04361F",
 	"vira-green-1000": "#062D1B",
-	"vira-teal-50": "#F4FDFE",
-	"vira-teal-100": "#E8FCFD",
-	"vira-teal-150": "#D9F8FA",
-	"vira-teal-200": "#CAF4F7",
-	"vira-teal-250": "#B6EEF4",
-	"vira-teal-300": "#A1E8F3",
-	"vira-teal-350": "#86DFEB",
-	"vira-teal-400": "#68D5E3",
-	"vira-teal-450": "#00BDD0",
-	"vira-teal-500": "#00A5BD",
-	"vira-teal-550": "#009BB3",
-	"vira-teal-600": "#0092AA",
-	"vira-teal-650": "#00879D",
-	"vira-teal-700": "#007C90",
-	"vira-teal-750": "#006A7B",
-	"vira-teal-800": "#005766",
-	"vira-teal-850": "#004A56",
-	"vira-teal-900": "#003D47",
-	"vira-teal-950": "#00343D",
-	"vira-teal-1000": "#002C33",
+	"vira-teal-50": "#F2FEFC",
+	"vira-teal-100": "#E4FEF9",
+	"vira-teal-150": "#D2FAF4",
+	"vira-teal-200": "#C1F8F1",
+	"vira-teal-250": "#ADF2EA",
+	"vira-teal-300": "#97ECE4",
+	"vira-teal-350": "#7CE3DB",
+	"vira-teal-400": "#5ED9D2",
+	"vira-teal-450": "#23BFBA",
+	"vira-teal-500": "#00A9A5",
+	"vira-teal-550": "#009F9C",
+	"vira-teal-600": "#009592",
+	"vira-teal-650": "#008A88",
+	"vira-teal-700": "#007F7D",
+	"vira-teal-750": "#006C6B",
+	"vira-teal-800": "#005958",
+	"vira-teal-850": "#004C4B",
+	"vira-teal-900": "#003F3E",
+	"vira-teal-950": "#003635",
+	"vira-teal-1000": "#002D2C",
 	"vira-blue-50": "#F8FAFE",
 	"vira-blue-100": "#F1F6FD",
 	"vira-blue-150": "#E9F1FC",
@@ -19786,12 +19786,12 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-red-50"]
 	},
 	"vira-red-on-self-body": {
-		foreground: viraColorPalette["vira-red-800"],
-		background: viraColorPalette["vira-red-200"]
+		foreground: viraColorPalette["vira-red-700"],
+		background: viraColorPalette["vira-red-100"]
 	},
 	"vira-red-on-self-non-body": {
-		foreground: viraColorPalette["vira-red-800"],
-		background: viraColorPalette["vira-red-300"]
+		foreground: viraColorPalette["vira-red-700"],
+		background: viraColorPalette["vira-red-200"]
 	},
 	"vira-red-on-self-header": {
 		foreground: viraColorPalette["vira-red-800"],
@@ -19966,8 +19966,8 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-green-100"]
 	},
 	"vira-green-on-self-body": {
-		foreground: viraColorPalette["vira-green-850"],
-		background: viraColorPalette["vira-green-300"]
+		foreground: viraColorPalette["vira-green-800"],
+		background: viraColorPalette["vira-green-200"]
 	},
 	"vira-green-on-self-non-body": {
 		foreground: viraColorPalette["vira-green-850"],
@@ -20044,7 +20044,7 @@ var viraTheme = defineColorTheme({
 	"vira-teal-behind-fg-non-body": { background: viraColorPalette["vira-teal-400"] },
 	"vira-teal-behind-fg-header": { background: viraColorPalette["vira-teal-500"] },
 	"vira-teal-behind-fg-placeholder": { background: viraColorPalette["vira-teal-600"] },
-	"vira-teal-behind-fg-decoration": { background: viraColorPalette["vira-teal-800"] },
+	"vira-teal-behind-fg-decoration": { background: viraColorPalette["vira-teal-750"] },
 	"vira-teal-behind-fg-invisible": { background: viraColorPalette["vira-teal-900"] },
 	"vira-teal-behind-fg-lowest-contrast": { background: viraColorPalette["vira-teal-1000"] },
 	"vira-teal-on-self-highest-contrast": {
@@ -20150,12 +20150,12 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-blue-200"]
 	},
 	"vira-blue-on-self-non-body": {
-		foreground: viraColorPalette["vira-blue-850"],
-		background: viraColorPalette["vira-blue-300"]
+		foreground: viraColorPalette["vira-blue-700"],
+		background: viraColorPalette["vira-blue-200"]
 	},
 	"vira-blue-on-self-header": {
-		foreground: viraColorPalette["vira-blue-850"],
-		background: viraColorPalette["vira-blue-400"]
+		foreground: viraColorPalette["vira-blue-700"],
+		background: viraColorPalette["vira-blue-300"]
 	},
 	"vira-blue-on-self-placeholder": {
 		foreground: viraColorPalette["vira-blue-850"],
@@ -20175,7 +20175,7 @@ var viraTheme = defineColorTheme({
 	},
 	"vira-brand-foreground-highest-contrast": { foreground: viraColorPalette["vira-brand-1000"] },
 	"vira-brand-foreground-small-body": { foreground: viraColorPalette["vira-brand-900"] },
-	"vira-brand-foreground-body": { foreground: viraColorPalette["vira-brand-700"] },
+	"vira-brand-foreground-body": { foreground: viraColorPalette["vira-brand-800"] },
 	"vira-brand-foreground-non-body": { foreground: viraColorPalette["vira-brand-500"] },
 	"vira-brand-foreground-header": { foreground: viraColorPalette["vira-brand-450"] },
 	"vira-brand-foreground-placeholder": { foreground: viraColorPalette["vira-brand-400"] },
@@ -20240,12 +20240,12 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-brand-200"]
 	},
 	"vira-brand-on-self-non-body": {
-		foreground: viraColorPalette["vira-brand-850"],
-		background: viraColorPalette["vira-brand-300"]
+		foreground: viraColorPalette["vira-brand-700"],
+		background: viraColorPalette["vira-brand-200"]
 	},
 	"vira-brand-on-self-header": {
-		foreground: viraColorPalette["vira-brand-850"],
-		background: viraColorPalette["vira-brand-400"]
+		foreground: viraColorPalette["vira-brand-700"],
+		background: viraColorPalette["vira-brand-300"]
 	},
 	"vira-brand-on-self-placeholder": {
 		foreground: viraColorPalette["vira-brand-850"],
@@ -20326,11 +20326,11 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-purple-50"]
 	},
 	"vira-purple-on-self-body": {
-		foreground: viraColorPalette["vira-purple-850"],
+		foreground: viraColorPalette["vira-purple-800"],
 		background: viraColorPalette["vira-purple-100"]
 	},
 	"vira-purple-on-self-non-body": {
-		foreground: viraColorPalette["vira-purple-850"],
+		foreground: viraColorPalette["vira-purple-800"],
 		background: viraColorPalette["vira-purple-200"]
 	},
 	"vira-purple-on-self-header": {
@@ -20444,9 +20444,9 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-pink-850"]
 	},
 	"vira-grey-foreground-highest-contrast": { foreground: viraColorPalette["vira-grey-1000"] },
-	"vira-grey-foreground-small-body": { foreground: viraColorPalette["vira-grey-700"] },
+	"vira-grey-foreground-small-body": { foreground: viraColorPalette["vira-grey-750"] },
 	"vira-grey-foreground-body": { foreground: viraColorPalette["vira-grey-550"] },
-	"vira-grey-foreground-non-body": { foreground: "#767676" },
+	"vira-grey-foreground-non-body": { foreground: viraColorPalette["vira-grey-500"] },
 	"vira-grey-foreground-header": { foreground: viraColorPalette["vira-grey-450"] },
 	"vira-grey-foreground-placeholder": { foreground: viraColorPalette["vira-grey-400"] },
 	"vira-grey-foreground-decoration": { foreground: viraColorPalette["vira-grey-300"] },
@@ -20462,7 +20462,7 @@ var viraTheme = defineColorTheme({
 	},
 	"vira-grey-behind-bg-body": {
 		foreground: { refDefaultBackground: true },
-		background: viraColorPalette["vira-grey-500"]
+		background: viraColorPalette["vira-grey-550"]
 	},
 	"vira-grey-behind-bg-non-body": {
 		foreground: { refDefaultBackground: true },
@@ -20506,12 +20506,12 @@ var viraTheme = defineColorTheme({
 		background: viraColorPalette["vira-grey-50"]
 	},
 	"vira-grey-on-self-body": {
-		foreground: "#434343",
-		background: "#E3E3E3"
+		foreground: viraColorPalette["vira-grey-600"],
+		background: viraColorPalette["vira-grey-200"]
 	},
 	"vira-grey-on-self-non-body": {
-		foreground: viraColorPalette["vira-grey-650"],
-		background: viraColorPalette["vira-grey-300"]
+		foreground: viraColorPalette["vira-grey-750"],
+		background: viraColorPalette["vira-grey-350"]
 	},
 	"vira-grey-on-self-header": {
 		foreground: viraColorPalette["vira-grey-650"],
@@ -20622,6 +20622,10 @@ var viraTheme = defineColorTheme({
 	"vira-tan-on-self-lowest-contrast": {
 		foreground: viraColorPalette["vira-tan-850"],
 		background: viraColorPalette["vira-tan-800"]
+	},
+	"vira-disabled": {
+		foreground: viraColorPalette["vira-grey-400"],
+		background: viraColorPalette["vira-grey-300"]
 	}
 });
 /**
@@ -20920,10 +20924,13 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 			foreground: viraColorPalette["vira-blue-250"],
 			background: viraColorPalette["vira-blue-500"]
 		},
-		"vira-blue-on-self-placeholder": { foreground: viraColorPalette["vira-blue-250"] },
-		"vira-blue-on-self-decoration": {
-			foreground: viraColorPalette["vira-blue-250"],
+		"vira-blue-on-self-placeholder": {
+			foreground: viraColorPalette["vira-blue-100"],
 			background: viraColorPalette["vira-blue-400"]
+		},
+		"vira-blue-on-self-decoration": {
+			foreground: viraColorPalette["vira-blue-100"],
+			background: viraColorPalette["vira-blue-300"]
 		},
 		"vira-blue-on-self-invisible": {
 			foreground: viraColorPalette["vira-blue-250"],
@@ -20977,10 +20984,13 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 			foreground: viraColorPalette["vira-brand-250"],
 			background: viraColorPalette["vira-brand-500"]
 		},
-		"vira-brand-on-self-placeholder": { foreground: viraColorPalette["vira-brand-250"] },
-		"vira-brand-on-self-decoration": {
-			foreground: viraColorPalette["vira-brand-250"],
+		"vira-brand-on-self-placeholder": {
+			foreground: viraColorPalette["vira-brand-100"],
 			background: viraColorPalette["vira-brand-400"]
+		},
+		"vira-brand-on-self-decoration": {
+			foreground: viraColorPalette["vira-brand-100"],
+			background: viraColorPalette["vira-brand-300"]
 		},
 		"vira-brand-on-self-invisible": {
 			foreground: viraColorPalette["vira-brand-250"],
@@ -21029,8 +21039,8 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 			background: viraColorPalette["vira-purple-800"]
 		},
 		"vira-purple-on-self-non-body": {
-			foreground: viraColorPalette["vira-purple-200"],
-			background: viraColorPalette["vira-purple-600"]
+			foreground: viraColorPalette["vira-purple-100"],
+			background: viraColorPalette["vira-purple-500"]
 		},
 		"vira-purple-on-self-header": {
 			foreground: viraColorPalette["vira-purple-200"],
@@ -21110,12 +21120,12 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 			background: viraColorPalette["vira-pink-250"]
 		},
 		"vira-grey-foreground-highest-contrast": { foreground: viraColorPalette["vira-grey-50"] },
-		"vira-grey-foreground-small-body": { foreground: viraColorPalette["vira-grey-200"] },
-		"vira-grey-foreground-body": { foreground: "#CDCDCD" },
+		"vira-grey-foreground-small-body": { foreground: viraColorPalette["vira-grey-100"] },
+		"vira-grey-foreground-body": { foreground: viraColorPalette["vira-grey-300"] },
 		"vira-grey-foreground-non-body": { foreground: viraColorPalette["vira-grey-400"] },
-		"vira-grey-foreground-header": { foreground: "#A1A1A1" },
+		"vira-grey-foreground-header": { foreground: viraColorPalette["vira-grey-400"] },
 		"vira-grey-foreground-placeholder": { foreground: viraColorPalette["vira-grey-450"] },
-		"vira-grey-foreground-decoration": { foreground: viraColorPalette["vira-grey-500"] },
+		"vira-grey-foreground-decoration": { foreground: viraColorPalette["vira-grey-550"] },
 		"vira-grey-foreground-invisible": { foreground: viraColorPalette["vira-grey-600"] },
 		"vira-grey-foreground-lowest-contrast": { foreground: viraColorPalette["vira-grey-1000"] },
 		"vira-grey-behind-bg-highest-contrast": { background: viraColorPalette["vira-grey-50"] },
@@ -21141,8 +21151,8 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 			background: viraColorPalette["vira-grey-1000"]
 		},
 		"vira-grey-on-self-small-body": {
-			foreground: "#F3F3F3",
-			background: "#303030"
+			foreground: viraColorPalette["vira-grey-100"],
+			background: viraColorPalette["vira-grey-750"]
 		},
 		"vira-grey-on-self-body": {
 			foreground: viraColorPalette["vira-grey-200"],
@@ -21231,6 +21241,10 @@ var viraThemeDarkOverride = defineColorThemeOverride(viraTheme, "dark", {
 		"vira-tan-on-self-lowest-contrast": {
 			foreground: viraColorPalette["vira-tan-200"],
 			background: viraColorPalette["vira-tan-250"]
+		},
+		"vira-disabled": {
+			foreground: viraColorPalette["vira-grey-500"],
+			background: viraColorPalette["vira-grey-700"]
 		}
 	}
 });
@@ -78203,7 +78217,7 @@ var sortedContrastLevelNames = [
 	"lowest-contrast",
 	...getEnumValues(ContrastLevelName).sort((a, b) => Number(b.includes("-")) - Number(a.includes("-")))
 ];
-var viraThemeColorNames = removeDuplicates(filterMap(Object.keys(viraTheme.colors), (key) => key.split("-")[1], (mappedKey) => mappedKey !== "default")).filter(check.isTruthy);
+var viraThemeColorNames = removeDuplicates(filterMap(Object.keys(viraTheme.colors), (key) => key.split("-")[1], (mappedKey, key) => mappedKey !== "default" && key.split("-").length > 2)).filter(check.isTruthy);
 /**
 * An enum of {@link ViraThemeColorName}.
 *
@@ -78844,7 +78858,21 @@ var ViraInput = defineViraElement()({
                 }
 
                 & > * {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                }
+
+                & .input-wrapper {
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
+                    background-color: ${viraTheme.colors["vira-disabled"].background.value};
+                }
+
+                & .wrapper-border {
+                    border-color: ${viraTheme.colors["vira-disabled"].background.value};
+                }
+
+                & input::placeholder,
+                & .show-password-button {
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
                 }
 
                 & .show-password-button {
@@ -81501,9 +81529,9 @@ var ViraButton = defineViraElement()({
 		"vira-button-active-text-color": "transparent",
 		"vira-button-active-background-color": "transparent",
 		"vira-button-active-border-color": "transparent",
-		"vira-button-disabled-text-color": viraTheme.colors["vira-grey-behind-bg-decoration"].foreground.value,
-		"vira-button-disabled-background-color": viraTheme.colors["vira-grey-behind-bg-decoration"].background.value,
-		"vira-button-disabled-border-color": viraTheme.colors["vira-grey-behind-bg-decoration"].background.value,
+		"vira-button-disabled-text-color": viraTheme.colors["vira-disabled"].foreground.value,
+		"vira-button-disabled-background-color": viraTheme.colors["vira-disabled"].background.value,
+		"vira-button-disabled-border-color": viraTheme.colors["vira-disabled"].background.value,
 		"vira-button-border-width": "1px",
 		"vira-button-border-radius": viraFormCssVars["vira-form-radius"].value
 	},
@@ -81674,7 +81702,7 @@ var ViraButton = defineViraElement()({
                 }
 
                 &${hostClasses["vira-button-emphasis-subtle"].selector} button {
-                    color: ${viraTheme.colors["vira-grey-foreground-decoration"].foreground.value};
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
                     background-color: transparent;
                     border-color: transparent;
                 }
@@ -82556,7 +82584,7 @@ var ViraCheckbox = defineViraElement()({
             }
 
             ${hostClasses["vira-checkbox-filled-checked"].selector} {
-                & .custom-checkbox.checked {
+                & .custom-checkbox.checked:not(.disabled) {
                     color: ${viraFormCssVars["vira-form-background-color"].value};
                     background-color: ${viraFormCssVars["vira-form-accent-primary-color"].value};
                 }
@@ -82572,7 +82600,7 @@ var ViraCheckbox = defineViraElement()({
                 }
             }
             ${hostClasses["vira-checkbox-filled-unchecked"].selector} {
-                & .custom-checkbox:not(.checked) {
+                & .custom-checkbox:not(.checked):not(.disabled) {
                     color: ${viraFormCssVars["vira-form-background-color"].value};
                     background-color: ${viraFormCssVars["vira-form-error-color"].value};
                 }
@@ -82644,7 +82672,10 @@ var ViraCheckbox = defineViraElement()({
                 }
 
                 &.disabled {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
+                    background-color: ${viraTheme.colors["vira-disabled"].background.value};
+                    border-color: ${viraTheme.colors["vira-disabled"].background.value};
                 }
             }
 
@@ -83108,7 +83139,10 @@ randomId: randomString(32) };
                 cursor: not-allowed;
 
                 & input {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
+                    background-color: ${viraTheme.colors["vira-disabled"].background.value};
+                    border-color: ${viraTheme.colors["vira-disabled"].background.value};
                 }
             }
         `;
@@ -83816,7 +83850,17 @@ var ViraTextArea = defineViraElement()({
                 }
 
                 & > * {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                }
+
+                & textarea {
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
+                    background-color: ${viraTheme.colors["vira-disabled"].background.value};
+                    border-color: ${viraTheme.colors["vira-disabled"].background.value};
+
+                    &::placeholder {
+                        color: ${viraTheme.colors["vira-disabled"].foreground.value};
+                    }
                 }
 
                 & .focus-border {
@@ -88042,7 +88086,9 @@ tabSelect: defineElementEvent() },
                 }
 
                 &.disabled {
-                    ${viraDisabledStyles};
+                    pointer-events: none;
+                    cursor: not-allowed;
+                    color: ${viraTheme.colors["vira-disabled"].foreground.value};
                 }
             }
 
@@ -88638,9 +88684,9 @@ var ViraTag = defineViraElement()({
 		"vira-tag-active-text-color": "transparent",
 		"vira-tag-active-background-color": "transparent",
 		"vira-tag-active-border-color": "transparent",
-		"vira-tag-disabled-text-color": viraTheme.colors["vira-grey-behind-bg-decoration"].foreground.value,
-		"vira-tag-disabled-background-color": viraTheme.colors["vira-grey-behind-bg-decoration"].background.value,
-		"vira-tag-disabled-border-color": viraTheme.colors["vira-grey-behind-bg-decoration"].background.value,
+		"vira-tag-disabled-text-color": viraTheme.colors["vira-disabled"].foreground.value,
+		"vira-tag-disabled-background-color": viraTheme.colors["vira-disabled"].background.value,
+		"vira-tag-disabled-border-color": viraTheme.colors["vira-disabled"].background.value,
 		"vira-tag-border-radius": "1000px",
 		"vira-tag-gap": "6px",
 		"vira-tag-horizontal-padding": "10px",

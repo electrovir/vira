@@ -116,6 +116,7 @@ export const ViraPopoverTrigger = defineViraElement<
 
             .dropdown-trigger {
                 box-sizing: border-box;
+                height: 100%;
                 ${noUserSelect};
             }
 

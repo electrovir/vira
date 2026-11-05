@@ -112,7 +112,12 @@ export const ViraDropdown = defineViraElement<
         'searchInput',
         'trigger',
     ],
-    styles: css`
+    hostClasses: {
+        'vira-dropdown-trigger-only'({inputs}) {
+            return !inputs.label && !inputs.isReadonly;
+        },
+    },
+    styles: ({hostClasses}) => css`
         :host {
             display: inline-flex;
             vertical-align: middle;
@@ -216,6 +221,20 @@ export const ViraDropdown = defineViraElement<
             border-radius: ${viraFormCssVars['vira-form-radius'].value};
             background-color: ${viraFormCssVars['vira-form-background-color'].value};
             color: ${viraFormCssVars['vira-form-foreground-color'].value};
+        }
+
+        ${hostClasses['vira-dropdown-trigger-only'].selector} {
+            /** On the host, rather than the trigger, so a consumer's \`height\` can shrink it. */
+            height: ${viraSizeHeights[ViraSize.Medium]}px;
+
+            & .dropdown-trigger {
+                min-height: 0;
+            }
+
+            & .trigger-icon {
+                aspect-ratio: auto;
+                align-self: center;
+            }
         }
 
         .dropdown-wrapper {

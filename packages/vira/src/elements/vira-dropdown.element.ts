@@ -57,10 +57,17 @@ export const ViraDropdown = defineViraElement<
          */
         placeholder: string;
         /**
-         * Text shown in the opened popover when `options` has no options. When omitted, opening a
-         * dropdown with no options shows no popover at all.
+         * Text shown in the opened popover when `options` has no options. Slotted
+         * `vira-dropdown-no-options` content replaces it. When neither is given, opening a dropdown
+         * with no options shows no popover at all.
          */
         noOptionsText: string;
+        /**
+         * Text shown in the opened popover when the search text matches no options. Slotted
+         * `vira-dropdown-no-search-results` content replaces it. When neither is given, the "no
+         * options" content (see `noOptionsText`) is shown instead.
+         */
+        noSearchResultsText: string;
         /**
          * If false, this will behave like a single select dropdown, otherwise you can select
          * multiple.
@@ -152,6 +159,12 @@ export const ViraDropdown = defineViraElement<
             return !inputs.label && !inputs.isReadonly;
         },
     },
+    slotNames: [
+        /** Shown in the opened popover when `options` has no options. */
+        'vira-dropdown-no-options',
+        /** Shown in the opened popover when the search text matches no options. */
+        'vira-dropdown-no-search-results',
+    ],
     testIds: [
         'createOption',
         'hiddenOptionsHint',
@@ -399,7 +412,7 @@ export const ViraDropdown = defineViraElement<
             popoverManager: undefined as undefined | PopoverManager,
         };
     },
-    render({state, inputs, dispatch, events, updateState, testIds, host}) {
+    render({state, inputs, dispatch, events, updateState, testIds, host, slotNames}) {
         const flatOptions = inputs.options.flatMap((entry) => {
             return isViraDropdownOptionGroup(entry) ? entry.options : [entry];
         });
@@ -665,9 +678,40 @@ export const ViraDropdown = defineViraElement<
             );
         }
 
+        /**
+         * Slotted content is only checked on render, which is enough because opening the dropdown
+         * renders.
+         */
+        function hasSlottedContent(slotName: string) {
+            return !!host.querySelector(`:scope > [slot="${slotName}"]`);
+        }
+
+        const hasNoOptionsContent =
+            !!inputs.noOptionsText || hasSlottedContent(slotNames['vira-dropdown-no-options']);
+        const noOptionsTemplate = html`
+            <slot name=${slotNames['vira-dropdown-no-options']}>${inputs.noOptionsText}</slot>
+        `;
+        const isSearchEmpty = !!flatOptions.length && !filteredFlatOptions.length;
+        const emptyContent = isSearchEmpty
+            ? {
+                  isShown:
+                      !!inputs.noSearchResultsText ||
+                      hasSlottedContent(slotNames['vira-dropdown-no-search-results']) ||
+                      hasNoOptionsContent,
+                  template: html`
+                      <slot name=${slotNames['vira-dropdown-no-search-results']}>
+                          ${inputs.noSearchResultsText ?? noOptionsTemplate}
+                      </slot>
+                  `,
+              }
+            : {
+                  isShown: hasNoOptionsContent,
+                  template: noOptionsTemplate,
+              };
+
         const isMenuShown =
             state.isOpen &&
-            (!!filteredFlatOptions.length || !!inputs.noOptionsText || shouldShowCreateOption);
+            (!!filteredFlatOptions.length || emptyContent.isShown || shouldShowCreateOption);
 
         const menuTemplate = html`
             <${ViraMenu.assign({
@@ -739,10 +783,10 @@ export const ViraDropdown = defineViraElement<
                                 `
                               : renderOptionEntries([entry]);
                       })
-                    : shouldShowCreateOption || !inputs.noOptionsText
+                    : shouldShowCreateOption || !emptyContent.isShown
                       ? nothing
                       : html`
-                            <div class="no-options">${inputs.noOptionsText}</div>
+                            <div class="no-options">${emptyContent.template}</div>
                         `}
                 ${hiddenOptionsCount
                     ? html`

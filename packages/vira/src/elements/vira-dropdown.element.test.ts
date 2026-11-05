@@ -3,7 +3,7 @@ import {createArray, mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
-import {css, html, listen, testIdSelector} from 'element-vir';
+import {css, html, type HtmlInterpolation, listen, testIdSelector} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createSizedIcon} from '../icons/sized-icon.js';
@@ -50,7 +50,11 @@ const mockGroupedOptions: ReadonlyArray<Readonly<ViraDropdownOptionGroup>> = [
     },
 ];
 
-async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
+async function setupDropdownTest(
+    inputs?: Partial<(typeof ViraDropdown)['InputsType']>,
+    /** Light DOM children, for filling slots. */
+    children?: HtmlInterpolation,
+) {
     const events: {
         createOption: string[];
         openChange: boolean[];
@@ -80,7 +84,9 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                     events.selectedValuesChange.push(event.detail);
                 })}
-            ></${ViraDropdown}>
+            >
+                ${children}
+            </${ViraDropdown}>
         </div>
     `);
 
@@ -473,6 +479,48 @@ describe(ViraDropdown.tagName, () => {
             extractElementText(assertWrap.instanceOf(findMenu(), HTMLElement)),
             'Nothing here',
         );
+    });
+
+    it('shows slotted no options content over noOptionsText', async () => {
+        const {toggle, instance} = await setupDropdownTest(
+            {
+                options: [],
+                noOptionsText: 'Nothing here',
+            },
+            html`
+                <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>Slotted</span>
+            `,
+        );
+
+        await toggle();
+
+        const slotElement = assertWrap.instanceOf(
+            instance.shadowRoot.querySelector('.no-options slot'),
+            HTMLSlotElement,
+        );
+        assert.strictEquals(
+            slotElement
+                .assignedNodes()
+                .map((node) => node.textContent)
+                .join('')
+                .trim(),
+            'Slotted',
+        );
+    });
+
+    it('opens with only slotted no options content', async () => {
+        const {toggle, findMenu} = await setupDropdownTest(
+            {
+                options: [],
+            },
+            html`
+                <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>Slotted</span>
+            `,
+        );
+
+        await toggle();
+
+        assert.isDefined(findMenu());
     });
 
     it('contains menu overscroll so the page does not scroll', async () => {
@@ -1047,11 +1095,17 @@ describe(ViraDropdown.tagName, () => {
     });
 
     describe('isSearchable', () => {
-        async function setupSearchTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
-            const dropdownTest = await setupDropdownTest({
-                isSearchable: true,
-                ...inputs,
-            });
+        async function setupSearchTest(
+            inputs?: Partial<(typeof ViraDropdown)['InputsType']>,
+            children?: HtmlInterpolation,
+        ) {
+            const dropdownTest = await setupDropdownTest(
+                {
+                    isSearchable: true,
+                    ...inputs,
+                },
+                children,
+            );
 
             return {
                 ...dropdownTest,
@@ -1202,6 +1256,102 @@ describe(ViraDropdown.tagName, () => {
             assert.deepEquals(events.selectedValuesChange, [
                 ['2'],
             ]);
+        });
+
+        describe('empty content', () => {
+            /** Reads the shown empty content, through slot assignments and slot fallbacks. */
+            function readEmptyText(instance: Element) {
+                const slotElement = assertWrap.instanceOf(
+                    instance.shadowRoot?.querySelector('.no-options slot'),
+                    HTMLSlotElement,
+                );
+
+                return slotElement
+                    .assignedNodes({
+                        flatten: true,
+                    })
+                    .map((node) => node.textContent)
+                    .join('')
+                    .trim();
+            }
+
+            async function searchFor(
+                setup: Awaited<ReturnType<typeof setupSearchTest>>,
+                text: string,
+            ) {
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+                await testWeb.typeText(text);
+                await waitUntil.isTruthy(() => {
+                    return setup.instance.shadowRoot.querySelector('.no-options');
+                });
+            }
+
+            it('shows noSearchResultsText when the search matches nothing', async () => {
+                const setup = await setupSearchTest({
+                    noOptionsText: 'No options',
+                    noSearchResultsText: 'No matches',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No matches');
+            });
+
+            it('falls back to noOptionsText when the search matches nothing', async () => {
+                const setup = await setupSearchTest({
+                    noOptionsText: 'No options',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No options');
+            });
+
+            it('falls back to slotted no options content when the search matches nothing', async () => {
+                const setup = await setupSearchTest(
+                    {},
+                    html`
+                        <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>
+                            Slotted no options
+                        </span>
+                    `,
+                );
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'Slotted no options');
+            });
+
+            it('shows slotted no search results content over the text inputs', async () => {
+                const setup = await setupSearchTest(
+                    {
+                        noOptionsText: 'No options',
+                        noSearchResultsText: 'No matches',
+                    },
+                    html`
+                        <span slot=${ViraDropdown.slotNames['vira-dropdown-no-search-results']}>
+                            Slotted no matches
+                        </span>
+                    `,
+                );
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'Slotted no matches');
+            });
+
+            it('shows no options content, not no search results content, without options', async () => {
+                const setup = await setupSearchTest({
+                    options: [],
+                    noOptionsText: 'No options',
+                    noSearchResultsText: 'No matches',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No options');
+            });
         });
 
         describe('isCreatable', () => {

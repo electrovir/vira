@@ -6,6 +6,7 @@ import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
+import {createSizedIcon} from '../icons/sized-icon.js';
 import {
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
@@ -996,12 +997,20 @@ describe(ViraDropdown.tagName, () => {
         });
     });
 
-    it('sizes the trigger chevron with its cssVar', async () => {
-        const {instance, triggerElement} = await setupDropdownTest();
-        setCssVarValue({
-            forCssVar: ViraDropdown.cssVars['vira-dropdown-trigger-icon-size'],
-            onElement: instance,
-            toValue: '16px',
+    it('renders a 24px chevron by default', async () => {
+        const {triggerElement} = await setupDropdownTest();
+
+        assert.strictEquals(
+            assertWrap
+                .isTruthy(triggerElement.querySelector('.trigger-icon'))
+                .getBoundingClientRect().width,
+            24,
+        );
+    });
+
+    it('renders a custom trigger icon at its own size', async () => {
+        const {triggerElement} = await setupDropdownTest({
+            triggerIcon: createSizedIcon(internalLucideIcons.ChevronUp16, 16),
         });
 
         assert.strictEquals(

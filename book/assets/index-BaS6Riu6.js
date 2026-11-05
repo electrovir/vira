@@ -23075,6 +23075,13 @@ var PopoverTrigger = /* @__PURE__ */ function(PopoverTrigger) {
 	* work.
 	*/
 	PopoverTrigger["Mousedown"] = "mousedown";
+	/**
+	* Toggles the popover the way a native context menu opens: on a right mousedown, a ctrl+left
+	* mousedown, or a touch held still on the anchor. The Menu key and Shift+F10 open it. The
+	* browser's own context menu is suppressed, and left clicks and taps are left to the anchor's
+	* contents.
+	*/
+	PopoverTrigger["ContextMenu"] = "context-menu";
 	return PopoverTrigger;
 }({});
 var defaultDelays = { ["hover"]: { milliseconds: 300 } };
@@ -23083,6 +23090,23 @@ function listenToAnchor(anchor, eventName, listener) {
 		listener(event);
 	});
 }
+/**
+* How long a touch must be held on a {@link PopoverTrigger.ContextMenu} anchor to open it.
+*
+* @category Internal
+*/
+var popoverLongPressDuration = { milliseconds: 500 };
+/**
+* Set on a {@link PopoverTrigger.ContextMenu} anchor while a touch is held on it, until the hold
+* opens the popover or is abandoned. Style it to show that the hold is working. It is removed right
+* before the popover opens, so make leaving the style instant: otherwise the popover is positioned
+* against the anchor while it is still changing back.
+*
+* @category Internal
+*/
+var popoverLongPressAttribute = "data-popover-long-press";
+/** How far, in pixels, a touch can drift before it stops counting as a long press. */
+var longPressMaxDistance = 10;
 var anchorListeners = {
 	["hover"](popoverManager, anchor) {
 		return [
@@ -23137,6 +23161,70 @@ var anchorListeners = {
 			}),
 			listenToAnchor(anchor, "keydown", (event) => {
 				popoverManager.openOnArrow(event);
+			})
+		];
+	},
+	["context-menu"](popoverManager, anchor) {
+		/**
+		* Set by a press that toggled the popover, so the click some browsers still fire for it
+		* (Firefox for a ctrl+click, mobile browsers after a long press) doesn't also activate the
+		* anchor's contents. Reset by the next press because browsers that skip that click would
+		* otherwise leave it set for a later, real click.
+		*/
+		let isClickSuppressed = false;
+		let longPress;
+		function cancelLongPress() {
+			clearTimeout(longPress?.timeout);
+			longPress = void 0;
+			anchor.removeAttribute(popoverLongPressAttribute);
+		}
+		return [
+			listenToAnchor(anchor, "pointerdown", (event) => {
+				isClickSuppressed = false;
+				cancelLongPress();
+				if (event.pointerType !== "touch") return;
+				longPress = {
+					pointerId: event.pointerId,
+					start: {
+						x: event.clientX,
+						y: event.clientY
+					},
+					timeout: setTimeout(() => {
+						cancelLongPress();
+						isClickSuppressed = true;
+						popoverManager.toggle();
+					}, popoverLongPressDuration.milliseconds)
+				};
+				anchor.setAttribute(popoverLongPressAttribute, "");
+			}),
+			listenToAnchor(anchor, "pointermove", (event) => {
+				if (longPress && event.pointerId === longPress.pointerId && Math.hypot(event.clientX - longPress.start.x, event.clientY - longPress.start.y) > longPressMaxDistance) cancelLongPress();
+			}),
+			listenToAnchor(anchor, "pointerup", cancelLongPress),
+			listenToAnchor(anchor, "pointercancel", cancelLongPress),
+			listenToAnchor(anchor, "mousedown", (event) => {
+				if (event.button === 2 || event.button === 0 && event.ctrlKey) {
+					isClickSuppressed = true;
+					popoverManager.toggle();
+				}
+			}),
+			listenToAnchor(anchor, "contextmenu", (event) => {
+				event.preventDefault();
+			}),
+			listenTo(anchor, "click", (event) => {
+				if (isClickSuppressed) {
+					isClickSuppressed = false;
+					event.stopPropagation();
+					event.preventDefault();
+				}
+			}, { 
+			/** So it runs before the listeners on the anchor's contents. */
+capture: true }),
+			listenToAnchor(anchor, "keydown", (event) => {
+				if (event.code === "ContextMenu" || event.shiftKey && event.code === "F10") {
+					event.preventDefault();
+					popoverManager.scheduleShow();
+				}
 			})
 		];
 	}
@@ -23322,11 +23410,19 @@ var PopoverManager = class {
 					event.preventDefault();
 				}
 			}),
-			listenToGlobal("mousedown", (event) => {
-				const path = event.composedPath();
-				if (this.anchor && path.includes(this.anchor) || this.popover && path.includes(this.popover) || isMouseEventOnScrollbar(event)) return;
-				this.hide();
-			}, { passive: true }),
+			listenToGlobal(
+				/**
+				* Not `mousedown`: iOS Safari only fires mouse events for taps on elements it
+				* considers clickable, so a tap on plain content would leave the popover open.
+				*/
+				"pointerdown",
+				(event) => {
+					const path = event.composedPath();
+					if (this.anchor && path.includes(this.anchor) || this.popover && path.includes(this.popover) || isMouseEventOnScrollbar(event)) return;
+					this.hide();
+				},
+				{ passive: true }
+			),
 			listenToGlobal("keydown", (event) => {
 				const keyCode = event.code;
 				if (keyCode === "Escape") this.hide();
@@ -79767,6 +79863,9 @@ var ViraPopoverTrigger = defineViraElement()({
 		},
 		"vira-popover-trigger-outside-focus"({ inputs }) {
 			return !inputs.useInsideFocus;
+		},
+		"vira-popover-trigger-context-menu"({ inputs }) {
+			return inputs.trigger === PopoverTrigger.ContextMenu;
 		}
 	},
 	cssVars: {
@@ -79791,6 +79890,12 @@ var ViraPopoverTrigger = defineViraElement()({
                 position: relative;
                 flex-grow: 1;
                 box-sizing: border-box;
+
+                /* No transition back: leaving this state snaps to full size. */
+                &[${r$1(popoverLongPressAttribute)}] {
+                    scale: 0.92;
+                    transition: scale ${popoverLongPressDuration.milliseconds}ms ease-out;
+                }
             }
 
             ${hostClasses["vira-popover-trigger-inside-focus"].selector} .dropdown-wrapper {
@@ -79804,6 +79909,11 @@ var ViraPopoverTrigger = defineViraElement()({
                 box-sizing: border-box;
                 height: 100%;
                 ${noUserSelect};
+            }
+
+            /** A left click does nothing with this trigger. */
+            ${hostClasses["vira-popover-trigger-context-menu"].selector} .dropdown-wrapper {
+                cursor: default;
             }
 
             ${hostClasses["vira-popover-trigger-disabled"].selector} {
@@ -92345,6 +92455,10 @@ var examples$4 = [
 		inputs: { menuCornerStyle: ViraMenuCornerStyle.Round }
 	},
 	{
+		title: "context menu trigger",
+		inputs: { trigger: PopoverTrigger.ContextMenu }
+	},
+	{
 		title: "disabled",
 		inputs: { isDisabled: true }
 	},
@@ -92413,7 +92527,6 @@ var viraMenuTriggerBookPage = defineBookPage({
 				title: example.title,
 				styles: css`
                     .trigger {
-                        cursor: pointer;
                         border: 4px solid #ccc;
                         padding: 8px 16px;
                     }

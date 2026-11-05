@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
-import {type CSSResult, css, html, listen} from 'element-vir';
+import {type CSSResult, type HtmlInterpolation, css, html, listen} from 'element-vir';
 import {
     LucideCodeXmlIcon,
     LucidePlusIcon,
@@ -130,6 +130,8 @@ const examples: ReadonlyArray<{
     customStyle?: CSSResult;
     /** Wraps the dropdown in a `.container` div so `customStyle` can style an ancestor. */
     isInContainer?: boolean;
+    /** Light DOM children of the dropdown, for filling its slots. */
+    children?: HtmlInterpolation;
 }> = [
     {
         title: 'default',
@@ -379,6 +381,26 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'searchable with separate no options and no search results text',
+        inputs: {
+            isSearchable: true,
+            noOptionsText: 'No options available',
+            noSearchResultsText: 'Nothing matches your search',
+        },
+    },
+    {
+        title: 'searchable with slotted no search results content',
+        inputs: {
+            isSearchable: true,
+        },
+        children: html`
+            <span slot=${ViraDropdown.slotNames['vira-dropdown-no-search-results']}>
+                Nothing matches.
+                <b>Try another search.</b>
+            </span>
+        `,
+    },
+    {
         title: 'searchable with a max shown options cap',
         inputs: {
             isSearchable: true,
@@ -567,7 +589,9 @@ export const viraDropdownPage = defineBookPage({
                                         : [newOption.value],
                                 });
                             })}
-                        ></${ViraDropdown}>
+                        >
+                            ${example.children}
+                        </${ViraDropdown}>
                     `;
 
                     return example.isInContainer

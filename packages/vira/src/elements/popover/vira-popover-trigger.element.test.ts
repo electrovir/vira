@@ -4,7 +4,7 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {waitForAnimationFrame} from '@augment-vir/web';
 import {sendKeys, setViewport} from '@web/test-runner-commands';
 import {css, html, type CSSResult} from 'element-vir';
-import {PopoverTrigger} from '../../util/popover-manager.js';
+import {popoverLongPressAttribute, PopoverTrigger} from '../../util/popover-manager.js';
 import {ViraPopoverTrigger} from './vira-popover-trigger.element.js';
 
 const triggerClass = 'trigger';
@@ -111,12 +111,13 @@ describe(ViraPopoverTrigger.tagName, () => {
         await waitUntil.isFalse(isPopoverOpen);
     });
 
-    it('hides the popover on an outside mousedown', async () => {
+    it('hides the popover on an outside press, including a touch', async () => {
         const {open, isPopoverOpen} = await setupPopoverTest();
 
         await open();
         document.body.dispatchEvent(
-            new MouseEvent('mousedown', {
+            new PointerEvent('pointerdown', {
+                pointerType: 'touch',
                 bubbles: true,
                 composed: true,
             }),
@@ -180,6 +181,92 @@ describe(ViraPopoverTrigger.tagName, () => {
         await waitUntil.isTrue(isPopoverOpen);
         await testWeb.click(trigger);
         await waitUntil.isFalse(isPopoverOpen);
+    });
+
+    it('toggles on a right or ctrl+left mousedown with the context menu trigger', async () => {
+        const {trigger, isPopoverOpen} = await setupPopoverTest({
+            inputs: {
+                trigger: PopoverTrigger.ContextMenu,
+            },
+        });
+
+        await testWeb.click(trigger);
+        await waitForAnimationFrame(2);
+        assert.isFalse(isPopoverOpen());
+
+        trigger.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 2,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        await waitUntil.isTrue(isPopoverOpen);
+        const contextMenuEvent = new MouseEvent('contextmenu', {
+            button: 2,
+            bubbles: true,
+            composed: true,
+            cancelable: true,
+        });
+        trigger.dispatchEvent(contextMenuEvent);
+        assert.isTrue(contextMenuEvent.defaultPrevented);
+
+        trigger.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 0,
+                ctrlKey: true,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        await waitUntil.isFalse(isPopoverOpen);
+    });
+
+    it('opens on a touch long press and swallows the click after it', async () => {
+        const {trigger, isPopoverOpen} = await setupPopoverTest({
+            inputs: {
+                trigger: PopoverTrigger.ContextMenu,
+            },
+        });
+        const clicks: MouseEvent[] = [];
+        trigger.addEventListener('click', (event) => {
+            clicks.push(event);
+        });
+
+        trigger.dispatchEvent(
+            new PointerEvent('pointerdown', {
+                pointerType: 'touch',
+                pointerId: 1,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        const anchor = assertWrap.instanceOf(
+            assertWrap
+                .instanceOf(trigger.parentElement, ViraPopoverTrigger)
+                .shadowRoot.querySelector('.dropdown-wrapper'),
+            HTMLElement,
+        );
+        assert.isTrue(anchor.hasAttribute(popoverLongPressAttribute));
+        await waitUntil.isTrue(isPopoverOpen, {
+            timeout: {
+                seconds: 2,
+            },
+        });
+        assert.isFalse(anchor.hasAttribute(popoverLongPressAttribute));
+        trigger.dispatchEvent(
+            new PointerEvent('pointerup', {
+                pointerType: 'touch',
+                pointerId: 1,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+        trigger.click();
+        assert.isLengthExactly(clicks, 0);
+
+        trigger.click();
+        assert.isLengthExactly(clicks, 1);
     });
 
     it('opens downwards below the trigger, including the vertical offset', async () => {

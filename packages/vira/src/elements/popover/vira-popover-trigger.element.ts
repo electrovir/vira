@@ -1,7 +1,7 @@
 import {assertWrap} from '@augment-vir/assert';
 import {type PartialWithUndefined} from '@augment-vir/common';
 import {NavController, type Coords} from 'device-navigation';
-import {classMap, css, defineElementEvent, html, listen, renderIf} from 'element-vir';
+import {classMap, css, defineElementEvent, html, listen, renderIf, unsafeCSS} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {popover} from '../../directives/popover.directive.js';
 import {createFocusStyles} from '../../styles/focus.js';
@@ -11,6 +11,8 @@ import {defineViraElement} from '../../util/define-vira-element.js';
 import {
     isMouseEventOnScrollbar,
     isTextInputActive,
+    popoverLongPressAttribute,
+    popoverLongPressDuration,
     PopoverManager,
     PopoverTrigger,
 } from '../../util/popover-manager.js';
@@ -80,6 +82,9 @@ export const ViraPopoverTrigger = defineViraElement<
         'vira-popover-trigger-outside-focus'({inputs}) {
             return !inputs.useInsideFocus;
         },
+        'vira-popover-trigger-context-menu'({inputs}) {
+            return inputs.trigger === PopoverTrigger.ContextMenu;
+        },
     },
     cssVars: {
         'vira-popover-trigger-offset-vertical': '0px',
@@ -103,6 +108,12 @@ export const ViraPopoverTrigger = defineViraElement<
                 position: relative;
                 flex-grow: 1;
                 box-sizing: border-box;
+
+                /* No transition back: leaving this state snaps to full size. */
+                &[${unsafeCSS(popoverLongPressAttribute)}] {
+                    scale: 0.92;
+                    transition: scale ${popoverLongPressDuration.milliseconds}ms ease-out;
+                }
             }
 
             ${hostClasses['vira-popover-trigger-inside-focus'].selector} .dropdown-wrapper {
@@ -118,6 +129,11 @@ export const ViraPopoverTrigger = defineViraElement<
                 box-sizing: border-box;
                 height: 100%;
                 ${noUserSelect};
+            }
+
+            /** A left click does nothing with this trigger. */
+            ${hostClasses['vira-popover-trigger-context-menu'].selector} .dropdown-wrapper {
+                cursor: default;
             }
 
             ${hostClasses['vira-popover-trigger-disabled'].selector} {

@@ -2,6 +2,7 @@ import {defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
 import {type FullSpaRoute} from 'spa-router-vir';
 import {
+    PopoverTrigger,
     renderMenuItemEntries,
     ViraDropdown,
     ViraLink,
@@ -76,6 +77,12 @@ const examples: {
         title: 'rounded',
         inputs: {
             menuCornerStyle: ViraMenuCornerStyle.Round,
+        },
+    },
+    {
+        title: 'context menu trigger',
+        inputs: {
+            trigger: PopoverTrigger.ContextMenu,
         },
     },
     {
@@ -172,7 +179,6 @@ export const viraMenuTriggerBookPage = defineBookPage({
                 title: example.title,
                 styles: css`
                     .trigger {
-                        cursor: pointer;
                         border: 4px solid #ccc;
                         padding: 8px 16px;
                     }

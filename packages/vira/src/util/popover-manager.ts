@@ -195,6 +195,13 @@ export enum PopoverTrigger {
      * work.
      */
     Mousedown = 'mousedown',
+    /**
+     * Toggles the popover the way a native context menu opens: on a right mousedown, a ctrl+left
+     * mousedown, or a touch held still on the anchor. The Menu key and Shift+F10 open it. The
+     * browser's own context menu is suppressed, and left clicks and taps are left to the anchor's
+     * contents.
+     */
+    ContextMenu = 'context-menu',
 }
 
 /**
@@ -239,6 +246,26 @@ function listenToAnchor<const EventName extends keyof HTMLElementEventMap>(
         listener(event satisfies Event as HTMLElementEventMap[EventName]);
     });
 }
+
+/**
+ * How long a touch must be held on a {@link PopoverTrigger.ContextMenu} anchor to open it.
+ *
+ * @category Internal
+ */
+export const popoverLongPressDuration: Duration<DurationUnit.Milliseconds> = {
+    milliseconds: 500,
+};
+/**
+ * Set on a {@link PopoverTrigger.ContextMenu} anchor while a touch is held on it, until the hold
+ * opens the popover or is abandoned. Style it to show that the hold is working. It is removed right
+ * before the popover opens, so make leaving the style instant: otherwise the popover is positioned
+ * against the anchor while it is still changing back.
+ *
+ * @category Internal
+ */
+export const popoverLongPressAttribute = 'data-popover-long-press';
+/** How far, in pixels, a touch can drift before it stops counting as a long press. */
+const longPressMaxDistance = 10;
 
 const anchorListeners: Record<
     PopoverTrigger,
@@ -311,6 +338,98 @@ const anchorListeners: Record<
             }),
             listenToAnchor(anchor, 'keydown', (event) => {
                 popoverManager.openOnArrow(event);
+            }),
+        ];
+    },
+    [PopoverTrigger.ContextMenu](popoverManager, anchor) {
+        /**
+         * Set by a press that toggled the popover, so the click some browsers still fire for it
+         * (Firefox for a ctrl+click, mobile browsers after a long press) doesn't also activate the
+         * anchor's contents. Reset by the next press because browsers that skip that click would
+         * otherwise leave it set for a later, real click.
+         */
+        let isClickSuppressed = false;
+        let longPress:
+            | {
+                  timeout: ReturnType<typeof setTimeout>;
+                  pointerId: number;
+                  start: Point;
+              }
+            | undefined;
+
+        function cancelLongPress() {
+            clearTimeout(longPress?.timeout);
+            longPress = undefined;
+            anchor.removeAttribute(popoverLongPressAttribute);
+        }
+
+        return [
+            listenToAnchor(anchor, 'pointerdown', (event) => {
+                isClickSuppressed = false;
+                cancelLongPress();
+
+                if (event.pointerType !== 'touch') {
+                    return;
+                }
+
+                longPress = {
+                    pointerId: event.pointerId,
+                    start: {
+                        x: event.clientX,
+                        y: event.clientY,
+                    },
+                    timeout: setTimeout(() => {
+                        cancelLongPress();
+                        isClickSuppressed = true;
+                        popoverManager.toggle();
+                    }, popoverLongPressDuration.milliseconds),
+                };
+                anchor.setAttribute(popoverLongPressAttribute, '');
+            }),
+            listenToAnchor(anchor, 'pointermove', (event) => {
+                if (
+                    longPress &&
+                    event.pointerId === longPress.pointerId &&
+                    Math.hypot(
+                        event.clientX - longPress.start.x,
+                        event.clientY - longPress.start.y,
+                    ) > longPressMaxDistance
+                ) {
+                    cancelLongPress();
+                }
+            }),
+            listenToAnchor(anchor, 'pointerup', cancelLongPress),
+            /** Fired when the browser takes the touch over to scroll. */
+            listenToAnchor(anchor, 'pointercancel', cancelLongPress),
+            listenToAnchor(anchor, 'mousedown', (event) => {
+                if (event.button === 2 || (event.button === 0 && event.ctrlKey)) {
+                    isClickSuppressed = true;
+                    popoverManager.toggle();
+                }
+            }),
+            listenToAnchor(anchor, 'contextmenu', (event) => {
+                event.preventDefault();
+            }),
+            listenTo(
+                anchor,
+                'click',
+                (event) => {
+                    if (isClickSuppressed) {
+                        isClickSuppressed = false;
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+                },
+                {
+                    /** So it runs before the listeners on the anchor's contents. */
+                    capture: true,
+                },
+            ),
+            listenToAnchor(anchor, 'keydown', (event) => {
+                if (event.code === 'ContextMenu' || (event.shiftKey && event.code === 'F10')) {
+                    event.preventDefault();
+                    popoverManager.scheduleShow();
+                }
             }),
         ];
     },
@@ -589,7 +708,11 @@ export class PopoverManager {
                 }
             }),
             listenToGlobal(
-                'mousedown',
+                /**
+                 * Not `mousedown`: iOS Safari only fires mouse events for taps on elements it
+                 * considers clickable, so a tap on plain content would leave the popover open.
+                 */
+                'pointerdown',
                 (event) => {
                     const path = event.composedPath();
 

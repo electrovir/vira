@@ -60,6 +60,19 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'constrained width with wrapped text',
+        content: 'has more text than is possible to fit',
+        customStyle: css`
+            :host {
+                max-width: 100px;
+            }
+        `,
+        inputs: {
+            selected: true,
+            wrapText: true,
+        },
+    },
+    {
         title: 'stretched width',
         content: 'wide',
         customStyle: css`

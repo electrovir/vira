@@ -1,6 +1,7 @@
-import {assert, assertWrap} from '@augment-vir/assert';
+import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {describe, it, testWeb} from '@augment-vir/test';
-import {css, html, listen} from 'element-vir';
+import {resetMouse} from '@web/test-runner-commands';
+import {css, html, type HtmlInterpolation, listen} from 'element-vir';
 import {viraFormCssVars} from '../../styles/form-styles.js';
 import {ViraMenuItem} from './vira-menu-item.element.js';
 
@@ -165,5 +166,111 @@ describe(ViraMenuItem.tagName, () => {
             globalThis.getComputedStyle(items[1]).backgroundColor,
             overriddenBackground,
         );
+    });
+
+    describe('text overflow', () => {
+        const longText = 'this text is much too long to fit in a narrow menu item';
+
+        async function renderNarrowMenuItem(
+            inputs: typeof ViraMenuItem.InputsType,
+            content: HtmlInterpolation = longText,
+        ) {
+            const fixture = await testWeb.render(html`
+                <${ViraMenuItem.assign(inputs)}
+                    style=${css`
+                        width: 120px;
+                    `}
+                >
+                    ${content}
+                </${ViraMenuItem}>
+            `);
+
+            const instance = assertWrap.instanceOf(fixture, ViraMenuItem);
+            const slotWrapper = assertWrap.instanceOf(
+                instance.shadowRoot.querySelector('.slot-wrapper'),
+                HTMLElement,
+            );
+
+            return {
+                instance,
+                slotWrapper,
+            };
+        }
+
+        async function hover(element: Element) {
+            try {
+                await testWeb.moveMouseTo(element);
+            } finally {
+                await resetMouse();
+            }
+        }
+
+        it('cuts long text off with an ellipsis by default', async () => {
+            const {instance, slotWrapper} = await renderNarrowMenuItem({});
+            const singleLine = await renderNarrowMenuItem({}, 'short');
+
+            assert.strictEquals(getComputedStyle(slotWrapper).whiteSpace, 'nowrap');
+            assert.isApproximately(
+                instance.getBoundingClientRect().height,
+                singleLine.instance.getBoundingClientRect().height,
+                1,
+            );
+        });
+
+        it('shows the full text on hover when it is cut off', async () => {
+            const {instance, slotWrapper} = await renderNarrowMenuItem({});
+
+            assert.isFalse(slotWrapper.hasAttribute('title'));
+            await hover(instance);
+
+            await waitUntil.strictEquals(longText, () => slotWrapper.getAttribute('title'));
+        });
+
+        it('shows the full text on hover when slotted content cuts itself off', async () => {
+            const {instance, slotWrapper} = await renderNarrowMenuItem(
+                {},
+                html`
+                    <span
+                        style=${css`
+                            display: block;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        `}
+                    >
+                        ${longText}
+                    </span>
+                `,
+            );
+
+            await hover(instance);
+
+            await waitUntil.strictEquals(longText, () => slotWrapper.getAttribute('title'));
+        });
+
+        it('shows no hover text when the text fits', async () => {
+            const {instance, slotWrapper} = await renderNarrowMenuItem({}, 'short');
+
+            await hover(instance);
+
+            assert.isFalse(slotWrapper.hasAttribute('title'));
+        });
+
+        it('wraps long text with wrapText', async () => {
+            const {instance, slotWrapper} = await renderNarrowMenuItem({
+                wrapText: true,
+            });
+            const singleLine = await renderNarrowMenuItem({}, 'short');
+
+            assert.isAbove(
+                instance.getBoundingClientRect().height,
+                singleLine.instance.getBoundingClientRect().height * 1.5,
+            );
+            assert.isAtMost(slotWrapper.scrollWidth, slotWrapper.clientWidth);
+
+            await hover(instance);
+
+            assert.isFalse(slotWrapper.hasAttribute('title'));
+        });
     });
 });

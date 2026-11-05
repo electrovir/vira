@@ -3,6 +3,7 @@ import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
 import {
+    LucideChevronUpIcon,
     LucideCodeXmlIcon,
     LucidePlusIcon,
     LucideUploadIcon,
@@ -123,6 +124,22 @@ const manyDropdownOptions = createArray(100, (index) => {
         value: String(index + 1),
     };
 });
+
+const longLabelDropdownOptions: ReadonlyArray<Readonly<ViraDropdownOption>> = [
+    {
+        label: 'A short label',
+        value: 'short',
+    },
+    {
+        label: 'A label that is much too long to fit on one line of the menu',
+        value: 'long',
+    },
+    {
+        label: 'Another label that is much too long to fit on one line of the menu',
+        value: 'long-with-icon',
+        icon: LucideChevronUpIcon,
+    },
+];
 
 const examples: ReadonlyArray<{
     title: string;
@@ -362,6 +379,19 @@ const examples: ReadonlyArray<{
         inputs: {
             options: [],
             noOptionsText: 'No options available',
+        },
+    },
+    {
+        title: 'long option labels',
+        inputs: {
+            options: longLabelDropdownOptions,
+        },
+    },
+    {
+        title: 'long option labels wrapped',
+        inputs: {
+            options: longLabelDropdownOptions,
+            wrapOptionText: true,
         },
     },
     {

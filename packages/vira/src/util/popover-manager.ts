@@ -86,12 +86,14 @@ export function isMouseEventOnScrollbar(event: Readonly<MouseEvent>): boolean {
     );
 }
 
-type Point = {
+/** @category Internal */
+export type Point = {
     x: number;
     y: number;
 };
 
-type PopoverHoverAreaParams = Readonly<
+/** @category Internal */
+export type PopoverHoverAreaParams = Readonly<
     Record<
         'anchorRect' | 'popoverRect',
         Readonly<Pick<DOMRectReadOnly, 'top' | 'right' | 'bottom' | 'left'>>

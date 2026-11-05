@@ -35,6 +35,13 @@ export const ViraMenuItem = defineViraElement<
         /** Removes the icon entirely, including the space it reserves when not shown. */
         hideIcon: boolean;
         /**
+         * Wraps text that is too long for the menu item onto more lines. When `false`, long text is
+         * cut off with an ellipsis instead, and hovering it shows the full text.
+         *
+         * @default false
+         */
+        wrapText: boolean;
+        /**
          * When `true`, activating this item will _not_ close the containing popover.
          *
          * @default false
@@ -72,6 +79,9 @@ export const ViraMenuItem = defineViraElement<
         },
         'vira-menu-item-default-styles'({inputs}) {
             return !inputs.disablePointerStyles;
+        },
+        'vira-menu-item-wrap-text'({inputs}) {
+            return !!inputs.wrapText;
         },
     },
     cssVars: {
@@ -159,6 +169,11 @@ export const ViraMenuItem = defineViraElement<
                     min-width: 0;
                 }
             }
+
+            ${hostClasses['vira-menu-item-wrap-text'].selector} .slot-wrapper {
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
         `;
     },
     init({state, updateState, host, inputs, dispatch, events}) {
@@ -242,6 +257,49 @@ export const ViraMenuItem = defineViraElement<
                 });
         }
 
+        /**
+         * Shows the full text in a native tooltip, only while the text is cut off by an ellipsis.
+         * Slotted content can cut itself off too (with its own `text-overflow`), so every element
+         * in it is checked.
+         */
+        function updateOverflowTitle() {
+            const slotWrapper = host.shadowRoot.querySelector('.slot-wrapper');
+            const slotElement = slotWrapper?.querySelector('slot');
+
+            if (!slotWrapper || !slotElement) {
+                return;
+            }
+
+            const assignedElements = slotElement.assignedElements({
+                flatten: true,
+            });
+            const isTruncated = [
+                slotWrapper,
+                slotElement,
+                ...assignedElements.flatMap((element) => {
+                    return [
+                        element,
+                        ...element.querySelectorAll('*'),
+                    ];
+                }),
+            ].some((element) => element.scrollWidth > element.clientWidth);
+
+            const fullText = slotElement
+                .assignedNodes({
+                    flatten: true,
+                })
+                .map((node) => node.textContent)
+                .join('')
+                .replaceAll(/\s+/g, ' ')
+                .trim();
+
+            if (isTruncated && fullText) {
+                slotWrapper.setAttribute('title', fullText);
+            } else {
+                slotWrapper.removeAttribute('title');
+            }
+        }
+
         const listenerRemovers = [
             listenTo(host, 'click', propagateMouseEvent),
             listenTo(host, 'mousedown', propagateMouseEvent),
@@ -278,6 +336,7 @@ export const ViraMenuItem = defineViraElement<
                 }
             }),
             listenTo(host, 'mouseenter', () => {
+                updateOverflowTitle();
                 if (!inputs.disabled) {
                     host.focus();
                 }

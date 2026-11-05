@@ -1041,6 +1041,85 @@ describe(ViraDropdown.tagName, () => {
         );
     });
 
+    describe('wrapOptionText', () => {
+        const longLabel =
+            'an option label that is far too long to fit on a single line of the dropdown menu';
+
+        /** Opens a dropdown with a short and a long option and reads both option heights. */
+        async function readOptionHeights(
+            inputs: Partial<(typeof ViraDropdown)['InputsType']>,
+            option: Partial<ViraDropdownOption> = {},
+        ) {
+            const {toggle, instance} = await setupDropdownTest({
+                options: [
+                    {
+                        value: 'short',
+                        label: 'short',
+                        ...option,
+                    },
+                    {
+                        value: 'long',
+                        label: longLabel,
+                        ...option,
+                    },
+                ],
+                ...inputs,
+            });
+
+            await toggle();
+
+            const [
+                short,
+                long,
+            ] = queryThroughShadow(instance, ViraMenuItem.tagName, {
+                all: true,
+            }).map((menuItem) => menuItem.getBoundingClientRect().height);
+
+            return {
+                short: assertWrap.isDefined(short),
+                long: assertWrap.isDefined(long),
+            };
+        }
+
+        it('keeps long option labels on one line by default', async () => {
+            const {short, long} = await readOptionHeights({});
+
+            assert.isApproximately(long, short, 1);
+        });
+
+        it('wraps long option labels', async () => {
+            const {short, long} = await readOptionHeights({
+                wrapOptionText: true,
+            });
+
+            assert.isAbove(long, short * 1.5);
+        });
+
+        it('keeps long option labels that have an icon on one line by default', async () => {
+            const {short, long} = await readOptionHeights(
+                {},
+                {
+                    icon: internalLucideIcons.Check16,
+                },
+            );
+
+            assert.isApproximately(long, short, 1);
+        });
+
+        it('wraps long option labels that have an icon', async () => {
+            const {short, long} = await readOptionHeights(
+                {
+                    wrapOptionText: true,
+                },
+                {
+                    icon: internalLucideIcons.Check16,
+                },
+            );
+
+            assert.isAbove(long, short * 1.5);
+        });
+    });
+
     describe('isSearchable', () => {
         async function setupSearchTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
             const dropdownTest = await setupDropdownTest({

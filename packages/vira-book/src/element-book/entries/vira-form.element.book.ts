@@ -34,6 +34,21 @@ const mockRoleOptions: ViraDropdownOption[] = [
     },
 ];
 
+const mockNotificationOptions: ViraDropdownOption[] = [
+    {
+        label: 'Email',
+        value: 'email',
+    },
+    {
+        label: 'Text message',
+        value: 'text-message',
+    },
+    {
+        label: 'Push notification',
+        value: 'push-notification',
+    },
+];
+
 export const viraFormBookPage = defineBookPage({
     parent: elementsBookPage,
     title: ViraForm.tagName,
@@ -291,6 +306,96 @@ export const viraFormBookPage = defineBookPage({
                             })}></${ViraButton}>
                         </div>
                     </${ViraForm}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'multi-select',
+            state() {
+                return {
+                    permissions: [
+                        'admin',
+                    ] as ReadonlyArray<string>,
+                    notifications: [] as ReadonlyArray<string>,
+                };
+            },
+            styles: css`
+                ${ViraForm} {
+                    width: 400px;
+                }
+            `,
+            render({state, updateState}) {
+                return html`
+                    <${ViraForm.assign({
+                        fields: {
+                            permissions: {
+                                type: ViraFormFieldType.MultiSelect,
+                                label: 'Permissions',
+                                options: mockRoleOptions,
+                                value: state.permissions,
+                                isRequired: true,
+                                placeholder: 'none',
+                            },
+                            notifications: {
+                                type: ViraFormFieldType.MultiSelect,
+                                label: 'Notifications',
+                                options: mockNotificationOptions,
+                                value: state.notifications,
+                                placeholder: 'none',
+                            },
+                        },
+                    })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            updateState({
+                                ...state,
+                                [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    ></${ViraForm}>
+                `;
+            },
+        });
+        defineExample({
+            title: 'checkbox group',
+            state() {
+                return {
+                    permissions: [
+                        'admin',
+                    ] as ReadonlyArray<string>,
+                    notifications: [] as ReadonlyArray<string>,
+                };
+            },
+            styles: css`
+                ${ViraForm} {
+                    width: 400px;
+                }
+            `,
+            render({state, updateState}) {
+                return html`
+                    <${ViraForm.assign({
+                        fields: {
+                            permissions: {
+                                type: ViraFormFieldType.CheckboxGroup,
+                                label: 'Permissions',
+                                options: mockRoleOptions,
+                                value: state.permissions,
+                                isRequired: true,
+                            },
+                            notifications: {
+                                type: ViraFormFieldType.CheckboxGroup,
+                                label: 'Notifications',
+                                options: mockNotificationOptions,
+                                value: state.notifications,
+                            },
+                        },
+                    })}
+                        ${listen(ViraForm.events.valueChange, (event) => {
+                            updateState({
+                                ...state,
+                                [event.detail.key]: event.detail.value,
+                            });
+                        })}
+                    ></${ViraForm}>
                 `;
             },
         });

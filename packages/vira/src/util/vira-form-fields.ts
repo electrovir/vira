@@ -21,6 +21,10 @@ export enum ViraFormFieldType {
     Email = 'email',
     Number = 'number',
     Select = 'select',
+    /** A dropdown that allows selecting any number of its options. */
+    MultiSelect = 'multi-select',
+    /** A vertical list of checkboxes, one per option, that allows selecting any number of them. */
+    CheckboxGroup = 'checkbox-group',
     Checkbox = 'checkbox',
     TextArea = 'text-area',
     Date = 'date',
@@ -91,6 +95,22 @@ export type ViraFormField =
           icon: ViraIconSvg;
       }> &
           CommonViraFormFields)
+    | ({
+          type: ViraFormFieldType.MultiSelect;
+          /** A required multi-select field is only valid when this contains at least one value. */
+          value: ReadonlyArray<string> | undefined;
+          options: ReadonlyArray<Readonly<ViraDropdownOption>>;
+      } & PartialWithUndefined<{
+          placeholder: string;
+          icon: ViraIconSvg;
+      }> &
+          CommonViraFormFields)
+    | ({
+          type: ViraFormFieldType.CheckboxGroup;
+          /** A required checkbox group is only valid when this contains at least one value. */
+          value: ReadonlyArray<string> | undefined;
+          options: ReadonlyArray<Readonly<ViraDropdownOption>>;
+      } & CommonViraFormFields)
     | ({
           type: ViraFormFieldType.Checkbox;
           value: boolean | undefined;
@@ -174,7 +194,7 @@ export function applyRequiredLabel(
  * Checks if all the {@link ViraFormField} entries in a given {@link ViraFormFields} are valid through
  * the following checks:
  *
- * - Checks that required fields are provided (not `undefined`)
+ * - Checks that required fields are provided (not `undefined`, an empty string, or an empty array)
  * - Ignores hidden fields
  *
  * @category Internal
@@ -185,6 +205,8 @@ export function areFormFieldsValid(formFields: Readonly<ViraFormFields>) {
             return true;
         } else if (check.isString(formField.value)) {
             return !!formField.value;
+        } else if (check.isArray(formField.value)) {
+            return formField.value.length > 0;
         } else {
             return formField.value != undefined;
         }

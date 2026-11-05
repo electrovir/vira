@@ -151,6 +151,23 @@ export const ViraForm = defineViraElement<
             }
         }
 
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .checkbox-group-label {
+            font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+        }
+
+        .checkbox-group-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
         .reorder-rows {
             display: flex;
             flex-direction: column;
@@ -403,14 +420,89 @@ export const ViraForm = defineViraElement<
                           }
                         : {};
 
-                if (field.type === ViraFormFieldType.Select) {
+                if (field.type === ViraFormFieldType.CheckboxGroup) {
+                    const selected = field.value || [];
+                    return wrapFormField({
+                        key,
+                        label,
+                        fieldTemplate: html`
+                            <div
+                                class="checkbox-group"
+                                ${field.testId ? testId(field.testId) : nothing}
+                                ${listenToFieldBlur(key, field)}
+                            >
+                                ${childLabel
+                                    ? html`
+                                          <span class="checkbox-group-label">${childLabel}</span>
+                                      `
+                                    : nothing}
+                                <div class="checkbox-group-options">
+                                    ${field.options.map((option) => {
+                                        return html`
+                                            <${ViraCheckbox.assign({
+                                                value: selected.includes(option.value),
+                                                isDisabled: !!(isDisabled || inputs.isReadonly),
+                                                hasError: field.hasError,
+                                                useHorizontalLabel: true,
+                                            })}
+                                                ${listen(
+                                                    ViraCheckbox.events.valueChange,
+                                                    (event) => {
+                                                        dispatch(
+                                                            new events.valueChange({
+                                                                detail: {
+                                                                    key,
+                                                                    ...field,
+                                                                    value: event.detail
+                                                                        ? [
+                                                                              ...selected,
+                                                                              option.value,
+                                                                          ]
+                                                                        : selected.filter(
+                                                                              (value) => {
+                                                                                  return (
+                                                                                      value !==
+                                                                                      option.value
+                                                                                  );
+                                                                              },
+                                                                          ),
+                                                                },
+                                                            }),
+                                                        );
+                                                    },
+                                                )}
+                                            >
+                                                <span
+                                                    slot=${ViraCheckbox.slotNames[
+                                                        'vira-checkbox-label'
+                                                    ]}
+                                                >
+                                                    ${option.label}
+                                                </span>
+                                            </${ViraCheckbox}>
+                                        `;
+                                    })}
+                                </div>
+                            </div>
+                        `,
+                    });
+                } else if (
+                    field.type === ViraFormFieldType.Select ||
+                    field.type === ViraFormFieldType.MultiSelect
+                ) {
                     return wrapFormField({
                         key,
                         label,
                         fieldTemplate: html`
                             <${ViraDropdown.assign({
                                 options: field.options,
-                                selected: field.value ? [field.value] : [],
+                                selected:
+                                    field.type === ViraFormFieldType.MultiSelect
+                                        ? field.value || []
+                                        : field.value
+                                          ? [field.value]
+                                          : [],
+                                isMultiSelect: field.type === ViraFormFieldType.MultiSelect,
                                 placeholder: field.placeholder,
                                 isDisabled,
                                 isReadonly: inputs.isReadonly,
@@ -424,11 +516,18 @@ export const ViraForm = defineViraElement<
                                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                                     dispatch(
                                         new events.valueChange({
-                                            detail: {
-                                                key,
-                                                ...field,
-                                                value: event.detail[0],
-                                            },
+                                            detail:
+                                                field.type === ViraFormFieldType.MultiSelect
+                                                    ? {
+                                                          key,
+                                                          ...field,
+                                                          value: event.detail,
+                                                      }
+                                                    : {
+                                                          key,
+                                                          ...field,
+                                                          value: event.detail[0],
+                                                      },
                                         }),
                                     );
                                 })}

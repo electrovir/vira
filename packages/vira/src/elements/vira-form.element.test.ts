@@ -212,6 +212,20 @@ describe(ViraForm.tagName, () => {
             value: undefined,
             options: [],
         },
+        [ViraFormFieldType.MultiSelect]: {
+            type: ViraFormFieldType.MultiSelect,
+            label: createTemplateLabel(ViraFormFieldType.MultiSelect),
+            isRequired: true,
+            value: undefined,
+            options: [],
+        },
+        [ViraFormFieldType.CheckboxGroup]: {
+            type: ViraFormFieldType.CheckboxGroup,
+            label: createTemplateLabel(ViraFormFieldType.CheckboxGroup),
+            isRequired: true,
+            value: undefined,
+            options: [],
+        },
         [ViraFormFieldType.Checkbox]: {
             type: ViraFormFieldType.Checkbox,
             label: createTemplateLabel(ViraFormFieldType.Checkbox),

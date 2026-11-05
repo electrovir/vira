@@ -58,6 +58,47 @@ describe(areFormFieldsValid.name, () => {
             },
             expect: true,
         },
+        {
+            it: 'rejects a required multi-select with nothing selected',
+            input: {
+                multiSelect: {
+                    type: ViraFormFieldType.MultiSelect,
+                    value: [],
+                    options: [],
+                    label: '',
+                    isRequired: true,
+                },
+            },
+            expect: false,
+        },
+        {
+            it: 'rejects a required checkbox group with nothing selected',
+            input: {
+                checkboxGroup: {
+                    type: ViraFormFieldType.CheckboxGroup,
+                    value: [],
+                    options: [],
+                    label: '',
+                    isRequired: true,
+                },
+            },
+            expect: false,
+        },
+        {
+            it: 'accepts a required checkbox group with a selection',
+            input: {
+                checkboxGroup: {
+                    type: ViraFormFieldType.CheckboxGroup,
+                    value: [
+                        'value',
+                    ],
+                    options: [],
+                    label: '',
+                    isRequired: true,
+                },
+            },
+            expect: true,
+        },
     ]);
 });
 

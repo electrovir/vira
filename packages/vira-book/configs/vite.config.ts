@@ -15,6 +15,7 @@ export default defineConfig(
             base: '/vira/book',
             build: {
                 outDir: join(basePaths.cwd, 'dist-book'),
+                minify: false,
             },
             esbuild: {
                 keepNames: true,

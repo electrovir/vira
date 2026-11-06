@@ -4,7 +4,11 @@ import {classMap, css, defineElementEvent, html, listen, nothing} from 'element-
 import {defineViraElement} from '../../util/define-vira-element.js';
 import {type PopoverTrigger} from '../../util/popover-manager.js';
 import {ViraMenu, ViraMenuCornerStyle} from './vira-menu.element.js';
-import {ViraPopoverTrigger, type PopoverOffset} from './vira-popover-trigger.element.js';
+import {
+    ViraPopoverTrigger,
+    type PopoverAnchor,
+    type PopoverOffset,
+} from './vira-popover-trigger.element.js';
 
 /**
  * Test ids for {@link ViraMenuTrigger}.
@@ -30,6 +34,8 @@ export const ViraMenuTrigger = defineViraElement<
          */
         trigger: boolean | PopoverTrigger;
         popoverOffset: PopoverOffset;
+        /** @default PopoverAnchor.FullWidth */
+        popoverAnchor: PopoverAnchor;
         keepOpenAfterInteraction: boolean;
         /** @default ViraMenuCornerStyle.Round */
         menuCornerStyle: ViraMenuCornerStyle;

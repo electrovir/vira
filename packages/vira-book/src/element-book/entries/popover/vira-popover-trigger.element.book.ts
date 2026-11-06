@@ -1,6 +1,7 @@
+import {getEnumValues} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
-import {viraFormCssVars, ViraPopoverTrigger} from 'vira';
+import {PopoverAnchor, viraFormCssVars, ViraPopoverTrigger} from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
 export const viraPopoverTriggerBookPage = defineBookPage({
@@ -47,6 +48,48 @@ export const viraPopoverTriggerBookPage = defineBookPage({
                     </${ViraPopoverTrigger}>
                 `;
             },
+        });
+        getEnumValues(PopoverAnchor).forEach((popoverAnchor) => {
+            defineExample({
+                title: `${popoverAnchor} anchor`,
+                styles: css`
+                    .trigger {
+                        cursor: pointer;
+                        width: 400px;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        border: 4px solid #ccc;
+                        padding: 8px 16px;
+                    }
+
+                    .popover {
+                        border: 4px solid #eee;
+                        padding: 8px 16px;
+                        background-color: #eef9ff;
+                    }
+                `,
+                render() {
+                    return html`
+                        <${ViraPopoverTrigger.assign({
+                            keepOpenAfterInteraction: true,
+                            popoverAnchor,
+                        })}>
+                            <div
+                                class="trigger"
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-trigger']}
+                            >
+                                Trigger Popover
+                            </div>
+                            <div
+                                class="popover"
+                                slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
+                            >
+                                Popover!
+                            </div>
+                        </${ViraPopoverTrigger}>
+                    `;
+                },
+            });
         });
         defineExample({
             title: 'long clipped content',

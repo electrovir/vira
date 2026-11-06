@@ -5,7 +5,7 @@ import {waitForAnimationFrame} from '@augment-vir/web';
 import {sendKeys, setViewport} from '@web/test-runner-commands';
 import {css, html, type CSSResult} from 'element-vir';
 import {popoverLongPressAttribute, PopoverTrigger} from '../../util/popover-manager.js';
-import {ViraPopoverTrigger} from './vira-popover-trigger.element.js';
+import {PopoverAnchor, ViraPopoverTrigger} from './vira-popover-trigger.element.js';
 
 const triggerClass = 'trigger';
 const popoverClass = 'popover';
@@ -439,6 +439,187 @@ describe(ViraPopoverTrigger.tagName, () => {
             positioner.getBoundingClientRect().width,
             trigger.getBoundingClientRect().width - 8,
             1,
+        );
+    });
+
+    it('fits its content at the trigger left edge with the left anchor', async () => {
+        const {open, trigger, positioner} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Left,
+            },
+        });
+
+        await open();
+
+        assert.deepEquals(
+            {
+                left: Math.round(positioner.getBoundingClientRect().left),
+                width: Math.round(positioner.getBoundingClientRect().width),
+            },
+            {
+                left: Math.round(trigger.getBoundingClientRect().left),
+                width: 100,
+            },
+        );
+    });
+
+    it('fits its content at the trigger right edge with the right anchor', async () => {
+        const {open, trigger, positioner} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Right,
+                popoverOffset: {
+                    vertical: 7,
+                },
+            },
+        });
+
+        await open();
+
+        assert.deepEquals(
+            {
+                top: Math.round(positioner.getBoundingClientRect().top),
+                right: Math.round(positioner.getBoundingClientRect().right),
+                width: Math.round(positioner.getBoundingClientRect().width),
+            },
+            {
+                top: Math.round(trigger.getBoundingClientRect().bottom + 7),
+                right: Math.round(trigger.getBoundingClientRect().right),
+                width: 100,
+            },
+        );
+    });
+
+    it('opens at the trigger left edge with the right anchor when there is no room left of the trigger', async () => {
+        const {open, trigger, positioner} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Right,
+            },
+            popoverWidth: 300,
+            wrapperStyle: css`
+                position: fixed;
+                top: 10px;
+                left: 10px;
+            `,
+        });
+
+        await open();
+
+        assert.isApproximately(
+            positioner.getBoundingClientRect().left,
+            trigger.getBoundingClientRect().left,
+            1,
+        );
+    });
+
+    it('opens just below where the pointer pressed with the mouse anchor', async () => {
+        const {open, trigger, positioner} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Mouse,
+            },
+        });
+
+        await open();
+
+        const triggerRect = trigger.getBoundingClientRect();
+        const positionerRect = positioner.getBoundingClientRect();
+        /** Browsers round the pointer position differently, so this allows a pixel either way. */
+        assert.isApproximately(
+            positionerRect.left,
+            triggerRect.left + triggerRect.width / 2 - 1,
+            1.5,
+        );
+        assert.isApproximately(
+            positionerRect.top,
+            triggerRect.top + triggerRect.height / 2 + 1,
+            1.5,
+        );
+        assert.isApproximately(positionerRect.width, 100, 1);
+    });
+
+    it('opens at the pointer with the mouse anchor and the click trigger', async () => {
+        const {open, trigger, positioner} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Mouse,
+                trigger: PopoverTrigger.Click,
+            },
+        });
+
+        await open();
+
+        assert.isApproximately(positioner.getBoundingClientRect().width, 100, 1);
+        assert.isAbove(
+            positioner.getBoundingClientRect().left,
+            trigger.getBoundingClientRect().left + 1,
+        );
+    });
+
+    it('opens at full width with the mouse anchor from the keyboard after a press that did not open it', async () => {
+        const {trigger, positioner, isPopoverOpen} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Mouse,
+                trigger: PopoverTrigger.ContextMenu,
+            },
+        });
+
+        await testWeb.click(trigger);
+        await waitForAnimationFrame(2);
+        assert.isFalse(isPopoverOpen());
+        /** WebKit doesn't focus a button when it's clicked. */
+        assertWrap
+            .instanceOf(
+                assertWrap
+                    .instanceOf(positioner.getRootNode(), ShadowRoot)
+                    .querySelector('.dropdown-wrapper'),
+                HTMLButtonElement,
+            )
+            .focus();
+        await sendKeys({
+            press: 'Shift+F10',
+        });
+        await waitUntil.isTrue(isPopoverOpen);
+        await waitForAnimationFrame(2);
+
+        assert.deepEquals(
+            {
+                left: Math.round(positioner.getBoundingClientRect().left),
+                width: Math.round(positioner.getBoundingClientRect().width),
+            },
+            {
+                left: Math.round(trigger.getBoundingClientRect().left),
+                width: Math.round(trigger.getBoundingClientRect().width),
+            },
+        );
+    });
+
+    it('opens at full width with the mouse anchor when opened from the keyboard after a pointer press', async () => {
+        const {open, trigger, positioner, isPopoverOpen} = await setupPopoverTest({
+            inputs: {
+                popoverAnchor: PopoverAnchor.Mouse,
+            },
+        });
+
+        await open();
+        await sendKeys({
+            press: 'Escape',
+        });
+        await waitUntil.isFalse(isPopoverOpen);
+        await sendKeys({
+            press: 'Enter',
+        });
+        await waitUntil.isTrue(isPopoverOpen);
+        await waitForAnimationFrame(2);
+
+        assert.deepEquals(
+            {
+                left: Math.round(positioner.getBoundingClientRect().left),
+                top: Math.round(positioner.getBoundingClientRect().top),
+                width: Math.round(positioner.getBoundingClientRect().width),
+            },
+            {
+                left: Math.round(trigger.getBoundingClientRect().left),
+                top: Math.round(trigger.getBoundingClientRect().bottom),
+                width: Math.round(trigger.getBoundingClientRect().width),
+            },
         );
     });
 

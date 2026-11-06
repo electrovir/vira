@@ -1,7 +1,16 @@
 import {assertWrap} from '@augment-vir/assert';
-import {type PartialWithUndefined} from '@augment-vir/common';
+import {wait, type PartialWithUndefined} from '@augment-vir/common';
 import {NavController, type Coords} from 'device-navigation';
-import {classMap, css, defineElementEvent, html, listen, renderIf, unsafeCSS} from 'element-vir';
+import {
+    classMap,
+    css,
+    defineElementEvent,
+    html,
+    listen,
+    renderIf,
+    unsafeCSS,
+    type CSSResult,
+} from 'element-vir';
 import {listenTo} from 'typed-event-target';
 import {popover} from '../../directives/popover.directive.js';
 import {createFocusStyles} from '../../styles/focus.js';
@@ -27,9 +36,50 @@ export type PopoverOffset = PartialWithUndefined<{
     vertical: number;
     /** Moves the popover rightwards when it opens from the trigger's left edge. */
     left: number;
-    /** Only shrinks the popover's minimum width (the trigger's width). This never moves the popover. */
+    /**
+     * Only shrinks the minimum width (the trigger's width) of a {@link PopoverAnchor.FullWidth}
+     * popover. This never moves the popover.
+     */
     right: number;
 }>;
+
+/**
+ * Where {@link ViraPopoverTrigger} first tries to place its popover. A popover that doesn't fit
+ * there still moves to whichever position does.
+ *
+ * @category Popover
+ */
+export enum PopoverAnchor {
+    /** Lines up with the trigger's left edge and is at least as wide as the trigger. */
+    FullWidth = 'full-width',
+    /** Lines up with the trigger's left edge and is only as wide as its content. */
+    Left = 'left',
+    /** Lines up with the trigger's right edge and is only as wide as its content. */
+    Right = 'right',
+    /**
+     * Opens at the point where the pointer pressed the trigger and is only as wide as its content.
+     * When anything other than a pointer press opens it, like the keyboard, it uses
+     * {@link PopoverAnchor.FullWidth} instead.
+     */
+    Mouse = 'mouse',
+}
+
+const fitsContent: Record<PopoverAnchor, boolean> = {
+    [PopoverAnchor.FullWidth]: false,
+    [PopoverAnchor.Left]: true,
+    [PopoverAnchor.Right]: true,
+    /** Only fits its content while {@link pointerAnchoredAttribute} is set. */
+    [PopoverAnchor.Mouse]: false,
+};
+
+/** Set on the popover only while it is opened by, or opening from, the current pointer press. */
+const pointerAnchoredAttribute = 'data-pointer-anchored';
+
+function setPointerAnchored(shadowRoot: ShadowRoot, isPointerAnchored: boolean) {
+    shadowRoot
+        .querySelector('.popover-positioner')
+        ?.toggleAttribute(pointerAnchoredAttribute, isPointerAnchored);
+}
 
 /**
  * An element with slots for a popover trigger and popover contents.
@@ -50,6 +100,8 @@ export const ViraPopoverTrigger = defineViraElement<
         keepOpenAfterInteraction: boolean;
         /** All values in px. */
         popoverOffset: PopoverOffset;
+        /** @default PopoverAnchor.FullWidth */
+        popoverAnchor: PopoverAnchor;
         /** If true, the focus outline is moved inside the element. */
         useInsideFocus: boolean;
         /** When `true`, the trigger will focus itself when the popover closes. */
@@ -85,6 +137,12 @@ export const ViraPopoverTrigger = defineViraElement<
         'vira-popover-trigger-context-menu'({inputs}) {
             return inputs.trigger === PopoverTrigger.ContextMenu;
         },
+        'vira-popover-trigger-fit-content'({inputs}) {
+            return fitsContent[inputs.popoverAnchor || PopoverAnchor.FullWidth];
+        },
+        'vira-popover-trigger-anchor-right'({inputs}) {
+            return inputs.popoverAnchor === PopoverAnchor.Right;
+        },
     },
     cssVars: {
         'vira-popover-trigger-offset-vertical': '0px',
@@ -92,6 +150,56 @@ export const ViraPopoverTrigger = defineViraElement<
         'vira-popover-trigger-offset-right': '0px',
     },
     styles({hostClasses, cssVars}) {
+        const viewportRightStyles = css`
+            position-area: block-end span-all;
+            justify-self: end;
+            margin-left: 0;
+            max-width: min(500px, 100%);
+        `;
+
+        /**
+         * Each fallback has an upwards copy because a position-try-fallbacks entry can only
+         * reference one @position-try rule. Every downwards entry comes before any upwards entry.
+         * The last entry always fits because, when no entry fits, browsers use the first one and
+         * shift it over the trigger.
+         */
+        function createFallbacks(otherSide: Readonly<{name: string; styles: CSSResult}>) {
+            return [
+                otherSide,
+                {
+                    /**
+                     * For a popover that fits on neither side of the trigger. 100% instead of 100vw
+                     * so that this always fits, even next to a scrollbar.
+                     */
+                    name: 'vira-popover-viewport-right',
+                    styles: viewportRightStyles,
+                },
+                {
+                    name: 'vira-popover-upwards',
+                    styles: css`
+                        min-height: 0;
+                    `,
+                    flipBlock: true,
+                },
+                {
+                    name: `${otherSide.name}-upwards`,
+                    styles: css`
+                        ${otherSide.styles}
+                        min-height: 0;
+                    `,
+                    flipBlock: true,
+                },
+                {
+                    name: 'vira-popover-viewport-right-upwards',
+                    styles: css`
+                        ${viewportRightStyles}
+                        min-height: 0;
+                    `,
+                    flipBlock: true,
+                },
+            ];
+        }
+
         return css`
             :host {
                 display: inline-flex;
@@ -147,65 +255,30 @@ export const ViraPopoverTrigger = defineViraElement<
 
             ${createAnchoredPopoverStyles({
                 selector: css`.popover-positioner`,
-                /**
-                 * Each fallback has an upwards copy because a position-try-fallbacks entry can only
-                 * reference one @position-try rule. Every downwards entry comes before any upwards
-                 * entry. The last entry always fits because, when no entry fits, browsers use the
-                 * first one and shift it over the trigger.
-                 */
-                fallbacks: [
-                    {
-                        /**
-                         * Used instead of flip-inline, which would move the left offset to the
-                         * right side.
-                         */
-                        name: 'vira-popover-leftwards',
-                        styles: css`
-                            position-area: block-end span-inline-start;
-                            margin-left: 0;
-                        `,
-                    },
-                    {
-                        /**
-                         * For a popover that fits on neither side of the trigger. 100% instead of
-                         * 100vw so that this always fits, even next to a scrollbar.
-                         */
-                        name: 'vira-popover-viewport-right',
-                        styles: css`
-                            position-area: block-end span-all;
-                            justify-self: end;
-                            margin-left: 0;
-                            max-width: min(500px, 100%);
-                        `,
-                    },
-                    {
-                        name: 'vira-popover-upwards',
-                        styles: css`
-                            min-height: 0;
-                        `,
-                        flipBlock: true,
-                    },
-                    {
-                        name: 'vira-popover-leftwards-upwards',
-                        styles: css`
-                            position-area: block-end span-inline-start;
-                            margin-left: 0;
-                            min-height: 0;
-                        `,
-                        flipBlock: true,
-                    },
-                    {
-                        name: 'vira-popover-viewport-right-upwards',
-                        styles: css`
-                            position-area: block-end span-all;
-                            justify-self: end;
-                            margin-left: 0;
-                            max-width: min(500px, 100%);
-                            min-height: 0;
-                        `,
-                        flipBlock: true,
-                    },
-                ],
+                fallbacks: createFallbacks({
+                    /**
+                     * Used instead of flip-inline, which would move the left offset to the right
+                     * side.
+                     */
+                    name: 'vira-popover-leftwards',
+                    styles: css`
+                        position-area: block-end span-inline-start;
+                        margin-left: 0;
+                    `,
+                }),
+            })}
+
+            ${createAnchoredPopoverStyles({
+                selector: css`
+                    ${hostClasses['vira-popover-trigger-anchor-right'].selector} .popover-positioner
+                `,
+                fallbacks: createFallbacks({
+                    name: 'vira-popover-rightwards',
+                    styles: css`
+                        position-area: block-end span-inline-end;
+                        margin-left: ${cssVars['vira-popover-trigger-offset-left'].value};
+                    `,
+                }),
             })}
 
             .popover-positioner {
@@ -248,6 +321,36 @@ export const ViraPopoverTrigger = defineViraElement<
                     pointer-events: auto;
                     max-width: 100%;
                 }
+            }
+
+            ${hostClasses['vira-popover-trigger-fit-content'].selector} .popover-positioner {
+                min-width: 0;
+            }
+
+            ${hostClasses['vira-popover-trigger-anchor-right'].selector} .popover-positioner {
+                position-area: block-end span-inline-start;
+                /* Repeated because the right anchor's base popover styles above reset every margin. */
+                margin-top: ${cssVars['vira-popover-trigger-offset-vertical'].value};
+                margin-left: 0;
+            }
+
+            .popover-positioner[${unsafeCSS(pointerAnchoredAttribute)}] {
+                position-anchor: --vira-popover-pointer;
+                min-width: 0;
+            }
+
+            /*
+                Surrounds the pointer so the popover opens just past it. A popover under the
+                pointer would get the release of the press that opened it as a click, which closes
+                it or picks the menu item there.
+            */
+            .pointer-anchor {
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                translate: -1px -1px;
+                pointer-events: none;
+                anchor-name: --vira-popover-pointer;
             }
         `;
     },
@@ -299,6 +402,17 @@ export const ViraPopoverTrigger = defineViraElement<
         );
     },
     render({dispatch, events, state, inputs, updateState, host, slotNames, cssVars}) {
+        /** Clears the pointer position when the press that set it didn't open the popover. */
+        async function clearUnusedPointerAnchor() {
+            /** Waits for the click after a pointerup, which opens the click trigger's popover. */
+            await wait({
+                milliseconds: 0,
+            });
+            if (!state.popoverManager.isOpen()) {
+                setPointerAnchored(host.shadowRoot, false);
+            }
+        }
+
         return html`
             <button
                 ?disabled=${!!inputs.isDisabled}
@@ -307,6 +421,26 @@ export const ViraPopoverTrigger = defineViraElement<
                 })}"
                 role="listbox"
                 aria-expanded=${state.isOpen}
+                ${listen('pointerdown', (event) => {
+                    const pointerAnchor = host.shadowRoot.querySelector('.pointer-anchor');
+                    /** A press on an open popover closes it, so it must not move it first. */
+                    if (!(pointerAnchor instanceof HTMLElement) || state.popoverManager.isOpen()) {
+                        return;
+                    }
+                    const wrapperRect = assertWrap
+                        .instanceOf(event.currentTarget, HTMLElement)
+                        .getBoundingClientRect();
+                    /**
+                     * Set directly instead of through state, because in Firefox and WebKit a
+                     * re-render between this pointerdown and its mousedown keeps the popover from
+                     * opening.
+                     */
+                    pointerAnchor.style.left = `${event.clientX - wrapperRect.left}px`;
+                    pointerAnchor.style.top = `${event.clientY - wrapperRect.top}px`;
+                    setPointerAnchored(host.shadowRoot, true);
+                })}
+                ${listen('pointerup', clearUnusedPointerAnchor)}
+                ${listen('pointercancel', clearUnusedPointerAnchor)}
                 ${popover(state.popoverManager, {
                     trigger: inputs.isDisabled
                         ? false
@@ -332,6 +466,12 @@ export const ViraPopoverTrigger = defineViraElement<
                 <div class="dropdown-trigger">
                     <slot name=${slotNames['vira-popover-trigger-trigger']}></slot>
                 </div>
+                ${renderIf(
+                    inputs.popoverAnchor === PopoverAnchor.Mouse,
+                    html`
+                        <span class="pointer-anchor"></span>
+                    `,
+                )}
             </button>
             <div
                 class="popover-positioner"
@@ -351,6 +491,9 @@ export const ViraPopoverTrigger = defineViraElement<
                         return;
                     }
 
+                    if (!isOpen) {
+                        setPointerAnchored(host.shadowRoot, false);
+                    }
                     updateState({
                         isOpen,
                     });

@@ -3,6 +3,7 @@ import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
 import {
+    LucideChevronUpIcon,
     LucideCodeXmlIcon,
     LucidePlusIcon,
     LucideUploadIcon,
@@ -401,6 +402,93 @@ const examples: ReadonlyArray<{
                     groupName: 'Second',
                     options: exampleDropdownOptions.slice(3),
                 },
+            ],
+        },
+    },
+    {
+        title: 'raw',
+        inputs: {
+            isRaw: true,
+            selected: [
+                '1',
+            ],
+        },
+        customStyle: css`
+            :host {
+                font-size: 24px;
+                font-weight: bold;
+                color: ${viraColorPalette['vira-blue-600'].value};
+            }
+        `,
+    },
+    {
+        title: 'raw with a selection label',
+        inputs: {
+            isRaw: true,
+            isMultiSelect: true,
+            selectionLabel: 'All Options',
+            options: [
+                {
+                    groupName: 'First Group',
+                    options: exampleDropdownOptions.slice(0, 2),
+                },
+                {
+                    groupName: 'Second Group',
+                    options: exampleDropdownOptions.slice(2, 4),
+                },
+            ],
+            selected: [
+                '1',
+                '2',
+                '3',
+                '4',
+            ],
+        },
+        customStyle: css`
+            :host {
+                font-size: 24px;
+                font-weight: bold;
+            }
+        `,
+    },
+    {
+        title: 'raw with trigger font vars',
+        inputs: {
+            isRaw: true,
+            selected: [
+                '1',
+            ],
+        },
+        customStyle: css`
+            ${ViraDropdown} {
+                ${ViraDropdown.cssVars['vira-dropdown-trigger-font-size'].name}: 24px;
+                ${ViraDropdown.cssVars['vira-dropdown-trigger-font-weight'].name}: bold;
+            }
+        `,
+    },
+    {
+        title: 'small trigger with a small chevron',
+        inputs: {
+            isRaw: true,
+            triggerIcon: createSizedIcon(LucideChevronUpIcon, 16),
+            selected: [
+                '1',
+            ],
+        },
+        customStyle: css`
+            ${ViraDropdown} {
+                ${ViraDropdown.cssVars['vira-dropdown-trigger-font-size'].name}: 12px;
+            }
+        `,
+    },
+    {
+        title: 'with a selection label',
+        inputs: {
+            isMultiSelect: true,
+            selectionLabel: 'Custom label',
+            selected: [
+                '1',
+                '2',
             ],
         },
     },

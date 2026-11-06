@@ -4,7 +4,9 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
 import {css, html, listen, testIdSelector} from 'element-vir';
+import {setCssVarValue} from 'lit-css-vars';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
+import {createSizedIcon} from '../icons/sized-icon.js';
 import {
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
@@ -13,6 +15,7 @@ import {ViraMenuItem} from './popover/vira-menu-item.element.js';
 import {ViraMenu} from './popover/vira-menu.element.js';
 import {ViraPopoverTrigger} from './popover/vira-popover-trigger.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
+import {ViraIcon} from './vira-icon.element.js';
 import {ViraInput} from './vira-input.element.js';
 
 const mockMenuItems: ReadonlyArray<Readonly<ViraDropdownOption>> = [
@@ -650,6 +653,60 @@ describe(ViraDropdown.tagName, () => {
         );
     });
 
+    it('checks multi select group headers only when the whole group is selected', async () => {
+        const {instance, toggle} = await setupDropdownTest({
+            isMultiSelect: true,
+            selected: [
+                '0',
+                '1',
+            ],
+            options: mockGroupedOptions,
+        });
+
+        await toggle();
+        const menuItems = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+        const [
+            firstHeader,
+            firstOption,
+            secondHeader,
+        ] = menuItems;
+
+        function getSlotWrapper(menuItem: Element | undefined) {
+            return assertWrap.instanceOf(
+                assertWrap.isDefined(menuItem).shadowRoot?.querySelector('.slot-wrapper'),
+                HTMLElement,
+            );
+        }
+
+        function isChecked(menuItem: Element | undefined) {
+            return (
+                getComputedStyle(
+                    assertWrap.instanceOf(
+                        assertWrap.isDefined(menuItem).shadowRoot?.querySelector(ViraIcon.tagName),
+                        HTMLElement,
+                    ),
+                ).visibility === 'visible'
+            );
+        }
+
+        assert.deepEquals(
+            {
+                isFirstHeaderChecked: isChecked(firstHeader),
+                isSecondHeaderChecked: isChecked(secondHeader),
+                headerColor: getComputedStyle(assertWrap.isDefined(firstHeader)).color,
+                headerLabelLeft: getSlotWrapper(firstHeader).getBoundingClientRect().left,
+            },
+            {
+                isFirstHeaderChecked: true,
+                isSecondHeaderChecked: false,
+                headerColor: getComputedStyle(assertWrap.isDefined(firstOption)).color,
+                headerLabelLeft: getSlotWrapper(firstOption).getBoundingClientRect().left,
+            },
+        );
+    });
+
     it('does not make group headers selectable in single select', async () => {
         const {instance, toggle} = await setupDropdownTest({
             options: [
@@ -775,6 +832,242 @@ describe(ViraDropdown.tagName, () => {
         } finally {
             await resetMouse();
         }
+    });
+
+    describe('selectionLabel', () => {
+        it('replaces a single selection', async () => {
+            const {triggerElement} = await setupDropdownTest({
+                selectionLabel: 'Custom',
+                selected: ['1'],
+            });
+
+            assert.strictEquals(extractElementText(triggerElement), 'Custom');
+        });
+
+        it('replaces the multi select count', async () => {
+            const {triggerElement} = await setupDropdownTest({
+                isMultiSelect: true,
+                selectionLabel: 'Custom',
+                selected: [
+                    '0',
+                    '1',
+                ],
+            });
+
+            assert.strictEquals(extractElementText(triggerElement), 'Custom');
+        });
+
+        it('renders a template', async () => {
+            const {triggerElement} = await setupDropdownTest({
+                selectionLabel: html`
+                    <b>Bold</b>
+                `,
+                selected: ['1'],
+            });
+
+            assert.strictEquals(
+                extractElementText(assertWrap.isTruthy(triggerElement.querySelector('b'))),
+                'Bold',
+            );
+        });
+
+        it('still shows the placeholder when nothing is selected', async () => {
+            const {triggerElement} = await setupDropdownTest({
+                selectionLabel: 'Custom',
+                placeholder: 'Pick one',
+            });
+
+            assert.strictEquals(extractElementText(triggerElement), 'Pick one');
+        });
+
+        it('fills the closed search input', async () => {
+            const {queryByTestId} = await setupDropdownTest({
+                isSearchable: true,
+                selectionLabel: 'Custom',
+                selected: ['1'],
+            });
+
+            assert.strictEquals(
+                assertWrap.instanceOf(queryByTestId.searchInput(), HTMLInputElement).value,
+                'Custom',
+            );
+        });
+    });
+
+    describe('isRaw', () => {
+        async function setupRawTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
+            const fixture = await testWeb.render(html`
+                <div
+                    style=${css`
+                        color: rgb(1, 2, 3);
+                        font-size: 30px;
+                        width: 500px;
+                    `}
+                >
+                    <${ViraDropdown.assign({
+                        options: mockMenuItems,
+                        selected: ['1'],
+                        isRaw: true,
+                        ...inputs,
+                    })}></${ViraDropdown}>
+                </div>
+            `);
+            const instance = assertWrap.instanceOf(
+                fixture.querySelector(ViraDropdown.tagName),
+                ViraDropdown,
+            );
+            const triggerElement = assertWrap.instanceOf(
+                instance.shadowRoot.querySelector(testIdSelector(ViraDropdown.testIds.trigger)),
+                HTMLElement,
+            );
+
+            return {
+                instance,
+                triggerElement,
+            };
+        }
+
+        it('removes the trigger box styles and inherits color', async () => {
+            const {triggerElement} = await setupRawTest();
+            const styles = getComputedStyle(triggerElement);
+
+            assert.deepEquals(
+                {
+                    borderTopWidth: styles.borderTopWidth,
+                    backgroundColor: styles.backgroundColor,
+                    paddingLeft: styles.paddingLeft,
+                    color: styles.color,
+                    fontSize: styles.fontSize,
+                },
+                {
+                    borderTopWidth: '0px',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    paddingLeft: '0px',
+                    color: 'rgb(1, 2, 3)',
+                    fontSize: '30px',
+                },
+            );
+        });
+
+        it('shrinks to its content with the chevron right after the text', async () => {
+            const {instance, triggerElement} = await setupRawTest();
+            const hostWidth = instance.getBoundingClientRect().width;
+
+            assert.isBelow(hostWidth, 224);
+
+            const textRect = assertWrap
+                .isTruthy(triggerElement.querySelector('.selection-display'))
+                .getBoundingClientRect();
+            const chevronRect = assertWrap
+                .isTruthy(triggerElement.querySelector('.trigger-icon'))
+                .getBoundingClientRect();
+
+            /** The 8px trigger gap. */
+            assert.isApproximately(chevronRect.left - textRect.right, 8, 1);
+            assert.isApproximately(chevronRect.right, instance.getBoundingClientRect().right, 1);
+        });
+
+        it('grows taller than the default height to fit large text', async () => {
+            const {instance, triggerElement} = await setupRawTest();
+            const hostHeight = instance.getBoundingClientRect().height;
+
+            assert.isAbove(hostHeight, 30);
+            assert.isApproximately(hostHeight, triggerElement.getBoundingClientRect().height, 1);
+        });
+
+        it('does not exceed its container', async () => {
+            const {instance} = await setupRawTest({
+                options: [
+                    {
+                        value: 'long',
+                        label: createArray(50, () => 'long').join(' '),
+                    },
+                ],
+                selected: ['long'],
+            });
+
+            assert.isApproximately(instance.getBoundingClientRect().width, 500, 1);
+        });
+
+        it('still opens the menu', async () => {
+            const {toggle, instance} = await setupDropdownTest({
+                isRaw: true,
+            });
+
+            await toggle();
+
+            assert.isLengthExactly(
+                queryThroughShadow(instance, ViraMenuItem.tagName, {
+                    all: true,
+                }),
+                mockMenuItems.length,
+            );
+        });
+    });
+
+    it('renders a 24px chevron by default', async () => {
+        const {triggerElement} = await setupDropdownTest();
+
+        assert.strictEquals(
+            assertWrap
+                .isTruthy(triggerElement.querySelector('.trigger-icon'))
+                .getBoundingClientRect().width,
+            24,
+        );
+    });
+
+    it('renders a custom trigger icon at its own size', async () => {
+        const {triggerElement} = await setupDropdownTest({
+            triggerIcon: createSizedIcon(internalLucideIcons.ChevronUp16, 16),
+        });
+
+        assert.strictEquals(
+            assertWrap
+                .isTruthy(triggerElement.querySelector('.trigger-icon'))
+                .getBoundingClientRect().width,
+            16,
+        );
+    });
+
+    it('applies trigger font cssVars to the trigger but not the menu', async () => {
+        const {instance, triggerElement, toggle} = await setupDropdownTest();
+        instance.style.fontSize = '15px';
+        instance.style.fontWeight = '400';
+        setCssVarValue({
+            forCssVar: ViraDropdown.cssVars['vira-dropdown-trigger-font-size'],
+            onElement: instance,
+            toValue: '30px',
+        });
+        setCssVarValue({
+            forCssVar: ViraDropdown.cssVars['vira-dropdown-trigger-font-weight'],
+            onElement: instance,
+            toValue: '700',
+        });
+
+        await toggle();
+
+        const menuItem = assertWrap.isDefined(
+            queryThroughShadow(instance, ViraMenuItem.tagName, {
+                all: true,
+            })[0],
+        );
+        const triggerStyles = getComputedStyle(triggerElement);
+        const menuItemStyles = getComputedStyle(menuItem);
+
+        assert.deepEquals(
+            {
+                triggerFontSize: triggerStyles.fontSize,
+                triggerFontWeight: triggerStyles.fontWeight,
+                menuItemFontSize: menuItemStyles.fontSize,
+                menuItemFontWeight: menuItemStyles.fontWeight,
+            },
+            {
+                triggerFontSize: '30px',
+                triggerFontWeight: '700',
+                menuItemFontSize: '15px',
+                menuItemFontWeight: '400',
+            },
+        );
     });
 
     describe('isSearchable', () => {

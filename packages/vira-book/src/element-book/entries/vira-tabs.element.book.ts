@@ -158,31 +158,6 @@ const simpleExamples = [
         iconLayout: ViraTabsIconLayout.Horizontal,
     },
     {
-        title: 'plain color variant',
-        tabs: tabsWithIcons,
-        color: ViraColorVariant.Plain,
-    },
-    {
-        title: 'neutral color variant',
-        tabs: tabsWithIcons,
-        color: ViraColorVariant.Neutral,
-    },
-    {
-        title: 'danger color variant',
-        tabs: tabsWithIcons,
-        color: ViraColorVariant.Danger,
-    },
-    {
-        title: 'warning color variant',
-        tabs: tabsWithIcons,
-        color: ViraColorVariant.Warning,
-    },
-    {
-        title: 'positive color variant',
-        tabs: tabsWithIcons,
-        color: ViraColorVariant.Positive,
-    },
-    {
         title: 'bar direction: top',
         tabs: tabsWithIcons,
         barDirection: ViraTabsBarDirection.Top,
@@ -196,6 +171,18 @@ const simpleExamples = [
         title: 'bar direction: right',
         tabs: tabsWithIcons,
         barDirection: ViraTabsBarDirection.Right,
+    },
+    {
+        title: 'rotated labels',
+        tabs: tabsWithIcons,
+        barDirection: ViraTabsBarDirection.Left,
+        shouldRotateLabels: true,
+    },
+    {
+        title: 'rotated labels: right bar',
+        tabs: tabsWithIcons,
+        barDirection: ViraTabsBarDirection.Right,
+        shouldRotateLabels: true,
     },
 ];
 
@@ -355,10 +342,36 @@ export const viraTabsBookPage = defineBookPage({
         });
 
         defineExample({
+            title: 'overflow: rotated labels',
+            styles: css`
+                :host {
+                    display: block;
+                    height: 240px;
+                    border: 1px solid red;
+                }
+
+                ${ViraTabs} {
+                    height: 100%;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithIcons,
+                        router: mockRouter,
+                        currentRoute: createMockRoute(mockPathTree.paths.children.tab4.fullPaths),
+                        barDirection: ViraTabsBarDirection.Left,
+                        shouldRotateLabels: true,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        defineExample({
             title: 'big font',
             styles: css`
                 :host {
-                    font-size: 32px;
+                    ${ViraTabs.cssVars['vira-tabs-font-size'].name}: 32px;
                     width: 240px;
                     border: 1px solid red;
                 }
@@ -456,6 +469,59 @@ export const viraTabsBookPage = defineBookPage({
             },
         });
 
+        [
+            {
+                title: 'grouped tabs: left bar',
+                shouldRotateLabels: false,
+            },
+            {
+                title: 'grouped tabs: rotated labels',
+                shouldRotateLabels: true,
+            },
+            {
+                title: 'grouped tabs: right bar',
+                shouldRotateLabels: false,
+                barDirection: ViraTabsBarDirection.Right,
+            },
+            {
+                title: 'grouped overflow: left bar',
+                shouldRotateLabels: false,
+                height: 200,
+            },
+            {
+                title: 'grouped overflow: rotated labels',
+                shouldRotateLabels: true,
+                height: 320,
+            },
+        ].forEach(({title, shouldRotateLabels, height, barDirection}) => {
+            defineExample({
+                title,
+                styles: css`
+                    :host {
+                        display: block;
+                        height: ${height ?? 640}px;
+                        border: 1px solid red;
+                    }
+
+                    ${ViraTabs} {
+                        height: 100%;
+                    }
+                `,
+                render() {
+                    return html`
+                        <${ViraTabs.assign({
+                            tabs: tabsWithGroups,
+                            router: mockRouter,
+                            currentRoute: selectedGroupedRoute,
+                            color: ViraColorVariant.Plain,
+                            barDirection: barDirection ?? ViraTabsBarDirection.Left,
+                            shouldRotateLabels,
+                        })}></${ViraTabs}>
+                    `;
+                },
+            });
+        });
+
         defineExample({
             title: 'dynamic overflow',
             styles: css`
@@ -472,66 +538,6 @@ export const viraTabsBookPage = defineBookPage({
                             currentRoute: selectedRoute,
                         })}></${ViraTabs}>
                     </${ViraDynamicWidthTabsExample}>
-                `;
-            },
-        });
-
-        defineExample({
-            title: 'all combinations',
-            styles: css`
-                :host {
-                    display: block;
-                    width: 760px;
-                }
-
-                .grid {
-                    display: grid;
-                    grid-template-columns: auto 1fr;
-                    gap: 24px;
-                    align-items: start;
-                }
-
-                h4 {
-                    margin: 0;
-                }
-            `,
-            render() {
-                const barDirections = [
-                    ViraTabsBarDirection.Top,
-                    ViraTabsBarDirection.Bottom,
-                    ViraTabsBarDirection.Left,
-                    ViraTabsBarDirection.Right,
-                ];
-
-                const colorVariants = [
-                    ViraColorVariant.Info,
-                    ViraColorVariant.Plain,
-                    ViraColorVariant.Neutral,
-                    ViraColorVariant.Danger,
-                    ViraColorVariant.Warning,
-                    ViraColorVariant.Positive,
-                ];
-
-                return html`
-                    ${colorVariants.map((colorVariant) => {
-                        return html`
-                            <h4>${colorVariant} variant</h4>
-                            <div class="grid">
-                                ${barDirections.map((barDirection) => {
-                                    return html`
-                                        <span>${barDirection}</span>
-                                        <${ViraTabs.assign({
-                                            tabs: tabsWithIcons,
-                                            router: mockRouter,
-                                            currentRoute: selectedRoute,
-                                            barDirection,
-                                            color: colorVariant,
-                                        })}></${ViraTabs}>
-                                    `;
-                                })}
-                            </div>
-                        `;
-                    })}
                 `;
             },
         });

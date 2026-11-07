@@ -1,4 +1,4 @@
-import {check} from '@augment-vir/assert';
+import {assertWrap, check} from '@augment-vir/assert';
 import {
     arrayToObject,
     filterMap,
@@ -16,6 +16,7 @@ import {
     onDomCreated,
     unsafeCSS,
     type CSSResult,
+    type HtmlInterpolation,
     type HTMLTemplateResult,
 } from 'element-vir';
 import {
@@ -25,6 +26,7 @@ import {
     type SpaRouter,
 } from 'spa-router-vir';
 import {themeDefaultKey} from 'theme-vir/dist/color-theme/color-theme.js';
+import {boldText} from '../directives/bold-text.directive.js';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createFocusStyles} from '../styles/focus.js';
@@ -38,11 +40,14 @@ import {
 import {noNativeFormStyles, noUserSelect, viraTheme} from '../styles/index.js';
 import {viraThemeByKeys, ViraThemeColorName} from '../styles/vira-color-theme-object.js';
 import {defineViraElement} from '../util/define-vira-element.js';
-import {renderMenuItemEntries, type ViraMenuItemEntry} from '../util/menu-helpers.js';
+import {
+    menuGroupLabelStyles,
+    renderMenuItemEntries,
+    type ViraMenuItemEntry,
+} from '../util/menu-helpers.js';
 import {ViraMenuTrigger} from './popover/vira-menu-trigger.element.js';
 import {ViraMenuCornerStyle} from './popover/vira-menu.element.js';
 import {type PopoverOffset} from './popover/vira-popover-trigger.element.js';
-import {ViraBoldText} from './vira-bold-text.element.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 import {ViraLink} from './vira-link.element.js';
@@ -71,9 +76,17 @@ export enum ViraTabsIconLayout {
     Horizontal = 'horizontal',
 }
 
-function measureElementWidth(mirrorElement: Element, selector: string) {
-    const element = mirrorElement.querySelector(selector);
-    return element ? element.getBoundingClientRect().width : 0;
+function isRotatingLabels(
+    inputs: Readonly<{
+        barDirection?: ViraTabsBarDirection | undefined;
+        shouldRotateLabels?: boolean | undefined;
+    }>,
+) {
+    return (
+        !!inputs.shouldRotateLabels &&
+        (inputs.barDirection === ViraTabsBarDirection.Left ||
+            inputs.barDirection === ViraTabsBarDirection.Right)
+    );
 }
 
 /**
@@ -82,7 +95,11 @@ function measureElementWidth(mirrorElement: Element, selector: string) {
  * @category Internal
  */
 export type ViraTab = {
-    label: string;
+    /**
+     * Any template, not just text. It renders inline, in the overflow menu, and on the overflow
+     * trigger when the selected tab is collapsed, so it must render the same in all three.
+     */
+    label: HtmlInterpolation;
     paths: GenericTreePaths;
 } & PartialWithUndefined<{
     icon: Readonly<ViraIconSvg>;
@@ -96,9 +113,10 @@ export type ViraTab = {
     exactMatch: boolean;
     /**
      * Optional cluster label. Consecutive tabs sharing the same `group` string render together
-     * under that label, separated from other clusters by an inset vertical divider. Tabs with no
-     * `group` render standalone (no label, no divider). Grouping only affects rendering when at
-     * least one tab has a `group`.
+     * under that label, separated from other clusters by an inset divider (on a vertical bar
+     * without `shouldRotateLabels`, a line under the label instead). Tabs with no `group` render
+     * standalone (no label, no divider). Grouping only affects rendering when at least one tab has
+     * a `group`.
      */
     group: string;
 }>;
@@ -227,6 +245,12 @@ export const ViraTabs = defineViraElement<
         overflowLabel: string;
         /** When true, tabs and their container expand to fill all available horizontal space. */
         shouldFillWidth: boolean;
+        /**
+         * Turns each tab's content sideways, with the bottoms of the letters facing the selection
+         * bar, so a vertical bar is only as wide as one line of text. Tabs stay in order from top
+         * to bottom. Only applies when `barDirection` is `Left` or `Right`.
+         */
+        shouldRotateLabels: boolean;
     }>
 >()({
     tagName: 'vira-tabs',
@@ -326,6 +350,9 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-fill-width'({inputs}) {
             return !!inputs.shouldFillWidth;
         },
+        'vira-tabs-rotate-labels'({inputs}) {
+            return isRotatingLabels(inputs);
+        },
     },
     cssVars: {
         'vira-tabs-active-color':
@@ -339,6 +366,11 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-inactive-color': viraTheme.colors[themeDefaultKey].foreground.value,
         'vira-tabs-inactive-hover-color': viraTheme.colors[themeDefaultKey].foreground.value,
         'vira-tabs-bar-thickness': '2px',
+        /** Space on each side of a tab's label, across its text. Applies along the bar's length. */
+        'vira-tabs-tab-padding-block': '6px',
+        /** Space before and after a tab's label, along its text, including when labels are rotated. */
+        'vira-tabs-tab-padding-inline': '12px',
+        'vira-tabs-font-size': viraFormCssVars['vira-form-small-text-size'].value,
     },
 
     styles({hostClasses, cssVars}) {
@@ -420,7 +452,7 @@ export const ViraTabs = defineViraElement<
                 position: relative;
                 margin: 0;
                 padding: 0;
-                font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
+                font-size: ${cssVars['vira-tabs-font-size'].value};
                 font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
 
                 & ${ViraButton} {
@@ -434,11 +466,11 @@ export const ViraTabs = defineViraElement<
                 left: 0;
                 overflow: visible;
                 /**
-                 * visibility:hidden keeps the mirror's links out of the tab order, but a selected
-                 * tab's label re-sets visibility:visible on itself (see ViraBoldText), which would
-                 * override the inherited hidden state and paint the label. opacity:0 cannot be
-                 * overridden by a descendant, so it keeps the mirror invisible while still allowing
-                 * width measurement.
+                 * visibility:hidden keeps the mirror's links out of the tab order, but a label
+                 * template that sets visibility:visible on itself would override the inherited
+                 * hidden state and paint the label. opacity:0 cannot be overridden by a
+                 * descendant, so it keeps the mirror invisible while still allowing width
+                 * measurement.
                  */
                 visibility: hidden;
                 opacity: 0;
@@ -597,7 +629,40 @@ export const ViraTabs = defineViraElement<
 
             .tab-item ${ViraLink} {
                 display: flex;
-                padding: 6px 12px;
+                padding: ${cssVars['vira-tabs-tab-padding-block'].value}
+                    ${cssVars['vira-tabs-tab-padding-inline'].value};
+            }
+
+            .menu-group-label {
+                ${menuGroupLabelStyles};
+            }
+
+            .more-button-content {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            ${hostClasses['vira-tabs-rotate-labels'].selector} {
+                & .tab-item ${ViraLink} {
+                    padding: ${cssVars['vira-tabs-tab-padding-inline'].value}
+                        ${cssVars['vira-tabs-tab-padding-block'].value};
+                }
+
+                & .tab-content {
+                    flex-direction: row;
+                    gap: 8px;
+                }
+
+                & .tab-content,
+                & .tab-more ${ViraButton}, & .tabs-measure ${ViraButton} {
+                    writing-mode: vertical-rl;
+                }
+
+                /** Writing mode leaves icons upright. This turns them to match the text. */
+                & .tab-content ${ViraIcon}, & .more-button-content ${ViraIcon} {
+                    transform: rotate(90deg);
+                }
             }
 
             .tab-more {
@@ -608,6 +673,14 @@ export const ViraTabs = defineViraElement<
                 & ${ViraButton} {
                     flex-shrink: 0;
                 }
+            }
+
+            /**
+             * WebKit sizes a rotated button to zero width when it sits directly in the menu
+             * trigger's block wrapper. A flex parent gets its real width.
+             */
+            .more-button-wrapper {
+                display: flex;
             }
 
             .tabs-container.grouped {
@@ -632,7 +705,8 @@ export const ViraTabs = defineViraElement<
                 white-space: nowrap;
                 font-size: 10px;
                 font-weight: ${viraFontCssVars['vira-font-weight-medium'].value};
-                padding: 6px 12px 4px;
+                padding-block: 6px 4px;
+                padding-inline: 12px;
                 color: ${viraTheme.colors['vira-grey-foreground-header'].foreground.value};
 
                 &.truncated {
@@ -648,6 +722,96 @@ export const ViraTabs = defineViraElement<
                 margin: 8px 0;
                 background-color: ${viraTheme.colors['vira-grey-foreground-decoration'].foreground
                     .value};
+            }
+
+            ${hostClasses['vira-tabs-bar-left'].selector},
+            ${hostClasses['vira-tabs-bar-right'].selector} {
+                & .tabs-container.grouped {
+                    align-items: stretch;
+                }
+
+                & .tab-cluster-tabs {
+                    flex-direction: column;
+                }
+
+                & .tab-cluster-divider {
+                    width: auto;
+                    height: 1px;
+                    margin: 0 8px;
+                }
+            }
+
+            :host(
+                    .${hostClasses['vira-tabs-bar-left'].name}:not(.${hostClasses[
+                            'vira-tabs-rotate-labels'
+                        ].name})
+                ),
+            :host(
+                    .${hostClasses['vira-tabs-bar-right'].name}:not(.${hostClasses[
+                            'vira-tabs-rotate-labels'
+                        ].name})
+                ) {
+                & .tab-cluster-divider {
+                    display: none;
+                }
+
+                & .tab-group-label {
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 8px;
+                        right: 8px;
+                        bottom: 0;
+                        height: 1px;
+                        background-color: ${viraTheme.colors['vira-grey-foreground-decoration']
+                            .foreground.value};
+                    }
+                }
+            }
+
+            ${hostClasses['vira-tabs-rotate-labels'].selector} {
+                /** Lines the overflow trigger up with the tabs rather than the group labels. */
+                & .tabs-container.grouped {
+                    align-items: flex-start;
+                }
+
+                /** The group label sits beside its tabs, on the side the tops of the letters face. */
+                & .tab-cluster {
+                    flex-direction: row-reverse;
+                }
+
+                & .tab-group-label {
+                    writing-mode: vertical-rl;
+                    width: auto;
+                    min-width: 0;
+                    /**
+                     * Keeps the label from lengthening its cluster: it stretches to the length of
+                     * the cluster's tabs instead, and truncates past that.
+                     */
+                    contain: inline-size;
+                }
+            }
+
+            :host(
+                    .${hostClasses['vira-tabs-rotate-labels'].name}.${hostClasses[
+                            'vira-tabs-bar-right'
+                        ].name}
+                ) {
+                /** Keeps the bottoms of the letters facing the selection bar. */
+                & .tab-content,
+                & .tab-more ${ViraButton}, & .tabs-measure ${ViraButton}, & .tab-group-label {
+                    transform: rotate(180deg);
+                }
+
+                & .tabs-container.grouped {
+                    align-items: flex-end;
+                }
+
+                & .tab-cluster {
+                    flex-direction: row;
+                }
             }
         `;
     },
@@ -695,12 +859,12 @@ export const ViraTabs = defineViraElement<
                     })}>
                         <span class="tab-content">
                             ${iconTemplate}
-                            <${ViraBoldText.assign({
-                                text: tab.label,
-                                bold: isSelected,
-                            })}
-                                class="tab-label"
-                            ></${ViraBoldText}>
+                            <span class="tab-label">
+                                ${boldText({
+                                    content: tab.label,
+                                    isBold: isSelected,
+                                })}
+                            </span>
                         </span>
                     </${ViraLink}>
                 `,
@@ -800,24 +964,24 @@ export const ViraTabs = defineViraElement<
         }
 
         function measureOverflow(mirrorElement: Element) {
-            const availableWidth = host.clientWidth;
-            if (!availableWidth) {
-                return;
-            }
-
-            /**
-             * Vertical (left/right) tab bars stack their tabs in a column, so horizontal
-             * width-based overflow does not apply: keep every tab inline.
-             */
+            /** Vertical (left/right) tab bars stack their tabs in a column, so they fill height. */
             const isVertical = globalThis
                 .getComputedStyle(mirrorElement)
                 .flexDirection.startsWith('column');
-            if (isVertical) {
-                if (state.overflowCount !== 0) {
-                    updateState({
-                        overflowCount: 0,
-                    });
-                }
+
+            /** Size along the bar: height in a vertical bar, width in a horizontal one. */
+            function measureLength(element: Element | null) {
+                const rect = element?.getBoundingClientRect();
+                return rect ? (isVertical ? rect.height : rect.width) : 0;
+            }
+
+            function measureStart(element: Element) {
+                const rect = element.getBoundingClientRect();
+                return isVertical ? rect.top : rect.left;
+            }
+
+            const availableLength = isVertical ? host.clientHeight : host.clientWidth;
+            if (!availableLength) {
                 return;
             }
 
@@ -827,35 +991,42 @@ export const ViraTabs = defineViraElement<
                 return;
             }
 
-            const tabWidths = tabElements.map((element) => element.getBoundingClientRect().width);
+            const tabLengths = tabElements.map(measureLength);
 
             /**
              * In grouped mode a partially-shown cluster still renders its leading divider, so its
-             * inline width is not a bare sum of tab widths. Capture each tab's cluster geometry (in
-             * tab order) so the inline width for any leading count can be derived from what is
+             * inline length is not a bare sum of tab lengths. Capture each tab's cluster geometry
+             * (in tab order) so the inline length for any leading count can be derived from what is
              * actually rendered.
              */
             const clusterElements = Array.from(mirrorElement.querySelectorAll('.tab-cluster'));
-            const containerLeft = mirrorElement.getBoundingClientRect().left;
+            const containerStart = measureStart(mirrorElement);
             const tabClusterInfo = clusterElements.flatMap((clusterElement) => {
-                const clusterLeft = clusterElement.getBoundingClientRect().left - containerLeft;
+                /**
+                 * Measured from the cluster's tabs rather than the cluster, since a vertical bar
+                 * stacks the group label before the tabs along the bar.
+                 */
+                const clusterStart =
+                    measureStart(
+                        assertWrap.isDefined(clusterElement.querySelector('.tab-cluster-tabs')),
+                    ) - containerStart;
                 return Array.from(clusterElement.querySelectorAll('.tab-item')).map(
                     (tabElement, indexInCluster) => {
                         return {
-                            clusterLeft,
+                            clusterStart,
                             indexInCluster,
-                            width: tabElement.getBoundingClientRect().width,
+                            length: measureLength(tabElement),
                         };
                     },
                 );
             });
 
-            /** Width of the inline area when the first `count` tabs are shown. */
-            function inlineWidthForCount(count: number) {
+            /** Length of the inline area when the first `count` tabs are shown. */
+            function inlineLengthForCount(count: number) {
                 if (count <= 0) {
                     return 0;
                 } else if (!clusterElements.length) {
-                    return tabWidths.slice(0, count).reduce((sum, width) => sum + width, 0);
+                    return tabLengths.slice(0, count).reduce((sum, length) => sum + length, 0);
                 }
 
                 const lastInfo = tabClusterInfo[count - 1];
@@ -864,25 +1035,25 @@ export const ViraTabs = defineViraElement<
                 }
                 const inlineTabsInLastCluster = tabClusterInfo
                     .slice(count - 1 - lastInfo.indexInCluster, count)
-                    .reduce((sum, info) => sum + info.width, 0);
-                return lastInfo.clusterLeft + inlineTabsInLastCluster;
+                    .reduce((sum, info) => sum + info.length, 0);
+                return lastInfo.clusterStart + inlineTabsInLastCluster;
             }
 
-            const totalWidth = inlineWidthForCount(tabCount);
+            const totalLength = inlineLengthForCount(tabCount);
 
             /**
-             * Largest number of leading tabs whose inline width fits within the available width
-             * minus the given reserve (the width the "more" button will occupy). Can return 0.
+             * Largest number of leading tabs whose inline length fits within the available length
+             * minus the given reserve (the length the "more" button will occupy). Can return 0.
              */
             function maxInlineForReserve(reservePx: number) {
-                const limit = availableWidth - reservePx;
+                const limit = availableLength - reservePx;
                 return tabElements.reduce((fittingCount, _tabElement, index) => {
-                    return inlineWidthForCount(index + 1) <= limit ? index + 1 : fittingCount;
+                    return inlineLengthForCount(index + 1) <= limit ? index + 1 : fittingCount;
                 }, 0);
             }
 
             /** When every tab fits on its own, there is no overflow and no "more" button. */
-            if (totalWidth <= availableWidth) {
+            if (totalLength <= availableLength) {
                 if (state.overflowCount !== 0) {
                     updateState({
                         overflowCount: 0,
@@ -891,8 +1062,12 @@ export const ViraTabs = defineViraElement<
                 return;
             }
 
-            const defaultButtonWidth = measureElementWidth(mirrorElement, '.measure-more-default');
-            const labeledButtonWidth = measureElementWidth(mirrorElement, '.measure-more-labeled');
+            const defaultButtonLength = measureLength(
+                mirrorElement.querySelector('.measure-more-default'),
+            );
+            const labeledButtonLength = measureLength(
+                mirrorElement.querySelector('.measure-more-labeled'),
+            );
 
             const selectedElement = mirrorElement.querySelector('.tab-item.measure-selected');
             const selectedIndex = selectedElement ? tabElements.indexOf(selectedElement) : -1;
@@ -901,17 +1076,17 @@ export const ViraTabs = defineViraElement<
              * Reserving the default ("more") trigger reveals whether the selected tab would end up
              * collapsed.
              */
-            const defaultInlineCount = maxInlineForReserve(defaultButtonWidth);
+            const defaultInlineCount = maxInlineForReserve(defaultButtonLength);
             const selectedIsCollapsed = selectedIndex >= 0 && selectedIndex >= defaultInlineCount;
 
             /**
              * When the selected tab is collapsed, the trigger always shows that tab's own label
-             * (with a checkmark), reserving its width even when it cannot fully fit (it is allowed
+             * (with a checkmark), reserving its length even when it cannot fully fit (it is allowed
              * to overflow rather than hide which tab is selected). Otherwise the trigger shows the
              * plain default overflow label.
              */
             const inlineCount = selectedIsCollapsed
-                ? maxInlineForReserve(labeledButtonWidth)
+                ? maxInlineForReserve(labeledButtonLength)
                 : defaultInlineCount;
 
             const newOverflowCount = Math.max(1, tabCount - inlineCount);
@@ -989,31 +1164,56 @@ export const ViraTabs = defineViraElement<
 
         const overflowLabel = inputs.overflowLabel || 'More';
 
+        function renderMoreButton({
+            isLabeled,
+            className,
+        }: Readonly<{
+            /** Shows the selected tab's label with a checkmark instead of the overflow label. */
+            isLabeled: boolean;
+            className: string;
+        }>) {
+            const text = isLabeled ? selectedTab?.label : overflowLabel;
+            const icon = isLabeled ? internalLucideIcons.Check16 : undefined;
+
+            return html`
+                <${ViraButton.assign({
+                    color: ViraColorVariant.Neutral,
+                })}
+                    class=${className}
+                >
+                    <span class="more-button-content">
+                        ${icon
+                            ? html`
+                                  <${ViraIcon.assign({
+                                      icon,
+                                  })}></${ViraIcon}>
+                              `
+                            : nothing}
+                        <span>${text}</span>
+                        <${ViraIcon.assign({
+                            icon: internalLucideIcons.ChevronDown16,
+                        })}></${ViraIcon}>
+                    </span>
+                </${ViraButton}>
+            `;
+        }
+
         /**
          * Hidden copies of the "more" button in each of its possible shapes, rendered inside the
-         * measurement mirror so their true widths can be measured before choosing which one fits:
-         * the default overflow label, and the collapsed selected tab's own label (with a checkmark
-         * and caret).
+         * measurement mirror so their true lengths along the bar can be measured before choosing
+         * which one fits: the default overflow label, and the collapsed selected tab's own label
+         * (with a checkmark and caret).
          */
         const measureMoreButtons = html`
-            <${ViraButton.assign({
-                text: overflowLabel,
-                rightSideIcon: internalLucideIcons.ChevronDown16,
-                color: ViraColorVariant.Neutral,
+            ${renderMoreButton({
+                isLabeled: false,
+                className: 'measure-more-default',
             })}
-                class="measure-more-default"
-            ></${ViraButton}>
             ${selectedTab
-                ? html`
-                      <${ViraButton.assign({
-                          text: selectedTab.label,
-                          icon: internalLucideIcons.Check16,
-                          rightSideIcon: internalLucideIcons.ChevronDown16,
-                          color: ViraColorVariant.Neutral,
-                      })}
-                          class="measure-more-labeled"
-                      ></${ViraButton}>
-                  `
+                ? renderMoreButton({
+                      isLabeled: true,
+                      className: 'measure-more-labeled',
+                  })
                 : nothing}
         `;
 
@@ -1025,15 +1225,25 @@ export const ViraTabs = defineViraElement<
                           popoverOffset: inputs.menuPopoverOffset,
                           menuCornerStyle: ViraMenuCornerStyle.Round,
                       })}>
-                          <${ViraButton.assign({
-                              text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
-                              icon: selectedIsCollapsed ? internalLucideIcons.Check16 : undefined,
-                              rightSideIcon: internalLucideIcons.ChevronDown16,
-                              color: ViraColorVariant.Neutral,
-                          })}
+                          <span
+                              class="more-button-wrapper"
                               slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
-                          ></${ViraButton}>
-                          ${buildMenuItems(overflowTabs)}
+                          >
+                              ${renderMoreButton({
+                                  isLabeled: selectedIsCollapsed,
+                                  className: '',
+                              })}
+                          </span>
+                          ${buildClusters(overflowTabs).map((cluster) => {
+                              return html`
+                                  ${cluster.group == undefined
+                                      ? nothing
+                                      : html`
+                                            <div class="menu-group-label">${cluster.group}</div>
+                                        `}
+                                  ${buildMenuItems(cluster.tabs)}
+                              `;
+                          })}
                       </${ViraMenuTrigger}>
                   </div>
               `

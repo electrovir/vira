@@ -19,17 +19,42 @@ describe(ViraButton.tagName, () => {
 
         assert.instanceOf(fixture, ViraButton);
 
-        const button = fixture.shadowRoot.querySelector('button');
+        const slot = fixture.shadowRoot.querySelector('button slot');
 
-        assert.instanceOf(button, HTMLButtonElement);
+        assert.instanceOf(slot, HTMLSlotElement);
         assert.deepEquals(
-            Array.from(button.children).map(({tagName}) => {
+            Array.from(slot.children).map(({tagName}) => {
                 return tagName.toLowerCase();
             }),
             [
                 ViraIcon.tagName,
                 'span',
                 ViraIcon.tagName,
+            ],
+        );
+    });
+
+    it('renders slotted content instead of the text and icons', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraButton.assign({
+                text: 'Fallback',
+                icon: internalLucideIcons.Check16,
+            })}>
+                <b>Slotted</b>
+            </${ViraButton}>
+        `);
+
+        assert.instanceOf(fixture, ViraButton);
+
+        const slot = fixture.shadowRoot.querySelector('slot');
+
+        assert.instanceOf(slot, HTMLSlotElement);
+        assert.deepEquals(
+            slot.assignedElements().map(({textContent}) => {
+                return textContent;
+            }),
+            [
+                'Slotted',
             ],
         );
     });

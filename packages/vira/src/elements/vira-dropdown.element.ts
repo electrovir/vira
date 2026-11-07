@@ -20,15 +20,10 @@ import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
-import {
-    noNativeFormStyles,
-    noUserSelect,
-    viraAnimationDurations,
-    viraTheme,
-} from '../styles/index.js';
+import {noNativeFormStyles, noUserSelect, viraAnimationDurations} from '../styles/index.js';
 import {defineViraElement} from '../util/define-vira-element.js';
 import {fuzzyMatch} from '../util/fuzzy-match.js';
-import {renderMenuItemEntries} from '../util/menu-helpers.js';
+import {menuGroupLabelStyles, renderMenuItemEntries} from '../util/menu-helpers.js';
 import {type PopoverManager} from '../util/popover-manager.js';
 import {
     isViraDropdownOptionGroup,
@@ -247,22 +242,14 @@ export const ViraDropdown = defineViraElement<
                 border-color: ${viraFormCssVars['vira-form-error-color'].value};
             }
 
-            .option-group-label,
+            .option-group-label {
+                ${menuGroupLabelStyles};
+            }
+
             .no-options,
             .hidden-options-hint {
                 ${noUserSelect};
                 text-align: left;
-            }
-
-            .option-group-label {
-                color: ${viraTheme.colors['vira-grey-foreground-placeholder'].foreground.value};
-                padding: 8px 12px 4px
-                    calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
-                font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
-            }
-
-            .no-options,
-            .hidden-options-hint {
                 cursor: default;
                 opacity: 0.6;
                 /* Aligns with the label text of each ViraMenuItem, past its check icon. */

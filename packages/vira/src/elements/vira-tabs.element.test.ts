@@ -4,7 +4,7 @@ import {describe, it, testWeb} from '@augment-vir/test';
 import {css, html} from 'element-vir';
 import {PathTree, type FullSpaRoute} from 'spa-router-vir';
 import {ViraButton} from './vira-button.element.js';
-import {buildClusters, ViraTabs, type ViraTab} from './vira-tabs.element.js';
+import {buildClusters, ViraTabs, ViraTabsBarDirection, type ViraTab} from './vira-tabs.element.js';
 
 const mockPathTree = new PathTree({
     allowBare: true,
@@ -79,7 +79,15 @@ const manyTabs = [
  */
 async function renderOverflowFixture(
     currentRoute: FullSpaRoute,
-    {width = 200, overflowLabel}: {width?: number; overflowLabel?: string} = {},
+    {
+        width = 200,
+        overflowLabel,
+        tabs = manyTabs,
+    }: {
+        width?: number;
+        overflowLabel?: string;
+        tabs?: ReadonlyArray<Readonly<ViraTab>>;
+    } = {},
 ) {
     const fixture = await testWeb.render(html`
         <div
@@ -88,7 +96,7 @@ async function renderOverflowFixture(
             `}
         >
             <${ViraTabs.assign({
-                tabs: manyTabs,
+                tabs,
                 router: mockRouter,
                 currentRoute,
                 overflowLabel,
@@ -105,9 +113,7 @@ async function renderOverflowFixture(
         );
     }
     function moreButtonLabel() {
-        const textContent = visibleContainer()
-            .querySelector(ViraButton.tagName)
-            ?.shadowRoot?.querySelector('.text-template')?.textContent;
+        const textContent = visibleContainer().querySelector(ViraButton.tagName)?.textContent;
         return (textContent ?? '').trim();
     }
 
@@ -382,9 +388,9 @@ describe(ViraTabs.tagName, () => {
 
         /**
          * The mirror must stay laid out so overflow widths can be measured, but it must never
-         * paint: a selected tab's ViraBoldText re-sets `visibility: visible` on its own label,
-         * which overrides the mirror's inherited `visibility: hidden`. `opacity: 0` (which a
-         * descendant cannot override) is what actually keeps the mirror invisible.
+         * paint: a label template that sets `visibility: visible` on itself overrides the mirror's
+         * inherited `visibility: hidden`. `opacity: 0` (which a descendant cannot override) is what
+         * actually keeps the mirror invisible.
          */
         assert.isAbove(measureMirror.getBoundingClientRect().width, 0);
         assert.strictEquals(globalThis.getComputedStyle(measureMirror).opacity, '0');
@@ -417,7 +423,7 @@ describe(ViraTabs.tagName, () => {
         const triggerText = assertWrap.instanceOf(
             visibleContainer()
                 .querySelector(ViraButton.tagName)
-                ?.shadowRoot?.querySelector('.text-template'),
+                ?.querySelector('.more-button-content'),
             HTMLElement,
         );
 
@@ -445,6 +451,37 @@ describe(ViraTabs.tagName, () => {
                 },
             },
             'the more button never showed the collapsed selected tab label',
+        );
+    });
+
+    it('labels each group of tabs in the overflow menu', async () => {
+        const groupedTabs = manyTabs.map((tab, index) => {
+            return {
+                ...tab,
+                group: index < 2 ? 'Alpha' : 'Beta',
+            };
+        });
+        const {visibleContainer} = await renderOverflowFixture(
+            createMockRoute(mockPathTree.paths.children.one.fullPaths),
+            {
+                tabs: groupedTabs,
+            },
+        );
+
+        const menuTrigger = assertWrap.isDefined(
+            visibleContainer().querySelector('.tab-more vira-menu-trigger'),
+        );
+        const menuGroups = [...menuTrigger.querySelectorAll('vira-menu-item')].map((menuItem) => {
+            return assertWrap.isDefined(
+                groupedTabs.find((tab) => tab.label === menuItem.textContent.trim()),
+            ).group;
+        });
+
+        assert.deepEquals(
+            [...menuTrigger.querySelectorAll('.menu-group-label')].map((label) => {
+                return label.textContent.trim();
+            }),
+            menuGroups.filter((group, index) => group !== menuGroups[index - 1]),
         );
     });
 
@@ -488,6 +525,167 @@ describe(ViraTabs.tagName, () => {
                 },
             },
             'the more button fell back to the overflow label instead of the selected tab',
+        );
+    });
+
+    it('renders template labels inline and on the collapsed selected trigger', async () => {
+        const {visibleContainer} = await renderOverflowFixture(
+            createMockRoute(mockPathTree.paths.children.five.fullPaths),
+            {
+                tabs: manyTabs.map((tab) => {
+                    return {
+                        ...tab,
+                        label: html`
+                            <b class="template-label">${tab.label}</b>
+                        `,
+                    };
+                }),
+            },
+        );
+
+        const inlineLabel = visibleContainer().querySelector('.tab-label .template-label');
+        await waitUntil.isTruthy(
+            () => {
+                return (
+                    visibleContainer()
+                        .querySelector(ViraButton.tagName)
+                        ?.querySelector('.template-label')?.textContent === 'Five'
+                );
+            },
+            {
+                timeout: {
+                    seconds: 2,
+                },
+            },
+            'the collapsed selected tab never rendered its template label on the trigger',
+        );
+        assert.strictEquals(inlineLabel?.textContent, 'One');
+    });
+
+    it('keeps template labels level whether selected or not and whatever they hold', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraTabs.assign({
+                tabs: mockTabs.map((tab, index) => {
+                    return {
+                        ...tab,
+                        label: html`
+                            <span
+                                class="template-label"
+                                style=${css`
+                                    display: inline-flex;
+                                    align-items: center;
+                                `}
+                            >
+                                ${index % 2
+                                    ? html`
+                                          <span
+                                              style=${css`
+                                                  display: inline-block;
+                                                  width: 14px;
+                                                  height: 14px;
+                                              `}
+                                          ></span>
+                                      `
+                                    : ''}
+                                ${tab.label}
+                            </span>
+                        `,
+                    };
+                }),
+                router: mockRouter,
+                currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+            })}></${ViraTabs}>
+        `);
+        const tabs = assertWrap.instanceOf(fixture, ViraTabs);
+        await waitUntil.isTruthy(
+            () => {
+                return tabs.shadowRoot.querySelector(
+                    '.tabs-container:not(.tabs-measure) .tab-item.selected',
+                );
+            },
+            {
+                timeout: {
+                    seconds: 2,
+                },
+            },
+            'no tab was ever selected',
+        );
+
+        const labelTops = [
+            ...tabs.shadowRoot.querySelectorAll(
+                '.tabs-container:not(.tabs-measure) .tab-item .tab-label',
+            ),
+        ].map((label) => {
+            return assertWrap
+                .isDefined(label.querySelector('[aria-hidden="false"] .template-label'))
+                .getBoundingClientRect().top;
+        });
+
+        assert.isLengthExactly(labelTops, 2);
+        assert.strictEquals(labelTops[0], labelTops[1]);
+    });
+
+    [
+        false,
+        true,
+    ].forEach((shouldRotateLabels) => {
+        it(`stacks grouped tabs along a vertical bar (rotated labels: ${shouldRotateLabels})`, async () => {
+            const fixture = await testWeb.render(html`
+                <${ViraTabs.assign({
+                    tabs: manyTabs.map((tab, index) => {
+                        return {
+                            ...tab,
+                            group: index < 3 ? 'Alpha' : 'Beta',
+                        };
+                    }),
+                    router: mockRouter,
+                    currentRoute: createMockRoute(mockPathTree.paths.children.one.fullPaths),
+                    barDirection: ViraTabsBarDirection.Left,
+                    shouldRotateLabels,
+                })}></${ViraTabs}>
+            `);
+
+            const tabRects = [
+                ...assertWrap
+                    .instanceOf(fixture, ViraTabs)
+                    .shadowRoot.querySelectorAll('.tabs-container:not(.tabs-measure) .tab-item'),
+            ].map((tabElement) => {
+                return tabElement.getBoundingClientRect();
+            });
+
+            assert.isLengthExactly(tabRects, manyTabs.length);
+            assert.deepEquals(
+                new Set(
+                    tabRects.map(({left}) => {
+                        return left;
+                    }),
+                ).size,
+                1,
+            );
+        });
+    });
+
+    it('turns labels sideways in a rotated vertical bar', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraTabs.assign({
+                tabs: mockTabs,
+                router: mockRouter,
+                currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+                barDirection: ViraTabsBarDirection.Right,
+                shouldRotateLabels: true,
+            })}></${ViraTabs}>
+        `);
+
+        assert.instanceOf(fixture, ViraTabs);
+
+        const tabItem = assertWrap.instanceOf(
+            fixture.shadowRoot.querySelector('.tabs-container:not(.tabs-measure) .tab-item'),
+            HTMLElement,
+        );
+
+        assert.isAbove(
+            tabItem.getBoundingClientRect().height,
+            tabItem.getBoundingClientRect().width,
         );
     });
 });

@@ -5,8 +5,25 @@ import {
     type PartialWithUndefined,
 } from '@augment-vir/common';
 import {nav, type NavController} from 'device-navigation';
-import {html, listen, nothing, type HtmlInterpolation} from 'element-vir';
+import {css, html, listen, nothing, type HtmlInterpolation} from 'element-vir';
 import {ViraMenuItem} from '../elements/popover/vira-menu-item.element.js';
+import {viraFormCssVars} from '../styles/form-styles.js';
+import {noUserSelect} from '../styles/user-select.js';
+import {viraTheme} from '../styles/vira-color-theme.js';
+
+/**
+ * Styles for a group name shown above a group of menu items: not selectable, and indented to line
+ * up with the items' check icons.
+ *
+ * @category Internal
+ */
+export const menuGroupLabelStyles = css`
+    ${noUserSelect};
+    text-align: left;
+    color: ${viraTheme.colors['vira-grey-foreground-placeholder'].foreground.value};
+    padding: 8px 12px 4px calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
+    font-weight: ${viraFormCssVars['vira-form-label-font-weight'].value};
+`;
 
 /**
  * Verifies that all items have unique ids.

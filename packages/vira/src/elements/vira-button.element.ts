@@ -182,6 +182,7 @@ const mutedButtonColors: Record<
  */
 export const ViraButton = defineViraElement<
     PartialWithUndefined<{
+        /** Rendered, along with both icons, only when nothing is slotted into the button. */
         text: string;
         icon: Readonly<ViraIconSvg>;
         /** An optional icon rendered after the button text. */
@@ -413,13 +414,14 @@ export const ViraButton = defineViraElement<
                         font-size: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
 
                         button {
-                            min-height: ${viraSizeHeights[sizeVariant]}px;
-                            padding: 2px
-                                ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
+                            min-block-size: ${viraSizeHeights[sizeVariant]}px;
+                            padding-block: 2px;
+                            padding-inline: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`]
+                                .value};
                         }
 
                         &${hostClasses['vira-button-icon-only'].selector} {
-                            min-width: ${viraSizeHeights[sizeVariant]}px;
+                            min-inline-size: ${viraSizeHeights[sizeVariant]}px;
                         }
                     }
                 `;
@@ -556,7 +558,7 @@ export const ViraButton = defineViraElement<
         ];
 
         return html`
-            <button ?disabled=${inputs.isDisabled}>${templates}</button>
+            <button ?disabled=${inputs.isDisabled}><slot>${templates}</slot></button>
         `;
     },
 });

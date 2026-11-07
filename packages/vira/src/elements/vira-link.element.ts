@@ -77,6 +77,15 @@ export const ViraLink = defineViraElement<
                 text-decoration: underline;
             }
 
+            a {
+                /**
+                 * Lays out the link's contents however the host is set to, such as a flex host
+                 * centering an icon and label. A plain inline anchor around block content (such as
+                 * rotated text) leaves Safari sizing the host smaller than what it paints.
+                 */
+                display: inherit;
+            }
+
             a,
             a:visited,
             a:active,

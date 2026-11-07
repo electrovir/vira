@@ -22,6 +22,12 @@ const directiveName = 'tooltip';
 export type TooltipOptions = PartialWithUndefined<{
     /** Defaults to {@link PopoverTrigger.Hover}. `true` or `false` force the tooltip open or closed. */
     trigger: boolean | PopoverTrigger;
+    /**
+     * Lets the pointer move onto the tooltip without closing it, so its text can be selected and
+     * its contents clicked. By default the tooltip ignores the pointer: clicks and scrolls go to
+     * whatever is under it.
+     */
+    allowMouseInteraction: boolean;
 }> &
     Pick<PopoverOptions, 'delay' | 'timeout'>;
 
@@ -32,6 +38,7 @@ export type TooltipOptions = PartialWithUndefined<{
  */
 export class TooltipDirective extends AsyncDirective {
     public content: HtmlInterpolation;
+    public allowMouseInteraction = false;
     /** Only exists while the tooltip is shown. */
     public tooltipElement: (typeof ViraTooltip)['InstanceType'] | undefined;
     public readonly popoverManager = new PopoverManager();
@@ -56,8 +63,13 @@ export class TooltipDirective extends AsyncDirective {
         const anchor = assertWrap.instanceOf(partInfo.element, HTMLElement);
 
         this.content = content;
+        this.allowMouseInteraction = !!options?.allowMouseInteraction;
 
         if (this.tooltipElement) {
+            this.tooltipElement.assignInputs({
+                anchor,
+                allowMouseInteraction: this.allowMouseInteraction,
+            });
             render(content, this.tooltipElement);
         }
 
@@ -65,6 +77,7 @@ export class TooltipDirective extends AsyncDirective {
             trigger: options?.trigger ?? PopoverTrigger.Hover,
             delay: options?.delay,
             timeout: options?.timeout,
+            closeOnAnchorLeave: !this.allowMouseInteraction,
             getPopover: () => this.createTooltipElement(anchor),
         });
 
@@ -90,6 +103,7 @@ export class TooltipDirective extends AsyncDirective {
         });
         this.tooltipElement.assignInputs({
             anchor,
+            allowMouseInteraction: this.allowMouseInteraction,
         });
         this.tooltipElement.popover = 'manual';
         this.tooltipElement.role = 'tooltip';

@@ -1,3 +1,4 @@
+import {type PartialWithUndefined} from '@augment-vir/common';
 import {colorCss} from '@electrovir/color';
 import {css, html} from 'element-vir';
 import {listenTo} from 'typed-event-target';
@@ -58,106 +59,123 @@ const shiftedStyles = css`
  * @category Popover
  * @category Elements
  */
-export const ViraTooltip = defineViraElement<{
-    anchor: HTMLElement;
-}>()({
+export const ViraTooltip = defineViraElement<
+    {
+        anchor: HTMLElement;
+    } & PartialWithUndefined<{
+        /** Lets the pointer select the tooltip's text and click its contents. */
+        allowMouseInteraction: boolean;
+    }>
+>()({
     tagName: 'vira-tooltip',
-    styles: css`
-        ${createAnchoredPopoverStyles({
-            fallbacks: [
-                {
-                    name: 'vira-tooltip-above-left-aligned',
-                    styles: leftAlignedStyles,
-                },
-                {
-                    name: 'vira-tooltip-above-right-aligned',
-                    styles: rightAlignedStyles,
-                },
-                {
-                    name: 'vira-tooltip-below-centered',
-                    styles: centeredStyles,
-                    flipBlock: true,
-                },
-                {
-                    name: 'vira-tooltip-below-left-aligned',
-                    styles: leftAlignedStyles,
-                    flipBlock: true,
-                },
-                {
-                    name: 'vira-tooltip-below-right-aligned',
-                    styles: rightAlignedStyles,
-                    flipBlock: true,
-                },
-                {
-                    name: 'vira-tooltip-above-shifted',
-                    styles: shiftedStyles,
-                },
-                {
-                    name: 'vira-tooltip-below-shifted',
-                    styles: shiftedStyles,
-                    flipBlock: true,
-                },
-            ],
-        })}
+    hostClasses: {
+        'vira-tooltip-allow-mouse-interaction'({inputs}) {
+            return !!inputs.allowMouseInteraction;
+        },
+    },
+    styles({hostClasses}) {
+        return css`
+            ${createAnchoredPopoverStyles({
+                fallbacks: [
+                    {
+                        name: 'vira-tooltip-above-left-aligned',
+                        styles: leftAlignedStyles,
+                    },
+                    {
+                        name: 'vira-tooltip-above-right-aligned',
+                        styles: rightAlignedStyles,
+                    },
+                    {
+                        name: 'vira-tooltip-below-centered',
+                        styles: centeredStyles,
+                        flipBlock: true,
+                    },
+                    {
+                        name: 'vira-tooltip-below-left-aligned',
+                        styles: leftAlignedStyles,
+                        flipBlock: true,
+                    },
+                    {
+                        name: 'vira-tooltip-below-right-aligned',
+                        styles: rightAlignedStyles,
+                        flipBlock: true,
+                    },
+                    {
+                        name: 'vira-tooltip-above-shifted',
+                        styles: shiftedStyles,
+                    },
+                    {
+                        name: 'vira-tooltip-below-shifted',
+                        styles: shiftedStyles,
+                        flipBlock: true,
+                    },
+                ],
+            })}
 
-        :host {
-            anchor-name: --vira-tooltip;
-            ${colorCss(viraTheme.colors['vira-grey-behind-bg-highest-contrast'])};
-            ${centeredStyles}
-            margin-bottom: 7px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            box-sizing: border-box;
-            width: max-content;
-            /*
+            :host {
+                anchor-name: --vira-tooltip;
+                ${colorCss(viraTheme.colors['vira-grey-behind-bg-highest-contrast'])};
+                ${centeredStyles}
+                margin-bottom: 7px;
+                padding: 4px 8px;
+                border-radius: 6px;
+                box-sizing: border-box;
+                width: max-content;
+                /*
                 Not 100%, which is the width of the current position-area. A tooltip limited to that
                 width shrinks to fit it rather than overflowing onto the next fallback.
             */
-            max-width: min(300px, 100vw);
-            font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
-            overflow-wrap: break-word;
-            user-select: text;
-        }
+                max-width: min(300px, 100vw);
+                font-size: ${viraFormCssVars['vira-form-small-text-size'].value};
+                overflow-wrap: break-word;
+                pointer-events: none;
+            }
 
-        /*
+            ${hostClasses['vira-tooltip-allow-mouse-interaction'].selector} {
+                pointer-events: auto;
+                user-select: text;
+            }
+
+            /*
             Separate popovers rather than children or pseudo-elements of the tooltip, because those can't
             use anchor() to reach the anchor element from inside the tooltip's top-layer box.
         */
-        .caret {
-            /*
+            .caret {
+                /*
                 position-anchor is set explicitly because its initial value differs between browsers.
             */
-            position-anchor: auto;
-            position: fixed;
-            inset: auto;
-            margin: 0;
-            padding: 0;
-            border: none;
-            height: auto;
-            width: 10px;
-            left: calc(anchor(center) - 5px);
-            background-color: ${viraTheme.colors['vira-grey-behind-bg-highest-contrast'].background
-                .value};
-            pointer-events: none;
-        }
+                position-anchor: auto;
+                position: fixed;
+                inset: auto;
+                margin: 0;
+                padding: 0;
+                border: none;
+                height: auto;
+                width: 10px;
+                left: calc(anchor(center) - 5px);
+                background-color: ${viraTheme.colors['vira-grey-behind-bg-highest-contrast']
+                    .background.value};
+                pointer-events: none;
+            }
 
-        /*
+            /*
             Each caret spans the gap between the tooltip and the anchor on its own side, so the caret
             on the side without the tooltip gets a negative height, which renders as nothing. This
             follows the tooltip's position-try-fallbacks choice without knowing which one won.
         */
-        .caret-down {
-            top: anchor(--vira-tooltip bottom);
-            bottom: calc(anchor(top) + 2px);
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-        }
+            .caret-down {
+                top: anchor(--vira-tooltip bottom);
+                bottom: calc(anchor(top) + 2px);
+                clip-path: polygon(0 0, 100% 0, 50% 100%);
+            }
 
-        .caret-up {
-            bottom: anchor(--vira-tooltip top);
-            top: calc(anchor(bottom) + 2px);
-            clip-path: polygon(50% 0, 100% 100%, 0 100%);
-        }
-    `,
+            .caret-up {
+                bottom: anchor(--vira-tooltip top);
+                top: calc(anchor(bottom) + 2px);
+                clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            }
+        `;
+    },
     init({host}) {
         /** The carets must open after the tooltip so they can anchor to it. */
         listenTo(host, 'toggle', () => {

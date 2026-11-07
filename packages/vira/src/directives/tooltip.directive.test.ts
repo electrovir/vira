@@ -277,11 +277,39 @@ describe('tooltip', () => {
         });
     });
 
-    it('stays open while the pointer moves through the cone onto the tooltip', async () => {
+    it('hides when the pointer leaves the anchor towards the tooltip and ignores the pointer', async () => {
         const {hover, findOpenTooltip} = await setupTooltipTest(css`
             top: 200px;
             left: 200px;
         `);
+
+        const {anchorRect} = await hover();
+        assert.strictEquals(
+            getComputedStyle(assertWrap.isDefined(findOpenTooltip())).pointerEvents,
+            'none',
+        );
+
+        await sendMouse({
+            type: 'move',
+            position: [
+                Math.round(anchorRect.left + anchorRect.width / 2),
+                Math.round(anchorRect.top - 3),
+            ],
+        });
+        await waitUntil.isUndefined(findOpenTooltip);
+    });
+
+    it('stays open while the pointer moves through the cone onto the tooltip with mouse interaction', async () => {
+        const {hover, findOpenTooltip} = await setupTooltipTest(
+            css`
+                top: 200px;
+                left: 200px;
+            `,
+            'Tooltip text',
+            {
+                allowMouseInteraction: true,
+            },
+        );
 
         const {popoverRect, anchorRect} = await hover();
         const anchorCenterX = anchorRect.left + anchorRect.width / 2;

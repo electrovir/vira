@@ -228,6 +228,11 @@ export type PopoverOptions = {
     delay: AnyDuration;
     /** Closes the popover once it has been open this long. By default it stays open. */
     timeout: AnyDuration;
+    /**
+     * Only for {@link PopoverTrigger.Hover}: hides the popover as soon as the pointer leaves the
+     * anchor, instead of keeping it open while the pointer moves onto it.
+     */
+    closeOnAnchorLeave: boolean;
 }>;
 
 const defaultDelays: PartialWithUndefined<
@@ -560,7 +565,7 @@ export class PopoverManager {
      * popover without closing it.
      */
     public hideOnHoverExit(event: Readonly<MouseEvent>) {
-        if (!this.isOpen() || !this.isInHoverArea(event)) {
+        if (!this.isOpen() || this.options?.closeOnAnchorLeave || !this.isInHoverArea(event)) {
             this.hide();
             return;
         }

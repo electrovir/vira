@@ -114,7 +114,7 @@ export const viraTooltipBookPage = defineBookPage({
             },
         });
         defineExample({
-            title: 'hover area',
+            title: 'mouse interaction',
             styles: css`
                 .hover-area-demo {
                     position: relative;
@@ -183,7 +183,10 @@ export const viraTooltipBookPage = defineBookPage({
                             text: 'Hover',
                         })}
                             ${tooltip(
-                                'Moving the pointer anywhere in the outlined area keeps this tooltip open.',
+                                'Moving the pointer anywhere in the outlined area keeps this tooltip open, so its text can be selected.',
+                                {
+                                    allowMouseInteraction: true,
+                                },
                             )}
                         ></${ViraButton}>
                     </div>

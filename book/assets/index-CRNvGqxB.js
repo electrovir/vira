@@ -13247,6 +13247,63 @@ function extractValue(previousString, value) {
 	else if (previousString.endsWith("=")) return `"${value}"`;
 	else return String(value);
 }
+// ../vira/src/styles/font.ts
+/**
+* Use this to set font values so they can be controlled via CSS vars.
+*
+* @category CSS Vars
+* @category Styles
+*/
+var viraFontCssVars = defineCssVars({
+	"vira-monospace": "monospace",
+	"vira-font-weight-normal": "normal",
+	"vira-font-weight-medium": "500",
+	"vira-font-weight-bold": "600"
+});
+// ../vira/src/directives/bold-text.directive.ts
+var hiddenCopyStyles = css`
+    visibility: hidden;
+    pointer-events: none;
+`;
+/**
+* Same as `ViraBoldText` but for any template, not just a string: `content` always takes up its
+* bold width, so toggling `isBold` never shifts the layout around it. `content` is rendered twice,
+* so any template in it is instantiated twice.
+*
+* @category Directives
+*/
+function boldText({ content, isBold }) {
+	return html`
+        <span
+            style=${css`
+                display: inline-grid;
+                vertical-align: top;
+            `}
+        >
+            <span
+                aria-hidden=${isBold ? "false" : "true"}
+                style=${css`
+                    grid-area: 1 / 1;
+                    display: flex;
+                    font-weight: ${viraFontCssVars["vira-font-weight-bold"].value};
+                    ${isBold ? css`` : hiddenCopyStyles}
+                `}
+            >
+                ${content}
+            </span>
+            <span
+                aria-hidden=${isBold ? "true" : "false"}
+                style=${css`
+                    grid-area: 1 / 1;
+                    display: flex;
+                    ${isBold ? hiddenCopyStyles : css``}
+                `}
+            >
+                ${content}
+            </span>
+        </span>
+    `;
+}
 // ../vira/src/directives/drag-reorder.directive.ts
 /**
 * The directive class behind {@link dragReorderHandle}.
@@ -19249,19 +19306,6 @@ function createCssVarNames(colorName) {
 		].join("-")
 	};
 }
-// ../vira/src/styles/font.ts
-/**
-* Use this to set font values so they can be controlled via CSS vars.
-*
-* @category CSS Vars
-* @category Styles
-*/
-var viraFontCssVars = defineCssVars({
-	"vira-monospace": "monospace",
-	"vira-font-weight-normal": "normal",
-	"vira-font-weight-medium": "500",
-	"vira-font-weight-bold": "600"
-});
 // ../vira/src/styles/vira-color-palette.ts
 /**
 * The base Vira color theme palette.
@@ -21425,99 +21469,109 @@ var shiftedStyles = css`
 */
 var ViraTooltip = defineViraElement()({
 	tagName: "vira-tooltip",
-	styles: css`
-        ${createAnchoredPopoverStyles({ fallbacks: [
-		{
-			name: "vira-tooltip-above-left-aligned",
-			styles: leftAlignedStyles
-		},
-		{
-			name: "vira-tooltip-above-right-aligned",
-			styles: rightAlignedStyles
-		},
-		{
-			name: "vira-tooltip-below-centered",
-			styles: centeredStyles,
-			flipBlock: true
-		},
-		{
-			name: "vira-tooltip-below-left-aligned",
-			styles: leftAlignedStyles,
-			flipBlock: true
-		},
-		{
-			name: "vira-tooltip-below-right-aligned",
-			styles: rightAlignedStyles,
-			flipBlock: true
-		},
-		{
-			name: "vira-tooltip-above-shifted",
-			styles: shiftedStyles
-		},
-		{
-			name: "vira-tooltip-below-shifted",
-			styles: shiftedStyles,
-			flipBlock: true
-		}
-	] })}
+	hostClasses: { "vira-tooltip-allow-mouse-interaction"({ inputs }) {
+		return !!inputs.allowMouseInteraction;
+	} },
+	styles({ hostClasses }) {
+		return css`
+            ${createAnchoredPopoverStyles({ fallbacks: [
+			{
+				name: "vira-tooltip-above-left-aligned",
+				styles: leftAlignedStyles
+			},
+			{
+				name: "vira-tooltip-above-right-aligned",
+				styles: rightAlignedStyles
+			},
+			{
+				name: "vira-tooltip-below-centered",
+				styles: centeredStyles,
+				flipBlock: true
+			},
+			{
+				name: "vira-tooltip-below-left-aligned",
+				styles: leftAlignedStyles,
+				flipBlock: true
+			},
+			{
+				name: "vira-tooltip-below-right-aligned",
+				styles: rightAlignedStyles,
+				flipBlock: true
+			},
+			{
+				name: "vira-tooltip-above-shifted",
+				styles: shiftedStyles
+			},
+			{
+				name: "vira-tooltip-below-shifted",
+				styles: shiftedStyles,
+				flipBlock: true
+			}
+		] })}
 
-        :host {
-            anchor-name: --vira-tooltip;
-            ${colorCss(viraTheme.colors["vira-grey-behind-bg-highest-contrast"])};
-            ${centeredStyles}
-            margin-bottom: 7px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            box-sizing: border-box;
-            width: max-content;
-            /*
+            :host {
+                anchor-name: --vira-tooltip;
+                ${colorCss(viraTheme.colors["vira-grey-behind-bg-highest-contrast"])};
+                ${centeredStyles}
+                margin-bottom: 7px;
+                padding: 4px 8px;
+                border-radius: 6px;
+                box-sizing: border-box;
+                width: max-content;
+                /*
                 Not 100%, which is the width of the current position-area. A tooltip limited to that
                 width shrinks to fit it rather than overflowing onto the next fallback.
             */
-            max-width: min(300px, 100vw);
-            font-size: ${viraFormCssVars["vira-form-small-text-size"].value};
-            overflow-wrap: break-word;
-            user-select: text;
-        }
+                max-width: min(300px, 100vw);
+                font-size: ${viraFormCssVars["vira-form-small-text-size"].value};
+                overflow-wrap: break-word;
+                pointer-events: none;
+            }
 
-        /*
+            ${hostClasses["vira-tooltip-allow-mouse-interaction"].selector} {
+                pointer-events: auto;
+                user-select: text;
+            }
+
+            /*
             Separate popovers rather than children or pseudo-elements of the tooltip, because those can't
             use anchor() to reach the anchor element from inside the tooltip's top-layer box.
         */
-        .caret {
-            /*
+            .caret {
+                /*
                 position-anchor is set explicitly because its initial value differs between browsers.
             */
-            position-anchor: auto;
-            position: fixed;
-            inset: auto;
-            margin: 0;
-            padding: 0;
-            border: none;
-            height: auto;
-            width: 10px;
-            left: calc(anchor(center) - 5px);
-            background-color: ${viraTheme.colors["vira-grey-behind-bg-highest-contrast"].background.value};
-            pointer-events: none;
-        }
+                position-anchor: auto;
+                position: fixed;
+                inset: auto;
+                margin: 0;
+                padding: 0;
+                border: none;
+                height: auto;
+                width: 10px;
+                left: calc(anchor(center) - 5px);
+                background-color: ${viraTheme.colors["vira-grey-behind-bg-highest-contrast"].background.value};
+                pointer-events: none;
+            }
 
-        /*
+            /*
             Each caret spans the gap between the tooltip and the anchor on its own side, so the caret
             on the side without the tooltip gets a negative height, which renders as nothing. This
             follows the tooltip's position-try-fallbacks choice without knowing which one won.
         */
-        .caret-down {
-            top: anchor(--vira-tooltip bottom);
-            bottom: calc(anchor(top) + 2px);
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-        }
+            .caret-down {
+                top: anchor(--vira-tooltip bottom);
+                bottom: calc(anchor(top) + 2px);
+                clip-path: polygon(0 0, 100% 0, 50% 100%);
+            }
 
-        .caret-up {
-            bottom: anchor(--vira-tooltip top);
-            top: calc(anchor(bottom) + 2px);
-            clip-path: polygon(50% 0, 100% 100%, 0 100%);
-        }
-    `,
+            .caret-up {
+                bottom: anchor(--vira-tooltip top);
+                top: calc(anchor(bottom) + 2px);
+                clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            }
+        `;
+	},
 	init({ host }) {
 		/** The carets must open after the tooltip so they can anchor to it. */
 		listenTo(host, "toggle", () => {
@@ -23331,7 +23385,7 @@ var PopoverManager = class {
 	* popover without closing it.
 	*/
 	hideOnHoverExit(event) {
-		if (!this.isOpen() || !this.isInHoverArea(event)) {
+		if (!this.isOpen() || this.options?.closeOnAnchorLeave || !this.isInHoverArea(event)) {
 			this.hide();
 			return;
 		}
@@ -23496,6 +23550,7 @@ var directiveName = "tooltip";
 */
 var TooltipDirective = class extends f$2 {
 	content;
+	allowMouseInteraction = false;
 	/** Only exists while the tooltip is shown. */
 	tooltipElement;
 	popoverManager = new PopoverManager();
@@ -23508,11 +23563,19 @@ var TooltipDirective = class extends f$2 {
 		assertIsElementPartInfo(partInfo, directiveName);
 		const anchor = assertWrap.instanceOf(partInfo.element, HTMLElement);
 		this.content = content;
-		if (this.tooltipElement) D(content, this.tooltipElement);
+		this.allowMouseInteraction = !!options?.allowMouseInteraction;
+		if (this.tooltipElement) {
+			this.tooltipElement.assignInputs({
+				anchor,
+				allowMouseInteraction: this.allowMouseInteraction
+			});
+			D(content, this.tooltipElement);
+		}
 		this.popoverManager.update(anchor, {
 			trigger: options?.trigger ?? PopoverTrigger.Hover,
 			delay: options?.delay,
 			timeout: options?.timeout,
+			closeOnAnchorLeave: !this.allowMouseInteraction,
 			getPopover: () => this.createTooltipElement(anchor)
 		});
 		return this.render(content, options);
@@ -23528,7 +23591,10 @@ var TooltipDirective = class extends f$2 {
 				if (this.tooltipElement === tooltipElement) this.tooltipElement = void 0;
 			}
 		});
-		this.tooltipElement.assignInputs({ anchor });
+		this.tooltipElement.assignInputs({
+			anchor,
+			allowMouseInteraction: this.allowMouseInteraction
+		});
 		this.tooltipElement.popover = "manual";
 		this.tooltipElement.role = "tooltip";
 		/**
@@ -80266,6 +80332,19 @@ function fuzzyMatch({ search, text }) {
 }
 // ../vira/src/util/menu-helpers.ts
 /**
+* Styles for a group name shown above a group of menu items: not selectable, and indented to line
+* up with the items' check icons.
+*
+* @category Internal
+*/
+var menuGroupLabelStyles = css`
+    ${noUserSelect};
+    text-align: left;
+    color: ${viraTheme.colors["vira-grey-foreground-placeholder"].foreground.value};
+    padding: 8px 12px 4px calc(${ViraMenuItem.cssVars["vira-menu-item-icon-gap"].value} * 2);
+    font-weight: ${viraFormCssVars["vira-form-label-font-weight"].value};
+`;
+/**
 * A helper for rendering a bunch of menu items.
 *
 * @category Popover
@@ -80681,22 +80760,14 @@ var ViraDropdown = defineViraElement()({
                 border-color: ${viraFormCssVars["vira-form-error-color"].value};
             }
 
-            .option-group-label,
+            .option-group-label {
+                ${menuGroupLabelStyles};
+            }
+
             .no-options,
             .hidden-options-hint {
                 ${noUserSelect};
                 text-align: left;
-            }
-
-            .option-group-label {
-                color: ${viraTheme.colors["vira-grey-foreground-placeholder"].foreground.value};
-                padding: 8px 12px 4px
-                    calc(${ViraMenuItem.cssVars["vira-menu-item-icon-gap"].value} * 2);
-                font-weight: ${viraFormCssVars["vira-form-label-font-weight"].value};
-            }
-
-            .no-options,
-            .hidden-options-hint {
                 cursor: default;
                 opacity: 0.6;
                 /* Aligns with the label text of each ViraMenuItem, past its check icon. */
@@ -81715,13 +81786,13 @@ var ViraButton = defineViraElement()({
                         font-size: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
 
                         button {
-                            min-height: ${viraSizeHeights[sizeVariant]}px;
-                            padding: 2px
-                                ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
+                            min-block-size: ${viraSizeHeights[sizeVariant]}px;
+                            padding-block: 2px;
+                            padding-inline: ${viraFormCssVars[`vira-form-${sizeVariant}-text-size`].value};
                         }
 
                         &${hostClasses["vira-button-icon-only"].selector} {
-                            min-width: ${viraSizeHeights[sizeVariant]}px;
+                            min-inline-size: ${viraSizeHeights[sizeVariant]}px;
                         }
                     }
                 `;
@@ -81839,7 +81910,7 @@ var ViraButton = defineViraElement()({
                   ` : A
 		];
 		return html`
-            <button ?disabled=${inputs.isDisabled}>${templates}</button>
+            <button ?disabled=${inputs.isDisabled}><slot>${templates}</slot></button>
         `;
 	}
 });
@@ -86106,6 +86177,15 @@ cleanupListeners: void 0 };
                 text-decoration: underline;
             }
 
+            a {
+                /**
+                 * Lays out the link's contents however the host is set to, such as a flex host
+                 * centering an icon and label. A plain inline anchor around block content (such as
+                 * rotated text) leaves Safari sizing the host smaller than what it paints.
+                 */
+                display: inherit;
+            }
+
             a,
             a:visited,
             a:active,
@@ -87934,9 +88014,8 @@ var ViraTabsIconLayout = /* @__PURE__ */ function(ViraTabsIconLayout) {
 	ViraTabsIconLayout["Horizontal"] = "horizontal";
 	return ViraTabsIconLayout;
 }({});
-function measureElementWidth(mirrorElement, selector) {
-	const element = mirrorElement.querySelector(selector);
-	return element ? element.getBoundingClientRect().width : 0;
+function isRotatingLabels(inputs) {
+	return !!inputs.shouldRotateLabels && (inputs.barDirection === "left" || inputs.barDirection === "right");
 }
 /**
 * Groups a flat list of tabs into clusters. Consecutive tabs sharing the same `group` string are
@@ -88055,6 +88134,9 @@ tabSelect: defineElementEvent() },
 		},
 		"vira-tabs-fill-width"({ inputs }) {
 			return !!inputs.shouldFillWidth;
+		},
+		"vira-tabs-rotate-labels"({ inputs }) {
+			return isRotatingLabels(inputs);
 		}
 	},
 	cssVars: {
@@ -88062,7 +88144,12 @@ tabSelect: defineElementEvent() },
 		"vira-tabs-active-hover-color": viraThemeByKeys[viraColorVariantToHostClassKey[ViraColorVariant.Info]]["behind-bg"][ContrastLevelName.Header].background.value,
 		"vira-tabs-inactive-color": viraTheme.colors[themeDefaultKey].foreground.value,
 		"vira-tabs-inactive-hover-color": viraTheme.colors[themeDefaultKey].foreground.value,
-		"vira-tabs-bar-thickness": "2px"
+		"vira-tabs-bar-thickness": "2px",
+		/** Space on each side of a tab's label, across its text. Applies along the bar's length. */
+		"vira-tabs-tab-padding-block": "6px",
+		/** Space before and after a tab's label, along its text, including when labels are rotated. */
+		"vira-tabs-tab-padding-inline": "12px",
+		"vira-tabs-font-size": viraFormCssVars["vira-form-small-text-size"].value
 	},
 	styles({ hostClasses, cssVars }) {
 		function buildThemedTabsColors(colorName) {
@@ -88119,7 +88206,7 @@ tabSelect: defineElementEvent() },
                 position: relative;
                 margin: 0;
                 padding: 0;
-                font-size: ${viraFormCssVars["vira-form-small-text-size"].value};
+                font-size: ${cssVars["vira-tabs-font-size"].value};
                 font-weight: ${viraFontCssVars["vira-font-weight-medium"].value};
 
                 & ${ViraButton} {
@@ -88133,11 +88220,11 @@ tabSelect: defineElementEvent() },
                 left: 0;
                 overflow: visible;
                 /**
-                 * visibility:hidden keeps the mirror's links out of the tab order, but a selected
-                 * tab's label re-sets visibility:visible on itself (see ViraBoldText), which would
-                 * override the inherited hidden state and paint the label. opacity:0 cannot be
-                 * overridden by a descendant, so it keeps the mirror invisible while still allowing
-                 * width measurement.
+                 * visibility:hidden keeps the mirror's links out of the tab order, but a label
+                 * template that sets visibility:visible on itself would override the inherited
+                 * hidden state and paint the label. opacity:0 cannot be overridden by a
+                 * descendant, so it keeps the mirror invisible while still allowing width
+                 * measurement.
                  */
                 visibility: hidden;
                 opacity: 0;
@@ -88295,7 +88382,40 @@ tabSelect: defineElementEvent() },
 
             .tab-item ${ViraLink} {
                 display: flex;
-                padding: 6px 12px;
+                padding: ${cssVars["vira-tabs-tab-padding-block"].value}
+                    ${cssVars["vira-tabs-tab-padding-inline"].value};
+            }
+
+            .menu-group-label {
+                ${menuGroupLabelStyles};
+            }
+
+            .more-button-content {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            ${hostClasses["vira-tabs-rotate-labels"].selector} {
+                & .tab-item ${ViraLink} {
+                    padding: ${cssVars["vira-tabs-tab-padding-inline"].value}
+                        ${cssVars["vira-tabs-tab-padding-block"].value};
+                }
+
+                & .tab-content {
+                    flex-direction: row;
+                    gap: 8px;
+                }
+
+                & .tab-content,
+                & .tab-more ${ViraButton}, & .tabs-measure ${ViraButton} {
+                    writing-mode: vertical-rl;
+                }
+
+                /** Writing mode leaves icons upright. This turns them to match the text. */
+                & .tab-content ${ViraIcon}, & .more-button-content ${ViraIcon} {
+                    transform: rotate(90deg);
+                }
             }
 
             .tab-more {
@@ -88306,6 +88426,14 @@ tabSelect: defineElementEvent() },
                 & ${ViraButton} {
                     flex-shrink: 0;
                 }
+            }
+
+            /**
+             * WebKit sizes a rotated button to zero width when it sits directly in the menu
+             * trigger's block wrapper. A flex parent gets its real width.
+             */
+            .more-button-wrapper {
+                display: flex;
             }
 
             .tabs-container.grouped {
@@ -88330,7 +88458,8 @@ tabSelect: defineElementEvent() },
                 white-space: nowrap;
                 font-size: 10px;
                 font-weight: ${viraFontCssVars["vira-font-weight-medium"].value};
-                padding: 6px 12px 4px;
+                padding-block: 6px 4px;
+                padding-inline: 12px;
                 color: ${viraTheme.colors["vira-grey-foreground-header"].foreground.value};
 
                 &.truncated {
@@ -88345,6 +88474,89 @@ tabSelect: defineElementEvent() },
                 width: 1px;
                 margin: 8px 0;
                 background-color: ${viraTheme.colors["vira-grey-foreground-decoration"].foreground.value};
+            }
+
+            ${hostClasses["vira-tabs-bar-left"].selector},
+            ${hostClasses["vira-tabs-bar-right"].selector} {
+                & .tabs-container.grouped {
+                    align-items: stretch;
+                }
+
+                & .tab-cluster-tabs {
+                    flex-direction: column;
+                }
+
+                & .tab-cluster-divider {
+                    width: auto;
+                    height: 1px;
+                    margin: 0 8px;
+                }
+            }
+
+            :host(
+                    .${hostClasses["vira-tabs-bar-left"].name}:not(.${hostClasses["vira-tabs-rotate-labels"].name})
+                ),
+            :host(
+                    .${hostClasses["vira-tabs-bar-right"].name}:not(.${hostClasses["vira-tabs-rotate-labels"].name})
+                ) {
+                & .tab-cluster-divider {
+                    display: none;
+                }
+
+                & .tab-group-label {
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 8px;
+                        right: 8px;
+                        bottom: 0;
+                        height: 1px;
+                        background-color: ${viraTheme.colors["vira-grey-foreground-decoration"].foreground.value};
+                    }
+                }
+            }
+
+            ${hostClasses["vira-tabs-rotate-labels"].selector} {
+                /** Lines the overflow trigger up with the tabs rather than the group labels. */
+                & .tabs-container.grouped {
+                    align-items: flex-start;
+                }
+
+                /** The group label sits beside its tabs, on the side the tops of the letters face. */
+                & .tab-cluster {
+                    flex-direction: row-reverse;
+                }
+
+                & .tab-group-label {
+                    writing-mode: vertical-rl;
+                    width: auto;
+                    min-width: 0;
+                    /**
+                     * Keeps the label from lengthening its cluster: it stretches to the length of
+                     * the cluster's tabs instead, and truncates past that.
+                     */
+                    contain: inline-size;
+                }
+            }
+
+            :host(
+                    .${hostClasses["vira-tabs-rotate-labels"].name}.${hostClasses["vira-tabs-bar-right"].name}
+                ) {
+                /** Keeps the bottoms of the letters facing the selection bar. */
+                & .tab-content,
+                & .tab-more ${ViraButton}, & .tabs-measure ${ViraButton}, & .tab-group-label {
+                    transform: rotate(180deg);
+                }
+
+                & .tabs-container.grouped {
+                    align-items: flex-end;
+                }
+
+                & .tab-cluster {
+                    flex-direction: row;
+                }
             }
         `;
 	},
@@ -88377,12 +88589,12 @@ tabSelect: defineElementEvent() },
 				})}>
                         <span class="tab-content">
                             ${iconTemplate}
-                            <${ViraBoldText.assign({
-					text: tab.label,
-					bold: isSelected
+                            <span class="tab-label">
+                                ${boldText({
+					content: tab.label,
+					isBold: isSelected
 				})}
-                                class="tab-label"
-                            ></${ViraBoldText}>
+                            </span>
                         </span>
                     </${ViraLink}>
                 `
@@ -88453,75 +88665,86 @@ tabSelect: defineElementEvent() },
 			}, check.isTruthy));
 		}
 		function measureOverflow(mirrorElement) {
-			const availableWidth = host.clientWidth;
-			if (!availableWidth) return;
-			if (globalThis.getComputedStyle(mirrorElement).flexDirection.startsWith("column")) {
-				if (state.overflowCount !== 0) updateState({ overflowCount: 0 });
-				return;
+			/** Vertical (left/right) tab bars stack their tabs in a column, so they fill height. */
+			const isVertical = globalThis.getComputedStyle(mirrorElement).flexDirection.startsWith("column");
+			/** Size along the bar: height in a vertical bar, width in a horizontal one. */
+			function measureLength(element) {
+				const rect = element?.getBoundingClientRect();
+				return rect ? isVertical ? rect.height : rect.width : 0;
 			}
+			function measureStart(element) {
+				const rect = element.getBoundingClientRect();
+				return isVertical ? rect.top : rect.left;
+			}
+			const availableLength = isVertical ? host.clientHeight : host.clientWidth;
+			if (!availableLength) return;
 			const tabElements = Array.from(mirrorElement.querySelectorAll(".tab-item"));
 			const tabCount = tabElements.length;
 			if (!tabCount) return;
-			const tabWidths = tabElements.map((element) => element.getBoundingClientRect().width);
+			const tabLengths = tabElements.map(measureLength);
 			/**
 			* In grouped mode a partially-shown cluster still renders its leading divider, so its
-			* inline width is not a bare sum of tab widths. Capture each tab's cluster geometry (in
-			* tab order) so the inline width for any leading count can be derived from what is
+			* inline length is not a bare sum of tab lengths. Capture each tab's cluster geometry
+			* (in tab order) so the inline length for any leading count can be derived from what is
 			* actually rendered.
 			*/
 			const clusterElements = Array.from(mirrorElement.querySelectorAll(".tab-cluster"));
-			const containerLeft = mirrorElement.getBoundingClientRect().left;
+			const containerStart = measureStart(mirrorElement);
 			const tabClusterInfo = clusterElements.flatMap((clusterElement) => {
-				const clusterLeft = clusterElement.getBoundingClientRect().left - containerLeft;
+				/**
+				* Measured from the cluster's tabs rather than the cluster, since a vertical bar
+				* stacks the group label before the tabs along the bar.
+				*/
+				const clusterStart = measureStart(assertWrap.isDefined(clusterElement.querySelector(".tab-cluster-tabs"))) - containerStart;
 				return Array.from(clusterElement.querySelectorAll(".tab-item")).map((tabElement, indexInCluster) => {
 					return {
-						clusterLeft,
+						clusterStart,
 						indexInCluster,
-						width: tabElement.getBoundingClientRect().width
+						length: measureLength(tabElement)
 					};
 				});
 			});
-			/** Width of the inline area when the first `count` tabs are shown. */
-			function inlineWidthForCount(count) {
+			/** Length of the inline area when the first `count` tabs are shown. */
+			function inlineLengthForCount(count) {
 				if (count <= 0) return 0;
-				else if (!clusterElements.length) return tabWidths.slice(0, count).reduce((sum, width) => sum + width, 0);
+				else if (!clusterElements.length) return tabLengths.slice(0, count).reduce((sum, length) => sum + length, 0);
 				const lastInfo = tabClusterInfo[count - 1];
 				if (!lastInfo) return 0;
-				const inlineTabsInLastCluster = tabClusterInfo.slice(count - 1 - lastInfo.indexInCluster, count).reduce((sum, info) => sum + info.width, 0);
-				return lastInfo.clusterLeft + inlineTabsInLastCluster;
+				const inlineTabsInLastCluster = tabClusterInfo.slice(count - 1 - lastInfo.indexInCluster, count).reduce((sum, info) => sum + info.length, 0);
+				return lastInfo.clusterStart + inlineTabsInLastCluster;
 			}
-			const totalWidth = inlineWidthForCount(tabCount);
+			const totalLength = inlineLengthForCount(tabCount);
 			/**
-			* Largest number of leading tabs whose inline width fits within the available width
-			* minus the given reserve (the width the "more" button will occupy). Can return 0.
+			* Largest number of leading tabs whose inline length fits within the available length
+			* minus the given reserve (the length the "more" button will occupy). Can return 0.
 			*/
 			function maxInlineForReserve(reservePx) {
-				const limit = availableWidth - reservePx;
+				const limit = availableLength - reservePx;
 				return tabElements.reduce((fittingCount, _tabElement, index) => {
-					return inlineWidthForCount(index + 1) <= limit ? index + 1 : fittingCount;
+					return inlineLengthForCount(index + 1) <= limit ? index + 1 : fittingCount;
 				}, 0);
 			}
 			/** When every tab fits on its own, there is no overflow and no "more" button. */
-			if (totalWidth <= availableWidth) {
+			if (totalLength <= availableLength) {
 				if (state.overflowCount !== 0) updateState({ overflowCount: 0 });
 				return;
 			}
-			const defaultButtonWidth = measureElementWidth(mirrorElement, ".measure-more-default");
-			const labeledButtonWidth = measureElementWidth(mirrorElement, ".measure-more-labeled");
+			const defaultButtonLength = measureLength(mirrorElement.querySelector(".measure-more-default"));
+			const labeledButtonLength = measureLength(mirrorElement.querySelector(".measure-more-labeled"));
 			const selectedElement = mirrorElement.querySelector(".tab-item.measure-selected");
 			const selectedIndex = selectedElement ? tabElements.indexOf(selectedElement) : -1;
 			/**
 			* Reserving the default ("more") trigger reveals whether the selected tab would end up
 			* collapsed.
 			*/
-			const defaultInlineCount = maxInlineForReserve(defaultButtonWidth);
+			const defaultInlineCount = maxInlineForReserve(defaultButtonLength);
 			/**
 			* When the selected tab is collapsed, the trigger always shows that tab's own label
-			* (with a checkmark), reserving its width even when it cannot fully fit (it is allowed
+			* (with a checkmark), reserving its length even when it cannot fully fit (it is allowed
 			* to overflow rather than hide which tab is selected). Otherwise the trigger shows the
 			* plain default overflow label.
 			*/
-			const inlineCount = selectedIndex >= 0 && selectedIndex >= defaultInlineCount ? maxInlineForReserve(labeledButtonWidth) : defaultInlineCount;
+			const inlineCount = selectedIndex >= 0 && selectedIndex >= defaultInlineCount ? maxInlineForReserve(labeledButtonLength) : defaultInlineCount;
 			const newOverflowCount = Math.max(1, tabCount - inlineCount);
 			if (newOverflowCount !== state.overflowCount) updateState({ overflowCount: newOverflowCount });
 		}
@@ -88570,30 +88793,38 @@ tabSelect: defineElementEvent() },
 		const inlineContent = hasGroups ? renderGroupedContent(inlineTabs, renderTabItem) : inlineTabs.map(renderTabItem);
 		const measureContent = hasGroups ? renderGroupedContent(visibleTabs, renderMeasureTabItem) : visibleTabs.map(renderMeasureTabItem);
 		const overflowLabel = inputs.overflowLabel || "More";
+		function renderMoreButton({ isLabeled, className }) {
+			const text = isLabeled ? selectedTab?.label : overflowLabel;
+			const icon = isLabeled ? internalLucideIcons.Check16 : void 0;
+			return html`
+                <${ViraButton.assign({ color: ViraColorVariant.Neutral })}
+                    class=${className}
+                >
+                    <span class="more-button-content">
+                        ${icon ? html`
+                                  <${ViraIcon.assign({ icon })}></${ViraIcon}>
+                              ` : A}
+                        <span>${text}</span>
+                        <${ViraIcon.assign({ icon: internalLucideIcons.ChevronDown16 })}></${ViraIcon}>
+                    </span>
+                </${ViraButton}>
+            `;
+		}
 		/**
 		* Hidden copies of the "more" button in each of its possible shapes, rendered inside the
-		* measurement mirror so their true widths can be measured before choosing which one fits:
-		* the default overflow label, and the collapsed selected tab's own label (with a checkmark
-		* and caret).
+		* measurement mirror so their true lengths along the bar can be measured before choosing
+		* which one fits: the default overflow label, and the collapsed selected tab's own label
+		* (with a checkmark and caret).
 		*/
 		const measureMoreButtons = html`
-            <${ViraButton.assign({
-			text: overflowLabel,
-			rightSideIcon: internalLucideIcons.ChevronDown16,
-			color: ViraColorVariant.Neutral
+            ${renderMoreButton({
+			isLabeled: false,
+			className: "measure-more-default"
 		})}
-                class="measure-more-default"
-            ></${ViraButton}>
-            ${selectedTab ? html`
-                      <${ViraButton.assign({
-			text: selectedTab.label,
-			icon: internalLucideIcons.Check16,
-			rightSideIcon: internalLucideIcons.ChevronDown16,
-			color: ViraColorVariant.Neutral
-		})}
-                          class="measure-more-labeled"
-                      ></${ViraButton}>
-                  ` : A}
+            ${selectedTab ? renderMoreButton({
+			isLabeled: true,
+			className: "measure-more-labeled"
+		}) : A}
         `;
 		const overflowMenuTemplate = overflowTabs.length ? html`
                   <div class="tab-more">
@@ -88602,15 +88833,23 @@ tabSelect: defineElementEvent() },
 			popoverOffset: inputs.menuPopoverOffset,
 			menuCornerStyle: ViraMenuCornerStyle.Round
 		})}>
-                          <${ViraButton.assign({
-			text: selectedIsCollapsed ? selectedTab?.label : overflowLabel,
-			icon: selectedIsCollapsed ? internalLucideIcons.Check16 : void 0,
-			rightSideIcon: internalLucideIcons.ChevronDown16,
-			color: ViraColorVariant.Neutral
-		})}
+                          <span
+                              class="more-button-wrapper"
                               slot=${ViraMenuTrigger.slotNames["vira-menu-trigger-trigger"]}
-                          ></${ViraButton}>
-                          ${buildMenuItems(overflowTabs)}
+                          >
+                              ${renderMoreButton({
+			isLabeled: selectedIsCollapsed,
+			className: ""
+		})}
+                          </span>
+                          ${buildClusters(overflowTabs).map((cluster) => {
+			return html`
+                                  ${cluster.group == void 0 ? A : html`
+                                            <div class="menu-group-label">${cluster.group}</div>
+                                        `}
+                                  ${buildMenuItems(cluster.tabs)}
+                              `;
+		})}
                       </${ViraMenuTrigger}>
                   </div>
               ` : A;
@@ -93269,7 +93508,7 @@ var viraTooltipBookPage = defineBookPage({
 			}
 		});
 		defineExample({
-			title: "hover area",
+			title: "mouse interaction",
 			styles: css`
                 .hover-area-demo {
                     position: relative;
@@ -93319,7 +93558,7 @@ var viraTooltipBookPage = defineBookPage({
                     >
                         <svg><polygon></polygon></svg>
                         <${ViraButton.assign({ text: "Hover" })}
-                            ${tooltip("Moving the pointer anywhere in the outlined area keeps this tooltip open.")}
+                            ${tooltip("Moving the pointer anywhere in the outlined area keeps this tooltip open, so its text can be selected.", { allowMouseInteraction: true })}
                         ></${ViraButton}>
                     </div>
                 `;
@@ -97363,31 +97602,6 @@ var simpleExamples = [
 		iconLayout: ViraTabsIconLayout.Horizontal
 	},
 	{
-		title: "plain color variant",
-		tabs: tabsWithIcons,
-		color: ViraColorVariant.Plain
-	},
-	{
-		title: "neutral color variant",
-		tabs: tabsWithIcons,
-		color: ViraColorVariant.Neutral
-	},
-	{
-		title: "danger color variant",
-		tabs: tabsWithIcons,
-		color: ViraColorVariant.Danger
-	},
-	{
-		title: "warning color variant",
-		tabs: tabsWithIcons,
-		color: ViraColorVariant.Warning
-	},
-	{
-		title: "positive color variant",
-		tabs: tabsWithIcons,
-		color: ViraColorVariant.Positive
-	},
-	{
 		title: "bar direction: top",
 		tabs: tabsWithIcons,
 		barDirection: ViraTabsBarDirection.Top
@@ -97401,6 +97615,18 @@ var simpleExamples = [
 		title: "bar direction: right",
 		tabs: tabsWithIcons,
 		barDirection: ViraTabsBarDirection.Right
+	},
+	{
+		title: "rotated labels",
+		tabs: tabsWithIcons,
+		barDirection: ViraTabsBarDirection.Left,
+		shouldRotateLabels: true
+	},
+	{
+		title: "rotated labels: right bar",
+		tabs: tabsWithIcons,
+		barDirection: ViraTabsBarDirection.Right,
+		shouldRotateLabels: true
 	}
 ];
 var dynamicWidths = {
@@ -97534,10 +97760,35 @@ var viraTabsBookPage = defineBookPage({
 			}
 		});
 		defineExample({
+			title: "overflow: rotated labels",
+			styles: css`
+                :host {
+                    display: block;
+                    height: 240px;
+                    border: 1px solid red;
+                }
+
+                ${ViraTabs} {
+                    height: 100%;
+                }
+            `,
+			render() {
+				return html`
+                    <${ViraTabs.assign({
+					tabs: tabsWithIcons,
+					router: mockRouter,
+					currentRoute: createMockRoute(mockPathTree.paths.children.tab4.fullPaths),
+					barDirection: ViraTabsBarDirection.Left,
+					shouldRotateLabels: true
+				})}></${ViraTabs}>
+                `;
+			}
+		});
+		defineExample({
 			title: "big font",
 			styles: css`
                 :host {
-                    font-size: 32px;
+                    ${ViraTabs.cssVars["vira-tabs-font-size"].name}: 32px;
                     width: 240px;
                     border: 1px solid red;
                 }
@@ -97631,6 +97882,58 @@ var viraTabsBookPage = defineBookPage({
                 `;
 			}
 		});
+		[
+			{
+				title: "grouped tabs: left bar",
+				shouldRotateLabels: false
+			},
+			{
+				title: "grouped tabs: rotated labels",
+				shouldRotateLabels: true
+			},
+			{
+				title: "grouped tabs: right bar",
+				shouldRotateLabels: false,
+				barDirection: ViraTabsBarDirection.Right
+			},
+			{
+				title: "grouped overflow: left bar",
+				shouldRotateLabels: false,
+				height: 200
+			},
+			{
+				title: "grouped overflow: rotated labels",
+				shouldRotateLabels: true,
+				height: 320
+			}
+		].forEach(({ title, shouldRotateLabels, height, barDirection }) => {
+			defineExample({
+				title,
+				styles: css`
+                    :host {
+                        display: block;
+                        height: ${height ?? 640}px;
+                        border: 1px solid red;
+                    }
+
+                    ${ViraTabs} {
+                        height: 100%;
+                    }
+                `,
+				render() {
+					return html`
+                        <${ViraTabs.assign({
+						tabs: tabsWithGroups,
+						router: mockRouter,
+						currentRoute: selectedGroupedRoute,
+						color: ViraColorVariant.Plain,
+						barDirection: barDirection ?? ViraTabsBarDirection.Left,
+						shouldRotateLabels
+					})}></${ViraTabs}>
+                    `;
+				}
+			});
+		});
 		defineExample({
 			title: "dynamic overflow",
 			styles: css`
@@ -97647,63 +97950,6 @@ var viraTabsBookPage = defineBookPage({
 					currentRoute: selectedRoute
 				})}></${ViraTabs}>
                     </${ViraDynamicWidthTabsExample}>
-                `;
-			}
-		});
-		defineExample({
-			title: "all combinations",
-			styles: css`
-                :host {
-                    display: block;
-                    width: 760px;
-                }
-
-                .grid {
-                    display: grid;
-                    grid-template-columns: auto 1fr;
-                    gap: 24px;
-                    align-items: start;
-                }
-
-                h4 {
-                    margin: 0;
-                }
-            `,
-			render() {
-				const barDirections = [
-					ViraTabsBarDirection.Top,
-					ViraTabsBarDirection.Bottom,
-					ViraTabsBarDirection.Left,
-					ViraTabsBarDirection.Right
-				];
-				const colorVariants = [
-					ViraColorVariant.Info,
-					ViraColorVariant.Plain,
-					ViraColorVariant.Neutral,
-					ViraColorVariant.Danger,
-					ViraColorVariant.Warning,
-					ViraColorVariant.Positive
-				];
-				return html`
-                    ${colorVariants.map((colorVariant) => {
-					return html`
-                            <h4>${colorVariant} variant</h4>
-                            <div class="grid">
-                                ${barDirections.map((barDirection) => {
-						return html`
-                                        <span>${barDirection}</span>
-                                        <${ViraTabs.assign({
-							tabs: tabsWithIcons,
-							router: mockRouter,
-							currentRoute: selectedRoute,
-							barDirection,
-							color: colorVariant
-						})}></${ViraTabs}>
-                                    `;
-					})}
-                            </div>
-                        `;
-				})}
                 `;
 			}
 		});

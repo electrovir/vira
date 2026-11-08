@@ -88014,6 +88014,20 @@ var ViraTabsIconLayout = /* @__PURE__ */ function(ViraTabsIconLayout) {
 	ViraTabsIconLayout["Horizontal"] = "horizontal";
 	return ViraTabsIconLayout;
 }({});
+/**
+* What {@link ViraTabs} does with tabs that don't fit along its bar.
+*
+* @category Internal
+*/
+var ViraTabsOverflowBehavior = /* @__PURE__ */ function(ViraTabsOverflowBehavior) {
+	/** Collapses the tabs that don't fit into a "more" dropdown menu at the end of the bar. */
+	ViraTabsOverflowBehavior["Dropdown"] = "dropdown";
+	/** Wraps tabs onto more rows (or more columns, for a vertical bar). */
+	ViraTabsOverflowBehavior["Wrap"] = "wrap";
+	/** Scrolls the bar along its length, without showing a scrollbar. */
+	ViraTabsOverflowBehavior["Scroll"] = "scroll";
+	return ViraTabsOverflowBehavior;
+}({});
 function isRotatingLabels(inputs) {
 	return !!inputs.shouldRotateLabels && (inputs.barDirection === "left" || inputs.barDirection === "right");
 }
@@ -88137,6 +88151,12 @@ tabSelect: defineElementEvent() },
 		},
 		"vira-tabs-rotate-labels"({ inputs }) {
 			return isRotatingLabels(inputs);
+		},
+		"vira-tabs-overflow-wrap"({ inputs }) {
+			return inputs.overflowBehavior === "wrap";
+		},
+		"vira-tabs-overflow-scroll"({ inputs }) {
+			return inputs.overflowBehavior === "scroll";
 		}
 	},
 	cssVars: {
@@ -88214,6 +88234,38 @@ tabSelect: defineElementEvent() },
                 }
             }
 
+            ${hostClasses["vira-tabs-overflow-wrap"].selector},
+            ${hostClasses["vira-tabs-overflow-scroll"].selector} {
+                & .tabs-container {
+                    min-width: 0;
+                    min-height: 0;
+                }
+            }
+
+            ${hostClasses["vira-tabs-overflow-wrap"].selector} {
+                & .tabs-container,
+                & .tab-cluster-tabs {
+                    flex-wrap: wrap;
+                }
+            }
+
+            ${hostClasses["vira-tabs-overflow-scroll"].selector} {
+                & .tabs-container {
+                    overflow: auto;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                & .tab-item,
+                & .tab-cluster,
+                & .tab-cluster-divider {
+                    flex-shrink: 0;
+                }
+            }
+
             .tabs-measure {
                 position: absolute;
                 top: 0;
@@ -88278,6 +88330,17 @@ tabSelect: defineElementEvent() },
                     &::after {
                         background-color: ${cssVars["vira-tabs-active-color"].value};
                     }
+
+                    /** Lets the selected tab still open its context menu. */
+                    &.has-context-menu {
+                        pointer-events: auto;
+                        cursor: default;
+                        background-color: transparent;
+                    }
+
+                    & ${ViraLink} {
+                        pointer-events: none;
+                    }
                 }
 
                 &.disabled {
@@ -88304,6 +88367,19 @@ tabSelect: defineElementEvent() },
                 border-top: 1px solid
                     ${viraTheme.colors["vira-grey-foreground-decoration"].foreground.value};
 
+                /** Keeps the tabs against the selection bar, with group labels on the far side. */
+                & .tabs-container.grouped {
+                    align-items: flex-start;
+                }
+
+                & .tab-cluster {
+                    flex-direction: column-reverse;
+                }
+
+                & .tab-group-label {
+                    padding-block: 4px 6px;
+                }
+
                 & .tab-item::after {
                     top: 0;
                     left: 0;
@@ -88327,6 +88403,8 @@ tabSelect: defineElementEvent() },
             }
 
             ${hostClasses["vira-tabs-bar-right"].selector} {
+                /** Keeps the tabs against the selection bar when they don't fill the width. */
+                justify-content: flex-end;
                 border-right: 1px solid
                     ${viraTheme.colors["vira-grey-foreground-decoration"].foreground.value};
 
@@ -88378,6 +88456,15 @@ tabSelect: defineElementEvent() },
 
             ${ViraLink} {
                 text-decoration: none;
+            }
+
+            .tab-item ${ViraMenuTrigger} {
+                flex-grow: 1;
+            }
+
+            .context-menu-trigger {
+                display: flex;
+                justify-content: center;
             }
 
             .tab-item ${ViraLink} {
@@ -88518,6 +88605,36 @@ tabSelect: defineElementEvent() },
                 }
             }
 
+            :host(
+                    .${hostClasses["vira-tabs-bar-left"].name}:not(.${hostClasses["vira-tabs-rotate-labels"].name})
+                ) {
+                /** Lines each tab's label up against the selection bar. */
+                & .tab-item,
+                & .tab-item ${ViraLink}, & .context-menu-trigger {
+                    justify-content: flex-start;
+                }
+
+                & .tab-item,
+                & .tab-group-label {
+                    text-align: left;
+                }
+            }
+
+            :host(
+                    .${hostClasses["vira-tabs-bar-right"].name}:not(.${hostClasses["vira-tabs-rotate-labels"].name})
+                ) {
+                /** Lines each tab's label up against the selection bar. */
+                & .tab-item,
+                & .tab-item ${ViraLink}, & .context-menu-trigger {
+                    justify-content: flex-end;
+                }
+
+                & .tab-item,
+                & .tab-group-label {
+                    text-align: right;
+                }
+            }
+
             ${hostClasses["vira-tabs-rotate-labels"].selector} {
                 /** Lines the overflow trigger up with the tabs rather than the group labels. */
                 & .tabs-container.grouped {
@@ -88605,17 +88722,40 @@ tabSelect: defineElementEvent() },
 		}
 		function renderTabItem(tab) {
 			const { isSelected, content } = renderTabInner(tab, false);
+			const hasContextMenu = !!tab.contextMenuEntries?.length && !tab.isDisabled;
 			return html`
                 <div
                     class=${e$4({
 				"tab-item": true,
 				selected: isSelected,
-				disabled: !!tab.isDisabled
+				disabled: !!tab.isDisabled,
+				"has-context-menu": hasContextMenu
 			})}
                     role="presentation"
-                    ${listen("click", () => handleTabClick(tab))}
+                    ${listen("click", (event) => {
+				/** Clicks on the context menu's items bubble up through the tab. */
+				const isFromContextMenu = hasContextMenu && !event.composedPath().some((node) => {
+					return node instanceof HTMLElement && node.classList.contains("context-menu-trigger");
+				});
+				if (!isSelected && !isFromContextMenu) handleTabClick(tab);
+			})}
                 >
-                    ${content}
+                    ${hasContextMenu ? html`
+                              <${ViraMenuTrigger.assign({
+				trigger: PopoverTrigger.ContextMenu,
+				popoverAnchor: PopoverAnchor.Mouse,
+				popoverOffset: inputs.contextMenuPopoverOffset,
+				useInsideFocus: true
+			})}>
+                                  <span
+                                      class="context-menu-trigger"
+                                      slot=${ViraMenuTrigger.slotNames["vira-menu-trigger-trigger"]}
+                                  >
+                                      ${content}
+                                  </span>
+                                  ${renderMenuItemEntries(tab.contextMenuEntries)}
+                              </${ViraMenuTrigger}>
+                          ` : content}
                 </div>
             `;
 		}
@@ -88780,7 +88920,9 @@ tabSelect: defineElementEvent() },
 		}
 		const visibleTabs = inputs.tabs.filter((tab) => !tab.isHidden);
 		const hasGroups = visibleTabs.some((tab) => tab.group != void 0);
-		const overflowCount = Math.min(visibleTabs.length, Math.max(0, state.overflowCount));
+		const isDropdownOverflow = !inputs.overflowBehavior || inputs.overflowBehavior === "dropdown";
+		if (!isDropdownOverflow) state.cleanupObserver?.();
+		const overflowCount = isDropdownOverflow ? Math.min(visibleTabs.length, Math.max(0, state.overflowCount)) : 0;
 		const inlineCount = visibleTabs.length - overflowCount;
 		const inlineTabs = visibleTabs.slice(0, inlineCount);
 		const overflowTabs = visibleTabs.slice(inlineCount);
@@ -88854,17 +88996,19 @@ tabSelect: defineElementEvent() },
                   </div>
               ` : A;
 		return html`
-            <div
-                class=${e$4({
+            ${isDropdownOverflow ? html`
+                      <div
+                          class=${e$4({
 			"tabs-container": true,
 			"tabs-measure": true,
 			grouped: hasGroups
 		})}
-                aria-hidden="true"
-                ${onDomCreated(setUpOverflowMeasurement)}
-            >
-                ${measureContent} ${measureMoreButtons}
-            </div>
+                          aria-hidden="true"
+                          ${onDomCreated(setUpOverflowMeasurement)}
+                      >
+                          ${measureContent} ${measureMoreButtons}
+                      </div>
+                  ` : A}
             <div
                 class=${e$4({
 			"tabs-container": true,
@@ -97780,6 +97924,50 @@ var viraTabsBookPage = defineBookPage({
 					currentRoute: createMockRoute(mockPathTree.paths.children.tab4.fullPaths),
 					barDirection: ViraTabsBarDirection.Left,
 					shouldRotateLabels: true
+				})}></${ViraTabs}>
+                `;
+			}
+		});
+		getEnumValues(ViraTabsOverflowBehavior).forEach((overflowBehavior) => {
+			defineExample({
+				title: `overflow behavior: ${overflowBehavior}`,
+				styles: css`
+                    :host {
+                        width: 240px;
+                        border: 1px solid red;
+                    }
+                `,
+				render() {
+					return html`
+                        <${ViraTabs.assign({
+						tabs: tabsWithIcons,
+						router: mockRouter,
+						currentRoute: selectedRoute,
+						overflowBehavior
+					})}></${ViraTabs}>
+                    `;
+				}
+			});
+		});
+		defineExample({
+			title: "context menus",
+			styles: css`
+                :host {
+                    width: 640px;
+                }
+            `,
+			render() {
+				return html`
+                    <${ViraTabs.assign({
+					tabs: tabsWithIcons.map((tab) => {
+						return {
+							...tab,
+							contextMenuEntries: [{ content: "Rename" }, { content: "Close" }]
+						};
+					}),
+					router: mockRouter,
+					currentRoute: selectedRoute,
+					iconLayout: ViraTabsIconLayout.Horizontal
 				})}></${ViraTabs}>
                 `;
 			}

@@ -1,5 +1,5 @@
 import {checkWrap} from '@augment-vir/assert';
-import {addPx, removePx} from '@augment-vir/common';
+import {addPx, getEnumValues, removePx} from '@augment-vir/common';
 import {defineBookPage} from 'element-book';
 import {css, html} from 'element-vir';
 import {readCssVarValue, setCssVarValue} from 'lit-css-vars';
@@ -15,6 +15,7 @@ import {
     ViraTabs,
     ViraTabsBarDirection,
     ViraTabsIconLayout,
+    ViraTabsOverflowBehavior,
     viraTheme,
     ViraThemeColorName,
     type ViraTab,
@@ -362,6 +363,59 @@ export const viraTabsBookPage = defineBookPage({
                         currentRoute: createMockRoute(mockPathTree.paths.children.tab4.fullPaths),
                         barDirection: ViraTabsBarDirection.Left,
                         shouldRotateLabels: true,
+                    })}></${ViraTabs}>
+                `;
+            },
+        });
+
+        getEnumValues(ViraTabsOverflowBehavior).forEach((overflowBehavior) => {
+            defineExample({
+                title: `overflow behavior: ${overflowBehavior}`,
+                styles: css`
+                    :host {
+                        width: 240px;
+                        border: 1px solid red;
+                    }
+                `,
+                render() {
+                    return html`
+                        <${ViraTabs.assign({
+                            tabs: tabsWithIcons,
+                            router: mockRouter,
+                            currentRoute: selectedRoute,
+                            overflowBehavior,
+                        })}></${ViraTabs}>
+                    `;
+                },
+            });
+        });
+
+        defineExample({
+            title: 'context menus',
+            styles: css`
+                :host {
+                    width: 640px;
+                }
+            `,
+            render() {
+                return html`
+                    <${ViraTabs.assign({
+                        tabs: tabsWithIcons.map((tab) => {
+                            return {
+                                ...tab,
+                                contextMenuEntries: [
+                                    {
+                                        content: 'Rename',
+                                    },
+                                    {
+                                        content: 'Close',
+                                    },
+                                ],
+                            };
+                        }),
+                        router: mockRouter,
+                        currentRoute: selectedRoute,
+                        iconLayout: ViraTabsIconLayout.Horizontal,
                     })}></${ViraTabs}>
                 `;
             },

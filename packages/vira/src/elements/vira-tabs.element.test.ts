@@ -1,10 +1,18 @@
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
 import {type ArrayElement} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
-import {css, html} from 'element-vir';
+import {waitForAnimationFrame} from '@augment-vir/web';
+import {css, html, listen} from 'element-vir';
 import {PathTree, type FullSpaRoute} from 'spa-router-vir';
+import {ViraMenuItem} from './popover/vira-menu-item.element.js';
 import {ViraButton} from './vira-button.element.js';
-import {buildClusters, ViraTabs, ViraTabsBarDirection, type ViraTab} from './vira-tabs.element.js';
+import {
+    buildClusters,
+    ViraTabs,
+    ViraTabsBarDirection,
+    ViraTabsOverflowBehavior,
+    type ViraTab,
+} from './vira-tabs.element.js';
 
 const mockPathTree = new PathTree({
     allowBare: true,
@@ -687,5 +695,287 @@ describe(ViraTabs.tagName, () => {
             tabItem.getBoundingClientRect().height,
             tabItem.getBoundingClientRect().width,
         );
+    });
+
+    (
+        [
+            ViraTabsBarDirection.Left,
+            ViraTabsBarDirection.Right,
+        ] as const
+    ).forEach((barDirection) => {
+        [
+            false,
+            true,
+        ].forEach((shouldFillWidth) => {
+            it(`lines labels up along a ${barDirection} bar (fill width: ${shouldFillWidth})`, async () => {
+                const fixture = await testWeb.render(html`
+                    <div
+                        style=${css`
+                            display: flex;
+                            width: 300px;
+                        `}
+                    >
+                        <${ViraTabs.assign({
+                            tabs: mockTabs,
+                            router: mockRouter,
+                            currentRoute: createMockRoute(
+                                mockPathTree.paths.children.ask.fullPaths,
+                            ),
+                            barDirection,
+                            shouldFillWidth,
+                        })}></${ViraTabs}>
+                    </div>
+                `);
+                const instance = assertWrap.instanceOf(
+                    fixture.querySelector(ViraTabs.tagName),
+                    ViraTabs,
+                );
+                const hostRect = instance.getBoundingClientRect();
+                const labelRects = [
+                    ...instance.shadowRoot.querySelectorAll(
+                        '.tabs-container:not(.tabs-measure) .tab-content',
+                    ),
+                ].map((label) => {
+                    return label.getBoundingClientRect();
+                });
+
+                const [
+                    firstLabel,
+                    secondLabel,
+                ] = assertWrap.isLengthExactly(labelRects, 2);
+                const isLeft = barDirection === ViraTabsBarDirection.Left;
+                const barEdges = labelRects.map((rect) => {
+                    return isLeft ? rect.left - hostRect.left : hostRect.right - rect.right;
+                });
+
+                assert.notStrictEquals(firstLabel.width, secondLabel.width);
+                assert.isAtMost(
+                    Math.abs(assertWrap.isDefined(barEdges[0]) - assertWrap.isDefined(barEdges[1])),
+                    0.5,
+                );
+                assert.isBelow(assertWrap.isDefined(barEdges[0]), 20);
+            });
+        });
+    });
+
+    it('puts group labels below the tabs of a top bar', async () => {
+        const fixture = await testWeb.render(html`
+            <${ViraTabs.assign({
+                tabs: [
+                    {
+                        label: 'Ask AI',
+                        paths: mockPathTree.paths.children.ask,
+                        group: 'Alpha',
+                    },
+                    {
+                        label: 'Settings',
+                        paths: mockPathTree.paths.children.settings,
+                    },
+                ],
+                router: mockRouter,
+                currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+                barDirection: ViraTabsBarDirection.Top,
+            })}></${ViraTabs}>
+        `);
+        const instance = assertWrap.instanceOf(fixture, ViraTabs);
+        const [
+            groupedTab,
+            standaloneTab,
+        ] = assertWrap.isLengthExactly(
+            [
+                ...instance.shadowRoot.querySelectorAll(
+                    '.tabs-container:not(.tabs-measure) .tab-item',
+                ),
+            ].map((tab) => {
+                return tab.getBoundingClientRect();
+            }),
+            2,
+        );
+        const groupLabel = assertWrap
+            .instanceOf(
+                instance.shadowRoot.querySelector(
+                    '.tabs-container:not(.tabs-measure) .tab-group-label',
+                ),
+                HTMLElement,
+            )
+            .getBoundingClientRect();
+
+        assert.isAtMost(Math.abs(groupedTab.top - standaloneTab.top), 0.5);
+        assert.isAtLeast(groupLabel.top, groupedTab.bottom - 0.5);
+    });
+
+    describe('overflowBehavior', () => {
+        async function renderNarrowTabs(
+            overflowBehavior: ViraTabsOverflowBehavior,
+            tabs: ReadonlyArray<Readonly<ViraTab>> = manyTabs,
+        ) {
+            const fixture = await testWeb.render(html`
+                <div
+                    style=${css`
+                        width: 200px;
+                    `}
+                >
+                    <${ViraTabs.assign({
+                        tabs,
+                        router: mockRouter,
+                        currentRoute: createMockRoute(mockPathTree.paths.children.one.fullPaths),
+                        overflowBehavior,
+                    })}></${ViraTabs}>
+                </div>
+            `);
+            const instance = assertWrap.instanceOf(
+                fixture.querySelector(ViraTabs.tagName),
+                ViraTabs,
+            );
+            await waitForAnimationFrame(2);
+
+            return {
+                instance,
+                container: assertWrap.instanceOf(
+                    instance.shadowRoot.querySelector('.tabs-container:not(.tabs-measure)'),
+                    HTMLElement,
+                ),
+            };
+        }
+
+        it('scrolls every tab inline without a scrollbar or a measurement mirror', async () => {
+            const {instance, container} = await renderNarrowTabs(ViraTabsOverflowBehavior.Scroll);
+
+            assert.deepEquals(
+                {
+                    tabCount: container.querySelectorAll('.tab-item').length,
+                    hasMoreButton: !!container.querySelector(ViraButton.tagName),
+                    hasMirror: !!instance.shadowRoot.querySelector('.tabs-measure'),
+                    isScrollable: container.scrollWidth > container.clientWidth,
+                    isWithinHost: container.clientWidth <= instance.clientWidth,
+                    scrollbarWidth: getComputedStyle(container).scrollbarWidth,
+                },
+                {
+                    tabCount: manyTabs.length,
+                    hasMoreButton: false,
+                    hasMirror: false,
+                    isScrollable: true,
+                    isWithinHost: true,
+                    scrollbarWidth: 'none',
+                },
+            );
+        });
+
+        it('wraps every tab onto more rows within its host', async () => {
+            const {instance, container} = await renderNarrowTabs(ViraTabsOverflowBehavior.Wrap);
+            const tabItems = Array.from(container.querySelectorAll('.tab-item'));
+            const rowTops = new Set(tabItems.map((tab) => tab.getBoundingClientRect().top));
+
+            assert.deepEquals(
+                {
+                    tabCount: tabItems.length,
+                    hasMoreButton: !!container.querySelector(ViraButton.tagName),
+                    isWithinHost: container.scrollWidth <= instance.clientWidth,
+                    hasMultipleRows: rowTops.size > 1,
+                },
+                {
+                    tabCount: manyTabs.length,
+                    hasMoreButton: false,
+                    isWithinHost: true,
+                    hasMultipleRows: true,
+                },
+            );
+        });
+    });
+
+    describe('contextMenuEntries', () => {
+        async function renderContextMenuTabs() {
+            const menuClicks: string[] = [];
+            const selectedTabs: string[] = [];
+            const tabs = mockTabs.map((tab) => {
+                return {
+                    ...tab,
+                    contextMenuEntries: [
+                        {
+                            content: 'Close',
+                            onClick() {
+                                menuClicks.push(tab.label);
+                            },
+                        },
+                    ],
+                };
+            });
+            const fixture = await testWeb.render(html`
+                <${ViraTabs.assign({
+                    tabs,
+                    router: mockRouter,
+                    currentRoute: createMockRoute(mockPathTree.paths.children.ask.fullPaths),
+                })}
+                    ${listen(ViraTabs.events.tabSelect, (event) => {
+                        selectedTabs.push(event.detail.paths.fullPaths.join('/'));
+                    })}
+                ></${ViraTabs}>
+            `);
+            const instance = assertWrap.instanceOf(fixture, ViraTabs);
+
+            function listTabItems(selector: string) {
+                return Array.from(instance.shadowRoot.querySelectorAll(selector)).map((element) => {
+                    return assertWrap.instanceOf(element, HTMLElement);
+                });
+            }
+
+            return {
+                instance,
+                menuClicks,
+                selectedTabs,
+                visibleTabs: listTabItems('.tabs-container:not(.tabs-measure) .tab-item'),
+                measuredTabs: listTabItems('.tabs-measure .tab-item'),
+            };
+        }
+
+        async function openContextMenu(tabItem: HTMLElement) {
+            assertWrap.isDefined(tabItem.querySelector('.context-menu-trigger')).dispatchEvent(
+                new MouseEvent('mousedown', {
+                    button: 2,
+                    bubbles: true,
+                    composed: true,
+                }),
+            );
+            /** Menu items stay in the DOM while closed, but only get a box once slotted open. */
+            await waitUntil.isTrue(
+                () => !!tabItem.querySelector(ViraMenuItem.tagName)?.checkVisibility(),
+            );
+            return assertWrap.instanceOf(tabItem.querySelector(ViraMenuItem.tagName), HTMLElement);
+        }
+
+        it('adds no length to a tab, so overflow measuring stays accurate', async () => {
+            const {visibleTabs, measuredTabs} = await renderContextMenuTabs();
+
+            assert.deepEquals(
+                visibleTabs.map((tab) => tab.getBoundingClientRect().width),
+                measuredTabs.map((tab) => tab.getBoundingClientRect().width),
+            );
+        });
+
+        it('runs the menu item action without selecting the tab', async () => {
+            const {visibleTabs, menuClicks, selectedTabs} = await renderContextMenuTabs();
+            const settingsTab = assertWrap.isDefined(visibleTabs[1]);
+
+            (await openContextMenu(settingsTab)).click();
+
+            assert.deepEquals(
+                {
+                    menuClicks,
+                    selectedTabs,
+                },
+                {
+                    menuClicks: ['Settings'],
+                    selectedTabs: [],
+                },
+            );
+        });
+
+        it('opens on the selected tab too', async () => {
+            const {visibleTabs, menuClicks} = await renderContextMenuTabs();
+
+            (await openContextMenu(assertWrap.isDefined(visibleTabs[0]))).click();
+
+            assert.deepEquals(menuClicks, ['Ask AI']);
+        });
     });
 });

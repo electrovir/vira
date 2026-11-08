@@ -45,9 +45,10 @@ import {
     renderMenuItemEntries,
     type ViraMenuItemEntry,
 } from '../util/menu-helpers.js';
+import {PopoverTrigger} from '../util/popover-manager.js';
 import {ViraMenuTrigger} from './popover/vira-menu-trigger.element.js';
 import {ViraMenuCornerStyle} from './popover/vira-menu.element.js';
-import {type PopoverOffset} from './popover/vira-popover-trigger.element.js';
+import {PopoverAnchor, type PopoverOffset} from './popover/vira-popover-trigger.element.js';
 import {ViraButton} from './vira-button.element.js';
 import {ViraIcon} from './vira-icon.element.js';
 import {ViraLink} from './vira-link.element.js';
@@ -74,6 +75,20 @@ export enum ViraTabsIconLayout {
     Vertical = 'vertical',
     /** Icon renders beside the label. */
     Horizontal = 'horizontal',
+}
+
+/**
+ * What {@link ViraTabs} does with tabs that don't fit along its bar.
+ *
+ * @category Internal
+ */
+export enum ViraTabsOverflowBehavior {
+    /** Collapses the tabs that don't fit into a "more" dropdown menu at the end of the bar. */
+    Dropdown = 'dropdown',
+    /** Wraps tabs onto more rows (or more columns, for a vertical bar). */
+    Wrap = 'wrap',
+    /** Scrolls the bar along its length, without showing a scrollbar. */
+    Scroll = 'scroll',
 }
 
 function isRotatingLabels(
@@ -111,6 +126,11 @@ export type ViraTab = {
      * current route.
      */
     exactMatch: boolean;
+    /**
+     * Opens a menu of these entries when the tab is right clicked or touch held. Tabs collapsed
+     * into the {@link ViraTabsOverflowBehavior.Dropdown} menu don't get one.
+     */
+    contextMenuEntries: ReadonlyArray<Readonly<ViraMenuItemEntry>>;
     /**
      * Optional cluster label. Consecutive tabs sharing the same `group` string render together
      * under that label, separated from other clusters by an inset divider (on a vertical bar
@@ -235,6 +255,10 @@ export const ViraTabs = defineViraElement<
         menuIsDisabled: boolean;
         /** Offset for the dropdown popover. Only used when tabs overflow into a dropdown. */
         menuPopoverOffset: Readonly<PopoverOffset>;
+        /** Offset for each tab's context menu, from the pointer that opened it. */
+        contextMenuPopoverOffset: Readonly<PopoverOffset>;
+        /** @default ViraTabsOverflowBehavior.Dropdown */
+        overflowBehavior: ViraTabsOverflowBehavior;
         /**
          * Text shown on the overflow "more" trigger when the selected tab is _not_ collapsed into
          * the menu. When the selected tab _is_ collapsed, the trigger shows that tab's label (with
@@ -353,6 +377,12 @@ export const ViraTabs = defineViraElement<
         'vira-tabs-rotate-labels'({inputs}) {
             return isRotatingLabels(inputs);
         },
+        'vira-tabs-overflow-wrap'({inputs}) {
+            return inputs.overflowBehavior === ViraTabsOverflowBehavior.Wrap;
+        },
+        'vira-tabs-overflow-scroll'({inputs}) {
+            return inputs.overflowBehavior === ViraTabsOverflowBehavior.Scroll;
+        },
     },
     cssVars: {
         'vira-tabs-active-color':
@@ -460,6 +490,38 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
+            ${hostClasses['vira-tabs-overflow-wrap'].selector},
+            ${hostClasses['vira-tabs-overflow-scroll'].selector} {
+                & .tabs-container {
+                    min-width: 0;
+                    min-height: 0;
+                }
+            }
+
+            ${hostClasses['vira-tabs-overflow-wrap'].selector} {
+                & .tabs-container,
+                & .tab-cluster-tabs {
+                    flex-wrap: wrap;
+                }
+            }
+
+            ${hostClasses['vira-tabs-overflow-scroll'].selector} {
+                & .tabs-container {
+                    overflow: auto;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                & .tab-item,
+                & .tab-cluster,
+                & .tab-cluster-divider {
+                    flex-shrink: 0;
+                }
+            }
+
             .tabs-measure {
                 position: absolute;
                 top: 0;
@@ -525,6 +587,17 @@ export const ViraTabs = defineViraElement<
                     &::after {
                         background-color: ${cssVars['vira-tabs-active-color'].value};
                     }
+
+                    /** Lets the selected tab still open its context menu. */
+                    &.has-context-menu {
+                        pointer-events: auto;
+                        cursor: default;
+                        background-color: transparent;
+                    }
+
+                    & ${ViraLink} {
+                        pointer-events: none;
+                    }
                 }
 
                 &.disabled {
@@ -551,6 +624,19 @@ export const ViraTabs = defineViraElement<
                 border-top: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
+                /** Keeps the tabs against the selection bar, with group labels on the far side. */
+                & .tabs-container.grouped {
+                    align-items: flex-start;
+                }
+
+                & .tab-cluster {
+                    flex-direction: column-reverse;
+                }
+
+                & .tab-group-label {
+                    padding-block: 4px 6px;
+                }
+
                 & .tab-item::after {
                     top: 0;
                     left: 0;
@@ -574,6 +660,8 @@ export const ViraTabs = defineViraElement<
             }
 
             ${hostClasses['vira-tabs-bar-right'].selector} {
+                /** Keeps the tabs against the selection bar when they don't fill the width. */
+                justify-content: flex-end;
                 border-right: 1px solid
                     ${viraTheme.colors['vira-grey-foreground-decoration'].foreground.value};
 
@@ -625,6 +713,15 @@ export const ViraTabs = defineViraElement<
 
             ${ViraLink} {
                 text-decoration: none;
+            }
+
+            .tab-item ${ViraMenuTrigger} {
+                flex-grow: 1;
+            }
+
+            .context-menu-trigger {
+                display: flex;
+                justify-content: center;
             }
 
             .tab-item ${ViraLink} {
@@ -771,6 +868,40 @@ export const ViraTabs = defineViraElement<
                 }
             }
 
+            :host(
+                    .${hostClasses['vira-tabs-bar-left'].name}:not(.${hostClasses[
+                            'vira-tabs-rotate-labels'
+                        ].name})
+                ) {
+                /** Lines each tab's label up against the selection bar. */
+                & .tab-item,
+                & .tab-item ${ViraLink}, & .context-menu-trigger {
+                    justify-content: flex-start;
+                }
+
+                & .tab-item,
+                & .tab-group-label {
+                    text-align: left;
+                }
+            }
+
+            :host(
+                    .${hostClasses['vira-tabs-bar-right'].name}:not(.${hostClasses[
+                            'vira-tabs-rotate-labels'
+                        ].name})
+                ) {
+                /** Lines each tab's label up against the selection bar. */
+                & .tab-item,
+                & .tab-item ${ViraLink}, & .context-menu-trigger {
+                    justify-content: flex-end;
+                }
+
+                & .tab-item,
+                & .tab-group-label {
+                    text-align: right;
+                }
+            }
+
             ${hostClasses['vira-tabs-rotate-labels'].selector} {
                 /** Lines the overflow trigger up with the tabs rather than the group labels. */
                 & .tabs-container.grouped {
@@ -883,17 +1014,49 @@ export const ViraTabs = defineViraElement<
 
         function renderTabItem(tab: Readonly<ViraTab>) {
             const {isSelected, content} = renderTabInner(tab, false);
+            const hasContextMenu = !!tab.contextMenuEntries?.length && !tab.isDisabled;
             return html`
                 <div
                     class=${classMap({
                         'tab-item': true,
                         selected: isSelected,
                         disabled: !!tab.isDisabled,
+                        'has-context-menu': hasContextMenu,
                     })}
                     role="presentation"
-                    ${listen('click', () => handleTabClick(tab))}
+                    ${listen('click', (event) => {
+                        /** Clicks on the context menu's items bubble up through the tab. */
+                        const isFromContextMenu =
+                            hasContextMenu &&
+                            !event.composedPath().some((node) => {
+                                return (
+                                    node instanceof HTMLElement &&
+                                    node.classList.contains('context-menu-trigger')
+                                );
+                            });
+                        if (!isSelected && !isFromContextMenu) {
+                            handleTabClick(tab);
+                        }
+                    })}
                 >
-                    ${content}
+                    ${hasContextMenu
+                        ? html`
+                              <${ViraMenuTrigger.assign({
+                                  trigger: PopoverTrigger.ContextMenu,
+                                  popoverAnchor: PopoverAnchor.Mouse,
+                                  popoverOffset: inputs.contextMenuPopoverOffset,
+                                  useInsideFocus: true,
+                              })}>
+                                  <span
+                                      class="context-menu-trigger"
+                                      slot=${ViraMenuTrigger.slotNames['vira-menu-trigger-trigger']}
+                                  >
+                                      ${content}
+                                  </span>
+                                  ${renderMenuItemEntries(tab.contextMenuEntries)}
+                              </${ViraMenuTrigger}>
+                          `
+                        : content}
                 </div>
             `;
         }
@@ -1141,7 +1304,16 @@ export const ViraTabs = defineViraElement<
         const visibleTabs = inputs.tabs.filter((tab) => !tab.isHidden);
         const hasGroups = visibleTabs.some((tab) => tab.group != undefined);
 
-        const overflowCount = Math.min(visibleTabs.length, Math.max(0, state.overflowCount));
+        const isDropdownOverflow =
+            !inputs.overflowBehavior ||
+            inputs.overflowBehavior === ViraTabsOverflowBehavior.Dropdown;
+        if (!isDropdownOverflow) {
+            state.cleanupObserver?.();
+        }
+
+        const overflowCount = isDropdownOverflow
+            ? Math.min(visibleTabs.length, Math.max(0, state.overflowCount))
+            : 0;
         const inlineCount = visibleTabs.length - overflowCount;
         const inlineTabs = visibleTabs.slice(0, inlineCount);
         const overflowTabs = visibleTabs.slice(inlineCount);
@@ -1250,17 +1422,21 @@ export const ViraTabs = defineViraElement<
             : nothing;
 
         return html`
-            <div
-                class=${classMap({
-                    'tabs-container': true,
-                    'tabs-measure': true,
-                    grouped: hasGroups,
-                })}
-                aria-hidden="true"
-                ${onDomCreated(setUpOverflowMeasurement)}
-            >
-                ${measureContent} ${measureMoreButtons}
-            </div>
+            ${isDropdownOverflow
+                ? html`
+                      <div
+                          class=${classMap({
+                              'tabs-container': true,
+                              'tabs-measure': true,
+                              grouped: hasGroups,
+                          })}
+                          aria-hidden="true"
+                          ${onDomCreated(setUpOverflowMeasurement)}
+                      >
+                          ${measureContent} ${measureMoreButtons}
+                      </div>
+                  `
+                : nothing}
             <div
                 class=${classMap({
                     'tabs-container': true,

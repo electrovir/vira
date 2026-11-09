@@ -993,6 +993,14 @@ describe(ViraDropdown.tagName, () => {
             assert.isApproximately(chevronRect.right, instance.getBoundingClientRect().right, 1);
         });
 
+        it('grows taller than the default height to fit large text', async () => {
+            const {instance, triggerElement} = await setupRawTest();
+            const hostHeight = instance.getBoundingClientRect().height;
+
+            assert.isAbove(hostHeight, 30);
+            assert.isApproximately(hostHeight, triggerElement.getBoundingClientRect().height, 1);
+        });
+
         it('does not exceed its container', async () => {
             const {instance} = await setupRawTest({
                 options: [

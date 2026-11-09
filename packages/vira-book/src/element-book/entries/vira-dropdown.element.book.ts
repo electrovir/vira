@@ -3,6 +3,7 @@ import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
 import {type CSSResult, css, html, listen} from 'element-vir';
 import {
+    LucideChevronUpIcon,
     LucideCodeXmlIcon,
     LucidePlusIcon,
     LucideUploadIcon,
@@ -469,6 +470,7 @@ const examples: ReadonlyArray<{
         title: 'small trigger with a small chevron',
         inputs: {
             isRaw: true,
+            triggerIcon: createSizedIcon(LucideChevronUpIcon, 16),
             selected: [
                 '1',
             ],
@@ -476,7 +478,6 @@ const examples: ReadonlyArray<{
         customStyle: css`
             ${ViraDropdown} {
                 ${ViraDropdown.cssVars['vira-dropdown-trigger-font-size'].name}: 12px;
-                ${ViraDropdown.cssVars['vira-dropdown-trigger-icon-size'].name}: 16px;
             }
         `,
     },

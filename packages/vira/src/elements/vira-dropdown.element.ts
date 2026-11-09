@@ -17,6 +17,7 @@ import {
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
+import {createSizedIcon} from '../icons/sized-icon.js';
 import {createFocusStyles} from '../styles/focus.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
@@ -34,6 +35,8 @@ import {ViraMenuItem} from './popover/vira-menu-item.element.js';
 import {ViraMenu, ViraMenuCornerStyle} from './popover/vira-menu.element.js';
 import {ViraPopoverTrigger} from './popover/vira-popover-trigger.element.js';
 import {ViraIcon} from './vira-icon.element.js';
+
+const defaultTriggerIcon = createSizedIcon(internalLucideIcons.ChevronUp16, 24);
 
 /**
  * A dropdown element that uses popover menus.
@@ -69,6 +72,13 @@ export const ViraDropdown = defineViraElement<
          */
         isSearchable: boolean;
         icon: ViraIconSvg;
+        /**
+         * Replaces the chevron at the end of the trigger. It should point up: it is rotated 180°
+         * while the dropdown is closed. Use {@link createSizedIcon} to change its size.
+         *
+         * @default a 24px ChevronUp icon
+         */
+        triggerIcon: ViraIconSvg;
         selectionPrefix: string;
         /**
          * Shown in the closed trigger instead of the selected option's label (or the "N Selected"
@@ -137,8 +147,6 @@ export const ViraDropdown = defineViraElement<
         'vira-dropdown-trigger-font-size': 'inherit',
         /** Font weight of the closed trigger (and readonly value), without affecting the menu. */
         'vira-dropdown-trigger-font-weight': 'inherit',
-        /** Size of the closed trigger's chevron. */
-        'vira-dropdown-trigger-icon-size': '24px',
     },
     styles({hostClasses, cssVars}) {
         return css`
@@ -215,8 +223,6 @@ export const ViraDropdown = defineViraElement<
             }
 
             .trigger-icon {
-                width: ${cssVars['vira-dropdown-trigger-icon-size'].value};
-                aspect-ratio: 1;
                 align-self: flex-start;
                 will-change: transform;
                 transform: rotate(180deg);
@@ -899,7 +905,7 @@ export const ViraDropdown = defineViraElement<
 
                     <span class="trigger-icon-wrapper">
                         <${ViraIcon.assign({
-                            icon: internalLucideIcons.ChevronUp16,
+                            icon: inputs.triggerIcon ?? defaultTriggerIcon,
                         })}
                             class="trigger-icon"
                         ></${ViraIcon}>

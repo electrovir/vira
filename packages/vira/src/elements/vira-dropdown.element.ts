@@ -70,6 +70,19 @@ export const ViraDropdown = defineViraElement<
         isSearchable: boolean;
         icon: ViraIconSvg;
         selectionPrefix: string;
+        /**
+         * Shown in the closed trigger instead of the selected option's label (or the "N Selected"
+         * text in multi select) whenever at least one option is selected. The placeholder is still
+         * shown when nothing is selected. When `isSearchable` is `true`, the closed search input
+         * can only show text, so it only uses a string `selectionLabel`.
+         */
+        selectionLabel: string | HtmlInterpolation;
+        /**
+         * Removes the trigger's border, background, padding, and fixed width so the closed dropdown
+         * renders as its selection text (inheriting font and color) followed by the chevron. The
+         * opened menu is unaffected.
+         */
+        isRaw: boolean;
         isDisabled: boolean;
         /**
          * When `true`, the currently selected options' labels are rendered as plain text with no
@@ -103,6 +116,14 @@ export const ViraDropdown = defineViraElement<
     }>
 >()({
     tagName: 'vira-dropdown',
+    hostClasses: {
+        'vira-dropdown-raw'({inputs}) {
+            return !!inputs.isRaw;
+        },
+        'vira-dropdown-trigger-only'({inputs}) {
+            return !inputs.label && !inputs.isReadonly;
+        },
+    },
     testIds: [
         'hiddenOptionsHint',
         'leadingIcon',
@@ -111,12 +132,15 @@ export const ViraDropdown = defineViraElement<
         'searchInput',
         'trigger',
     ],
-    hostClasses: {
-        'vira-dropdown-trigger-only'({inputs}) {
-            return !inputs.label && !inputs.isReadonly;
-        },
+    cssVars: {
+        /** Font size of the closed trigger (and readonly value), without affecting the menu. */
+        'vira-dropdown-trigger-font-size': 'inherit',
+        /** Font weight of the closed trigger (and readonly value), without affecting the menu. */
+        'vira-dropdown-trigger-font-weight': 'inherit',
+        /** Size of the closed trigger's chevron. */
+        'vira-dropdown-trigger-icon-size': '24px',
     },
-    styles({hostClasses}) {
+    styles({hostClasses, cssVars}) {
         return css`
             :host {
                 display: inline-flex;
@@ -124,6 +148,10 @@ export const ViraDropdown = defineViraElement<
                 width: 224px;
                 position: relative;
                 max-width: 100%;
+            }
+
+            ${hostClasses['vira-dropdown-raw'].selector} {
+                width: auto;
             }
 
             ${ViraPopoverTrigger} {
@@ -187,7 +215,7 @@ export const ViraDropdown = defineViraElement<
             }
 
             .trigger-icon {
-                width: 24px;
+                width: ${cssVars['vira-dropdown-trigger-icon-size'].value};
                 aspect-ratio: 1;
                 align-self: flex-start;
                 will-change: transform;
@@ -204,6 +232,12 @@ export const ViraDropdown = defineViraElement<
 
             .open .trigger-icon {
                 transform: rotate(0);
+            }
+
+            .dropdown-trigger,
+            .readonly-value {
+                font-size: ${cssVars['vira-dropdown-trigger-font-size'].value};
+                font-weight: ${cssVars['vira-dropdown-trigger-font-weight'].value};
             }
 
             .dropdown-trigger {
@@ -246,6 +280,28 @@ export const ViraDropdown = defineViraElement<
                 border-color: ${viraFormCssVars['vira-form-error-color'].value};
             }
 
+            ${hostClasses['vira-dropdown-raw'].selector} {
+                /** Overrides the trigger-only fixed height so a raw trigger fits its content. */
+                height: auto;
+
+                & .dropdown-trigger {
+                    border: none;
+                    background: none;
+                    border-radius: 0;
+                    padding: 0;
+                    min-height: 0;
+                    color: inherit;
+                }
+
+                & .has-error .dropdown-trigger {
+                    color: ${viraFormCssVars['vira-form-error-color'].value};
+                }
+
+                & .trigger-icon-wrapper {
+                    flex-grow: 0;
+                }
+            }
+
             .option-group-label {
                 ${menuGroupLabelStyles};
             }
@@ -263,6 +319,7 @@ export const ViraDropdown = defineViraElement<
             }
 
             ${ViraMenuItem}.option-group-label {
+                color: inherit;
                 padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
                 ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
             }
@@ -346,9 +403,11 @@ export const ViraDropdown = defineViraElement<
 
         const selectionDisplay = shouldUsePlaceholder
             ? inputs.placeholder || ''
-            : inputs.isMultiSelect && selectedOptions.length > 1
-              ? `${selectedOptions.length} Selected`
-              : selectedOptions[0]?.label || '';
+            : inputs.selectionLabel && check.isString(inputs.selectionLabel)
+              ? inputs.selectionLabel
+              : inputs.isMultiSelect && selectedOptions.length > 1
+                ? `${selectedOptions.length} Selected`
+                : selectedOptions[0]?.label || '';
 
         function renderOptionLabel(option: Readonly<ViraDropdownOption>) {
             return option.icon || option.labelTemplate
@@ -371,9 +430,12 @@ export const ViraDropdown = defineViraElement<
                 : option.label;
         }
 
-        const selectionTemplate = check.isLengthExactly(selectedOptions, 1)
-            ? renderOptionLabel(selectedOptions[0])
-            : selectionDisplay;
+        const selectionTemplate =
+            inputs.selectionLabel && !shouldUsePlaceholder
+                ? inputs.selectionLabel
+                : check.isLengthExactly(selectedOptions, 1)
+                  ? renderOptionLabel(selectedOptions[0])
+                  : selectionDisplay;
 
         function selectOption(option: Readonly<ViraDropdownOption>) {
             const newSelectedValues = inputs.isMultiSelect
@@ -473,15 +535,21 @@ export const ViraDropdown = defineViraElement<
             });
         }
 
+        function isGroupSelected(group: Readonly<ViraDropdownOptionGroup>) {
+            const enabledGroupOptions = group.options.filter((option) => !option.disabled);
+
+            return (
+                !!enabledGroupOptions.length &&
+                enabledGroupOptions.every((option) => selectedOptions.includes(option))
+            );
+        }
+
         function toggleGroup(group: Readonly<ViraDropdownOptionGroup>) {
             const enabledGroupOptions = group.options.filter((option) => !option.disabled);
-            const isGroupSelected = enabledGroupOptions.every((option) => {
-                return selectedOptions.includes(option);
-            });
 
             dispatch(
                 new events.selectedValuesChange({
-                    detail: (isGroupSelected
+                    detail: (isGroupSelected(group)
                         ? selectedOptions.filter((option) => !enabledGroupOptions.includes(option))
                         : [
                               ...selectedOptions,
@@ -498,8 +566,7 @@ export const ViraDropdown = defineViraElement<
             return inputs.isMultiSelect
                 ? html`
                       <${ViraMenuItem.assign({
-                          disablePointerStyles: true,
-                          hideIcon: true,
+                          selected: isGroupSelected(group),
                       })}
                           class="option-group-label"
                           ${state.navController ? nav(state.navController) : nothing}

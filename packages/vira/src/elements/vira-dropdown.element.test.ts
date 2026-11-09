@@ -407,6 +407,32 @@ describe(ViraDropdown.tagName, () => {
         assert.strictEquals(extractElementText(triggerElement), placeholder);
     });
 
+    it('shows the placeholder at the top of the menu while something is selected', async () => {
+        const placeholder = randomString();
+        const {toggle, events, queryByTestId} = await setupDropdownTest({
+            placeholder,
+            selected: [
+                '1',
+            ],
+        });
+
+        await toggle();
+        await testWeb.click(assertWrap.instanceOf(queryByTestId.placeholderOption(), HTMLElement));
+
+        assert.deepEquals(
+            {
+                text: extractElementText(
+                    assertWrap.instanceOf(queryByTestId.placeholderOption(), HTMLElement),
+                ),
+                selectedValuesChange: events.selectedValuesChange,
+            },
+            {
+                text: placeholder,
+                selectedValuesChange: [],
+            },
+        );
+    });
+
     it('rotates the arrow without a popover when there are no options', async () => {
         const {triggerElement, events, findMenu} = await setupDropdownTest({
             options: [],

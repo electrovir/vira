@@ -48,7 +48,10 @@ export const ViraDropdown = defineViraElement<
         /** The selected id from the given options. */
         selected: ReadonlyArray<PropertyKey>;
     } & PartialWithUndefined<{
-        /** Text to show if nothing is selected. */
+        /**
+         * Text to show if nothing is selected. Also shown as a greyed out, unselectable entry at
+         * the top of the opened menu.
+         */
         placeholder: string;
         /**
          * Text shown in the opened popover when `options` has no options. When omitted, opening a
@@ -103,6 +106,7 @@ export const ViraDropdown = defineViraElement<
     testIds: [
         'hiddenOptionsHint',
         'leadingIcon',
+        'placeholderOption',
         'prefixText',
         'searchInput',
         'trigger',
@@ -247,6 +251,7 @@ export const ViraDropdown = defineViraElement<
             }
 
             .no-options,
+            .placeholder-option,
             .hidden-options-hint {
                 ${noUserSelect};
                 text-align: left;
@@ -579,6 +584,24 @@ export const ViraDropdown = defineViraElement<
                     }
                 })}
             >
+                ${inputs.placeholder && filteredFlatOptions.length
+                    ? html`
+                          <div
+                              class="placeholder-option"
+                              ${testId(testIds.placeholderOption)}
+                              ${listen('mousedown', (event) => {
+                                  /** Keeps focus in the search input. */
+                                  event.preventDefault();
+                              })}
+                              ${listen('click', (event) => {
+                                  /** ViraPopoverTrigger closes on any click inside its popover. */
+                                  event.stopPropagation();
+                              })}
+                          >
+                              ${inputs.placeholder}
+                          </div>
+                      `
+                    : nothing}
                 ${filteredFlatOptions.length
                     ? shownOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)

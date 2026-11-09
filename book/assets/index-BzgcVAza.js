@@ -80669,6 +80669,7 @@ var ViraDropdown = defineViraElement()({
 	testIds: [
 		"hiddenOptionsHint",
 		"leadingIcon",
+		"placeholderOption",
 		"prefixText",
 		"searchInput",
 		"trigger"
@@ -80811,6 +80812,7 @@ var ViraDropdown = defineViraElement()({
             }
 
             .no-options,
+            .placeholder-option,
             .hidden-options-hint {
                 ${noUserSelect};
                 text-align: left;
@@ -81016,6 +81018,22 @@ var ViraDropdown = defineViraElement()({
 			}
 		})}
             >
+                ${inputs.placeholder && filteredFlatOptions.length ? html`
+                          <div
+                              class="placeholder-option"
+                              ${testId(testIds.placeholderOption)}
+                              ${listen("mousedown", (event) => {
+			/** Keeps focus in the search input. */
+			event.preventDefault();
+		})}
+                              ${listen("click", (event) => {
+			/** ViraPopoverTrigger closes on any click inside its popover. */
+			event.stopPropagation();
+		})}
+                          >
+                              ${inputs.placeholder}
+                          </div>
+                      ` : A}
                 ${filteredFlatOptions.length ? shownOptions.map((entry) => {
 			return isViraDropdownOptionGroup(entry) ? html`
                                     ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
@@ -84497,6 +84515,7 @@ var ViraForm = defineViraElement()({
 					selected: field.type === ViraFormFieldType.MultiSelect ? field.value || [] : field.value ? [field.value] : [],
 					isMultiSelect: field.type === ViraFormFieldType.MultiSelect,
 					placeholder: field.placeholder,
+					isSearchable: field.isSearchable,
 					isDisabled,
 					isReadonly: inputs.isReadonly,
 					label: childLabel,

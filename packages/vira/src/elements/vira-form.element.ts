@@ -504,6 +504,7 @@ export const ViraForm = defineViraElement<
                                           : [],
                                 isMultiSelect: field.type === ViraFormFieldType.MultiSelect,
                                 placeholder: field.placeholder,
+                                isSearchable: field.isSearchable,
                                 isDisabled,
                                 isReadonly: inputs.isReadonly,
                                 label: childLabel,

@@ -6,6 +6,7 @@ import {createUtcFullDate, utcTimezone} from 'date-vir';
 import {html, listen, testIdSelector} from 'element-vir';
 import {ViraFormFieldType, type ViraFormField} from '../util/vira-form-fields.js';
 import {ViraAbsoluteTime} from './vira-absolute-time.element.js';
+import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraForm} from './vira-form.element.js';
 
 describe(ViraForm.tagName, () => {
@@ -42,6 +43,37 @@ describe(ViraForm.tagName, () => {
         });
 
         assert.strictEquals(absoluteTime.shadowRoot.textContent.trim(), 'Jun 15, 1942');
+    });
+
+    it('forwards isSearchable to a select field', async () => {
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraForm.assign({
+                    fields: {
+                        state: {
+                            label: 'State',
+                            type: ViraFormFieldType.Select,
+                            value: undefined,
+                            isSearchable: true,
+                            options: [
+                                {
+                                    label: 'Colorado',
+                                    value: 'colorado',
+                                },
+                            ],
+                        },
+                    },
+                })}></${ViraForm}>
+            </div>
+        `);
+        await waitForAnimationFrame();
+
+        const dropdown = assertWrap.instanceOf(
+            queryThroughShadow(fixture, ViraDropdown.tagName),
+            ViraDropdown,
+        );
+
+        assert.isTrue(dropdown.instanceInputs.isSearchable);
     });
 
     it('vertically centers every readonly horizontal label against its value', async () => {

@@ -93,6 +93,8 @@ export type ViraFormField =
       } & PartialWithUndefined<{
           placeholder: string;
           icon: ViraIconSvg;
+          /** Passed to `ViraDropdown`'s `isSearchable` input. */
+          isSearchable: boolean;
       }> &
           CommonViraFormFields)
     | ({
@@ -103,6 +105,8 @@ export type ViraFormField =
       } & PartialWithUndefined<{
           placeholder: string;
           icon: ViraIconSvg;
+          /** Passed to `ViraDropdown`'s `isSearchable` input. */
+          isSearchable: boolean;
       }> &
           CommonViraFormFields)
     | ({

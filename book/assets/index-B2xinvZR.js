@@ -23247,7 +23247,43 @@ var anchorListeners = {
 			longPress = void 0;
 			anchor.removeAttribute(popoverLongPressAttribute);
 		}
+		/**
+		* Aborts the listeners that swallow the mouse events a long press's release still fires.
+		* Without them, Android and iOS send the release's mouseup and click to whatever the finger
+		* lifts over, which is now the popover, so it picks a menu item.
+		*/
+		let releaseSwallower;
+		function stopSwallowingRelease() {
+			releaseSwallower?.abort();
+			releaseSwallower = void 0;
+		}
+		function swallowRelease() {
+			stopSwallowingRelease();
+			const controller = new AbortController();
+			releaseSwallower = controller;
+			function swallow(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				if (event.type === "click") stopSwallowingRelease();
+			}
+			[
+				"mousedown",
+				"mouseup",
+				"click"
+			].forEach((eventName) => {
+				globalThis.addEventListener(eventName, swallow, {
+					capture: true,
+					signal: controller.signal
+				});
+			});
+			/** A browser that skips the release's click must not swallow the next real press. */
+			globalThis.addEventListener("pointerdown", stopSwallowingRelease, {
+				capture: true,
+				signal: controller.signal
+			});
+		}
 		return [
+			stopSwallowingRelease,
 			listenToAnchor(anchor, "pointerdown", (event) => {
 				isClickSuppressed = false;
 				cancelLongPress();
@@ -23260,7 +23296,7 @@ var anchorListeners = {
 					},
 					timeout: setTimeout(() => {
 						cancelLongPress();
-						isClickSuppressed = true;
+						swallowRelease();
 						popoverManager.toggle();
 					}, popoverLongPressDuration.milliseconds)
 				};
@@ -79964,6 +80000,8 @@ var fitsContent = {
 };
 /** Set on the popover only while it is opened by, or opening from, the current pointer press. */
 var pointerAnchoredAttribute = "data-pointer-anchored";
+/** Set on the pointer anchor when the press that placed it was a finger. */
+var touchAnchoredAttribute = "data-touch";
 function setPointerAnchored(shadowRoot, isPointerAnchored) {
 	shadowRoot.querySelector(".popover-positioner")?.toggleAttribute(pointerAnchoredAttribute, isPointerAnchored);
 }
@@ -80208,6 +80246,13 @@ var ViraPopoverTrigger = defineViraElement()({
                 translate: -1px -1px;
                 pointer-events: none;
                 anchor-name: --vira-popover-pointer;
+
+                /* Covers a fingertip, so the popover opens where the finger doesn't hide it. */
+                &[${r$1(touchAnchoredAttribute)}] {
+                    width: 64px;
+                    height: 64px;
+                    translate: -32px -32px;
+                }
             }
         `;
 	},
@@ -80262,6 +80307,7 @@ var ViraPopoverTrigger = defineViraElement()({
 			*/
 			pointerAnchor.style.left = `${event.clientX - wrapperRect.left}px`;
 			pointerAnchor.style.top = `${event.clientY - wrapperRect.top}px`;
+			pointerAnchor.toggleAttribute(touchAnchoredAttribute, event.pointerType === "touch");
 			setPointerAnchored(host.shadowRoot, true);
 		})}
                 ${listen("pointerup", clearUnusedPointerAnchor)}

@@ -717,19 +717,30 @@ describe(ViraDropdown.tagName, () => {
             );
         }
 
+        function getIcon(menuItem: Element | undefined) {
+            return assertWrap.instanceOf(
+                assertWrap.isDefined(menuItem).shadowRoot?.querySelector(ViraIcon.tagName),
+                HTMLElement,
+            );
+        }
+
         assert.deepEquals(
             {
                 isFirstHeaderChecked: isChecked(firstHeader),
                 isSecondHeaderChecked: isChecked(secondHeader),
                 headerColor: getComputedStyle(assertWrap.isDefined(firstHeader)).color,
-                headerLabelLeft: getSlotWrapper(firstHeader).getBoundingClientRect().left,
             },
             {
                 isFirstHeaderChecked: true,
                 isSecondHeaderChecked: false,
                 headerColor: getComputedStyle(assertWrap.isDefined(firstOption)).color,
-                headerLabelLeft: getSlotWrapper(firstOption).getBoundingClientRect().left,
             },
+        );
+        /** Grouped options are indented: their check icons line up with the header's label. */
+        assert.isApproximately(
+            getIcon(firstOption).getBoundingClientRect().left,
+            getSlotWrapper(firstHeader).getBoundingClientRect().left,
+            1,
         );
     });
 

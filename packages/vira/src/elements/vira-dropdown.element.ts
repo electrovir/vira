@@ -86,7 +86,7 @@ export const ViraDropdown = defineViraElement<
          * shown when nothing is selected. When `isSearchable` is `true`, the closed search input
          * can only show text, so it only uses a string `selectionLabel`.
          */
-        selectionLabel: string | HtmlInterpolation;
+        selectionLabel: HtmlInterpolation;
         /**
          * Removes the trigger's border, background, padding, and fixed width so the closed dropdown
          * renders as its selection text (inheriting font and color) followed by the chevron. The
@@ -322,6 +322,13 @@ export const ViraDropdown = defineViraElement<
                 /* Aligns with the label text of each ViraMenuItem, past its check icon. */
                 padding: 8px 12px 8px
                     calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
+            }
+
+            ${ViraMenuItem}.grouped-option {
+                /** Lines up each option's check icon with its multi select group header's label. */
+                padding-left: calc(
+                    ${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px
+                );
             }
 
             ${ViraMenuItem}.option-group-label {
@@ -609,10 +616,14 @@ export const ViraDropdown = defineViraElement<
                 : optionActions;
         });
 
-        function renderOptionEntries(options: ReadonlyArray<Readonly<ViraDropdownOption>>) {
+        function renderOptionEntries(
+            options: ReadonlyArray<Readonly<ViraDropdownOption>>,
+            isGrouped = false,
+        ) {
             return renderMenuItemEntries(
                 options.map((option) => {
                     return {
+                        className: isGrouped && inputs.isMultiSelect ? 'grouped-option' : undefined,
                         content: renderOptionLabel(option),
                         onClick() {
                             selectOption(option);
@@ -679,7 +690,8 @@ export const ViraDropdown = defineViraElement<
                     ? shownOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)
                               ? html`
-                                    ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
+                                    ${renderGroupLabel(entry)}
+                                    ${renderOptionEntries(entry.options, true)}
                                 `
                               : renderOptionEntries([entry]);
                       })

@@ -74,6 +74,8 @@ const fitsContent: Record<PopoverAnchor, boolean> = {
 
 /** Set on the popover only while it is opened by, or opening from, the current pointer press. */
 const pointerAnchoredAttribute = 'data-pointer-anchored';
+/** Set on the pointer anchor when the press that placed it was a finger. */
+const touchAnchoredAttribute = 'data-touch';
 
 function setPointerAnchored(shadowRoot: ShadowRoot, isPointerAnchored: boolean) {
     shadowRoot
@@ -351,6 +353,13 @@ export const ViraPopoverTrigger = defineViraElement<
                 translate: -1px -1px;
                 pointer-events: none;
                 anchor-name: --vira-popover-pointer;
+
+                /* Covers a fingertip, so the popover opens where the finger doesn't hide it. */
+                &[${unsafeCSS(touchAnchoredAttribute)}] {
+                    width: 64px;
+                    height: 64px;
+                    translate: -32px -32px;
+                }
             }
         `;
     },
@@ -437,6 +446,10 @@ export const ViraPopoverTrigger = defineViraElement<
                      */
                     pointerAnchor.style.left = `${event.clientX - wrapperRect.left}px`;
                     pointerAnchor.style.top = `${event.clientY - wrapperRect.top}px`;
+                    pointerAnchor.toggleAttribute(
+                        touchAnchoredAttribute,
+                        event.pointerType === 'touch',
+                    );
                     setPointerAnchored(host.shadowRoot, true);
                 })}
                 ${listen('pointerup', clearUnusedPointerAnchor)}

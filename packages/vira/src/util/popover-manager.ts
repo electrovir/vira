@@ -369,7 +369,50 @@ const anchorListeners: Record<
             anchor.removeAttribute(popoverLongPressAttribute);
         }
 
+        /**
+         * Aborts the listeners that swallow the mouse events a long press's release still fires.
+         * Without them, Android and iOS send the release's mouseup and click to whatever the finger
+         * lifts over, which is now the popover, so it picks a menu item.
+         */
+        let releaseSwallower: AbortController | undefined;
+
+        function stopSwallowingRelease() {
+            releaseSwallower?.abort();
+            releaseSwallower = undefined;
+        }
+
+        function swallowRelease() {
+            stopSwallowingRelease();
+            const controller = new AbortController();
+            releaseSwallower = controller;
+            function swallow(event: Event) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+                if (event.type === 'click') {
+                    stopSwallowingRelease();
+                }
+            }
+            (
+                [
+                    'mousedown',
+                    'mouseup',
+                    'click',
+                ] as const
+            ).forEach((eventName) => {
+                globalThis.addEventListener(eventName, swallow, {
+                    capture: true,
+                    signal: controller.signal,
+                });
+            });
+            /** A browser that skips the release's click must not swallow the next real press. */
+            globalThis.addEventListener('pointerdown', stopSwallowingRelease, {
+                capture: true,
+                signal: controller.signal,
+            });
+        }
+
         return [
+            stopSwallowingRelease,
             listenToAnchor(anchor, 'pointerdown', (event) => {
                 isClickSuppressed = false;
                 cancelLongPress();
@@ -386,7 +429,7 @@ const anchorListeners: Record<
                     },
                     timeout: setTimeout(() => {
                         cancelLongPress();
-                        isClickSuppressed = true;
+                        swallowRelease();
                         popoverManager.toggle();
                     }, popoverLongPressDuration.milliseconds),
                 };

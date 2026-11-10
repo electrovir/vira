@@ -324,15 +324,7 @@ export const ViraDropdown = defineViraElement<
                     calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px);
             }
 
-            ${ViraMenuItem}.grouped-option {
-                /** Lines up each option's check icon with its multi select group header's label. */
-                padding-left: calc(
-                    ${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 3 + 16px
-                );
-            }
-
             ${ViraMenuItem}.option-group-label {
-                color: inherit;
                 padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
                 ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
             }
@@ -548,21 +540,15 @@ export const ViraDropdown = defineViraElement<
             });
         }
 
-        function isGroupSelected(group: Readonly<ViraDropdownOptionGroup>) {
-            const enabledGroupOptions = group.options.filter((option) => !option.disabled);
-
-            return (
-                !!enabledGroupOptions.length &&
-                enabledGroupOptions.every((option) => selectedOptions.includes(option))
-            );
-        }
-
         function toggleGroup(group: Readonly<ViraDropdownOptionGroup>) {
             const enabledGroupOptions = group.options.filter((option) => !option.disabled);
+            const isGroupSelected = enabledGroupOptions.every((option) => {
+                return selectedOptions.includes(option);
+            });
 
             dispatch(
                 new events.selectedValuesChange({
-                    detail: (isGroupSelected(group)
+                    detail: (isGroupSelected
                         ? selectedOptions.filter((option) => !enabledGroupOptions.includes(option))
                         : [
                               ...selectedOptions,
@@ -579,7 +565,8 @@ export const ViraDropdown = defineViraElement<
             return inputs.isMultiSelect
                 ? html`
                       <${ViraMenuItem.assign({
-                          selected: isGroupSelected(group),
+                          disablePointerStyles: true,
+                          hideIcon: true,
                       })}
                           class="option-group-label"
                           ${state.navController ? nav(state.navController) : nothing}
@@ -616,14 +603,10 @@ export const ViraDropdown = defineViraElement<
                 : optionActions;
         });
 
-        function renderOptionEntries(
-            options: ReadonlyArray<Readonly<ViraDropdownOption>>,
-            isGrouped = false,
-        ) {
+        function renderOptionEntries(options: ReadonlyArray<Readonly<ViraDropdownOption>>) {
             return renderMenuItemEntries(
                 options.map((option) => {
                     return {
-                        className: isGrouped && inputs.isMultiSelect ? 'grouped-option' : undefined,
                         content: renderOptionLabel(option),
                         onClick() {
                             selectOption(option);
@@ -690,8 +673,7 @@ export const ViraDropdown = defineViraElement<
                     ? shownOptions.map((entry) => {
                           return isViraDropdownOptionGroup(entry)
                               ? html`
-                                    ${renderGroupLabel(entry)}
-                                    ${renderOptionEntries(entry.options, true)}
+                                    ${renderGroupLabel(entry)} ${renderOptionEntries(entry.options)}
                                 `
                               : renderOptionEntries([entry]);
                       })

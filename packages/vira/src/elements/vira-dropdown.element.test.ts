@@ -15,7 +15,6 @@ import {ViraMenuItem} from './popover/vira-menu-item.element.js';
 import {ViraMenu} from './popover/vira-menu.element.js';
 import {ViraPopoverTrigger} from './popover/vira-popover-trigger.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
-import {ViraIcon} from './vira-icon.element.js';
 import {ViraInput} from './vira-input.element.js';
 
 const mockMenuItems: ReadonlyArray<Readonly<ViraDropdownOption>> = [
@@ -676,71 +675,6 @@ describe(ViraDropdown.tagName, () => {
                 ['0'],
             ],
             () => events.selectedValuesChange,
-        );
-    });
-
-    it('checks multi select group headers only when the whole group is selected', async () => {
-        const {instance, toggle} = await setupDropdownTest({
-            isMultiSelect: true,
-            selected: [
-                '0',
-                '1',
-            ],
-            options: mockGroupedOptions,
-        });
-
-        await toggle();
-        const menuItems = queryThroughShadow(instance, ViraMenuItem.tagName, {
-            all: true,
-        });
-        const [
-            firstHeader,
-            firstOption,
-            secondHeader,
-        ] = menuItems;
-
-        function getSlotWrapper(menuItem: Element | undefined) {
-            return assertWrap.instanceOf(
-                assertWrap.isDefined(menuItem).shadowRoot?.querySelector('.slot-wrapper'),
-                HTMLElement,
-            );
-        }
-
-        function isChecked(menuItem: Element | undefined) {
-            return (
-                getComputedStyle(
-                    assertWrap.instanceOf(
-                        assertWrap.isDefined(menuItem).shadowRoot?.querySelector(ViraIcon.tagName),
-                        HTMLElement,
-                    ),
-                ).visibility === 'visible'
-            );
-        }
-
-        function getIcon(menuItem: Element | undefined) {
-            return assertWrap.instanceOf(
-                assertWrap.isDefined(menuItem).shadowRoot?.querySelector(ViraIcon.tagName),
-                HTMLElement,
-            );
-        }
-
-        assert.deepEquals(
-            {
-                isFirstHeaderChecked: isChecked(firstHeader),
-                isSecondHeaderChecked: isChecked(secondHeader),
-                headerColor: getComputedStyle(assertWrap.isDefined(firstHeader)).color,
-            },
-            {
-                isFirstHeaderChecked: true,
-                isSecondHeaderChecked: false,
-                headerColor: getComputedStyle(assertWrap.isDefined(firstOption)).color,
-            },
-        );
-        /** Grouped options are indented: their check icons line up with the header's label. */
-        assert.isApproximately(
-            getIcon(firstOption).getBoundingClientRect().left,
-            getSlotWrapper(firstHeader).getBoundingClientRect().left,
-            1,
         );
     });
 

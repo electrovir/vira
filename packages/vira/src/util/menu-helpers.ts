@@ -5,7 +5,7 @@ import {
     type PartialWithUndefined,
 } from '@augment-vir/common';
 import {nav, type NavController} from 'device-navigation';
-import {css, html, ifDefined, listen, nothing, type HtmlInterpolation} from 'element-vir';
+import {css, html, listen, nothing, type HtmlInterpolation} from 'element-vir';
 import {ViraMenuItem} from '../elements/popover/vira-menu-item.element.js';
 import {viraFormCssVars} from '../styles/form-styles.js';
 import {noUserSelect} from '../styles/user-select.js';
@@ -65,8 +65,6 @@ export type ViraMenuItemEntry = {
      * @default false
      */
     hidden: boolean;
-    /** Added to the rendered `ViraMenuItem`'s `class` attribute. */
-    className: string;
 }> &
     typeof ViraMenuItem.InputsType;
 
@@ -100,7 +98,6 @@ export function renderMenuItemEntries(
                 <${ViraMenuItem.assign({
                     ...item,
                 })}
-                    class=${ifDefined(item.className)}
                     ${navController
                         ? nav(navController, {
                               disabled: item.disabled,

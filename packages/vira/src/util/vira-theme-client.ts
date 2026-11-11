@@ -59,10 +59,8 @@ export type ViraThemeStorage = {
 export type ApplyThemeCallback = (params: Readonly<{useDarkTheme: boolean}>) => MaybePromise<void>;
 
 /**
- * Default implementation of {@link ApplyThemeCallback}, which applies Vira themes, sets the root
- * `color-scheme` so native controls, scrollbars, and unstyled links follow the theme, and matches
- * any `<meta name="theme-color">` tags to the page background so browser and app window chrome
- * follows the theme.
+ * Default implementation of {@link ApplyThemeCallback}. Applies Vira themes and syncs the root
+ * `color-scheme` and any `<meta name="theme-color">` tags to the applied theme.
  *
  * @category Internal
  */

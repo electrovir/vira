@@ -9,6 +9,7 @@ import {
     viraColorVariants,
     viraEmphasisVariants,
     viraFontCssVars,
+    ViraSize,
     viraSizeVariants,
     ViraThemeColorName,
 } from 'vira';
@@ -73,6 +74,72 @@ const buttonVariants: {
         },
     },
 ];
+
+function renderLongTextGrid(extraInputs: Omit<typeof ViraButton.InputsType, 'text' | 'wrapText'>) {
+    return html`
+        <div class="long-text-grid">
+            ${[
+                60,
+                240,
+            ].map((width) => {
+                return [
+                    true,
+                    false,
+                ].map((wrapText) => {
+                    return html`
+                        <div class="long-text-column">
+                            <h3>${width}px${wrapText ? '' : ', wrapText: false'}</h3>
+                            ${[
+                                'Configuration',
+                                'Save changes',
+                                'Download the full quarterly report',
+                            ].map((text) => {
+                                return html`
+                                    <div class="long-text-container" style="width: ${width}px">
+                                        <${ViraButton.assign({
+                                            ...extraInputs,
+                                            text,
+                                            wrapText,
+                                        })}></${ViraButton}>
+                                    </div>
+                                `;
+                            })}
+                        </div>
+                    `;
+                });
+            })}
+        </div>
+    `;
+}
+
+const longTextStyles = css`
+    .long-text-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .long-text-column {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: ${viraFontCssVars['vira-font-weight-normal'].value};
+    }
+
+    .long-text-container {
+        display: flex;
+        outline: 1px dashed grey;
+    }
+
+    ${ViraButton} {
+        max-width: 100%;
+    }
+`;
 
 const tableStyles = css`
     table {
@@ -189,6 +256,43 @@ export const viraButtonBookPage = defineBookPage({
                         text: 'This is a long button label that wraps',
                     })}></${ViraButton}>
                 `;
+            },
+        });
+
+        defineExample({
+            title: 'long text',
+            styles: longTextStyles,
+            render() {
+                return renderLongTextGrid({});
+            },
+        });
+
+        defineExample({
+            title: 'long text with chevron',
+            styles: longTextStyles,
+            render() {
+                return renderLongTextGrid({
+                    rightSideIcon: LucideChevronDownIcon,
+                });
+            },
+        });
+
+        defineExample({
+            title: 'long text pill',
+            styles: css`
+                ${longTextStyles}
+
+                ${ViraButton} {
+                    ${ViraButton.cssVars['vira-button-border-width'].name}: 0;
+                    ${ViraButton.cssVars['vira-button-border-radius'].name}: 999px;
+                }
+            `,
+            render() {
+                return renderLongTextGrid({
+                    buttonSize: ViraSize.Small,
+                    color: ViraColorVariant.Muted,
+                    rightSideIcon: LucideChevronDownIcon,
+                });
             },
         });
 

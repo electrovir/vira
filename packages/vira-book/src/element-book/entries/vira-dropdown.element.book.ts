@@ -445,9 +445,9 @@ const examples: ReadonlyArray<{
             ],
         },
         customStyle: css`
-            :host {
-                font-size: 24px;
-                font-weight: bold;
+            ${ViraDropdown} {
+                ${ViraDropdown.cssVars['vira-dropdown-trigger-font-size'].name}: 24px;
+                ${ViraDropdown.cssVars['vira-dropdown-trigger-font-weight'].name}: bold;
             }
         `,
     },

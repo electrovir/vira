@@ -24,8 +24,8 @@ import {viraColorPalette} from './vira-color-palette.js';
  *   - Background: white
  * - Dark mode:
  *
- *   - Foreground: white
- *   - Background: black
+ *   - Foreground: light grey (`#E0E0E0`)
+ *   - Background: dark grey (`#1E1E1E`)
  *
  * ## Choosing a Color
  *
@@ -45,29 +45,29 @@ import {viraColorPalette} from './vira-color-palette.js';
  *    color pair.
  *
  *    - `foreground`: "Color in the foreground". In this color pair, the chosen color is the foreground
- *         and the page default background (white in light mode, black in dark mode) is the
+ *         and the page default background (white in light mode, dark grey in dark mode) is the
  *         background. The lightness level of the foreground, the chosen color, varies based on the
  *         selected contrast level (in the next step).
  *
  *         - Foreground: the chosen color (red, blue, etc.)
- *         - Background: the page default background (white in light mode, black in dark mode).
+ *         - Background: the page default background (white in light mode, dark grey in dark mode).
  *         - Example: `viraTheme.colors['vira-red-foreground-body']`
  *         - Example: `viraTheme.colors['vira-blue-foreground-body']`
  *    - `behind-fg`: "Color behind foreground". In this color pair, the chosen color is the background
- *         and the page default foreground (black in light mode, white in dark mode) is the
+ *         and the page default foreground (black in light mode, light grey in dark mode) is the
  *         foreground. The lightness level of the background, the chosen color, varies based on the
  *         selected contrast level (in the next step).
  *
- *         - Foreground: the page default foreground (black in light mode, white in dark mode).
+ *         - Foreground: the page default foreground (black in light mode, light grey in dark mode).
  *         - Background: the chosen color (red, blue, etc.)
  *         - Example: `viraTheme.colors['vira-red-behind-fg-body']`
  *         - Example: `viraTheme.colors['vira-blue-behind-fg-body']`
  *    - `behind-bg`: "Color behind background". In this color pair, the chosen color is the background
- *         and the page default background (white in light mode, black in dark mode) is the
+ *         and the page default background (white in light mode, dark grey in dark mode) is the
  *         foreground. The lightness level of the background, the chosen color, varies based on the
  *         selected contrast level (in the next step).
  *
- *         - Foreground: the page default background (white in light mode, black in dark mode)
+ *         - Foreground: the page default background (white in light mode, dark grey in dark mode)
  *         - Background: the chosen color (red, blue, etc.)
  *         - Example: `viraTheme.colors['vira-red-behind-bg-body']`
  *         - Example: `viraTheme.colors['vira-blue-behind-bg-body']`
@@ -1641,14 +1641,28 @@ export const viraTheme = defineColorTheme(
 );
 
 /**
+ * The page background color for {@link viraThemeDarkOverride}.
+ *
+ * @category Color
+ */
+export const viraDarkModeBackground = '#1E1E1E';
+
+/**
+ * The page text color for {@link viraThemeDarkOverride}. Dimmer than pure white to reduce glare.
+ *
+ * @category Color
+ */
+export const viraDarkModeForeground = '#E0E0E0';
+
+/**
  * Dark mode override for {@link viraTheme}.
  *
  * @category Color
  */
 export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark', {
     defaultOverride: {
-        foreground: 'white',
-        background: 'black',
+        foreground: viraDarkModeForeground,
+        background: viraDarkModeBackground,
     },
     colorOverrides: {
         'vira-red-foreground-highest-contrast': {
@@ -1703,19 +1717,19 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-red-1000'],
         },
         'vira-red-behind-fg-small-body': {
-            background: viraColorPalette['vira-red-700'],
+            background: viraColorPalette['vira-red-1000'],
         },
         'vira-red-behind-fg-body': {
-            background: viraColorPalette['vira-red-600'],
+            background: viraColorPalette['vira-red-850'],
         },
         'vira-red-behind-fg-non-body': {
-            background: viraColorPalette['vira-red-500'],
+            background: viraColorPalette['vira-red-650'],
         },
         'vira-red-behind-fg-placeholder': {
-            background: viraColorPalette['vira-red-300'],
+            background: viraColorPalette['vira-red-400'],
         },
         'vira-red-behind-fg-decoration': {
-            background: viraColorPalette['vira-red-200'],
+            background: viraColorPalette['vira-red-350'],
         },
         'vira-red-behind-fg-invisible': {
             background: viraColorPalette['vira-red-100'],
@@ -1816,22 +1830,22 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-yellow-1000'],
         },
         'vira-yellow-behind-fg-small-body': {
-            background: viraColorPalette['vira-yellow-800'],
+            background: viraColorPalette['vira-yellow-1000'],
         },
         'vira-yellow-behind-fg-body': {
-            background: viraColorPalette['vira-yellow-700'],
+            background: viraColorPalette['vira-yellow-950'],
         },
         'vira-yellow-behind-fg-non-body': {
-            background: viraColorPalette['vira-yellow-600'],
+            background: viraColorPalette['vira-yellow-750'],
         },
         'vira-yellow-behind-fg-header': {
-            background: viraColorPalette['vira-yellow-500'],
+            background: viraColorPalette['vira-yellow-650'],
         },
         'vira-yellow-behind-fg-placeholder': {
-            background: viraColorPalette['vira-yellow-400'],
+            background: viraColorPalette['vira-yellow-550'],
         },
         'vira-yellow-behind-fg-decoration': {
-            background: viraColorPalette['vira-yellow-350'],
+            background: viraColorPalette['vira-yellow-450'],
         },
         'vira-yellow-behind-fg-invisible': {
             background: viraColorPalette['vira-yellow-100'],
@@ -1882,10 +1896,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-green-200'],
         },
         'vira-green-foreground-body': {
-            foreground: viraColorPalette['vira-green-400'],
+            foreground: viraColorPalette['vira-green-350'],
         },
         'vira-green-foreground-non-body': {
-            foreground: viraColorPalette['vira-green-450'],
+            foreground: viraColorPalette['vira-green-400'],
         },
         'vira-green-foreground-placeholder': {
             foreground: viraColorPalette['vira-green-600'],
@@ -1906,7 +1920,7 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-green-200'],
         },
         'vira-green-behind-bg-body': {
-            background: viraColorPalette['vira-green-400'],
+            background: viraColorPalette['vira-green-350'],
         },
         'vira-green-behind-bg-non-body': {
             background: viraColorPalette['vira-green-450'],
@@ -1930,22 +1944,22 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-green-1000'],
         },
         'vira-green-behind-fg-small-body': {
-            background: viraColorPalette['vira-green-800'],
+            background: viraColorPalette['vira-green-1000'],
         },
         'vira-green-behind-fg-body': {
-            background: viraColorPalette['vira-green-700'],
+            background: viraColorPalette['vira-green-950'],
         },
         'vira-green-behind-fg-non-body': {
-            background: viraColorPalette['vira-green-600'],
+            background: viraColorPalette['vira-green-750'],
         },
         'vira-green-behind-fg-header': {
-            background: viraColorPalette['vira-green-450'],
+            background: viraColorPalette['vira-green-650'],
         },
         'vira-green-behind-fg-placeholder': {
-            background: viraColorPalette['vira-green-400'],
+            background: viraColorPalette['vira-green-500'],
         },
         'vira-green-behind-fg-decoration': {
-            background: viraColorPalette['vira-green-300'],
+            background: viraColorPalette['vira-green-450'],
         },
         'vira-green-behind-fg-invisible': {
             background: viraColorPalette['vira-green-200'],
@@ -2032,7 +2046,7 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-teal-600'],
         },
         'vira-teal-behind-bg-decoration': {
-            background: viraColorPalette['vira-teal-800'],
+            background: viraColorPalette['vira-teal-750'],
         },
         'vira-teal-behind-bg-invisible': {
             background: viraColorPalette['vira-teal-900'],
@@ -2044,22 +2058,22 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-teal-1000'],
         },
         'vira-teal-behind-fg-small-body': {
-            background: viraColorPalette['vira-teal-800'],
+            background: viraColorPalette['vira-teal-1000'],
         },
         'vira-teal-behind-fg-body': {
-            background: viraColorPalette['vira-teal-700'],
+            background: viraColorPalette['vira-teal-950'],
         },
         'vira-teal-behind-fg-non-body': {
-            background: viraColorPalette['vira-teal-600'],
+            background: viraColorPalette['vira-teal-800'],
         },
         'vira-teal-behind-fg-header': {
-            background: viraColorPalette['vira-teal-450'],
+            background: viraColorPalette['vira-teal-650'],
         },
         'vira-teal-behind-fg-placeholder': {
-            background: viraColorPalette['vira-teal-400'],
+            background: viraColorPalette['vira-teal-500'],
         },
         'vira-teal-behind-fg-decoration': {
-            background: viraColorPalette['vira-teal-300'],
+            background: viraColorPalette['vira-teal-450'],
         },
         'vira-teal-behind-fg-invisible': {
             background: viraColorPalette['vira-teal-200'],
@@ -2154,19 +2168,19 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-blue-1000'],
         },
         'vira-blue-behind-fg-small-body': {
-            background: viraColorPalette['vira-blue-800'],
+            background: viraColorPalette['vira-blue-1000'],
         },
         'vira-blue-behind-fg-body': {
-            background: viraColorPalette['vira-blue-600'],
+            background: viraColorPalette['vira-blue-900'],
         },
         'vira-blue-behind-fg-non-body': {
-            background: viraColorPalette['vira-blue-500'],
+            background: viraColorPalette['vira-blue-750'],
         },
         'vira-blue-behind-fg-placeholder': {
-            background: viraColorPalette['vira-blue-400'],
+            background: viraColorPalette['vira-blue-500'],
         },
         'vira-blue-behind-fg-decoration': {
-            background: viraColorPalette['vira-blue-300'],
+            background: viraColorPalette['vira-blue-450'],
         },
         'vira-blue-behind-fg-invisible': {
             background: viraColorPalette['vira-blue-200'],
@@ -2262,19 +2276,19 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-brand-1000'],
         },
         'vira-brand-behind-fg-small-body': {
-            background: viraColorPalette['vira-brand-800'],
+            background: viraColorPalette['vira-brand-1000'],
         },
         'vira-brand-behind-fg-body': {
-            background: viraColorPalette['vira-brand-600'],
+            background: viraColorPalette['vira-brand-900'],
         },
         'vira-brand-behind-fg-non-body': {
-            background: viraColorPalette['vira-brand-500'],
+            background: viraColorPalette['vira-brand-750'],
         },
         'vira-brand-behind-fg-placeholder': {
-            background: viraColorPalette['vira-brand-400'],
+            background: viraColorPalette['vira-brand-500'],
         },
         'vira-brand-behind-fg-decoration': {
-            background: viraColorPalette['vira-brand-300'],
+            background: viraColorPalette['vira-brand-450'],
         },
         'vira-brand-behind-fg-invisible': {
             background: viraColorPalette['vira-brand-200'],
@@ -2328,7 +2342,7 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-purple-200'],
         },
         'vira-purple-foreground-non-body': {
-            foreground: viraColorPalette['vira-purple-300'],
+            foreground: viraColorPalette['vira-purple-250'],
         },
         'vira-purple-foreground-placeholder': {
             foreground: viraColorPalette['vira-purple-400'],
@@ -2373,22 +2387,22 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-purple-1000'],
         },
         'vira-purple-behind-fg-small-body': {
-            background: viraColorPalette['vira-purple-800'],
+            background: viraColorPalette['vira-purple-1000'],
         },
         'vira-purple-behind-fg-body': {
-            background: viraColorPalette['vira-purple-600'],
+            background: viraColorPalette['vira-purple-900'],
         },
         'vira-purple-behind-fg-non-body': {
-            background: viraColorPalette['vira-purple-400'],
+            background: viraColorPalette['vira-purple-600'],
         },
         'vira-purple-behind-fg-header': {
-            background: viraColorPalette['vira-purple-300'],
+            background: viraColorPalette['vira-purple-450'],
         },
         'vira-purple-behind-fg-placeholder': {
-            background: viraColorPalette['vira-purple-250'],
+            background: viraColorPalette['vira-purple-400'],
         },
         'vira-purple-behind-fg-decoration': {
-            background: viraColorPalette['vira-purple-200'],
+            background: viraColorPalette['vira-purple-300'],
         },
         'vira-purple-behind-fg-invisible': {
             background: viraColorPalette['vira-purple-100'],
@@ -2471,7 +2485,7 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-pink-600'],
         },
         'vira-pink-behind-bg-decoration': {
-            background: viraColorPalette['vira-pink-800'],
+            background: viraColorPalette['vira-pink-750'],
         },
         'vira-pink-behind-bg-invisible': {
             background: viraColorPalette['vira-pink-900'],
@@ -2483,19 +2497,19 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-pink-1000'],
         },
         'vira-pink-behind-fg-small-body': {
-            background: viraColorPalette['vira-pink-800'],
+            background: viraColorPalette['vira-pink-1000'],
         },
         'vira-pink-behind-fg-body': {
-            background: viraColorPalette['vira-pink-700'],
+            background: viraColorPalette['vira-pink-950'],
         },
         'vira-pink-behind-fg-non-body': {
-            background: viraColorPalette['vira-pink-500'],
+            background: viraColorPalette['vira-pink-800'],
         },
         'vira-pink-behind-fg-placeholder': {
-            background: viraColorPalette['vira-pink-400'],
+            background: viraColorPalette['vira-pink-500'],
         },
         'vira-pink-behind-fg-decoration': {
-            background: viraColorPalette['vira-pink-300'],
+            background: viraColorPalette['vira-pink-450'],
         },
         'vira-pink-behind-fg-invisible': {
             background: viraColorPalette['vira-pink-100'],
@@ -2549,7 +2563,7 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             foreground: viraColorPalette['vira-grey-300'],
         },
         'vira-grey-foreground-non-body': {
-            foreground: viraColorPalette['vira-grey-400'],
+            foreground: viraColorPalette['vira-grey-350'],
         },
         'vira-grey-foreground-header': {
             foreground: viraColorPalette['vira-grey-400'],
@@ -2579,10 +2593,10 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-grey-400'],
         },
         'vira-grey-behind-bg-header': {
-            background: viraColorPalette['vira-grey-450'],
+            background: viraColorPalette['vira-grey-400'],
         },
         'vira-grey-behind-bg-placeholder': {
-            background: viraColorPalette['vira-grey-500'],
+            background: viraColorPalette['vira-grey-450'],
         },
         'vira-grey-behind-bg-decoration': {
             background: viraColorPalette['vira-grey-550'],
@@ -2597,22 +2611,22 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-grey-1000'],
         },
         'vira-grey-behind-fg-small-body': {
-            background: viraColorPalette['vira-grey-600'],
+            background: viraColorPalette['vira-grey-1000'],
         },
         'vira-grey-behind-fg-body': {
-            background: viraColorPalette['vira-grey-500'],
+            background: viraColorPalette['vira-grey-800'],
         },
         'vira-grey-behind-fg-non-body': {
-            background: viraColorPalette['vira-grey-450'],
+            background: viraColorPalette['vira-grey-550'],
         },
         'vira-grey-behind-fg-header': {
-            background: viraColorPalette['vira-grey-400'],
+            background: viraColorPalette['vira-grey-500'],
         },
         'vira-grey-behind-fg-placeholder': {
-            background: viraColorPalette['vira-grey-350'],
+            background: viraColorPalette['vira-grey-450'],
         },
         'vira-grey-behind-fg-decoration': {
-            background: viraColorPalette['vira-grey-300'],
+            background: viraColorPalette['vira-grey-400'],
         },
         'vira-grey-behind-fg-invisible': {
             background: viraColorPalette['vira-grey-100'],
@@ -2708,19 +2722,19 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
             background: viraColorPalette['vira-tan-1000'],
         },
         'vira-tan-behind-fg-small-body': {
-            background: viraColorPalette['vira-tan-800'],
+            background: viraColorPalette['vira-tan-1000'],
         },
         'vira-tan-behind-fg-body': {
-            background: viraColorPalette['vira-tan-700'],
+            background: viraColorPalette['vira-tan-950'],
         },
         'vira-tan-behind-fg-non-body': {
-            background: viraColorPalette['vira-tan-500'],
+            background: viraColorPalette['vira-tan-750'],
         },
         'vira-tan-behind-fg-placeholder': {
-            background: viraColorPalette['vira-tan-400'],
+            background: viraColorPalette['vira-tan-500'],
         },
         'vira-tan-behind-fg-decoration': {
-            background: viraColorPalette['vira-tan-300'],
+            background: viraColorPalette['vira-tan-450'],
         },
         'vira-tan-behind-fg-invisible': {
             background: viraColorPalette['vira-tan-100'],
@@ -2767,6 +2781,21 @@ export const viraThemeDarkOverride = defineColorThemeOverride(viraTheme, 'dark',
         'vira-disabled': {
             foreground: viraColorPalette['vira-grey-500'],
             background: viraColorPalette['vira-grey-700'],
+        },
+        'vira-red-behind-fg-header': {
+            background: viraColorPalette['vira-red-500'],
+        },
+        'vira-blue-behind-fg-header': {
+            background: viraColorPalette['vira-blue-550'],
+        },
+        'vira-brand-behind-fg-header': {
+            background: viraColorPalette['vira-brand-550'],
+        },
+        'vira-pink-behind-fg-header': {
+            background: viraColorPalette['vira-pink-600'],
+        },
+        'vira-tan-behind-fg-header': {
+            background: viraColorPalette['vira-tan-600'],
         },
     },
 });

@@ -8,7 +8,11 @@ import {LocalStorageClient} from '@electrovir/local-storage-client';
 import {defineShape, enumShape} from 'object-shape-tester';
 import {applyColorThemeViaStyleElement} from 'theme-vir/dist/color-theme/apply-color-theme.js';
 import {defineTypedCustomEvent, ListenTarget, listenTo} from 'typed-event-target';
-import {viraTheme, viraThemeDarkOverride} from '../styles/vira-color-theme.js';
+import {
+    viraDarkModeBackground,
+    viraTheme,
+    viraThemeDarkOverride,
+} from '../styles/vira-color-theme.js';
 
 /**
  * A user-facing selection of which theme to display. `Auto` follows the system color scheme; the
@@ -55,12 +59,18 @@ export type ViraThemeStorage = {
 export type ApplyThemeCallback = (params: Readonly<{useDarkTheme: boolean}>) => MaybePromise<void>;
 
 /**
- * Default implementation of {@link ApplyThemeCallback}, which simply applies Vira themes.
+ * Default implementation of {@link ApplyThemeCallback}, which applies Vira themes and matches any
+ * `<meta name="theme-color">` tags to the page background so browser and app window chrome follows
+ * the theme.
  *
  * @category Internal
  */
 export const defaultApplyThemeCallback: ApplyThemeCallback = ({useDarkTheme}) => {
     applyColorThemeViaStyleElement(viraTheme, useDarkTheme ? viraThemeDarkOverride : undefined);
+    globalThis.document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+        meta.removeAttribute('media');
+        meta.setAttribute('content', useDarkTheme ? viraDarkModeBackground : '#FFFFFF');
+    });
 };
 
 /**

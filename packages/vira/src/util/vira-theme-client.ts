@@ -59,14 +59,16 @@ export type ViraThemeStorage = {
 export type ApplyThemeCallback = (params: Readonly<{useDarkTheme: boolean}>) => MaybePromise<void>;
 
 /**
- * Default implementation of {@link ApplyThemeCallback}, which applies Vira themes and matches any
- * `<meta name="theme-color">` tags to the page background so browser and app window chrome follows
- * the theme.
+ * Default implementation of {@link ApplyThemeCallback}, which applies Vira themes, sets the root
+ * `color-scheme` so native controls, scrollbars, and unstyled links follow the theme, and matches
+ * any `<meta name="theme-color">` tags to the page background so browser and app window chrome
+ * follows the theme.
  *
  * @category Internal
  */
 export const defaultApplyThemeCallback: ApplyThemeCallback = ({useDarkTheme}) => {
     applyColorThemeViaStyleElement(viraTheme, useDarkTheme ? viraThemeDarkOverride : undefined);
+    globalThis.document.documentElement.style.colorScheme = useDarkTheme ? 'dark' : 'light';
     globalThis.document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
         meta.removeAttribute('media');
         meta.setAttribute('content', useDarkTheme ? viraDarkModeBackground : '#FFFFFF');

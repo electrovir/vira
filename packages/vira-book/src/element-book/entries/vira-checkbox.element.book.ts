@@ -1,6 +1,6 @@
 import {BookPageControlType, defineBookPage} from 'element-book';
 import {css, html, listen} from 'element-vir';
-import {ViraCheckbox} from 'vira';
+import {ViraCheckbox, viraTheme} from 'vira';
 import {elementsBookPage} from '../top-level-pages.js';
 
 export const viraCheckboxBookPage = defineBookPage({
@@ -276,7 +276,13 @@ export const viraCheckboxBookPage = defineBookPage({
                     >
                         <span slot=${ViraCheckbox.slotNames['vira-checkbox-label']}>
                             I agree to the
-                            <a href="#">terms and conditions</a>
+                            <a
+                                href="#"
+                                style="color: ${viraTheme.colors['vira-blue-foreground-body']
+                                    .foreground.value}"
+                            >
+                                terms and conditions
+                            </a>
                         </span>
                     </${ViraCheckbox}>
                 `;

@@ -113,7 +113,7 @@ describe(ViraButton.tagName, () => {
         assert.strictEquals(icon.getBoundingClientRect().width, 16);
     });
 
-    it('keeps long text on one line when wrapText is false', async () => {
+    it('keeps long text on one line with truncateOnOverflow', async () => {
         const singleWord = await renderInNarrowContainer({
             text: 'Configuration',
         });
@@ -122,7 +122,7 @@ describe(ViraButton.tagName, () => {
         });
         const notWrapped = await renderInNarrowContainer({
             text: 'Download the full quarterly report',
-            wrapText: false,
+            truncateOnOverflow: true,
         });
 
         const singleLineHeight = singleWord.getBoundingClientRect().height;

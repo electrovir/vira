@@ -190,13 +190,13 @@ export const ViraButton = defineViraElement<
         /** @default false */
         isDisabled: boolean;
         /**
-         * Wraps the text between words, truncating each word that does not fit on its line with an
-         * ellipsis. When `false`, the text stays on a single line and is truncated with an ellipsis
-         * when it does not fit.
+         * Keeps the text on a single line, truncated with an ellipsis when it does not fit. When
+         * `false`, the text wraps between words and each word that does not fit on its line is
+         * truncated with an ellipsis.
          *
-         * @default true
+         * @default false
          */
-        wrapText: boolean;
+        truncateOnOverflow: boolean;
         /**
          * Set a predefined emphasis variant. Set to `ViraEmphasis.None` for maximum customization.
          *
@@ -308,8 +308,8 @@ export const ViraButton = defineViraElement<
         'vira-button-icon-only'({inputs}) {
             return !inputs.text && (!!inputs.icon || !!inputs.rightSideIcon);
         },
-        'vira-button-single-line-text'({inputs}) {
-            return inputs.wrapText === false;
+        'vira-button-truncate-on-overflow'({inputs}) {
+            return !!inputs.truncateOnOverflow;
         },
     },
     cssVars: {
@@ -513,7 +513,7 @@ export const ViraButton = defineViraElement<
                 overflow-wrap: normal;
             }
 
-            ${hostClasses['vira-button-single-line-text'].selector} .text-template {
+            ${hostClasses['vira-button-truncate-on-overflow'].selector} .text-template {
                 white-space: nowrap;
             }
 

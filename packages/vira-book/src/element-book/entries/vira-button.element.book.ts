@@ -75,7 +75,9 @@ const buttonVariants: {
     },
 ];
 
-function renderLongTextGrid(extraInputs: Omit<typeof ViraButton.InputsType, 'text' | 'wrapText'>) {
+function renderLongTextGrid(
+    extraInputs: Omit<typeof ViraButton.InputsType, 'text' | 'truncateOnOverflow'>,
+) {
     return html`
         <div class="long-text-grid">
             ${[
@@ -83,12 +85,12 @@ function renderLongTextGrid(extraInputs: Omit<typeof ViraButton.InputsType, 'tex
                 240,
             ].map((width) => {
                 return [
-                    true,
                     false,
-                ].map((wrapText) => {
+                    true,
+                ].map((truncateOnOverflow) => {
                     return html`
                         <div class="long-text-column">
-                            <h3>${width}px${wrapText ? '' : ', wrapText: false'}</h3>
+                            <h3>${width}px${truncateOnOverflow ? ', truncateOnOverflow' : ''}</h3>
                             ${[
                                 'Configuration',
                                 'Save changes',
@@ -99,7 +101,7 @@ function renderLongTextGrid(extraInputs: Omit<typeof ViraButton.InputsType, 'tex
                                         <${ViraButton.assign({
                                             ...extraInputs,
                                             text,
-                                            wrapText,
+                                            truncateOnOverflow,
                                         })}></${ViraButton}>
                                     </div>
                                 `;

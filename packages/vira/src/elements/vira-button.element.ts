@@ -190,6 +190,14 @@ export const ViraButton = defineViraElement<
         /** @default false */
         isDisabled: boolean;
         /**
+         * Keeps the text on a single line, truncated with an ellipsis when it does not fit. When
+         * `false`, the text wraps between words and each word that does not fit on its line is
+         * truncated with an ellipsis.
+         *
+         * @default false
+         */
+        truncateOnOverflow: boolean;
+        /**
          * Set a predefined emphasis variant. Set to `ViraEmphasis.None` for maximum customization.
          *
          * @default ViraEmphasis.Standard
@@ -299,6 +307,9 @@ export const ViraButton = defineViraElement<
         },
         'vira-button-icon-only'({inputs}) {
             return !inputs.text && (!!inputs.icon || !!inputs.rightSideIcon);
+        },
+        'vira-button-truncate-on-overflow'({inputs}) {
+            return !!inputs.truncateOnOverflow;
         },
     },
     cssVars: {
@@ -462,7 +473,7 @@ export const ViraButton = defineViraElement<
 
                 box-sizing: border-box;
                 display: inline-flex;
-                justify-content: center;
+                justify-content: safe center;
                 align-items: center;
 
                 border-radius: ${cssVars['vira-button-border-radius'].value};
@@ -494,12 +505,25 @@ export const ViraButton = defineViraElement<
                 overflow: hidden;
             }
 
+            .text-template {
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: keep-all;
+                overflow-wrap: normal;
+            }
+
+            ${hostClasses['vira-button-truncate-on-overflow'].selector} .text-template {
+                white-space: nowrap;
+            }
+
             button ${ViraIcon} + .text-template,
             button .text-template + ${ViraIcon} {
                 margin-left: 8px;
             }
 
             ${ViraIcon} {
+                flex-shrink: 0;
                 height: 0;
                 display: flex;
                 align-items: center;

@@ -24,7 +24,7 @@ import {viraColorPalette} from './vira-color-palette.js';
  *   - Background: white
  * - Dark mode:
  *
- *   - Foreground: light grey (`#E0E0E0`)
+ *   - Foreground: light grey (`#EBEBEB`)
  *   - Background: dark grey (`#1E1E1E`)
  *
  * ## Choosing a Color
@@ -1652,7 +1652,7 @@ export const viraDarkModeBackground = '#1E1E1E';
  *
  * @category Color
  */
-export const viraDarkModeForeground = '#E0E0E0';
+export const viraDarkModeForeground = '#EBEBEB';
 
 /**
  * Dark mode override for {@link viraTheme}.

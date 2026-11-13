@@ -81802,6 +81802,9 @@ var ViraButton = defineViraElement()({
 		},
 		"vira-button-icon-only"({ inputs }) {
 			return !inputs.text && (!!inputs.icon || !!inputs.rightSideIcon);
+		},
+		"vira-button-truncate-on-overflow"({ inputs }) {
+			return !!inputs.truncateOnOverflow;
 		}
 	},
 	cssVars: {
@@ -81935,7 +81938,7 @@ var ViraButton = defineViraElement()({
 
                 box-sizing: border-box;
                 display: inline-flex;
-                justify-content: center;
+                justify-content: safe center;
                 align-items: center;
 
                 border-radius: ${cssVars["vira-button-border-radius"].value};
@@ -81965,12 +81968,25 @@ var ViraButton = defineViraElement()({
                 overflow: hidden;
             }
 
+            .text-template {
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: keep-all;
+                overflow-wrap: normal;
+            }
+
+            ${hostClasses["vira-button-truncate-on-overflow"].selector} .text-template {
+                white-space: nowrap;
+            }
+
             button ${ViraIcon} + .text-template,
             button .text-template + ${ViraIcon} {
                 margin-left: 8px;
             }
 
             ${ViraIcon} {
+                flex-shrink: 0;
                 height: 0;
                 display: flex;
                 align-items: center;
@@ -94115,6 +94131,64 @@ var buttonVariants = [
 		extraInputs: { rightSideIcon: LucideChevronDownIcon }
 	}
 ];
+function renderLongTextGrid(extraInputs) {
+	return html`
+        <div class="long-text-grid">
+            ${[60, 240].map((width) => {
+		return [false, true].map((truncateOnOverflow) => {
+			return html`
+                        <div class="long-text-column">
+                            <h3>${width}px${truncateOnOverflow ? ", truncateOnOverflow" : ""}</h3>
+                            ${[
+				"Configuration",
+				"Save changes",
+				"Download the full quarterly report"
+			].map((text) => {
+				return html`
+                                    <div class="long-text-container" style="width: ${width}px">
+                                        <${ViraButton.assign({
+					...extraInputs,
+					text,
+					truncateOnOverflow
+				})}></${ViraButton}>
+                                    </div>
+                                `;
+			})}
+                        </div>
+                    `;
+		});
+	})}
+        </div>
+    `;
+}
+var longTextStyles = css`
+    .long-text-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .long-text-column {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: ${viraFontCssVars["vira-font-weight-normal"].value};
+    }
+
+    .long-text-container {
+        display: flex;
+        outline: 1px dashed grey;
+    }
+
+    ${ViraButton} {
+        max-width: 100%;
+    }
+`;
 var tableStyles = css`
     table {
         border-collapse: collapse;
@@ -94223,6 +94297,38 @@ var viraButtonBookPage = defineBookPage({
 				return html`
                     <${ViraButton.assign({ text: "This is a long button label that wraps" })}></${ViraButton}>
                 `;
+			}
+		});
+		defineExample({
+			title: "long text",
+			styles: longTextStyles,
+			render() {
+				return renderLongTextGrid({});
+			}
+		});
+		defineExample({
+			title: "long text with chevron",
+			styles: longTextStyles,
+			render() {
+				return renderLongTextGrid({ rightSideIcon: LucideChevronDownIcon });
+			}
+		});
+		defineExample({
+			title: "long text pill",
+			styles: css`
+                ${longTextStyles}
+
+                ${ViraButton} {
+                    ${ViraButton.cssVars["vira-button-border-width"].name}: 0;
+                    ${ViraButton.cssVars["vira-button-border-radius"].name}: 999px;
+                }
+            `,
+			render() {
+				return renderLongTextGrid({
+					buttonSize: ViraSize.Small,
+					color: ViraColorVariant.Muted,
+					rightSideIcon: LucideChevronDownIcon
+				});
 			}
 		});
 		defineExample({

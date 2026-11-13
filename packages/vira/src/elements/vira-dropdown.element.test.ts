@@ -3,7 +3,7 @@ import {createArray, mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
-import {css, html, listen, testIdSelector} from 'element-vir';
+import {css, html, type HtmlInterpolation, listen, testIdSelector} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createSizedIcon} from '../icons/sized-icon.js';
@@ -50,11 +50,17 @@ const mockGroupedOptions: ReadonlyArray<Readonly<ViraDropdownOptionGroup>> = [
     },
 ];
 
-async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
+async function setupDropdownTest(
+    inputs?: Partial<(typeof ViraDropdown)['InputsType']>,
+    /** Light DOM children, for filling slots. */
+    children?: HtmlInterpolation,
+) {
     const events: {
+        createOption: string[];
         openChange: boolean[];
         selectedValuesChange: string[][];
     } = {
+        createOption: [],
         openChange: [],
         selectedValuesChange: [],
     };
@@ -69,13 +75,18 @@ async function setupDropdownTest(inputs?: Partial<(typeof ViraDropdown)['InputsT
                 selected: [],
                 ...inputs,
             })}
+                ${listen(ViraDropdown.events.createOption, (event) => {
+                    events.createOption.push(event.detail);
+                })}
                 ${listen(ViraDropdown.events.openChange, (event) => {
                     events.openChange.push(event.detail);
                 })}
                 ${listen(ViraDropdown.events.selectedValuesChange, (event) => {
                     events.selectedValuesChange.push(event.detail);
                 })}
-            ></${ViraDropdown}>
+            >
+                ${children}
+            </${ViraDropdown}>
         </div>
     `);
 
@@ -468,6 +479,48 @@ describe(ViraDropdown.tagName, () => {
             extractElementText(assertWrap.instanceOf(findMenu(), HTMLElement)),
             'Nothing here',
         );
+    });
+
+    it('shows slotted no options content over noOptionsText', async () => {
+        const {toggle, instance} = await setupDropdownTest(
+            {
+                options: [],
+                noOptionsText: 'Nothing here',
+            },
+            html`
+                <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>Slotted</span>
+            `,
+        );
+
+        await toggle();
+
+        const slotElement = assertWrap.instanceOf(
+            instance.shadowRoot.querySelector('.no-options slot'),
+            HTMLSlotElement,
+        );
+        assert.strictEquals(
+            slotElement
+                .assignedNodes()
+                .map((node) => node.textContent)
+                .join('')
+                .trim(),
+            'Slotted',
+        );
+    });
+
+    it('opens with only slotted no options content', async () => {
+        const {toggle, findMenu} = await setupDropdownTest(
+            {
+                options: [],
+            },
+            html`
+                <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>Slotted</span>
+            `,
+        );
+
+        await toggle();
+
+        assert.isDefined(findMenu());
     });
 
     it('contains menu overscroll so the page does not scroll', async () => {
@@ -1042,11 +1095,17 @@ describe(ViraDropdown.tagName, () => {
     });
 
     describe('isSearchable', () => {
-        async function setupSearchTest(inputs?: Partial<(typeof ViraDropdown)['InputsType']>) {
-            const dropdownTest = await setupDropdownTest({
-                isSearchable: true,
-                ...inputs,
-            });
+        async function setupSearchTest(
+            inputs?: Partial<(typeof ViraDropdown)['InputsType']>,
+            children?: HtmlInterpolation,
+        ) {
+            const dropdownTest = await setupDropdownTest(
+                {
+                    isSearchable: true,
+                    ...inputs,
+                },
+                children,
+            );
 
             return {
                 ...dropdownTest,
@@ -1197,6 +1256,331 @@ describe(ViraDropdown.tagName, () => {
             assert.deepEquals(events.selectedValuesChange, [
                 ['2'],
             ]);
+        });
+
+        describe('empty content', () => {
+            /** Reads the shown empty content, through slot assignments and slot fallbacks. */
+            function readEmptyText(instance: Element) {
+                const slotElement = assertWrap.instanceOf(
+                    instance.shadowRoot?.querySelector('.no-options slot'),
+                    HTMLSlotElement,
+                );
+
+                return slotElement
+                    .assignedNodes({
+                        flatten: true,
+                    })
+                    .map((node) => node.textContent)
+                    .join('')
+                    .trim();
+            }
+
+            async function searchFor(
+                setup: Awaited<ReturnType<typeof setupSearchTest>>,
+                text: string,
+            ) {
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+                await testWeb.typeText(text);
+                await waitUntil.isTruthy(() => {
+                    return setup.instance.shadowRoot.querySelector('.no-options');
+                });
+            }
+
+            it('shows noSearchResultsText when the search matches nothing', async () => {
+                const setup = await setupSearchTest({
+                    noOptionsText: 'No options',
+                    noSearchResultsText: 'No matches',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No matches');
+            });
+
+            it('falls back to noOptionsText when the search matches nothing', async () => {
+                const setup = await setupSearchTest({
+                    noOptionsText: 'No options',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No options');
+            });
+
+            it('falls back to slotted no options content when the search matches nothing', async () => {
+                const setup = await setupSearchTest(
+                    {},
+                    html`
+                        <span slot=${ViraDropdown.slotNames['vira-dropdown-no-options']}>
+                            Slotted no options
+                        </span>
+                    `,
+                );
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'Slotted no options');
+            });
+
+            it('shows slotted no search results content over the text inputs', async () => {
+                const setup = await setupSearchTest(
+                    {
+                        noOptionsText: 'No options',
+                        noSearchResultsText: 'No matches',
+                    },
+                    html`
+                        <span slot=${ViraDropdown.slotNames['vira-dropdown-no-search-results']}>
+                            Slotted no matches
+                        </span>
+                    `,
+                );
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'Slotted no matches');
+            });
+
+            it('shows no options content, not no search results content, without options', async () => {
+                const setup = await setupSearchTest({
+                    options: [],
+                    noOptionsText: 'No options',
+                    noSearchResultsText: 'No matches',
+                });
+
+                await searchFor(setup, 'zzz');
+
+                assert.strictEquals(readEmptyText(setup.instance), 'No options');
+            });
+        });
+
+        describe('isCreatable', () => {
+            async function typeIntoSearch(
+                setup: Awaited<ReturnType<typeof setupSearchTest>>,
+                text: string,
+            ) {
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+                await testWeb.typeText(text);
+            }
+
+            it('does nothing without isCreatable', async () => {
+                const setup = await setupSearchTest();
+
+                await typeIntoSearch(setup, 'zzz');
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('does not show the create option without search text', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await testWeb.click(setup.searchInput);
+                await waitUntil.isTruthy(setup.findMenu);
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('shows the create option first when nothing matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, '  Option D ');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(
+                        assertWrap.instanceOf(setup.queryByTestId.createOption(), HTMLElement),
+                    ),
+                    'Create "Option D"',
+                );
+                assert.strictEquals(setup.readOptionLabels()[0], 'Create "Option D"');
+            });
+
+            it('shows the create option above partial matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'Option');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+
+                assert.deepEquals(setup.readOptionLabels(), [
+                    'Create "Option"',
+                    'Option A',
+                    'Option B',
+                    'Option C',
+                ]);
+            });
+
+            it('hides the create option when a label matches exactly, ignoring case', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'option b');
+                await waitUntil.deepEquals(
+                    [
+                        'Option B',
+                    ],
+                    setup.readOptionLabels,
+                );
+
+                assert.isNullish(setup.queryByTestId.createOption());
+            });
+
+            it('uses createOptionLabel', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    createOptionLabel(searchText) {
+                        return `Add ${searchText}!`;
+                    },
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(
+                        assertWrap.instanceOf(setup.queryByTestId.createOption(), HTMLElement),
+                    ),
+                    'Add zzz!',
+                );
+            });
+
+            it('replaces noOptionsText', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    noOptionsText: 'Nothing here',
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                assert.strictEquals(
+                    extractElementText(assertWrap.isDefined(setup.findMenu())).includes(
+                        'Nothing here',
+                    ),
+                    false,
+                );
+            });
+
+            it('emits createOption on click without changing the selection', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, ' New thing ');
+                await testWeb.click(
+                    assertWrap.instanceOf(
+                        await waitUntil.isTruthy(setup.queryByTestId.createOption),
+                        HTMLElement,
+                    ),
+                );
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'New thing',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('emits createOption on Enter when nothing matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'zzz',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('selects the first match on Enter when there are matches', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'opt');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.isEmpty(setup.events.createOption);
+                assert.deepEquals(setup.events.selectedValuesChange, [
+                    ['0'],
+                ]);
+            });
+
+            it('can be reached and chosen with the keyboard', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                });
+
+                await typeIntoSearch(setup, 'opt');
+                await waitUntil.isTruthy(setup.queryByTestId.createOption);
+                await sendKeys({
+                    press: 'Tab',
+                });
+                await waitForAnimationFrame();
+
+                assert.strictEquals(
+                    extractElementText(assertWrap.isDefined(findFocusedMenuItem(setup.instance))),
+                    'Create "opt"',
+                );
+
+                await sendKeys({
+                    press: 'Enter',
+                });
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'opt',
+                ]);
+                assert.isEmpty(setup.events.selectedValuesChange);
+            });
+
+            it('closes a multi select menu after creating', async () => {
+                const setup = await setupSearchTest({
+                    isCreatable: true,
+                    isMultiSelect: true,
+                });
+
+                await typeIntoSearch(setup, 'zzz');
+                await testWeb.click(
+                    assertWrap.instanceOf(
+                        await waitUntil.isTruthy(setup.queryByTestId.createOption),
+                        HTMLElement,
+                    ),
+                );
+
+                await waitUntil.isFalsy(setup.findMenu);
+                assert.deepEquals(setup.events.createOption, [
+                    'zzz',
+                ]);
+            });
+
+            it('is ignored when not searchable', async () => {
+                const {toggle, queryByTestId} = await setupDropdownTest({
+                    isCreatable: true,
+                });
+
+                await toggle();
+
+                assert.isNullish(queryByTestId.createOption());
+            });
         });
 
         describe('maxShownOptions', () => {

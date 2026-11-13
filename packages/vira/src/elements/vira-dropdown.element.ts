@@ -123,6 +123,13 @@ export const ViraDropdown = defineViraElement<
          * @default hiddenCount => `+${hiddenCount}, type to narrow your search`
          */
         hiddenOptionsText: (hiddenCount: number) => string;
+        /**
+         * Wraps option labels that are too long for the menu onto more lines. When `false`, long
+         * labels are cut off with an ellipsis instead, and hovering one shows its full text.
+         *
+         * @default false
+         */
+        wrapOptionText: boolean;
     }>
 >()({
     tagName: 'vira-dropdown',
@@ -132,6 +139,9 @@ export const ViraDropdown = defineViraElement<
         },
         'vira-dropdown-trigger-only'({inputs}) {
             return !inputs.label && !inputs.isReadonly;
+        },
+        'vira-dropdown-wrap-option-text'({inputs}) {
+            return !!inputs.wrapOptionText;
         },
     },
     testIds: [
@@ -261,6 +271,12 @@ export const ViraDropdown = defineViraElement<
                 border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 background-color: ${viraFormCssVars['vira-form-background-color'].value};
                 color: ${viraFormCssVars['vira-form-foreground-color'].value};
+            }
+
+            ${hostClasses['vira-dropdown-wrap-option-text']
+                .selector} ${ViraMenuItem} .option-label-text {
+                white-space: normal;
+                overflow-wrap: anywhere;
             }
 
             ${hostClasses['vira-dropdown-trigger-only'].selector} {
@@ -613,6 +629,7 @@ export const ViraDropdown = defineViraElement<
                         },
                         disabled: option.disabled,
                         selected: selectedOptions.includes(option),
+                        wrapText: inputs.wrapOptionText,
                     };
                 }),
                 state.navController,

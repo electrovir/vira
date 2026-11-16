@@ -7,6 +7,7 @@ import {css, html, listen, testIdSelector} from 'element-vir';
 import {setCssVarValue} from 'lit-css-vars';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
 import {createSizedIcon} from '../icons/sized-icon.js';
+import {ViraSize, viraSizeHeights} from '../styles/form-variants.js';
 import {
     type ViraDropdownOption,
     type ViraDropdownOptionGroup,
@@ -665,6 +666,35 @@ describe(ViraDropdown.tagName, () => {
         assert.deepEquals(
             getSize(fixture.querySelector(ViraDropdown.tagName)),
             getSize(fixture.querySelector(ViraInput.tagName)),
+        );
+    });
+
+    it('does not shrink below its default height in a crowded flex column', async () => {
+        const fixture = await testWeb.render(html`
+            <div
+                style=${css`
+                    display: flex;
+                    flex-direction: column;
+                    height: 100px;
+                `}
+            >
+                <${ViraDropdown.assign({
+                    options: mockMenuItems,
+                    selected: [],
+                })}></${ViraDropdown}>
+                <div
+                    style=${css`
+                        height: 10000px;
+                    `}
+                ></div>
+            </div>
+        `);
+
+        assert.strictEquals(
+            assertWrap
+                .isDefined(fixture.querySelector(ViraDropdown.tagName))
+                .getBoundingClientRect().height,
+            viraSizeHeights[ViraSize.Medium],
         );
     });
 

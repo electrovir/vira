@@ -133,6 +133,9 @@ export const ViraDropdown = defineViraElement<
         'vira-dropdown-trigger-only'({inputs}) {
             return !inputs.label && !inputs.isReadonly;
         },
+        'vira-dropdown-readonly'({inputs}) {
+            return !!inputs.isReadonly;
+        },
     },
     testIds: [
         'hiddenOptionsHint',
@@ -161,6 +164,10 @@ export const ViraDropdown = defineViraElement<
 
             ${hostClasses['vira-dropdown-raw'].selector} {
                 width: auto;
+            }
+
+            ${hostClasses['vira-dropdown-readonly'].selector} {
+                min-height: auto;
             }
 
             ${ViraPopoverTrigger} {

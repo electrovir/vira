@@ -1,6 +1,6 @@
 {
     "name": "@electrovir/scripts",
-    "version": "33.18.0",
+    "version": "33.18.1",
     "private": true,
     "license": "(MIT OR CC0-1.0)",
     "author": {
@@ -20,16 +20,16 @@
         "update:lucide-icons": "tsx src/vira-scripts/generate-lucide-icons.ts"
     },
     "dependencies": {
-        "@augment-vir/assert": "^32.7.0",
-        "@augment-vir/common": "^32.7.0",
-        "@augment-vir/node": "^32.7.0",
+        "@augment-vir/assert": "^32.7.1",
+        "@augment-vir/common": "^32.7.1",
+        "@augment-vir/node": "^32.7.1",
         "prettier": "^3.4.2",
         "tsx": "^4.23.15"
     },
     "devDependencies": {
         "@types/node": "^26.6.6",
-        "markdown-code-example-inserter": "^3.1.1",
-        "runstorm": "^1.1.0",
+        "markdown-code-example-inserter": "^3.1.2",
+        "runstorm": "^1.1.1",
         "typedoc": "^0.28.20",
         "typescript": "^6.0.3"
     },

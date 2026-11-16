@@ -124,6 +124,7 @@ export const ViraDropdown = defineViraElement<
                 width: 224px;
                 position: relative;
                 max-width: 100%;
+                min-height: ${viraSizeHeights[ViraSize.Medium]}px;
             }
 
             ${ViraPopoverTrigger} {
@@ -224,7 +225,10 @@ export const ViraDropdown = defineViraElement<
             }
 
             ${hostClasses['vira-dropdown-trigger-only'].selector} {
-                /** On the host, rather than the trigger, so a consumer's \`height\` can shrink it. */
+                /**
+                 * On the host, rather than the trigger, so a consumer's \`height\` and \`min-height\` can
+                 * shrink it.
+                 */
                 height: ${viraSizeHeights[ViraSize.Medium]}px;
 
                 & .dropdown-trigger {

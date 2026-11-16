@@ -1,5 +1,5 @@
 import {assert, assertWrap, waitUntil} from '@augment-vir/assert';
-import {createArray, mapObjectValues, randomString} from '@augment-vir/common';
+import {awaitedForEach, createArray, mapObjectValues, randomString} from '@augment-vir/common';
 import {describe, it, testWeb} from '@augment-vir/test';
 import {extractElementText, queryThroughShadow, waitForAnimationFrame} from '@augment-vir/web';
 import {resetMouse, sendKeys, sendMouse} from '@web/test-runner-commands';
@@ -220,6 +220,70 @@ describe(ViraDropdown.tagName, () => {
         }
     });
 
+    it('selects the option the mouse is released on after pressing a different option', async () => {
+        const {instance, toggle, events, findMenu} = await setupDropdownTest();
+
+        await toggle();
+        const options = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+        assert.isLengthExactly(options, 3);
+
+        try {
+            await testWeb.moveMouseTo(options[0]);
+            await sendMouse({
+                type: 'down',
+                button: 'left',
+            });
+            await testWeb.moveMouseTo(options[2]);
+            await sendMouse({
+                type: 'up',
+                button: 'left',
+            });
+
+            await waitUntil.isFalsy(findMenu);
+            assert.deepEquals(events.selectedValuesChange, [
+                ['2'],
+            ]);
+        } finally {
+            await resetMouse();
+        }
+    });
+
+    it('selects only the released option in multi select after pressing a different option', async () => {
+        const {instance, toggle, events} = await setupDropdownTest({
+            isMultiSelect: true,
+        });
+
+        await toggle();
+        const options = queryThroughShadow(instance, ViraMenuItem.tagName, {
+            all: true,
+        });
+        assert.isLengthExactly(options, 3);
+
+        try {
+            await testWeb.moveMouseTo(options[0]);
+            await sendMouse({
+                type: 'down',
+                button: 'left',
+            });
+            await testWeb.moveMouseTo(options[1]);
+            await sendMouse({
+                type: 'up',
+                button: 'left',
+            });
+
+            await waitUntil.deepEquals(
+                [
+                    ['1'],
+                ],
+                () => events.selectedValuesChange,
+            );
+        } finally {
+            await resetMouse();
+        }
+    });
+
     it('navigates and selects options with arrow keys', async () => {
         const {instance, events, findMenu} = await setupDropdownTest();
 
@@ -253,6 +317,89 @@ describe(ViraDropdown.tagName, () => {
         await waitUntil.isFalsy(findMenu);
         assert.deepEquals(events.selectedValuesChange, [
             ['1'],
+        ]);
+    });
+
+    it('navigates with arrow keys across group boundaries', async () => {
+        const {instance, findMenu} = await setupDropdownTest({
+            isMultiSelect: true,
+            options: [
+                {
+                    groupName: 'First',
+                    options: mockMenuItems.slice(0, 2),
+                },
+                {
+                    groupName: 'Second',
+                    options: [
+                        ...mockMenuItems.slice(2),
+                        {
+                            value: '3',
+                            label: 'Option D',
+                        },
+                        {
+                            value: 'disabled',
+                            label: 'Disabled',
+                            disabled: true,
+                        },
+                    ],
+                },
+            ],
+        });
+
+        assertWrap.instanceOf(queryThroughShadow(instance, 'button'), HTMLButtonElement).focus();
+        await sendKeys({
+            press: 'ArrowDown',
+        });
+        await waitUntil.isTruthy(findMenu);
+
+        const focusedLabels: string[] = [];
+        const labelsWithoutHighlight: string[] = [];
+
+        await awaitedForEach(
+            [
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowDown',
+                'ArrowUp',
+                'ArrowUp',
+                'ArrowUp',
+                'ArrowUp',
+                'ArrowUp',
+                'ArrowUp',
+            ],
+            async (key) => {
+                await sendKeys({
+                    press: key,
+                });
+                await waitForAnimationFrame();
+                const focusedMenuItem = assertWrap.isDefined(findFocusedMenuItem(instance));
+                focusedLabels.push(extractElementText(focusedMenuItem));
+                if (getComputedStyle(focusedMenuItem).backgroundColor === 'rgba(0, 0, 0, 0)') {
+                    labelsWithoutHighlight.push(extractElementText(focusedMenuItem));
+                }
+            },
+        );
+
+        assert.isEmpty(labelsWithoutHighlight);
+
+        assert.deepEquals(focusedLabels, [
+            'First',
+            'Option A',
+            'Option B',
+            'Second',
+            'Option C',
+            'Option D',
+            'Option D',
+            'Option C',
+            'Second',
+            'Option B',
+            'Option A',
+            'First',
+            'First',
         ]);
     });
 

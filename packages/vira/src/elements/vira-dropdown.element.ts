@@ -327,6 +327,11 @@ export const ViraDropdown = defineViraElement<
             ${ViraMenuItem}.option-group-label {
                 padding: 0 0 0 calc(${ViraMenuItem.cssVars['vira-menu-item-icon-gap'].value} * 2);
                 ${ViraMenuItem.cssVars['vira-menu-item-padding'].name}: 8px 12px 4px 0;
+                cursor: pointer;
+
+                &:focus {
+                    background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+                }
             }
 
             .readonly-value {
@@ -364,6 +369,12 @@ export const ViraDropdown = defineViraElement<
         return {
             isOpen: false,
             shouldSelectOnMouseUp: false,
+            /**
+             * The menu item that the mouse was last pressed on. Releasing on a different menu item
+             * fires no `click` on either, so the released item gets activated on `mouseup`
+             * instead.
+             */
+            pressedMenuItem: undefined as undefined | InstanceType<typeof ViraMenuItem>,
             /**
              * Used to couple the label and trigger together. This is not applied if no label is
              * provided.
@@ -603,6 +614,14 @@ export const ViraDropdown = defineViraElement<
                 : optionActions;
         });
 
+        function findEventMenuItem(event: Readonly<Event>) {
+            return event
+                .composedPath()
+                .find((eventTarget): eventTarget is InstanceType<typeof ViraMenuItem> => {
+                    return eventTarget instanceof ViraMenuItem;
+                });
+        }
+
         function renderOptionEntries(options: ReadonlyArray<Readonly<ViraDropdownOption>>) {
             return renderMenuItemEntries(
                 options.map((option) => {
@@ -628,15 +647,18 @@ export const ViraDropdown = defineViraElement<
                 hoverScrollSpeed: inputs.menuHoverScrollSpeed,
             })}
                 slot=${ViraPopoverTrigger.slotNames['vira-popover-trigger-popover']}
+                ${listen('mousedown', (event) => {
+                    updateState({
+                        pressedMenuItem: findEventMenuItem(event),
+                    });
+                })}
                 ${listen('mouseup', (event) => {
-                    if (state.shouldSelectOnMouseUp) {
-                        const menuItem = event
-                            .composedPath()
-                            .find(
-                                (eventTarget): eventTarget is InstanceType<typeof ViraMenuItem> => {
-                                    return eventTarget instanceof ViraMenuItem;
-                                },
-                            );
+                    const menuItem = findEventMenuItem(event);
+
+                    if (
+                        state.shouldSelectOnMouseUp ||
+                        (state.pressedMenuItem && state.pressedMenuItem !== menuItem)
+                    ) {
                         const menuItemAction = menuItem
                             ? menuItemActions[
                                   Array.from(

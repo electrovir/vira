@@ -60,14 +60,20 @@ export type ApplyThemeCallback = (params: Readonly<{useDarkTheme: boolean}>) => 
 
 /**
  * Default implementation of {@link ApplyThemeCallback}. Applies Vira themes and syncs the root
- * `color-scheme` and any `<meta name="theme-color">` tags to the applied theme.
+ * `color-scheme` and `<meta name="theme-color">` tags (creating one if none exist) to the applied
+ * theme.
  *
  * @category Internal
  */
 export const defaultApplyThemeCallback: ApplyThemeCallback = ({useDarkTheme}) => {
     applyColorThemeViaStyleElement(viraTheme, useDarkTheme ? viraThemeDarkOverride : undefined);
     globalThis.document.documentElement.style.colorScheme = useDarkTheme ? 'dark' : 'light';
-    globalThis.document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+    const metaTags = globalThis.document.querySelectorAll('meta[name="theme-color"]');
+    const metas: Element[] = metaTags.length
+        ? [...metaTags]
+        : [globalThis.document.head.appendChild(globalThis.document.createElement('meta'))];
+    metas.forEach((meta) => {
+        meta.setAttribute('name', 'theme-color');
         meta.removeAttribute('media');
         meta.setAttribute('content', useDarkTheme ? viraDarkModeBackground : '#FFFFFF');
     });

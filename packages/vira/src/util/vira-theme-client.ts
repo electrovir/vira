@@ -10,6 +10,7 @@ import {applyColorThemeViaStyleElement} from 'theme-vir/dist/color-theme/apply-c
 import {defineTypedCustomEvent, ListenTarget, listenTo} from 'typed-event-target';
 import {
     viraDarkModeBackground,
+    viraLightModeBackground,
     viraTheme,
     viraThemeDarkOverride,
 } from '../styles/vira-color-theme.js';
@@ -75,7 +76,10 @@ export const defaultApplyThemeCallback: ApplyThemeCallback = ({useDarkTheme}) =>
     metas.forEach((meta) => {
         meta.setAttribute('name', 'theme-color');
         meta.removeAttribute('media');
-        meta.setAttribute('content', useDarkTheme ? viraDarkModeBackground : '#FFFFFF');
+        meta.setAttribute(
+            'content',
+            useDarkTheme ? viraDarkModeBackground : viraLightModeBackground,
+        );
     });
 };
 

@@ -1062,6 +1062,57 @@ describe(ViraDropdown.tagName, () => {
             };
         }
 
+        it('keeps focus in the input while the mouse hovers over and leaves the options', async () => {
+            const {instance, searchInput, findMenu} = await setupSearchTest();
+
+            try {
+                await testWeb.click(searchInput);
+                await waitUntil.isTruthy(findMenu);
+
+                const [
+                    hoveredOption,
+                    otherOption,
+                ] = queryThroughShadow(instance, ViraMenuItem.tagName, {
+                    all: true,
+                });
+
+                await testWeb.moveMouseTo(assertWrap.isDefined(hoveredOption));
+                await waitForAnimationFrame();
+
+                const whileHovering = {
+                    isInputFocused: searchInput.matches(':focus'),
+                    isHoveredHighlighted:
+                        getComputedStyle(assertWrap.isDefined(hoveredOption)).backgroundColor !==
+                        getComputedStyle(assertWrap.isDefined(otherOption)).backgroundColor,
+                };
+
+                await sendMouse({
+                    type: 'move',
+                    position: [
+                        0,
+                        0,
+                    ],
+                });
+                await waitForAnimationFrame();
+
+                assert.deepEquals(
+                    {
+                        whileHovering,
+                        isInputFocusedAfterLeaving: searchInput.matches(':focus'),
+                    },
+                    {
+                        whileHovering: {
+                            isInputFocused: true,
+                            isHoveredHighlighted: true,
+                        },
+                        isInputFocusedAfterLeaving: true,
+                    },
+                );
+            } finally {
+                await resetMouse();
+            }
+        });
+
         it('clears the selection from the input when clicked into', async () => {
             const {searchInput, findMenu} = await setupSearchTest({
                 selected: ['1'],

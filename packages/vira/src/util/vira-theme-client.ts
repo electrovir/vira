@@ -69,16 +69,13 @@ export type ApplyThemeCallback = (params: Readonly<{useDarkTheme: boolean}>) => 
 export const defaultApplyThemeCallback: ApplyThemeCallback = ({useDarkTheme}) => {
     applyColorThemeViaStyleElement(viraTheme, useDarkTheme ? viraThemeDarkOverride : undefined);
     globalThis.document.documentElement.style.colorScheme = useDarkTheme ? 'dark' : 'light';
-    const themeColorTags: Element[] = [
-        ...globalThis.document.querySelectorAll('meta[name="theme-color"]'),
-    ];
-    if (!themeColorTags.length) {
+    const themeColorSelector = 'meta[name="theme-color"]';
+    if (!globalThis.document.querySelector(themeColorSelector)) {
         const newTag = globalThis.document.createElement('meta');
+        newTag.setAttribute('name', 'theme-color');
         globalThis.document.head.append(newTag);
-        themeColorTags.push(newTag);
     }
-    themeColorTags.forEach((meta) => {
-        meta.setAttribute('name', 'theme-color');
+    globalThis.document.querySelectorAll(themeColorSelector).forEach((meta) => {
         meta.removeAttribute('media');
         meta.setAttribute(
             'content',

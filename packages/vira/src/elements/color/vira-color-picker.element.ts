@@ -123,7 +123,7 @@ export const ViraColorPicker = defineElement<
                 }
 
                 &:hover {
-                    color: #000;
+                    color: ${viraFormCssVars['vira-form-foreground-color'].value};
                 }
 
                 &:active {
@@ -136,8 +136,9 @@ export const ViraColorPicker = defineElement<
                 flex-direction: column;
                 gap: 4px;
                 padding: 16px;
-                background: white;
-                border: 1px solid #ccc;
+                background-color: ${viraFormCssVars['vira-form-background-color'].value};
+                color: ${viraFormCssVars['vira-form-foreground-color'].value};
+                border: 1px solid ${viraFormCssVars['vira-form-border-color'].value};
                 border-radius: 8px;
             }
 

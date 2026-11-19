@@ -13,6 +13,7 @@ import {
     ViraThemeSwitcher,
     createColoredIcon,
     createSizedIcon,
+    viraTheme,
 } from 'vira';
 import {elementsBookPage} from '../../top-level-pages.js';
 
@@ -115,7 +116,7 @@ const examples: ReadonlyArray<{
             selected: false,
             iconOverride: createSizedIcon(
                 createColoredIcon(LucideSlidersHorizontalIcon, {
-                    'vira-icon-stroke-color': 'blue',
+                    'vira-icon-stroke-color': `${viraTheme.colors['vira-blue-foreground-body'].foreground.value}`,
                 }),
                 24,
             ),

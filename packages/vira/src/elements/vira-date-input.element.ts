@@ -75,6 +75,9 @@ export const ViraDateInput = defineViraElement<
         'vira-date-input-disabled'({inputs}) {
             return !!inputs.isDisabled;
         },
+        'vira-date-input-empty'({inputs}) {
+            return !inputs.value;
+        },
     },
     styles({hostClasses}) {
         return css`
@@ -105,6 +108,10 @@ export const ViraDateInput = defineViraElement<
                 border-radius: ${viraFormCssVars['vira-form-radius'].value};
                 background-color: ${viraFormCssVars['vira-form-background-color'].value};
                 color: ${viraFormCssVars['vira-form-foreground-color'].value};
+            }
+
+            ${hostClasses['vira-date-input-empty'].selector} input {
+                color: ${viraFormCssVars['vira-form-placeholder-color'].value};
             }
 
             ${hostClasses['vira-date-input-error'].selector} input {

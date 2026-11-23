@@ -8,20 +8,24 @@ import {createAnchoredPopoverStyles} from '../../util/anchored-popover.js';
 import {defineViraElement} from '../../util/define-vira-element.js';
 
 /**
- * Centered with insets instead of `position-area`, because browsers shift a centered
+ * Centered with insets instead of `justify-self: anchor-center`, because browsers shift a centered
  * `position-area` box back onto the screen rather than moving on to the next
  * `position-try-fallbacks` entry. These insets leave a space that is centered on the anchor and as
  * wide as possible, and `unsafe` stops the browser from shifting the tooltip, so a tooltip wider
  * than that space overflows it and moves on to an aligned fallback. Each `anchor(center)` is
  * measured from the side its inset is on, so the same formula works for `left` and `right`.
+ *
+ * The vertical position still comes from `position-area` rather than `bottom: anchor(top)`: Safari
+ * 27 can resolve that `anchor()` to a spot well below the anchor while `position-try-fallbacks` is
+ * set, leaving the tooltip far from its anchor.
  */
 const centeredStyles = css`
-    position-area: none;
-    top: 0;
-    bottom: anchor(top);
+    position-area: block-start span-all;
+    top: auto;
+    bottom: auto;
     left: max(0px, 2 * anchor(center) - 100%);
     right: max(0px, 2 * anchor(center) - 100%);
-    align-self: end;
+    align-self: normal;
     justify-self: unsafe center;
 `;
 

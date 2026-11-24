@@ -8,6 +8,7 @@ import {ViraFormFieldType, type ViraFormField} from '../util/vira-form-fields.js
 import {ViraAbsoluteTime} from './vira-absolute-time.element.js';
 import {ViraDropdown} from './vira-dropdown.element.js';
 import {ViraForm} from './vira-form.element.js';
+import {ViraInput} from './vira-input.element.js';
 
 describe(ViraForm.tagName, () => {
     async function renderReadonlyDateForm(
@@ -74,6 +75,38 @@ describe(ViraForm.tagName, () => {
         );
 
         assert.isTrue(dropdown.instanceInputs.isSearchable);
+    });
+
+    it('makes only the fields with isReadonly readonly', async () => {
+        const fixture = await testWeb.render(html`
+            <div>
+                <${ViraForm.assign({
+                    fields: {
+                        patient: {
+                            label: 'Patient',
+                            type: ViraFormFieldType.Text,
+                            value: 'Example Person',
+                            isReadonly: true,
+                        },
+                        title: {
+                            label: 'Title',
+                            type: ViraFormFieldType.Text,
+                            value: '',
+                        },
+                    },
+                })}></${ViraForm}>
+            </div>
+        `);
+        await waitForAnimationFrame();
+
+        const readonlyStates = queryThroughShadow(fixture, ViraInput.tagName, {
+            all: true,
+        }).map((input) => assertWrap.instanceOf(input, ViraInput).instanceInputs.isReadonly);
+
+        assert.deepEquals(readonlyStates, [
+            true,
+            false,
+        ]);
     });
 
     it('vertically centers every readonly horizontal label against its value', async () => {

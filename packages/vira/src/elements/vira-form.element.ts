@@ -365,6 +365,7 @@ export const ViraForm = defineViraElement<
                 field,
             ]) => {
                 const isDisabled = !!(inputs.isDisabled || field.isDisabled);
+                const isReadonly = !!(inputs.isReadonly || field.isReadonly);
                 const showRequiredMarker = !!field.isRequired && !inputs.hideRequiredMarkers;
 
                 if (field.isHidden) {
@@ -377,7 +378,7 @@ export const ViraForm = defineViraElement<
                         fieldTemplate: html`
                             <${ViraCheckbox.assign({
                                 value: field.value || false,
-                                isDisabled: !!(isDisabled || inputs.isReadonly),
+                                isDisabled: isDisabled || isReadonly,
                                 hasError: field.hasError,
                                 useHorizontalLabel: inputs.horizontalCheckboxes,
                                 fillWhenChecked: field.fillWhenChecked,
@@ -441,7 +442,7 @@ export const ViraForm = defineViraElement<
                                         return html`
                                             <${ViraCheckbox.assign({
                                                 value: selected.includes(option.value),
-                                                isDisabled: !!(isDisabled || inputs.isReadonly),
+                                                isDisabled: isDisabled || isReadonly,
                                                 hasError: field.hasError,
                                                 useHorizontalLabel: true,
                                             })}
@@ -506,7 +507,7 @@ export const ViraForm = defineViraElement<
                                 placeholder: field.placeholder,
                                 isSearchable: field.isSearchable,
                                 isDisabled,
-                                isReadonly: inputs.isReadonly,
+                                isReadonly,
                                 label: childLabel,
                                 hasError: field.hasError,
                                 icon: field.icon,
@@ -544,7 +545,7 @@ export const ViraForm = defineViraElement<
                                 value: field.value || '',
                                 disabled: isDisabled,
                                 hasError: field.hasError,
-                                isReadonly: inputs.isReadonly,
+                                isReadonly,
                                 label: childLabel,
                                 placeholder: field.placeholder,
                                 rows: field.rows,
@@ -578,7 +579,7 @@ export const ViraForm = defineViraElement<
                                 allowedInputs: /\d/,
                                 hasError: field.hasError,
                                 icon: field.icon,
-                                isReadonly: inputs.isReadonly,
+                                isReadonly,
                                 label: childLabel,
                                 placeholder: field.placeholder,
                                 showClearButton: inputs.showClearButtons,
@@ -634,7 +635,7 @@ export const ViraForm = defineViraElement<
                                 showTimeOnly: field.showTimeOnly,
                                 isDisabled,
                                 hasError: field.hasError,
-                                isReadonly: inputs.isReadonly,
+                                isReadonly,
                                 label: childLabel,
                             })}
                                 ${field.testId ? testId(field.testId) : nothing}
@@ -663,7 +664,7 @@ export const ViraForm = defineViraElement<
                                 disabled: isDisabled,
                                 hasError: field.hasError,
                                 icon: field.icon,
-                                isReadonly: inputs.isReadonly,
+                                isReadonly,
                                 label: childLabel,
                                 placeholder: field.placeholder,
                                 showClearButton: inputs.showClearButtons,

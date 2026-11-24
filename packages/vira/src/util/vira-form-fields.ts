@@ -64,6 +64,13 @@ export type CommonViraFormFields = {
      * @default false
      */
     isDisabled: boolean;
+    /**
+     * Same as `ViraForm`'s `isReadonly` input but for this field alone: inputs, selects, and text
+     * areas show their value as plain text, and checkboxes render disabled.
+     *
+     * @default false
+     */
+    isReadonly: boolean;
 }>;
 
 /**

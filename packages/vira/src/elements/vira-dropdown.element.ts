@@ -14,6 +14,7 @@ import {
     listen,
     nothing,
     testId,
+    unsafeCSS,
 } from 'element-vir';
 import {type ViraIconSvg} from '../icons/icon-svg.js';
 import {internalLucideIcons} from '../icons/internal-lucide-icons.js';
@@ -219,6 +220,16 @@ export const ViraDropdown = defineViraElement<
                 cursor: text;
             }
 
+            /** Hovering doesn't focus menu items while typing (see init), so highlight here. */
+            ${ViraPopoverTrigger}:has(.search-input:focus)
+                ${ViraMenuItem}.${unsafeCSS(
+                ViraMenuItem.hostClasses['vira-menu-item-enabled'],
+            )}.${unsafeCSS(
+                ViraMenuItem.hostClasses['vira-menu-item-default-styles'],
+            )}:hover:not(:active) {
+                background-color: ${viraFormCssVars['vira-form-selection-hover-color'].value};
+            }
+
             .dropdown-trigger:has(.search-input:focus-visible:not([disabled])) {
                 position: relative;
 
@@ -395,7 +406,60 @@ export const ViraDropdown = defineViraElement<
             searchText: '',
             navController: undefined as undefined | NavController,
             popoverManager: undefined as undefined | PopoverManager,
+            removeHoverFocusBlockers: undefined as undefined | (() => void),
         };
+    },
+    init({host, state, updateState}) {
+        state.removeHoverFocusBlockers?.();
+
+        /**
+         * Menu items focus themselves on hover (both in `ViraMenuItem` and in device-navigation's
+         * `nav` directive) and blur on mouse leave, which moves focus out of the search input and
+         * hides its text cursor. While the search input is focused, this stops those hover events
+         * before they reach the menu items (capture phase on the shadow root runs first) and keeps
+         * mouse presses from focusing them.
+         */
+        function blockHoverFocus(event: Event) {
+            if (
+                !host.shadowRoot.activeElement?.classList.contains('search-input') ||
+                !event.composedPath().some((target) => target instanceof ViraMenuItem)
+            ) {
+                return;
+            } else if (event.type === 'mousedown') {
+                event.preventDefault();
+            } else {
+                event.stopPropagation();
+            }
+        }
+
+        const blockedEvents = [
+            'mouseenter',
+            'mousemove',
+            'mouseleave',
+            'mousedown',
+        ] as const;
+
+        blockedEvents.forEach((eventName) => {
+            host.shadowRoot.addEventListener(eventName, blockHoverFocus, {
+                capture: true,
+            });
+        });
+
+        updateState({
+            removeHoverFocusBlockers() {
+                blockedEvents.forEach((eventName) => {
+                    host.shadowRoot.removeEventListener(eventName, blockHoverFocus, {
+                        capture: true,
+                    });
+                });
+            },
+        });
+    },
+    cleanup({state, updateState}) {
+        state.removeHoverFocusBlockers?.();
+        updateState({
+            removeHoverFocusBlockers: undefined,
+        });
     },
     render({state, inputs, dispatch, events, updateState, testIds, host}) {
         const flatOptions = inputs.options.flatMap((entry) => {

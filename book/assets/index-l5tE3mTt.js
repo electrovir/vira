@@ -21452,20 +21452,24 @@ var defineViraElement = wrapDefineElement({ assertInputs(inputs) {
 } });
 // ../vira/src/elements/popover/vira-tooltip.element.ts
 /**
-* Centered with insets instead of `position-area`, because browsers shift a centered
+* Centered with insets instead of `justify-self: anchor-center`, because browsers shift a centered
 * `position-area` box back onto the screen rather than moving on to the next
 * `position-try-fallbacks` entry. These insets leave a space that is centered on the anchor and as
 * wide as possible, and `unsafe` stops the browser from shifting the tooltip, so a tooltip wider
 * than that space overflows it and moves on to an aligned fallback. Each `anchor(center)` is
 * measured from the side its inset is on, so the same formula works for `left` and `right`.
+*
+* The vertical position still comes from `position-area` rather than `bottom: anchor(top)`: Safari
+* 27 can resolve that `anchor()` to a spot well below the anchor while `position-try-fallbacks` is
+* set, leaving the tooltip far from its anchor.
 */
 var centeredStyles = css`
-    position-area: none;
-    top: 0;
-    bottom: anchor(top);
+    position-area: block-start span-all;
+    top: auto;
+    bottom: auto;
     left: max(0px, 2 * anchor(center) - 100%);
     right: max(0px, 2 * anchor(center) - 100%);
-    align-self: end;
+    align-self: normal;
     justify-self: unsafe center;
 `;
 /** `unsafe` for the same reason as {@link centeredStyles}. */
@@ -23736,35 +23740,9 @@ var noNativeFormStyles = css`
     text-decoration: inherit;
     -webkit-tap-highlight-color: transparent;
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/a-arrow-down.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var AArrowDown = `
-<svg
-  class="lucide lucide-a-arrow-down"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m14 12 4 4 4-4" />
-  <path d="M18 16V7" />
-  <path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" />
-  <path d="M3.304 13h6.392" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/a-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23788,9 +23766,35 @@ var AArrowUp = `
   <path d="M3.304 13h6.392" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/a-arrow-down.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var AArrowDown = `
+<svg
+  class="lucide lucide-a-arrow-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m14 12 4 4 4-4" />
+  <path d="M18 16V7" />
+  <path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" />
+  <path d="M3.304 13h6.392" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/a-large-small.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23816,7 +23820,7 @@ var ALargeSmall = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/accessibility.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23843,7 +23847,7 @@ var Accessibility = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/activity.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23866,7 +23870,7 @@ var Activity = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ad.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23892,7 +23896,7 @@ var Ad = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/air-vent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23916,33 +23920,9 @@ var AirVent = `
   <path d="M6.6 15.572A2 2 0 1 0 10 17v-5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/airplay.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Airplay = `
-<svg
-  class="lucide lucide-airplay"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
-  <path d="m12 15 5 6H7Z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-clock-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23968,9 +23948,33 @@ var AlarmClockCheck = `
   <path d="m9 13 2 2 4-4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/airplay.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Airplay = `
+<svg
+  class="lucide lucide-airplay"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
+  <path d="m12 15 5 6H7Z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-clock-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -23998,7 +24002,7 @@ var AlarmClockMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-clock-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24026,7 +24030,7 @@ var AlarmClockOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-clock-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24055,7 +24059,7 @@ var AlarmClockPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24083,7 +24087,7 @@ var AlarmClock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/alarm-smoke.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24110,7 +24114,7 @@ var AlarmSmoke = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-center-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24137,7 +24141,7 @@ var AlignCenterHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-center-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24164,7 +24168,7 @@ var AlignCenterVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-end-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24189,7 +24193,7 @@ var AlignEndHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-end-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24214,7 +24218,7 @@ var AlignEndVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-distribute-center.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24242,7 +24246,7 @@ var AlignHorizontalDistributeCenter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-distribute-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24268,7 +24272,7 @@ var AlignHorizontalDistributeEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-distribute-start.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24294,7 +24298,7 @@ var AlignHorizontalDistributeStart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-justify-center.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24319,7 +24323,7 @@ var AlignHorizontalJustifyCenter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-justify-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24344,7 +24348,7 @@ var AlignHorizontalJustifyEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-justify-start.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24369,7 +24373,7 @@ var AlignHorizontalJustifyStart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-space-around.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24392,9 +24396,34 @@ var AlignHorizontalSpaceAround = `
   <path d="M20 22V2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/align-start-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var AlignStartHorizontal = `
+<svg
+  class="lucide lucide-align-start-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="6" height="16" x="4" y="6" rx="2" />
+  <rect width="6" height="9" x="14" y="6" rx="2" />
+  <path d="M22 2H2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/align-horizontal-space-between.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24420,7 +24449,7 @@ var AlignHorizontalSpaceBetween = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-start-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24443,34 +24472,9 @@ var AlignStartVertical = `
   <path d="M2 2v20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/align-start-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var AlignStartHorizontal = `
-<svg
-  class="lucide lucide-align-start-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="6" height="16" x="4" y="6" rx="2" />
-  <rect width="6" height="9" x="14" y="6" rx="2" />
-  <path d="M22 2H2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-distribute-center.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24498,7 +24502,7 @@ var AlignVerticalDistributeCenter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-distribute-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24524,7 +24528,7 @@ var AlignVerticalDistributeEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-distribute-start.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24550,7 +24554,7 @@ var AlignVerticalDistributeStart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-justify-center.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24575,7 +24579,7 @@ var AlignVerticalJustifyCenter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-justify-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24600,7 +24604,7 @@ var AlignVerticalJustifyEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-justify-start.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24625,7 +24629,7 @@ var AlignVerticalJustifyStart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-space-around.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24650,7 +24654,7 @@ var AlignVerticalSpaceAround = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/align-vertical-space-between.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24676,7 +24680,7 @@ var AlignVerticalSpaceBetween = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ambulance.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24705,7 +24709,7 @@ var Ambulance = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ampersand.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24729,7 +24733,7 @@ var Ampersand = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ampersands.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24753,7 +24757,7 @@ var Ampersands = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/amphora.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24781,7 +24785,7 @@ var Amphora = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/anchor.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24805,9 +24809,33 @@ var Anchor = `
   <circle cx="12" cy="4" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/angle.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Angle = `
+<svg
+  class="lucide lucide-angle"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M3 11a10 10 0 0 1 10 10" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/antenna.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24835,7 +24863,7 @@ var Antenna = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/anvil.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24862,7 +24890,7 @@ var Anvil = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/aperture.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24889,33 +24917,9 @@ var Aperture = `
   <path d="m16.62 12-5.74 9.94" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/angle.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Angle = `
-<svg
-  class="lucide lucide-angle"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-  <path d="M3 11a10 10 0 0 1 10 10" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/app-window-mac.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24939,33 +24943,9 @@ var AppWindowMac = `
   <path d="M14 8h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/apple.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Apple = `
-<svg
-  class="lucide lucide-apple"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
-  <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/app-window.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -24989,16 +24969,16 @@ var AppWindow = `
   <path d="M6 4v4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/archive-arrow-up.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/apple.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var ArchiveArrowUp = `
+var Apple = `
 <svg
-  class="lucide lucide-archive-arrow-up"
+  class="lucide lucide-apple"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -25009,16 +24989,13 @@ var ArchiveArrowUp = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <rect width="20" height="5" x="2" y="3" rx="1" />
-  <path d="M4 8v11a2 2 0 0 0 2 2h2" />
-  <path d="M20 8v11a2 2 0 0 1-2 2h-2" />
-  <path d="m9 15 3-3 3 3" />
-  <path d="M12 12v9" />
+  <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+  <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/archive-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25043,9 +25020,36 @@ var ArchiveArrowDown = `
   <path d="M12 12v9" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/archive-arrow-up.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArchiveArrowUp = `
+<svg
+  class="lucide lucide-archive-arrow-up"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="5" x="2" y="3" rx="1" />
+  <path d="M4 8v11a2 2 0 0 0 2 2h2" />
+  <path d="M20 8v11a2 2 0 0 1-2 2h-2" />
+  <path d="m9 15 3-3 3 3" />
+  <path d="M12 12v9" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/archive-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25071,7 +25075,7 @@ var ArchiveX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/archive.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25096,7 +25100,7 @@ var Archive = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/armchair.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25122,7 +25126,7 @@ var Armchair = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/armenian-dram.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25147,7 +25151,7 @@ var ArmenianDram = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-down-dash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25171,7 +25175,7 @@ var ArrowBigDownDash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25194,7 +25198,7 @@ var ArrowBigDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-left-dash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25218,7 +25222,7 @@ var ArrowBigLeftDash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25239,32 +25243,9 @@ var ArrowBigLeft = `
   <path d="M10.793 19.793a.707.707 0 0 0 1.207-.5V16a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-6a1 1 0 0 1-1-1V4.707a.707.707 0 0 0-1.207-.5l-6.94 6.94a1.207 1.207 0 0 0 0 1.707z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/arrow-big-right.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ArrowBigRight = `
-<svg
-  class="lucide lucide-arrow-big-right"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.207 19.793a.707.707 0 0 1-1.207-.5V16a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1V4.707a.707.707 0 0 1 1.207-.5l6.94 6.94a1.207 1.207 0 0 1 0 1.707z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-right-dash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25286,16 +25267,16 @@ var ArrowBigRightDash = `
   <path d="M4 9v6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/arrow-big-up-dash.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/arrow-big-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var ArrowBigUpDash = `
+var ArrowBigRight = `
 <svg
-  class="lucide lucide-arrow-big-up-dash"
+  class="lucide lucide-arrow-big-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -25306,13 +25287,12 @@ var ArrowBigUpDash = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M14 16a1 1 0 0 0 1-1v-2a1 1 0 0 1 1-1h3.293a.707.707 0 0 0 .5-1.207l-6.939-6.939a1.207 1.207 0 0 0-1.708 0l-6.94 6.94a.707.707 0 0 0 .5 1.206H8a1 1 0 0 1 1 1v2a1 1 0 0 0 1 1z" />
-  <path d="M9 20h6" />
+  <path d="M13.207 19.793a.707.707 0 0 1-1.207-.5V16a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1V4.707a.707.707 0 0 1 1.207-.5l6.94 6.94a1.207 1.207 0 0 1 0 1.707z" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-big-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25335,7 +25315,7 @@ var ArrowBigUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-0-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25362,7 +25342,7 @@ var ArrowDown01 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-1-0.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25387,9 +25367,33 @@ var ArrowDown10 = `
   <rect x="15" y="14" width="4" height="6" ry="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/arrow-big-up-dash.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowBigUpDash = `
+<svg
+  class="lucide lucide-arrow-big-up-dash"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 16a1 1 0 0 0 1-1v-2a1 1 0 0 1 1-1h3.293a.707.707 0 0 0 .5-1.207l-6.939-6.939a1.207 1.207 0 0 0-1.708 0l-6.94 6.94a.707.707 0 0 0 .5 1.206H8a1 1 0 0 1 1 1v2a1 1 0 0 0 1 1z" />
+  <path d="M9 20h6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-a-z.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25416,7 +25420,7 @@ var ArrowDownAZ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-from-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25441,7 +25445,7 @@ var ArrowDownFromLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25465,7 +25469,7 @@ var ArrowDownLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-narrow-wide.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25492,7 +25496,7 @@ var ArrowDownNarrowWide = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25516,7 +25520,7 @@ var ArrowDownRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-to-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25541,7 +25545,7 @@ var ArrowDownToDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-to-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25566,7 +25570,7 @@ var ArrowDownToLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25592,7 +25596,7 @@ var ArrowDownUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-wide-narrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25619,7 +25623,7 @@ var ArrowDownWideNarrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down-z-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25646,7 +25650,7 @@ var ArrowDownZA = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25670,7 +25674,7 @@ var ArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-left-from-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25695,7 +25699,7 @@ var ArrowLeftFromLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-left-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25721,7 +25725,7 @@ var ArrowLeftRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-left-to-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25746,7 +25750,7 @@ var ArrowLeftToLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25770,7 +25774,7 @@ var ArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-right-from-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25795,7 +25799,7 @@ var ArrowRightFromLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-right-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25821,7 +25825,7 @@ var ArrowRightLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-right-to-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25846,7 +25850,7 @@ var ArrowRightToLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25870,7 +25874,7 @@ var ArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-0-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25897,7 +25901,7 @@ var ArrowUp01 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-1-0.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25924,7 +25928,7 @@ var ArrowUp10 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-a-z.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25951,7 +25955,7 @@ var ArrowUpAZ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -25977,7 +25981,7 @@ var ArrowUpDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-from-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26002,7 +26006,7 @@ var ArrowUpFromDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-from-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26027,7 +26031,7 @@ var ArrowUpFromLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26051,7 +26055,7 @@ var ArrowUpLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-narrow-wide.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26078,7 +26082,7 @@ var ArrowUpNarrowWide = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26102,7 +26106,7 @@ var ArrowUpRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-to-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26127,7 +26131,7 @@ var ArrowUpToLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-wide-narrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26154,7 +26158,7 @@ var ArrowUpWideNarrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up-z-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26181,7 +26185,7 @@ var ArrowUpZA = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26203,9 +26207,210 @@ var ArrowUp = `
   <path d="M12 19V5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-from-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsFromAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-arrows-from-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M12 16v6" />
+  <path d="M12 2v6" />
+  <path d="M16 12h-2" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+  <path d="m9 19 3 3 3-3" />
+  <path d="m9 5 3-3 3 3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-from-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsFromAxisDashedVertical = `
+<svg
+  class="lucide lucide-arrows-from-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 10V8" />
+  <path d="M12 16v-2" />
+  <path d="M12 22v-2" />
+  <path d="M12 4V2" />
+  <path d="m19 15 3-3-3-3" />
+  <path d="M22 12h-6" />
+  <path d="m5 15-3-3 3-3" />
+  <path d="M8 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-from-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsFromAxisHorizontal = `
+<svg
+  class="lucide lucide-arrows-from-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v6" />
+  <path d="M12 2v6" />
+  <path d="m15 19-3 3-3-3" />
+  <path d="m15 5-3-3-3 3" />
+  <path d="M22 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-from-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsFromAxisVertical = `
+<svg
+  class="lucide lucide-arrows-from-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 22V2" />
+  <path d="m19 15 3-3-3-3" />
+  <path d="M22 12h-6" />
+  <path d="m5 15-3-3 3-3" />
+  <path d="M8 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-to-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsToAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-arrows-to-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M12 22v-6" />
+  <path d="M12 8V2" />
+  <path d="m15 19-3-3-3 3" />
+  <path d="m15 5-3 3-3-3" />
+  <path d="M16 12h-2" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-to-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsToAxisDashedVertical = `
+<svg
+  class="lucide lucide-arrows-to-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 10V8" />
+  <path d="M12 16v-2" />
+  <path d="M12 22v-2" />
+  <path d="M12 4V2" />
+  <path d="M16 12h6" />
+  <path d="m19 15-3-3 3-3" />
+  <path d="M2 12h6" />
+  <path d="m5 15 3-3-3-3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-to-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsToAxisHorizontal = `
+<svg
+  class="lucide lucide-arrows-to-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 22v-6" />
+  <path d="M12 8V2" />
+  <path d="m15 19-3-3-3 3" />
+  <path d="m15 5-3 3-3-3" />
+  <path d="M22 12H2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/arrows-up-from-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26232,7 +26437,7 @@ var ArrowsUpFromLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/asterisk.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26255,9 +26460,83 @@ var Asterisk = `
   <path d="m5.94 8.504 12.125 7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/arrows-to-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ArrowsToAxisVertical = `
+<svg
+  class="lucide lucide-arrows-to-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 22V2" />
+  <path d="M16 12h6" />
+  <path d="m19 15-3-3 3-3" />
+  <path d="M2 12h6" />
+  <path d="m5 15 3-3-3-3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/astroid.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Astroid = `
+<svg
+  class="lucide lucide-astroid"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12.983 21.186a1 1 0 0 1-1.966 0 10 10 0 0 0-8.203-8.203 1 1 0 0 1 0-1.966 10 10 0 0 0 8.203-8.203 1 1 0 0 1 1.966 0 10 10 0 0 0 8.203 8.203 1 1 0 0 1 0 1.966 10 10 0 0 0-8.203 8.203" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/at-sign.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var AtSign = `
+<svg
+  class="lucide lucide-at-sign"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/asterism.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26286,56 +26565,9 @@ var Asterism = `
   <path d="m8.5 8 7-4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/astroid.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Astroid = `
-<svg
-  class="lucide lucide-astroid"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12.983 21.186a1 1 0 0 1-1.966 0 10 10 0 0 0-8.203-8.203 1 1 0 0 1 0-1.966 10 10 0 0 0 8.203-8.203 1 1 0 0 1 1.966 0 10 10 0 0 0 8.203 8.203 1 1 0 0 1 0 1.966 10 10 0 0 0-8.203 8.203" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/at-sign.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var AtSign = `
-<svg
-  class="lucide lucide-at-sign"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="4" />
-  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/atom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26360,7 +26592,7 @@ var Atom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/audio-lines-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26391,7 +26623,7 @@ var AudioLinesOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/audio-lines-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26421,7 +26653,7 @@ var AudioLinesX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/audio-lines.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26449,7 +26681,7 @@ var AudioLines = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/audio-waveform.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26470,33 +26702,9 @@ var AudioWaveform = `
   <path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/avocado.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Avocado = `
-<svg
-  class="lucide lucide-avocado"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.465 3.464a5 5 0 017.07 0 5 5 0 010 7.072c-1.204 1.203-2.38 2.89-2.614 4.577A8 8 0 118.886 6.08c1.687-.235 3.375-1.41 4.579-2.615" />
-  <circle cx="10" cy="14" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/award.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26520,7 +26728,7 @@ var Award = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/axe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26542,9 +26750,33 @@ var Axe = `
   <path d="M15 15.5a.5.5 0 0 0 .5.5A6.5 6.5 0 0 0 22 9.5a.5.5 0 0 0-.5-.5h-1.672a2 2 0 0 1-1.414-.586l-5.062-5.062a1.205 1.205 0 0 0-1.704 0L9.352 5.648a1.205 1.205 0 0 0 0 1.704l5.062 5.062A2 2 0 0 1 15 13.828z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/avocado.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Avocado = `
+<svg
+  class="lucide lucide-avocado"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.465 3.464a5 5 0 017.07 0 5 5 0 010 7.072c-1.204 1.203-2.38 2.89-2.614 4.577A8 8 0 118.886 6.08c1.687-.235 3.375-1.41 4.579-2.615" />
+  <circle cx="10" cy="14" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/axis-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26570,7 +26802,7 @@ var Axis3d = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/azerbaijani-manat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26594,7 +26826,7 @@ var AzerbaijaniManat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/baby.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26620,7 +26852,7 @@ var Baby = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/backpack.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26647,7 +26879,7 @@ var Backpack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bacon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26671,7 +26903,7 @@ var Bacon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-cent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26696,7 +26928,7 @@ var BadgeCent = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26720,7 +26952,7 @@ var BadgeCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-dollar-sign.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26745,7 +26977,7 @@ var BadgeDollarSign = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-euro.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26770,7 +27002,7 @@ var BadgeEuro = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26795,7 +27027,7 @@ var BadgeExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-indian-rupee.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26821,7 +27053,7 @@ var BadgeIndianRupee = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-info.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26846,7 +27078,7 @@ var BadgeInfo = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-japanese-yen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26873,7 +27105,7 @@ var BadgeJapaneseYen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26897,7 +27129,7 @@ var BadgeMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26923,7 +27155,7 @@ var BadgePercent = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26948,7 +27180,7 @@ var BadgePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-pound-sterling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26974,7 +27206,7 @@ var BadgePoundSterling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -26999,7 +27231,7 @@ var BadgeQuestionMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-russian-ruble.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27024,7 +27256,7 @@ var BadgeRussianRuble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-swiss-franc.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27050,7 +27282,7 @@ var BadgeSwissFranc = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-turkish-lira.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27075,7 +27307,7 @@ var BadgeTurkishLira = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27100,7 +27332,7 @@ var BadgeX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/badge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27121,34 +27353,9 @@ var Badge = `
   <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/ball-wave.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BallWave = `
-<svg
-  class="lucide lucide-ball-wave"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 20c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
-  <path d="M7.757 13.243a2 6 45 1 0 8.486-8.486 2 6 45 1 0-8.486 8.486" />
-  <circle cx="12" cy="9" r="6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/baggage-claim.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27173,9 +27380,34 @@ var BaggageClaim = `
   <circle cx="9" cy="20" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/ball-wave.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BallWave = `
+<svg
+  class="lucide lucide-ball-wave"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 20c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+  <path d="M7.757 13.243a2 6 45 1 0 8.486-8.486 2 6 45 1 0-8.486 8.486" />
+  <circle cx="12" cy="9" r="6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/balloon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27200,7 +27432,7 @@ var Balloon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27224,7 +27456,7 @@ var Ban = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/banana.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27248,7 +27480,7 @@ var Banana = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bandage.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27275,9 +27507,33 @@ var Bandage = `
   <rect x="2" y="6" width="20" height="12" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/bangladeshi-taka.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BangladeshiTaka = `
+<svg
+  class="lucide lucide-bangladeshi-taka"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 5a2 2 0 0 1 4 0v12a4 4 0 0 0 8 0 2 2 0 0 0-4 0" />
+  <path d="M6 9h12" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/banknote-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27303,33 +27559,9 @@ var BanknoteArrowDown = `
   <circle cx="12" cy="12" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/bangladeshi-taka.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BangladeshiTaka = `
-<svg
-  class="lucide lucide-bangladeshi-taka"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 5a2 2 0 0 1 4 0v12a4 4 0 0 0 8 0 2 2 0 0 0-4 0" />
-  <path d="M6 9h12" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/banknote-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27357,7 +27589,7 @@ var BanknoteArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/banknote-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27384,7 +27616,7 @@ var BanknoteCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/banknote-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27412,7 +27644,7 @@ var BanknoteX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/banknote.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27437,7 +27669,7 @@ var Banknote = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/barcode.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27464,7 +27696,7 @@ var Barcode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/barrel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27491,7 +27723,7 @@ var Barrel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/baseline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27516,7 +27748,7 @@ var Baseline = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bath.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27543,7 +27775,7 @@ var Bath = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-charging.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27569,7 +27801,7 @@ var BatteryCharging = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27596,7 +27828,7 @@ var BatteryExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-full.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27623,7 +27855,7 @@ var BatteryFull = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-low.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27648,7 +27880,7 @@ var BatteryLow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-medium.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27674,7 +27906,7 @@ var BatteryMedium = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27701,7 +27933,7 @@ var BatteryPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/battery.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27725,7 +27957,7 @@ var Battery = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/beaker.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27750,7 +27982,7 @@ var Beaker = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bean-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27776,7 +28008,7 @@ var BeanOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bean.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27800,7 +28032,7 @@ var Bean = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bed-double.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27826,7 +28058,7 @@ var BedDouble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bed-single.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27851,7 +28083,7 @@ var BedSingle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27877,7 +28109,7 @@ var Bed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/beef-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27903,9 +28135,34 @@ var BeefOff = `
   <path d="M6.355 6.37a7 7 0 0 0-.075.23c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c3.356 0 6.993-1.267 9.85-3.151" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/beef.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Beef = `
+<svg
+  class="lucide lucide-beef"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16.4 13.7A6.5 6.5 0 1 0 6.28 6.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3" />
+  <path d="m18.5 6 1.754 3.5a6.48 6.48 0 0 1-1.854 8.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5" />
+  <circle cx="12.5" cy="8.5" r="2.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/beer-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27935,7 +28192,7 @@ var BeerOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/beer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -27960,34 +28217,9 @@ var Beer = `
   <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/beef.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Beef = `
-<svg
-  class="lucide lucide-beef"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16.4 13.7A6.5 6.5 0 1 0 6.28 6.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3" />
-  <path d="m18.5 6 1.754 3.5a6.48 6.48 0 0 1-1.854 8.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5" />
-  <circle cx="12.5" cy="8.5" r="2.5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/belarusian-ruble.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28011,7 +28243,7 @@ var BelarusianRuble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28037,7 +28269,7 @@ var BellCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28062,7 +28294,7 @@ var BellDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-electric.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28090,7 +28322,7 @@ var BellElectric = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28115,7 +28347,7 @@ var BellMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28141,7 +28373,7 @@ var BellOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28167,7 +28399,7 @@ var BellPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell-ring.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28193,7 +28425,7 @@ var BellRing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bell.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28217,7 +28449,7 @@ var Bell = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/between-horizontal-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28242,7 +28474,7 @@ var BetweenHorizontalEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/between-horizontal-start.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28265,34 +28497,9 @@ var BetweenHorizontalStart = `
   <rect width="13" height="7" x="8" y="14" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/between-vertical-start.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BetweenVerticalStart = `
-<svg
-  class="lucide lucide-between-vertical-start"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="7" height="13" x="3" y="8" rx="1" />
-  <path d="m15 2-3 3-3-3" />
-  <rect width="7" height="13" x="14" y="8" rx="1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/between-vertical-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28315,9 +28522,34 @@ var BetweenVerticalEnd = `
   <rect width="7" height="13" x="14" y="3" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/between-vertical-start.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BetweenVerticalStart = `
+<svg
+  class="lucide lucide-between-vertical-start"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="7" height="13" x="3" y="8" rx="1" />
+  <path d="m15 2-3 3-3-3" />
+  <rect width="7" height="13" x="14" y="8" rx="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/biceps-flexed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28342,7 +28574,7 @@ var BicepsFlexed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bike.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28368,7 +28600,7 @@ var Bike = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/binary.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28396,7 +28628,7 @@ var Binary = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/binoculars.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28424,7 +28656,7 @@ var Binoculars = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/biohazard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28456,7 +28688,7 @@ var Biohazard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bird.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28484,7 +28716,7 @@ var Bird = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/birdhouse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28512,7 +28744,7 @@ var Birdhouse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bitcoin.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28535,7 +28767,7 @@ var Bitcoin = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/blend.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28559,7 +28791,7 @@ var Blend = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/blender.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28587,7 +28819,7 @@ var Blender = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/blinds.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28616,7 +28848,7 @@ var Blinds = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/blocks.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28640,7 +28872,7 @@ var Blocks = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bluetooth-connected.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28665,7 +28897,7 @@ var BluetoothConnected = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bluetooth-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28690,7 +28922,7 @@ var BluetoothOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bluetooth-searching.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28715,7 +28947,7 @@ var BluetoothSearching = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bluetooth.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28738,7 +28970,7 @@ var Bluetooth = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bolt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28762,7 +28994,7 @@ var Bolt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bomb.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28787,7 +29019,7 @@ var Bomb = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bone-fracture.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28815,7 +29047,7 @@ var BoneFracture = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28838,7 +29070,7 @@ var Bone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28863,7 +29095,7 @@ var BookA = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-audio.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28889,7 +29121,7 @@ var BookAudio = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-bookmark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28913,7 +29145,7 @@ var BookBookmark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28937,7 +29169,7 @@ var BookCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-copy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28962,7 +29194,7 @@ var BookCopy = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -28995,7 +29227,7 @@ var BookDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29020,7 +29252,7 @@ var BookDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29043,58 +29275,9 @@ var BookExclamationPoint = `
   <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/book-heart.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BookHeart = `
-<svg
-  class="lucide lucide-book-heart"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-  <path d="M8.62 9.8A2.25 2.25 0 1 1 12 6.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/book-image.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BookImage = `
-<svg
-  class="lucide lucide-book-image"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17" />
-  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-  <circle cx="10" cy="8" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/book-headphones.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29118,9 +29301,58 @@ var BookHeadphones = `
   <circle cx="9" cy="12" r="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/book-heart.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BookHeart = `
+<svg
+  class="lucide lucide-book-heart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  <path d="M8.62 9.8A2.25 2.25 0 1 1 12 6.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/book-image.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BookImage = `
+<svg
+  class="lucide lucide-book-image"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17" />
+  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  <circle cx="10" cy="8" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/book-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29147,7 +29379,7 @@ var BookKey = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29173,7 +29405,7 @@ var BookLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29197,7 +29429,7 @@ var BookMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-open-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29222,7 +29454,7 @@ var BookOpenCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-open-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29250,7 +29482,7 @@ var BookOpenText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29274,7 +29506,7 @@ var BookOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29299,7 +29531,7 @@ var BookPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29325,7 +29557,7 @@ var BookSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29350,7 +29582,7 @@ var BookText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-type.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29376,7 +29608,7 @@ var BookType = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-up-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29403,7 +29635,7 @@ var BookUp2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29428,7 +29660,7 @@ var BookUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-user.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29453,7 +29685,7 @@ var BookUser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29478,7 +29710,7 @@ var BookX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/book.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29501,7 +29733,7 @@ var Book = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29525,7 +29757,7 @@ var BookmarkCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29549,7 +29781,7 @@ var BookmarkMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29574,7 +29806,7 @@ var BookmarkOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29599,7 +29831,7 @@ var BookmarkPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29624,7 +29856,7 @@ var BookmarkX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bookmark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29647,7 +29879,7 @@ var Bookmark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/boom-box.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29674,9 +29906,37 @@ var BoomBox = `
   <circle cx="16" cy="15" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/bot-check.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BotCheck = `
+<svg
+  class="lucide lucide-bot-check"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 8V4H8" />
+  <path d="M15 13v2" />
+  <path d="m16 19 2 2 4-4" />
+  <path d="M2 14h2" />
+  <path d="M20 13.5V10a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h6" />
+  <path d="M9 13v2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/bot-message-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29702,9 +29962,37 @@ var BotMessageSquare = `
   <path d="M9 11v2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/bot-minus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BotMinus = `
+<svg
+  class="lucide lucide-bot-minus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 8V4H8" />
+  <path d="M15 13v2" />
+  <path d="M2 14h2" />
+  <path d="M20 15v-5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h6" />
+  <path d="M22 19h-6" />
+  <path d="M9 13v2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/bot-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29731,9 +30019,67 @@ var BotOff = `
   <path d="M9.67 4H12v2.33" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/bot-plus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BotPlus = `
+<svg
+  class="lucide lucide-bot-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 8V4H8" />
+  <path d="M15 13v2" />
+  <path d="M19 16v6" />
+  <path d="M2 14h2" />
+  <path d="M20 12v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h6" />
+  <path d="M22 19h-6" />
+  <path d="M9 13v2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/bot-x.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BotX = `
+<svg
+  class="lucide lucide-bot-x"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 8V4H8" />
+  <path d="M15 13v1.5" />
+  <path d="m18 17 4 4" />
+  <path d="M2 14h2" />
+  <path d="M20 13.5V10a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8" />
+  <path d="m22 17-4 4" />
+  <path d="M9 13v2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/bot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29761,7 +30107,7 @@ var Bot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bottle-wine.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29785,7 +30131,7 @@ var BottleWine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bow-arrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29810,9 +30156,42 @@ var BowArrow = `
   <path d="M9.707 14.293 21 3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/box-dashed.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BoxDashed = `
+<svg
+  class="lucide lucide-box-dashed"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 12v3" />
+  <path d="M12 22v-3" />
+  <path d="m18.268 18.732 1.732-1a2 2 0 001-1.733V14" />
+  <path d="M20.7 7 18 8.552" />
+  <path d="M21 10V8a2 2 0 00-1-1.73l-1.732-1" />
+  <path d="M3 10V8a2 2 0 011-1.73l1.732-1" />
+  <path d="M3.3 7 6 8.552" />
+  <path d="m5.732 18.732-1.732-1A2 2 0 013 16v-2" />
+  <path d="m9.268 20.732 1.732 1a2 2 0 002-.002l1.732-.998" />
+  <path d="m9.268 3.27 1.732-1a2 2 0 012 0l1.732 1" />
+  <path d="m9.468 10.54 2.533 1.462 2.533-1.463" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/box.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29837,7 +30216,7 @@ var Box = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/boxes-linked.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29866,7 +30245,7 @@ var BoxesLinked = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/boxes.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29900,7 +30279,7 @@ var Boxes = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/braces.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29924,7 +30303,7 @@ var Braces = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brackets.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29948,7 +30327,7 @@ var Brackets = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brain-circuit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -29982,7 +30361,7 @@ var BrainCircuit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brain-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30019,7 +30398,7 @@ var BrainCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brain-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30051,7 +30430,7 @@ var BrainOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brain.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30079,9 +30458,38 @@ var Brain = `
   <path d="M6.004 5.125a4 4 0 00-2.526 5.77" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/brick-wall-fire.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var BrickWallFire = `
+<svg
+  class="lucide lucide-brick-wall-fire"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 3v2.107" />
+  <path d="M17 9c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 22 17a5 5 0 0 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C13 11.5 16 9 17 9" />
+  <path d="M21 8.274V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.938" />
+  <path d="M3 15h5.253" />
+  <path d="M3 9h8.228" />
+  <path d="M8 15v6" />
+  <path d="M8 3v6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/brick-wall-shield.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30109,38 +30517,9 @@ var BrickWallShield = `
   <path d="M8 3v6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/brick-wall-fire.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var BrickWallFire = `
-<svg
-  class="lucide lucide-brick-wall-fire"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16 3v2.107" />
-  <path d="M17 9c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 22 17a5 5 0 0 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C13 11.5 16 9 17 9" />
-  <path d="M21 8.274V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.938" />
-  <path d="M3 15h5.253" />
-  <path d="M3 9h8.228" />
-  <path d="M8 15v6" />
-  <path d="M8 3v6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/brick-wall.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30170,7 +30549,7 @@ var BrickWall = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bridge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30198,7 +30577,7 @@ var Bridge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/briefcase-business.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30224,7 +30603,7 @@ var BriefcaseBusiness = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/briefcase-conveyor-belt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30253,7 +30632,7 @@ var BriefcaseConveyorBelt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/briefcase-medical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30281,7 +30660,7 @@ var BriefcaseMedical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/briefcase-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30307,7 +30686,7 @@ var BriefcasePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/briefcase.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30331,7 +30710,7 @@ var Briefcase = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bring-to-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30356,7 +30735,7 @@ var BringToFront = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/broccoli.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30382,7 +30761,7 @@ var Broccoli = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/broom-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30414,7 +30793,7 @@ var BroomSparkles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/broom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30440,7 +30819,7 @@ var Broom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brush-cleaning.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30466,7 +30845,7 @@ var BrushCleaning = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/brush.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30491,7 +30870,7 @@ var Brush = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bubbles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30517,7 +30896,7 @@ var Bubbles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bug-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30551,7 +30930,7 @@ var BugOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bug-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30582,7 +30961,7 @@ var BugPlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bug.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30615,7 +30994,7 @@ var Bug = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/building-complex-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30645,7 +31024,7 @@ var BuildingComplexPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/building-complex.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30672,7 +31051,7 @@ var BuildingComplex = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/building.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30705,7 +31084,7 @@ var Building = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bus-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30736,7 +31115,7 @@ var BusFront = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/bus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30763,38 +31142,9 @@ var Bus = `
   <circle cx="16" cy="18" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cable.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Cable = `
-<svg
-  class="lucide lucide-cable"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z" />
-  <path d="M17 21v-2" />
-  <path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10" />
-  <path d="M21 21v-2" />
-  <path d="M3 5V3" />
-  <path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z" />
-  <path d="M7 5V3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cable-car.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30822,9 +31172,38 @@ var CableCar = `
   <path d="M4 17h16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cable.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Cable = `
+<svg
+  class="lucide lucide-cable"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z" />
+  <path d="M17 21v-2" />
+  <path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10" />
+  <path d="M21 21v-2" />
+  <path d="M3 5V3" />
+  <path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z" />
+  <path d="M7 5V3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/cake-slice.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30850,7 +31229,7 @@ var CakeSlice = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cake.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30881,7 +31260,7 @@ var Cake = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calculator.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30913,7 +31292,7 @@ var Calculator = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30940,7 +31319,7 @@ var Calendar1 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30968,7 +31347,7 @@ var CalendarArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -30996,7 +31375,7 @@ var CalendarArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31024,7 +31403,7 @@ var CalendarArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31052,7 +31431,7 @@ var CalendarArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-check-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31085,7 +31464,7 @@ var CalendarCheck2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31112,7 +31491,7 @@ var CalendarCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-chevrons-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31140,7 +31519,7 @@ var CalendarChevronsLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-chevrons-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31168,7 +31547,7 @@ var CalendarChevronsRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31186,17 +31565,17 @@ var CalendarClock = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M16 14v2.2l1.6 1" />
   <path d="M16 2v3" />
-  <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" />
-  <path d="M3 9h5.859" />
+  <path d="M17 15.5v1.7l1 .625" />
+  <path d="M21 8.936V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h3.935" />
+  <path d="M3 9h9.873" />
   <path d="M8 2v3" />
-  <circle cx="16" cy="16" r="6" />
+  <circle cx="17" cy="17" r="5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31231,7 +31610,7 @@ var CalendarCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-days.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31263,7 +31642,7 @@ var CalendarDays = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-fold.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31289,7 +31668,7 @@ var CalendarFold = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31316,7 +31695,7 @@ var CalendarHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-minus-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31343,7 +31722,7 @@ var CalendarMinus2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31370,7 +31749,7 @@ var CalendarMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31398,7 +31777,7 @@ var CalendarOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-plus-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31426,7 +31805,7 @@ var CalendarPlus2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31454,7 +31833,7 @@ var CalendarPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-range.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31484,7 +31863,7 @@ var CalendarRange = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31512,7 +31891,7 @@ var CalendarSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-sync.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31542,7 +31921,7 @@ var CalendarSync = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-x-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31570,7 +31949,7 @@ var CalendarX2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31598,7 +31977,7 @@ var CalendarX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendar.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31624,7 +32003,7 @@ var Calendar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/calendars.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31652,7 +32031,7 @@ var Calendars = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/camera-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31678,7 +32057,7 @@ var CameraOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/camera.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31702,7 +32081,7 @@ var Camera = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/can-soda.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31730,7 +32109,7 @@ var CanSoda = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/can.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31756,7 +32135,7 @@ var Can = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/candy-cane.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31783,7 +32162,7 @@ var CandyCane = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/candy-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31812,7 +32191,7 @@ var CandyOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/candy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31839,7 +32218,7 @@ var Candy = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cannabis-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31867,7 +32246,7 @@ var CannabisOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cannabis.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31889,9 +32268,33 @@ var Cannabis = `
   <path d="M7 12c-1.5 0-4.5 1.5-5 3 3.5 1.5 6 1 6 1-1.5 1.5-2 3.5-2 5 2.5 0 4.5-1.5 6-3 1.5 1.5 3.5 3 6 3 0-1.5-.5-3.5-2-5 0 0 2.5.5 6-1-.5-1.5-3.5-3-5-3 1.5-1 4-4 4-6-2.5 0-5.5 1.5-7 3 0-2.5-.5-5-2-7-1.5 2-2 4.5-2 7-1.5-1.5-4.5-3-7-3 0 2 2.5 5 4 6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cap.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Cap = `
+<svg
+  class="lucide lucide-cap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.04 4.017a12 12 0 00-2.631 11.101" />
+  <path d="M5 16c3.298 0 6-3 10-3a8 8 0 016.81 3.799 1.33 1.33 0 01.19.701.5.5 0 01-.5.5c-.732.001-2.04-1.004-3.5-1-3.005.008-5.197 2.982-8 3-2.761 0-5-1.79-5-4-1.5 0-2.543-.664-2.713-1.3A8.5 8.5 0 1119 12.5a8.6 8.6 0 01-.131 1.496" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/captions-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31919,7 +32322,7 @@ var CaptionsOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/captions.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31943,7 +32346,7 @@ var Captions = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/car-battery.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31971,7 +32374,7 @@ var CarBattery = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/car-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -31997,35 +32400,9 @@ var CarFront = `
   <path d="M19 18v2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/car.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Car = `
-<svg
-  class="lucide lucide-car"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
-  <circle cx="7" cy="17" r="2" />
-  <path d="M9 17h6" />
-  <circle cx="17" cy="17" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/car-taxi-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32052,9 +32429,35 @@ var CarTaxiFront = `
   <path d="M19 18v2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/car.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Car = `
+<svg
+  class="lucide lucide-car"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+  <circle cx="7" cy="17" r="2" />
+  <path d="M9 17h6" />
+  <circle cx="17" cy="17" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/caravan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32080,7 +32483,7 @@ var Caravan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/card-sim.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32104,9 +32507,221 @@ var CardSim = `
   <rect x="8" y="10" width="8" height="8" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-from-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsFromAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-carets-from-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M16 12h-2" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+  <path d="M7.298 17.712A1 1 0 0 1 8 16h8a1 1 0 0 1 .703 1.712l-3.991 3.99a1 1 0 0 1-1.424.001z" />
+  <path d="M7.298 6.288A1 1 0 0 0 8 8h8a1 1 0 0 0 .703-1.712l-3.991-3.99a1 1 0 0 0-1.424-.001z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-from-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsFromAxisDashedVertical = `
+<svg
+  class="lucide lucide-carets-from-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v2" />
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M12 8v2" />
+  <path d="M17.712 16.703A1 1 0 0 1 15.999 16V8a1 1 0 0 1 1.713-.703l3.99 3.991a1 1 0 0 1 .001 1.424z" />
+  <path d="M6.288 16.703A1 1 0 0 0 8.001 16V8a1 1 0 0 0-1.713-.703l-3.99 3.991a1 1 0 0 0-.001 1.424z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-from-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsFromAxisHorizontal = `
+<svg
+  class="lucide lucide-carets-from-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16.703 6.288A1 1 0 0 1 16 8H8a1 1 0 0 1-.703-1.712l3.991-3.99a1 1 0 0 1 1.425-.001z" />
+  <path d="M22 12H2" />
+  <path d="M7.298 17.712A1 1 0 0 1 8 16h8a1 1 0 0 1 .703 1.712l-3.991 3.99a1 1 0 0 1-1.424.001z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-from-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsFromAxisVertical = `
+<svg
+  class="lucide lucide-carets-from-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="M17.712 16.703A1 1 0 0 1 15.999 16V8a1 1 0 0 1 1.713-.703l3.99 3.991a1 1 0 0 1 .001 1.424z" />
+  <path d="M6.288 16.703A1 1 0 0 0 8.001 16V8a1 1 0 0 0-1.713-.703l-3.99 3.991a1 1 0 0 0-.001 1.424z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-to-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsToAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-carets-to-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M16 12h-2" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+  <path d="M7.298 20.288A1 1 0 0 0 8 22h8a1 1 0 0 0 .703-1.712l-3.991-3.99a1 1 0 0 0-1.424-.001z" />
+  <path d="M7.298 3.712A1 1 0 0 1 8 2h8a1 1 0 0 1 .703 1.712l-3.991 3.99a1 1 0 0 1-1.424.001z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-to-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsToAxisDashedVertical = `
+<svg
+  class="lucide lucide-carets-to-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v2" />
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M12 8v2" />
+  <path d="M20.288 16.703A1 1 0 0 0 22 16V8a1 1 0 0 0-1.712-.703l-3.99 3.991a1 1 0 0 0-.001 1.424z" />
+  <path d="M3.712 16.703A1 1 0 0 1 2 16V8a1 1 0 0 1 1.712-.703l3.99 3.991a1 1 0 0 1 .001 1.424z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-to-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsToAxisHorizontal = `
+<svg
+  class="lucide lucide-carets-to-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 12H2" />
+  <path d="M7.298 20.288A1 1 0 0 0 8 22h8a1 1 0 0 0 .703-1.712l-3.991-3.99a1 1 0 0 0-1.424-.001z" />
+  <path d="M7.298 3.712A1 1 0 0 1 8 2h8a1 1 0 0 1 .703 1.712l-3.991 3.99a1 1 0 0 1-1.424.001z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/carets-to-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CaretsToAxisVertical = `
+<svg
+  class="lucide lucide-carets-to-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="M20.288 16.703A1 1 0 0 0 22 16V8a1 1 0 0 0-1.712-.703l-3.99 3.991a1 1 0 0 0-.001 1.424z" />
+  <path d="M3.712 16.703A1 1 0 0 1 2 16V8a1 1 0 0 1 1.712-.703l3.99 3.991a1 1 0 0 1 .001 1.424z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/carrot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32131,7 +32746,7 @@ var Carrot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/carton-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32159,7 +32774,7 @@ var CartonOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/carton.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32183,7 +32798,7 @@ var Carton = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/case-lower.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32209,7 +32824,7 @@ var CaseLower = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/case-sensitive.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32235,7 +32850,7 @@ var CaseSensitive = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/case-upper.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32258,35 +32873,9 @@ var CaseUpper = `
   <path d="M3.304 13h6.392" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cast.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Cast = `
-<svg
-  class="lucide lucide-cast"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" />
-  <path d="M2 12a9 9 0 0 1 8 8" />
-  <path d="M2 16a5 5 0 0 1 4 4" />
-  <line x1="2" x2="2.01" y1="20" y2="20" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cassette-tape.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32311,9 +32900,35 @@ var CassetteTape = `
   <path d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cast.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Cast = `
+<svg
+  class="lucide lucide-cast"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" />
+  <path d="M2 12a9 9 0 0 1 8 8" />
+  <path d="M2 16a5 5 0 0 1 4 4" />
+  <line x1="2" x2="2.01" y1="20" y2="20" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/castle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32343,7 +32958,7 @@ var Castle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32369,7 +32984,7 @@ var Cat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cctv-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32397,7 +33012,7 @@ var CctvOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cctv.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32422,33 +33037,9 @@ var Cctv = `
   <path d="M7 9h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/chart-area.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ChartArea = `
-<svg
-  class="lucide lucide-chart-area"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-  <path d="M7 11.207a.5.5 0 0 1 .146-.353l2-2a.5.5 0 0 1 .708 0l3.292 3.292a.5.5 0 0 0 .708 0l4.292-4.292a.5.5 0 0 1 .854.353V16a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/certificate.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32473,9 +33064,33 @@ var Certificate = `
   <circle cx="19" cy="13" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/chart-area.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChartArea = `
+<svg
+  class="lucide lucide-chart-area"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M7 11.207a.5.5 0 0 1 .146-.353l2-2a.5.5 0 0 1 .708 0l3.292 3.292a.5.5 0 0 0 .708 0l4.292-4.292a.5.5 0 0 1 .854.353V16a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bar-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32500,7 +33115,7 @@ var ChartBarBig = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bar-decreasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32526,7 +33141,7 @@ var ChartBarDecreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bar-increasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32552,7 +33167,7 @@ var ChartBarIncreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bar-stacked.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32579,7 +33194,7 @@ var ChartBarStacked = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bar.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32605,7 +33220,7 @@ var ChartBar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-bell-curve.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32629,7 +33244,7 @@ var ChartBellCurve = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-candlestick.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32658,7 +33273,7 @@ var ChartCandlestick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-column-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32683,7 +33298,7 @@ var ChartColumnBig = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-column-decreasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32709,7 +33324,7 @@ var ChartColumnDecreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-column-increasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32735,7 +33350,7 @@ var ChartColumnIncreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-column-stacked.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32762,7 +33377,7 @@ var ChartColumnStacked = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-column.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32788,7 +33403,7 @@ var ChartColumn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-gantt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32814,7 +33429,7 @@ var ChartGantt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32838,7 +33453,7 @@ var ChartLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-network.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32867,7 +33482,7 @@ var ChartNetwork = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-no-axes-column-decreasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32892,7 +33507,7 @@ var ChartNoAxesColumnDecreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-no-axes-column-increasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32917,7 +33532,7 @@ var ChartNoAxesColumnIncreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-no-axes-column.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32942,7 +33557,7 @@ var ChartNoAxesColumn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-no-axes-combined.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32970,7 +33585,7 @@ var ChartNoAxesCombined = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-no-axes-gantt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -32995,7 +33610,7 @@ var ChartNoAxesGantt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-pie.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33019,7 +33634,7 @@ var ChartPie = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-quadrant.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33048,7 +33663,7 @@ var ChartQuadrant = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-radar.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33074,7 +33689,7 @@ var ChartRadar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-scatter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33102,7 +33717,7 @@ var ChartScatter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chart-spline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33126,7 +33741,7 @@ var ChartSpline = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/check-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33150,7 +33765,7 @@ var CheckCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/check-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33175,7 +33790,7 @@ var CheckLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33198,7 +33813,7 @@ var Check = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cheese.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33224,7 +33839,7 @@ var Cheese = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chef-hat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33250,7 +33865,7 @@ var ChefHat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cherry.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33276,7 +33891,7 @@ var Cherry = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-bishop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33302,7 +33917,7 @@ var ChessBishop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-king.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33328,7 +33943,7 @@ var ChessKing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-knight.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33355,7 +33970,7 @@ var ChessKnight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-pawn.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33382,7 +33997,7 @@ var ChessPawn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-queen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33412,7 +34027,7 @@ var ChessQueen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chess-rook.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33441,7 +34056,7 @@ var ChessRook = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33464,7 +34079,7 @@ var ChevronDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-first.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33488,7 +34103,7 @@ var ChevronFirst = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-last.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33512,7 +34127,7 @@ var ChevronLast = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33535,7 +34150,7 @@ var ChevronLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33558,7 +34173,7 @@ var ChevronRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevron-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33581,7 +34196,7 @@ var ChevronUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-down-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33605,7 +34220,7 @@ var ChevronsDownUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33627,9 +34242,115 @@ var ChevronsDown = `
   <path d="m7 13 5 5 5-5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-from-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsFromAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-chevrons-from-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M16 12h-2" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+  <path d="m8 17 4 4 4-4" />
+  <path d="m8 7 4-4 4 4" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-from-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsFromAxisDashedVertical = `
+<svg
+  class="lucide lucide-chevrons-from-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v2" />
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M12 8v2" />
+  <path d="m17 8 4 4-4 4" />
+  <path d="m7 8-4 4 4 4" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-from-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsFromAxisHorizontal = `
+<svg
+  class="lucide lucide-chevrons-from-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 12H2" />
+  <path d="m8 17 4 4 4-4" />
+  <path d="m8 7 4-4 4 4" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-from-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsFromAxisVertical = `
+<svg
+  class="lucide lucide-chevrons-from-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="m17 8 4 4-4 4" />
+  <path d="m7 8-4 4 4 4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-left-right-ellipsis.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33656,7 +34377,7 @@ var ChevronsLeftRightEllipsis = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-left-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33680,7 +34401,7 @@ var ChevronsLeftRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33704,7 +34425,7 @@ var ChevronsLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-right-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33728,7 +34449,7 @@ var ChevronsRightLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33750,9 +34471,115 @@ var ChevronsRight = `
   <path d="m13 17 5-5-5-5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-to-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsToAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-chevrons-to-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M16 12h-2" />
+  <path d="m16 21-4-4-4 4" />
+  <path d="m16 3-4 4-4-4" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-to-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsToAxisDashedVertical = `
+<svg
+  class="lucide lucide-chevrons-to-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v2" />
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M12 8v2" />
+  <path d="m21 8-4 4 4 4" />
+  <path d="m3 8 4 4-4 4" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-to-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsToAxisHorizontal = `
+<svg
+  class="lucide lucide-chevrons-to-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 21-4-4-4 4" />
+  <path d="m16 3-4 4-4-4" />
+  <path d="M22 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/chevrons-to-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronsToAxisVertical = `
+<svg
+  class="lucide lucide-chevrons-to-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="m21 8-4 4 4 4" />
+  <path d="m3 8 4 4-4 4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-up-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33776,7 +34603,7 @@ var ChevronsUpDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/chevrons-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33798,9 +34625,36 @@ var ChevronsUp = `
   <path d="m17 18-5-5-5 5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/chocolate-bar.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChocolateBar = `
+<svg
+  class="lucide lucide-chocolate-bar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v10" />
+  <path d="M17 12V4.4a.4.4 0 00-.4-.4A1.6 1.6 0 0115 2.4a.4.4 0 00-.4-.4H9a2 2 0 00-2 2v8" />
+  <path d="M5 14a2 2 0 012-2h10a2 2 0 012 2v2a1 1 0 01-1 1 2 2 0 01-.9-.203l-1.2-.594a2 2 0 00-1.8 0l-1.2.594a2 2 0 01-1.8 0l-1.2-.594a2 2 0 00-1.8 0l-1.2.594a2 2 0 01-.9.198A1 1 0 015 16z" />
+  <path d="M7 16.748V20a2 2 0 002 2h6a2 2 0 002-2v-3.252" />
+  <path d="M7 7h10" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/church.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33827,7 +34681,7 @@ var Church = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cigarette-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33855,7 +34709,7 @@ var CigaretteOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cigarette.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33880,9 +34734,35 @@ var Cigarette = `
   <path d="M7 12v4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cinema.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Cinema = `
+<svg
+  class="lucide lucide-cinema"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 22a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2" />
+  <path d="M15.03 8.44a.65.65 0 0 1 0 1.12l-4.06 2.35a.64.64 0 0 1-.97-.56v-4.7a.647.647 0 0 1 .96-.56z" />
+  <path d="M2 22a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2" />
+  <rect x="2" y="2" width="20" height="14" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-down-left-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33907,7 +34787,7 @@ var CircleArrowDownLeftExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-down-right-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33932,7 +34812,7 @@ var CircleArrowDownRightExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33957,7 +34837,7 @@ var CircleArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -33982,7 +34862,7 @@ var CircleArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34007,7 +34887,7 @@ var CircleArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-up-left-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34032,7 +34912,7 @@ var CircleArrowUpLeftExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-up-right-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34057,7 +34937,7 @@ var CircleArrowUpRightExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34080,9 +34960,33 @@ var CircleArrowUp = `
   <path d="M12 16V8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/circle-bounce.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CircleBounce = `
+<svg
+  class="lucide lucide-circle-bounce"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 13c2.5.5 5 4 5 8 0-2.16 1.813-7.536 6-11.293" />
+  <circle cx="19" cy="6" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-check-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34106,7 +35010,7 @@ var CircleCheckBig = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34130,7 +35034,7 @@ var CircleCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevron-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34154,7 +35058,7 @@ var CircleChevronDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevron-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34178,7 +35082,7 @@ var CircleChevronLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevron-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34202,7 +35106,7 @@ var CircleChevronRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevron-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34226,7 +35130,7 @@ var CircleChevronUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevrons-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34251,7 +35155,7 @@ var CircleChevronsDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevrons-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34276,7 +35180,7 @@ var CircleChevronsLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevrons-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34301,7 +35205,7 @@ var CircleChevronsRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-chevrons-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34326,7 +35230,7 @@ var CircleChevronsUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-dashed-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34357,7 +35261,7 @@ var CircleDashedCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34387,7 +35291,7 @@ var CircleDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-divide.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34413,7 +35317,7 @@ var CircleDivide = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-dollar-sign.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34438,7 +35342,7 @@ var CircleDollarSign = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-dot-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34469,7 +35373,7 @@ var CircleDotDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34493,7 +35397,7 @@ var CircleDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-ellipsis.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34519,7 +35423,7 @@ var CircleEllipsis = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-equal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34544,7 +35448,7 @@ var CircleEqual = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-euro.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34569,7 +35473,7 @@ var CircleEuro = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34594,7 +35498,7 @@ var CircleExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-fading-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34623,7 +35527,7 @@ var CircleFadingArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-fading-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34651,7 +35555,7 @@ var CircleFadingCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-fading-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34679,7 +35583,7 @@ var CircleFadingPlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-fading-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34708,7 +35612,7 @@ var CircleFadingPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-gauge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34733,7 +35637,7 @@ var CircleGauge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34758,7 +35662,7 @@ var CircleLetterA = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-b.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34782,7 +35686,7 @@ var CircleLetterB = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-c.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34806,7 +35710,7 @@ var CircleLetterC = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34830,7 +35734,7 @@ var CircleLetterD = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-e.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34855,7 +35759,7 @@ var CircleLetterE = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-f.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34880,7 +35784,7 @@ var CircleLetterF = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-g.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34904,7 +35808,7 @@ var CircleLetterG = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-h.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34930,7 +35834,7 @@ var CircleLetterH = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-i.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34954,7 +35858,7 @@ var CircleLetterI = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-j.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -34978,7 +35882,7 @@ var CircleLetterJ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-k.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35004,7 +35908,7 @@ var CircleLetterK = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-l.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35028,7 +35932,7 @@ var CircleLetterL = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-m.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35052,7 +35956,7 @@ var CircleLetterM = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-n.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35076,7 +35980,7 @@ var CircleLetterN = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-o.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35100,7 +36004,7 @@ var CircleLetterO = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-p-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35127,7 +36031,7 @@ var CircleLetterPOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-p.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35151,7 +36055,7 @@ var CircleLetterP = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-q.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35176,7 +36080,7 @@ var CircleLetterQ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-r.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35201,7 +36105,7 @@ var CircleLetterR = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-s.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35225,7 +36129,7 @@ var CircleLetterS = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-t.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35250,7 +36154,7 @@ var CircleLetterT = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-u.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35274,7 +36178,7 @@ var CircleLetterU = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-v.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35298,7 +36202,7 @@ var CircleLetterV = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-w.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35322,7 +36226,7 @@ var CircleLetterW = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35347,7 +36251,7 @@ var CircleLetterX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-y.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35372,7 +36276,7 @@ var CircleLetterY = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-letter-z.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35396,7 +36300,7 @@ var CircleLetterZ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35420,7 +36324,7 @@ var CircleMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35445,7 +36349,7 @@ var CircleOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-pause.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35470,7 +36374,7 @@ var CirclePause = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35494,9 +36398,36 @@ var CirclePercent = `
   <path d="M15 15h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/circle-person-arms-spread.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CirclePersonArmsSpread = `
+<svg
+  class="lucide lucide-circle-person-arms-spread"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 17-3-3" />
+  <path d="M8 10s2 1 4 1 4-1 4-1" />
+  <path d="m9 17 3-3v-3" />
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="7" r=".5" fill="currentColor" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-pile.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35524,7 +36455,7 @@ var CirclePile = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35548,7 +36479,7 @@ var CirclePlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35573,7 +36504,7 @@ var CirclePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-pound-sterling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35599,7 +36530,7 @@ var CirclePoundSterling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-power.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35624,7 +36555,7 @@ var CirclePower = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35649,7 +36580,7 @@ var CircleQuestionMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-slash-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35673,7 +36604,7 @@ var CircleSlash2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35697,7 +36628,7 @@ var CircleSlash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-small.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35720,7 +36651,7 @@ var CircleSmall = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35744,7 +36675,7 @@ var CircleStar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-stop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35768,7 +36699,7 @@ var CircleStop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-user-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35793,7 +36724,7 @@ var CircleUserRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-user.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35818,7 +36749,7 @@ var CircleUser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35843,7 +36774,7 @@ var CircleX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35866,7 +36797,7 @@ var Circle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/circuit-board.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35893,7 +36824,7 @@ var CircuitBoard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/citrus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35919,7 +36850,7 @@ var Citrus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clapperboard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35945,7 +36876,7 @@ var Clapperboard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clef-alto.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35970,7 +36901,7 @@ var ClefAlto = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clef-bass.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -35996,7 +36927,7 @@ var ClefBass = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clef-treble.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36019,7 +36950,7 @@ var ClefTreble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36044,7 +36975,7 @@ var ClipboardCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36062,16 +36993,16 @@ var ClipboardClock = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M16 14v2.2l1.6 1" />
-  <path d="M16 4h2a2 2 0 0 1 2 2v.832" />
-  <path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2" />
-  <circle cx="16" cy="16" r="6" />
+  <path d="M16 4h2a2 2 0 012 2v2.512" />
+  <path d="M17 15.5v1.7l1 .625" />
+  <path d="M8 4H6a2 2 0 00-2 2v14a2 2 0 002 2h3.516" />
+  <circle cx="17" cy="17" r="5" />
   <rect x="8" y="2" width="8" height="4" rx="1" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-copy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36098,7 +37029,7 @@ var ClipboardCopy = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-list.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36126,7 +37057,7 @@ var ClipboardList = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36151,7 +37082,7 @@ var ClipboardMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-paste.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36178,7 +37109,7 @@ var ClipboardPaste = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-pen-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36205,7 +37136,7 @@ var ClipboardPenLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36231,7 +37162,7 @@ var ClipboardPen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36257,7 +37188,7 @@ var ClipboardPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-type.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36284,7 +37215,7 @@ var ClipboardType = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36310,7 +37241,7 @@ var ClipboardX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clipboard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36332,33 +37263,9 @@ var Clipboard = `
   <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/clock-1.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Clock1 = `
-<svg
-  class="lucide lucide-clock-1"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="10" />
-  <path d="M12 6v6l2-4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-10.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36382,7 +37289,7 @@ var Clock10 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-11.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36404,9 +37311,33 @@ var Clock11 = `
   <path d="M12 6v6l-2-4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/clock-1.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Clock1 = `
+<svg
+  class="lucide lucide-clock-1"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l2-4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-12.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36428,33 +37359,9 @@ var Clock12 = `
   <path d="M12 6v6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/clock-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Clock2 = `
-<svg
-  class="lucide lucide-clock-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="10" />
-  <path d="M12 6v6l4-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36476,9 +37383,33 @@ var Clock3 = `
   <path d="M12 6v6h4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/clock-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Clock2 = `
+<svg
+  class="lucide lucide-clock-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-4.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36502,7 +37433,7 @@ var Clock4 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-5.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36526,7 +37457,7 @@ var Clock5 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-6.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36548,33 +37479,9 @@ var Clock6 = `
   <path d="M12 6v10" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/clock-7.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Clock7 = `
-<svg
-  class="lucide lucide-clock-7"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="10" />
-  <path d="M12 6v6l-2 4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-8.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36596,9 +37503,33 @@ var Clock8 = `
   <path d="M12 6v6l-4 2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/clock-7.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Clock7 = `
+<svg
+  class="lucide lucide-clock-7"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l-2 4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-9.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36622,7 +37553,7 @@ var Clock9 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36648,7 +37579,7 @@ var ClockArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36674,7 +37605,7 @@ var ClockArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36700,7 +37631,7 @@ var ClockArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36726,7 +37657,7 @@ var ClockArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36751,7 +37682,7 @@ var ClockCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36775,9 +37706,35 @@ var ClockExclamationPoint = `
   <path d="M21.25 8.2A10 10 0 1 0 16 21.16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/clock-plus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ClockPlus = `
+<svg
+  class="lucide lucide-clock-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 6v6l3.644 1.822" />
+  <path d="M16 19h6" />
+  <path d="M19 16v6" />
+  <path d="M21.92 13.267a10 10 0 1 0-8.653 8.653" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock-fading.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36803,35 +37760,9 @@ var ClockFading = `
   <path d="M8.644 21.42a10 10 0 0 0 7.631-.38" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/clock-plus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ClockPlus = `
-<svg
-  class="lucide lucide-clock-plus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 6v6l3.644 1.822" />
-  <path d="M16 19h6" />
-  <path d="M19 16v6" />
-  <path d="M21.92 13.267a10 10 0 1 0-8.653 8.653" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36855,7 +37786,7 @@ var Clock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/closed-caption.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36880,7 +37811,7 @@ var ClosedCaption = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-backup.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36903,33 +37834,9 @@ var CloudBackup = `
   <path d="M8 19a5 5 0 0 0 9-3 4.5 4.5 0 0 0-4.5-4.5 4.82 4.82 0 0 0-3.41 1.41L7 15" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cloud-check.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CloudCheck = `
-<svg
-  class="lucide lucide-cloud-check"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m17 15-5.5 5.5L9 18" />
-  <path d="M5.516 16.07A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 3.501 7.327" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36958,9 +37865,33 @@ var CloudCog = `
   <path d="m9.228 18.148-.923.383" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cloud-check.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CloudCheck = `
+<svg
+  class="lucide lucide-cloud-check"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m17 15-5.5 5.5L9 18" />
+  <path d="M5.516 16.07A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 3.501 7.327" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-download.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -36985,7 +37916,7 @@ var CloudDownload = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-drizzle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37014,7 +37945,7 @@ var CloudDrizzle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37039,7 +37970,7 @@ var CloudExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-fog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37064,7 +37995,7 @@ var CloudFog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-hail.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37091,33 +38022,9 @@ var CloudHail = `
   <path d="M12 22h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cloud-lightning.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CloudLightning = `
-<svg
-  class="lucide lucide-cloud-lightning"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
-  <path d="m13 12-3 5h4l-3 5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-moon-rain.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37141,16 +38048,16 @@ var CloudMoonRain = `
   <path d="M7 19v2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cloud-moon.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/cloud-lightning.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var CloudMoon = `
+var CloudLightning = `
 <svg
-  class="lucide lucide-cloud-moon"
+  class="lucide lucide-cloud-lightning"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -37161,13 +38068,13 @@ var CloudMoon = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M13 16a3 3 0 0 1 0 6H7a5 5 0 1 1 4.9-6z" />
-  <path d="M18.376 14.512a6 6 0 0 0 3.461-4.127c.148-.625-.659-.97-1.248-.714a4 4 0 0 1-5.259-5.26c.255-.589-.09-1.395-.716-1.248a6 6 0 0 0-4.594 5.36" />
+  <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
+  <path d="m13 12-3 5h4l-3 5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37190,9 +38097,33 @@ var CloudOff = `
   <path d="m2 2 20 20" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cloud-moon.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CloudMoon = `
+<svg
+  class="lucide lucide-cloud-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13 16a3 3 0 0 1 0 6H7a5 5 0 1 1 4.9-6z" />
+  <path d="M18.376 14.512a6 6 0 0 0 3.461-4.127c.148-.625-.659-.97-1.248-.714a4 4 0 0 1-5.259-5.26c.255-.589-.09-1.395-.716-1.248a6 6 0 0 0-4.594 5.36" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-rain-wind.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37218,7 +38149,7 @@ var CloudRainWind = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-rain.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37244,7 +38175,7 @@ var CloudRain = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-snow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37273,7 +38204,7 @@ var CloudSnow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-sun-rain.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37303,7 +38234,7 @@ var CloudSunRain = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-sun.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37329,9 +38260,34 @@ var CloudSun = `
   <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/cloud-upload.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CloudUpload = `
+<svg
+  class="lucide lucide-cloud-upload"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 13v8" />
+  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+  <path d="m8 17 4-4 4 4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud-sync.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37356,34 +38312,9 @@ var CloudSync = `
   <path d="m7 14 1.535-1.605a5 5 0 0 1 8 1.5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/cloud-upload.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CloudUpload = `
-<svg
-  class="lucide lucide-cloud-upload"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 13v8" />
-  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-  <path d="m8 17 4-4 4 4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cloud.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37406,7 +38337,7 @@ var Cloud = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cloudy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37430,7 +38361,7 @@ var Cloudy = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/clover.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37455,7 +38386,7 @@ var Clover = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/club.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37479,7 +38410,7 @@ var Club = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/code-xml.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37504,7 +38435,7 @@ var CodeXml = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37528,7 +38459,7 @@ var Code = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/coffee.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37554,7 +38485,7 @@ var Coffee = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37590,7 +38521,7 @@ var Cog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/coins.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37616,7 +38547,7 @@ var Coins = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/columns-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37640,7 +38571,7 @@ var Columns2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/columns-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37665,7 +38596,7 @@ var Columns3 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/columns-3-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37699,7 +38630,7 @@ var Columns3Cog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/columns-4.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37725,7 +38656,7 @@ var Columns4 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/combine.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37753,7 +38684,7 @@ var Combine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/command.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37776,7 +38707,7 @@ var Command = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/compass.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37800,7 +38731,7 @@ var Compass = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/component.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37824,9 +38755,35 @@ var Component = `
   <path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/concierge-bell.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ConciergeBell = `
+<svg
+  class="lucide lucide-concierge-bell"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z" />
+  <path d="M20 16a8 8 0 1 0-16 0" />
+  <path d="M12 4v4" />
+  <path d="M10 4h4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/computer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37851,35 +38808,9 @@ var Computer = `
   <rect x="4" y="2" width="16" height="12" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/concierge-bell.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ConciergeBell = `
-<svg
-  class="lucide lucide-concierge-bell"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z" />
-  <path d="M20 16a8 8 0 1 0-16 0" />
-  <path d="M12 4v4" />
-  <path d="M10 4h4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/cone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37903,7 +38834,7 @@ var Cone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/construction.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37933,7 +38864,7 @@ var Construction = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/contact-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37960,7 +38891,7 @@ var ContactRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/contact.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -37987,7 +38918,7 @@ var Contact = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/container.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38014,7 +38945,7 @@ var Container = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/contrast.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38038,7 +38969,7 @@ var Contrast = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cookie.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38067,9 +38998,34 @@ var Cookie = `
   <path d="M9 8h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/copy-check.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CopyCheck = `
+<svg
+  class="lucide lucide-copy-check"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 15 2 2 4-4" />
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/cooking-pot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38093,34 +39049,9 @@ var CookingPot = `
   <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/copy-check.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CopyCheck = `
-<svg
-  class="lucide lucide-copy-check"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m12 15 2 2 4-4" />
-  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/copy-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38145,7 +39076,7 @@ var CopyMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/copy-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38171,7 +39102,7 @@ var CopyPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/copy-slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38196,7 +39127,7 @@ var CopySlash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/copy-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38222,7 +39153,7 @@ var CopyX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/copy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38246,7 +39177,7 @@ var Copy = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/copyleft.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38270,7 +39201,7 @@ var Copyleft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-down-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38292,33 +39223,9 @@ var CornerDownLeft = `
   <path d="m9 10-5 5 5 5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/corner-down-right.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CornerDownRight = `
-<svg
-  class="lucide lucide-corner-down-right"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m15 10 5 5-5 5" />
-  <path d="M4 4v7a4 4 0 0 0 4 4h12" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-left-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38340,9 +39247,33 @@ var CornerLeftDown = `
   <path d="M20 4h-7a4 4 0 0 0-4 4v12" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/corner-down-right.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CornerDownRight = `
+<svg
+  class="lucide lucide-corner-down-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 10 5 5-5 5" />
+  <path d="M4 4v7a4 4 0 0 0 4 4h12" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-left-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38364,33 +39295,9 @@ var CornerLeftUp = `
   <path d="M20 20h-7a4 4 0 0 1-4-4V4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/corner-right-down.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var CornerRightDown = `
-<svg
-  class="lucide lucide-corner-right-down"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m10 15 5 5 5-5" />
-  <path d="M4 4h7a4 4 0 0 1 4 4v12" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-right-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38412,9 +39319,33 @@ var CornerRightUp = `
   <path d="M4 20h7a4 4 0 0 0 4-4V4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/corner-right-down.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CornerRightDown = `
+<svg
+  class="lucide lucide-corner-right-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m10 15 5 5 5-5" />
+  <path d="M4 4h7a4 4 0 0 1 4 4v12" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-up-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38438,7 +39369,7 @@ var CornerUpLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/corner-up-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38462,7 +39393,7 @@ var CornerUpRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cpu-ai.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38500,7 +39431,7 @@ var CpuAi = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cpu.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38536,7 +39467,7 @@ var Cpu = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/creative-commons.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38561,7 +39492,7 @@ var CreativeCommons = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38587,7 +39518,7 @@ var CreditCardCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38613,7 +39544,7 @@ var CreditCardMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38640,7 +39571,7 @@ var CreditCardPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card-reader.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38666,7 +39597,7 @@ var CreditCardReader = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38693,7 +39624,7 @@ var CreditCardX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/credit-card.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38718,7 +39649,7 @@ var CreditCard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/croissant.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38745,7 +39676,7 @@ var Croissant = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/crop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38769,7 +39700,7 @@ var Crop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cross.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38792,7 +39723,7 @@ var Cross = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/crosshair.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38819,7 +39750,7 @@ var Crosshair = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/crown.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38843,7 +39774,7 @@ var Crown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cuboid.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38868,7 +39799,7 @@ var Cuboid = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cup-soda.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38894,7 +39825,7 @@ var CupSoda = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cupcake.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38923,7 +39854,7 @@ var Cupcake = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/currency.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38950,7 +39881,7 @@ var Currency = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/cylinder.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -38974,7 +39905,7 @@ var Cylinder = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dam.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39003,7 +39934,7 @@ var Dam = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39029,37 +39960,9 @@ var DatabaseArrowDown = `
   <ellipse cx="12" cy="5" rx="9" ry="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/database-arrow-up.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var DatabaseArrowUp = `
-<svg
-  class="lucide lucide-database-arrow-up"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 22v-6" />
-  <path d="M21 12.536V5" />
-  <path d="m22 19-3-3-3 3" />
-  <path d="M3 12A9 3 0 0 0 14.457 14.886" />
-  <path d="M3 5V19A9 3 0 0 0 13.318 21.968" />
-  <ellipse cx="12" cy="5" rx="9" ry="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/database-backup.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39085,9 +39988,37 @@ var DatabaseBackup = `
   <path d="M13 20a5 5 0 0 0 9-3 4.5 4.5 0 0 0-4.5-4.5c-1.33 0-2.54.54-3.41 1.41L12 16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/database-arrow-up.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var DatabaseArrowUp = `
+<svg
+  class="lucide lucide-database-arrow-up"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 22v-6" />
+  <path d="M21 12.536V5" />
+  <path d="m22 19-3-3-3 3" />
+  <path d="M3 12A9 3 0 0 0 14.457 14.886" />
+  <path d="M3 5V19A9 3 0 0 0 13.318 21.968" />
+  <ellipse cx="12" cy="5" rx="9" ry="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/database-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39114,7 +40045,7 @@ var DatabaseCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39149,7 +40080,7 @@ var DatabaseCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39176,7 +40107,7 @@ var DatabaseMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39204,7 +40135,7 @@ var DatabasePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39232,7 +40163,7 @@ var DatabaseSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39261,7 +40192,7 @@ var DatabaseX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database-zap.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39288,7 +40219,7 @@ var DatabaseZap = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/database.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39311,9 +40242,35 @@ var Database = `
   <path d="M3 12A9 3 0 0 0 21 12" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/decimals-arrow-left.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var DecimalsArrowLeft = `
+<svg
+  class="lucide lucide-decimals-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m13 21-3-3 3-3" />
+  <path d="M20 18H10" />
+  <path d="M3 11h.01" />
+  <rect x="6" y="3" width="5" height="8" rx="2.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/decimals-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39340,7 +40297,7 @@ var DecimalsArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/delete.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39363,16 +40320,16 @@ var Delete = `
   <path d="m18 9-6 6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/decimals-arrow-left.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/dessert.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var DecimalsArrowLeft = `
+var Dessert = `
 <svg
-  class="lucide lucide-decimals-arrow-left"
+  class="lucide lucide-dessert"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -39383,15 +40340,14 @@ var DecimalsArrowLeft = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="m13 21-3-3 3-3" />
-  <path d="M20 18H10" />
-  <path d="M3 11h.01" />
-  <rect x="6" y="3" width="5" height="8" rx="2.5" />
+  <path d="M10.162 3.167A10 10 0 0 0 2 13a2 2 0 0 0 4 0v-1a2 2 0 0 1 4 0v4a2 2 0 0 0 4 0v-4a2 2 0 0 1 4 0v1a2 2 0 0 0 4-.006 10 10 0 0 0-8.161-9.826" />
+  <path d="M20.804 14.869a9 9 0 0 1-17.608 0" />
+  <circle cx="12" cy="4" r="2" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/diagram-flow-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39416,34 +40372,9 @@ var DiagramFlowHorizontal = `
   <rect x="2" y="9" width="6" height="6" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/dessert.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Dessert = `
-<svg
-  class="lucide lucide-dessert"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10.162 3.167A10 10 0 0 0 2 13a2 2 0 0 0 4 0v-1a2 2 0 0 1 4 0v4a2 2 0 0 0 4 0v-4a2 2 0 0 1 4 0v1a2 2 0 0 0 4-.006 10 10 0 0 0-8.161-9.826" />
-  <path d="M20.804 14.869a9 9 0 0 1-17.608 0" />
-  <circle cx="12" cy="4" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/diagram-flow-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39468,9 +40399,34 @@ var DiagramFlowVertical = `
   <rect x="9" y="2" width="6" height="6" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/diagram-sankey.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var DiagramSankey = `
+<svg
+  class="lucide lucide-diagram-sankey"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 12c-2.534 0-4.058-.492-5.093-1.08-1.065-.606-1.823-1.425-2.736-2.52-.85-1.02-1.97-2.472-3.557-3.557C7.914 3.68 5.814 3 3 3a1 1 0 00-1 1v3a1 1 0 001 1c1.935 0 3.023.444 3.792.97.881.602 1.512 1.4 2.537 2.63.7.84 1.548 1.827 2.691 2.718" />
+  <path d="M3 16a1 1 0 00-1 1v3a1 1 0 001 1c10 0 10-4 18-4a1 1 0 001-1v-3a1 1 0 00-1-1c-8 0-8 4-18 4" />
+  <path d="M3 3h18a1 1 0 011 1v3a1 1 0 01-1 1h-8.036" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/diameter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39497,7 +40453,7 @@ var Diameter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/diamond-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39521,7 +40477,7 @@ var DiamondMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/diamond-percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39547,7 +40503,7 @@ var DiamondPercent = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/diamond-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39572,7 +40528,7 @@ var DiamondPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/diamond.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39595,7 +40551,7 @@ var Diamond = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dice-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39619,7 +40575,7 @@ var Dice1 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dice-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39642,9 +40598,36 @@ var Dice2 = `
   <path d="M9 15h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/dice-4.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Dice4 = `
+<svg
+  class="lucide lucide-dice-4"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+  <path d="M16 8h.01" />
+  <path d="M8 8h.01" />
+  <path d="M8 16h.01" />
+  <path d="M16 16h.01" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/dice-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39670,7 +40653,7 @@ var Dice3 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dice-5.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39696,16 +40679,16 @@ var Dice5 = `
   <path d="M12 12h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/dice-4.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/dices.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Dice4 = `
+var Dices = `
 <svg
-  class="lucide lucide-dice-4"
+  class="lucide lucide-dices"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -39716,16 +40699,17 @@ var Dice4 = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-  <path d="M16 8h.01" />
-  <path d="M8 8h.01" />
-  <path d="M8 16h.01" />
-  <path d="M16 16h.01" />
+  <rect width="12" height="12" x="2" y="10" rx="2" ry="2" />
+  <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6" />
+  <path d="M6 18h.01" />
+  <path d="M10 14h.01" />
+  <path d="M15 6h.01" />
+  <path d="M18 9h.01" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dice-6.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39752,37 +40736,9 @@ var Dice6 = `
   <path d="M8 16h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/dices.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Dices = `
-<svg
-  class="lucide lucide-dices"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="12" height="12" x="2" y="10" rx="2" ry="2" />
-  <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6" />
-  <path d="M6 18h.01" />
-  <path d="M10 14h.01" />
-  <path d="M15 6h.01" />
-  <path d="M18 9h.01" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/diff.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39805,9 +40761,34 @@ var Diff = `
   <path d="M5 21h14" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/disc-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Disc2 = `
+<svg
+  class="lucide lucide-disc-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 12h.01" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/disc-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39831,34 +40812,9 @@ var Disc3 = `
   <path d="M18 12c0 1.7-.7 3.2-1.8 4.2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/disc-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Disc2 = `
-<svg
-  class="lucide lucide-disc-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="10" />
-  <circle cx="12" cy="12" r="4" />
-  <path d="M12 12h.01" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/disc-album.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39883,7 +40839,7 @@ var DiscAlbum = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/disc.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39907,7 +40863,7 @@ var Disc = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/divide.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39930,9 +40886,41 @@ var Divide = `
   <circle cx="12" cy="18" r="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/dna-off.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var DnaOff = `
+<svg
+  class="lucide lucide-dna-off"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 2c-1.35 1.5-2.092 3-2.5 4.5L14 8" />
+  <path d="m17 6-2.891-2.891" />
+  <path d="M2 15c3.333-3 6.667-3 10-3" />
+  <path d="m2 2 20 20" />
+  <path d="m20 9 .891.891" />
+  <path d="M22 9c-1.5 1.35-3 2.092-4.5 2.5l-1-1" />
+  <path d="M3.109 14.109 4 15" />
+  <path d="m6.5 12.5 1 1" />
+  <path d="m7 18 2.891 2.891" />
+  <path d="M9 22c1.35-1.5 2.092-3 2.5-4.5L10 16" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/dna.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -39963,41 +40951,9 @@ var Dna = `
   <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/dna-off.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var DnaOff = `
-<svg
-  class="lucide lucide-dna-off"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15 2c-1.35 1.5-2.092 3-2.5 4.5L14 8" />
-  <path d="m17 6-2.891-2.891" />
-  <path d="M2 15c3.333-3 6.667-3 10-3" />
-  <path d="m2 2 20 20" />
-  <path d="m20 9 .891.891" />
-  <path d="M22 9c-1.5 1.35-3 2.092-4.5 2.5l-1-1" />
-  <path d="M3.109 14.109 4 15" />
-  <path d="m6.5 12.5 1 1" />
-  <path d="m7 18 2.891 2.891" />
-  <path d="M9 22c1.35-1.5 2.092-3 2.5-4.5L10 16" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/dock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40022,7 +40978,7 @@ var Dock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40047,9 +41003,35 @@ var Dog = `
   <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/doghouse.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Doghouse = `
+<svg
+  class="lucide lucide-doghouse"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m2 9.718 8.82-6.333a2 2 0 012.36 0L22 9.718" />
+  <path d="m20 8.282-1.007 10.902A2 2 0 0117 21H7a2 2 0 01-1.992-1.816L4 8.282" />
+  <path d="M8.5 9.938a7 7 0 017 0" />
+  <path d="M9 21v-5a3 3 0 016 0v5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/dollar-sign.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40073,7 +41055,7 @@ var DollarSign = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dome.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40101,7 +41083,7 @@ var Dome = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/donut.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40125,7 +41107,7 @@ var Donut = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/door-closed-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40159,7 +41141,7 @@ var DoorClosedCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/door-closed-locked.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40186,7 +41168,7 @@ var DoorClosedLocked = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/door-closed-package.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40213,7 +41195,7 @@ var DoorClosedPackage = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/door-closed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40238,7 +41220,7 @@ var DoorClosed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/door-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40263,9 +41245,32 @@ var DoorOpen = `
   <path d="M22 21h-3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/dot.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Dot = `
+<svg
+  class="lucide lucide-dot"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/door-stairwell.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40290,32 +41295,9 @@ var DoorStairwell = `
   <path d="M22 21H2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/dot.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Dot = `
-<svg
-  class="lucide lucide-dot"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/download.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40338,9 +41320,36 @@ var Download = `
   <path d="m7 10 5 5 5-5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/drafting-compass.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var DraftingCompass = `
+<svg
+  class="lucide lucide-drafting-compass"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12.99 6.74 1.93 3.44" />
+  <path d="M19.136 12a10 10 0 0 1-14.271 0" />
+  <path d="m21 21-2.16-3.84" />
+  <path d="m3 21 8.02-14.26" />
+  <circle cx="12" cy="5" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/drama.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40368,36 +41377,9 @@ var Drama = `
   <path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/drafting-compass.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var DraftingCompass = `
-<svg
-  class="lucide lucide-drafting-compass"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m12.99 6.74 1.93 3.44" />
-  <path d="M19.136 12a10 10 0 0 1-14.271 0" />
-  <path d="m21 21-2.16-3.84" />
-  <path d="m3 21 8.02-14.26" />
-  <circle cx="12" cy="5" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/drill.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40425,7 +41407,7 @@ var Drill = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/drone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40456,7 +41438,7 @@ var Drone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/droplet-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40481,7 +41463,7 @@ var DropletOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/droplet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40504,7 +41486,7 @@ var Droplet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/droplets.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40528,7 +41510,7 @@ var Droplets = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/drum.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40557,7 +41539,7 @@ var Drum = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/drumstick.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40581,7 +41563,7 @@ var Drumstick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/dumbbell.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40608,7 +41590,7 @@ var Dumbbell = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ear-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40635,7 +41617,7 @@ var EarOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ear.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40659,7 +41641,7 @@ var Ear = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/earbuds-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40685,7 +41667,7 @@ var EarbudsOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/earbuds.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40707,35 +41689,9 @@ var Earbuds = `
   <path d="M6 3a4 4 0 014 4v12a2 2 0 01-4 0v-8a5 5 0 01-3.75-1.693A1 1 0 012 8.646V5.354a1 1 0 01.25-.661A5 5 0 016 3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/earth.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Earth = `
-<svg
-  class="lucide lucide-earth"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54" />
-  <path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17" />
-  <path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05" />
-  <circle cx="12" cy="12" r="10" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/earth-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40761,9 +41717,35 @@ var EarthLock = `
   <rect width="8" height="5" x="14" y="6" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/earth.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Earth = `
+<svg
+  class="lucide lucide-earth"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54" />
+  <path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17" />
+  <path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05" />
+  <circle cx="12" cy="12" r="10" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/eclipse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40787,7 +41769,7 @@ var Eclipse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/egg-fried.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40811,7 +41793,7 @@ var EggFried = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/egg-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40836,7 +41818,7 @@ var EggOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/egg.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40857,9 +41839,33 @@ var Egg = `
   <path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/eighth-note.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var EighthNote = `
+<svg
+  class="lucide lucide-eighth-note"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m19 6-5.2-3.9a.5.5 0 0 0-.8.4V18" />
+  <circle cx="9" cy="18" r="4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/eighth-notes.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40882,33 +41888,9 @@ var EighthNotes = `
   <circle cx="6" cy="19" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/eighth-note.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var EighthNote = `
-<svg
-  class="lucide lucide-eighth-note"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m19 6-5.2-3.9a.5.5 0 0 0-.8.4V18" />
-  <circle cx="9" cy="18" r="4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/eject.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40930,34 +41912,9 @@ var Eject = `
   <rect x="3" y="17" width="18" height="4" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/ellipsis-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var EllipsisVertical = `
-<svg
-  class="lucide lucide-ellipsis-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="12" r="1" />
-  <circle cx="12" cy="5" r="1" />
-  <circle cx="12" cy="19" r="1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/ellipse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -40980,7 +41937,7 @@ var Ellipse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ellipsis.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41005,7 +41962,7 @@ var Ellipsis = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/emirati-dirham.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41028,9 +41985,34 @@ var EmiratiDirham = `
   <path d="M4 14h17" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/ellipsis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var EllipsisVertical = `
+<svg
+  class="lucide lucide-ellipsis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="1" />
+  <circle cx="12" cy="5" r="1" />
+  <circle cx="12" cy="19" r="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/engine.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41057,7 +42039,7 @@ var Engine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/equal-approximately-not.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41082,7 +42064,7 @@ var EqualApproximatelyNot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/equal-approximately.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41106,7 +42088,7 @@ var EqualApproximately = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/equal-not.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41131,7 +42113,7 @@ var EqualNot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/equal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41155,7 +42137,7 @@ var Equal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/eraser.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41179,7 +42161,7 @@ var Eraser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ethernet-port.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41206,7 +42188,7 @@ var EthernetPort = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/euro.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41231,7 +42213,7 @@ var Euro = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ev-charger.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41258,7 +42240,7 @@ var EvCharger = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/exclamation-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41282,7 +42264,7 @@ var ExclamationMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/expand.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41312,7 +42294,7 @@ var Expand = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/external-link.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41337,7 +42319,7 @@ var ExternalLink = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/eye-closed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41364,7 +42346,7 @@ var EyeClosed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/eye-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41395,7 +42377,7 @@ var EyeDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/eye-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41419,33 +42401,9 @@ var EyeOff = `
   <path d="m2 2 20 20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/eye.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Eye = `
-<svg
-  class="lucide lucide-eye"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-  <circle cx="12" cy="12" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/face-angry.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41473,7 +42431,7 @@ var FaceAngry = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/face-expressionless.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41497,9 +42455,33 @@ var FaceExpressionless = `
   <circle cx="12" cy="12" r="10" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/eye.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Eye = `
+<svg
+  class="lucide lucide-eye"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/face-grinning.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41525,7 +42507,7 @@ var FaceGrinning = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/face-neutral.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41551,7 +42533,7 @@ var FaceNeutral = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/face-slightly-frowning.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41577,7 +42559,7 @@ var FaceSlightlyFrowning = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/face-slightly-smiling-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41605,7 +42587,7 @@ var FaceSlightlySmilingPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/face-slightly-smiling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41631,7 +42613,7 @@ var FaceSlightlySmiling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/factory.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41657,7 +42639,7 @@ var Factory = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41681,7 +42663,7 @@ var Fan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fast-forward.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41705,7 +42687,7 @@ var FastForward = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/faucet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41734,7 +42716,7 @@ var Faucet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/feather.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41759,7 +42741,7 @@ var Feather = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fence.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41788,7 +42770,7 @@ var Fence = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ferris-wheel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41819,7 +42801,7 @@ var FerrisWheel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-archive.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41847,7 +42829,7 @@ var FileArchive = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-axis-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41873,7 +42855,7 @@ var FileAxis3d = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-badge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41899,7 +42881,7 @@ var FileBadge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-box.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41926,7 +42908,7 @@ var FileBox = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-braces-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41952,7 +42934,7 @@ var FileBracesCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-braces.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -41978,7 +42960,7 @@ var FileBraces = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-chart-column-increasing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42005,7 +42987,7 @@ var FileChartColumnIncreasing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-chart-column.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42032,7 +43014,7 @@ var FileChartColumn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-chart-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42057,7 +43039,7 @@ var FileChartLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-chart-pie.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42083,7 +43065,7 @@ var FileChartPie = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-check-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42108,7 +43090,7 @@ var FileCheckCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42133,7 +43115,7 @@ var FileCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42151,15 +43133,15 @@ var FileClock = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M16 22h2a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v2.85" />
-  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-  <path d="M8 14v2.2l1.6 1" />
-  <circle cx="8" cy="16" r="6" />
+  <path d="M14 2v5a1 1 0 001 1h5" />
+  <path d="M14.5 22H18a2 2 0 002-2V8a2.4 2.4 0 00-.706-1.706l-3.588-3.588A2.4 2.4 0 0014 2H6a2 2 0 00-2 2v4.512" />
+  <path d="M7 15.5v1.7l1 .625" />
+  <circle cx="7" cy="17" r="5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-code-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42183,35 +43165,9 @@ var FileCodeCorner = `
   <path d="m9 22 3-3-3-3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/file-code.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FileCode = `
-<svg
-  class="lucide lucide-file-code"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
-  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-  <path d="M10 12.5 8 15l2 2.5" />
-  <path d="m14 12.5 2 2.5-2 2.5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/file-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42243,9 +43199,35 @@ var FileCog = `
   <circle cx="7" cy="18" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/file-code.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FileCode = `
+<svg
+  class="lucide lucide-file-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 12.5 8 15l2 2.5" />
+  <path d="m14 12.5 2 2.5-2 2.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/file-database.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42272,7 +43254,7 @@ var FileDatabase = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-diff.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42298,7 +43280,7 @@ var FileDiff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-digit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42325,7 +43307,7 @@ var FileDigit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42351,7 +43333,7 @@ var FileDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42376,7 +43358,7 @@ var FileExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-headphone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42401,7 +43383,7 @@ var FileHeadphone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42426,7 +43408,7 @@ var FileHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-image.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42452,7 +43434,7 @@ var FileImage = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-input.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42478,7 +43460,7 @@ var FileInput = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42505,7 +43487,7 @@ var FileKey = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42531,7 +43513,7 @@ var FileLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-minus-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42556,7 +43538,7 @@ var FileMinusCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42581,7 +43563,7 @@ var FileMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-music.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42607,7 +43589,7 @@ var FileMusic = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-output.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42633,7 +43615,7 @@ var FileOutput = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-pen-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42659,7 +43641,7 @@ var FilePenLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42684,7 +43666,7 @@ var FilePen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42709,7 +43691,7 @@ var FilePlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-plus-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42735,7 +43717,7 @@ var FilePlusCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42761,7 +43743,7 @@ var FilePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42786,7 +43768,7 @@ var FileQuestionMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-scan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42814,7 +43796,7 @@ var FileScan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-search-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42840,7 +43822,7 @@ var FileSearchCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42866,7 +43848,7 @@ var FileSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-signal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42893,7 +43875,7 @@ var FileSignal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-sliders.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42921,7 +43903,7 @@ var FileSliders = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-spreadsheet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42949,7 +43931,7 @@ var FileSpreadsheet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-stack.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42974,7 +43956,7 @@ var FileStack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-symlink.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -42999,7 +43981,7 @@ var FileSymlink = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-terminal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43025,7 +44007,7 @@ var FileTerminal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43052,7 +44034,7 @@ var FileText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-type-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43079,7 +44061,7 @@ var FileTypeCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-type.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43106,7 +44088,7 @@ var FileType = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43132,7 +44114,7 @@ var FileUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-user.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43158,7 +44140,7 @@ var FileUser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-video-camera.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43184,7 +44166,7 @@ var FileVideoCamera = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file-volume.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43208,35 +44190,9 @@ var FileVolume = `
   <path d="M8 14.502a.5.5 0 0 0-.826-.381l-1.893 1.631a1 1 0 0 1-.651.243H3.5a.5.5 0 0 0-.5.501v3.006a.5.5 0 0 0 .5.501h1.129a1 1 0 0 1 .652.243l1.893 1.633a.5.5 0 0 0 .826-.38z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/file-x-corner.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FileXCorner = `
-<svg
-  class="lucide lucide-file-x-corner"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5" />
-  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-  <path d="m15 17 5 5" />
-  <path d="m20 17-5 5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/file-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43262,7 +44218,7 @@ var FileX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/file.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43284,9 +44240,35 @@ var File = `
   <path d="M14 2v5a1 1 0 0 0 1 1h5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/file-x-corner.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FileXCorner = `
+<svg
+  class="lucide lucide-file-x-corner"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="m15 17 5 5" />
+  <path d="m20 17-5 5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/files.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43311,7 +44293,7 @@ var Files = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/film.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43341,7 +44323,7 @@ var Film = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fingerprint-pattern.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43372,7 +44354,7 @@ var FingerprintPattern = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fire-extinguisher.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43398,32 +44380,9 @@ var FireExtinguisher = `
   <path d="M17 10a4 4 0 0 0-8 0v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2Z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/fish-symbol.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FishSymbol = `
-<svg
-  class="lucide lucide-fish-symbol"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 16s9-15 20-4C11 23 2 8 2 8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/fish-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43446,9 +44405,32 @@ var FishOff = `
   <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98M8.53 3h5.27a2 2 0 0 1 1.98 1.67l.23 1.4M2 2l20 20" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/fish-symbol.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FishSymbol = `
+<svg
+  class="lucide lucide-fish-symbol"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 16s9-15 20-4C11 23 2 8 2 8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/fish.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43476,7 +44458,7 @@ var Fish = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fishing-hook.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43501,7 +44483,7 @@ var FishingHook = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fishing-rod.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43526,7 +44508,7 @@ var FishingRod = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flag-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43552,7 +44534,7 @@ var FlagOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flag-triangle-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43575,7 +44557,7 @@ var FlagTriangleLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flag-triangle-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43598,7 +44580,7 @@ var FlagTriangleRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43621,7 +44603,7 @@ var Flag = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flame-kindling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43646,7 +44628,7 @@ var FlameKindling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flame.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43669,7 +44651,7 @@ var Flame = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flashlight-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43696,7 +44678,7 @@ var FlashlightOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flashlight.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43721,7 +44703,7 @@ var Flashlight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flask-conical-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43747,34 +44729,9 @@ var FlaskConicalOff = `
   <path d="M8.5 2h7" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/flask-conical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FlaskConical = `
-<svg
-  class="lucide lucide-flask-conical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
-  <path d="M6.453 15h11.094" />
-  <path d="M8.5 2h7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/flask-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43799,7 +44756,7 @@ var FlaskRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flower-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43826,7 +44783,7 @@ var Flower2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/flower.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43856,9 +44813,34 @@ var Flower = `
   <path d="M14.12 14.12 16 16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/flask-conical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FlaskConical = `
+<svg
+  class="lucide lucide-flask-conical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+  <path d="M6.453 15h11.094" />
+  <path d="M8.5 2h7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/focus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43883,69 +44865,9 @@ var Focus = `
   <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/fold-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FoldHorizontal = `
-<svg
-  class="lucide lucide-fold-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 12h6" />
-  <path d="M22 12h-6" />
-  <path d="M12 2v2" />
-  <path d="M12 8v2" />
-  <path d="M12 14v2" />
-  <path d="M12 20v2" />
-  <path d="m19 9-3 3 3 3" />
-  <path d="m5 15 3-3-3-3" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/fold-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FoldVertical = `
-<svg
-  class="lucide lucide-fold-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 22v-6" />
-  <path d="M12 8V2" />
-  <path d="M4 12H2" />
-  <path d="M10 12H8" />
-  <path d="M16 12h-2" />
-  <path d="M22 12h-2" />
-  <path d="m15 19-3-3-3 3" />
-  <path d="m15 5-3 3-3-3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-archive.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43971,7 +44893,7 @@ var FolderArchive = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-bookmark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -43995,7 +44917,7 @@ var FolderBookmark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44019,7 +44941,7 @@ var FolderCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44037,14 +44959,14 @@ var FolderClock = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M16 14v2.2l1.6 1" />
-  <path d="M7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2" />
-  <circle cx="16" cy="16" r="6" />
+  <path d="M17 15.5v1.7l1 .625" />
+  <path d="M8.512 20H4a2 2 0 01-2-2V5a2 2 0 012-2h3.9a2 2 0 011.69.9l.81 1.2a2 2 0 001.67.9H20a2 2 0 012 2v1.516" />
+  <circle cx="17" cy="17" r="5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-closed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44068,7 +44990,7 @@ var FolderClosed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44093,7 +45015,7 @@ var FolderCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44125,7 +45047,7 @@ var FolderCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44149,7 +45071,7 @@ var FolderDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44174,7 +45096,7 @@ var FolderDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-git-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44200,7 +45122,7 @@ var FolderGit2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-git.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44224,33 +45146,9 @@ var FolderGit = `
   <path d="M7 13h3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/folder-heart.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FolderHeart = `
-<svg
-  class="lucide lucide-folder-heart"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10.638 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v3.417" />
-  <path d="M14.62 18.8A2.25 2.25 0 1 1 18 15.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-input.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44273,9 +45171,33 @@ var FolderInput = `
   <path d="m9 16 3-3-3-3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/folder-heart.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FolderHeart = `
+<svg
+  class="lucide lucide-folder-heart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10.638 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v3.417" />
+  <path d="M14.62 18.8A2.25 2.25 0 1 1 18 15.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-kanban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44301,7 +45223,7 @@ var FolderKanban = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44327,7 +45249,7 @@ var FolderKey = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44352,7 +45274,7 @@ var FolderLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44374,9 +45296,36 @@ var FolderMinus = `
   <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/folder-network.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FolderNetwork = `
+<svg
+  class="lucide lucide-folder-network"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v4" />
+  <path d="M17 4a2 2 0 012 2v6a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2h2.5a1.5 1.5 0 011.2.6l.6.8a1.5 1.5 0 001.2.6z" />
+  <path d="M21 20h-7" />
+  <path d="M3 20h7" />
+  <circle cx="12" cy="20" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-open-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44400,7 +45349,7 @@ var FolderOpenDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44423,7 +45372,7 @@ var FolderOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-output.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44448,7 +45397,7 @@ var FolderOutput = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44470,9 +45419,34 @@ var FolderPen = `
   <path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/folder-plus-corner.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FolderPlusCorner = `
+<svg
+  class="lucide lucide-folder-plus-corner"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 17h6" />
+  <path d="M19 14v6" />
+  <path d="M22 11.354V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2h9.354" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44497,7 +45471,7 @@ var FolderPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-root.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44522,7 +45496,7 @@ var FolderRoot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-search-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44545,34 +45519,9 @@ var FolderSearch2 = `
   <path d="M13.3 14.3 15 16" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/folder-search.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var FolderSearch = `
-<svg
-  class="lucide lucide-folder-search"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10.7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v4.1" />
-  <path d="m21 21-1.9-1.9" />
-  <circle cx="17" cy="17" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-symlink.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44596,7 +45545,7 @@ var FolderSymlink = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-sync.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44621,9 +45570,34 @@ var FolderSync = `
   <path d="m22 18-1.535 1.605a5 5 0 0 1-8-1.5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/folder-search.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FolderSearch = `
+<svg
+  class="lucide lucide-folder-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10.7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v4.1" />
+  <path d="m21 21-1.9-1.9" />
+  <circle cx="17" cy="17" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-tree.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44649,7 +45623,7 @@ var FolderTree = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44674,7 +45648,7 @@ var FolderUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-user.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44699,7 +45673,7 @@ var FolderUser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-users.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44725,7 +45699,7 @@ var FolderUsers = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44750,7 +45724,7 @@ var FolderX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folder.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44773,7 +45747,7 @@ var Folder = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/folders.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44797,7 +45771,7 @@ var Folders = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/footprints.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44823,7 +45797,7 @@ var Footprints = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/forklift.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44852,7 +45826,7 @@ var Forklift = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/form.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44878,7 +45852,7 @@ var Form = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/forward.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44902,7 +45876,7 @@ var Forward = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/frame.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44928,7 +45902,7 @@ var Frame = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fuel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44954,7 +45928,7 @@ var Fuel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/fullscreen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -44981,7 +45955,7 @@ var Fullscreen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/funnel-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45006,7 +45980,7 @@ var FunnelPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/funnel-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45031,7 +46005,7 @@ var FunnelX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/funnel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45052,9 +46026,34 @@ var Funnel = `
   <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/gallery-horizontal-end.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var GalleryHorizontalEnd = `
+<svg
+  class="lucide lucide-gallery-horizontal-end"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 7v10" />
+  <path d="M6 5v14" />
+  <rect width="12" height="18" x="10" y="3" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/galaxy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45079,59 +46078,9 @@ var Galaxy = `
   <circle cx="12" cy="12" r="1" fill="currentColor" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/gallery-horizontal-end.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var GalleryHorizontalEnd = `
-<svg
-  class="lucide lucide-gallery-horizontal-end"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 7v10" />
-  <path d="M6 5v14" />
-  <rect width="12" height="18" x="10" y="3" rx="2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/gallery-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var GalleryHorizontal = `
-<svg
-  class="lucide lucide-gallery-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 3v18" />
-  <rect width="12" height="18" x="6" y="3" rx="2" />
-  <path d="M22 3v18" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/gallery-thumbnails.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45156,9 +46105,34 @@ var GalleryThumbnails = `
   <path d="M19 21h1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/gallery-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var GalleryHorizontal = `
+<svg
+  class="lucide lucide-gallery-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 3v18" />
+  <rect width="12" height="18" x="6" y="3" rx="2" />
+  <path d="M22 3v18" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/gallery-vertical-end.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45183,7 +46157,7 @@ var GalleryVerticalEnd = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gallery-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45208,7 +46182,7 @@ var GalleryVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gamepad-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45235,7 +46209,7 @@ var Gamepad2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gamepad-directional.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45261,7 +46235,7 @@ var GamepadDirectional = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gamepad.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45288,7 +46262,7 @@ var Gamepad = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gap-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45316,7 +46290,7 @@ var GapHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gap-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45344,7 +46318,7 @@ var GapVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gauge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45368,7 +46342,7 @@ var Gauge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gavel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45395,7 +46369,7 @@ var Gavel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gem.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45420,7 +46394,7 @@ var Gem = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/georgian-lari.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45446,7 +46420,7 @@ var GeorgianLari = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/germ-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45481,7 +46455,7 @@ var GermOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/germ.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45515,7 +46489,7 @@ var Germ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ghost.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45540,7 +46514,7 @@ var Ghost = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/gift.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45566,7 +46540,7 @@ var Gift = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-branch-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45592,7 +46566,7 @@ var GitBranchMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-branch-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45620,7 +46594,7 @@ var GitBranchPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-branch.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45645,7 +46619,7 @@ var GitBranch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-commit-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45668,9 +46642,34 @@ var GitCommitHorizontal = `
   <line x1="15" x2="21" y1="12" y2="12" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/git-commit-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var GitCommitVertical = `
+<svg
+  class="lucide lucide-git-commit-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3v6" />
+  <circle cx="12" cy="12" r="3" />
+  <path d="M12 15v6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/git-compare-arrows.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45698,7 +46697,7 @@ var GitCompareArrows = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-compare.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45722,34 +46721,9 @@ var GitCompare = `
   <path d="M11 18H8a2 2 0 0 1-2-2V9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/git-commit-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var GitCommitVertical = `
-<svg
-  class="lucide lucide-git-commit-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3v6" />
-  <circle cx="12" cy="12" r="3" />
-  <path d="M12 15v6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/git-fork.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45776,7 +46750,7 @@ var GitFork = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-graph.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45804,7 +46778,7 @@ var GitGraph = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-merge-conflict.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45831,7 +46805,7 @@ var GitMergeConflict = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-merge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45856,7 +46830,7 @@ var GitMerge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request-arrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45883,7 +46857,7 @@ var GitPullRequestArrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request-closed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45911,7 +46885,7 @@ var GitPullRequestClosed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request-create-arrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45939,7 +46913,7 @@ var GitPullRequestCreateArrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request-create.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45966,7 +46940,7 @@ var GitPullRequestCreate = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request-draft.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -45993,7 +46967,7 @@ var GitPullRequestDraft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/git-pull-request.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46019,7 +46993,7 @@ var GitPullRequest = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/glass-water.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46043,7 +47017,7 @@ var GlassWater = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/glasses.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46070,7 +47044,7 @@ var Glasses = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-ban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46097,7 +47071,7 @@ var GlobeBan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46121,7 +47095,7 @@ var GlobeCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46147,7 +47121,7 @@ var GlobeCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46173,7 +47147,7 @@ var GlobeLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46202,7 +47176,7 @@ var GlobeOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46229,7 +47203,7 @@ var GlobePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46254,7 +47228,7 @@ var GlobeX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/globe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46277,9 +47251,34 @@ var Globe = `
   <path d="M2 12h20" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/goal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Goal = `
+<svg
+  class="lucide lucide-goal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 13V2l8 4-8 4" />
+  <path d="M20.561 10.222a9 9 0 1 1-12.55-5.29" />
+  <path d="M8.002 9.997a5 5 0 1 0 8.9 2.02" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/gpu.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46304,34 +47303,9 @@ var Gpu = `
   <circle cx="8" cy="11" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/goal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Goal = `
-<svg
-  class="lucide lucide-goal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 13V2l8 4-8 4" />
-  <path d="M20.561 10.222a9 9 0 1 1-12.55-5.29" />
-  <path d="M8.002 9.997a5 5 0 1 0 8.9 2.02" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/graduation-cap.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46356,7 +47330,7 @@ var GraduationCap = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grape.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46387,7 +47361,7 @@ var Grape = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/graph-hub.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46414,9 +47388,37 @@ var GraphHub = `
   <path d="M16 7a4 4 0 0 1 4 4v6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/graph-ring.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var GraphRing = `
+<svg
+  class="lucide lucide-graph-ring"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.006 19.241a8 8 0 0 1-10.011 0" />
+  <path d="M19.919 14.143a8 8 0 0 0-4.971-8.583" />
+  <path d="M4.081 14.143A8 8 0 0 1 9.052 5.56" />
+  <circle cx="12" cy="5.001" r="3" />
+  <circle cx="19" cy="17" r="3" />
+  <circle cx="5" cy="17" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/graph-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46447,34 +47449,9 @@ var GraphStar = `
   <circle cx="4" cy="4" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/grid-2x2-plus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Grid2x2Plus = `
-<svg
-  class="lucide lucide-grid-2x2-plus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3v17a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H3" />
-  <path d="M16 19h6" />
-  <path d="M19 22v-6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-2x2-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46498,7 +47475,7 @@ var Grid2x2Check = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-2x2-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46521,9 +47498,34 @@ var Grid2x2X = `
   <path d="m16.5 21.5 5-5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/grid-2x2-plus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Grid2x2Plus = `
+<svg
+  class="lucide lucide-grid-2x2-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3v17a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H3" />
+  <path d="M16 19h6" />
+  <path d="M19 22v-6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-2x2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46548,7 +47550,7 @@ var Grid2x2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-3x2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46574,7 +47576,7 @@ var Grid3x2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-3x3-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46605,7 +47607,7 @@ var Grid3x3Off = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grid-3x3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46632,7 +47634,7 @@ var Grid3x3 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grip-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46660,7 +47662,7 @@ var GripHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grip-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46688,7 +47690,7 @@ var GripVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/grip.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46717,35 +47719,9 @@ var Grip = `
   <circle cx="5" cy="19" r="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/groceries.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Groceries = `
-<svg
-  class="lucide lucide-groceries"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 15h4" />
-  <path d="M19.424 11.095a2.5 2.5 0 00.471-2.309 2 2 0 00.424-3.286 2 2 0 00-2.143-3.322 2 2 0 00-.676.502 2 2 0 00-3.287.424 2.5 2.5 0 00-3.189 2.06A3 3 0 0012 11l4-4" />
-  <path d="M4 12.006A1 1 0 014.994 11H19a1 1 0 011 1v7a2 2 0 01-2 2H6a2 2 0 01-2-2z" />
-  <path d="M7 11a4 4 0 01-4-4V5a1 1 0 011-1h2a4 4 0 013.584 2.222" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/group.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46771,16 +47747,16 @@ var Group = `
   <rect width="7" height="5" x="10" y="12" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/guitar.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/groceries.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Guitar = `
+var Groceries = `
 <svg
-  class="lucide lucide-guitar"
+  class="lucide lucide-groceries"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -46791,15 +47767,15 @@ var Guitar = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="m11.9 12.1 4.514-4.514" />
-  <path d="M20.1 2.3a1 1 0 0 0-1.4 0l-1.114 1.114A2 2 0 0 0 17 4.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 17.828 7h1.344a2 2 0 0 0 1.414-.586L21.7 5.3a1 1 0 0 0 0-1.4z" />
-  <path d="m6 16 2 2" />
-  <path d="M8.23 9.85A3 3 0 0 1 11 8a5 5 0 0 1 5 5 3 3 0 0 1-1.85 2.77l-.92.38A2 2 0 0 0 12 18a4 4 0 0 1-4 4 6 6 0 0 1-6-6 4 4 0 0 1 4-4 2 2 0 0 0 1.85-1.23z" />
+  <path d="M10 15h4" />
+  <path d="M19.424 11.095a2.5 2.5 0 00.471-2.309 2 2 0 00.424-3.286 2 2 0 00-2.143-3.322 2 2 0 00-.676.502 2 2 0 00-3.287.424 2.5 2.5 0 00-3.189 2.06A3 3 0 0012 11l4-4" />
+  <path d="M4 12.006A1 1 0 014.994 11H19a1 1 0 011 1v7a2 2 0 01-2 2H6a2 2 0 01-2-2z" />
+  <path d="M7 11a4 4 0 01-4-4V5a1 1 0 011-1h2a4 4 0 013.584 2.222" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/guitar-electric.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46823,9 +47799,35 @@ var GuitarElectric = `
   <path d="M8.23 9.85a3 3 0 011.28-1.454 1 1 0 011.496.815 4 4 0 003.783 3.783 1 1 0 01.815 1.496 3 3 0 01-1.454 1.28l-.92.38A2 2 0 0012 18a4 4 0 01-4 4 6 6 0 01-6-6 4 4 0 014-4 2 2 0 001.85-1.23z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/guitar.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Guitar = `
+<svg
+  class="lucide lucide-guitar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m11.9 12.1 4.514-4.514" />
+  <path d="M20.1 2.3a1 1 0 0 0-1.4 0l-1.114 1.114A2 2 0 0 0 17 4.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 17.828 7h1.344a2 2 0 0 0 1.414-.586L21.7 5.3a1 1 0 0 0 0-1.4z" />
+  <path d="m6 16 2 2" />
+  <path d="M8.23 9.85A3 3 0 0 1 11 8a5 5 0 0 1 5 5 3 3 0 0 1-1.85 2.77l-.92.38A2 2 0 0 0 12 18a4 4 0 0 1-4 4 6 6 0 0 1-6-6 4 4 0 0 1 4-4 2 2 0 0 0 1.85-1.23z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/half-note.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46847,35 +47849,9 @@ var HalfNote = `
   <path d="M16 18V2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/ham.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Ham = `
-<svg
-  class="lucide lucide-ham"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.144 21.144A7.274 10.445 45 1 0 2.856 10.856" />
-  <path d="M13.144 21.144A7.274 4.365 45 0 0 2.856 10.856a7.274 4.365 45 0 0 10.288 10.288" />
-  <path d="M16.565 10.435 18.6 8.4a2.501 2.501 0 1 0 1.65-4.65 2.5 2.5 0 1 0-4.66 1.66l-2.024 2.025" />
-  <path d="m8.5 16.5-1-1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/hamburger.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46899,9 +47875,35 @@ var Hamburger = `
   <path d="m6.67 12 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/ham.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Ham = `
+<svg
+  class="lucide lucide-ham"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.144 21.144A7.274 10.445 45 1 0 2.856 10.856" />
+  <path d="M13.144 21.144A7.274 4.365 45 0 0 2.856 10.856a7.274 4.365 45 0 0 10.288 10.288" />
+  <path d="M16.565 10.435 18.6 8.4a2.501 2.501 0 1 0 1.65-4.65 2.5 2.5 0 1 0-4.66 1.66l-2.024 2.025" />
+  <path d="m8.5 16.5-1-1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hammer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46926,7 +47928,7 @@ var Hammer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-coins.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46953,7 +47955,7 @@ var HandCoins = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-fist.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -46979,7 +47981,7 @@ var HandFist = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-grab.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47006,7 +48008,7 @@ var HandGrab = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47032,7 +48034,7 @@ var HandHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-helping.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47057,7 +48059,7 @@ var HandHelping = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-metal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47083,7 +48085,7 @@ var HandMetal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hand-platter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47109,9 +48111,34 @@ var HandPlatter = `
   <path d="M5 14v6a1 1 0 0 1-1 1H2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/hand-truck.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HandTruck = `
+<svg
+  class="lucide lucide-hand-truck"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15.614 7.108-2.115-4.53a1 1 0 0 0-1.329-.484l-2.3 1.073a1 1 0 0 0-.484 1.33l4.783 10.247a1 1 0 0 0 1.329.483l5.925-2.765a1 1 0 0 0 .483-1.329l-2.245-4.81a1 1 0 0 0-1.329-.484l-6.831 3.188" />
+  <path d="M2 3.268a2 2 0 0 1 2.812.886l7 15a2 2 0 0 0 2.659.967L20 17.54" />
+  <circle cx="10" cy="20" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hand.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47137,7 +48164,7 @@ var Hand = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/handbag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47161,7 +48188,7 @@ var Handbag = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/handle-bottom-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47183,9 +48210,36 @@ var HandleBottomRight = `
   <path d="m21 15-6 6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/handshake.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Handshake = `
+<svg
+  class="lucide lucide-handshake"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+  <path d="m21 3 1 11h-2" />
+  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+  <path d="M3 4h8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hard-drive-download.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47212,7 +48266,7 @@ var HardDriveDownload = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hard-drive-upload.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47237,36 +48291,9 @@ var HardDriveUpload = `
   <path d="M10 18h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/handshake.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Handshake = `
-<svg
-  class="lucide lucide-handshake"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m11 17 2 2a1 1 0 1 0 3-3" />
-  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
-  <path d="m21 3 1 11h-2" />
-  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
-  <path d="M3 4h8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/hard-drive.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47290,9 +48317,61 @@ var HardDrive = `
   <path d="M6 16h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/hard-hat.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HardHat = `
+<svg
+  class="lucide lucide-hard-hat"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5" />
+  <path d="M14 6a6 6 0 0 1 6 6v3" />
+  <path d="M4 15v-3a6 6 0 0 1 6-6" />
+  <rect x="2" y="15" width="20" height="4" rx="1" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/hash.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Hash = `
+<svg
+  class="lucide lucide-hash"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <line x1="4" x2="20" y1="9" y2="9" />
+  <line x1="4" x2="20" y1="15" y2="15" />
+  <line x1="10" x2="8" y1="3" y2="21" />
+  <line x1="16" x2="14" y1="3" y2="21" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hat-glasses.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47317,62 +48396,9 @@ var HatGlasses = `
   <circle cx="7" cy="18" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/hash.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Hash = `
-<svg
-  class="lucide lucide-hash"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <line x1="4" x2="20" y1="9" y2="9" />
-  <line x1="4" x2="20" y1="15" y2="15" />
-  <line x1="10" x2="8" y1="3" y2="21" />
-  <line x1="16" x2="14" y1="3" y2="21" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/hd.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Hd = `
-<svg
-  class="lucide lucide-hd"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 12H6" />
-  <path d="M10 15V9" />
-  <path d="M14 14.5a.5.5 0 0 0 .5.5h1a2.5 2.5 0 0 0 2.5-2.5v-1A2.5 2.5 0 0 0 15.5 9h-1a.5.5 0 0 0-.5.5z" />
-  <path d="M6 15V9" />
-  <rect x="2" y="5" width="20" height="14" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/haze.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47400,16 +48426,16 @@ var Haze = `
   <path d="M12 5V2.5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/hdmi-port.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/hd.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var HdmiPort = `
+var Hd = `
 <svg
-  class="lucide lucide-hdmi-port"
+  class="lucide lucide-hd"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -47420,39 +48446,16 @@ var HdmiPort = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M22 9a1 1 0 00-1-1H3a1 1 0 00-1 1v4a1 1 0 001 1h.5a2 2 0 011.6.8l.3.4A2 2 0 007 16h10a2 2 0 001.6-.8l.3-.4a2 2 0 011.6-.8h.5a1 1 0 001-1z" />
-  <path d="M8 12h8" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/hard-hat.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var HardHat = `
-<svg
-  class="lucide lucide-hard-hat"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5" />
-  <path d="M14 6a6 6 0 0 1 6 6v3" />
-  <path d="M4 15v-3a6 6 0 0 1 6-6" />
-  <rect x="2" y="15" width="20" height="4" rx="1" />
+  <path d="M10 12H6" />
+  <path d="M10 15V9" />
+  <path d="M14 14.5a.5.5 0 0 0 .5.5h1a2.5 2.5 0 0 0 2.5-2.5v-1A2.5 2.5 0 0 0 15.5 9h-1a.5.5 0 0 0-.5.5z" />
+  <path d="M6 15V9" />
+  <rect x="2" y="5" width="20" height="14" rx="2" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/heading-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47476,9 +48479,33 @@ var Heading1 = `
   <path d="m17 12 3-2v8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/hdmi-port.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HdmiPort = `
+<svg
+  class="lucide lucide-hdmi-port"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 9a1 1 0 00-1-1H3a1 1 0 00-1 1v4a1 1 0 001 1h.5a2 2 0 011.6.8l.3.4A2 2 0 007 16h10a2 2 0 001.6-.8l.3-.4a2 2 0 011.6-.8h.5a1 1 0 001-1z" />
+  <path d="M8 12h8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/heading-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47502,36 +48529,9 @@ var Heading2 = `
   <path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/heading-3.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Heading3 = `
-<svg
-  class="lucide lucide-heading-3"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 12h8" />
-  <path d="M4 18V6" />
-  <path d="M12 18V6" />
-  <path d="M17.5 10.5c1.7-1 3.5 0 3.5 1.5a2 2 0 0 1-2 2" />
-  <path d="M17 17.5c2 1.5 4 .3 4-1.5a2 2 0 0 0-2-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/heading-4.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47558,7 +48558,7 @@ var Heading4 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/heading-5.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47583,9 +48583,36 @@ var Heading5 = `
   <path d="M17 17.7c.4.2.8.3 1.3.3 1.5 0 2.7-1.1 2.7-2.5S19.8 13 18.3 13H17" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/heading-3.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Heading3 = `
+<svg
+  class="lucide lucide-heading-3"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 12h8" />
+  <path d="M4 18V6" />
+  <path d="M12 18V6" />
+  <path d="M17.5 10.5c1.7-1 3.5 0 3.5 1.5a2 2 0 0 1-2 2" />
+  <path d="M17 17.5c2 1.5 4 .3 4-1.5a2 2 0 0 0-2-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/heading-6.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47612,7 +48639,7 @@ var Heading6 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/headphone-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47639,7 +48666,7 @@ var HeadphoneOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/headphones.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47662,7 +48689,7 @@ var Headphones = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/headset.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47686,7 +48713,7 @@ var Headset = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-crack.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47710,7 +48737,7 @@ var HeartCrack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-handshake.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47733,7 +48760,7 @@ var HeartHandshake = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47755,34 +48782,9 @@ var HeartMinus = `
   <path d="M15 15h6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/heart-off.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var HeartOff = `
-<svg
-  class="lucide lucide-heart-off"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10.5 4.893a5.5 5.5 0 0 1 1.091.931.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 1.872-1.002 3.356-2.187 4.655" />
-  <path d="m16.967 16.967-3.459 3.346a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5a5.5 5.5 0 0 1 2.747-4.761" />
-  <path d="m2 2 20 20" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47805,9 +48807,34 @@ var HeartPlus = `
   <path d="M18 12v6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/heart-off.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HeartOff = `
+<svg
+  class="lucide lucide-heart-off"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10.5 4.893a5.5 5.5 0 0 1 1.091.931.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 1.872-1.002 3.356-2.187 4.655" />
+  <path d="m16.967 16.967-3.459 3.346a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5a5.5 5.5 0 0 1 2.747-4.761" />
+  <path d="m2 2 20 20" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-pulse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47829,9 +48856,32 @@ var HeartPulse = `
   <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/heart.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Heart = `
+<svg
+  class="lucide lucide-heart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/heart-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47854,62 +48904,9 @@ var HeartX = `
   <path d="M21.955 8.774a5.5 5.5 0 0 0-9.546-2.95.6.6 0 0 1-.818 0A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.508 5.332a2 2 0 0 0 2.57.352" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/heart.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Heart = `
-<svg
-  class="lucide lucide-heart"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/helicopter.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Helicopter = `
-<svg
-  class="lucide lucide-helicopter"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 17v4" />
-  <path d="M14 3v8a2 2 0 0 0 2 2h5.865" />
-  <path d="M17 17v4" />
-  <path d="M18 17a4 4 0 0 0 4-4 8 6 0 0 0-8-6 6 5 0 0 0-6 5v3a2 2 0 0 0 2 2z" />
-  <path d="M2 10v5" />
-  <path d="M6 3h16" />
-  <path d="M7 21h14" />
-  <path d="M8 13H2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/heater.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47939,9 +48936,39 @@ var Heater = `
   <path d="M19 20v2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/helicopter.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Helicopter = `
+<svg
+  class="lucide lucide-helicopter"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 17v4" />
+  <path d="M14 3v8a2 2 0 0 0 2 2h5.865" />
+  <path d="M17 17v4" />
+  <path d="M18 17a4 4 0 0 0 4-4 8 6 0 0 0-8-6 6 5 0 0 0-6 5v3a2 2 0 0 0 2 2z" />
+  <path d="M2 10v5" />
+  <path d="M6 3h16" />
+  <path d="M7 21h14" />
+  <path d="M8 13H2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hexagon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47964,7 +48991,7 @@ var Hexagon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/highlighter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -47986,34 +49013,9 @@ var Highlighter = `
   <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/hiking-stick.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var HikingStick = `
-<svg
-  class="lucide lucide-hiking-stick"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.5 10.5 2 22" />
-  <path d="M16.352 11.648a1.205 1.205 0 01-1.704 0l-2.296-2.296a1.205 1.205 0 010-1.704l.72-.72a2 2 0 011.022-.546l.599-.12a2 2 0 001.569-1.57l.12-.598a2 2 0 01.546-1.022l.72-.72a1.205 1.205 0 011.704 0l2.296 2.296a1.205 1.205 0 010 1.704l-6.02 6.02a1 1 0 103 3l.201-.201A7.4 7.4 0 0021 9.93V7" />
-  <path d="m6 21-3-3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/hockey-stick.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48041,7 +49043,7 @@ var HockeyStick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hop-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48070,9 +49072,34 @@ var HopOff = `
   <path d="m2 2 20 20" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/hiking-stick.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HikingStick = `
+<svg
+  class="lucide lucide-hiking-stick"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.5 10.5 2 22" />
+  <path d="M16.352 11.648a1.205 1.205 0 01-1.704 0l-2.296-2.296a1.205 1.205 0 010-1.704l.72-.72a2 2 0 011.022-.546l.599-.12a2 2 0 001.569-1.57l.12-.598a2 2 0 01.546-1.022l.72-.72a1.205 1.205 0 011.704 0l2.296 2.296a1.205 1.205 0 010 1.704l-6.02 6.02a1 1 0 103 3l.201-.201A7.4 7.4 0 0021 9.93V7" />
+  <path d="m6 21-3-3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/hop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48102,7 +49129,7 @@ var Hop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hospital.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48129,7 +49156,7 @@ var Hospital = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hot-air-balloon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48154,7 +49181,7 @@ var HotAirBalloon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hotel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48186,7 +49213,7 @@ var Hotel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/hourglass-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48219,9 +49246,87 @@ var HourglassCog = `
   <circle cx="18" cy="18" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/hourglass.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Hourglass = `
+<svg
+  class="lucide lucide-hourglass"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 22h14" />
+  <path d="M5 2h14" />
+  <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+  <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/house-arrow-left.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HouseArrowLeft = `
+<svg
+  class="lucide lucide-house-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12.343 21H5a2 2 0 01-2-2v-9a2 2 0 01.709-1.527l7-6a2 2 0 012.582 0l7 6A2 2 0 0121 10.001v2.354" />
+  <path d="m18 15-3 3" />
+  <path d="M21 18h-6l3 3" />
+  <path d="M9 21v-8a1 1 0 011-.999h4a1 1 0 01.857.485" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/house-arrow-right.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HouseArrowRight = `
+<svg
+  class="lucide lucide-house-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12.353 21H5a2 2 0 01-2-2v-9a2 2 0 01.709-1.528l7-6a2 2 0 012.582 0l7 6A2 2 0 0121 10v2.344" />
+  <path d="M14.87 12.508A1 1 0 0014 12h-4a1 1 0 00-1 1v8" />
+  <path d="m17.999 21 3-3h-6" />
+  <path d="m20.999 18-3-3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/house-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48252,35 +49357,9 @@ var HouseCog = `
   <circle cx="18" cy="18" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/hourglass.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Hourglass = `
-<svg
-  class="lucide lucide-hourglass"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M5 22h14" />
-  <path d="M5 2h14" />
-  <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
-  <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/house-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48302,35 +49381,9 @@ var HouseHeart = `
   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/house-plug.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var HousePlug = `
-<svg
-  class="lucide lucide-house-plug"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 12V8.964" />
-  <path d="M14 12V8.964" />
-  <path d="M15 12a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2a1 1 0 0 1 1-1z" />
-  <path d="M8.5 21H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/house-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48356,7 +49409,7 @@ var HousePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/house-wifi.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48380,9 +49433,35 @@ var HouseWifi = `
   <path d="M7 10.754a8 8 0 0 1 10 0" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/house-plug.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var HousePlug = `
+<svg
+  class="lucide lucide-house-plug"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12V8.964" />
+  <path d="M14 12V8.964" />
+  <path d="M15 12a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2a1 1 0 0 1 1-1z" />
+  <path d="M8.5 21H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/house.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48406,7 +49485,7 @@ var House = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/houses.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48431,7 +49510,7 @@ var Houses = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ice-cream-bowl.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48456,7 +49535,7 @@ var IceCreamBowl = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ice-cream-cone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48481,7 +49560,7 @@ var IceCreamCone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/id-card-lanyard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48508,7 +49587,7 @@ var IdCardLanyard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/id-card.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48535,7 +49614,7 @@ var IdCard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48561,7 +49640,7 @@ var ImageDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48587,7 +49666,7 @@ var ImageMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48613,35 +49692,9 @@ var ImageOff = `
   <path d="M21 15V5a2 2 0 0 0-2-2H9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/image-play.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ImagePlay = `
-<svg
-  class="lucide lucide-image-play"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15 15.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z" />
-  <path d="M21 12.17V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6" />
-  <path d="m6 21 5-5" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/image-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48668,7 +49721,7 @@ var ImagePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48694,7 +49747,7 @@ var ImageUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image-upscale.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48724,7 +49777,7 @@ var ImageUpscale = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/image.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48749,7 +49802,7 @@ var Image = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/images.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48773,9 +49826,35 @@ var Images = `
   <rect x="8" y="2" width="14" height="14" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/image-play.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ImagePlay = `
+<svg
+  class="lucide lucide-image-play"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 15.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z" />
+  <path d="M21 12.17V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6" />
+  <path d="m6 21 5-5" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/import.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48800,7 +49879,7 @@ var Import = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/inbox.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48824,7 +49903,7 @@ var Inbox = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/indian-rupee.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48849,7 +49928,7 @@ var IndianRupee = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/infinity.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48872,7 +49951,7 @@ var Infinity$1 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/info.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48897,7 +49976,7 @@ var Info = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/inspection-panel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48924,7 +50003,7 @@ var InspectionPanel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/italic.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48949,7 +50028,7 @@ var Italic = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/iteration-ccw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48973,7 +50052,7 @@ var IterationCcw = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/iteration-cw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -48997,7 +50076,7 @@ var IterationCw = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/iv-bag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49020,9 +50099,37 @@ var IvBag = `
   <path d="M9.293 3c.453 0 .887-.18 1.207-.5s.754-.5 1.207-.5h.586c.453 0 .887.18 1.207.5s.754.5 1.207.5H16a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/jacket.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Jacket = `
+<svg
+  class="lucide lucide-jacket"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 2a3 3 0 00-3 3c0 2.6 4 4.4 4 7 0-2.6 4-4.4 4-7a3 3 0 00-3-3" />
+  <path d="M12 12v10" />
+  <path d="M18 10v10a2 2 0 01-2 2H8a2 2 0 01-2-2V10" />
+  <path d="M18 17h-2" />
+  <path d="M18 20h3a1 1 0 001-1V9a7 7 0 00-7-7H9a7 7 0 00-7 7v10a1 1 0 001 1h3" />
+  <path d="M6 17h2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/japanese-yen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49048,7 +50155,7 @@ var JapaneseYen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/joystick.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49074,7 +50181,7 @@ var Joystick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/kanban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49099,7 +50206,7 @@ var Kanban = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/kayak.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49125,7 +50232,7 @@ var Kayak = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/kazakh-tenge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49150,7 +50257,7 @@ var KazakhTenge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/key-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49174,7 +50281,7 @@ var KeyRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/key-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49199,7 +50306,7 @@ var KeySquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49224,7 +50331,7 @@ var Key = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/keyboard-music.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49255,7 +50362,7 @@ var KeyboardMusic = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/keyboard-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49287,7 +50394,7 @@ var KeyboardOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/keyboard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49318,7 +50425,7 @@ var Keyboard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lambda.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49340,9 +50447,34 @@ var Lambda = `
   <path d="M19 18a2 2 0 01-2 2c-4.87-.003-5.052-16-10-16a2 2 0 00-2 2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/lamp-ceiling.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LampCeiling = `
+<svg
+  class="lucide lucide-lamp-ceiling"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v5" />
+  <path d="M14.829 15.998a3 3 0 1 1-5.658 0" />
+  <path d="M20.92 14.606A1 1 0 0 1 20 16H4a1 1 0 0 1-.92-1.394l3-7A1 1 0 0 1 7 7h10a1 1 0 0 1 .92.606z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/lamp-desk.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49366,34 +50498,9 @@ var LampDesk = `
   <path d="m9.086 6.5-4.793 4.793a1 1 0 0 0-.18 1.17L7 18" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/lamp-ceiling.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LampCeiling = `
-<svg
-  class="lucide lucide-lamp-ceiling"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 2v5" />
-  <path d="M14.829 15.998a3 3 0 1 1-5.658 0" />
-  <path d="M20.92 14.606A1 1 0 0 1 20 16H4a1 1 0 0 1-.92-1.394l3-7A1 1 0 0 1 7 7h10a1 1 0 0 1 .92.606z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/lamp-floor.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49418,7 +50525,7 @@ var LampFloor = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lamp-wall-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49443,7 +50550,7 @@ var LampWallDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lamp-wall-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49468,7 +50575,7 @@ var LampWallUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lamp.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49493,7 +50600,7 @@ var Lamp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/land-plot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49517,37 +50624,9 @@ var LandPlot = `
   <path d="M17.51 12.85 6.5 19.15" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/landmark.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Landmark = `
-<svg
-  class="lucide lucide-landmark"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 18v-7" />
-  <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
-  <path d="M14 18v-7" />
-  <path d="M18 18v-7" />
-  <path d="M3 22h18" />
-  <path d="M6 18v-7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/languages.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49573,9 +50652,37 @@ var Languages = `
   <path d="M14 18h6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/landmark.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Landmark = `
+<svg
+  class="lucide lucide-landmark"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 18v-7" />
+  <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+  <path d="M14 18v-7" />
+  <path d="M18 18v-7" />
+  <path d="M3 22h18" />
+  <path d="M6 18v-7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/laptop-minimal-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49600,7 +50707,7 @@ var LaptopMinimalCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/laptop-minimal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49624,7 +50731,7 @@ var LaptopMinimal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/laptop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49648,7 +50755,7 @@ var Laptop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/laser.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49679,7 +50786,7 @@ var Laser = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lasso-select.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49706,7 +50813,7 @@ var LassoSelect = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lasso.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49731,7 +50838,7 @@ var Lasso = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layer-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49757,7 +50864,7 @@ var LayerArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layer-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49782,7 +50889,7 @@ var LayerArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layers-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49804,9 +50911,35 @@ var Layers2 = `
   <path d="m20 14.285 1.5.845a1 1 0 0 1 0 1.74L13 21.74a2 2 0 0 1-2 0l-8.5-4.87a1 1 0 0 1 0-1.74l1.5-.845" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/layers-arrow-up.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LayersArrowUp = `
+<svg
+  class="lucide lucide-layers-arrow-up"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 12V2" />
+  <path d="M2 17.002a1 1 0 00.58.91l8.6 3.91a2 2 0 001.65 0l8.58-3.9a1 1 0 00.59-.92" />
+  <path d="M7.674 8.774 2.58 11.09a1 1 0 000 1.822l8.6 3.91a2 2 0 001.65 0l8.58-3.9a1 1 0 00.59-.92 1 1 0 00-.59-.922l-5.078-2.308" />
+  <path d="m9 5 3-3 3 3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/layers-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49831,35 +50964,9 @@ var LayersArrowDown = `
   <path d="m9 19 3 3 3-3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/layers-arrow-up.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LayersArrowUp = `
-<svg
-  class="lucide lucide-layers-arrow-up"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 12V2" />
-  <path d="M2 17.002a1 1 0 00.58.91l8.6 3.91a2 2 0 001.65 0l8.58-3.9a1 1 0 00.59-.92" />
-  <path d="M7.674 8.774 2.58 11.09a1 1 0 000 1.822l8.6 3.91a2 2 0 001.65 0l8.58-3.9a1 1 0 00.59-.92 1 1 0 00-.59-.922l-5.078-2.308" />
-  <path d="m9 5 3-3 3 3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/layers-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49886,7 +50993,7 @@ var LayersMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layers-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49913,7 +51020,7 @@ var LayersPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layers.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49938,7 +51045,7 @@ var Layers = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49964,7 +51071,7 @@ var LayoutArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -49990,7 +51097,7 @@ var LayoutArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-dashboard.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50016,7 +51123,7 @@ var LayoutDashboard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-freeform.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50039,9 +51146,36 @@ var LayoutFreeform = `
   <rect width="7" height="7" x="4" y="14" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/layout-grid-plus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LayoutGridPlus = `
+<svg
+  class="lucide lucide-layout-grid-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 18h6" />
+  <path d="M18 15v6" />
+  <rect x="14" y="3" width="7" height="7" rx="1" />
+  <rect x="3" y="14" width="7" height="7" rx="1" />
+  <rect x="3" y="3" width="7" height="7" rx="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-grid-circles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50067,7 +51201,7 @@ var LayoutGridCircles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-grid.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50093,7 +51227,7 @@ var LayoutGrid = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-list.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50121,7 +51255,7 @@ var LayoutList = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-panel-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50146,7 +51280,7 @@ var LayoutPanelLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-panel-top.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50171,7 +51305,7 @@ var LayoutPanelTop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/layout-template.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50196,7 +51330,7 @@ var LayoutTemplate = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/leaf.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50218,33 +51352,9 @@ var Leaf = `
   <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/leafy-green.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LeafyGreen = `
-<svg
-  class="lucide lucide-leafy-green"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 22c1.25-.987 2.27-1.975 3.9-2.2a5.56 5.56 0 0 1 3.8 1.5 4 4 0 0 0 6.187-2.353 3.5 3.5 0 0 0 3.69-5.116A3.5 3.5 0 0 0 20.95 8 3.5 3.5 0 1 0 16 3.05a3.5 3.5 0 0 0-5.831 1.373 3.5 3.5 0 0 0-5.116 3.69 4 4 0 0 0-2.348 6.155C3.499 15.42 4.409 16.712 4.2 18.1 3.926 19.743 3.014 20.732 2 22" />
-  <path d="M2 22 17 7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/lectern.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50268,9 +51378,33 @@ var Lectern = `
   <path d="M18 6V3a1 1 0 00-1-1h-3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/leafy-green.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LeafyGreen = `
+<svg
+  class="lucide lucide-leafy-green"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 22c1.25-.987 2.27-1.975 3.9-2.2a5.56 5.56 0 0 1 3.8 1.5 4 4 0 0 0 6.187-2.353 3.5 3.5 0 0 0 3.69-5.116A3.5 3.5 0 0 0 20.95 8 3.5 3.5 0 1 0 16 3.05a3.5 3.5 0 0 0-5.831 1.373 3.5 3.5 0 0 0-5.116 3.69 4 4 0 0 0-2.348 6.155C3.499 15.42 4.409 16.712 4.2 18.1 3.926 19.743 3.014 20.732 2 22" />
+  <path d="M2 22 17 7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/lens-concave.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50293,7 +51427,7 @@ var LensConcave = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lens-convex.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50316,7 +51450,7 @@ var LensConvex = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lens.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50341,7 +51475,7 @@ var Lens = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50363,32 +51497,9 @@ var LetterA = `
   <path d="m4 20 7.55-15.712a.5.5 0 01.9 0L20 20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/letter-c.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LetterC = `
-<svg
-  class="lucide lucide-letter-c"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 6.708a8 8 0 100 10.584" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-b.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50409,9 +51520,32 @@ var LetterB = `
   <path d="M6 12h9a4 4 0 010 8H7a1 1 0 01-1-1V5a1 1 0 011-1h7a4 4 0 010 8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/letter-c.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LetterC = `
+<svg
+  class="lucide lucide-letter-c"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 6.708a8 8 0 100 10.584" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50432,33 +51566,9 @@ var LetterD = `
   <path d="M11 4a8 8 0 010 16H6.406A.406.406 0 016 19.594V4.406A.406.406 0 016.406 4z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/letter-f.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LetterF = `
-<svg
-  class="lucide lucide-letter-f"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 12h8" />
-  <path d="M6 20V5a1 1 0 011-1h11" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-e.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50480,9 +51590,33 @@ var LetterE = `
   <path d="M6 12h8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/letter-f.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LetterF = `
+<svg
+  class="lucide lucide-letter-f"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 12h8" />
+  <path d="M6 20V5a1 1 0 011-1h11" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-g.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50505,7 +51639,7 @@ var LetterG = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-h.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50530,7 +51664,7 @@ var LetterH = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-i.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50553,7 +51687,7 @@ var LetterI = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-j.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50576,7 +51710,7 @@ var LetterJ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-k.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50601,7 +51735,7 @@ var LetterK = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-l.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50624,7 +51758,7 @@ var LetterL = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-m.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50647,7 +51781,7 @@ var LetterM = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-n.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50670,7 +51804,7 @@ var LetterN = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-o.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50693,7 +51827,7 @@ var LetterO = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-p.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50716,7 +51850,7 @@ var LetterP = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-q.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50740,7 +51874,7 @@ var LetterQ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-r.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50764,7 +51898,7 @@ var LetterR = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-s.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50787,7 +51921,7 @@ var LetterS = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-spacing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50811,32 +51945,9 @@ var LetterSpacing = `
   <path d="m8 16 3.453-7.648a.6.6 0 011.094.001L16 16" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/letter-u.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LetterU = `
-<svg
-  class="lucide lucide-letter-u"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 4v10a6 6 0 0012 0V4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-t.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50858,9 +51969,32 @@ var LetterT = `
   <path d="M5 4h14" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/letter-u.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LetterU = `
+<svg
+  class="lucide lucide-letter-u"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 4v10a6 6 0 0012 0V4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-v.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50883,7 +52017,7 @@ var LetterV = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-w.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50904,33 +52038,9 @@ var LetterW = `
   <path d="m21 4-4.794 15.821a.25.25 0 01-.471.021l-3.503-8.685a.25.25 0 00-.464 0l-3.503 8.685a.25.25 0 01-.47-.021L3 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/letter-x.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LetterX = `
-<svg
-  class="lucide lucide-letter-x"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M18 4 6 20" />
-  <path d="m6 4 12 16" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-y.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50952,9 +52062,33 @@ var LetterY = `
   <path d="m6 4 6 8 6-8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/letter-x.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LetterX = `
+<svg
+  class="lucide lucide-letter-x"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 4 6 20" />
+  <path d="m6 4 12 16" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/letter-z.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -50977,7 +52111,7 @@ var LetterZ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/letters.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51003,7 +52137,7 @@ var Letters = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/library-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51026,35 +52160,9 @@ var LibraryBig = `
   <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/library.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Library = `
-<svg
-  class="lucide lucide-library"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m16 6 4 14" />
-  <path d="M12 6v14" />
-  <path d="M8 8v12" />
-  <path d="M4 4v16" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/life-buoy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51080,9 +52188,35 @@ var LifeBuoy = `
   <circle cx="12" cy="12" r="4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/library.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Library = `
+<svg
+  class="lucide lucide-library"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 6 4 14" />
+  <path d="M12 6v14" />
+  <path d="M8 8v12" />
+  <path d="M4 4v16" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/ligature.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51109,7 +52243,7 @@ var Ligature = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lightbulb-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51136,7 +52270,7 @@ var LightbulbOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lightbulb.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51161,7 +52295,7 @@ var Lightbulb = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lighthouse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51195,7 +52329,7 @@ var Lighthouse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/line-dot-bottom-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51219,7 +52353,7 @@ var LineDotBottomVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/line-dot-right-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51243,7 +52377,7 @@ var LineDotRightHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/line-dot-left-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51267,7 +52401,7 @@ var LineDotLeftHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/line-dot-top-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51289,32 +52423,9 @@ var LineDotTopVertical = `
   <circle cx="12" cy="6" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/line-squiggle.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LineSquiggle = `
-<svg
-  class="lucide lucide-line-squiggle"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M7 3.5c5-2 7 2.5 3 4C1.5 10 2 15 5 16c5 2 9-10 14-7s.5 13.5-4 12c-5-2.5.5-11 6-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/line-height.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51338,9 +52449,32 @@ var LineHeight = `
   <path d="m8 16 3.453-7.648a.6.6 0 011.094.001L16 16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/line-squiggle.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LineSquiggle = `
+<svg
+  class="lucide lucide-line-squiggle"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M7 3.5c5-2 7 2.5 3 4C1.5 10 2 15 5 16c5 2 9-10 14-7s.5 13.5-4 12c-5-2.5.5-11 6-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/line-style.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51368,7 +52502,7 @@ var LineStyle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/link-2-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51394,7 +52528,7 @@ var Link2Off = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/link-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51419,7 +52553,7 @@ var Link2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/link.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51443,7 +52577,7 @@ var Link = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51469,7 +52603,7 @@ var ListCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-checks.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51496,7 +52630,7 @@ var ListChecks = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-chevrons-down-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51521,36 +52655,9 @@ var ListChevronsDownUp = `
   <path d="m15 19 3-3 3 3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/list-chevrons-up-down.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ListChevronsUpDown = `
-<svg
-  class="lucide lucide-list-chevrons-up-down"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h8" />
-  <path d="M3 12h8" />
-  <path d="M3 19h8" />
-  <path d="m15 8 3-3 3 3" />
-  <path d="m15 16 3 3 3-3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51575,36 +52682,9 @@ var ListClock = `
   <circle cx="16" cy="15" r="6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/list-end.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ListEnd = `
-<svg
-  class="lucide lucide-list-end"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16 5H3" />
-  <path d="M16 12H3" />
-  <path d="M9 19H3" />
-  <path d="m16 16-3 3 3 3" />
-  <path d="M21 5v12a2 2 0 0 1-2 2h-6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-collapse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51631,7 +52711,7 @@ var ListCollapse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-filter-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51656,9 +52736,63 @@ var ListFilterPlus = `
   <path d="M19 8V2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/list-chevrons-up-down.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ListChevronsUpDown = `
+<svg
+  class="lucide lucide-list-chevrons-up-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h8" />
+  <path d="M3 12h8" />
+  <path d="M3 19h8" />
+  <path d="m15 8 3-3 3 3" />
+  <path d="m15 16 3 3 3-3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/list-end.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ListEnd = `
+<svg
+  class="lucide lucide-list-end"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 5H3" />
+  <path d="M16 12H3" />
+  <path d="M9 19H3" />
+  <path d="m16 16-3 3 3 3" />
+  <path d="M21 5v12a2 2 0 0 1-2 2h-6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-filter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51683,7 +52817,7 @@ var ListFilter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-indent-decrease.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51709,7 +52843,7 @@ var ListIndentDecrease = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-indent-increase.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51735,7 +52869,7 @@ var ListIndentIncrease = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51761,7 +52895,7 @@ var ListMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-music.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51786,9 +52920,37 @@ var ListMusic = `
   <circle cx="18" cy="16" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/list-ordered.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ListOrdered = `
+<svg
+  class="lucide lucide-list-ordered"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 5h10" />
+  <path d="M11 12h10" />
+  <path d="M11 19h10" />
+  <path d="M4 4h1v5" />
+  <path d="M4 9h2" />
+  <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51815,7 +52977,7 @@ var ListPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-restart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51840,37 +53002,9 @@ var ListRestart = `
   <path d="M11 10v4h4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/list-ordered.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ListOrdered = `
-<svg
-  class="lucide lucide-list-ordered"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 5h10" />
-  <path d="M11 12h10" />
-  <path d="M11 19h10" />
-  <path d="M4 4h1v5" />
-  <path d="M4 9h2" />
-  <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-sort-ascending.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51895,7 +53029,7 @@ var ListSortAscending = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/list-sort-descending.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51918,36 +53052,9 @@ var ListSortDescending = `
   <path d="M9 19H3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/list-start.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ListStart = `
-<svg
-  class="lucide lucide-list-start"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h6" />
-  <path d="M3 12h13" />
-  <path d="M3 19h13" />
-  <path d="m16 8-3-3 3-3" />
-  <path d="M21 19V7a2 2 0 0 0-2-2h-6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-todo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51972,9 +53079,36 @@ var ListTodo = `
   <rect x="3" y="4" width="6" height="6" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/list-start.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ListStart = `
+<svg
+  class="lucide lucide-list-start"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h6" />
+  <path d="M3 12h13" />
+  <path d="M3 19h13" />
+  <path d="m16 8-3-3 3-3" />
+  <path d="M21 19V7a2 2 0 0 0-2-2h-6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-tree.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -51999,35 +53133,9 @@ var ListTree = `
   <path d="M3 5v12a2 2 0 0 0 2 2h3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/list-video.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ListVideo = `
-<svg
-  class="lucide lucide-list-video"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 5H3" />
-  <path d="M10 12H3" />
-  <path d="M10 19H3" />
-  <path d="M15 12.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/list-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52052,9 +53160,35 @@ var ListX = `
   <path d="m20.5 9.5-5 5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/list-video.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ListVideo = `
+<svg
+  class="lucide lucide-list-video"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 5H3" />
+  <path d="M10 12H3" />
+  <path d="M10 19H3" />
+  <path d="M15 12.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/list.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52082,7 +53216,7 @@ var List = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/loader-circle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52105,7 +53239,7 @@ var LoaderCircle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/loader-pinwheel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52123,15 +53257,15 @@ var LoaderPinwheel = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M22 12a1 1 0 0 1-10 0 1 1 0 0 0-10 0" />
-  <path d="M7 20.7a1 1 0 1 1 5-8.7 1 1 0 1 0 5-8.6" />
-  <path d="M7 3.3a1 1 0 1 1 5 8.6 1 1 0 1 0 5 8.6" />
+  <path d="M17 3.34A5 5 0 1112 12a5 5 0 10-5 8.66" />
+  <path d="M22 12a5 5 0 01-10 0 5 5 0 00-10 0" />
+  <path d="M7 3.34A5 5 0 1112 12a5 5 0 105 8.66" />
   <circle cx="12" cy="12" r="10" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/loader.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52159,37 +53293,9 @@ var Loader = `
   <path d="m4.9 4.9 2.9 2.9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/locate-fixed.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LocateFixed = `
-<svg
-  class="lucide lucide-locate-fixed"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <line x1="2" x2="5" y1="12" y2="12" />
-  <line x1="19" x2="22" y1="12" y2="12" />
-  <line x1="12" x2="12" y1="2" y2="5" />
-  <line x1="12" x2="12" y1="19" y2="22" />
-  <circle cx="12" cy="12" r="7" />
-  <circle cx="12" cy="12" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/locate-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52216,9 +53322,37 @@ var LocateOff = `
   <path d="M7.05 7.05a7 7 0 0 0 9.9 9.9" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/locate-fixed.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var LocateFixed = `
+<svg
+  class="lucide lucide-locate-fixed"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <line x1="2" x2="5" y1="12" y2="12" />
+  <line x1="19" x2="22" y1="12" y2="12" />
+  <line x1="12" x2="12" y1="2" y2="5" />
+  <line x1="12" x2="12" y1="19" y2="22" />
+  <circle cx="12" cy="12" r="7" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/locate.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52245,7 +53379,7 @@ var Locate = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lock-keyhole-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52270,7 +53404,7 @@ var LockKeyholeOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lock-keyhole.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52295,7 +53429,7 @@ var LockKeyhole = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lock-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52319,7 +53453,7 @@ var LockOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52343,7 +53477,7 @@ var Lock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/log-in.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52368,7 +53502,7 @@ var LogIn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/log-out.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52393,7 +53527,7 @@ var LogOut = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/logs.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52424,7 +53558,7 @@ var Logs = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/lollipop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52449,7 +53583,7 @@ var Lollipop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/luggage.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52476,7 +53610,7 @@ var Luggage = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/magnet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52501,7 +53635,7 @@ var Magnet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-badge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52527,7 +53661,7 @@ var MailBadge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52552,7 +53686,7 @@ var MailCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52570,16 +53704,16 @@ var MailClock = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M16 14v2.2l1.6 1" />
-  <path d="m22 7-.759.484" />
-  <path d="M6.835 20H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v2" />
-  <path d="M7.605 10.567 2 7" />
-  <circle cx="16" cy="16" r="6" />
+  <path d="M17 15.5v1.7l1 .625" />
+  <path d="m22 7-2.244 1.43" />
+  <path d="M22 9.516V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h4.512" />
+  <path d="M9.62 11.848 2 7" />
+  <circle cx="17" cy="17" r="5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52604,7 +53738,7 @@ var MailDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52630,7 +53764,7 @@ var MailExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52655,7 +53789,7 @@ var MailMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52677,34 +53811,9 @@ var MailOpen = `
   <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/mail-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MailPen = `
-<svg
-  class="lucide lucide-mail-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15.363 17.634a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506l3.013-3.009a1 1 0 10-3.004-3.004z" />
-  <path d="M22 10.38V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h6.25" />
-  <path d="m22 7-8.991 5.727a2 2 0 01-2.009 0L2 7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52728,9 +53837,60 @@ var MailPlus = `
   <path d="M16 19h6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/mail-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MailPen = `
+<svg
+  class="lucide lucide-mail-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.363 17.634a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506l3.013-3.009a1 1 0 10-3.004-3.004z" />
+  <path d="M22 10.38V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h6.25" />
+  <path d="m22 7-8.991 5.727a2 2 0 01-2.009 0L2 7" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/mail-question-mark.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MailQuestionMark = `
+<svg
+  class="lucide lucide-mail-question-mark"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 10.35V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h12.3" />
+  <path d="m22 7-8.97 5.7a2 2 0 01-2.06 0L2 7" />
+  <path d="M20 18.5c.5-1 2-1 2-2.5a2 2 0 00-2-2 2.5 2.5 0 00-2 1" />
+  <path d="M20 22h.01" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52755,35 +53915,9 @@ var MailSearch = `
   <path d="m22 22-1.5-1.5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/mail-question-mark.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MailQuestionMark = `
-<svg
-  class="lucide lucide-mail-question-mark"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M22 10.35V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h12.3" />
-  <path d="m22 7-8.97 5.7a2 2 0 01-2.06 0L2 7" />
-  <path d="M20 18.5c.5-1 2-1 2-2.5a2 2 0 00-2-2 2.5 2.5 0 00-2 1" />
-  <path d="M20 22h.01" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/mail-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52809,7 +53943,7 @@ var MailX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mail.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52833,7 +53967,7 @@ var Mail = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mailbox.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52859,7 +53993,7 @@ var Mailbox = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mails.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52884,7 +54018,7 @@ var Mails = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mango.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52908,7 +54042,7 @@ var Mango = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52934,7 +54068,7 @@ var MapMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-check-inside.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52958,7 +54092,7 @@ var MapPinCheckInside = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -52983,7 +54117,7 @@ var MapPinCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-house.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53009,7 +54143,7 @@ var MapPinHouse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-minus-inside.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53031,34 +54165,9 @@ var MapPinMinusInside = `
   <path d="M9 10h6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/map-pin-minus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MapPinMinus = `
-<svg
-  class="lucide lucide-map-pin-minus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M18.977 14C19.6 12.701 20 11.343 20 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 1.202 0 32 32 0 0 0 .824-.738" />
-  <circle cx="12" cy="10" r="3" />
-  <path d="M16 18h6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53085,7 +54194,7 @@ var MapPinOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53110,7 +54219,7 @@ var MapPinPen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-plus-inside.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53133,16 +54242,16 @@ var MapPinPlusInside = `
   <path d="M9 10h6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/map-pin-plus.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/map-pin-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var MapPinPlus = `
+var MapPinMinus = `
 <svg
-  class="lucide lucide-map-pin-plus"
+  class="lucide lucide-map-pin-minus"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -53153,15 +54262,14 @@ var MapPinPlus = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M19.914 11.105A7.298 7.298 0 0 0 20 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 1.202 0 32 32 0 0 0 .824-.738" />
+  <path d="M18.977 14C19.6 12.701 20 11.343 20 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 1.202 0 32 32 0 0 0 .824-.738" />
   <circle cx="12" cy="10" r="3" />
   <path d="M16 18h6" />
-  <path d="M19 15v6" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53185,16 +54293,16 @@ var MapPinSearch = `
   <circle cx="18" cy="18" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/map-pin-x-inside.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/map-pin-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var MapPinXInside = `
+var MapPinPlus = `
 <svg
-  class="lucide lucide-map-pin-x-inside"
+  class="lucide lucide-map-pin-plus"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -53205,14 +54313,15 @@ var MapPinXInside = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-  <path d="m14.5 7.5-5 5" />
-  <path d="m9.5 7.5 5 5" />
+  <path d="M19.914 11.105A7.298 7.298 0 0 0 20 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 1.202 0 32 32 0 0 0 .824-.738" />
+  <circle cx="12" cy="10" r="3" />
+  <path d="M16 18h6" />
+  <path d="M19 15v6" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53238,7 +54347,7 @@ var MapPinX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pin.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53260,9 +54369,34 @@ var MapPin = `
   <circle cx="12" cy="10" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/map-pin-x-inside.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MapPinXInside = `
+<svg
+  class="lucide lucide-map-pin-x-inside"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <path d="m14.5 7.5-5 5" />
+  <path d="m9.5 7.5 5 5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/map-pinned.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53287,7 +54421,7 @@ var MapPinned = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53314,7 +54448,7 @@ var MapPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/map.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53339,7 +54473,7 @@ var Map$1 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53363,7 +54497,7 @@ var MarginBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53388,7 +54522,7 @@ var MarginHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53412,7 +54546,7 @@ var MarginLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53436,7 +54570,7 @@ var MarginRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-top.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53460,7 +54594,7 @@ var MarginTop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53485,7 +54619,7 @@ var MarginVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/margin.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53512,7 +54646,7 @@ var Margin = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mars-stroke.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53538,7 +54672,7 @@ var MarsStroke = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mars.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53563,7 +54697,7 @@ var Mars = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/martini.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53588,7 +54722,7 @@ var Martini = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/maximize-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53614,7 +54748,7 @@ var Maximize2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/maximize.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53640,7 +54774,7 @@ var Maximize = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/medal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53668,7 +54802,7 @@ var Medal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/megaphone-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53695,7 +54829,7 @@ var MegaphoneOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/megaphone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53720,7 +54854,7 @@ var Megaphone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/memory-stick.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53753,7 +54887,7 @@ var MemoryStick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/menu.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53778,7 +54912,7 @@ var Menu = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/merge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53803,7 +54937,7 @@ var Merge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53827,7 +54961,7 @@ var MessageCircleCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53852,7 +54986,7 @@ var MessageCircleCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-dashed-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53883,7 +55017,7 @@ var MessageCircleDashedCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53913,7 +55047,7 @@ var MessageCircleDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53938,7 +55072,7 @@ var MessageCircleExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53962,7 +55096,7 @@ var MessageCircleHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-more.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -53988,7 +55122,7 @@ var MessageCircleMore = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54013,7 +55147,7 @@ var MessageCircleOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54036,34 +55170,9 @@ var MessageCirclePlus = `
   <path d="M12 8v8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/message-circle-reply.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MessageCircleReply = `
-<svg
-  class="lucide lucide-message-circle-reply"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-  <path d="m10 15-3-3 3-3" />
-  <path d="M7 12h8a2 2 0 0 1 2 2v1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54086,9 +55195,34 @@ var MessageCircleQuestionMark = `
   <path d="M12 17h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/message-circle-reply.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MessageCircleReply = `
+<svg
+  class="lucide lucide-message-circle-reply"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+  <path d="m10 15-3-3 3-3" />
+  <path d="M7 12h8a2 2 0 0 1 2 2v1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54114,7 +55248,7 @@ var MessageCircleText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54139,7 +55273,7 @@ var MessageCircleX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-circle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54162,7 +55296,7 @@ var MessageCircle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54184,9 +55318,34 @@ var MessageSquareCheck = `
   <path d="m9 11 2 2 4-4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/message-square-code.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MessageSquareCode = `
+<svg
+  class="lucide lucide-message-square-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+  <path d="m10 8-3 3 3 3" />
+  <path d="m14 14 3-3-3-3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54216,34 +55375,9 @@ var MessageSquareDashed = `
   <path d="M8 3h2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/message-square-code.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MessageSquareCode = `
-<svg
-  class="lucide lucide-message-square-code"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
-  <path d="m10 8-3 3 3 3" />
-  <path d="m14 14 3-3-3-3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-diff.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54267,33 +55401,9 @@ var MessageSquareDiff = `
   <path d="M12 7v4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/message-square-dot.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MessageSquareDot = `
-<svg
-  class="lucide lucide-message-square-dot"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12.7 3H4a2 2 0 0 0-2 2v16.286a.71.71 0 0 0 1.212.502l2.202-2.202A2 2 0 0 1 6.828 19H20a2 2 0 0 0 2-2v-4.7" />
-  <circle cx="19" cy="6" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54316,9 +55426,33 @@ var MessageSquareExclamationPoint = `
   <path d="M12 7v4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/message-square-dot.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MessageSquareDot = `
+<svg
+  class="lucide lucide-message-square-dot"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12.7 3H4a2 2 0 0 0-2 2v16.286a.71.71 0 0 0 1.212.502l2.202-2.202A2 2 0 0 1 6.828 19H20a2 2 0 0 0 2-2v-4.7" />
+  <circle cx="19" cy="6" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54342,7 +55476,7 @@ var MessageSquareHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54367,7 +55501,7 @@ var MessageSquareLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-more.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54393,7 +55527,7 @@ var MessageSquareMore = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54416,34 +55550,9 @@ var MessageSquareOff = `
   <path d="M8.656 3H20a2 2 0 0 1 2 2v11.344" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/message-square-quote.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MessageSquareQuote = `
-<svg
-  class="lucide lucide-message-square-quote"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 14a2 2 0 0 0 2-2V8h-2" />
-  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
-  <path d="M8 14a2 2 0 0 0 2-2V8H8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54466,9 +55575,34 @@ var MessageSquarePlus = `
   <path d="M9 11h6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/message-square-quote.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MessageSquareQuote = `
+<svg
+  class="lucide lucide-message-square-quote"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 14a2 2 0 0 0 2-2V8h-2" />
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+  <path d="M8 14a2 2 0 0 0 2-2V8H8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-reply.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54493,7 +55627,7 @@ var MessageSquareReply = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-share.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54518,7 +55652,7 @@ var MessageSquareShare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54544,7 +55678,7 @@ var MessageSquareText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54569,7 +55703,7 @@ var MessageSquareX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/message-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54592,7 +55726,7 @@ var MessageSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/messages-circle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54616,7 +55750,7 @@ var MessagesCircle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/messages-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54640,7 +55774,7 @@ var MessagesSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/metronome.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54666,7 +55800,7 @@ var Metronome = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mic-audio-lines.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54697,7 +55831,7 @@ var MicAudioLines = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mic-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54725,7 +55859,7 @@ var MicOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mic-signal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54754,7 +55888,7 @@ var MicSignal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mic-vocal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54779,7 +55913,7 @@ var MicVocal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mic.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54804,7 +55938,7 @@ var Mic = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/microchip.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54836,7 +55970,7 @@ var Microchip = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/microscope.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54864,7 +55998,7 @@ var Microscope = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/microwave.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54891,7 +56025,7 @@ var Microwave = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/midi-port.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54918,34 +56052,9 @@ var MidiPort = `
   <circle cx="12" cy="12" r="10" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/milestone.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Milestone = `
-<svg
-  class="lucide lucide-milestone"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 13v8" />
-  <path d="M12 3v3" />
-  <path d="M18.172 6a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/milk-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -54969,16 +56078,16 @@ var MilkOff = `
   <line x1="2" x2="22" y1="2" y2="22" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/milk.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/milestone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Milk = `
+var Milestone = `
 <svg
-  class="lucide lucide-milk"
+  class="lucide lucide-milestone"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -54989,14 +56098,14 @@ var Milk = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M8 2h8" />
-  <path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2" />
-  <path d="M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0" />
+  <path d="M12 13v8" />
+  <path d="M12 3v3" />
+  <path d="M18.172 6a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/minimize-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55020,9 +56129,34 @@ var Minimize2 = `
   <path d="M4 14h6v6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/milk.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Milk = `
+<svg
+  class="lucide lucide-milk"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2h8" />
+  <path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2" />
+  <path d="M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/minimize.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55048,7 +56182,7 @@ var Minimize = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55071,7 +56205,7 @@ var Minus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mirror-rectangular.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55096,7 +56230,7 @@ var MirrorRectangular = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mirror-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55123,7 +56257,7 @@ var MirrorRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-activity.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55149,7 +56283,7 @@ var MonitorActivity = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55175,7 +56309,7 @@ var MonitorCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-cloud.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55201,7 +56335,7 @@ var MonitorCloud = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55235,7 +56369,7 @@ var MonitorCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55261,7 +56395,7 @@ var MonitorDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55288,7 +56422,7 @@ var MonitorDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55315,7 +56449,7 @@ var MonitorOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-pause.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55342,7 +56476,7 @@ var MonitorPause = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-pc.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55371,7 +56505,7 @@ var MonitorPc = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55397,7 +56531,7 @@ var MonitorPlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-smartphone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55423,7 +56557,7 @@ var MonitorSmartphone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-speaker.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55450,7 +56584,7 @@ var MonitorSpeaker = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-stop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55476,7 +56610,7 @@ var MonitorStop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55503,7 +56637,7 @@ var MonitorUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55530,7 +56664,7 @@ var MonitorX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/monitor.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55555,7 +56689,7 @@ var Monitor = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/moon-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55580,7 +56714,7 @@ var MoonStar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/moon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55603,7 +56737,7 @@ var Moon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mop-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55635,7 +56769,7 @@ var MopSparkles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55658,36 +56792,9 @@ var Mop = `
   <path d="m6.98 13.02 2.665-2.664a1.21 1.21 0 011.71 0l2.29 2.288a1.21 1.21 0 010 1.712l-2.088 2.087" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/moped.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Moped = `
-<svg
-  class="lucide lucide-moped"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m18.16 14.12-2.927-8.447A1 1 0 0 0 14.288 5H13" />
-  <path d="M19 10a7 7 0 0 0-6.928 6" />
-  <path d="M2 10h5.5a3 3 0 0 1 2.747 1.795l1.669 3.803A1 1 0 0 1 11.01 17H8" />
-  <circle cx="19" cy="17" r="3" />
-  <circle cx="5" cy="17" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/mosque.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55713,9 +56820,36 @@ var Mosque = `
   <path d="M7 22V6a5 5 0 00-2-4 5 5 0 00-2 4v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/moped.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Moped = `
+<svg
+  class="lucide lucide-moped"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m18.16 14.12-2.927-8.447A1 1 0 0 0 14.288 5H13" />
+  <path d="M19 10a7 7 0 0 0-6.928 6" />
+  <path d="M2 10h5.5a3 3 0 0 1 2.747 1.795l1.669 3.803A1 1 0 0 1 11.01 17H8" />
+  <circle cx="19" cy="17" r="3" />
+  <circle cx="5" cy="17" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/motorbike.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55740,33 +56874,9 @@ var Motorbike = `
   <circle cx="5" cy="17" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/mountain-snow.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MountainSnow = `
-<svg
-  class="lucide lucide-mountain-snow"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-  <path d="M4.14 15.08c2.62-1.57 5.24-1.43 7.86.42 2.74 1.94 5.49 2 8.23.19" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/mound-shovel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55790,9 +56900,33 @@ var MoundShovel = `
   <path d="m22 4-4-2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/mountain-snow.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MountainSnow = `
+<svg
+  class="lucide lucide-mountain-snow"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+  <path d="M4.14 15.08c2.62-1.57 5.24-1.43 7.86.42 2.74 1.94 5.49 2 8.23.19" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/mountain.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55813,34 +56947,9 @@ var Mountain = `
   <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/mouse-left.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MouseLeft = `
-<svg
-  class="lucide lucide-mouse-left"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 7.318V10" />
-  <path d="M5 10v5a7 7 0 0 0 14 0V9c0-3.527-2.608-6.515-6-7" />
-  <circle cx="7" cy="4" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55864,9 +56973,34 @@ var MouseOff = `
   <path d="M22 22 2 2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/mouse-left.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MouseLeft = `
+<svg
+  class="lucide lucide-mouse-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 7.318V10" />
+  <path d="M5 10v5a7 7 0 0 0 14 0V9c0-3.527-2.608-6.515-6-7" />
+  <circle cx="7" cy="4" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-pointer-2-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55891,7 +57025,7 @@ var MousePointer2Off = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-pointer-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55914,7 +57048,7 @@ var MousePointer2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-pointer-ban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55939,7 +57073,7 @@ var MousePointerBan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-pointer-click.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55966,7 +57100,7 @@ var MousePointerClick = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-pointer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -55990,7 +57124,7 @@ var MousePointer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56015,7 +57149,7 @@ var MouseRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56039,7 +57173,7 @@ var Mouse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouth-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56066,7 +57200,7 @@ var MouthOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/mouth.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56090,7 +57224,7 @@ var Mouth = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56116,7 +57250,7 @@ var Move3d = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-diagonal-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56141,7 +57275,7 @@ var MoveDiagonal2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-diagonal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56164,33 +57298,9 @@ var MoveDiagonal = `
   <path d="M19 5 5 19" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/move-down-right.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MoveDownRight = `
-<svg
-  class="lucide lucide-move-down-right"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 13V19H13" />
-  <path d="M5 5L19 19" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/move-down-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56212,9 +57322,33 @@ var MoveDownLeft = `
   <path d="M19 5L5 19" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/move-down-right.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MoveDownRight = `
+<svg
+  class="lucide lucide-move-down-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 13V19H13" />
+  <path d="M5 5L19 19" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/move-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56238,7 +57372,7 @@ var MoveDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56263,7 +57397,7 @@ var MoveHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56287,7 +57421,7 @@ var MoveLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56311,7 +57445,7 @@ var MoveRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-up-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56335,7 +57469,7 @@ var MoveUpLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-up-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56359,7 +57493,7 @@ var MoveUpRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/move-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56381,9 +57515,34 @@ var MoveUp = `
   <path d="M12 2V22" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/move-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MoveVertical = `
+<svg
+  class="lucide lucide-move-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="m8 18 4 4 4-4" />
+  <path d="m8 6 4-4 4 4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/move.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56409,34 +57568,9 @@ var Move = `
   <path d="m9 5 3-3 3 3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/move-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var MoveVertical = `
-<svg
-  class="lucide lucide-move-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 2v20" />
-  <path d="m8 18 4 4 4-4" />
-  <path d="m8 6 4-4 4 4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/navigation-2-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56461,7 +57595,7 @@ var Navigation2Off = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/navigation-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56484,7 +57618,7 @@ var Navigation2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/navigation-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56507,9 +57641,32 @@ var NavigationOff = `
   <line x1="2" x2="22" y1="2" y2="22" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/navigation.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Navigation = `
+<svg
+  class="lucide lucide-navigation"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/nepali-rupee.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56532,32 +57689,9 @@ var NepaliRupee = `
   <path d="M6 4h12" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/navigation.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Navigation = `
-<svg
-  class="lucide lucide-navigation"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <polygon points="3 11 22 2 13 21 11 13 3 11" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/network.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56582,61 +57716,9 @@ var Network = `
   <path d="M12 12V8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/nfc.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Nfc = `
-<svg
-  class="lucide lucide-nfc"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36" />
-  <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58" />
-  <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
-  <path d="M16.37 2a20.16 20.16 0 0 1 0 20" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/non-binary.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var NonBinary = `
-<svg
-  class="lucide lucide-non-binary"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 2v10" />
-  <path d="m8.5 4 7 4" />
-  <path d="m8.5 8 7-4" />
-  <circle cx="12" cy="17" r="5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/newspaper.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56660,9 +57742,86 @@ var Newspaper = `
   <rect width="8" height="4" x="10" y="6" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/nfc.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Nfc = `
+<svg
+  class="lucide lucide-nfc"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36" />
+  <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+  <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+  <path d="M16.37 2a20.16 20.16 0 0 1 0 20" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/nigerian-naira.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var NigerianNaira = `
+<svg
+  class="lucide lucide-nigerian-naira"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 10h16" />
+  <path d="M4 14h16" />
+  <path d="M6 20V4.25a.25.25 0 01.455-.143l11.09 15.786a.25.25 0 00.455-.144V4" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/non-binary.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var NonBinary = `
+<svg
+  class="lucide lucide-non-binary"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v10" />
+  <path d="m8.5 4 7 4" />
+  <path d="m8.5 8 7-4" />
+  <circle cx="12" cy="17" r="5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/notebook-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56689,9 +57848,37 @@ var NotebookDot = `
   <circle cx="18" cy="5" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/notebook-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var NotebookPen = `
+<svg
+  class="lucide lucide-notebook-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
+  <path d="M2 6h4" />
+  <path d="M2 10h4" />
+  <path d="M2 14h4" />
+  <path d="M2 18h4" />
+  <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/notebook-tabs.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56720,37 +57907,9 @@ var NotebookTabs = `
   <path d="M15 17h5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/notebook-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var NotebookPen = `
-<svg
-  class="lucide lucide-notebook-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
-  <path d="M2 6h4" />
-  <path d="M2 10h4" />
-  <path d="M2 14h4" />
-  <path d="M2 18h4" />
-  <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/notebook-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56780,7 +57939,7 @@ var NotebookText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/notebook.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56808,7 +57967,7 @@ var Notebook = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/notepad-text-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56841,9 +58000,34 @@ var NotepadTextDashed = `
   <path d="M8 18h5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/numbers.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Numbers = `
+<svg
+  class="lucide lucide-numbers"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m10 4 2.6-1.95a.25.25 0 01.4.2V10" />
+  <path d="M16 14.535A4 4 0 0118 14a2 2 0 010 4 2 2 0 010 4 4 4 0 01-2-.535" />
+  <path d="M8 22H4.5a.5.5 0 01-.5-.5c0-2.68 4-2.932 4-5.5a2 2 0 00-2-2 2.5 2.5 0 00-2 1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/notepad-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56870,34 +58054,9 @@ var NotepadText = `
   <path d="M8 18h5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/numbers.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Numbers = `
-<svg
-  class="lucide lucide-numbers"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m10 4 2.6-1.95a.25.25 0 01.4.2V10" />
-  <path d="M16 14.535A4 4 0 0118 14a2 2 0 010 4 2 2 0 010 4 4 4 0 01-2-.535" />
-  <path d="M8 22H4.5a.5.5 0 01-.5-.5c0-2.68 4-2.932 4-5.5a2 2 0 00-2-2 2.5 2.5 0 00-2 1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/nut-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56924,7 +58083,7 @@ var NutOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/nut.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56949,7 +58108,7 @@ var Nut = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/octagon-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56972,9 +58131,33 @@ var OctagonExclamationPoint = `
   <path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/octagon-minus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var OctagonMinus = `
+<svg
+  class="lucide lucide-octagon-minus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+  <path d="M8 12h8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/octagon-pause.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -56997,33 +58180,9 @@ var OctagonPause = `
   <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/octagon-minus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var OctagonMinus = `
-<svg
-  class="lucide lucide-octagon-minus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
-  <path d="M8 12h8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/octagon-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57048,7 +58207,7 @@ var OctagonX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/octagon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57071,7 +58230,7 @@ var Octagon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/omega.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57094,7 +58253,7 @@ var Omega = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/opacity.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57129,7 +58288,7 @@ var Opacity = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/option.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57153,7 +58312,7 @@ var Option = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/orbit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57180,7 +58339,7 @@ var Orbit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57205,7 +58364,7 @@ var Package2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/origami.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57230,7 +58389,7 @@ var Origami = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57257,7 +58416,7 @@ var PackageCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57284,7 +58443,7 @@ var PackageMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57308,9 +58467,36 @@ var PackageOpen = `
   <path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/package-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PackagePen = `
+<svg
+  class="lucide lucide-package-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14.34V12l8.71-5" />
+  <path d="M16.511 21.141a2 2 0 0 0 .854-.506l4.013-4.009a1 1 0 1 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .599.626z" />
+  <path d="M21 9.114V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l5.087 2.907" />
+  <path d="M3.29 7 12 12" />
+  <path d="m7.5 4.27 9 5.15" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/package-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57336,36 +58522,9 @@ var PackagePlus = `
   <path d="m7.5 4.27 8.997 5.148" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/package-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var PackagePen = `
-<svg
-  class="lucide lucide-package-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 14.34V12l8.71-5" />
-  <path d="M16.511 21.141a2 2 0 0 0 .854-.506l4.013-4.009a1 1 0 1 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .599.626z" />
-  <path d="M21 9.114V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l5.087 2.907" />
-  <path d="M3.29 7 12 12" />
-  <path d="m7.5 4.27 9 5.15" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/package-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57393,7 +58552,7 @@ var PackageQuestionMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57421,7 +58580,7 @@ var PackageSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57449,7 +58608,7 @@ var PackageX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/package.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57475,7 +58634,7 @@ var Package = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/paint-bucket.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57499,9 +58658,41 @@ var PaintBucket = `
   <path d="m8.5 4.5 2.148-2.148a1.205 1.205 0 0 1 1.704 0l7.296 7.296a1.205 1.205 0 0 1 0 1.704l-7.592 7.592a3.615 3.615 0 0 1-5.112 0l-3.888-3.888a3.615 3.615 0 0 1 0-5.112L5.67 7.33" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/paint-gun.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PaintGun = `
+<svg
+  class="lucide lucide-paint-gun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 10v-.172a2 2 0 0 1 .586-1.414l.828-.828A2 2 0 0 0 13 6.172V3a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v3.172a2 2 0 0 0 .586 1.414l.828.828A2 2 0 0 1 7 9.828V10" />
+  <path d="m12 14-.81 3.242a1 1 0 0 1-.97.758H7" />
+  <path d="M13 12h1" />
+  <path d="M18.01 10h.01" />
+  <path d="M18.01 14h.01" />
+  <path d="M22.01 12h.01" />
+  <path d="M22.01 16h.01" />
+  <path d="M22.01 8h.01" />
+  <path d="m4 14-1.845 7.379A.5.5 0 0 0 2.64 22h2.58a1 1 0 0 0 .97-.758L8 14" />
+  <rect x="2" y="10" width="11" height="4" rx="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/paint-roller.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57526,7 +58717,7 @@ var PaintRoller = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/paintbrush-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57552,7 +58743,7 @@ var PaintbrushVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/paintbrush.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57577,7 +58768,7 @@ var Paintbrush = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/palette.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57604,7 +58795,7 @@ var Palette = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panda.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57632,7 +58823,7 @@ var Panda = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-bottom-close.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57657,7 +58848,7 @@ var PanelBottomClose = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-bottom-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57684,7 +58875,7 @@ var PanelBottomDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-bottom-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57709,7 +58900,7 @@ var PanelBottomOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57733,7 +58924,7 @@ var PanelBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-left-close.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57758,7 +58949,7 @@ var PanelLeftClose = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-left-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57785,7 +58976,7 @@ var PanelLeftDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-left-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57810,7 +59001,7 @@ var PanelLeftOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-left-right-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57841,7 +59032,7 @@ var PanelLeftRightDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57865,7 +59056,7 @@ var PanelLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-right-close.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57890,7 +59081,7 @@ var PanelRightClose = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-right-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57917,7 +59108,7 @@ var PanelRightDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-right-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57942,7 +59133,7 @@ var PanelRightOpen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57964,9 +59155,34 @@ var PanelRight = `
   <path d="M15 3v18" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/panel-top-close.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PanelTopClose = `
+<svg
+  class="lucide lucide-panel-top-close"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M3 9h18" />
+  <path d="m9 16 3-3 3 3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-top-bottom-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -57997,7 +59213,7 @@ var PanelTopBottomDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-top-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58024,7 +59240,7 @@ var PanelTopDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-top-open.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58047,34 +59263,9 @@ var PanelTopOpen = `
   <path d="m15 14-3 3-3-3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/panel-top-close.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var PanelTopClose = `
-<svg
-  class="lucide lucide-panel-top-close"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="18" height="18" x="3" y="3" rx="2" />
-  <path d="M3 9h18" />
-  <path d="m9 16 3-3 3 3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/panel-top.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58098,7 +59289,7 @@ var PanelTop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panels-left-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58123,7 +59314,7 @@ var PanelsLeftBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panels-right-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58148,7 +59339,7 @@ var PanelsRightBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/panels-top-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58173,7 +59364,7 @@ var PanelsTopLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/paper-bag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58195,32 +59386,9 @@ var PaperBag = `
   <path d="M7 3h11.379a2 2 0 011.789 1.106l.723 1.447A1 1 0 0119.997 7h-8.525a2 2 0 01-1.789-1.106L8.79 4.105a2 2 0 10-3.579 1.789l2.261 4.522A5 5 0 018 12.652V21" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/paperclip.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Paperclip = `
-<svg
-  class="lucide lucide-paperclip"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/parasol.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58243,9 +59411,32 @@ var Parasol = `
   <path d="M21 21H3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/paperclip.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Paperclip = `
+<svg
+  class="lucide lucide-paperclip"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/parentheses.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58267,9 +59458,36 @@ var Parentheses = `
   <path d="M16 3s4 3 4 9-4 9-4 9" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/parking-meter.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ParkingMeter = `
+<svg
+  class="lucide lucide-parking-meter"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 15h2" />
+  <path d="M12 12v3" />
+  <path d="M12 19v3" />
+  <path d="M15.282 19a1 1 0 0 0 .948-.68l2.37-6.988a7 7 0 1 0-13.2 0l2.37 6.988a1 1 0 0 0 .948.68z" />
+  <path d="M9 9a3 3 0 1 1 6 0" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/park.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58297,36 +59515,9 @@ var Park = `
   <circle cx="19" cy="6" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/parking-meter.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ParkingMeter = `
-<svg
-  class="lucide lucide-parking-meter"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 15h2" />
-  <path d="M12 12v3" />
-  <path d="M12 19v3" />
-  <path d="M15.282 19a1 1 0 0 0 .948-.68l2.37-6.988a7 7 0 1 0-13.2 0l2.37 6.988a1 1 0 0 0 .948.68z" />
-  <path d="M9 9a3 3 0 1 1 6 0" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/party-popper.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58357,7 +59548,7 @@ var PartyPopper = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pause.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58381,7 +59572,7 @@ var Pause = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/paw-print.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58407,7 +59598,7 @@ var PawPrint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pc-case.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58431,33 +59622,9 @@ var PcCase = `
   <path d="M9 10h6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/pen-line.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var PenLine = `
-<svg
-  class="lucide lucide-pen-line"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13 21h8" />
-  <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/pen-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58482,7 +59649,7 @@ var PenOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pen-tool.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58508,7 +59675,7 @@ var PenTool = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58529,9 +59696,33 @@ var Pen = `
   <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/pen-line.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PenLine = `
+<svg
+  class="lucide lucide-pen-line"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13 21h8" />
+  <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/pencil-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58556,7 +59747,7 @@ var PencilLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pencil-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58582,7 +59773,7 @@ var PencilOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pencil-ruler.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58610,7 +59801,7 @@ var PencilRuler = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pencil-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58640,7 +59831,7 @@ var PencilSparkles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pencil.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58664,7 +59855,7 @@ var Pencil = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pentagon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58687,7 +59878,7 @@ var Pentagon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58710,9 +59901,35 @@ var Percent = `
   <circle cx="17.5" cy="17.5" r="2.5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/person-standing.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PersonStanding = `
+<svg
+  class="lucide lucide-person-standing"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="5" r="1" />
+  <path d="m9 20 3-6 3 6" />
+  <path d="m6 8 6 2 6-2" />
+  <path d="M12 10v4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/perfume-bottle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58741,35 +59958,9 @@ var PerfumeBottle = `
   <rect x="9" y="2" width="6" height="5" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/person-standing.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var PersonStanding = `
-<svg
-  class="lucide lucide-person-standing"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="12" cy="5" r="1" />
-  <path d="m9 20 3-6 3 6" />
-  <path d="m6 8 6 2 6-2" />
-  <path d="M12 10v4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/phi.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58793,7 +59984,7 @@ var Phi = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/philippine-peso.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58818,7 +60009,7 @@ var PhilippinePeso = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-call.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58843,7 +60034,7 @@ var PhoneCall = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-forwarded.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58868,7 +60059,7 @@ var PhoneForwarded = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-incoming.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58893,7 +60084,7 @@ var PhoneIncoming = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-log.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58918,7 +60109,7 @@ var PhoneLog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-missed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58943,7 +60134,7 @@ var PhoneMissed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58968,7 +60159,7 @@ var PhoneOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone-outgoing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -58993,7 +60184,7 @@ var PhoneOutgoing = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/phone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59016,7 +60207,7 @@ var Phone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pi.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59041,7 +60232,7 @@ var Pi = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/piano.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59069,7 +60260,7 @@ var Piano = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pickaxe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59093,33 +60284,9 @@ var Pickaxe = `
   <path d="M18.352 3.352a1.205 1.205 0 0 0-1.704 0l-5.296 5.296a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l5.296-5.296a1.205 1.205 0 0 0 0-1.704z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/picture-in-picture-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var PictureInPicture2 = `
-<svg
-  class="lucide lucide-picture-in-picture-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 9V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h4" />
-  <rect width="10" height="7" x="12" y="13" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/picture-in-picture.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59144,9 +60311,33 @@ var PictureInPicture = `
   <rect x="12" y="14" width="10" height="7" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/picture-in-picture-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var PictureInPicture2 = `
+<svg
+  class="lucide lucide-picture-in-picture-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 9V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h4" />
+  <rect width="10" height="7" x="12" y="13" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/piggy-bank.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59171,7 +60362,7 @@ var PiggyBank = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pilcrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59198,7 +60389,7 @@ var PilcrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pilcrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59225,7 +60416,7 @@ var PilcrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pilcrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59250,7 +60441,7 @@ var Pilcrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pill-bottle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59273,33 +60464,9 @@ var PillBottle = `
   <rect width="16" height="5" x="4" y="2" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/pill.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Pill = `
-<svg
-  class="lucide lucide-pill"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
-  <path d="m8.5 8.5 7 7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/pin-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59323,9 +60490,33 @@ var PinOff = `
   <path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h11" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/pill.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Pill = `
+<svg
+  class="lucide lucide-pill"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
+  <path d="m8.5 8.5 7 7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/pin.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59349,7 +60540,7 @@ var Pin = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pipette.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59374,7 +60565,7 @@ var Pipette = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pizza.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59401,7 +60592,7 @@ var Pizza = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plane-landing.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59425,7 +60616,7 @@ var PlaneLanding = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plane-takeoff.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59449,7 +60640,7 @@ var PlaneTakeoff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plane.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59472,7 +60663,7 @@ var Plane = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plant-pot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59497,7 +60688,7 @@ var PlantPot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/play-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59522,7 +60713,7 @@ var PlayOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59545,7 +60736,7 @@ var Play = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/playing-card.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59569,7 +60760,7 @@ var PlayingCard = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/playing-cards-fan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59594,7 +60785,7 @@ var PlayingCardsFan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/playing-cards.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59619,7 +60810,7 @@ var PlayingCards = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plug-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59646,7 +60837,7 @@ var Plug2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plug-zap.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59673,7 +60864,7 @@ var PlugZap = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plug.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59699,7 +60890,7 @@ var Plug = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59723,7 +60914,7 @@ var Plus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pocket-knife.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59748,34 +60939,9 @@ var PocketKnife = `
   <path d="M18 11.66V22a4 4 0 0 0 4-4V6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/podium.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Podium = `
-<svg
-  class="lucide lucide-podium"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 6V2h-1" />
-  <path d="M9 15a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1" />
-  <path d="M9 21V11a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v10" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/pointer-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59801,16 +60967,16 @@ var PointerOff = `
   <path d="m2 2 20 20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/popcorn.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/podium.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Popcorn = `
+var Podium = `
 <svg
-  class="lucide lucide-popcorn"
+  class="lucide lucide-podium"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -59821,15 +60987,14 @@ var Popcorn = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" />
-  <path d="M10 22 9 8" />
-  <path d="m14 22 1-14" />
-  <path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" />
+  <path d="M12 6V2h-1" />
+  <path d="M9 15a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1" />
+  <path d="M9 21V11a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v10" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pointer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59854,9 +61019,35 @@ var Pointer = `
   <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/popcorn.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Popcorn = `
+<svg
+  class="lucide lucide-popcorn"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" />
+  <path d="M10 22 9 8" />
+  <path d="m14 22 1-14" />
+  <path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/popsicle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59880,7 +61071,7 @@ var Popsicle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/pound-sterling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59904,7 +61095,7 @@ var PoundSterling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/power-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59930,7 +61121,7 @@ var PowerOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/power.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59954,7 +61145,7 @@ var Power = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/presentation.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -59979,7 +61170,7 @@ var Presentation = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/printer-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60008,7 +61199,7 @@ var Printer3d = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/printer-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60034,7 +61225,7 @@ var PrinterCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/printer-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60061,7 +61252,7 @@ var PrinterX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/printer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60086,7 +61277,7 @@ var Printer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/projector.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60114,7 +61305,7 @@ var Projector = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/proportions.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60137,32 +61328,9 @@ var Proportions = `
   <path d="M2 9h13a2 2 0 0 1 2 2v9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/puzzle.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Puzzle = `
-<svg
-  class="lucide lucide-puzzle"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/pyramid.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60186,7 +61354,7 @@ var Pyramid = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/qr-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60218,9 +61386,32 @@ var QrCode = `
   <path d="M12 21v-1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/puzzle.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Puzzle = `
+<svg
+  class="lucide lucide-puzzle"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60244,7 +61435,7 @@ var QuestionMark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/quote.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60268,7 +61459,7 @@ var Quote = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rabbit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60295,7 +61486,7 @@ var Rabbit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/radar.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60323,9 +61514,32 @@ var Radar = `
   <path d="m13.41 10.59 5.66-5.66" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/radical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Radical = `
+<svg
+  class="lucide lucide-radical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 12h3.28a1 1 0 0 1 .948.684l2.298 7.934a.5.5 0 0 0 .96-.044L13.82 4.771A1 1 0 0 1 14.792 4H21" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/radiation.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60349,16 +61563,16 @@ var Radiation = `
   <path d="M8 12a4 4 0 0 1 2-3.464L7.528 4.254a1 1 0 0 0-1.46-.305 10 10 0 0 0-4.006 6.94A1 1 0 0 0 3 12z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/radical.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/radio-receiver.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Radical = `
+var RadioReceiver = `
 <svg
-  class="lucide lucide-radical"
+  class="lucide lucide-radio-receiver"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -60369,12 +61583,15 @@ var Radical = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M3 12h3.28a1 1 0 0 1 .948.684l2.298 7.934a.5.5 0 0 0 .96-.044L13.82 4.771A1 1 0 0 1 14.792 4H21" />
+  <path d="M5 16v2" />
+  <path d="M19 16v2" />
+  <rect width="20" height="8" x="2" y="8" rx="2" />
+  <path d="M18 12h.01" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/radio-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60400,35 +61617,9 @@ var RadioOff = `
   <path d="M7.753 16.239a6 6 0 0 1 0-8.478" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/radio-receiver.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var RadioReceiver = `
-<svg
-  class="lucide lucide-radio-receiver"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M5 16v2" />
-  <path d="M19 16v2" />
-  <rect width="20" height="8" x="2" y="8" rx="2" />
-  <path d="M18 12h.01" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/radio-tower.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60457,7 +61648,7 @@ var RadioTower = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/radio.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60482,34 +61673,9 @@ var Radio = `
   <circle cx="12" cy="12" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/rainbow.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Rainbow = `
-<svg
-  class="lucide lucide-rainbow"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M22 17a10 10 0 0 0-20 0" />
-  <path d="M6 17a6 6 0 0 1 12 0" />
-  <path d="M10 17a2 2 0 0 1 4 0" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/radius.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60533,9 +61699,34 @@ var Radius = `
   <circle cx="12" cy="12" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/rainbow.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Rainbow = `
+<svg
+  class="lucide lucide-rainbow"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a10 10 0 0 0-20 0" />
+  <path d="M6 17a6 6 0 0 1 12 0" />
+  <path d="M10 17a2 2 0 0 1 4 0" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/rat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60562,7 +61753,7 @@ var Rat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ratio.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60586,7 +61777,7 @@ var Ratio = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-cent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60611,7 +61802,7 @@ var ReceiptCent = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-euro.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60636,7 +61827,7 @@ var ReceiptEuro = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-indian-rupee.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60662,7 +61853,7 @@ var ReceiptIndianRupee = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-japanese-yen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60689,7 +61880,7 @@ var ReceiptJapaneseYen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-pound-sterling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60715,7 +61906,7 @@ var ReceiptPoundSterling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-russian-ruble.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60740,7 +61931,7 @@ var ReceiptRussianRuble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-swiss-franc.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60766,7 +61957,7 @@ var ReceiptSwissFranc = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60792,7 +61983,7 @@ var ReceiptText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt-turkish-lira.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60817,7 +62008,7 @@ var ReceiptTurkishLira = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/receipt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60842,7 +62033,7 @@ var Receipt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rectangle-circle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60866,7 +62057,7 @@ var RectangleCircle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rectangle-ellipsis.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60892,7 +62083,7 @@ var RectangleEllipsis = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rectangle-goggles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60915,7 +62106,7 @@ var RectangleGoggles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rectangle-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60936,9 +62127,33 @@ var RectangleHorizontal = `
   <rect width="20" height="12" x="2" y="6" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/rectangle-landscape-play.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var RectangleLandscapePlay = `
+<svg
+  class="lucide lucide-rectangle-landscape-play"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.033 11.44a.65.65 0 010 1.12l-4.065 2.352a.65.65 0 01-.968-.56V9.648a.65.65 0 01.967-.56z" />
+  <rect x="2" y="5" width="20" height="14" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/rectangle-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -60959,33 +62174,9 @@ var RectangleVertical = `
   <rect width="12" height="20" x="6" y="2" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/redo-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Redo2 = `
-<svg
-  class="lucide lucide-redo-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m15 14 5-5-5-5" />
-  <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/recycle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61011,9 +62202,33 @@ var Recycle = `
   <path d="m13.378 9.633 4.096 1.098 1.097-4.096" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/redo-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Redo2 = `
+<svg
+  class="lucide lucide-redo-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 14 5-5-5-5" />
+  <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/redo-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61038,7 +62253,7 @@ var RedoDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/redo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61062,7 +62277,7 @@ var Redo = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/refresh-ccw-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61087,35 +62302,9 @@ var RefreshCcwDot = `
   <circle cx="12" cy="12" r="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/refresh-ccw.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var RefreshCcw = `
-<svg
-  class="lucide lucide-refresh-ccw"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-  <path d="M3 3v5h5" />
-  <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-  <path d="M16 16h5v5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/refresh-cw-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61142,9 +62331,35 @@ var RefreshCwOff = `
   <path d="M22 22 2 2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/refresh-ccw.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var RefreshCcw = `
+<svg
+  class="lucide lucide-refresh-ccw"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+  <path d="M3 3v5h5" />
+  <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+  <path d="M16 16h5v5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/refresh-cw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61170,7 +62385,7 @@ var RefreshCw = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/refrigerator.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61195,7 +62410,7 @@ var Refrigerator = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/regex.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61221,7 +62436,7 @@ var Regex = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/remove-formatting.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61248,7 +62463,7 @@ var RemoveFormatting = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/repeat-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61273,9 +62488,35 @@ var Repeat1 = `
   <path d="M11 10h1v4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/repeat-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Repeat2 = `
+<svg
+  class="lucide lucide-repeat-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m2 9 3-3 3 3" />
+  <path d="M13 18H7a2 2 0 0 1-2-2V6" />
+  <path d="m22 15-3 3-3-3" />
+  <path d="M11 6h6a2 2 0 0 1 2 2v10" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/repeat-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61304,7 +62545,7 @@ var RepeatOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/repeat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61328,35 +62569,9 @@ var Repeat = `
   <path d="M21 13v1a4 4 0 0 1-4 4H3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/repeat-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Repeat2 = `
-<svg
-  class="lucide lucide-repeat-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m2 9 3-3 3 3" />
-  <path d="M13 18H7a2 2 0 0 1-2-2V6" />
-  <path d="m22 15-3 3-3-3" />
-  <path d="M11 6h6a2 2 0 0 1 2 2v10" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/replace-all.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61385,9 +62600,34 @@ var ReplaceAll = `
   <rect x="3" y="14" width="7" height="7" rx="1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/reply-all.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ReplyAll = `
+<svg
+  class="lucide lucide-reply-all"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 17-5-5 5-5" />
+  <path d="M22 18v-2a4 4 0 0 0-4-4H7" />
+  <path d="m7 17-5-5 5-5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/replace.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61414,34 +62654,9 @@ var Replace = `
   <rect x="3" y="14" width="7" height="7" rx="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/reply-all.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ReplyAll = `
-<svg
-  class="lucide lucide-reply-all"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m12 17-5-5 5-5" />
-  <path d="M22 18v-2a4 4 0 0 0-4-4H7" />
-  <path d="m7 17-5-5 5-5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/reply.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61465,7 +62680,7 @@ var Reply = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rewind.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61487,35 +62702,9 @@ var Rewind = `
   <path d="M22 6a2 2 0 0 0-3.414-1.414l-6 6a2 2 0 0 0 0 2.828l6 6A2 2 0 0 0 22 18z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/road.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Road = `
-<svg
-  class="lucide lucide-road"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 17v4" />
-  <path d="M12 5V3" />
-  <path d="M12 9v3" />
-  <path d="M2.077 18.449A2 2 0 0 0 4 21h16a2 2 0 0 0 1.924-2.55l-4-14A2 2 0 0 0 16 3H8a2 2 0 0 0-1.924 1.45z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/ribbon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61540,9 +62729,35 @@ var Ribbon = `
   <path d="M9.35 14.53C7.728 12.246 6 10.221 6 7a6 5 0 0 1 12 0c-.005 3.22-1.778 5.235-3.43 7.5l3.557 4.527a1 1 0 0 1-.203 1.43l-1.894 1.36a1 1 0 0 1-1.384-.215L12 18l-2.679 3.593a1 1 0 0 1-1.39.213l-1.865-1.353a1 1 0 0 1-.203-1.422z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/road.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Road = `
+<svg
+  class="lucide lucide-road"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 17v4" />
+  <path d="M12 5V3" />
+  <path d="M12 9v3" />
+  <path d="M2.077 18.449A2 2 0 0 0 4 21h16a2 2 0 0 0 1.924-2.55l-4-14A2 2 0 0 0 16 3H8a2 2 0 0 0-1.924 1.45z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/robot-arm.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61570,7 +62785,7 @@ var RobotArm = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/robot-vacuum.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61600,7 +62815,7 @@ var RobotVacuum = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rocket.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61624,35 +62839,9 @@ var Rocket = `
   <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/rocking-chair.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var RockingChair = `
-<svg
-  class="lucide lucide-rocking-chair"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m15 13 3.708 7.416" />
-  <path d="M3 19a15 15 0 0 0 18 0" />
-  <path d="m3 2 3.21 9.633A2 2 0 0 0 8.109 13H18" />
-  <path d="m9 13-3.708 7.416" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/roller-coaster.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61679,9 +62868,35 @@ var RollerCoaster = `
   <path d="M2 19V9a4 4 0 0 1 4-4c2 0 4 1.33 6 4s4 4 6 4a4 4 0 1 0-3-6.65" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/rocking-chair.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var RockingChair = `
+<svg
+  class="lucide lucide-rocking-chair"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 13 3.708 7.416" />
+  <path d="M3 19a15 15 0 0 0 18 0" />
+  <path d="m3 2 3.21 9.633A2 2 0 0 0 8.109 13H18" />
+  <path d="m9 13-3.708 7.416" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/rose.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61708,7 +62923,7 @@ var Rose = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61731,34 +62946,9 @@ var Rotate3d = `
   <path d="M21.79796 11 A 10 5 0 1 0 19 15.57071" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/rotate-ccw-clock.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var RotateCcwClock = `
-<svg
-  class="lucide lucide-rotate-ccw-clock"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-  <path d="M3 3v5h5" />
-  <path d="M12 7v5l4 2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-ccw-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61785,7 +62975,7 @@ var RotateCcwKey = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-ccw-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61808,9 +62998,34 @@ var RotateCcwSquare = `
   <path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/rotate-ccw-clock.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var RotateCcwClock = `
+<svg
+  class="lucide lucide-rotate-ccw-clock"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+  <path d="M3 3v5h5" />
+  <path d="M12 7v5l4 2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-ccw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61832,9 +63047,34 @@ var RotateCcw = `
   <path d="M3 3v5h5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/rotate-cw-clock.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var RotateCwClock = `
+<svg
+  class="lucide lucide-rotate-cw-clock"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 7v5l4 2" />
+  <path d="M16 8h5V3" />
+  <path d="m21 8-2.3-2.3A9.7 9.7 0 0012 3a9 9 0 109 9" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-cw-fading-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61864,34 +63104,9 @@ var RotateCwFadingClock = `
   <path d="M21 8h-5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/rotate-cw-clock.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var RotateCwClock = `
-<svg
-  class="lucide lucide-rotate-cw-clock"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 7v5l4 2" />
-  <path d="M16 8h5V3" />
-  <path d="m21 8-2.3-2.3A9.7 9.7 0 0012 3a9 9 0 109 9" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-cw-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61916,7 +63131,7 @@ var RotateCwSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rotate-cw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61940,7 +63155,7 @@ var RotateCw = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/route-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61965,7 +63180,7 @@ var RouteArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/route-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -61994,7 +63209,7 @@ var RouteOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/route.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62019,7 +63234,7 @@ var Route = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/router.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62047,7 +63262,7 @@ var Router = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rows-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62071,7 +63286,7 @@ var Rows2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rows-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62096,7 +63311,7 @@ var Rows3 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rows-4.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62122,7 +63337,7 @@ var Rows4 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rss.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62147,7 +63362,7 @@ var Rss = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/rugby-ball.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62174,7 +63389,7 @@ var RugbyBall = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ruler-dimension-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62204,7 +63419,7 @@ var RulerDimensionLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ruler.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62231,7 +63446,7 @@ var Ruler = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/russian-ruble.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62255,7 +63470,7 @@ var RussianRuble = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sailboat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62280,7 +63495,7 @@ var Sailboat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/salad.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62306,7 +63521,7 @@ var Salad = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sandwich.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62333,7 +63548,7 @@ var Sandwich = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/satellite-dish.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62359,7 +63574,7 @@ var SatelliteDish = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/satellite.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62386,7 +63601,7 @@ var Satellite = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/saudi-riyal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62412,7 +63627,7 @@ var SaudiRiyal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/save-all.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62438,7 +63653,7 @@ var SaveAll = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/save-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62462,9 +63677,35 @@ var SaveCheck = `
   <path d="M7 3v4a1 1 0 0 0 1 1h7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/save-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SavePen = `
+<svg
+  class="lucide lucide-save-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.33 13H8a1 1 0 00-1 1v7" />
+  <path d="M14.363 17.634a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506l4.013-4.009a1 1 0 10-3.004-3.004z" />
+  <path d="M7 3v4a1 1 0 001 1h7" />
+  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h10.2a2 2 0 011.4.6l3.8 3.8a2 2 0 01.6 1.4v.3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/save-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62490,35 +63731,9 @@ var SaveOff = `
   <path d="M9 3h6.2a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V15" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/save-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SavePen = `
-<svg
-  class="lucide lucide-save-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13.33 13H8a1 1 0 00-1 1v7" />
-  <path d="M14.363 17.634a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506l4.013-4.009a1 1 0 10-3.004-3.004z" />
-  <path d="M7 3v4a1 1 0 001 1h7" />
-  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h10.2a2 2 0 011.4.6l3.8 3.8a2 2 0 01.6 1.4v.3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/save-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62543,9 +63758,34 @@ var SavePlus = `
   <path d="M7 3v4a1 1 0 0 0 1 1h7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/save.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Save = `
+<svg
+  class="lucide lucide-save"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+  <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+  <path d="M7 3v4a1 1 0 0 0 1 1h7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/scale-3d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62569,34 +63809,9 @@ var Scale3d = `
   <circle cx="5" cy="5" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/save.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Save = `
-<svg
-  class="lucide lucide-save"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-  <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
-  <path d="M7 3v4a1 1 0 0 0 1 1h7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/scale.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62623,7 +63838,7 @@ var Scale = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scaling.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62649,7 +63864,7 @@ var Scaling = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-barcode.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62678,7 +63893,7 @@ var ScanBarcode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-box.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62707,7 +63922,7 @@ var ScanBox = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-eye.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62735,7 +63950,7 @@ var ScanEye = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-face.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62764,7 +63979,7 @@ var ScanFace = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-heart.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62791,7 +64006,7 @@ var ScanHeart = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-line.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62818,7 +64033,7 @@ var ScanLine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-qr-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62848,7 +64063,7 @@ var ScanQrCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62876,7 +64091,7 @@ var ScanSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62903,7 +64118,7 @@ var ScanSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62932,7 +64147,7 @@ var ScanText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62958,7 +64173,7 @@ var Scan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/school.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -62986,7 +64201,7 @@ var School = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scissors-line-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63015,7 +64230,7 @@ var ScissorsLineDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scissors.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63042,7 +64257,7 @@ var Scissors = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scooter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63068,7 +64283,7 @@ var Scooter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scratch-blocks.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63092,7 +64307,7 @@ var ScratchBlocks = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/screen-share-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63119,7 +64334,7 @@ var ScreenShareOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/screen-share.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63146,7 +64361,7 @@ var ScreenShare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/screw.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63173,7 +64388,7 @@ var Screw = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/scroll-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63197,9 +64412,33 @@ var ScrollText = `
   <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/scroll.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Scroll = `
+<svg
+  class="lucide lucide-scroll"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+  <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/search-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63222,33 +64461,9 @@ var SearchCheck = `
   <path d="m21 21-4.3-4.3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/scroll.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Scroll = `
-<svg
-  class="lucide lucide-scroll"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 17V5a2 2 0 0 0-2-2H4" />
-  <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/search-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63274,7 +64489,7 @@ var SearchCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/search-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63300,7 +64515,7 @@ var SearchExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/search-slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63325,7 +64540,7 @@ var SearchSlash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/search-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63351,7 +64566,7 @@ var SearchX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63375,7 +64590,7 @@ var Search = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/section.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63397,33 +64612,9 @@ var Section = `
   <path d="M8 19a4 3 0 0 0 8 0c0-4-8-3-8-7a4 3 0 0 1 8 0" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/send-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SendHorizontal = `
-<svg
-  class="lucide lucide-send-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
-  <path d="M6 12h16" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/send-to-back.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63447,9 +64638,33 @@ var SendToBack = `
   <path d="M14 7h1a2 2 0 0 1 2 2v1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/send-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SendHorizontal = `
+<svg
+  class="lucide lucide-send-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+  <path d="M6 12h16" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/send.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63473,7 +64688,7 @@ var Send = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/separator-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63498,7 +64713,7 @@ var SeparatorHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/separator-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63523,7 +64738,7 @@ var SeparatorVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63557,7 +64772,7 @@ var ServerCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server-crash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63584,7 +64799,7 @@ var ServerCrash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server-nas.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63612,7 +64827,7 @@ var ServerNas = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63640,7 +64855,7 @@ var ServerOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63668,7 +64883,7 @@ var ServerPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/server.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63694,7 +64909,7 @@ var Server = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/settings-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63720,7 +64935,7 @@ var Settings2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/settings.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63742,9 +64957,34 @@ var Settings = `
   <circle cx="12" cy="12" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shapes.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Shapes = `
+<svg
+  class="lucide lucide-shapes"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z" />
+  <rect x="3" y="14" width="7" height="7" rx="1" />
+  <circle cx="17.5" cy="17.5" r="3.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/share-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63769,34 +65009,9 @@ var Share2 = `
   <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shapes.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Shapes = `
-<svg
-  class="lucide lucide-shapes"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z" />
-  <rect x="3" y="14" width="7" height="7" rx="1" />
-  <circle cx="17.5" cy="17.5" r="3.5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/share.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63821,7 +65036,7 @@ var Share = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sheet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63846,32 +65061,9 @@ var Sheet = `
   <line x1="15" x2="15" y1="9" y2="21" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shell.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Shell = `
-<svg
-  class="lucide lucide-shell"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shelving-unit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63898,9 +65090,32 @@ var ShelvingUnit = `
   <path d="M4 4h16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shell.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Shell = `
+<svg
+  class="lucide lucide-shell"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-ban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63924,7 +65139,7 @@ var ShieldBan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63948,7 +65163,7 @@ var ShieldCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-cog-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -63978,9 +65193,84 @@ var ShieldCogCorner = `
   <circle cx="17.695" cy="17.695" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shield-ellipsis.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldEllipsis = `
+<svg
+  class="lucide lucide-shield-ellipsis"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M8 12h.01" />
+  <path d="M12 12h.01" />
+  <path d="M16 12h.01" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/shield-exclamation-point.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldExclamationPoint = `
+<svg
+  class="lucide lucide-shield-exclamation-point"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M12 8v4" />
+  <path d="M12 16h.01" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/shield-half.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldHalf = `
+<svg
+  class="lucide lucide-shield-half"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M12 22V2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64010,84 +65300,9 @@ var ShieldCog = `
   <circle cx="12.077" cy="11.695" r="3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shield-ellipsis.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShieldEllipsis = `
-<svg
-  class="lucide lucide-shield-ellipsis"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-  <path d="M8 12h.01" />
-  <path d="M12 12h.01" />
-  <path d="M16 12h.01" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/shield-exclamation-point.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShieldExclamationPoint = `
-<svg
-  class="lucide lucide-shield-exclamation-point"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-  <path d="M12 8v4" />
-  <path d="M12 16h.01" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/shield-half.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShieldHalf = `
-<svg
-  class="lucide lucide-shield-half"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-  <path d="M12 22V2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-keyhole.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64112,7 +65327,7 @@ var ShieldKeyhole = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64137,7 +65352,7 @@ var ShieldLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-house.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64160,33 +65375,9 @@ var ShieldHouse = `
   <path d="M20 10.418V6a1 1 0 00-1-1c-2 0-4.49-1.19-6.24-2.72a1.17 1.17 0 00-1.52 0C9.5 3.8 7 5 5 5a1 1 0 00-1 1v7c0 4.602 2.67 7.1 6.037 8.603" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shield-minus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShieldMinus = `
-<svg
-  class="lucide lucide-shield-minus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-  <path d="M9 12h6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64209,9 +65400,33 @@ var ShieldOff = `
   <path d="M9.309 3.652A12.252 12.252 0 0 0 11.24 2.28a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1v7a9.784 9.784 0 0 1-.08 1.264" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shield-minus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldMinus = `
+<svg
+  class="lucide lucide-shield-minus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M9 12h6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64236,7 +65451,7 @@ var ShieldPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-question-mark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64259,34 +65474,9 @@ var ShieldQuestionMark = `
   <path d="M12 17h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shield-user.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShieldUser = `
-<svg
-  class="lucide lucide-shield-user"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-  <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
-  <circle cx="12" cy="11" r="4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shield-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64311,7 +65501,7 @@ var ShieldX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shield.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64332,9 +65522,34 @@ var Shield = `
   <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shield-user.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldUser = `
+<svg
+  class="lucide lucide-shield-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
+  <circle cx="12" cy="11" r="4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/ship-cargo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64361,7 +65576,7 @@ var ShipCargo = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ship-wheel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64393,7 +65608,7 @@ var ShipWheel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ship.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64420,7 +65635,7 @@ var Ship = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shirt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64443,7 +65658,7 @@ var Shirt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shopping-bag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64468,7 +65683,7 @@ var ShoppingBag = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shopping-basket.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64497,7 +65712,7 @@ var ShoppingBasket = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shopping-cart-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64525,7 +65740,7 @@ var ShoppingCartMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shopping-cart-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64552,35 +65767,9 @@ var ShoppingCartPlus = `
   <circle cx="8" cy="20" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shopping-cart.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ShoppingCart = `
-<svg
-  class="lucide lucide-shopping-cart"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
-  <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
-  <circle cx="18" cy="20" r="2" />
-  <circle cx="8" cy="20" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shovel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64605,7 +65794,7 @@ var Shovel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shower-head.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64635,9 +65824,35 @@ var ShowerHead = `
   <path d="M20 11v.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shopping-cart.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShoppingCart = `
+<svg
+  class="lucide lucide-shopping-cart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
+  <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
+  <circle cx="18" cy="20" r="2" />
+  <circle cx="8" cy="20" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/shredder.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64666,7 +65881,7 @@ var Shredder = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shrimp-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64695,7 +65910,7 @@ var ShrimpOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/shrimp.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64720,34 +65935,9 @@ var Shrimp = `
   <path d="M8 16c-2 0-4.5-4-4-6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/shrub.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Shrub = `
-<svg
-  class="lucide lucide-shrub"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 22v-5.172a2 2 0 0 0-.586-1.414L9.5 13.5" />
-  <path d="M14.5 14.5 12 17" />
-  <path d="M17 8.8A6 6 0 0 1 13.8 20H10A6.5 6.5 0 0 1 7 8a5 5 0 0 1 10 0z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/shrink.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64771,9 +65961,57 @@ var Shrink = `
   <path d="M9 4.2V9m0 0H4.2M9 9 3 3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/shrub.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Shrub = `
+<svg
+  class="lucide lucide-shrub"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 22v-5.172a2 2 0 0 0-.586-1.414L9.5 13.5" />
+  <path d="M14.5 14.5 12 17" />
+  <path d="M17 8.8A6 6 0 0 1 13.8 20H10A6.5 6.5 0 0 1 7 8a5 5 0 0 1 10 0z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/sigma.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Sigma = `
+<svg
+  class="lucide lucide-sigma"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/shuffle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64798,32 +66036,9 @@ var Shuffle = `
   <path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sigma.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Sigma = `
-<svg
-  class="lucide lucide-sigma"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/signal-high.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64849,7 +66064,7 @@ var SignalHigh = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/signal-low.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64873,7 +66088,7 @@ var SignalLow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/signal-medium.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64898,7 +66113,7 @@ var SignalMedium = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/signal-zero.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64921,7 +66136,7 @@ var SignalZero = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/signal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64946,9 +66161,33 @@ var Signal = `
   <path d="M22 4v16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/signature.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Signature = `
+<svg
+  class="lucide lucide-signature"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" />
+  <path d="M3 21h18" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/signpost-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -64972,33 +66211,9 @@ var SignpostBig = `
   <path d="M8 22h8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/signature.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Signature = `
-<svg
-  class="lucide lucide-signature"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" />
-  <path d="M3 21h18" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/signpost.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65023,7 +66238,7 @@ var Signpost = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/siren-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65054,7 +66269,7 @@ var SirenOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/siren.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65084,7 +66299,7 @@ var Siren = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sixteenth-notes.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65110,7 +66325,7 @@ var SixteenthNotes = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/skip-back.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65134,7 +66349,7 @@ var SkipBack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/skip-forward.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65158,7 +66373,7 @@ var SkipForward = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/skull.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65182,32 +66397,9 @@ var Skull = `
   <circle cx="9" cy="12" r="1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/slice.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Slice = `
-<svg
-  class="lucide lucide-slice"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 16.586V19a1 1 0 0 1-1 1H2L18.37 3.63a1 1 0 1 1 3 3l-9.663 9.663a1 1 0 0 1-1.414 0L8 14" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65228,16 +66420,16 @@ var Slash = `
   <path d="M22 2 2 22" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sliders-horizontal.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/slice.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var SlidersHorizontal = `
+var Slice = `
 <svg
-  class="lucide lucide-sliders-horizontal"
+  class="lucide lucide-slice"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -65248,20 +66440,12 @@ var SlidersHorizontal = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M10 5H3" />
-  <path d="M12 19H3" />
-  <path d="M14 3v4" />
-  <path d="M16 17v4" />
-  <path d="M21 12h-9" />
-  <path d="M21 19h-5" />
-  <path d="M21 5h-7" />
-  <path d="M8 10v4" />
-  <path d="M8 12H3" />
+  <path d="M11 16.586V19a1 1 0 0 1-1 1H2L18.37 3.63a1 1 0 1 1 3 3l-9.663 9.663a1 1 0 0 1-1.414 0L8 14" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sliders-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65290,9 +66474,40 @@ var SlidersVertical = `
   <path d="M5 21v-7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/sliders-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SlidersHorizontal = `
+<svg
+  class="lucide lucide-sliders-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/smartphone-charging.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65314,35 +66529,9 @@ var SmartphoneCharging = `
   <path d="M12.667 8 10 12h4l-2.667 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/smartphone-nfc.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SmartphoneNfc = `
-<svg
-  class="lucide lucide-smartphone-nfc"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="7" height="12" x="2" y="6" rx="1" />
-  <path d="M13 8.32a7.43 7.43 0 0 1 0 7.36" />
-  <path d="M16.46 6.21a11.76 11.76 0 0 1 0 11.58" />
-  <path d="M19.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/smartphone-user-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65366,9 +66555,35 @@ var SmartphoneUserRound = `
   <circle cx="18" cy="15" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/smartphone-nfc.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SmartphoneNfc = `
+<svg
+  class="lucide lucide-smartphone-nfc"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="7" height="12" x="2" y="6" rx="1" />
+  <path d="M13 8.32a7.43 7.43 0 0 1 0 7.36" />
+  <path d="M16.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+  <path d="M19.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/smartphone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65392,7 +66607,7 @@ var Smartphone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/snail.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65419,7 +66634,7 @@ var Snail = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/snowflake.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65453,7 +66668,7 @@ var Snowflake = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/soap-dispenser-droplet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65479,7 +66694,7 @@ var SoapDispenserDroplet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sofa.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65506,7 +66721,7 @@ var Sofa = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/solar-panel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65535,7 +66750,7 @@ var SolarPanel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/soup.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65563,7 +66778,7 @@ var Soup = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/space.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65584,32 +66799,9 @@ var Space = `
   <path d="M22 17v1c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1v-1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sparkle.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Sparkle = `
-<svg
-  class="lucide lucide-sparkle"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/spade.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65631,9 +66823,32 @@ var Spade = `
   <path d="M2 14.499a5.5 5.5 0 0 0 9.591 3.675.6.6 0 0 1 .818.001A5.5 5.5 0 0 0 22 14.5c0-2.29-1.5-4-3-5.5l-5.492-5.312a2 2 0 0 0-3-.02L5 8.999c-1.5 1.5-3 3.2-3 5.5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/sparkle.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Sparkle = `
+<svg
+  class="lucide lucide-sparkle"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65657,9 +66872,34 @@ var Sparkles = `
   <circle cx="4" cy="20" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/speech.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Speech = `
+<svg
+  class="lucide lucide-speech"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8.8 20v-4.1l1.9.2a2.3 2.3 0 0 0 2.164-2.1V8.3A5.37 5.37 0 0 0 2 8.25c0 2.8.656 3.054 1 4.55a5.77 5.77 0 0 1 .029 2.758L2 20" />
+  <path d="M19.8 17.8a7.5 7.5 0 0 0 .003-10.603" />
+  <path d="M17 15a3.5 3.5 0 0 0-.025-4.975" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/speaker.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65683,34 +66923,9 @@ var Speaker = `
   <path d="M12 14h.01" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/speech.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Speech = `
-<svg
-  class="lucide lucide-speech"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8.8 20v-4.1l1.9.2a2.3 2.3 0 0 0 2.164-2.1V8.3A5.37 5.37 0 0 0 2 8.25c0 2.8.656 3.054 1 4.55a5.77 5.77 0 0 1 .029 2.758L2 20" />
-  <path d="M19.8 17.8a7.5 7.5 0 0 0 .003-10.603" />
-  <path d="M17 15a3.5 3.5 0 0 0-.025-4.975" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/spell-check-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65735,7 +66950,7 @@ var SpellCheck2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/spline-pointer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65761,7 +66976,7 @@ var SplinePointer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/spell-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65786,7 +67001,7 @@ var SpellCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/spline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65811,7 +67026,7 @@ var Spline = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/split.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65837,7 +67052,7 @@ var Split = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/spool.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65861,7 +67076,7 @@ var Spool = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sport-shoe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65884,9 +67099,66 @@ var SportShoe = `
   <path d="M9.5 22 21.414 9.415A2 2 0 0 0 21.2 6.4l-5.61-4.208A1 1 0 0 0 14 3v2a2 2 0 0 1-1.394 1.906L8.677 8.053A1 1 0 0 0 8 9c-.155 6.393-2.082 9-4 9a2 2 0 0 0 0 4h14" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/spray-can.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SprayCan = `
+<svg
+  class="lucide lucide-spray-can"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19 8-3" />
+  <path d="M14 6h-2" />
+  <path d="M18 8.172V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v3.172" />
+  <path d="m20 11-8 3" />
+  <path d="M20 20a2 2 0 01-2 2h-4a2 2 0 01-2-2v-9a3 3 0 013-3h2a3 3 0 013 3z" />
+  <path d="M4 10h.01" />
+  <path d="M4 2h.01" />
+  <path d="M4 6h.01" />
+  <path d="M8 4h.01" />
+  <path d="M8 8h.01" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/sprout.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Sprout = `
+<svg
+  class="lucide lucide-sprout"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" />
+  <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" />
+  <path d="M5 21h14" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/spotlight.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65911,66 +67183,9 @@ var Spotlight = `
   <path d="M8 9V2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/spray-can.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SprayCan = `
-<svg
-  class="lucide lucide-spray-can"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 3h.01" />
-  <path d="M7 5h.01" />
-  <path d="M11 7h.01" />
-  <path d="M3 7h.01" />
-  <path d="M7 9h.01" />
-  <path d="M3 11h.01" />
-  <rect width="4" height="4" x="15" y="5" />
-  <path d="m19 9 2 2v10c0 .6-.4 1-1 1h-6c-.6 0-1-.4-1-1V11l2-2" />
-  <path d="m13 14 8-2" />
-  <path d="m13 19 8-2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/sprout.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Sprout = `
-<svg
-  class="lucide lucide-sprout"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" />
-  <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" />
-  <path d="M5 21h14" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-activity.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -65994,7 +67209,7 @@ var SquareActivity = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66017,34 +67232,9 @@ var SquareArrowDownExit = `
   <path d="m8 17 4 4 4-4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-enter.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareArrowDownEnter = `
-<svg
-  class="lucide lucide-square-arrow-down-enter"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3v10" />
-  <path d="M16 3h3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h3" />
-  <path d="m8 9 4 4 4-4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-left-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66067,16 +67257,16 @@ var SquareArrowDownLeftEnter = `
   <path d="M21 8.67V19a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h10.33" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-left-exit.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var SquareArrowDownLeftExit = `
+var SquareArrowDownEnter = `
 <svg
-  class="lucide lucide-square-arrow-down-left-exit"
+  class="lucide lucide-square-arrow-down-enter"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -66087,14 +67277,14 @@ var SquareArrowDownLeftExit = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M13 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6" />
-  <path d="m3 21 9-9" />
-  <path d="M9 21H3v-6" />
+  <path d="M12 3v10" />
+  <path d="M16 3h3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h3" />
+  <path d="m8 9 4 4 4-4" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66119,7 +67309,7 @@ var SquareArrowDownLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-right-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66144,7 +67334,7 @@ var SquareArrowDownRightEnter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-right-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66169,7 +67359,7 @@ var SquareArrowDownRightExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66194,7 +67384,7 @@ var SquareArrowDownRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66219,7 +67409,7 @@ var SquareArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-left-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66244,7 +67434,7 @@ var SquareArrowLeftEnter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-left-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66267,9 +67457,34 @@ var SquareArrowLeftExit = `
   <path d="m7 8-4 4 4 4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-down-left-exit.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareArrowDownLeftExit = `
+<svg
+  class="lucide lucide-square-arrow-down-left-exit"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6" />
+  <path d="m3 21 9-9" />
+  <path d="M9 21H3v-6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66294,7 +67509,7 @@ var SquareArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-right-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66319,7 +67534,7 @@ var SquareArrowRightEnter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-right-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66344,7 +67559,7 @@ var SquareArrowRightExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66369,7 +67584,7 @@ var SquareArrowRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66394,7 +67609,7 @@ var SquareArrowUpEnter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66419,7 +67634,7 @@ var SquareArrowUpExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-left-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66444,7 +67659,7 @@ var SquareArrowUpLeftEnter = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-left-exit.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66469,7 +67684,7 @@ var SquareArrowUpLeftExit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66494,7 +67709,7 @@ var SquareArrowUpLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-right-enter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66517,34 +67732,9 @@ var SquareArrowUpRightEnter = `
   <path d="m4 20 9-9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-right-exit.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareArrowUpRightExit = `
-<svg
-  class="lucide lucide-square-arrow-up-right-exit"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-  <path d="m21 3-9 9" />
-  <path d="M15 3h6v6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66567,9 +67757,34 @@ var SquareArrowUpRight = `
   <rect x="3" y="3" width="18" height="18" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up-right-exit.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareArrowUpRightExit = `
+<svg
+  class="lucide lucide-square-arrow-up-right-exit"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+  <path d="m21 3-9 9" />
+  <path d="M15 3h6v6" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66594,7 +67809,7 @@ var SquareArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-asterisk.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66618,9 +67833,115 @@ var SquareAsterisk = `
   <path d="m8.5 10 7 4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-axis-dashed-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareAxisDashedHorizontal = `
+<svg
+  class="lucide lucide-square-axis-dashed-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12H8" />
+  <path d="M16 12h-2" />
+  <path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
+  <path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3" />
+  <path d="M22 12h-2" />
+  <path d="M4 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/square-axis-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareAxisHorizontal = `
+<svg
+  class="lucide lucide-square-axis-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
+  <path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3" />
+  <path d="M22 12H2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/square-axis-dashed-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareAxisDashedVertical = `
+<svg
+  class="lucide lucide-square-axis-dashed-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 14v2" />
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M12 8v2" />
+  <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+  <path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/square-axis-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareAxisVertical = `
+<svg
+  class="lucide lucide-square-axis-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+  <path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-bookmark.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66644,7 +67965,7 @@ var SquareBookmark = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-bottom-dashed-scissors.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66672,65 +67993,9 @@ var SquareBottomDashedScissors = `
   <circle cx="8.5" cy="8.5" r="1.5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-centerline-dashed-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareCenterlineDashedHorizontal = `
-<svg
-  class="lucide lucide-square-centerline-dashed-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
-  <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
-  <path d="M12 20v2" />
-  <path d="M12 14v2" />
-  <path d="M12 8v2" />
-  <path d="M12 2v2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/square-centerline-dashed-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareCenterlineDashedVertical = `
-<svg
-  class="lucide lucide-square-centerline-dashed-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3" />
-  <path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
-  <path d="M4 12H2" />
-  <path d="M10 12H8" />
-  <path d="M16 12h-2" />
-  <path d="M22 12h-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chart-gantt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66756,7 +68021,7 @@ var SquareChartGantt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-check-big.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66780,7 +68045,7 @@ var SquareCheckBig = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66804,7 +68069,7 @@ var SquareCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevron-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66828,7 +68093,7 @@ var SquareChevronDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevron-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66852,7 +68117,7 @@ var SquareChevronLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevron-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66876,7 +68141,7 @@ var SquareChevronRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevron-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66898,34 +68163,9 @@ var SquareChevronUp = `
   <path d="m8 14 4-4 4 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-chevrons-left.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareChevronsLeft = `
-<svg
-  class="lucide lucide-square-chevrons-left"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 9L7 12L10 15" />
-  <path d="M16 9L13 12L16 15" />
-  <rect x="3" y="3" width="18" height="18" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevrons-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66948,9 +68188,34 @@ var SquareChevronsDown = `
   <rect x="3" y="3" width="18" height="18" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-chevrons-left.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareChevronsLeft = `
+<svg
+  class="lucide lucide-square-chevrons-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 9L7 12L10 15" />
+  <path d="M16 9L13 12L16 15" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevrons-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -66975,7 +68240,7 @@ var SquareChevronsRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-chevrons-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67000,7 +68265,7 @@ var SquareChevronsUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67025,7 +68290,7 @@ var SquareCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-bottom-code.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67052,7 +68317,7 @@ var SquareDashedBottomCode = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67077,7 +68342,7 @@ var SquareDashedBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-kanban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67114,7 +68379,7 @@ var SquareDashedKanban = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-mouse-pointer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67146,7 +68411,7 @@ var SquareDashedMousePointer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67180,42 +68445,9 @@ var SquareDashedPlus = `
   <path d="M12 8v8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-dashed-search.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareDashedSearch = `
-<svg
-  class="lucide lucide-square-dashed-search"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 3h1" />
-  <path d="M19 3a2 2 0 012 2" />
-  <path d="m21 21-1.875-1.875" />
-  <path d="M21 9v1" />
-  <path d="M3 14v1" />
-  <path d="M3 9v1" />
-  <path d="M5 21a2 2 0 01-2-2" />
-  <path d="M5 3a2 2 0 00-2 2" />
-  <path d="M9 21h1" />
-  <path d="M9 3h1" />
-  <circle cx="17" cy="17" r="3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67250,9 +68482,42 @@ var SquareDashedText = `
   <path d="M9 3h1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-dashed-search.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareDashedSearch = `
+<svg
+  class="lucide lucide-square-dashed-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 3h1" />
+  <path d="M19 3a2 2 0 012 2" />
+  <path d="m21 21-1.875-1.875" />
+  <path d="M21 9v1" />
+  <path d="M3 14v1" />
+  <path d="M3 9v1" />
+  <path d="M5 21a2 2 0 01-2-2" />
+  <path d="M5 3a2 2 0 00-2 2" />
+  <path d="M9 21h1" />
+  <path d="M9 3h1" />
+  <circle cx="17" cy="17" r="3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-top-solid.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67281,9 +68546,42 @@ var SquareDashedTopSolid = `
   <path d="M9 21h1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-dashed-x-corner.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareDashedXCorner = `
+<svg
+  class="lucide lucide-square-dashed-x-corner"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14 3h1" />
+  <path d="m16 16 5 5" />
+  <path d="M19 3a2 2 0 012 2" />
+  <path d="m21 16-5 5" />
+  <path d="M21 9v1" />
+  <path d="M3 14v1" />
+  <path d="M3 9v1" />
+  <path d="M5 21a2 2 0 01-2-2" />
+  <path d="M5 3a2 2 0 00-2 2" />
+  <path d="M9 21h1" />
+  <path d="M9 3h1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67317,42 +68615,9 @@ var SquareDashedX = `
   <path d="m9 9 6 6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-dashed-x-corner.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareDashedXCorner = `
-<svg
-  class="lucide lucide-square-dashed-x-corner"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 3h1" />
-  <path d="m16 16 5 5" />
-  <path d="M19 3a2 2 0 012 2" />
-  <path d="m21 16-5 5" />
-  <path d="M21 9v1" />
-  <path d="M3 14v1" />
-  <path d="M3 9v1" />
-  <path d="M5 21a2 2 0 01-2-2" />
-  <path d="M5 3a2 2 0 00-2 2" />
-  <path d="M9 21h1" />
-  <path d="M9 3h1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67386,7 +68651,7 @@ var SquareDashed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-dimensions.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67409,9 +68674,33 @@ var SquareDimensions = `
   <path d="M12 17h5v-5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-dot.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareDot = `
+<svg
+  class="lucide lucide-square-dot"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <circle cx="12" cy="12" r="1" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-divide.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67437,7 +68726,7 @@ var SquareDivide = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-equal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67460,33 +68749,9 @@ var SquareEqual = `
   <path d="M7 14h10" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-dot.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareDot = `
-<svg
-  class="lucide lucide-square-dot"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="18" height="18" x="3" y="3" rx="2" />
-  <circle cx="12" cy="12" r="1" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67511,7 +68776,7 @@ var SquareExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-function.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67536,7 +68801,7 @@ var SquareFunction = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-kanban-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67564,7 +68829,7 @@ var SquareKanbanPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-kanban.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67588,9 +68853,33 @@ var SquareKanban = `
   <path d="M16 7v9" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-letter-b.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareLetterB = `
+<svg
+  class="lucide lucide-square-letter-b"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9 12h4.846a2.24 2.24 0 011.523.586 2 2 0 01.001 2.828 2.24 2.24 0 01-1.524.586H9.5a.5.5 0 01-.5-.5v-7a.5.5 0 01.5-.5H13a2 2 0 010 4" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-a.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67613,33 +68902,9 @@ var SquareLetterA = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-letter-b.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareLetterB = `
-<svg
-  class="lucide lucide-square-letter-b"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M9 12h4.846a2.24 2.24 0 011.523.586 2 2 0 01.001 2.828 2.24 2.24 0 01-1.524.586H9.5a.5.5 0 01-.5-.5v-7a.5.5 0 01.5-.5H13a2 2 0 010 4" />
-  <rect x="3" y="3" width="18" height="18" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-c.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67663,7 +68928,7 @@ var SquareLetterC = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-d.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67687,7 +68952,7 @@ var SquareLetterD = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-e.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67712,7 +68977,7 @@ var SquareLetterE = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-f.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67737,7 +69002,7 @@ var SquareLetterF = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-g.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67761,7 +69026,7 @@ var SquareLetterG = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-h.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67787,7 +69052,7 @@ var SquareLetterH = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-i.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67811,7 +69076,7 @@ var SquareLetterI = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-j.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67835,7 +69100,7 @@ var SquareLetterJ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-k.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67859,33 +69124,9 @@ var SquareLetterK = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-letter-m.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareLetterM = `
-<svg
-  class="lucide lucide-square-letter-m"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8 16.001v-7.5a.5.5 0 0 1 .9-.3l2.7 3.599a.5.5 0 0 0 .8 0l2.7-3.6a.5.5 0 0 1 .9.3v7.501" />
-  <rect width="18" height="18" x="3" y="3" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-l.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67907,9 +69148,33 @@ var SquareLetterL = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-letter-m.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareLetterM = `
+<svg
+  class="lucide lucide-square-letter-m"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 16.001v-7.5a.5.5 0 0 1 .9-.3l2.7 3.599a.5.5 0 0 0 .8 0l2.7-3.6a.5.5 0 0 1 .9.3v7.501" />
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-n.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67933,7 +69198,7 @@ var SquareLetterN = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-o.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67957,7 +69222,7 @@ var SquareLetterO = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-p-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -67984,7 +69249,7 @@ var SquareLetterPOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-p.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68008,7 +69273,7 @@ var SquareLetterP = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-q.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68031,9 +69296,33 @@ var SquareLetterQ = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-letter-s.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareLetterS = `
+<svg
+  class="lucide lucide-square-letter-s"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.5 8H11a2 2 0 100 4h2a2 2 0 110 4H9" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-r.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68056,58 +69345,9 @@ var SquareLetterR = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-letter-s.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareLetterS = `
-<svg
-  class="lucide lucide-square-letter-s"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14.5 8H11a2 2 0 100 4h2a2 2 0 110 4H9" />
-  <rect x="3" y="3" width="18" height="18" rx="2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/square-letter-t.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareLetterT = `
-<svg
-  class="lucide lucide-square-letter-t"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 16V8" />
-  <path d="M9 8h6" />
-  <rect x="3" y="3" width="18" height="18" rx="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-u.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68131,7 +69371,7 @@ var SquareLetterU = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-v.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68153,9 +69393,34 @@ var SquareLetterV = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-letter-t.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareLetterT = `
+<svg
+  class="lucide lucide-square-letter-t"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16V8" />
+  <path d="M9 8h6" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-w.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68179,7 +69444,7 @@ var SquareLetterW = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68204,7 +69469,7 @@ var SquareLetterX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-y.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68229,7 +69494,7 @@ var SquareLetterY = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-letter-z.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68253,7 +69518,7 @@ var SquareLetterZ = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-library.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68279,7 +69544,7 @@ var SquareLibrary = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-menu.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68305,7 +69570,7 @@ var SquareMenu = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68329,7 +69594,7 @@ var SquareMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-mouse-pointer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68353,7 +69618,7 @@ var SquareMousePointer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68378,7 +69643,7 @@ var SquareOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding-bottom.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68402,7 +69667,7 @@ var SquarePaddingBottom = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68427,7 +69692,7 @@ var SquarePaddingHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68451,7 +69716,7 @@ var SquarePaddingLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68475,7 +69740,7 @@ var SquarePaddingRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding-top.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68497,9 +69762,34 @@ var SquarePaddingTop = `
   <path d="M8 7h8" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-padding-vertical.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquarePaddingVertical = `
+<svg
+  class="lucide lucide-square-padding-vertical"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M8 17h8" />
+  <path d="M8 7h8" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-padding.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68524,34 +69814,9 @@ var SquarePadding = `
   <path d="M7 14v-4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-padding-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquarePaddingVertical = `
-<svg
-  class="lucide lucide-square-padding-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect x="3" y="3" width="18" height="18" rx="2" />
-  <path d="M8 17h8" />
-  <path d="M8 7h8" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-pause.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68574,33 +69839,9 @@ var SquarePause = `
   <line x1="14" x2="14" y1="15" y2="9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquarePen = `
-<svg
-  class="lucide lucide-square-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-  <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68624,9 +69865,59 @@ var SquarePercent = `
   <path d="M15 15h.01" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-pi.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquarePi = `
+<svg
+  class="lucide lucide-square-pi"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M7 7h10" />
+  <path d="M10 7v10" />
+  <path d="M16 17a2 2 0 0 1-2-2V7" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/square-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquarePen = `
+<svg
+  class="lucide lucide-square-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+  <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-pilcrow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68652,7 +69943,7 @@ var SquarePilcrow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68676,7 +69967,7 @@ var SquarePlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68699,35 +69990,9 @@ var SquarePlus = `
   <path d="M12 8v8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-pi.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquarePi = `
-<svg
-  class="lucide lucide-square-pi"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="18" height="18" x="3" y="3" rx="2" />
-  <path d="M7 7h10" />
-  <path d="M10 7v10" />
-  <path d="M16 17a2 2 0 0 1-2-2V7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-power.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68752,7 +70017,7 @@ var SquarePower = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-radical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68776,7 +70041,7 @@ var SquareRadical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-round-corner.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68800,7 +70065,7 @@ var SquareRoundCorner = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-scissors.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68828,7 +70093,7 @@ var SquareScissors = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-sigma.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68852,7 +70117,7 @@ var SquareSigma = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68874,9 +70139,34 @@ var SquareSlash = `
   <line x1="9" x2="15" y1="15" y2="9" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-split-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareSplitHorizontal = `
+<svg
+  class="lucide lucide-square-split-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v20" />
+  <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+  <path d="M8 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68900,34 +70190,9 @@ var SquareSparkles = `
   <path d="M9 13v4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-split-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareSplitHorizontal = `
-<svg
-  class="lucide lucide-square-split-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 2v20" />
-  <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
-  <path d="M8 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-split-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68952,7 +70217,7 @@ var SquareSplitVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -68976,7 +70241,7 @@ var SquareSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-stack.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69001,7 +70266,7 @@ var SquareStack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69025,7 +70290,7 @@ var SquareStar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-stop.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69049,7 +70314,7 @@ var SquareStop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-terminal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69074,7 +70339,7 @@ var SquareTerminal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-text.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69100,7 +70365,7 @@ var SquareText = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/square-user-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69123,34 +70388,9 @@ var SquareUserRound = `
   <rect width="18" height="18" x="3" y="3" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/square-user.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquareUser = `
-<svg
-  class="lucide lucide-square-user"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="18" height="18" x="3" y="3" rx="2" />
-  <circle cx="12" cy="10" r="3" />
-  <path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/square-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69173,9 +70413,34 @@ var SquareX = `
   <path d="m9 9 6 6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/square-user.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquareUser = `
+<svg
+  class="lucide lucide-square-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <circle cx="12" cy="10" r="3" />
+  <path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69198,7 +70463,7 @@ var Square = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/squares-exclude.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69222,7 +70487,7 @@ var SquaresExclude = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/squares-intersect.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69255,7 +70520,7 @@ var SquaresIntersect = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/squares-subtract.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69281,32 +70546,9 @@ var SquaresSubtract = `
   <path d="M22 20a2 2 0 0 1-2 2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/squares-unite.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var SquaresUnite = `
-<svg
-  class="lucide lucide-squares-unite"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 16a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3a1 1 0 0 0 1 1h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-3a1 1 0 0 0-1-1z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/squircle-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69334,9 +70576,32 @@ var SquircleDashed = `
   <path d="M6.26 3.82c-1.149.51-1.93 1.291-2.44 2.44" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/squares-unite.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var SquaresUnite = `
+<svg
+  class="lucide lucide-squares-unite"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3a1 1 0 0 0 1 1h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-3a1 1 0 0 0-1-1z" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/squircle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69359,7 +70624,7 @@ var Squircle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/squirrel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69385,7 +70650,7 @@ var Squirrel = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stamp.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69410,7 +70675,7 @@ var Stamp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69434,7 +70699,7 @@ var StarCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-half.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69457,7 +70722,7 @@ var StarHalf = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69481,7 +70746,7 @@ var StarMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69506,7 +70771,7 @@ var StarOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69531,7 +70796,7 @@ var StarPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69556,7 +70821,7 @@ var StarX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69579,7 +70844,7 @@ var Star = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/step-back.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69603,7 +70868,7 @@ var StepBack = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/step-forward.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69625,36 +70890,9 @@ var StepForward = `
   <path d="M3 4v16" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/stethoscope.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Stethoscope = `
-<svg
-  class="lucide lucide-stethoscope"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 2v2" />
-  <path d="M5 2v2" />
-  <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
-  <path d="M8 15a6 6 0 0 0 12 0v-3" />
-  <circle cx="20" cy="10" r="2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/sticker.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69679,9 +70917,36 @@ var Sticker = `
   <path d="M10 16s.8 1 2 1c1.3 0 2-1 2-1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/stethoscope.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Stethoscope = `
+<svg
+  class="lucide lucide-stethoscope"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 2v2" />
+  <path d="M5 2v2" />
+  <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
+  <path d="M8 15a6 6 0 0 0 12 0v-3" />
+  <circle cx="20" cy="10" r="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69706,7 +70971,7 @@ var StickyNoteCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69731,7 +70996,7 @@ var StickyNoteMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69757,7 +71022,7 @@ var StickyNoteOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69783,7 +71048,7 @@ var StickyNotePlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69809,7 +71074,7 @@ var StickyNoteX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-note.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69833,7 +71098,7 @@ var StickyNote = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sticky-notes.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69859,7 +71124,7 @@ var StickyNotes = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69884,7 +71149,7 @@ var Stone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/store.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69909,7 +71174,7 @@ var Store = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stretch-horizontal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69933,7 +71198,7 @@ var StretchHorizontal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stretch-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69957,7 +71222,7 @@ var StretchVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/strikethrough.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -69982,7 +71247,7 @@ var Strikethrough = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stroke-line-cap-butt.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70009,7 +71274,7 @@ var StrokeLineCapButt = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stroke-line-cap-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70035,7 +71300,7 @@ var StrokeLineCapRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stroke-line-cap-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70061,7 +71326,7 @@ var StrokeLineCapSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/stroke-line-join-bevel.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70085,60 +71350,9 @@ var StrokeLineJoinBevel = `
   <path d="M9 13h1a1 1 0 011 1v1" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/stroke-line-join-round.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var StrokeLineJoinRound = `
-<svg
-  class="lucide lucide-stroke-line-join-round"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 21v-2.002" />
-  <path d="M3 3h8a10 10 0 0110 10v8" />
-  <path d="M5 13H3" />
-  <path d="M9 13h1a1 1 0 011 1v1" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/subscript.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Subscript = `
-<svg
-  class="lucide lucide-subscript"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m4 5 8 8" />
-  <path d="m12 5-8 8" />
-  <path d="M20 19h-4c0-1.5.44-2 1.5-2.5S20 15.33 20 14c0-.47-.17-.93-.48-1.29a2.11 2.11 0 0 0-2.62-.44c-.42.24-.74.62-.9 1.07" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/stroke-line-join-miter.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70162,9 +71376,112 @@ var StrokeLineJoinMiter = `
   <path d="M9 13h1a1 1 0 011 1v1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/stroke-line-join-round.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var StrokeLineJoinRound = `
+<svg
+  class="lucide lucide-stroke-line-join-round"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 21v-2.002" />
+  <path d="M3 3h8a10 10 0 0110 10v8" />
+  <path d="M5 13H3" />
+  <path d="M9 13h1a1 1 0 011 1v1" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/stroke-width.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var StrokeWidth = `
+<svg
+  class="lucide lucide-stroke-width"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3.25 3h17.5" />
+  <rect x="3" y="7" width="18" height="4" rx="1" />
+  <rect x="3" y="15" width="18" height="6" rx="1" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/subscript.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Subscript = `
+<svg
+  class="lucide lucide-subscript"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m4 5 8 8" />
+  <path d="m12 5-8 8" />
+  <path d="M20 19h-4c0-1.5.44-2 1.5-2.5S20 15.33 20 14c0-.47-.17-.93-.48-1.29a2.11 2.11 0 0 0-2.62-.44c-.42.24-.74.62-.9 1.07" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/summary.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Summary = `
+<svg
+  class="lucide lucide-summary"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 4H7" />
+  <path d="m18 16 3 3-3 3" />
+  <path d="M3 4v13a2 2 0 0 0 2 2h16" />
+  <path d="M7 14h7" />
+  <path d="M7 9h12" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/sun-dim.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70195,7 +71512,7 @@ var SunDim = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sun-medium.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70224,36 +71541,9 @@ var SunMedium = `
   <path d="m17.657 17.657.707.707" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/summary.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Summary = `
-<svg
-  class="lucide lucide-summary"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15 4H7" />
-  <path d="m18 16 3 3-3 3" />
-  <path d="M3 4v13a2 2 0 0 0 2 2h16" />
-  <path d="M7 14h7" />
-  <path d="M7 9h12" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/sun-moon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70278,9 +71568,40 @@ var SunMoon = `
   <path d="M20 12h2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/sun.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Sun = `
+<svg
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/sun-snow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70311,16 +71632,16 @@ var SunSnow = `
   <path d="m4.34 6.34-.7-.7" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sun.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/sunrise.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Sun = `
+var Sunrise = `
 <svg
-  class="lucide lucide-sun"
+  class="lucide lucide-sunrise"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -70331,20 +71652,19 @@ var Sun = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <circle cx="12" cy="12" r="4" />
-  <path d="M12 2v2" />
-  <path d="M12 20v2" />
-  <path d="m4.93 4.93 1.41 1.41" />
-  <path d="m17.66 17.66 1.41 1.41" />
-  <path d="M2 12h2" />
-  <path d="M20 12h2" />
-  <path d="m6.34 17.66-1.41 1.41" />
-  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M12 2v8" />
+  <path d="m4.93 10.93 1.41 1.41" />
+  <path d="M2 18h2" />
+  <path d="M20 18h2" />
+  <path d="m19.07 10.93-1.41 1.41" />
+  <path d="M22 22H2" />
+  <path d="m8 6 4-4 4 4" />
+  <path d="M16 18a4 4 0 0 0-8 0" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/sunset.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70374,7 +71694,7 @@ var Sunset = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/superscript.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70397,39 +71717,9 @@ var Superscript = `
   <path d="M20 12h-4c0-1.5.442-2 1.5-2.5S20 8.334 20 7.002c0-.472-.17-.93-.484-1.29a2.105 2.105 0 0 0-2.617-.436c-.42.239-.738.614-.899 1.06" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sunrise.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Sunrise = `
-<svg
-  class="lucide lucide-sunrise"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 2v8" />
-  <path d="m4.93 10.93 1.41 1.41" />
-  <path d="M2 18h2" />
-  <path d="M20 18h2" />
-  <path d="m19.07 10.93-1.41 1.41" />
-  <path d="M22 22H2" />
-  <path d="m8 6 4-4 4 4" />
-  <path d="M16 18a4 4 0 0 0-8 0" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/swatch-book.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70455,7 +71745,7 @@ var SwatchBook = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/swiss-franc.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70480,7 +71770,7 @@ var SwissFranc = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/switch-camera.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70505,35 +71795,9 @@ var SwitchCamera = `
   <path d="m6 2 3 3-3 3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/sword.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Sword = `
-<svg
-  class="lucide lucide-sword"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m11 19-6-6" />
-  <path d="m5 21-2-2" />
-  <path d="m8 16-4 4" />
-  <path d="M9.5 17.5 20.414 6.586A2 2 0 0021 5.172V3h-2.172a2 2 0 00-1.414.586L6.5 14.5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/swords.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70561,16 +71825,16 @@ var Swords = `
   <path d="M7.5 16.5 4 20" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/table-2.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/sword.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Table2 = `
+var Sword = `
 <svg
-  class="lucide lucide-table-2"
+  class="lucide lucide-sword"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -70581,14 +71845,15 @@ var Table2 = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M3 9h18" />
-  <path d="M9 3v18" />
-  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="m11 19-6-6" />
+  <path d="m5 21-2-2" />
+  <path d="m8 16-4 4" />
+  <path d="M9.5 17.5 20.414 6.586A2 2 0 0021 5.172V3h-2.172a2 2 0 00-1.414.586L6.5 14.5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/syringe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70614,9 +71879,34 @@ var Syringe = `
   <path d="m14 4 6 6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/table-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Table2 = `
+<svg
+  class="lucide lucide-table-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 9h18" />
+  <path d="M9 3v18" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/table-cells-merge.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70643,7 +71933,7 @@ var TableCellsMerge = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table-cells-split.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70669,7 +71959,7 @@ var TableCellsSplit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table-columns-split.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70702,7 +71992,7 @@ var TableColumnsSplit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table-of-contents.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70730,7 +72020,7 @@ var TableOfContents = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table-properties.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70756,7 +72046,7 @@ var TableProperties = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table-rows-split.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70789,7 +72079,7 @@ var TableRowsSplit = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/table.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70815,7 +72105,7 @@ var Table = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tablet-smartphone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70840,7 +72130,7 @@ var TabletSmartphone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tablet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70864,7 +72154,7 @@ var Tablet = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tablets.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70890,7 +72180,7 @@ var Tablets = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tag-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70916,7 +72206,7 @@ var TagPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tag-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70942,7 +72232,7 @@ var TagX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tag.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70964,9 +72254,56 @@ var Tag = `
   <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/tally-1.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Tally1 = `
+<svg
+  class="lucide lucide-tally-1"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 4v16" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/tally-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Tally2 = `
+<svg
+  class="lucide lucide-tally-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 4v16" />
+  <path d="M9 4v16" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/tags.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -70991,7 +72328,7 @@ var Tags = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tally-3.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71014,56 +72351,9 @@ var Tally3 = `
   <path d="M14 4v16" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/tally-1.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Tally1 = `
-<svg
-  class="lucide lucide-tally-1"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 4v16" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/tally-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Tally2 = `
-<svg
-  class="lucide lucide-tally-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 4v16" />
-  <path d="M9 4v16" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/tally-4.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71087,35 +72377,9 @@ var Tally4 = `
   <path d="M19 4v16" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/tangent.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Tangent = `
-<svg
-  class="lucide lucide-tangent"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="17" cy="4" r="2" />
-  <path d="M15.59 5.41 5.41 15.59" />
-  <circle cx="4" cy="17" r="2" />
-  <path d="M12 22s-4-9-1.5-11.5S22 12 22 12" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/tally-5.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71140,9 +72404,35 @@ var Tally5 = `
   <path d="M22 6 2 18" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/tangent.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Tangent = `
+<svg
+  class="lucide lucide-tangent"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="17" cy="4" r="2" />
+  <path d="M15.59 5.41 5.41 15.59" />
+  <circle cx="4" cy="17" r="2" />
+  <path d="M12 22s-4-9-1.5-11.5S22 12 22 12" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/target.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71167,7 +72457,7 @@ var Target = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/telescope.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71194,59 +72484,9 @@ var Telescope = `
   <circle cx="12" cy="13" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/tent.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Tent = `
-<svg
-  class="lucide lucide-tent"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3.5 21 14 3" />
-  <path d="M20.5 21 10 3" />
-  <path d="M15.5 21 12 15l-3.5 6" />
-  <path d="M2 21h20" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/terminal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Terminal = `
-<svg
-  class="lucide lucide-terminal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 19h8" />
-  <path d="m4 17 6-6-6-6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/tent-tree.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71273,16 +72513,16 @@ var TentTree = `
   <path d="m9 14 5 8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/test-tube.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/terminal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var TestTube = `
+var Terminal = `
 <svg
-  class="lucide lucide-test-tube"
+  class="lucide lucide-terminal"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -71293,14 +72533,39 @@ var TestTube = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5c-1.4 0-2.5-1.1-2.5-2.5V2" />
-  <path d="M8.5 2h7" />
-  <path d="M14.5 16h-5" />
+  <path d="M12 19h8" />
+  <path d="m4 17 6-6-6-6" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/tent.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Tent = `
+<svg
+  class="lucide lucide-tent"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3.5 21 14 3" />
+  <path d="M20.5 21 10 3" />
+  <path d="M15.5 21 12 15l-3.5 6" />
+  <path d="M2 21h20" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/test-tube-diagonal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71323,9 +72588,184 @@ var TestTubeDiagonal = `
   <path d="M12 16H4" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/test-tube.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TestTube = `
+<svg
+  class="lucide lucide-test-tube"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5c-1.4 0-2.5-1.1-2.5-2.5V2" />
+  <path d="M8.5 2h7" />
+  <path d="M14.5 16h-5" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-center.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignCenter = `
+<svg
+  class="lucide lucide-text-align-center"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 5H3" />
+  <path d="M17 12H7" />
+  <path d="M19 19H5" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-end.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignEnd = `
+<svg
+  class="lucide lucide-text-align-end"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 5H3" />
+  <path d="M21 12H9" />
+  <path d="M21 19H7" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-center.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignJustifyCenter = `
+<svg
+  class="lucide lucide-text-align-justify-center"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h18" />
+  <path d="M3 12h18" />
+  <path d="M7 19h10" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-end.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignJustifyEnd = `
+<svg
+  class="lucide lucide-text-align-justify-end"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h18" />
+  <path d="M3 12h18" />
+  <path d="M11 19h10" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-start.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignJustifyStart = `
+<svg
+  class="lucide lucide-text-align-justify-start"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h18" />
+  <path d="M3 12h18" />
+  <path d="M3 19h10" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignJustify = `
+<svg
+  class="lucide lucide-text-align-justify"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 5h18" />
+  <path d="M3 12h18" />
+  <path d="M3 19h18" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/test-tubes.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71351,184 +72791,9 @@ var TestTubes = `
   <path d="M20 16h-5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-center.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignCenter = `
-<svg
-  class="lucide lucide-text-align-center"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 5H3" />
-  <path d="M17 12H7" />
-  <path d="M19 19H5" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-end.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignEnd = `
-<svg
-  class="lucide lucide-text-align-end"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 5H3" />
-  <path d="M21 12H9" />
-  <path d="M21 19H7" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-center.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignJustifyCenter = `
-<svg
-  class="lucide lucide-text-align-justify-center"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h18" />
-  <path d="M3 12h18" />
-  <path d="M7 19h10" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-end.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignJustifyEnd = `
-<svg
-  class="lucide lucide-text-align-justify-end"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h18" />
-  <path d="M3 12h18" />
-  <path d="M11 19h10" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify-start.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignJustifyStart = `
-<svg
-  class="lucide lucide-text-align-justify-start"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h18" />
-  <path d="M3 12h18" />
-  <path d="M3 19h10" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-justify.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignJustify = `
-<svg
-  class="lucide lucide-text-align-justify"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 5h18" />
-  <path d="M3 12h18" />
-  <path d="M3 19h18" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/text-align-start.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextAlignStart = `
-<svg
-  class="lucide lucide-text-align-start"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M21 5H3" />
-  <path d="M15 12H3" />
-  <path d="M17 19H3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/text-cursor-input.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71553,9 +72818,34 @@ var TextCursorInput = `
   <path d="M9 6v12" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/text-align-start.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextAlignStart = `
+<svg
+  class="lucide lucide-text-align-start"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 5H3" />
+  <path d="M15 12H3" />
+  <path d="M17 19H3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/text-cursor.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71578,35 +72868,9 @@ var TextCursor = `
   <path d="M7 2h1a4 4 0 0 1 4 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/text-pen.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TextPen = `
-<svg
-  class="lucide lucide-text-pen"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 12H3" />
-  <path d="M21 5H3" />
-  <path d="M21.377 14.626a1 1 0 10-3.004-3.004l-5.01 5.012a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506z" />
-  <path d="M8 19H3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/text-initial.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71631,9 +72895,35 @@ var TextInitial = `
   <path d="M3.92 10h6.16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/text-pen.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TextPen = `
+<svg
+  class="lucide lucide-text-pen"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 12H3" />
+  <path d="M21 5H3" />
+  <path d="M21.377 14.626a1 1 0 10-3.004-3.004l-5.01 5.012a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837a2 2 0 00.854-.506z" />
+  <path d="M8 19H3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/text-quote.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71659,7 +72949,7 @@ var TextQuote = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/text-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71686,7 +72976,7 @@ var TextSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/text-wrap.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71712,7 +73002,7 @@ var TextWrap = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/theater.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71743,7 +73033,7 @@ var Theater = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/thermometer-snowflake.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71773,7 +73063,7 @@ var ThermometerSnowflake = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/thermometer-sun.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71801,7 +73091,7 @@ var ThermometerSun = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/thermometer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71824,7 +73114,7 @@ var Thermometer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/thumbs-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71848,7 +73138,7 @@ var ThumbsDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/thumbs-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71872,7 +73162,7 @@ var ThumbsUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tic-tac-toe.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71902,7 +73192,7 @@ var TicTacToe = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71926,7 +73216,7 @@ var TicketCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71950,7 +73240,7 @@ var TicketMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-percent.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -71976,7 +73266,7 @@ var TicketPercent = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72001,7 +73291,7 @@ var TicketPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-slash.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72025,7 +73315,7 @@ var TicketSlash = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72050,7 +73340,7 @@ var TicketX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/ticket.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72074,9 +73364,36 @@ var Ticket = `
   <path d="M13 11v2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/tickets.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Tickets = `
+<svg
+  class="lucide lucide-tickets"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m3.173 8.18 11-5a2 2 0 0 1 2.647.993L18.56 8" />
+  <path d="M6 10V8" />
+  <path d="M6 14v1" />
+  <path d="M6 19v2" />
+  <rect x="2" y="8" width="20" height="13" rx="2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/tickets-plane.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72103,63 +73420,9 @@ var TicketsPlane = `
   <rect x="2" y="8" width="20" height="13" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/tickets.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Tickets = `
-<svg
-  class="lucide lucide-tickets"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m3.173 8.18 11-5a2 2 0 0 1 2.647.993L18.56 8" />
-  <path d="M6 10V8" />
-  <path d="M6 14v1" />
-  <path d="M6 19v2" />
-  <rect x="2" y="8" width="20" height="13" rx="2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/timer-off.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TimerOff = `
-<svg
-  class="lucide lucide-timer-off"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 2h4" />
-  <path d="M4.6 11a8 8 0 0 0 1.7 8.7 8 8 0 0 0 8.7 1.7" />
-  <path d="M7.4 7.4a8 8 0 0 1 10.3 1 8 8 0 0 1 .9 10.2" />
-  <path d="m2 2 20 20" />
-  <path d="M12 12v-2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/timeline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72187,9 +73450,36 @@ var Timeline = `
   <path d="M9.414 5.414A2 2 0 0 0 10.828 6H19a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-8.172a2 2 0 0 0-1.414.586L8 4z" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/timer-off.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TimerOff = `
+<svg
+  class="lucide lucide-timer-off"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 2h4" />
+  <path d="M4.6 11a8 8 0 0 0 1.7 8.7 8 8 0 0 0 8.7 1.7" />
+  <path d="M7.4 7.4a8 8 0 0 1 10.3 1 8 8 0 0 1 .9 10.2" />
+  <path d="m2 2 20 20" />
+  <path d="M12 12v-2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/timer-reset.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72215,7 +73505,7 @@ var TimerReset = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/timer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72238,33 +73528,9 @@ var Timer = `
   <circle cx="12" cy="14" r="8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/toggle-right.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ToggleRight = `
-<svg
-  class="lucide lucide-toggle-right"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="15" cy="12" r="3" />
-  <rect width="20" height="14" x="2" y="5" rx="7" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/toggle-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72288,7 +73554,7 @@ var ToggleLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/toilet.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72310,16 +73576,16 @@ var Toilet = `
   <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/tool-case.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/toggle-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var ToolCase = `
+var ToggleRight = `
 <svg
-  class="lucide lucide-tool-case"
+  class="lucide lucide-toggle-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -72330,15 +73596,13 @@ var ToolCase = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M10 15h4" />
-  <path d="m14.5 4.058.571-1.429a1 1 0 011.3-.558l5 2a1 1 0 01.549.534.88.88 0 01.01.765l-2.332 5.83" />
-  <path d="M15.634 11a2 2 0 00-.186-.34l-1.17-1.757 1.31-1.656a2 2 0 00-2.109-3.165l-2.032.57-1.17-1.758a2 2 0 00-3.664 1.028l-.086 2.11-2.032.568a2 2 0 00-.155 3.8l1.617.6" />
-  <path d="M4 12.006A1 1 0 014.994 11H19a1 1 0 011 1v7a2 2 0 01-2 2H6a2 2 0 01-2-2z" />
+  <circle cx="15" cy="12" r="3" />
+  <rect width="20" height="14" x="2" y="5" rx="7" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tombstone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72362,9 +73626,62 @@ var Tombstone = `
   <path d="M9 14h6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/tool-case.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ToolCase = `
+<svg
+  class="lucide lucide-tool-case"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 15h4" />
+  <path d="m14.5 4.058.571-1.429a1 1 0 011.3-.558l5 2a1 1 0 01.549.534.88.88 0 01.01.765l-2.332 5.83" />
+  <path d="M15.634 11a2 2 0 00-.186-.34l-1.17-1.757 1.31-1.656a2 2 0 00-2.109-3.165l-2.032.57-1.17-1.758a2 2 0 00-3.664 1.028l-.086 2.11-2.032.568a2 2 0 00-.155 3.8l1.617.6" />
+  <path d="M4 12.006A1 1 0 014.994 11H19a1 1 0 011 1v7a2 2 0 01-2 2H6a2 2 0 01-2-2z" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/toolbox.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Toolbox = `
+<svg
+  class="lucide lucide-toolbox"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 12v4" />
+  <path d="M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+  <path d="M17 6a2 2 0 011.414.586l3 3A2 2 0 0122 11v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8a2 2 0 01.586-1.414l3-3A2 2 0 017 6z" />
+  <path d="M2 14h20" />
+  <path d="M8 12v4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/toothbrush-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72393,36 +73710,9 @@ var ToothbrushSparkles = `
   <path d="M9 2v2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/toolbox.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Toolbox = `
-<svg
-  class="lucide lucide-toolbox"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16 12v4" />
-  <path d="M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
-  <path d="M17 6a2 2 0 011.414.586l3 3A2 2 0 0122 11v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8a2 2 0 01.586-1.414l3-3A2 2 0 017 6z" />
-  <path d="M2 14h20" />
-  <path d="M8 12v4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/toothbrush.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72446,7 +73736,7 @@ var Toothbrush = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tornado.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72471,33 +73761,9 @@ var Tornado = `
   <path d="M11 20H9" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/torus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Torus = `
-<svg
-  class="lucide lucide-torus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <ellipse cx="12" cy="11" rx="3" ry="2" />
-  <ellipse cx="12" cy="12.5" rx="10" ry="8.5" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/touchpad-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72523,9 +73789,33 @@ var TouchpadOff = `
   <path d="M9.656 4H20a2 2 0 0 1 2 2v10.344" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/torus.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Torus = `
+<svg
+  class="lucide lucide-torus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <ellipse cx="12" cy="11" rx="3" ry="2" />
+  <ellipse cx="12" cy="12.5" rx="10" ry="8.5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/touchpad.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72550,7 +73840,7 @@ var Touchpad = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/towel-rack.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72573,9 +73863,34 @@ var TowelRack = `
   <path d="M9 7H2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/toy-brick.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ToyBrick = `
+<svg
+  class="lucide lucide-toy-brick"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="12" x="3" y="8" rx="1" />
+  <path d="M10 8V5c0-.6-.4-1-1-1H6a1 1 0 0 0-1 1v3" />
+  <path d="M19 8V5c0-.6-.4-1-1-1h-3a1 1 0 0 0-1 1v3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/tower-control.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72602,34 +73917,9 @@ var TowerControl = `
   <path d="M13 2h-2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/toy-brick.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ToyBrick = `
-<svg
-  class="lucide lucide-toy-brick"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <rect width="18" height="12" x="3" y="8" rx="1" />
-  <path d="M10 8V5c0-.6-.4-1-1-1H6a1 1 0 0 0-1 1v3" />
-  <path d="M19 8V5c0-.6-.4-1-1-1h-3a1 1 0 0 0-1 1v3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/tractor.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72660,7 +73950,7 @@ var Tractor = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/traffic-cone.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72686,7 +73976,7 @@ var TrafficCone = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/trailer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72712,38 +74002,9 @@ var Trailer = `
   <circle cx="8" cy="17" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/train-front-tunnel.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TrainFrontTunnel = `
-<svg
-  class="lucide lucide-train-front-tunnel"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 22V12a10 10 0 1 1 20 0v10" />
-  <path d="M15 6.8v1.4a3 2.8 0 1 1-6 0V6.8" />
-  <path d="M10 15h.01" />
-  <path d="M14 15h.01" />
-  <path d="M10 19a4 4 0 0 1-4-4v-3a6 6 0 1 1 12 0v3a4 4 0 0 1-4 4Z" />
-  <path d="m9 19-2 3" />
-  <path d="m15 19 2 3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/train-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72771,7 +74032,7 @@ var TrainFront = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/train-track.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72798,9 +74059,38 @@ var TrainTrack = `
   <path d="M7 22 22 7" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/train-front-tunnel.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TrainFrontTunnel = `
+<svg
+  class="lucide lucide-train-front-tunnel"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 22V12a10 10 0 1 1 20 0v10" />
+  <path d="M15 6.8v1.4a3 2.8 0 1 1-6 0V6.8" />
+  <path d="M10 15h.01" />
+  <path d="M14 15h.01" />
+  <path d="M10 19a4 4 0 0 1-4-4v-3a6 6 0 1 1 12 0v3a4 4 0 0 1-4 4Z" />
+  <path d="m9 19-2 3" />
+  <path d="m15 19 2 3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/tram-front.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72829,7 +74119,7 @@ var TramFront = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/transgender.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72857,110 +74147,9 @@ var Transgender = `
   <circle cx="12" cy="12" r="4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/trash.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Trash = `
-<svg
-  class="lucide lucide-trash"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 11v6" />
-  <path d="M14 11v6" />
-  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-  <path d="M3 6h18" />
-  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/tree-deciduous.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TreeDeciduous = `
-<svg
-  class="lucide lucide-tree-deciduous"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z" />
-  <path d="M12 19v3" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/tree-palm.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TreePalm = `
-<svg
-  class="lucide lucide-tree-palm"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" />
-  <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" />
-  <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" />
-  <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/tree-pine.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TreePine = `
-<svg
-  class="lucide lucide-tree-pine"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z" />
-  <path d="M12 22v-3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/trash-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -72988,9 +74177,110 @@ var TrashOff = `
   <path d="M5 6v14a2 2 0 002 2h10a2 2 0 002-2v-1" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/trash.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Trash = `
+<svg
+  class="lucide lucide-trash"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 11v6" />
+  <path d="M14 11v6" />
+  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+  <path d="M3 6h18" />
+  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/tree-deciduous.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TreeDeciduous = `
+<svg
+  class="lucide lucide-tree-deciduous"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z" />
+  <path d="M12 19v3" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/tree-palm.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TreePalm = `
+<svg
+  class="lucide lucide-tree-palm"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" />
+  <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" />
+  <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" />
+  <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/tree-pine.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TreePine = `
+<svg
+  class="lucide lucide-tree-pine"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z" />
+  <path d="M12 22v-3" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/trees.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73014,9 +74304,33 @@ var Trees = `
   <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/trending-down.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TrendingDown = `
+<svg
+  class="lucide lucide-trending-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 17h6v-6" />
+  <path d="m22 17-8.5-8.5-5 5L2 7" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/trending-up-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73042,7 +74356,7 @@ var TrendingUpDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/trending-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73064,9 +74378,34 @@ var TrendingUp = `
   <path d="m22 7-8.5 8.5-5-5L2 17" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/triangle-exclamation-point.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var TriangleExclamationPoint = `
+<svg
+  class="lucide lucide-triangle-exclamation-point"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/triangle-dashed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73095,58 +74434,9 @@ var TriangleDashed = `
   <path d="m8.102 7.743-1 1.732" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/trending-down.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TrendingDown = `
-<svg
-  class="lucide lucide-trending-down"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16 17h6v-6" />
-  <path d="m22 17-8.5-8.5-5 5L2 7" />
-</svg>
-`;
-// ../../node_modules/lucide-static/dist/esm/icons/triangle-exclamation-point.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TriangleExclamationPoint = `
-<svg
-  class="lucide lucide-triangle-exclamation-point"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
-  <path d="M12 9v4" />
-  <path d="M12 17h.01" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/triangle-right.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73169,7 +74459,7 @@ var TriangleRight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/triangle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73190,37 +74480,9 @@ var Triangle = `
   <path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/triangles-centerline-dashed-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TrianglesCenterlineDashedVertical = `
-<svg
-  class="lucide lucide-triangles-centerline-dashed-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 14v2" />
-  <path d="M12 20v2" />
-  <path d="M12 2v2" />
-  <path d="M12 8v2" />
-  <path d="M20.288 16.703A1 1 0 0022 16V8a1 1 0 00-1.712-.703l-3.99 3.991a1 1 0 00-.001 1.424z" />
-  <path d="M3.712 16.703A1 1 0 012 16V8a1 1 0 011.712-.703l3.99 3.991a1 1 0 01.001 1.424z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/trophy.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73246,37 +74508,9 @@ var Trophy = `
   <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/triangles-centerline-dashed-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var TrianglesCenterlineDashedHorizontal = `
-<svg
-  class="lucide lucide-triangles-centerline-dashed-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 12H8" />
-  <path d="M16 12h-2" />
-  <path d="M22 12h-2" />
-  <path d="M4 12H2" />
-  <path d="M7.298 20.288A1 1 0 008 22h8a1 1 0 00.703-1.712l-3.991-3.99a1 1 0 00-1.424-.001z" />
-  <path d="M7.298 3.712A1 1 0 018 2h8a1 1 0 01.703 1.712l-3.991 3.99a1 1 0 01-1.424.001z" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/truck-electric.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73305,7 +74539,7 @@ var TruckElectric = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/truck.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73332,7 +74566,7 @@ var Truck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tube-lotion.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73357,7 +74591,7 @@ var TubeLotion = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/turkish-lira.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73382,7 +74616,7 @@ var TurkishLira = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/turntable.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73408,7 +74642,7 @@ var Turntable = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/turtle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73434,7 +74668,7 @@ var Turtle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tv-minimal-play.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73459,7 +74693,7 @@ var TvMinimalPlay = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tv-minimal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73483,7 +74717,7 @@ var TvMinimal = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/tv.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73507,7 +74741,7 @@ var Tv = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/type-outline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73530,7 +74764,7 @@ var TypeOutline = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/type.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73555,7 +74789,7 @@ var Type = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/umbrella-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73582,7 +74816,7 @@ var UmbrellaOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/umbrella.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73607,7 +74841,7 @@ var Umbrella = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/underline.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73631,7 +74865,7 @@ var Underline = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/undo-2.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73655,7 +74889,7 @@ var Undo2 = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/undo-dot.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73680,7 +74914,7 @@ var UndoDot = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/undo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73702,39 +74936,9 @@ var Undo = `
   <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/unfold-vertical.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var UnfoldVertical = `
-<svg
-  class="lucide lucide-unfold-vertical"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 22v-6" />
-  <path d="M12 8V2" />
-  <path d="M4 12H2" />
-  <path d="M10 12H8" />
-  <path d="M16 12h-2" />
-  <path d="M22 12h-2" />
-  <path d="m15 19-3 3-3-3" />
-  <path d="m15 5-3-3-3 3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/ungroup.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73756,39 +74960,9 @@ var Ungroup = `
   <rect x="3" y="3" width="10" height="7" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/unfold-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var UnfoldHorizontal = `
-<svg
-  class="lucide lucide-unfold-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M16 12h6" />
-  <path d="M8 12H2" />
-  <path d="M12 2v2" />
-  <path d="M12 8v2" />
-  <path d="M12 14v2" />
-  <path d="M12 20v2" />
-  <path d="m19 15 3-3-3-3" />
-  <path d="m5 9-3 3 3 3" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/university.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73815,32 +74989,9 @@ var University = `
   <circle cx="12" cy="10" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/unlink-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Unlink2 = `
-<svg
-  class="lucide lucide-unlink-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15 7h2a5 5 0 0 1 0 10h-2m-6 0H7A5 5 0 0 1 7 7h2" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/unlink.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73866,9 +75017,32 @@ var Unlink = `
   <line x1="19" x2="22" y1="16" y2="16" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/unlink-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Unlink2 = `
+<svg
+  class="lucide lucide-unlink-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 7h2a5 5 0 0 1 0 10h-2m-6 0H7A5 5 0 0 1 7 7h2" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/unplug.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73896,7 +75070,7 @@ var Unplug = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/upload.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73921,7 +75095,7 @@ var Upload = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/usb-c-port.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73945,7 +75119,7 @@ var UsbCPort = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/usb.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73974,7 +75148,7 @@ var Usb = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -73999,7 +75173,7 @@ var UserCheck = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74032,7 +75206,7 @@ var UserCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-exclamation-point.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74058,7 +75232,7 @@ var UserExclamationPoint = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-group.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74084,35 +75258,9 @@ var UserGroup = `
   <circle cx="6" cy="4" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/user-lock.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var UserLock = `
-<svg
-  class="lucide lucide-user-lock"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 16v-2a2 2 0 0 0-4 0v2" />
-  <path d="M9.5 15H7a4 4 0 0 0-4 4v2" />
-  <circle cx="10" cy="7" r="4" />
-  <rect x="13" y="16" width="8" height="5" rx=".899" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/user-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74137,9 +75285,35 @@ var UserKey = `
   <circle cx="20" cy="19" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/user-lock.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var UserLock = `
+<svg
+  class="lucide lucide-user-lock"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 16v-2a2 2 0 0 0-4 0v2" />
+  <path d="M9.5 15H7a4 4 0 0 0-4 4v2" />
+  <circle cx="10" cy="7" r="4" />
+  <rect x="13" y="16" width="8" height="5" rx=".899" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/user-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74164,7 +75338,7 @@ var UserMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74189,7 +75363,7 @@ var UserPen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74215,7 +75389,7 @@ var UserPlus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-arrow-left.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74241,7 +75415,7 @@ var UserRoundArrowLeft = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-check.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74264,16 +75438,16 @@ var UserRoundCheck = `
   <path d="m16 19 2 2 4-4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/user-round-exclamation-point.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/user-round-clock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var UserRoundExclamationPoint = `
+var UserRoundClock = `
 <svg
-  class="lucide lucide-user-round-exclamation-point"
+  class="lucide lucide-user-round-clock"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -74284,15 +75458,15 @@ var UserRoundExclamationPoint = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M19.99 13v4" />
-  <path d="M19.99 21H20" />
-  <path d="M4 21a8 8 0 0111.99-6.934" />
-  <circle cx="12" cy="8" r="5" />
+  <path d="M17 15.5v1.7l1 .625" />
+  <path d="M2 21a8 8 0 016.898-7.924" />
+  <path d="M8.987 12.897a5 5 0 116.008-4.673" />
+  <circle cx="17" cy="17" r="5" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74323,9 +75497,35 @@ var UserRoundCog = `
   <circle cx="18" cy="18" r="3" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/user-round-exclamation-point.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var UserRoundExclamationPoint = `
+<svg
+  class="lucide lucide-user-round-exclamation-point"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19.99 13v4" />
+  <path d="M19.99 21H20" />
+  <path d="M4 21a8 8 0 0111.99-6.934" />
+  <circle cx="12" cy="8" r="5" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-group.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74353,7 +75553,7 @@ var UserRoundGroup = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-key.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74380,7 +75580,7 @@ var UserRoundKey = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-minus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74405,7 +75605,7 @@ var UserRoundMinus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74428,35 +75628,9 @@ var UserRoundPen = `
   <circle cx="10" cy="8" r="5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/user-round-search.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var UserRoundSearch = `
-<svg
-  class="lucide lucide-user-round-search"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="10" cy="8" r="5" />
-  <path d="M2 21a8 8 0 0 1 10.434-7.62" />
-  <circle cx="18" cy="18" r="3" />
-  <path d="m22 22-1.9-1.9" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-plus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74480,9 +75654,35 @@ var UserRoundPlus = `
   <path d="M22 19h-6" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/user-round-search.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var UserRoundSearch = `
+<svg
+  class="lucide lucide-user-round-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="10" cy="8" r="5" />
+  <path d="M2 21a8 8 0 0 1 10.434-7.62" />
+  <circle cx="18" cy="18" r="3" />
+  <path d="m22 22-1.9-1.9" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-shield.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74506,7 +75706,7 @@ var UserRoundShield = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74531,7 +75731,7 @@ var UserRoundStar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74557,7 +75757,7 @@ var UserRoundX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74581,7 +75781,7 @@ var UserRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-search.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74607,7 +75807,7 @@ var UserSearch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-shield.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74632,7 +75832,7 @@ var UserShield = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-star.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74657,7 +75857,7 @@ var UserStar = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/user-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74681,9 +75881,33 @@ var UserX = `
   <line x1="22" x2="17" y1="8" y2="13" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/user.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var User = `
+<svg
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/users-collaboration.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74709,33 +75933,9 @@ var UsersCollaboration = `
   <circle cx="7" cy="4" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/user.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var User = `
-<svg
-  class="lucide lucide-user"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-  <circle cx="12" cy="7" r="4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/users-round-collaboration.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74763,7 +75963,7 @@ var UsersRoundCollaboration = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/users-round.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74788,7 +75988,7 @@ var UsersRound = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/users.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74814,7 +76014,7 @@ var Users = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/utensils-crossed.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74840,7 +76040,7 @@ var UtensilsCrossed = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/utensils.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74865,7 +76065,7 @@ var Utensils = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/utility-pole.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74894,7 +76094,7 @@ var UtilityPole = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/van.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74919,35 +76119,9 @@ var Van = `
   <circle cx="7" cy="18" r="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/variable.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Variable = `
-<svg
-  class="lucide lucide-variable"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8 21s-4-3-4-9 4-9 4-9" />
-  <path d="M16 3s4 3 4 9-4 9-4 9" />
-  <line x1="15" x2="9" y1="9" y2="15" />
-  <line x1="9" x2="15" y1="9" y2="15" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/vault.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -74977,9 +76151,35 @@ var Vault = `
   <circle cx="12" cy="12" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/variable.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Variable = `
+<svg
+  class="lucide lucide-variable"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 21s-4-3-4-9 4-9 4-9" />
+  <path d="M16 3s4 3 4 9-4 9-4 9" />
+  <line x1="15" x2="9" y1="9" y2="15" />
+  <line x1="9" x2="15" y1="9" y2="15" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/vector-polygon.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75009,7 +76209,7 @@ var VectorPolygon = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/vector-square.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75039,7 +76239,7 @@ var VectorSquare = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/vegan.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75064,7 +76264,7 @@ var Vegan = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/venetian-mask.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75087,34 +76287,9 @@ var VenetianMask = `
   <path d="M6 11c1.5 0 2.5.5 3 2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/venus.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Venus = `
-<svg
-  class="lucide lucide-venus"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 15v7" />
-  <path d="M9 19h6" />
-  <circle cx="12" cy="9" r="6" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/venus-and-mars.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75139,16 +76314,16 @@ var VenusAndMars = `
   <circle cx="12" cy="11" r="5" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/vibrate-off.mjs
+// ../../node_modules/lucide-static/dist/esm/icons/venus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var VibrateOff = `
+var Venus = `
 <svg
-  class="lucide lucide-vibrate-off"
+  class="lucide lucide-venus"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -75159,16 +76334,14 @@ var VibrateOff = `
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="m2 8 2 2-2 2 2 2-2 2" />
-  <path d="m22 8-2 2 2 2-2 2 2 2" />
-  <path d="M8 8v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2" />
-  <path d="M16 10.34V6c0-.55-.45-1-1-1h-4.34" />
-  <line x1="2" x2="22" y1="2" y2="22" />
+  <path d="M12 15v7" />
+  <path d="M9 19h6" />
+  <circle cx="12" cy="9" r="6" />
 </svg>
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/vibrate.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75193,7 +76366,7 @@ var Vibrate = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/video-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75218,7 +76391,7 @@ var VideoOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/video.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75242,7 +76415,7 @@ var Video = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/videotape.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75267,9 +76440,36 @@ var Videotape = `
   <circle cx="16" cy="14" r="2" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/vibrate-off.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var VibrateOff = `
+<svg
+  class="lucide lucide-vibrate-off"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m2 8 2 2-2 2 2 2-2 2" />
+  <path d="m22 8-2 2 2 2-2 2 2 2" />
+  <path d="M8 8v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2" />
+  <path d="M16 10.34V6c0-.55-.45-1-1-1h-4.34" />
+  <line x1="2" x2="22" y1="2" y2="22" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/view.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75295,7 +76495,7 @@ var View = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/virus-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75337,7 +76537,7 @@ var VirusOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/virus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75379,7 +76579,7 @@ var Virus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/voicemail.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75404,7 +76604,7 @@ var Voicemail = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/volleyball.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75432,7 +76632,7 @@ var Volleyball = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/volume-1.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75454,34 +76654,9 @@ var Volume1 = `
   <path d="M16 9a5 5 0 0 1 0 6" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/volume-2.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Volume2 = `
-<svg
-  class="lucide lucide-volume-2"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
-  <path d="M16 9a5 5 0 0 1 0 6" />
-  <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/volume-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75506,9 +76681,34 @@ var VolumeOff = `
   <path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/volume-2.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Volume2 = `
+<svg
+  class="lucide lucide-volume-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+  <path d="M16 9a5 5 0 0 1 0 6" />
+  <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/volume-x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75533,7 +76733,7 @@ var VolumeX = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/volume.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75556,7 +76756,7 @@ var Volume = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/vote.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75581,7 +76781,7 @@ var Vote = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wallet-cards.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75606,7 +76806,7 @@ var WalletCards = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wallet-minimal.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75628,9 +76828,33 @@ var WalletMinimal = `
   <path d="M7 7h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/wallet.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Wallet = `
+<svg
+  class="lucide lucide-wallet"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/wallpaper.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75655,33 +76879,9 @@ var Wallpaper = `
   <rect x="2" y="3" width="20" height="14" rx="2" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/wallet.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Wallet = `
-<svg
-  class="lucide lucide-wallet"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
-  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/wand-sparkles.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75711,7 +76911,7 @@ var WandSparkles = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wand.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75740,9 +76940,35 @@ var Wand = `
   <path d="M12.2 6.2 11 5" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/warehouse-waves.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var WarehouseWaves = `
+<svg
+  class="lucide lucide-warehouse-waves"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 11V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8v3" />
+  <path d="M6 11v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
+  <path d="M2 16q2.5 2 5 0t5 0 5 0 5 0" />
+  <path d="M2 21q2.5 2 5 0t5 0 5 0 5 0" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/warehouse.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75768,7 +76994,7 @@ var Warehouse = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/washing-machine.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75795,7 +77021,7 @@ var WashingMachine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/watch.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75821,7 +77047,7 @@ var Watch = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/waves-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75847,7 +77073,7 @@ var WavesArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/waves-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75871,34 +77097,9 @@ var WavesArrowUp = `
   <path d="m8 6 4-4 4 4" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/waves-horizontal.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var WavesHorizontal = `
-<svg
-  class="lucide lucide-waves-horizontal"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" />
-  <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" />
-  <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/waves-ladder.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75923,9 +77124,34 @@ var WavesLadder = `
   <path d="M9 5a2 2 0 0 0-2 2v11" />
 </svg>
 `;
+// ../../node_modules/lucide-static/dist/esm/icons/waves-horizontal.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var WavesHorizontal = `
+<svg
+  class="lucide lucide-waves-horizontal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" />
+  <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" />
+  <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" />
+</svg>
+`;
 // ../../node_modules/lucide-static/dist/esm/icons/waves-vertical.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75950,7 +77176,7 @@ var WavesVertical = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/waypoints.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -75979,7 +77205,7 @@ var Waypoints = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/webcam-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76008,7 +77234,7 @@ var WebcamOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/webcam.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76034,7 +77260,7 @@ var Webcam = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/webhook-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76063,7 +77289,7 @@ var WebhookOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/webhook.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76088,7 +77314,7 @@ var Webhook = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/weight-tilde.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76113,7 +77339,7 @@ var WeightTilde = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/weight.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76137,7 +77363,7 @@ var Weight = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wheat-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76169,7 +77395,7 @@ var WheatOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wheat.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76199,7 +77425,7 @@ var Wheat = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/whistle.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76223,7 +77449,7 @@ var Whistle = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/whole-word.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76250,7 +77476,7 @@ var WholeWord = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-cog.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76284,7 +77510,7 @@ var WifiCog = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-high.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76309,7 +77535,7 @@ var WifiHigh = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-lock.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76336,7 +77562,7 @@ var WifiLock = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-low.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76360,7 +77586,7 @@ var WifiLow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76389,7 +77615,7 @@ var WifiOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-pen.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76415,7 +77641,7 @@ var WifiPen = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-sync.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76444,7 +77670,7 @@ var WifiSync = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi-zero.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76467,7 +77693,7 @@ var WifiZero = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wifi.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76493,7 +77719,7 @@ var Wifi = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wind-arrow-down.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76519,7 +77745,7 @@ var WindArrowDown = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wind-arrow-up.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76545,7 +77771,7 @@ var WindArrowUp = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wind.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76570,7 +77796,7 @@ var Wind = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wine-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76597,7 +77823,7 @@ var WineOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wine.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76623,7 +77849,7 @@ var Wine = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/workflow.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76648,7 +77874,7 @@ var Workflow = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/worm.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76673,7 +77899,7 @@ var Worm = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wrench-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76698,7 +77924,7 @@ var WrenchOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/wrench.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76721,7 +77947,7 @@ var Wrench = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/x-line-top.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76746,7 +77972,7 @@ var XLineTop = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/x.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76770,7 +77996,7 @@ var X = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zap-off.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76796,7 +78022,7 @@ var ZapOff = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zap.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76819,7 +78045,7 @@ var Zap = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-aquarius.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76843,7 +78069,7 @@ var ZodiacAquarius = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-aries.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76867,7 +78093,7 @@ var ZodiacAries = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-cancer.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76893,7 +78119,7 @@ var ZodiacCancer = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-capricorn.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76918,7 +78144,7 @@ var ZodiacCapricorn = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-gemini.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76944,7 +78170,7 @@ var ZodiacGemini = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-leo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76968,7 +78194,7 @@ var ZodiacLeo = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-libra.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -76992,7 +78218,7 @@ var ZodiacLibra = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-ophiuchus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77016,7 +78242,7 @@ var ZodiacOphiuchus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-pisces.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77041,7 +78267,7 @@ var ZodiacPisces = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-sagittarius.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77066,7 +78292,7 @@ var ZodiacSagittarius = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-scorpio.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77092,7 +78318,7 @@ var ZodiacScorpio = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-taurus.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77116,7 +78342,7 @@ var ZodiacTaurus = `
 `;
 // ../../node_modules/lucide-static/dist/esm/icons/zodiac-virgo.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77140,34 +78366,9 @@ var ZodiacVirgo = `
   <path d="M6 5.5a1 1 0 0 1 5 0V19" />
 </svg>
 `;
-// ../../node_modules/lucide-static/dist/esm/icons/zoom-out.mjs
-/**
-* @license lucide-static v1.72.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ZoomOut = `
-<svg
-  class="lucide lucide-zoom-out"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <circle cx="11" cy="11" r="8" />
-  <line x1="21" x2="16.65" y1="21" y2="16.65" />
-  <line x1="8" x2="14" y1="11" y2="11" />
-</svg>
-`;
 // ../../node_modules/lucide-static/dist/esm/icons/zoom-in.mjs
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -77188,6 +78389,31 @@ var ZoomIn = `
   <circle cx="11" cy="11" r="8" />
   <line x1="21" x2="16.65" y1="21" y2="16.65" />
   <line x1="11" x2="11" y1="8" y2="14" />
+  <line x1="8" x2="14" y1="11" y2="11" />
+</svg>
+`;
+// ../../node_modules/lucide-static/dist/esm/icons/zoom-out.mjs
+/**
+* @license lucide-static v1.77.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ZoomOut = `
+<svg
+  class="lucide lucide-zoom-out"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="11" cy="11" r="8" />
+  <line x1="21" x2="16.65" y1="21" y2="16.65" />
   <line x1="8" x2="14" y1="11" y2="11" />
 </svg>
 `;
@@ -77329,6 +78555,14 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	ArrowUpWideNarrow: () => ArrowUpWideNarrow,
 	ArrowUpZA: () => ArrowUpZA,
 	ArrowUpZa: () => ArrowUpZA,
+	ArrowsFromAxisDashedHorizontal: () => ArrowsFromAxisDashedHorizontal,
+	ArrowsFromAxisDashedVertical: () => ArrowsFromAxisDashedVertical,
+	ArrowsFromAxisHorizontal: () => ArrowsFromAxisHorizontal,
+	ArrowsFromAxisVertical: () => ArrowsFromAxisVertical,
+	ArrowsToAxisDashedHorizontal: () => ArrowsToAxisDashedHorizontal,
+	ArrowsToAxisDashedVertical: () => ArrowsToAxisDashedVertical,
+	ArrowsToAxisHorizontal: () => ArrowsToAxisHorizontal,
+	ArrowsToAxisVertical: () => ArrowsToAxisVertical,
 	ArrowsUpFromLine: () => ArrowsUpFromLine,
 	Asterisk: () => Asterisk,
 	AsteriskSquare: () => SquareAsterisk,
@@ -77483,11 +78717,16 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	BookmarkX: () => BookmarkX,
 	BoomBox: () => BoomBox,
 	Bot: () => Bot,
+	BotCheck: () => BotCheck,
 	BotMessageSquare: () => BotMessageSquare,
+	BotMinus: () => BotMinus,
 	BotOff: () => BotOff,
+	BotPlus: () => BotPlus,
+	BotX: () => BotX,
 	BottleWine: () => BottleWine,
 	BowArrow: () => BowArrow,
 	Box: () => Box,
+	BoxDashed: () => BoxDashed,
 	BoxSelect: () => SquareDashed,
 	Boxes: () => Boxes,
 	BoxesLinked: () => BoxesLinked,
@@ -77563,6 +78802,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	CandyOff: () => CandyOff,
 	Cannabis: () => Cannabis,
 	CannabisOff: () => CannabisOff,
+	Cap: () => Cap,
 	Captions: () => Captions,
 	CaptionsOff: () => CaptionsOff,
 	Car: () => Car,
@@ -77571,6 +78811,14 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	CarTaxiFront: () => CarTaxiFront,
 	Caravan: () => Caravan,
 	CardSim: () => CardSim,
+	CaretsFromAxisDashedHorizontal: () => CaretsFromAxisDashedHorizontal,
+	CaretsFromAxisDashedVertical: () => CaretsFromAxisDashedVertical,
+	CaretsFromAxisHorizontal: () => CaretsFromAxisHorizontal,
+	CaretsFromAxisVertical: () => CaretsFromAxisVertical,
+	CaretsToAxisDashedHorizontal: () => CaretsToAxisDashedHorizontal,
+	CaretsToAxisDashedVertical: () => CaretsToAxisDashedVertical,
+	CaretsToAxisHorizontal: () => CaretsToAxisHorizontal,
+	CaretsToAxisVertical: () => CaretsToAxisVertical,
 	Carrot: () => Carrot,
 	Carton: () => Carton,
 	CartonOff: () => CartonOff,
@@ -77642,16 +78890,26 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	ChevronUpSquare: () => SquareChevronUp,
 	ChevronsDown: () => ChevronsDown,
 	ChevronsDownUp: () => ChevronsDownUp,
+	ChevronsFromAxisDashedHorizontal: () => ChevronsFromAxisDashedHorizontal,
+	ChevronsFromAxisDashedVertical: () => ChevronsFromAxisDashedVertical,
+	ChevronsFromAxisHorizontal: () => ChevronsFromAxisHorizontal,
+	ChevronsFromAxisVertical: () => ChevronsFromAxisVertical,
 	ChevronsLeft: () => ChevronsLeft,
 	ChevronsLeftRight: () => ChevronsLeftRight,
 	ChevronsLeftRightEllipsis: () => ChevronsLeftRightEllipsis,
 	ChevronsRight: () => ChevronsRight,
 	ChevronsRightLeft: () => ChevronsRightLeft,
+	ChevronsToAxisDashedHorizontal: () => ChevronsToAxisDashedHorizontal,
+	ChevronsToAxisDashedVertical: () => ChevronsToAxisDashedVertical,
+	ChevronsToAxisHorizontal: () => ChevronsToAxisHorizontal,
+	ChevronsToAxisVertical: () => ChevronsToAxisVertical,
 	ChevronsUp: () => ChevronsUp,
 	ChevronsUpDown: () => ChevronsUpDown,
+	ChocolateBar: () => ChocolateBar,
 	Church: () => Church,
 	Cigarette: () => Cigarette,
 	CigaretteOff: () => CigaretteOff,
+	Cinema: () => Cinema,
 	Circle: () => Circle,
 	CircleAlert: () => CircleExclamationPoint,
 	CircleArrowDown: () => CircleArrowDown,
@@ -77666,6 +78924,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	CircleArrowUp: () => CircleArrowUp,
 	CircleArrowUpLeftExit: () => CircleArrowUpLeftExit,
 	CircleArrowUpRightExit: () => CircleArrowUpRightExit,
+	CircleBounce: () => CircleBounce,
 	CircleCheck: () => CircleCheck,
 	CircleCheckBig: () => CircleCheckBig,
 	CircleChevronDown: () => CircleChevronDown,
@@ -77725,6 +78984,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	CircleParkingOff: () => CircleLetterPOff,
 	CirclePause: () => CirclePause,
 	CirclePercent: () => CirclePercent,
+	CirclePersonArmsSpread: () => CirclePersonArmsSpread,
 	CirclePile: () => CirclePile,
 	CirclePlay: () => CirclePlay,
 	CirclePlus: () => CirclePlus,
@@ -77889,6 +79149,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	Dessert: () => Dessert,
 	DiagramFlowHorizontal: () => DiagramFlowHorizontal,
 	DiagramFlowVertical: () => DiagramFlowVertical,
+	DiagramSankey: () => DiagramSankey,
 	Diameter: () => Diameter,
 	Diamond: () => Diamond,
 	DiamondMinus: () => DiamondMinus,
@@ -77913,6 +79174,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	DnaOff: () => DnaOff,
 	Dock: () => Dock,
 	Dog: () => Dog,
+	Doghouse: () => Doghouse,
 	DollarSign: () => DollarSign,
 	Dome: () => Dome,
 	Donut: () => Donut,
@@ -78093,15 +79355,15 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	FlaskConical: () => FlaskConical,
 	FlaskConicalOff: () => FlaskConicalOff,
 	FlaskRound: () => FlaskRound,
-	FlipHorizontal: () => SquareCenterlineDashedHorizontal,
-	FlipHorizontal2: () => TrianglesCenterlineDashedHorizontal,
-	FlipVertical: () => SquareCenterlineDashedVertical,
-	FlipVertical2: () => TrianglesCenterlineDashedVertical,
+	FlipHorizontal: () => SquareAxisDashedVertical,
+	FlipHorizontal2: () => CaretsToAxisDashedHorizontal,
+	FlipVertical: () => SquareAxisDashedHorizontal,
+	FlipVertical2: () => CaretsToAxisDashedVertical,
 	Flower: () => Flower,
 	Flower2: () => Flower2,
 	Focus: () => Focus,
-	FoldHorizontal: () => FoldHorizontal,
-	FoldVertical: () => FoldVertical,
+	FoldHorizontal: () => ArrowsToAxisDashedVertical,
+	FoldVertical: () => ArrowsToAxisDashedHorizontal,
 	Folder: () => Folder,
 	FolderArchive: () => FolderArchive,
 	FolderBookmark: () => FolderBookmark,
@@ -78122,11 +79384,13 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	FolderKey: () => FolderKey,
 	FolderLock: () => FolderLock,
 	FolderMinus: () => FolderMinus,
+	FolderNetwork: () => FolderNetwork,
 	FolderOpen: () => FolderOpen,
 	FolderOpenDot: () => FolderOpenDot,
 	FolderOutput: () => FolderOutput,
 	FolderPen: () => FolderPen,
 	FolderPlus: () => FolderPlus,
+	FolderPlusCorner: () => FolderPlusCorner,
 	FolderRoot: () => FolderRoot,
 	FolderSearch: () => FolderSearch,
 	FolderSearch2: () => FolderSearch2,
@@ -78210,6 +79474,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	GraduationCap: () => GraduationCap,
 	Grape: () => Grape,
 	GraphHub: () => GraphHub,
+	GraphRing: () => GraphRing,
 	GraphStar: () => GraphStar,
 	Grid: () => Grid3x3,
 	Grid2X2: () => Grid2x2,
@@ -78245,6 +79510,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	HandHelping: () => HandHelping,
 	HandMetal: () => HandMetal,
 	HandPlatter: () => HandPlatter,
+	HandTruck: () => HandTruck,
 	Handbag: () => Handbag,
 	HandleBottomRight: () => HandleBottomRight,
 	Handshake: () => Handshake,
@@ -78293,6 +79559,8 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	Hourglass: () => Hourglass,
 	HourglassCog: () => HourglassCog,
 	House: () => House,
+	HouseArrowLeft: () => HouseArrowLeft,
+	HouseArrowRight: () => HouseArrowRight,
 	HouseCog: () => HouseCog,
 	HouseHeart: () => HouseHeart,
 	HousePlug: () => HousePlug,
@@ -78328,6 +79596,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	IterationCcw: () => IterationCcw,
 	IterationCw: () => IterationCw,
 	IvBag: () => IvBag,
+	Jacket: () => Jacket,
 	JapaneseYen: () => JapaneseYen,
 	Joystick: () => Joystick,
 	Kanban: () => Kanban,
@@ -78375,6 +79644,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	LayoutFreeform: () => LayoutFreeform,
 	LayoutGrid: () => LayoutGrid,
 	LayoutGridCircles: () => LayoutGridCircles,
+	LayoutGridPlus: () => LayoutGridPlus,
 	LayoutList: () => LayoutList,
 	LayoutPanelLeft: () => LayoutPanelLeft,
 	LayoutPanelTop: () => LayoutPanelTop,
@@ -78658,6 +79928,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	Network: () => Network,
 	Newspaper: () => Newspaper,
 	Nfc: () => Nfc,
+	NigerianNaira: () => NigerianNaira,
 	NonBinary: () => NonBinary,
 	Notebook: () => Notebook,
 	NotebookDot: () => NotebookDot,
@@ -78692,6 +79963,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	PackageSearch: () => PackageSearch,
 	PackageX: () => PackageX,
 	PaintBucket: () => PaintBucket,
+	PaintGun: () => PaintGun,
 	PaintRoller: () => PaintRoller,
 	Paintbrush: () => Paintbrush,
 	Paintbrush2: () => PaintbrushVertical,
@@ -78857,6 +80129,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	RectangleEllipsis: () => RectangleEllipsis,
 	RectangleGoggles: () => RectangleGoggles,
 	RectangleHorizontal: () => RectangleHorizontal,
+	RectangleLandscapePlay: () => RectangleLandscapePlay,
 	RectangleVertical: () => RectangleVertical,
 	Recycle: () => Recycle,
 	Redo: () => Redo,
@@ -79103,10 +80376,14 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	SquareArrowUpRightEnter: () => SquareArrowUpRightEnter,
 	SquareArrowUpRightExit: () => SquareArrowUpRightExit,
 	SquareAsterisk: () => SquareAsterisk,
+	SquareAxisDashedHorizontal: () => SquareAxisDashedHorizontal,
+	SquareAxisDashedVertical: () => SquareAxisDashedVertical,
+	SquareAxisHorizontal: () => SquareAxisHorizontal,
+	SquareAxisVertical: () => SquareAxisVertical,
 	SquareBookmark: () => SquareBookmark,
 	SquareBottomDashedScissors: () => SquareBottomDashedScissors,
-	SquareCenterlineDashedHorizontal: () => SquareCenterlineDashedHorizontal,
-	SquareCenterlineDashedVertical: () => SquareCenterlineDashedVertical,
+	SquareCenterlineDashedHorizontal: () => SquareAxisDashedVertical,
+	SquareCenterlineDashedVertical: () => SquareAxisDashedHorizontal,
 	SquareChartGantt: () => SquareChartGantt,
 	SquareCheck: () => SquareCheck,
 	SquareCheckBig: () => SquareCheckBig,
@@ -79245,6 +80522,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	StrokeLineJoinBevel: () => StrokeLineJoinBevel,
 	StrokeLineJoinMiter: () => StrokeLineJoinMiter,
 	StrokeLineJoinRound: () => StrokeLineJoinRound,
+	StrokeWidth: () => StrokeWidth,
 	Subscript: () => Subscript,
 	Subtitles: () => Captions,
 	Summary: () => Summary,
@@ -79370,8 +80648,8 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	TriangleDashed: () => TriangleDashed,
 	TriangleExclamationPoint: () => TriangleExclamationPoint,
 	TriangleRight: () => TriangleRight,
-	TrianglesCenterlineDashedHorizontal: () => TrianglesCenterlineDashedHorizontal,
-	TrianglesCenterlineDashedVertical: () => TrianglesCenterlineDashedVertical,
+	TrianglesCenterlineDashedHorizontal: () => CaretsToAxisDashedHorizontal,
+	TrianglesCenterlineDashedVertical: () => CaretsToAxisDashedVertical,
 	Trophy: () => Trophy,
 	Truck: () => Truck,
 	TruckElectric: () => TruckElectric,
@@ -79391,8 +80669,8 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	Undo: () => Undo,
 	Undo2: () => Undo2,
 	UndoDot: () => UndoDot,
-	UnfoldHorizontal: () => UnfoldHorizontal,
-	UnfoldVertical: () => UnfoldVertical,
+	UnfoldHorizontal: () => ArrowsFromAxisDashedVertical,
+	UnfoldVertical: () => ArrowsFromAxisDashedHorizontal,
 	Ungroup: () => Ungroup,
 	University: () => University,
 	Unlink: () => Unlink,
@@ -79424,6 +80702,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	UserRound: () => UserRound,
 	UserRoundArrowLeft: () => UserRoundArrowLeft,
 	UserRoundCheck: () => UserRoundCheck,
+	UserRoundClock: () => UserRoundClock,
 	UserRoundCog: () => UserRoundCog,
 	UserRoundExclamationPoint: () => UserRoundExclamationPoint,
 	UserRoundGroup: () => UserRoundGroup,
@@ -79485,6 +80764,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	Wand2: () => WandSparkles,
 	WandSparkles: () => WandSparkles,
 	Warehouse: () => Warehouse,
+	WarehouseWaves: () => WarehouseWaves,
 	WashingMachine: () => WashingMachine,
 	Watch: () => Watch,
 	Waves: () => WavesHorizontal,
@@ -79547,7 +80827,7 @@ var lucide_static_exports = /* @__PURE__ */ __exportAll({
 	ZoomOut: () => ZoomOut
 });
 /**
-* @license lucide-static v1.72.0 - ISC
+* @license lucide-static v1.77.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -84948,6 +86228,9 @@ randomId: randomString(32) };
 		},
 		"vira-date-input-disabled"({ inputs }) {
 			return !!inputs.isDisabled;
+		},
+		"vira-date-input-empty"({ inputs }) {
+			return !inputs.value;
 		}
 	},
 	styles({ hostClasses }) {
@@ -84979,6 +86262,10 @@ randomId: randomString(32) };
                 border-radius: ${viraFormCssVars["vira-form-radius"].value};
                 background-color: ${viraFormCssVars["vira-form-background-color"].value};
                 color: ${viraFormCssVars["vira-form-foreground-color"].value};
+            }
+
+            ${hostClasses["vira-date-input-empty"].selector} input {
+                color: ${viraFormCssVars["vira-form-placeholder-color"].value};
             }
 
             ${hostClasses["vira-date-input-error"].selector} input {
@@ -86028,6 +87315,7 @@ var ViraForm = defineViraElement()({
 		}
 		const formFieldTemplates = getObjectTypedEntries(inputs.fields).map(([key, field]) => {
 			const isDisabled = !!(inputs.isDisabled || field.isDisabled);
+			const isReadonly = !!(inputs.isReadonly || field.isReadonly);
 			const showRequiredMarker = !!field.isRequired && !inputs.hideRequiredMarkers;
 			if (field.isHidden) return A;
 			else if (field.type === ViraFormFieldType.Checkbox) {
@@ -86038,7 +87326,7 @@ var ViraForm = defineViraElement()({
 					fieldTemplate: html`
                             <${ViraCheckbox.assign({
 						value: field.value || false,
-						isDisabled: !!(isDisabled || inputs.isReadonly),
+						isDisabled: isDisabled || isReadonly,
 						hasError: field.hasError,
 						useHorizontalLabel: inputs.horizontalCheckboxes,
 						fillWhenChecked: field.fillWhenChecked,
@@ -86087,7 +87375,7 @@ var ViraForm = defineViraElement()({
 						return html`
                                             <${ViraCheckbox.assign({
 							value: selected.includes(option.value),
-							isDisabled: !!(isDisabled || inputs.isReadonly),
+							isDisabled: isDisabled || isReadonly,
 							hasError: field.hasError,
 							useHorizontalLabel: true
 						})}
@@ -86124,7 +87412,7 @@ var ViraForm = defineViraElement()({
 					placeholder: field.placeholder,
 					isSearchable: field.isSearchable,
 					isDisabled,
-					isReadonly: inputs.isReadonly,
+					isReadonly,
 					label: childLabel,
 					hasError: field.hasError,
 					icon: field.icon,
@@ -86154,7 +87442,7 @@ var ViraForm = defineViraElement()({
 					value: field.value || "",
 					disabled: isDisabled,
 					hasError: field.hasError,
-					isReadonly: inputs.isReadonly,
+					isReadonly,
 					label: childLabel,
 					placeholder: field.placeholder,
 					rows: field.rows,
@@ -86183,7 +87471,7 @@ var ViraForm = defineViraElement()({
 					allowedInputs: /\d/,
 					hasError: field.hasError,
 					icon: field.icon,
-					isReadonly: inputs.isReadonly,
+					isReadonly,
 					label: childLabel,
 					placeholder: field.placeholder,
 					showClearButton: inputs.showClearButtons,
@@ -86221,7 +87509,7 @@ var ViraForm = defineViraElement()({
 					showTimeOnly: field.showTimeOnly,
 					isDisabled,
 					hasError: field.hasError,
-					isReadonly: inputs.isReadonly,
+					isReadonly,
 					label: childLabel
 				})}
                                 ${field.testId ? testId(field.testId) : A}
@@ -86245,7 +87533,7 @@ var ViraForm = defineViraElement()({
 					disabled: isDisabled,
 					hasError: field.hasError,
 					icon: field.icon,
-					isReadonly: inputs.isReadonly,
+					isReadonly,
 					label: childLabel,
 					placeholder: field.placeholder,
 					showClearButton: inputs.showClearButtons,

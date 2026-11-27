@@ -1,7 +1,7 @@
 import {check} from '@augment-vir/assert';
 import {createArray} from '@augment-vir/common';
 import {BookPageControlType, defineBookPage, definePageControl} from 'element-book';
-import {type CSSResult, css, html, listen} from 'element-vir';
+import {type CSSResult, type HtmlInterpolation, css, html, listen} from 'element-vir';
 import {
     LucideChevronUpIcon,
     LucideCodeXmlIcon,
@@ -131,6 +131,8 @@ const examples: ReadonlyArray<{
     customStyle?: CSSResult;
     /** Wraps the dropdown in a `.container` div so `customStyle` can style an ancestor. */
     isInContainer?: boolean;
+    /** Light DOM children of the dropdown, for filling its slots. */
+    children?: HtmlInterpolation;
 }> = [
     {
         title: 'default',
@@ -380,12 +382,52 @@ const examples: ReadonlyArray<{
         },
     },
     {
+        title: 'searchable with separate no options and no search results text',
+        inputs: {
+            isSearchable: true,
+            noOptionsText: 'No options available',
+            noSearchResultsText: 'Nothing matches your search',
+        },
+    },
+    {
+        title: 'searchable with slotted no search results content',
+        inputs: {
+            isSearchable: true,
+        },
+        children: html`
+            <span slot=${ViraDropdown.slotNames['vira-dropdown-no-search-results']}>
+                Nothing matches.
+                <b>Try another search.</b>
+            </span>
+        `,
+    },
+    {
         title: 'searchable with a max shown options cap',
         inputs: {
             isSearchable: true,
             options: manyDropdownOptions,
             maxShownOptions: 20,
             noOptionsText: 'No matches',
+        },
+    },
+    {
+        title: 'searchable and creatable',
+        inputs: {
+            isSearchable: true,
+            isCreatable: true,
+            options: exampleDropdownOptions.slice(0, 3),
+            noOptionsText: 'No matches',
+        },
+    },
+    {
+        title: 'searchable and creatable with a custom label',
+        inputs: {
+            isSearchable: true,
+            isCreatable: true,
+            createOptionLabel(searchText) {
+                return `Add a new option called "${searchText}"`;
+            },
+            options: exampleDropdownOptions.slice(0, 3),
         },
     },
     {
@@ -574,6 +616,8 @@ export const viraDropdownPage = defineBookPage({
                 state() {
                     return {
                         selected: example.inputs?.selected || [],
+                        /** Options added by the creatable examples. */
+                        createdOptions: [] as ReadonlyArray<Readonly<ViraDropdownOption>>,
                     };
                 },
                 styles: example.customStyle,
@@ -584,7 +628,10 @@ export const viraDropdownPage = defineBookPage({
                             example.inputs && 'placeholder' in example.inputs
                                 ? example.inputs.placeholder
                                 : controls.Placeholder,
-                        options: example.inputs?.options || exampleDropdownOptions,
+                        options: [
+                            ...(example.inputs?.options || exampleDropdownOptions),
+                            ...state.createdOptions,
+                        ],
                         selected: controls.Selected
                             ? [
                                   exampleDropdownOptions.find(
@@ -611,7 +658,28 @@ export const viraDropdownPage = defineBookPage({
                                     selected: event.detail,
                                 });
                             })}
-                        ></${ViraDropdown}>
+                            ${listen(ViraDropdown.events.createOption, (event) => {
+                                /** The host decides what creating means: add it and select it. */
+                                const newOption = {
+                                    label: event.detail,
+                                    value: `created-${event.detail}`,
+                                };
+                                updateState({
+                                    createdOptions: [
+                                        ...state.createdOptions,
+                                        newOption,
+                                    ],
+                                    selected: example.inputs?.isMultiSelect
+                                        ? [
+                                              ...state.selected,
+                                              newOption.value,
+                                          ]
+                                        : [newOption.value],
+                                });
+                            })}
+                        >
+                            ${example.children}
+                        </${ViraDropdown}>
                     `;
 
                     return example.isInContainer
